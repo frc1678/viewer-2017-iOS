@@ -7,10 +7,8 @@
 //
 
 #import "SecondPickTableViewController.h"
-#import "RealmModels.h"
 #import "MultiCellTableViewCell.h"
 #import "config.h"
-#import "ScoutDataFetcher.h"
 #import "scout_viewer_2015_iOS-Swift.h"
 
 
@@ -20,11 +18,17 @@
 
 @implementation SecondPickTableViewController
 
+FirebaseDataFetcher *firebaseFetcher;
+
+-(void)viewDidLoad {
+    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[ScoutDataFetcher rankOfTeam:team withCharacteristic:@"calculatedData.secondPickAbility"]];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.secondPickAbility"]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
                                  [Utils roundValue:team.calculatedData.secondPickAbility toDecimalPlaces:2]];
@@ -36,7 +40,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [ScoutDataFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.secondPickAbility" ascending:NO]];
+    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.secondPickAbility" ascending:NO]];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
@@ -53,8 +57,8 @@
         
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
         
-        if ([ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].seed > 0) {
-            teamDetailsController.data = [ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        if ([firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
+            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         }
     }
 }

@@ -9,9 +9,14 @@
 import UIKit
 
 class MatchDetailsViewController: UIViewController {
+    
+    var matchNumber = -1
+    
+    var firebaseFetcher = FirebaseDataFetcher()
+    
     var match: Match? = nil {
         didSet {
-            updateUI()
+            //updateUI()
         }
     }
     
@@ -43,48 +48,55 @@ class MatchDetailsViewController: UIViewController {
     @IBOutlet weak var blueTeamThreeAbilityLabel: UILabel!
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        updateUI()
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"checkRes:", name:"updateLeftTable", object:nil)
+        //updateUI()
+        print("-----------------")
+        print(self.match)
     }
     
     private func updateUI() {
         if redOfficialScoreLabel == nil {
-            return
+            
         }
         
         if let match = match {
-            title = match.match
+            title = String(match.number)
             
-            redOfficialScoreLabel.text = getLabelTitle(match.officialRedScore)
-            redPredictedScoreLabel.text = getLabelTitle(match.calculatedData.predictedRedScore)
-            redErrorPercentageLabel.text = getErrorLabelText(match.officialRedScore, predictedScore: Float(match.calculatedData.predictedRedScore))
+            redOfficialScoreLabel.text = getLabelTitle(match.redScore)
+            redPredictedScoreLabel.text = getLabelTitle(Int(match.calculatedData.predictedRedScore))
+            redErrorPercentageLabel.text = getErrorLabelText(match.redScore, predictedScore: Float(match.calculatedData.predictedRedScore))
             
-            let redTeams = ScoutDataFetcher.realmArrayToArray(match.redTeams) as! [Team]
-            if count(redTeams) > 0 {
-                for index in 0...(count(redTeams) - 1) {
+            let redTeams = firebaseFetcher.getTeamsFromNumbers(match.redAllianceTeamNumbers)
+            if redTeams.count > 0 {
+                for index in 0...redTeams.count - 1 {
                     if index <= 2 {
-                        (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(redTeams[index].number)", forState: UIControlState.Normal)
+                        (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers[index])", forState: UIControlState.Normal)
                         
-                        (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData.stackingAbility, toDecimalPlaces: 4)
+                        (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData.driverAbility, toDecimalPlaces: 4)
                     }
                 }
             }
             
-            blueOfficialScoreLabel.text = getLabelTitle(match.officialBlueScore)
+            blueOfficialScoreLabel.text = getLabelTitle(match.blueScore)
             bluePredictedScoreLabel.text = getLabelTitle(match.calculatedData.predictedBlueScore)
-            blueErrorPercentageLabel.text = getErrorLabelText(match.officialBlueScore, predictedScore: Float(match.calculatedData.predictedBlueScore))
+            blueErrorPercentageLabel.text = getErrorLabelText(match.blueScore, predictedScore: Float(match.calculatedData.predictedBlueScore))
 
-            let blueTeams = ScoutDataFetcher.realmArrayToArray(match.blueTeams) as! [Team]
-            if count(blueTeams) > 0 {
-                for index in 0...(count(blueTeams) - 1) {
+            let blueTeams = firebaseFetcher.getTeamsFromNumbers(match.blueAllianceTeamNumbers)
+            if blueTeams.count > 0 {
+                for index in 0...(blueTeams.count - 1) {
                     if index <= 2 {
-                        (valueForKey("blueTeam\(mapping[index])Button") as! UIButton).setTitle("\(blueTeams[index].number)", forState: UIControlState.Normal)
+                        print(blueTeams[index].number)
+                        (valueForKey("blueTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers[index])", forState: UIControlState.Normal)
                         
-                        (valueForKey("blueTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(blueTeams[index].calculatedData.stackingAbility, toDecimalPlaces: 4)
+                        (valueForKey("blueTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(blueTeams[index].calculatedData.driverAbility, toDecimalPlaces: 4)
                     }
                 }
             }
@@ -92,8 +104,9 @@ class MatchDetailsViewController: UIViewController {
     }
     
     @IBAction func teamTapped(sender: UIButton) {
-        if let teamNumTapped = sender.titleLabel?.text?.toInt() {
-            if let match = ScoutDataFetcher.fetchTeamInMatchDataForTeam(ScoutDataFetcher.fetchTeam(teamNumTapped), inMatch: match) where match.uploadedData.maxFieldToteHeight > 0 {
+        if let teamNumTapped = Int((sender.titleLabel?.text)!) {
+            let match = firebaseFetcher.fetchTeamInMatchDataForTeam(firebaseFetcher.fetchTeam(teamNumTapped), inMatch: self.match!)
+            if match.matchNumber > 0 {
                 performSegueWithIdentifier("GoToTIMController", sender: sender)
             } else {
                 performSegueWithIdentifier("GoToTeamController", sender: sender)
@@ -138,15 +151,22 @@ class MatchDetailsViewController: UIViewController {
         
         return nil
     }
-    
+    func checkRes(notification:NSNotification) {
+        if notification.name == "updateLeftTable" {
+            if self.match == nil {
+                self.match = firebaseFetcher.matches[self.matchNumber-2] as? Match
+            }
+            self.updateUI()
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let button = sender as? UIButton,
-               teamNumTapped = button.titleLabel?.text?.toInt() {
+               teamNumTapped = Int((button.titleLabel?.text)!) {
             if let dest = segue.destinationViewController as? TeamInMatchDetailsTableViewController {
-                dest.data = ScoutDataFetcher.fetchTeamInMatchDataForTeam(ScoutDataFetcher.fetchTeam(teamNumTapped), inMatch: match)
+                dest.data = firebaseFetcher.fetchTeamInMatchDataForTeam(firebaseFetcher.fetchTeam(teamNumTapped), inMatch: match!)
             } else if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
-                dest.data = ScoutDataFetcher.fetchTeam(teamNumTapped)
+                dest.data = firebaseFetcher.fetchTeam(teamNumTapped) as? Team
             }
         }
     }

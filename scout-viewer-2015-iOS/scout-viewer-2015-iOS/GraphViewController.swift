@@ -54,7 +54,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     }
     
     func barChartView(barChartView: JBBarChartView!, heightForBarViewAtIndex index: UInt) -> CGFloat {
-        return values[Int(index)] - min(minElement(values), 0.0);
+        return values[Int(index)] - min(values.minElement()!, 0.0);
     }
     
     func barSelectionColorForBarChartView(barChartView: JBBarChartView!) -> UIColor! {
@@ -64,11 +64,11 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     func barChartView(barChartView: JBBarChartView!, didSelectBarAtIndex index: UInt) {
         self.mainDisplay.text = "\(displayTitle)\(roundValue(values[Int(index)], toDecimalPlaces: 2))"
         
-        if Int(index) < count(subValuesLeft) {
+        if Int(index) < subValuesLeft.count {
             self.subDisplayLeft.text = "\(subDisplayLeftTitle)\(subValuesLeft[Int(index)])"
         }
         
-        if Int(index) < count(subValuesRight) {
+        if Int(index) < subValuesRight.count {
             self.subDisplayRight.text = "\(subDisplayRightTitle)\(subValuesRight[Int(index)])"
         }
         
@@ -89,12 +89,17 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
                 return UIColor.greenColor()
             }
         } else if values[Int(index)] < 0 {
-            let fraction = ((maxElement(values) - min(minElement(values), 0.0)) / (values[Int(index)] - min(minElement(values), 0.0)))
+            let fraction = ((values.maxElement()! - min(values.minElement()!, 0.0)) / (values[Int(index)] - min(values.minElement()!, 0.0)))
             return negativeColor.colorWithAlphaComponent((fraction * 0.3 + 0.2) * CGFloat(negativeMultiplier))
         } else {
-            return color.colorWithAlphaComponent(((values[Int(index)] - min(minElement(values), 0.0)) / (maxElement(values) - min(minElement(values), 0.0))) * 0.5 + 0.5)
+            return color.colorWithAlphaComponent(((values[Int(index)] - min(values.minElement()!, 0.0)) / (values.maxElement()! - min(values.minElement()!, 0.0))) * 0.5 + 0.5)
         }
     }
+    
+    
+    
+    
+    
     
     func toggleDisplay(hide: Bool) {
         if hide {

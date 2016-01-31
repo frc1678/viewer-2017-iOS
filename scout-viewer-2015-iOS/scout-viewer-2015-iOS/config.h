@@ -9,10 +9,7 @@
 #ifndef scout_viewer_2015_iOS_Header_h
 #define scout_viewer_2015_iOS_Header_h
 
-#define DB_DATABASE_NAME @"realm.realm"
-#define DB_DATABASE_DIRECTORY @"Database File"
-#define REALM_SEED_PROPERTY @"seed"
-#define REALM_MATCH_PROPERTY @"match"
+
 #define TEAM_CELL_IDENTIFIER @"TeamCell"
 #define MULTI_CELL_IDENTIFIER @"MultiCellTableViewCell"
 #define MATCH_CELL_IDENTIFIER @"MatchTableViewCell"

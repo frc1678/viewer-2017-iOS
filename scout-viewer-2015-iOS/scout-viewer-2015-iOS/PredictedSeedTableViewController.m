@@ -7,10 +7,8 @@
 //
 
 #import "PredictedSeedTableViewController.h"
-#import "RealmModels.h"
 #import "config.h"
 #import "MultiCellTableViewCell.h"
-#import "ScoutDataFetcher.h"
 #import "scout_viewer_2015_iOS-Swift.h"
 
 
@@ -20,6 +18,28 @@
 
 @implementation PredictedSeedTableViewController
 
+FirebaseDataFetcher *firebaseFetcher;
+
+-(void)viewDidLoad {
+    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
+    MultiCellTableViewCell *cell = [nib objectAtIndex:0];
+    
+    NSArray *predSeedArray = [firebaseFetcher predSeedList];
+    Team *team = predSeedArray[indexPath.row];
+    
+    cell.teamLabel.text = team.name;
+    cell.scoreLabel.text = [NSString stringWithFormat:@"%d",team.calculatedData.predictedSeed];
+    
+    return cell;
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
     
@@ -27,7 +47,7 @@
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.predictedSeed];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.predictedAverageScore toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.predictedSeed toDecimalPlaces:2]];
     
 }
 
@@ -36,7 +56,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [ScoutDataFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.predictedSeed" ascending:YES]];
+    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.predictedSeed" ascending:YES]];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
@@ -53,8 +73,8 @@
         
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
         
-        if ([ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].seed > 0) {
-            teamDetailsController.data = [ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        if ([firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
+            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         }
     }
 }

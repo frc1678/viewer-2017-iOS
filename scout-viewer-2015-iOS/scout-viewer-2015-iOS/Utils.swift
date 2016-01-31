@@ -9,63 +9,57 @@
 import Foundation
 
 let humanReadableNames = [
-    "calculatedData.firstPickAbility" : "First Pick Ability",
-    "calculatedData.secondPickAbility" : "Second Pick Ability",
-    "calculatedData.stackingAbility" : "Stacking Ability",
-    "calculatedData.noodleReliability" : "Noodle Reliability",
-    "calculatedData.avgNumMaxHeightStacks" : "Avg. Max Height Stacks",
-    "calculatedData.reconAbility" : "Recon Ability",
-    "calculatedData.reconReliability" : "Recon Reliability",
-    "calculatedData.isRobotMoveIntoAutoZonePercentage" : "Moved Into Auto",
-    "calculatedData.isStackedToteSetPercentage" : "Stacked Tote Set",
-    "calculatedData.avgStepReconsAcquiredInAuto" : "Avg. Step Recons",
-    "calculatedData.stepReconSuccessRateInAuto" : "Step Recon Success",
-    "calculatedData.avgNumTotesMoveIntoAutoZone" : "Avg. Totes Into Auto",
-    "calculatedData.avgNumTotesStacked" : "Avg. Totes Stacked",
-    "calculatedData.avgNumReconLevels" : "Avg. Recon Levels",
-    "calculatedData.avgNumNoodlesContributed" : "Avg. Noodles Cont.",
-    "calculatedData.avgNumReconsStacked" : "Avg. Recons Stacked",
-    "calculatedData.avgNumReconsPickedUp" : "Avg. Recons Intaked",
-    "calculatedData.avgNumTotesPickedUpFromGround" : "Avg. Ground Totes",
-    "calculatedData.avgNumLitterDropped" : "Avg. Noodles Dropped",
-    "calculatedData.avgNumStacksDamaged" : "Avg. Stacks Damaged",
-    "calculatedData.avgMaxFieldToteHeight" : "Avg. Max Tote Height",
-    "calculatedData.avgMaxReconHeight" : "Avg. Max Recon Height",
-    "calculatedData.avgNumLitterThrownToOtherSide" : "Avg. Litter Thrown",
-    "calculatedData.avgAgility" : "Agility",
+    "calculatedData.actualSeed" : "Seed",
+    "calculatedData.avgBallControl" : "Avg. Ball Controll",
+    "calculatedData.avgBallsKnockedOffMidlineAuto" : "Avg. Balls Off Mid Line",
+    "calculatedData.avgDefense" : "Average Defense",
+    "calculatedData.avgEvasion" : "Average Evasion",
+    "calculatedData.avgFailedTimesCrossedDefensesAuto" : "Avg. Cross Fails Auto",
+    "calculatedData.avgFailedTimesCrossedDefensesTele" : "Avg. Cross Fails Tele",
+    "calculatedData.avgGroundIntakes" : "Avg. Ground Intakes",
+    "calculatedData.avgHighShotsAuto" : "Avg. High Shots in Auto",
+    "calculatedData.avgHighShotsTele" : "Avg. High Shots in Tele",
+    "calculatedData.avgLowShotsAuto" : "Avg. Low Shots in Auto",
+    "calculatedData.avgLowShotsTele" : "Avg. Low Shots in Tele",
+    "calculatedData.avgMidlineBallsIntakedAuto" : "Avg. Mid Balls in Auto",
+    "calculatedData.avgShotsBlocked" : "Avg. Shots Blocked",
+    "calculatedData.avgSpeed" : "Avg. Speed",
+    "calculatedData.avgSuccessfulTimesCrossedDefensesAuto" : "Idklol",
+    "calculatedData.avgSuccessfulTimesCrossedDefensesTele" : "Idklol",
+    "calculatedData.avgTorque" : "Avg. Torque",
+    "calculatedData.challengePercentage" : "Challenge Percentage",
+    "calculatedData.disabledPercentage" : "Disabled Percentage",
+    "calculatedData.disfunctionalPercentage" : "Disfunctional Percentage",
     "calculatedData.driverAbility" : "Driver Ability",
-    "calculatedData.avgStackPlacing" : "Stack Placing",
-    "calculatedData.avgHumanPlayerLoading" : "HP Loading",
-    "calculatedData.incapacitatedPercentage" : "Incapacitated",
-    "calculatedData.disabledPercentage" : "Disabled",
-    "calculatedData.reliability" : "Reliability",
-    "calculatedData.avgReconStepAcquisitionTime" : "Avg. Step Recon Time",
-    "calculatedData.reconAcquisitionTypes" : "Step Recon Types",
-    "calculatedData.mostCommonReconAcquisitionType" : "Most Common Step Recon",
-    "calculatedData.avgMostCommonReconAcquisitionTypeTime" : "Avg. Common Step Recon Time",
-    "calculatedData.avgCounterChokeholdTime" : "Avg. Counter Chokehold Time",
-    "calculatedData.avgThreeChokeholdTime" : "Avg. Three Chokehold Time",
-    "calculatedData.avgFourChokeholdTime" : "Avg. Four Chokehold Time",
-    "calculatedData.avgCoopPoints" : "Avg. Coop Points",
-    "uploadedData.numWheels" : "Number of Wheels",
-    "uploadedData.numMotors" : "Number of Motors",
-    "uploadedData.pitOrganization" : "Pit Organization",
-    "uploadedData.drivetrain" : "Drivetrain",
-    "uploadedData.typesWheels" : "Types Wheels",
-    "uploadedData.programmingLanguage" : "Programming Language",
-    "uploadedData.weight" : "Weight",
-    "uploadedData.withholdingAllowanceUsed" : "Allowance Used",
-    "uploadedData.canMountMechanism" : "Can Mount",
-    "uploadedData.pitNotes" : "Pit Notes",
-    "calculatedData.thirdPickAbility" : "Third Pick Ability",
-    "calculatedData.thirdPickAbilityLandfill" : "Landfill Pick Ability",
-    "calculatedData.avgNumVerticalReconsPickedUp" : "Avg. V. Recons Intaked",
-    "calculatedData.avgNumHorizontalReconsPickedUp" : "Avg. H. Recons Intaked",
-    "matchDatas" : "Matches",
-    "calculatedData.avgNumTeleopReconsFromStep" : "Teleop Step Recons",
-    "calculatedData.avgNumCappedSixStacks" : "Avg. Capped 6 Stacks",
-    "uploadedData.mechRemove" : "Must Remove Mech",
-    "calculatedData.avgNumTotesFromHP" : "Avg. HP Totes",
+    "calculatedData.firstPickAbility" : "First Pick Ability",
+    "calculatedData.highShotAccuracyAuto" : "High Shot Accuracy Auto",
+    "calculatedData.highShotAccuracyTele" : "High Shot Accuracy Tele",
+    "calculatedData.incapacitatedPercentage" : "Incapacitated Percentage",
+    "calculatedData.lowShotAccuracyAuto" : "Low Shot Accuracy Auto",
+    "calculatedData.lowShotAccuracyTele" : "Low Shot Accuracy Tele",
+    "calculatedData.numAutoPoints" : "Number of Auto Points",
+    "calculatedData.numRPs" : "#yolo",
+    "calculatedData.numScaleAndChallengePoints" : "Scale and Challenge Points",
+    //THE BOOKMARK
+    "calculatedData.predictedSeed" : "Predicted Seed",
+    "calculatedData.reachPercentage" : "Reach Percentage",
+    "calculatedData.scalePercentage" : "Scale Percentage",
+    "calculatedData.sdBallsKnockedOffMidlineAuto" : "σ Balls off Midline Auto",
+    "calculatedData.sdFailedDefenseCrossesAuto" : "σ Failed Defenses Auto",
+    "calculatedData.sdGroundIntakes" : "σ Ground Intakes",
+    "calculatedData.sdHighShotsAuto" : "σ High Shots Auto",
+    "calculatedData.sdHighShotsTele" : "σ High Shots Tele",
+    "calculatedData.sdLowShotsAuto" : "σ Low Shots Auto",
+    "calculatedData.sdLowShotsTele" : "σ Low Shots Tele",
+    "calculatedData.sdMidlineBallsIntakedAuto" : "σ Midline Balls Intaked",
+    "calculatedData.sdShotsBlocked" : "σ Shots Blocked",
+    "calculatedData.sdSuccessfulDefenseCrossesAuto" : "σ Successful Defenses Auto",
+    "calculatedData.sdSuccessfulDefenseCrossesTele" : "σ Successful Defenses Tele",
+    "calculatedData.secondPickAbility" : "Second Pick Ability",
+    "calculatedData.siegeAbility" : "Siege Ability",
+    "calculatedData.siegeConsistency" : "Siege Consistency",
+    "calculatedData.siegePower" : "Siege Power",
+    "matchDatas" : "Matches"
 ]
 
 func roundValue(value: AnyObject, toDecimalPlaces numDecimalPlaces: Int) -> String {
@@ -102,9 +96,9 @@ func isZero(object: AnyObject) -> Bool {
 
 func insertCommasAndSpacesBetweenCapitalsInString(string: String) -> String {
     var toReturn = ""
-    for char in string {
+    for char in string.characters {
         if "\(char)".uppercaseString == "\(char)" {
-            toReturn.extend(", \(char)")
+            toReturn += ", \(char)"
         } else {
             toReturn.append(char)
         }
@@ -120,7 +114,7 @@ func insertCommasAndSpacesBetweenCapitalsInString(string: String) -> String {
 func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
     var values: [Int] = []
     for num in nsNumberArray {
-        if let int = "\(num)".toInt() {
+        if let int = Int("\(num)") {
             values.append(int)
         }
     }
@@ -128,10 +122,8 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
     return values
 }
 
-@objc class Utils {
-    class func `new`() -> Utils {
-        return Utils()
-    }
+@objc class Utils: NSObject {
+
     
     class func roundValue(value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber

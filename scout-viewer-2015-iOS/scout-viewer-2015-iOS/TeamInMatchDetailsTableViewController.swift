@@ -9,6 +9,7 @@
 import UIKit
 
 class TeamInMatchDetailsTableViewController: UITableViewController {
+    var firebaseFetcher = FirebaseDataFetcher()
     
     var data: TeamInMatchData? = nil {
         didSet {
@@ -17,32 +18,32 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
         }
     }
     
-    let humanReadableNames = ["uploadedData.robotMovedIntoAutoZone": "Moved into Auto Zone",
-    "uploadedData.stackedToteSet": "Stacked Tote Set",
-    "uploadedData.numTotesMovedIntoAutoZone": "Totes into Auto",
-    "uploadedData.numContainersMovedIntoAutoZone": "Recons into Auto",
-    "uploadedData.numTotesStacked": "Totes Stacked",
-    "uploadedData.numReconLevels": "Recon Levels",
-    "uploadedData.numReconsStacked": "Recons Stacked",
-    "uploadedData.numNoodlesContributed": "Noodles Contributed",
-    "uploadedData.numTotesPickedUpFromGround": "Totes from Ground",
-    "uploadedData.numLitterDropped": "Litter Dropped",
-    "uploadedData.numStacksDamaged": "Stacks Damaged",
-    "uploadedData.coopActions": "Coop Actions",
-    "uploadedData.maxFieldToteHeight": "Highest Tote Stacked",
-    "uploadedData.maxReconHeight": "Highest Recon Stacked",
-    "uploadedData.reconAcquisitions": "Step Recon Acquisitions",
-    "uploadedData.numLitterThrownToOtherSide": "Thrown Litter",
-    "uploadedData.agility": "Agility",
-    "uploadedData.stackPlacing": "Stack Placing Security",
-    "uploadedData.humanPlayerLoading": "HP Loading Ability",
-    "uploadedData.incapacitated": "Incapacitated",
-    "uploadedData.disabled": "Disabled",
-    "uploadedData.miscellaneousNotes": "Notes",
-    "calculatedData.numReconsPickedUp": "Recons Intaked",
-    "uploadedData.numHorizontalReconsPickedUp": "H. Recons Intaked",
-    "uploadedData.numVerticalReconsPickedUp": "V. Recons Intaked",
-    "uploadedData.numTeleopReconsFromStep": "Step Recons Teleop" ]
+//    let humanReadableNames = ["uploadedData.robotMovedIntoAutoZone": "Moved into Auto Zone",
+//    "uploadedData.stackedToteSet": "Stacked Tote Set",
+//    "uploadedData.numTotesMovedIntoAutoZone": "Totes into Auto",
+//    "uploadedData.numContainersMovedIntoAutoZone": "Recons into Auto",
+//    "uploadedData.numTotesStacked": "Totes Stacked",
+//    "uploadedData.numReconLevels": "Recon Levels",
+//    "uploadedData.numReconsStacked": "Recons Stacked",
+//    "uploadedData.numNoodlesContributed": "Noodles Contributed",
+//    "uploadedData.numTotesPickedUpFromGround": "Totes from Ground",
+//    "uploadedData.numLitterDropped": "Litter Dropped",
+//    "uploadedData.numStacksDamaged": "Stacks Damaged",
+//    "uploadedData.coopActions": "Coop Actions",
+//    "uploadedData.maxFieldToteHeight": "Highest Tote Stacked",
+//    "uploadedData.maxReconHeight": "Highest Recon Stacked",
+//    "uploadedData.reconAcquisitions": "Step Recon Acquisitions",
+//    "uploadedData.numLitterThrownToOtherSide": "Thrown Litter",
+//    "uploadedData.agility": "Agility",
+//    "uploadedData.stackPlacing": "Stack Placing Security",
+//    "uploadedData.humanPlayerLoading": "HP Loading Ability",
+//    "uploadedData.incapacitated": "Incapacitated",
+//    "uploadedData.disabled": "Disabled",
+//    "uploadedData.miscellaneousNotes": "Notes",
+//    "calculatedData.numReconsPickedUp": "Recons Intaked",
+//    "uploadedData.numHorizontalReconsPickedUp": "H. Recons Intaked",
+//    "uploadedData.numVerticalReconsPickedUp": "V. Recons Intaked",
+//    "uploadedData.numTeleopReconsFromStep": "Step Recons Teleop" ]
     
     let autoKeys = ["uploadedData.stackedToteSet", "uploadedData.numContainersMovedIntoAutoZone"]
     let teleKeys = ["uploadedData.numTotesStacked", "uploadedData.numReconLevels", "uploadedData.numNoodlesContributed", "uploadedData.numReconsStacked", "uploadedData.numTeleopReconsFromStep", "uploadedData.numHorizontalReconsPickedUp", "uploadedData.numVerticalReconsPickedUp", "calculatedData.numReconsPickedUp", "uploadedData.numTotesPickedUpFromGround", "uploadedData.numLitterDropped", "uploadedData.numStacksDamaged", "uploadedData.coopActions", "uploadedData.maxFieldToteHeight", "uploadedData.maxReconHeight", "uploadedData.reconAcquisitions" ]
@@ -66,7 +67,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     
     
     func updateTitle() {
-        switch (data?.match?.match, data?.team?.number) {
+        switch (data?.matchNumber, data?.teamNumber) {
         case (.Some(let m), .Some(let n)):
             title = "\(m) - \(n)"
         case (.Some(let m), .None):
@@ -105,8 +106,8 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
             let notesCell = cell as! ResizableNotesTableViewCell
             notesCell.titleLabel?.text = "Notes:"
-            notesCell.notesLabel?.text = count(notes) == 0 ? "None" : notes
-        } else if let array = dataPoint as? RLMArray {
+            notesCell.notesLabel?.text = notes.characters.count == 0 ? "None" : notes
+        } else if let array = dataPoint as? NSArray {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) as! UITableViewCell
 
             cell.detailTextLabel?.text = "some array"
@@ -125,30 +126,30 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
-            if let number = data?.team.number {
-                dest.data = ScoutDataFetcher.fetchTeam(number)
+            if let number = data?.teamNumber {
+                dest.data = firebaseFetcher.fetchTeam(number)
             }
         } else if segue.identifier == "Graph" {
             let graphViewController = segue.destinationViewController as! GraphViewController
             
-            if let teamNum = data?.team.number {
+            if let teamNum = data?.teamNumber {
                 let indexPath = sender as! NSIndexPath
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                     graphViewController.graphTitle = "\(cell.textLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                    if let values = ScoutDataFetcher.valuesInTeamMatchesOfPath(keySets[indexPath.section][indexPath.row], forTeam: data?.team!) as? [CGFloat] {
-                        graphViewController.values = values
+                     let values = firebaseFetcher.valuesInTeamMatchesOfPath(keySets[indexPath.section][indexPath.row], forTeam: firebaseFetcher.fetchTeam((data?.teamNumber)!))
+                        graphViewController.values = (values as? [CGFloat])!
                         graphViewController.subDisplayLeftTitle = "Match: "
-                        graphViewController.subValuesLeft = ScoutDataFetcher.valuesInTeamMatchesOfPath("match.match", forTeam: data?.team!)
+                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("match.match", forTeam: firebaseFetcher.fetchTeam(data!.teamNumber)) as [AnyObject]
                         if let d = data {
-                            graphViewController.subValuesRight = nsNumArrayToIntArray(ScoutDataFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:d.team) as! [NSNumber])
+                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.teamNumber)))
                             
-                            if let i = find(graphViewController.subValuesLeft as! [String], d.match.match) {
+                            if let i = ((graphViewController.subValuesLeft as! [String]).indexOf(String(d.matchNumber))) {
                                 graphViewController.highlightIndex = i
                             }
                         }
                         graphViewController.subDisplayRightTitle = "Rank: "
-                    }
+
                 }
             }
         }
@@ -156,7 +157,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-            if contains(graphableCells, cell.textLabel!.text!) {
+            if graphableCells.contains(cell.textLabel!.text!) {
                 performSegueWithIdentifier("Graph", sender: indexPath)
             }
         }

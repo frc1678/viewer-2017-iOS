@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CCDropboxLinkingAppDelegate.h"
 
-@interface AppDelegate : CCDropboxLinkingAppDelegate <UIApplicationDelegate>
+@interface AppDelegate: NSObject
+
+@property(strong,nonatomic) UIWindow *window;
 
 
 @end

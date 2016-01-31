@@ -7,10 +7,8 @@
 //
 
 #import "ThirdPickTableViewController.h"
-#import "RealmModels.h"
 #import "MultiCellTableViewCell.h"
 #import "config.h"
-#import "ScoutDataFetcher.h"
 #import "scout_viewer_2015_iOS-Swift.h"
 
 @interface ThirdPickTableViewController ()
@@ -19,8 +17,11 @@
 
 @implementation ThirdPickTableViewController
 
+FirebaseDataFetcher *firebaseFetcher;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     
     self.key = [self keyForIndex:0];
 }
@@ -46,7 +47,7 @@
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[ScoutDataFetcher rankOfTeam:team withCharacteristic:self.key]];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[firebaseFetcher rankOfTeam:team withCharacteristic:self.key]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
                                  [Utils roundValue:[[team valueForKeyPath:self.key] floatValue] toDecimalPlaces:2]];
@@ -58,7 +59,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [ScoutDataFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:self.key ascending:NO]];
+    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:self.key ascending:NO]];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
@@ -75,8 +76,8 @@
         
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
         
-        if ([ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].seed > 0) {
-            teamDetailsController.data = [ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        if ([firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
+            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         }
     } else if ([segue.destinationViewController isKindOfClass:[NthPickMechanismFilteredTableViewController class]]) {
         NthPickMechanismFilteredTableViewController *secondPickController = segue.destinationViewController;

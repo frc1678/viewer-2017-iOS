@@ -1,5 +1,0 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#endif
-
-#import "Pods-scout-viewer-2015-iOS-environment.h"

@@ -10,6 +10,8 @@ import UIKit
 
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate {
     
+    var firebaseFetcher = FirebaseDataFetcher()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var teamNumberLabel: UILabel!
     @IBOutlet weak var teamNameLabel: UILabel!
@@ -39,69 +41,78 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     let abilityKeys = [
         "calculatedData.firstPickAbility",
-        "calculatedData.secondPickAbility",
-        "calculatedData.thirdPickAbility",
-        "calculatedData.thirdPickAbilityLandfill" ]
+        "calculatedData.secondPickAbility"
+        ]
     
     // Add carrying stability into stacking security
     
     let autoKeys = [
-        "calculatedData.isStackedToteSetPercentage",
-        "calculatedData.mostCommonReconAcquisitionType",
-        "calculatedData.avgStepReconsAcquiredInAuto",
-        "calculatedData.stepReconSuccessRateInAuto",
-        "calculatedData.reconAcquisitionTypes"]
+        "calculatedData.avgBallsKnockedOffMidlineAuto",
+        "calculatedData.avgFailedTimesCrossedDefensesAuto",
+        "calculatedData.avgHighShotsAuto",
+        "calculatedData.avgLowShotsAuto",
+        "calculatedData.avgMidlineBallsIntakedAuto",
+    "calculatedData.avgSuccessfulTimesCrossedDefensesAuto",
+    "calculatedData.highShotAccuracyAuto",
+    "calculatedData.lowShotAccuracyAuto",
+    "calculatedData.sdBallsKnockedOffMidlineAuto",
+    "calculatedData.avgMidlineBallsIntakedAuto"]
     
-    let stackingKeys = [
-        "calculatedData.stackingAbility",
-        "calculatedData.avgNumMaxHeightStacks",
-        "calculatedData.avgNumCappedSixStacks",
-        "calculatedData.avgStackPlacing" ]
+//    let stackingKeys = [
+//        "calculatedData.stackingAbility",
+//        "calculatedData.avgNumMaxHeightStacks",
+//        "calculatedData.avgNumCappedSixStacks",
+//        "calculatedData.avgStackPlacing" ]
+//
+//    let toteKeys = [
+//        "calculatedData.avgNumTotesStacked",
+//        "calculatedData.avgMaxFieldToteHeight",
+//        "calculatedData.avgNumTotesPickedUpFromGround" ]
     
-    let toteKeys = [
-        "calculatedData.avgNumTotesStacked",
-        "calculatedData.avgMaxFieldToteHeight",
-        "calculatedData.avgNumTotesPickedUpFromGround" ]
+//    let reconKeys = [
+//        "calculatedData.reconAbility",
+//        "calculatedData.avgNumReconLevels",
+//        "calculatedData.avgNumTeleopReconsFromStep",
+//        "calculatedData.avgNumReconsPickedUp",
+//        "calculatedData.avgNumHorizontalReconsPickedUp",
+//        "calculatedData.avgNumVerticalReconsPickedUp",
+//        "calculatedData.avgNumReconsStacked",
+//        "calculatedData.avgMaxReconHeight",
+//        "calculatedData.reconReliability" ]
+//    
+//    let noodleKeys = [
+//        "calculatedData.noodleReliability",
+//        "calculatedData.avgNumNoodlesContributed",
+//        "calculatedData.avgNumLitterDropped" ]
     
-    let reconKeys = [
-        "calculatedData.reconAbility",
-        "calculatedData.avgNumReconLevels",
-        "calculatedData.avgNumTeleopReconsFromStep",
-        "calculatedData.avgNumReconsPickedUp",
-        "calculatedData.avgNumHorizontalReconsPickedUp",
-        "calculatedData.avgNumVerticalReconsPickedUp",
-        "calculatedData.avgNumReconsStacked",
-        "calculatedData.avgMaxReconHeight",
-        "calculatedData.reconReliability" ]
-    
-    let noodleKeys = [
-        "calculatedData.noodleReliability",
-        "calculatedData.avgNumNoodlesContributed",
-        "calculatedData.avgNumLitterDropped" ]
-    
-    let humanPlayerKeys = [
-        "calculatedData.avgNumTotesFromHP" ]
+//    let humanPlayerKeys = [
+//        "calculatedData.avgNumTotesFromHP" ]
     
     let superKeys = [
-        "calculatedData.driverAbility" ]
+        "calculatedData.avgEvasion",
+        "calculatedData.avgDefense"
+    ]
     
     let statusKeys = [
-        "calculatedData.reliability",
+          "calculatedData.driverAbility",
+        "calculatedData.challengePercentage",
+        "calculatedData.disabledPercentage",
+        "calculatedData.disfunctionalPercentage",
         "calculatedData.incapacitatedPercentage",
-        "calculatedData.disabledPercentage" ]
+        ]
     
-    let pitKeys = [
-        "uploadedData.pitOrganization",
-        "uploadedData.programmingLanguage",
-        "uploadedData.canMountMechanism",
-        "uploadedData.pitNotes" ]
+//    let pitKeys = [
+//        "uploadedData.pitOrganization",
+//        "uploadedData.programmingLanguage",
+//        "uploadedData.canMountMechanism",
+//        "uploadedData.pitNotes" ]
 
     let keySetNames = [
         "Information",
         "Ability - High Level",
         "Autonomous",
-        "Stacking",
-        "Totes",
+        "Qualitative",
+        "Percentages",
         "Recycling Containers",
         "Noodles / Litter",
         "Human Player",
@@ -111,43 +122,34 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let longTextCells = [
-        "calculatedData.reconAcquisitionTypes",
-        "uploadedData.pitNotes" ]
+        "calculatedData.reconAcquisitionTypes"
+        //"uploadedData.pitNotes"
+    ]
     
     let unrankedCells = [
-        "calculatedData.mostCommonReconAcquisitionType",
-        "uploadedData.pitOrganization",
-        "uploadedData.drivetrain",
-        "uploadedData.numMotors",
-        "uploadedData.numWheels",
-        "uploadedData.typesWheels",
-        "uploadedData.programmingLanguage",
-        "uploadedData.weight",
-        "uploadedData.withholdingAllowanceUsed",
-        "uploadedData.canMountMechanism",
-        "uploadedData.mechRemove",
-        "uploadedData.pitNotes" ]
+        "calculatedData.pitOrganization",
+        "calculatedData.pitNotes" ]
     
     let percentageValues = [
         "calculatedData.driverAbility",
-        "calculatedData.avgStackPlacing",
-        "calculatedData.avgHumanPlayerLoading",
-        "calculatedData.isRobotMoveIntoAutoZonePercentage",
+        "calculatedData.challengePercentage",
+        "calculatedData.disabledPercentage",
+        "calculatedData.disfunctionalPercentage",
         "calculatedData.isStackedToteSetPercentage",
         "calculatedData.stepReconSuccessRateInAuto",
-        "calculatedData.reconReliability",
-        "calculatedData.noodleReliability",
-        "calculatedData.reliability",
         "calculatedData.incapacitatedPercentage",
-        "calculatedData.disabledPercentage" ]
-    
+        "calculatedData.disabledPercentage"]
     let addCommasBetweenCapitals = [
         "calculatedData.reconAcquisitionTypes"
     ]
     
     let boolValues = [
-        "uploadedData.canMountMechanism",
-        "uploadedData.mechRemove"
+        "calculatedData.challengePercentage",
+        "calculatedData.disabledPercentage",
+        "calculatedData.disfunctionalPercentage",
+        "calculatedData.incapacitatedPercentage",
+        "calculatedData.reachPercentage",
+        "calculatedData.scalePercentage",
     ]
     
     let moreInfoValues = [
@@ -158,14 +160,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         return [ defaultKeys,
                 abilityKeys,
                 autoKeys,
-                stackingKeys,
-                toteKeys,
-                reconKeys,
-                noodleKeys,
-                humanPlayerKeys,
+                /*stackingKeys*/
+                /*toteKeys*/
+                /*reconKeys*/
+                /*noodleKeys,*/
+                /*humanPlayerKeys,*/
                 superKeys,
-                statusKeys,
-                pitKeys ]
+                statusKeys
+                /*pitKeys*/ ]
     }
     
     func reload() {
@@ -173,13 +175,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableViewHeightConstraint?.constant = (tableView.contentSize.height)
         if let team = data,
             let imageView = teamSelectedImageView {
-            ScoutDataFetcher.getTeamImage(team.number, ofSize: DBThumbSizeL)
+     //       firebaseFetcher.getTeamImage(team.number, ofSize: DBThumbSizeL)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"checkRes:", name:"updateLeftTable", object:nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "gotTeamImage:", name: "gotTeamImage", object: nil);
         
@@ -225,8 +229,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let team = self.data {
                 self.teamSelectedImageView.userInteractionEnabled = false;
                 self.navigationController?.setSGProgressPercentage(1.0)
-                ScoutDataFetcher.getTeamImagesForTeam(team.number, withProgresscallback: {
-                    (progress: Float, done: Bool, teamDownloaded: Int) -> () in
+                self.firebaseFetcher.getTeamImagesForTeam(team, callBack: {
+                    (progress: Float, done: Bool, teamDownloaded: Int)->() in
                     if teamDownloaded == self.num {
                         self.navigationController?.setSGProgressPercentage(progress * 100);
 //                        self.lastProgress = progress
@@ -236,7 +240,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         self.teamSelectedImageView.userInteractionEnabled = true;
                     }
                 })
-//                ScoutDataFetcher.getTeamImagesForTeam(team.number)
+//                firebaseFetcher.getTeamImagesForTeam(team.number)
             }
         })
     }
@@ -247,15 +251,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         let pdfPath = dir.stringByAppendingPathComponent("team_cards.pdf")
         let pdfURL = NSURL(fileURLWithPath: pdfPath)
-        println("Rendering PDF...")
+        print("Rendering PDF...")
         
         PDFRenderer.renderPDFToPath(pdfPath) {(progress: Float, done: Bool) -> () in
             self.navigationController?.setSGProgressPercentage(progress * 100)
             
             if(done) {
-                println("Done rendering PDF")
+                print("Done rendering PDF")
                 
-                self.shareController = self.setupControllerWithURL(pdfURL!, usingDelegate: self)
+                self.shareController = self.setupControllerWithURL(pdfURL, usingDelegate: self)
                 self.shareController.presentPreviewAnimated(true)
                 sender.enabled = true
             }
@@ -279,7 +283,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         // Filter to a unique array
         photos = photos.filter { photo in
             for p in self.photos {
-                if UIImagePNGRepresentation(p.image).isEqualToData(UIImagePNGRepresentation(photo.image)) && photo != p {
+                if UIImagePNGRepresentation(p.underlyingImage)!.isEqualToData(UIImagePNGRepresentation(photo.underlyingImage)!) && photo != p {
                     return false
                 }
             }
@@ -293,7 +297,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
         
         let dataKey: String = keySets[indexPath.section][indexPath.row]
-        if contains(longTextCells, dataKey) {
+        if longTextCells.contains(dataKey) {
             let dataPoint: AnyObject = data!.valueForKeyPath(dataKey) ?? ""
 
             let titleText = humanReadableNames[dataKey]
@@ -330,9 +334,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
         
         let dataKey: String = keySets[indexPath.section][indexPath.row]
-        if !contains(moreInfoValues, dataKey) {
+        if !moreInfoValues.contains(dataKey) {
             let dataPoint: AnyObject = data!.valueForKeyPath(dataKey) ?? ""
-            if contains(longTextCells, dataKey) {
+            if longTextCells.contains(dataKey) {
                 let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
                 
                 notesCell.titleLabel?.text = humanReadableNames[dataKey]
@@ -345,16 +349,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 }
                 notesCell.selectionStyle = UITableViewCellSelectionStyle.None
                 cell = notesCell
-            } else if contains(unrankedCells, dataKey) {
+            } else if unrankedCells.contains(dataKey) {
                 let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
                 
                 unrankedCell.titleLabel.text = humanReadableNames[dataKey]
                 
                 if "\(dataPoint)".isEmpty || isZero(dataPoint) {
                     unrankedCell.detailLabel.text = "-"
-                } else if contains(addCommasBetweenCapitals, dataKey) {
+                } else if addCommasBetweenCapitals.contains(dataKey) {
                     unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint, toDecimalPlaces: 2)))"
-                } else if contains(boolValues, dataKey) {
+                } else if boolValues.contains(dataKey) {
                     unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as! Bool))"
                 } else {
                     unrankedCell.detailLabel.text = "\(roundValue(dataPoint, toDecimalPlaces: 2))"
@@ -365,15 +369,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             } else {
                 let multiCell: MultiCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("MultiCellTableViewCell", forIndexPath: indexPath) as! MultiCellTableViewCell
                 
-                multiCell.teamLabel.text = humanReadableNames[dataKey]
+                multiCell.teamLabel!.text = humanReadableNames[dataKey]
                 
-                if contains(percentageValues, dataKey) {
-                    multiCell.scoreLabel.text = "\(percentageValueOf(dataPoint))"
+                if percentageValues.contains(dataKey) {
+                    multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint))"
                 } else {
-                    multiCell.scoreLabel.text = "\(roundValue(dataPoint, toDecimalPlaces: 2))"
+                    multiCell.scoreLabel!.text = "\(roundValue(dataPoint, toDecimalPlaces: 2))"
                 }
                 
-                multiCell.rankLabel.text = "\(ScoutDataFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
+                multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
                 
 //                multiCell.selectionStyle = UITableViewCellSelectionStyle.None
                 cell = multiCell
@@ -414,7 +418,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         var seedText = "?"
         var predSeedText = "?"
-        if let seed = data?.seed where seed > 0 {
+        if let seed = data?.calculatedData.actualSeed where seed > 0 {
             seedText = "\(seed)"
         }
         
@@ -468,15 +472,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let teamNum = data?.number {
                 let indexPath = sender as! NSIndexPath
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! MultiCellTableViewCell
-                graphViewController.graphTitle = "\(cell.teamLabel.text!)"
+                graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                 graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                if let values = ScoutDataFetcher.valuesInCompetitionOfPathForTeams(keySets[indexPath.section][indexPath.row]) as? [CGFloat] {
+                if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(keySets[indexPath.section][indexPath.row]) as? [CGFloat] {
                     graphViewController.values = values
-                    graphViewController.subValuesLeft = ScoutDataFetcher.valuesInCompetitionOfPathForTeams("number")
+                    graphViewController.subValuesLeft = firebaseFetcher.valuesInCompetitionOfPathForTeams("number") as [AnyObject]
                     graphViewController.subDisplayLeftTitle = "Team "
-                    graphViewController.subValuesRight = nsNumArrayToIntArray(ScoutDataFetcher.ranksOfTeamsWithCharacteristic(keySets[indexPath.section][indexPath.row]) as! [NSNumber])
+                    graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamsWithCharacteristic(keySets[indexPath.section][indexPath.row]) as! [Int])
                     graphViewController.subDisplayRightTitle = "Rank: "
-                    if let i = find(graphViewController.subValuesLeft as! [Int], teamNum) {
+                    if let i = ((graphViewController.subValuesLeft as! [Int]).indexOf(teamNum)) {
                         graphViewController.highlightIndex = i
                     }
                 }
@@ -518,4 +522,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             performSegueWithIdentifier("Graph", sender: indexPath)
         }
     }
+    func checkRes(notification:NSNotification) {
+        if notification.name == "updateLeftTable" {
+            self.reload()
+        }
+    }
+
 }

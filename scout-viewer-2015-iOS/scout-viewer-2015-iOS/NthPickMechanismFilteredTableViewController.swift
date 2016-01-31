@@ -10,6 +10,8 @@ import UIKit
 
 class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
     
+    var dataObject = FirebaseDataFetcher()
+    
     var order = 2
     var landfill = false
     
@@ -19,16 +21,16 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
         let team = data as! Team
         
         let mechCell = cell as! MechanismTableViewCell
-        mechCell.rankLabel.text = "\(ScoutDataFetcher.rankOfTeam(team, withCharacteristic: getKeyFromOrder()))"
+        mechCell.rankLabel.text = "\(dataObject.rankOfTeam(team, withCharacteristic: getKeyFromOrder()))"
         mechCell.teamLabel.text = "\(team.number)"
-        mechCell.easeLabel.text = "Ease: \(team.uploadedData.easeOfMounting)"
-        mechCell.programmingLanguageLabel.text = team.uploadedData.programmingLanguage.isEmpty ? "???" : team.uploadedData.programmingLanguage
+     //   mechCell.easeLabel.text = "Ease: \(team.uploadedData.easeOfMounting)"
+       // mechCell.programmingLanguageLabel.text = team.uploadedData.programmingLanguage.isEmpty ? "???" : team.uploadedData.programmingLanguage
         mechCell.scoreLabel.text = roundValue(team.valueForKeyPath(getKeyFromOrder())!, toDecimalPlaces: 2)
     }
     
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
         let descriptor = NSSortDescriptor(key: getKeyFromOrder(), ascending: false)
-        let returnData = ScoutDataFetcher.fetchAndFilterMechansimTeamsByDescriptor(descriptor)
+        let returnData = dataObject.teams
         
         return returnData
     }
@@ -40,12 +42,11 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let
             dest = segue.destinationViewController as? TeamDetailsTableViewController,
-            teamNum = (sender as? MechanismTableViewCell)?.teamLabel?.text?.toInt(),
-            mechCell = sender as? MechanismTableViewCell
-        {
-            if let team = ScoutDataFetcher.fetchTeam(teamNum) where team.seed > 0 {
-                dest.data = ScoutDataFetcher.fetchTeam(teamNum)
-            }
+            teamNum = Int(((sender as? MechanismTableViewCell)?.teamLabel?.text)!),
+            mechCell = sender as? MechanismTableViewCell {
+                
+            let team = dataObject.fetchTeam(teamNum)
+                dest.data = dataObject.fetchTeam(teamNum)
         }
     }
     

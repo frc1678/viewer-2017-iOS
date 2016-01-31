@@ -1,10 +1,13 @@
 # Uncomment this line to define a global platform for your project
 # platform :ios, '6.0'
 
-target 'scout-viewer-2015-iOS' do
+use_frameworks!
+source 'https://github.com/CocoaPods/Specs.git'
 
-	pod 'CCDropboxRealmSync-iOS', :git => 'https://github.com/frc1678/CCDropboxRealmSync-iOS'
-	pod 'realm-database-2015', :git => 'https://github.com/frc1678/realm-database-2015'
+target 'scout-viewer-2015-iOS' do
+	
+	pod 'Firebase', '>= 2.5.0'
+	pod 'firebase-schema-2016-ios', :git => 'https://github.com/frc1678/firebase-schema-2016-ios.git'
 	pod 'MWPhotoBrowser', :git => 'https://github.com/mwaterfall/MWPhotoBrowser.git'
 	pod 'JBChartView'
 end

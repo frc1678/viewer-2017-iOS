@@ -7,7 +7,6 @@
 //
 
 #import "PDFRenderer.h"
-#import "ScoutDataFetcher.h"
 #import "NSAttributedString+OrdinalFormat.h"
 #import <objc/runtime.h>
 #import "scout_viewer_2015_iOS-Swift.h"
@@ -18,29 +17,36 @@
 
 @implementation PDFRenderer
 
+FirebaseDataFetcher *firebaseFetcher;
+
+
 #define GRAPH_KEYS @[@"secondPickAbility", @"stackingAbility", @"thirdPickAbility", @"thirdPickAbilityLandfill"]
 #define COLORS @[[UIColor purpleColor], [UIColor greenColor], [UIColor blueColor], [UIColor orangeColor], [UIColor yellowColor], [UIColor magentaColor], [UIColor redColor]]
 
 static NSMutableDictionary *teamsDict;
 static NSMutableArray *teamNums;
 
+-(void)viewDidLoad {
+    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+}
+
 + (void) renderPDFToPath:(NSString *)filePath withProgressCallback:(void(^)(float progress, BOOL done))progressCallback
 {
     teamsDict = [[NSMutableDictionary alloc] init];
     teamNums = [[NSMutableArray alloc] init];
-    NSArray *teams = [ScoutDataFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]];
+    NSArray *teams = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]];
     for (Team *team in teams) {
         [teamNums addObject:@(team.number)];
         NSMutableDictionary *teamDict = [[NSMutableDictionary alloc] init];
         [teamsDict setObject:teamDict forKey:@(team.number)];
         [teamDict setObject:@(team.number) forKey:@"number"];
-        [teamDict setObject:@(team.seed) forKey:@"seed"];
+        [teamDict setObject:@(team.calculatedData.actualSeed) forKey:@"seed"];
         [teamDict setObject:team.name forKey:@"name"];
         for (NSString *prop in [self allPropertyNamesForClass:[CalculatedTeamData class]]) {
             [teamDict setObject:[team.calculatedData valueForKeyPath:prop] forKey:prop];
         }
-        for (NSString *prop in [self allPropertyNamesForClass:[UploadedTeamData class]]) {
-            [teamDict setObject:[team.uploadedData valueForKeyPath:prop] forKey:prop];
+        for (NSString *prop in [self allPropertyNamesForClass:[CalculatedTeamData class]]) {
+            [teamDict setObject:[team.calculatedData valueForKeyPath:prop] forKey:prop];
         }
     }
         
@@ -135,7 +141,7 @@ static NSMutableArray *teamNums;
     #pragma mark - PDF Rendering
     UIGraphicsBeginPDFPage();
 
-    UIImage *robotImage = [ScoutDataFetcher getTeamPDFImage:[[team objectForKey:@"number"] integerValue] withSize:DBThumbSizeXL];
+    UIImage *robotImage = [firebaseFetcher getTeamPDFImage:[[team objectForKey:@"number"] integerValue]];
     
     NSAttributedString *numberTitle = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long)[[team objectForKey:@"number"] integerValue]] attributes:titleStyle];
     CGFloat topLabelHeight = numberTitle.size.height;

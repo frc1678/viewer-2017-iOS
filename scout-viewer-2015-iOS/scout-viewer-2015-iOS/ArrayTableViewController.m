@@ -7,9 +7,6 @@
 //
 
 #import "ArrayTableViewController.h"
-#import <CCDropboxRealmSync-iOS/CCDropboxLinkingAppDelegate.h>
-#import "CCRealmSync.h"
-#import "ScoutDataFetcher.h"
 #import "config.h"
 #import "MultiCellTableViewCell.h"
 #import "UINavigationController+SGProgress.h"
@@ -46,11 +43,11 @@
 }
 
 - (void)setUpAppConnectionsDidLoad {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(databaseUpdated:) name:SCOUT_VIEWER_DATABASE_UPDATE object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(databaseUpdated:) name:SCOUT_VIEWER_DATABASE_UPDATE object:nil];
 }
 
 - (void)setUpAppConnectionsDidAppear {
-    [CC_DROPBOX_APP_DELEGATE possiblyLinkFromController:self];
+ //   [CC_DROPBOX_APP_DELEGATE possiblyLinkFromController:self];
 }
 
 
@@ -106,23 +103,23 @@
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier] forIndexPath:indexPath];
-
-    id data = nil;
-
-    if (self.filteredArray) {
-        data = self.filteredArray[indexPath.row];
-    } else {
-        data = self.dataArray[indexPath.row];
-    }
-    
-    [self configureCell:cell atIndexPath:indexPath forData:data inTableView:tableView];
-    
-    return cell;
-}
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier] forIndexPath:indexPath];
+//
+//    id data = nil;
+//
+//    if (self.filteredArray) {
+//        data = self.filteredArray[indexPath.row];
+//    } else {
+//        data = self.dataArray[indexPath.row];
+//    }
+//    
+//    [self configureCell:cell atIndexPath:indexPath forData:data inTableView:tableView];
+//    
+//    return cell;
+//}
 
 //Should be overridden by child classes
 - (NSString *)cellIdentifier

@@ -7,9 +7,9 @@
 //
 
 #import "TeamTableViewController.h"
-#import "ScoutDataFetcher.h"
 #import "config.h"
-#import "RealmModels.h"
+#import "scout_viewer_2015_iOS-Swift.h"
+
 
 @interface TeamTableViewController ()
 
@@ -17,12 +17,15 @@
 
 @implementation TeamTableViewController
 
+FirebaseDataFetcher *firebaseFetcher;
+
 - (void)viewDidLoad {
+    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     [super viewDidLoad];
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [ScoutDataFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]];
+    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]];
     return returnData;
 }
 

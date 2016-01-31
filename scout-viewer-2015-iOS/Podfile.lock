@@ -1,61 +1,44 @@
 PODS:
-  - CCDropboxRealmSync-iOS (0.0.1):
-    - Dropbox-Sync-API-SDK
-    - Realm
   - DACircularProgress (2.3.1)
-  - Dropbox-Sync-API-SDK (3.1.2)
-  - JBChartView (2.8.13)
-  - MBProgressHUD (0.9.1)
-  - MWPhotoBrowser (1.4.1):
-    - DACircularProgress
-    - MBProgressHUD (~> 0.8)
-    - PSTCollectionView (~> 1.2)
-    - SDWebImage (~> 3.7)
-  - PSTCollectionView (1.2.3)
-  - Realm (0.91.3):
-    - Realm/Headers (= 0.91.3)
-  - realm-database-2015 (0.0.1):
-    - Realm
-  - Realm/Headers (0.91.3)
-  - SDWebImage (3.7.2):
-    - SDWebImage/Core (= 3.7.2)
-  - SDWebImage/Core (3.7.2)
+  - Firebase (2.5.0)
+  - firebase-schema-2016-ios (0.0.1)
+  - JBChartView (3.0.6)
+  - MBProgressHUD (0.9.2)
+  - MWPhotoBrowser (2.1.1):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - SDWebImage (!= 3.7.2, ~> 3.7)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
 
 DEPENDENCIES:
-  - CCDropboxRealmSync-iOS (from `https://github.com/frc1678/CCDropboxRealmSync-iOS`)
+  - Firebase (>= 2.5.0)
+  - firebase-schema-2016-ios (from `https://github.com/frc1678/firebase-schema-2016-ios.git`)
   - JBChartView
   - MWPhotoBrowser (from `https://github.com/mwaterfall/MWPhotoBrowser.git`)
-  - realm-database-2015 (from `https://github.com/frc1678/realm-database-2015`)
 
 EXTERNAL SOURCES:
-  CCDropboxRealmSync-iOS:
-    :git: https://github.com/frc1678/CCDropboxRealmSync-iOS
+  firebase-schema-2016-ios:
+    :git: https://github.com/frc1678/firebase-schema-2016-ios.git
   MWPhotoBrowser:
     :git: https://github.com/mwaterfall/MWPhotoBrowser.git
-  realm-database-2015:
-    :git: https://github.com/frc1678/realm-database-2015
 
 CHECKOUT OPTIONS:
-  CCDropboxRealmSync-iOS:
-    :commit: 1b8786c19e626a60b9d0dc86c939078684ccd439
-    :git: https://github.com/frc1678/CCDropboxRealmSync-iOS
+  firebase-schema-2016-ios:
+    :commit: 7b47e7c16285ce81815404820367c48d9234737c
+    :git: https://github.com/frc1678/firebase-schema-2016-ios.git
   MWPhotoBrowser:
-    :commit: d68f9cd5d5c64399fc6ca5b9600b8eaf2bea1319
+    :commit: 3d6efbb9240799408bdf47b1c0794e2068baefc8
     :git: https://github.com/mwaterfall/MWPhotoBrowser.git
-  realm-database-2015:
-    :commit: 3a8d73908aa6ce9728b53b3f01c42714cf377065
-    :git: https://github.com/frc1678/realm-database-2015
 
 SPEC CHECKSUMS:
-  CCDropboxRealmSync-iOS: 41efe40858f4fb1c16e983cfb044b4aeb0d21578
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
-  Dropbox-Sync-API-SDK: 92652bd663984740f963ba228864542711eda148
-  JBChartView: 6cd003d4a5e833d45345b85f40efd9c7e7c6f589
-  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MWPhotoBrowser: 2531e682860d62b8a7ba8659de02eb9040e431e5
-  PSTCollectionView: 6749df92885353521f55279a7ce2b293762e2be4
-  Realm: 4bfdac6f0f3170a3947c7196e2e9a2e49c943719
-  realm-database-2015: 79dd9966fdd3bcee0710d48b51551d74ee5ddf1f
-  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
+  firebase-schema-2016-ios: 172ffba71ecfd9b77c363c79960458a0e846907d
+  JBChartView: 5e4ab567158a45184bc26b295b06e7cb9cf38349
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MWPhotoBrowser: cebf3540db6b5116f1ad3e3e4c1b9aa11c0bf25f
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
 
-COCOAPODS: 0.37.1
+COCOAPODS: 0.39.0

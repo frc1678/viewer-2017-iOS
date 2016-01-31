@@ -6,11 +6,10 @@
 //  Copyright (c) 2015 Citrus Circuits. All rights reserved.
 //
 
-#import "SeedTableViewController.h"
-#import "RealmModels.h"
+#import "seedTableViewController.h"
+
 #import "config.h"
 #import "MultiCellTableViewCell.h"
-#import "ScoutDataFetcher.h"
 #import "scout_viewer_2015_iOS-Swift.h"
 
 
@@ -20,14 +19,41 @@
 
 @implementation SeedTableViewController
 
+FirebaseDataFetcher *firebaseFetcher;
+
+-(void)viewDidLoad {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(checkRes:) name:@"updateLeftTable" object:nil];
+    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+     
+   
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
+    MultiCellTableViewCell *cell = [nib objectAtIndex:0];
+    
+    NSArray *sortedTeams = [firebaseFetcher seedList];
+    Team *team = sortedTeams[indexPath.row];
+    cell.teamLabel.text = team.name;
+    cell.rankLabel.text = [NSString stringWithFormat:@"%d",indexPath.row];
+    cell.scoreLabel.text = [NSString stringWithFormat:@"%d",team.calculatedData.firstPickAbility];
+    return cell;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    NSLog(@"How many rows?");
+    NSLog([NSString stringWithFormat:@"%lu",(unsigned long)firebaseFetcher.teams.count]);
+    return firebaseFetcher.getPickList.count;
+}
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.seed];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.actualSeed];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.averageScore toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
     
 }
 
@@ -36,7 +62,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [ScoutDataFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"seed" ascending:YES]];
+    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"seed" ascending:YES]];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
@@ -54,9 +80,9 @@
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
     
         
-        Team *team = [ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
-        if (team.seed > 0) {
-            teamDetailsController.data = [ScoutDataFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        Team *team = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        if (team.calculatedData.actualSeed > 0) {
+            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         }
     }
 }
@@ -68,5 +94,14 @@
         return [numberText rangeOfString:searchString].location == 0;
     }]];
 }
+-(void)checkRes:(NSNotification *)notification
+{
+    if ([[notification name] isEqualToString:@"updateLeftTable"])
+    {
+        NSLog(@"Updating via checkRes!");
+        [self.tableView reloadData];
+    }
+}
+
 
 @end

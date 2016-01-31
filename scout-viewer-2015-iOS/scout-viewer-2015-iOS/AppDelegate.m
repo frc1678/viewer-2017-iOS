@@ -7,8 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <CCDropboxRealmSync-iOS/CCRealmSync.h>
-#import "ScoutDataFetcher.h"
 
 @interface AppDelegate ()
 
@@ -20,26 +18,12 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    BOOL ret = [super application:application didFinishLaunchingWithOptions:launchOptions];
-    self.hasCached = false;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(databaseUpdated:) name:CC_NEW_REALM_NOTIFICATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadUIBecauseDropboxIsLinkedNow) name:CC_DROPBOX_LINK_NOTIFICATION object:nil];
-    [CCRealmSync setRealmDropboxPath:[ScoutDataFetcher dropboxFilePath]];
-    
-    [CCRealmSync defaultReadonlyDropboxRealm:^(RLMRealm *realm) {
-        NSLog(@"Initial setup of realm %@", realm);
-        [ScoutDataFetcher reloadAllData];
-    }];
-    
-    return ret;
+    return true;
 }
 
 - (void)databaseUpdated:(NSNotification *)note {
-    [ScoutDataFetcher reloadAllData];
 }
 
-- (void)reloadUIBecauseDropboxIsLinkedNow {
-    [ScoutDataFetcher reloadAllData];
-}
+
 
 @end
