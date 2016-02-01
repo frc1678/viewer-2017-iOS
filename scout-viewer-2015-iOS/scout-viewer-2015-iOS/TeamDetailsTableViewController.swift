@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import MWPhotoBrowser
+import SDWebImage
+
 
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate {
     

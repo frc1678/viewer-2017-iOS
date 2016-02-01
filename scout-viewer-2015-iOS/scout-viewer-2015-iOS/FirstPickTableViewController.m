@@ -28,7 +28,7 @@ FirebaseDataFetcher *firebaseFetcher;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"%d",firebaseFetcher.teams.count);
+    NSLog(@"%lu",(unsigned long)firebaseFetcher.teams.count);
     return firebaseFetcher.getPickList.count;
 }
 
@@ -38,8 +38,8 @@ FirebaseDataFetcher *firebaseFetcher;
     MultiCellTableViewCell *cell = [nib objectAtIndex:0];
     
     cell.teamLabel.text = firebaseFetcher.getPickList[indexPath.row].name;
-    cell.rankLabel.text = [NSString stringWithFormat:@"%d",(indexPath.row+1)];
-    cell.scoreLabel.text = [NSString stringWithFormat:@"%d",firebaseFetcher.getPickList[indexPath.row].calculatedData.actualSeed];
+    cell.rankLabel.text = [NSString stringWithFormat:@"%ld",(indexPath.row+1)];
+    cell.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)firebaseFetcher.getPickList[indexPath.row].calculatedData.actualSeed];
     
     return cell;
 }
@@ -63,7 +63,8 @@ FirebaseDataFetcher *firebaseFetcher;
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.firstPickAbility" ascending:NO]];
+    //NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.firstPickAbility" ascending:NO]];
+    NSArray *returnData = [firebaseFetcher getPickList];
     return returnData;
 }
 

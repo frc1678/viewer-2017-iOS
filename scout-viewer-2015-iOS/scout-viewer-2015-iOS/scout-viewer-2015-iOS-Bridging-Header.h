@@ -4,10 +4,10 @@
 
 #import "MultiCellTableViewCell.h"
 #import "ArrayTableViewController.h"
-#import "MWPhotoBrowser.h"
-#import "SDImageCache.h"
+#import <MWPhotoBrowser/MWPhotoBrowser.h>
+#import <SDWebImage/SDImageCache.h>
 #import "TeamScheduleTableViewController.h"
-#import "JBChartView.h"
-#import "JBBarChartView.h"
+#import <JBChartView/JBChartView.h>
+#import <JBChartView/JBBarChartView.h>
 #import "PDFRenderer.h"
 #import "UINavigationController+SGProgress.h"

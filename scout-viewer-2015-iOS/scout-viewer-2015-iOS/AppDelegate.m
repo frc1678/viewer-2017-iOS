@@ -7,10 +7,13 @@
 //
 
 #import "AppDelegate.h"
+@import DATAStack;
+
 
 @interface AppDelegate ()
 
 @property (nonatomic) bool hasCached;
+@property (nonatomic) DATAStack *dataStack;
 
 @end
 
@@ -18,12 +21,21 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    self.dataStack = [[DATAStack alloc] initWithModelName:@"Model"];
     return true;
 }
 
 - (void)databaseUpdated:(NSNotification *)note {
 }
 
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [self.dataStack persistWithCompletion:nil];
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    [self.dataStack persistWithCompletion:nil];
+}
 
 
 @end

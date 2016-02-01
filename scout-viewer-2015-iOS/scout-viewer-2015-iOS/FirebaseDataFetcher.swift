@@ -9,13 +9,19 @@
 import UIKit
 import firebase_schema_2016_ios
 import Firebase
+import Sync
+import DATAStack
 
 class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
-    var teams = [Team]()
+    var teams = [Team]() {
+        willSet {
+            
+        }
+    }
     var matches = [AnyObject]()
     var allTheData = NSDictionary()
-    
+    var dataStack : DATAStack = DATAStack()
     var teamInMatchKeys = [
         "ballsIntakedAuto",
         "didChallengeTele",
@@ -41,7 +47,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         "rankSpeed",
         "rankTorque",
         "teamNumber",
-       // "timesCrossedDefensesAuto",
+        // "timesCrossedDefensesAuto",
         //"timesCrossedDefensesTele",
     ]
     
@@ -101,6 +107,21 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         self.getAllTheData()
     }
     
+    func coreDataImport() {
+        let fb = Firebase(url: "https://1678-dev-2016.firebaseio.com/")
+        fb.observeEventType(.Value, withBlock: { snapshot in
+            Sync.changes(
+                WHEEEEEE ERROR HERE: You need the JSON thing that is being used in pit scout.
+                changes: JSON(snapshot.value),
+                inEntityNamed: String,
+                dataStack: self.dataStack,
+                completion: {
+                    
+            })
+        }
+        
+    }
+    
     func getAllTheData() {
         let matchReference = Firebase(url: "https://1678-dev-2016.firebaseio.com/Matches")
         matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
@@ -119,9 +140,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             
             self.matches.append(match)
             if(self.matches.count == 95) {
-                 NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
             }
-          
+            
             
         })
         let teamReference = Firebase(url:"https://1678-dev-2016.firebaseio.com/Teams")
@@ -131,24 +152,24 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             team.number = (snapshot.value.objectForKey("number") as? Int)!
             let teamDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)!
             team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
-                
+            
             self.teams.append(team)
         })
-//        let matchRef = Firebase(url:"https://1678-dev-2016.firebaseio.com/")
-//        matchRef.observeEventType(.Value, withBlock: { snapshot in
-//            
-//            self.allTheData = (snapshot.value as? NSDictionary)!
-//            print(self.allTheData.objectForKey("Matches"))
-//            let stuff = self.allTheData.objectForKey("Matches")! as? NSDictionary
-//            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-//            })
-    
+        //        let matchRef = Firebase(url:"https://1678-dev-2016.firebaseio.com/")
+        //        matchRef.observeEventType(.Value, withBlock: { snapshot in
+        //            
+        //            self.allTheData = (snapshot.value as? NSDictionary)!
+        //            print(self.allTheData.objectForKey("Matches"))
+        //            let stuff = self.allTheData.objectForKey("Matches")! as? NSDictionary
+        //            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+        //            })
+        
     }
     func fetchTeamInMatchDataForTeam(team:Team, inMatch: Match) -> TeamInMatchData {
         let dankString = "https://1678-dev-2016.firebaseio.com/TeamInMatchDatas/"
         let TIMRef = Firebase(url:dankString)
         let TIMData = TeamInMatchData()
-         TIMRef.observeEventType(.Value, withBlock: { snapshot in
+        TIMRef.observeEventType(.Value, withBlock: { snapshot in
             let key = String(team.number)+"Q"+String(inMatch.number)
             let dankMeme = (snapshot.value.objectForKey(key))
             for key in self.teamInMatchKeys {
@@ -292,7 +313,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         matchData.redRPs = (dict.objectForKey("actualRedRPs") as? Int)!
         
         return matchData
-
+        
     }
     func getTeamCalculatedDataFromDict(dict:NSDictionary) -> CalculatedTeamData {
         let teamData = CalculatedTeamData()

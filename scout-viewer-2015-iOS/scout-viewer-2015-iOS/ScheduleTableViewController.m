@@ -52,9 +52,9 @@ FirebaseDataFetcher *firebaseFetcher;
     cell.blueOneLabel.text = [NSString stringWithFormat:@"%@",match.blueAllianceTeamNumbers[0]];
     cell.blueTwoLabel.text = [NSString stringWithFormat:@"%@",match.blueAllianceTeamNumbers[1]];
     cell.blueThreeLabel.text = [NSString stringWithFormat:@"%@",match.blueAllianceTeamNumbers[2]];
-    cell.matchLabel.text = [NSString stringWithFormat:@"%d",match.number];
-    cell.redScoreLabel.text = [NSString stringWithFormat:@"%d",match.redScore];
-    cell.blueScoreLabel.text = [NSString stringWithFormat:@"%d",match.blueScore];
+    cell.matchLabel.text = [NSString stringWithFormat:@"%ld",(long)match.number];
+    cell.redScoreLabel.text = [NSString stringWithFormat:@"%ld",(long)match.redScore];
+    cell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld",(long)match.blueScore];
     return cell;
 }
 -(void)checkRes:(NSNotification *)notification
