@@ -8,8 +8,10 @@
 
 import UIKit
 
-class Team: NSObject {
-    
+class Team: NSObject, Objectable {
+    func toObject() -> NSDictionary {
+        return self.dictionaryWithValuesForKeys(["name", "number", "calculatedData"])
+    }
     var name = String()
     var number = -1
     var calculatedData = CalculatedTeamData()

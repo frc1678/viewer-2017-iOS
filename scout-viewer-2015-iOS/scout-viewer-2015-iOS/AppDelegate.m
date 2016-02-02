@@ -7,13 +7,12 @@
 //
 
 #import "AppDelegate.h"
-@import DATAStack;
+#import "Firebase.h"
 
 
 @interface AppDelegate ()
 
 @property (nonatomic) bool hasCached;
-@property (nonatomic) DATAStack *dataStack;
 
 @end
 
@@ -21,8 +20,7 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    self.dataStack = [[DATAStack alloc] initWithModelName:@"Model"];
+    Firebase.defaultConfig().persistenceEnabled = true //You need this so it stores to disk and doesnt go away when app is killed
     return true;
 }
 

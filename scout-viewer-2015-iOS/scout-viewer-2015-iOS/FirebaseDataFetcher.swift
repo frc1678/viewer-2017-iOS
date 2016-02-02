@@ -9,19 +9,14 @@
 import UIKit
 import firebase_schema_2016_ios
 import Firebase
-import Sync
-import DATAStack
 
 class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
-    var teams = [Team]() {
-        willSet {
-            
-        }
-    }
+    var teams = [Team]()
     var matches = [AnyObject]()
     var allTheData = NSDictionary()
-    var dataStack : DATAStack = DATAStack()
+    var firebase = Firebase(url: "https://1678-dev-2016.firebaseio.com")
+    var teamsCollection : FirebaseCollection = FirebaseCollection.init(node: self.firebase, dictionary: self.allTheData, type: Team)
     var teamInMatchKeys = [
         "ballsIntakedAuto",
         "didChallengeTele",
@@ -107,22 +102,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         self.getAllTheData()
     }
     
-    func coreDataImport() {
-        let fb = Firebase(url: "https://1678-dev-2016.firebaseio.com/")
-        fb.observeEventType(.Value, withBlock: { snapshot in
-            Sync.changes(
-                WHEEEEEE ERROR HERE: You need the JSON thing that is being used in pit scout.
-                changes: JSON(snapshot.value),
-                inEntityNamed: String,
-                dataStack: self.dataStack,
-                completion: {
-                    
-            })
-        }
-        
-    }
+    
     
     func getAllTheData() {
+        
+        
+        
+        
         let matchReference = Firebase(url: "https://1678-dev-2016.firebaseio.com/Matches")
         matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
             let match = Match()
@@ -139,7 +125,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             match.redScore = snapshot.value.objectForKey("redScore") as! Int
             
             self.matches.append(match)
-            if(self.matches.count == 95) {
+            if(self.matches.count == 95) { //This is sketch and should not be done in this way
                 NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
             }
             
