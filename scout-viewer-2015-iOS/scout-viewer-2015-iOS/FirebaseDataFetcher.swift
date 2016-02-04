@@ -107,22 +107,23 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         self.getAllTheData()
     }
     
-    func coreDataImport() {
-        let fb = Firebase(url: "https://1678-dev-2016.firebaseio.com/")
-        fb.observeEventType(.Value, withBlock: { snapshot in
-            Sync.changes(
-                WHEEEEEE ERROR HERE: You need the JSON thing that is being used in pit scout.
-                changes: JSON(snapshot.value),
-                inEntityNamed: String,
-                dataStack: self.dataStack,
-                completion: {
-                    
-            })
-        }
-        
-    }
+//    func coreDataImport() {
+//        let fb = Firebase(url: "https://1678-dev-2016.firebaseio.com/")
+//        fb.observeEventType(.Value, withBlock: { snapshot in
+//            Sync.changes(
+//                WHEEEEEE, ERROR HERE: You need the JSON thing that is being used in pit scout.
+//                changes: JSON(snapshot.value),
+//                inEntityNamed: String,
+//                dataStack: self.dataStack,
+//                completion: {
+//                    
+//            })
+//        }
+//        
+//    }
     
     func getAllTheData() {
+        //Firebase.defaultConfig().persistenceEnabled = true
         let matchReference = Firebase(url: "https://1678-dev-2016.firebaseio.com/Matches")
         matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
             let match = Match()
@@ -244,10 +245,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         return values.indexOf(timData.matchNumber)! + 1
     }
-    func valuesInCompetitionOfPathForTeams(path:NSString) -> NSArray {
+    func valuesInCompetitionOfPathForTeams(path:String) -> NSArray {
         let array = NSMutableArray()
         for team in self.teams {
-            array.addObject(team.valueForKey(path as String)!)
+            array.addObject(team.valueForKeyPath(path)!)
         }
         return array
     }

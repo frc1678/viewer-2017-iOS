@@ -26,6 +26,21 @@ FirebaseDataFetcher *firebaseFetcher;
     self.key = [self keyForIndex:0];
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
+    MultiCellTableViewCell *multiCell = [nib objectAtIndex:0];
+    
+    multiCell.rankLabel.text = @"Hello, this won't be needed until champs :)";
+    multiCell.teamLabel.text = @"";
+    multiCell.scoreLabel.text = @"";
+    
+    return multiCell;
+}
+
 - (void) setKey:(NSString *)key {
     _key = key;
     

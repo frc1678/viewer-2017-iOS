@@ -477,6 +477,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! MultiCellTableViewCell
                 graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                 graphViewController.displayTitle = "\(graphViewController.graphTitle): "
+                print("THIS IS IMPORTANT STUFF")
+                print(keySets[indexPath.section][indexPath.row])
                 if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(keySets[indexPath.section][indexPath.row]) as? [CGFloat] {
                     graphViewController.values = values
                     graphViewController.subValuesLeft = firebaseFetcher.valuesInCompetitionOfPathForTeams("number") as [AnyObject]

@@ -24,10 +24,33 @@ FirebaseDataFetcher *firebaseFetcher;
     firebaseFetcher = [[FirebaseDataFetcher alloc] init];
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return firebaseFetcher.teams.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
+    MultiCellTableViewCell *multiCell = [nib objectAtIndex:0];
+    
+    Team *team = [firebaseFetcher getPickList][indexPath.row];
+    
+    multiCell.teamLabel.text = team.name;
+    multiCell.scoreLabel.text = [NSString stringWithFormat:@"%d",team.calculatedData.secondPickAbility];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%d",indexPath.row];
+    
+                           
+    return multiCell;
+    
+
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
     
-    MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
+    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
+    MultiCellTableViewCell *multiCell = [nib objectAtIndex:0];
+    
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.secondPickAbility"]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
