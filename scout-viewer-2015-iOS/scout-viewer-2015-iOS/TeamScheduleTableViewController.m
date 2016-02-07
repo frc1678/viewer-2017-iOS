@@ -17,44 +17,20 @@
 
 @implementation TeamScheduleTableViewController
 
-FirebaseDataFetcher *firebaseFetcher;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(checkRes:) name:@"updateLeftTable" object:nil];
-    
-    self.title = [NSString stringWithFormat:@"%ld - Matches", (long)self.teamNumber];
-}
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [firebaseFetcher getMatchesForTeam:self.teamNumber].count;
-}
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    MatchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier]];
-    Match *match = [firebaseFetcher getMatchesForTeam:self.teamNumber][indexPath.row];
-    cell.redOneLabel.text = [NSString stringWithFormat:@"%@",match.redAllianceTeamNumbers[0]];
-    cell.redTwoLabel.text =[NSString stringWithFormat:@"%@",match.redAllianceTeamNumbers[1]];
-    cell.redThreeLabel.text = [NSString stringWithFormat:@"%@",match.redAllianceTeamNumbers[2]];
-    cell.blueOneLabel.text = [NSString stringWithFormat:@"%@",match.blueAllianceTeamNumbers[0]];
-    cell.blueTwoLabel.text =[NSString stringWithFormat:@"%@",match.blueAllianceTeamNumbers[1]];
-    cell.blueThreeLabel.text =[NSString stringWithFormat:@"%@",match.blueAllianceTeamNumbers[2]];
-    cell.matchLabel.text = [NSString stringWithFormat:@"%ld",(long)match.number];
-    cell.redScoreLabel.text = [NSString stringWithFormat:@"%ld",(long)match.redScore];
-    cell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld",(long)match.blueScore];
-    return cell;
+    self.title = [NSString stringWithFormat:@"%ld - Matches", (long)self.teamNumber];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Match *match = data;
-    NSArray *redTeams = [firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
-    NSArray *blueTeams = [firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
+    NSArray *redTeams = [self.firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
+    NSArray *blueTeams = [self.firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
     
     
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
-    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:match.matchName];
+    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat: @"%d",match.number]];
     
     for (int i = 0; i < 3; i++) {
         if(i < redTeams.count) {
@@ -100,11 +76,11 @@ FirebaseDataFetcher *firebaseFetcher;
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [firebaseFetcher fetchMatchesForTeamWithNumber:self.teamNumber];
-    NSLog(@"%lu", (unsigned long)returnData.count);
+    NSArray *returnData = [self.firebaseFetcher fetchMatchesForTeamWithNumber:self.teamNumber];
+    NSLog(@"Return Data");
+    NSLog(@"%d", returnData.count);
     return returnData;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -114,7 +90,7 @@ FirebaseDataFetcher *firebaseFetcher;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MatchTableViewCell *cell = sender;
     MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
-    detailController.match = [firebaseFetcher fetchMatch:cell.matchLabel.text];
+    detailController.match = [self.firebaseFetcher fetchMatch:cell.matchLabel.text];
 }
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
@@ -123,7 +99,7 @@ FirebaseDataFetcher *firebaseFetcher;
         if (scope == 0) {
             return ([match.matchName rangeOfString:searchString].location == 0 || [match.matchName rangeOfString:searchString].location == 1);
         } else if (scope == 1) {
-            for (Team *team in [firebaseFetcher allTeamsInMatch:match]) {
+            for (Team *team in [self.firebaseFetcher allTeamsInMatch:match]) {
                 NSString *numberText = [NSString stringWithFormat:@"%ld", (long)team.number];
                 if ([numberText rangeOfString:searchString].location == 0) {
                     return YES;
@@ -163,14 +139,5 @@ FirebaseDataFetcher *firebaseFetcher;
 + (NSArray *)mappings {
     return @[@"One", @"Two", @"Three"];
 }
-
--(void)checkRes:(NSNotification *)notification
-{
-    if ([[notification name] isEqualToString:@"updateLeftTable"])
-    {
-        [self.tableView reloadData];
-    }
-}
-
 
 @end

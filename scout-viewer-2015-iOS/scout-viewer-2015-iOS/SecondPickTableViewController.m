@@ -18,43 +18,21 @@
 
 @implementation SecondPickTableViewController
 
-FirebaseDataFetcher *firebaseFetcher;
 
 -(void)viewDidLoad {
-    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+    [super viewDidLoad];
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return firebaseFetcher.teams.count;
-}
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
-    MultiCellTableViewCell *multiCell = [nib objectAtIndex:0];
-    
-    Team *team = [firebaseFetcher getPickList][indexPath.row];
-    
-    multiCell.teamLabel.text = team.name;
-    multiCell.scoreLabel.text = [NSString stringWithFormat:@"%d",team.calculatedData.secondPickAbility];
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%d",indexPath.row];
-    
-                           
-    return multiCell;
-    
-
-}
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
+    MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
-    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
-    MultiCellTableViewCell *multiCell = [nib objectAtIndex:0];
-    
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.secondPickAbility"]];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.secondPickAbility"]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.secondPickAbility toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
     
 }
 
@@ -63,7 +41,7 @@ FirebaseDataFetcher *firebaseFetcher;
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.secondPickAbility" ascending:NO]];
+    NSArray *returnData = [self.firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.secondPickAbility" ascending:NO]];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
@@ -71,27 +49,34 @@ FirebaseDataFetcher *firebaseFetcher;
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self performSegueWithIdentifier:@"TeamDetails" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    [self performSegueWithIdentifier:@"classSpecSecondPickSegue" sender:[tableView cellForRowAtIndexPath:indexPath]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.destinationViewController isKindOfClass:[TeamDetailsTableViewController class]]) {
+//    if ([segue.destinationViewController isKindOfClass:[TeamDetailsTableViewController class]]) {
+//        MultiCellTableViewCell *multiCell = sender;
+//        
+//        TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
+//        
+//        if ([firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
+//            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+//        }
+//    }
+    if([segue.destinationViewController isKindOfClass:[ConditionalSecondPickTableViewController class]]) {
+        NSLog(@"Prepping Segue");
         MultiCellTableViewCell *multiCell = sender;
-        
-        TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
-        
-        if ([firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
-            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
-        }
+        ConditionalSecondPickTableViewController *dest = segue.destinationViewController;
+        dest.teamNumber = [multiCell.teamLabel.text integerValue];
     }
 }
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
     return [self.dataArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Team *team, NSDictionary *bindings) {
-        NSString *numberText = [NSString stringWithFormat:@"%ld", team.number];
+        NSString *numberText = [NSString stringWithFormat:@"%ld", (long)team.number];
         return [numberText rangeOfString:searchString].location == 0;
     }]];
 }
+
 
 @end

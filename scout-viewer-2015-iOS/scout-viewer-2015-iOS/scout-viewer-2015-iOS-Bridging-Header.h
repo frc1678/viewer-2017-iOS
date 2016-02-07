@@ -11,3 +11,4 @@
 #import <JBChartView/JBBarChartView.h>
 #import "PDFRenderer.h"
 #import "UINavigationController+SGProgress.h"
+#import "AppDelegate.h"

@@ -18,26 +18,9 @@
 
 @implementation PredictedSeedTableViewController
 
-FirebaseDataFetcher *firebaseFetcher;
 
 -(void)viewDidLoad {
-    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
-}
-
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
-}
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
-    MultiCellTableViewCell *cell = [nib objectAtIndex:0];
-    
-    NSArray *predSeedArray = [firebaseFetcher predSeedList];
-    Team *team = predSeedArray[indexPath.row];
-    
-    cell.teamLabel.text = team.name;
-    cell.scoreLabel.text = [NSString stringWithFormat:@"%d",team.calculatedData.predictedSeed];
-    
-    return cell;
+    [super viewDidLoad];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
@@ -56,7 +39,7 @@ FirebaseDataFetcher *firebaseFetcher;
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.predictedSeed" ascending:YES]];
+    NSArray *returnData = [self.firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.predictedSeed" ascending:YES]];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
@@ -72,10 +55,7 @@ FirebaseDataFetcher *firebaseFetcher;
         MultiCellTableViewCell *multiCell = sender;
         
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
-        
-        if ([firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
-            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
-        }
+        teamDetailsController.data = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
     }
 }
 

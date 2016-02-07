@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "scout_viewer_2015_iOS-Swift.h"
+#import "Firebase/Firebase.h"
 @import DATAStack;
 
 
@@ -19,10 +21,19 @@
 
 @implementation AppDelegate
 
++ (AppDelegate *)getAppDelegate
+{
+    return [[UIApplication sharedApplication] delegate];
+}
+
+
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
     self.dataStack = [[DATAStack alloc] initWithModelName:@"Model"];
+    [Firebase defaultConfig].persistenceEnabled = YES;
+    self.firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+    
     return true;
 }
 

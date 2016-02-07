@@ -13,7 +13,7 @@ import SDWebImage
 
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate {
     
-    var firebaseFetcher = FirebaseDataFetcher()
+    var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var teamNumberLabel: UILabel!
@@ -44,52 +44,35 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     let abilityKeys = [
         "calculatedData.firstPickAbility",
-        "calculatedData.secondPickAbility"
+        "calculatedData.avgTorque",
+        "calculatedData.avgEvasion",
+        "calculatedData.avgSpeed",
+        "calculatedData.numAutoPoints",
+        "calculatedData.avgBallControl",
+        "calculatedData.avgDefense",
+        "calculatedData.numRPs",
+        "calculatedData.predictedNumRPs"
         ]
     
     // Add carrying stability into stacking security
     
     let autoKeys = [
-        "calculatedData.avgBallsKnockedOffMidlineAuto",
-        "calculatedData.avgFailedTimesCrossedDefensesAuto",
-        "calculatedData.avgHighShotsAuto",
-        "calculatedData.avgLowShotsAuto",
-        "calculatedData.avgMidlineBallsIntakedAuto",
-    "calculatedData.avgSuccessfulTimesCrossedDefensesAuto",
+    //TODO: Add Avg. Num Shots in 2 ball Auto
+    "calculatedData.numAutoPoints",
     "calculatedData.highShotAccuracyAuto",
     "calculatedData.lowShotAccuracyAuto",
-    "calculatedData.sdBallsKnockedOffMidlineAuto",
+    "calculatedData.avgBallsKnockedOffMidlineAuto",
     "calculatedData.avgMidlineBallsIntakedAuto"]
     
-//    let stackingKeys = [
-//        "calculatedData.stackingAbility",
-//        "calculatedData.avgNumMaxHeightStacks",
-//        "calculatedData.avgNumCappedSixStacks",
-//        "calculatedData.avgStackPlacing" ]
-//
-//    let toteKeys = [
-//        "calculatedData.avgNumTotesStacked",
-//        "calculatedData.avgMaxFieldToteHeight",
-//        "calculatedData.avgNumTotesPickedUpFromGround" ]
+    let teleKeys = [
+    "calculatedData.highShotAccuracyTele",
+    "calculatedData.lowShotAccuracyTele",
+    "calculatedData.avgHighShotsTele",
+    "calculatedData.sdHighShotsTele",
+    "calculatedData.avgLowShotsTele",
+    "calculatedData.sdLowShotsTele"
+    ]
     
-//    let reconKeys = [
-//        "calculatedData.reconAbility",
-//        "calculatedData.avgNumReconLevels",
-//        "calculatedData.avgNumTeleopReconsFromStep",
-//        "calculatedData.avgNumReconsPickedUp",
-//        "calculatedData.avgNumHorizontalReconsPickedUp",
-//        "calculatedData.avgNumVerticalReconsPickedUp",
-//        "calculatedData.avgNumReconsStacked",
-//        "calculatedData.avgMaxReconHeight",
-//        "calculatedData.reconReliability" ]
-//    
-//    let noodleKeys = [
-//        "calculatedData.noodleReliability",
-//        "calculatedData.avgNumNoodlesContributed",
-//        "calculatedData.avgNumLitterDropped" ]
-    
-//    let humanPlayerKeys = [
-//        "calculatedData.avgNumTotesFromHP" ]
     
     let superKeys = [
         "calculatedData.avgEvasion",
@@ -97,36 +80,26 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let statusKeys = [
-          "calculatedData.driverAbility",
+        "calculatedData.driverAbility",
         "calculatedData.challengePercentage",
         "calculatedData.disabledPercentage",
         "calculatedData.disfunctionalPercentage",
         "calculatedData.incapacitatedPercentage",
         ]
     
-//    let pitKeys = [
-//        "uploadedData.pitOrganization",
-//        "uploadedData.programmingLanguage",
-//        "uploadedData.canMountMechanism",
-//        "uploadedData.pitNotes" ]
-
-    let keySetNames = [
-        "Information",
-        "Ability - High Level",
-        "Autonomous",
-        "Qualitative",
-        "Percentages",
-        "Recycling Containers",
-        "Noodles / Litter",
-        "Human Player",
-        "Super Scout",
-        "Status",
-        "Pit Scouting / Robot Design"
+    let pitKeys = [
+        "pitPotentialLowBarCapability",
+        "pitPotentialMidlineBallCapability",
+        "pitDriveBaseWidth",
+        "pitDriveBaseLength",
+        "pitBumperHeight",
+        "pitPotentialShotBlockerCapability",
+        "pitOrganization",
     ]
+
     
     let longTextCells = [
-        "calculatedData.reconAcquisitionTypes"
-        //"uploadedData.pitNotes"
+        "pitNotes"
     ]
     
     let unrankedCells = [
@@ -138,39 +111,46 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.challengePercentage",
         "calculatedData.disabledPercentage",
         "calculatedData.disfunctionalPercentage",
-        "calculatedData.isStackedToteSetPercentage",
-        "calculatedData.stepReconSuccessRateInAuto",
         "calculatedData.incapacitatedPercentage",
-        "calculatedData.disabledPercentage"]
+        "calculatedData.scalePercentage",
+        "calculatedData.siegeConsistency"
+        
+    ]
     let addCommasBetweenCapitals = [
         "calculatedData.reconAcquisitionTypes"
     ]
     
     let boolValues = [
+        "calculatedData.driverAbility",
         "calculatedData.challengePercentage",
         "calculatedData.disabledPercentage",
-        "calculatedData.disfunctionalPercentage",
         "calculatedData.incapacitatedPercentage",
-        "calculatedData.reachPercentage",
-        "calculatedData.scalePercentage",
     ]
     
     let moreInfoValues = [
         "matchDatas"
     ]
+    let keySetNames = [
+        "Information",
+        "Ability - High Level",
+        "Autonomous",
+        "TeleOp",
+        "Percentages",
+        "Qualitative",
+        "Additional Info",
+        "Pit Scouting / Robot Design"
+    ]
+
 
     var keySets: [[String]] {
         return [ defaultKeys,
                 abilityKeys,
                 autoKeys,
-                /*stackingKeys*/
-                /*toteKeys*/
-                /*reconKeys*/
-                /*noodleKeys,*/
-                /*humanPlayerKeys,*/
-                superKeys,
-                statusKeys
-                /*pitKeys*/ ]
+                teleKeys,
+                percentageValues,
+                pitKeys,
+                longTextCells
+        ]
     }
     
     func reload() {
@@ -480,6 +460,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 print("THIS IS IMPORTANT STUFF")
                 print(keySets[indexPath.section][indexPath.row])
                 if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(keySets[indexPath.section][indexPath.row]) as? [CGFloat] {
+                    print(values)
                     graphViewController.values = values
                     graphViewController.subValuesLeft = firebaseFetcher.valuesInCompetitionOfPathForTeams("number") as [AnyObject]
                     graphViewController.subDisplayLeftTitle = "Team "

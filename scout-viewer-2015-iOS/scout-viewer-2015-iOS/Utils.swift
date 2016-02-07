@@ -12,8 +12,8 @@ let humanReadableNames = [
     "calculatedData.actualSeed" : "Seed",
     "calculatedData.avgBallControl" : "Avg. Ball Controll",
     "calculatedData.avgBallsKnockedOffMidlineAuto" : "Avg. Balls Off Mid Line",
-    "calculatedData.avgDefense" : "Average Defense",
-    "calculatedData.avgEvasion" : "Average Evasion",
+    "calculatedData.avgDefense" : "Avg. Defense",
+    "calculatedData.avgEvasion" : "Avg. Evasion",
     "calculatedData.avgFailedTimesCrossedDefensesAuto" : "Avg. Cross Fails Auto",
     "calculatedData.avgFailedTimesCrossedDefensesTele" : "Avg. Cross Fails Tele",
     "calculatedData.avgGroundIntakes" : "Avg. Ground Intakes",
@@ -38,9 +38,9 @@ let humanReadableNames = [
     "calculatedData.lowShotAccuracyAuto" : "Low Shot Accuracy Auto",
     "calculatedData.lowShotAccuracyTele" : "Low Shot Accuracy Tele",
     "calculatedData.numAutoPoints" : "Number of Auto Points",
-    "calculatedData.numRPs" : "#yolo",
+    "calculatedData.numRPs" : "Number of RPs",
+    "calculatedData.predictedNumRPs" : "Predicted Number of RPs",
     "calculatedData.numScaleAndChallengePoints" : "Scale and Challenge Points",
-    //THE BOOKMARK
     "calculatedData.predictedSeed" : "Predicted Seed",
     "calculatedData.reachPercentage" : "Reach Percentage",
     "calculatedData.scalePercentage" : "Scale Percentage",
@@ -59,7 +59,15 @@ let humanReadableNames = [
     "calculatedData.siegeAbility" : "Siege Ability",
     "calculatedData.siegeConsistency" : "Siege Consistency",
     "calculatedData.siegePower" : "Siege Power",
-    "matchDatas" : "Matches"
+    "matchDatas" : "Matches",
+    "pitPotentialLowBarCapability" : "Low Bar Capability",
+    "pitPotentialMidlineBallCapability" : "Mid Line Ball Capability",
+    "pitDriveBaseWidth" : "Drive Base Width",
+    "pitDriveBaseLength" : "Drive Base Length",
+    "pitBumperHeight" : "Bumper Height",
+    "pitPotentialShotBlockerCapability" : "Shot Blocking Capacity",
+    "pitNotes" : "Pit Notes",
+    "pitOrganization" : "Pit Organization"
 ]
 
 func roundValue(value: AnyObject, toDecimalPlaces numDecimalPlaces: Int) -> String {

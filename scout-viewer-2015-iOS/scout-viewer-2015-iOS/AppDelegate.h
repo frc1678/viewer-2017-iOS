@@ -8,9 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class FirebaseDataFetcher;
 @interface AppDelegate: NSObject
 
 @property(strong,nonatomic) UIWindow *window;
+@property(strong,nonatomic) FirebaseDataFetcher *firebaseFetcher;
+
++ (AppDelegate *)getAppDelegate;
+
 
 
 @end

@@ -10,6 +10,8 @@
 #import "config.h"
 #import "MultiCellTableViewCell.h"
 #import "UINavigationController+SGProgress.h"
+#import "AppDelegate.h"
+#import "scout_viewer_2015_iOS-Swift.h"
 
 @interface ArrayTableViewController ()
 
@@ -20,8 +22,11 @@
 
 @implementation ArrayTableViewController
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
 
     self.tableView.estimatedRowHeight = 100;
     [self.tableView registerNib:[UINib nibWithNibName:[self cellIdentifier] bundle:nil] forCellReuseIdentifier:[self cellIdentifier]];
@@ -34,16 +39,21 @@
     self.searchController.searchBar.scopeButtonTitles = [self scopeButtonTitles];
     self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
     
+    [self setUpAppConnectionsDidLoad];
 
     
     self.tableView.tableHeaderView = self.searchController.searchBar;
     self.definesPresentationContext = YES;
+    
+    [self.tableView reloadData];
     
     self.highlighteds = [[NSMutableDictionary alloc] init];
 }
 
 - (void)setUpAppConnectionsDidLoad {
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(databaseUpdated:) name:SCOUT_VIEWER_DATABASE_UPDATE object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(databaseUpdated:) name:@"updateLeftTable" object:nil];
 }
 
 - (void)setUpAppConnectionsDidAppear {
@@ -102,24 +112,23 @@
     }
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier] forIndexPath:indexPath];
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier] forIndexPath:indexPath];
-//
-//    id data = nil;
-//
-//    if (self.filteredArray) {
-//        data = self.filteredArray[indexPath.row];
-//    } else {
-//        data = self.dataArray[indexPath.row];
-//    }
-//    
-//    [self configureCell:cell atIndexPath:indexPath forData:data inTableView:tableView];
-//    
-//    return cell;
-//}
+    id data = nil;
+
+    if (self.filteredArray) {
+        data = self.filteredArray[indexPath.row];
+    } else {
+        data = self.dataArray[indexPath.row];
+    }
+    
+    [self configureCell:cell atIndexPath:indexPath forData:data inTableView:tableView];
+    
+    return cell;
+}
 
 //Should be overridden by child classes
 - (NSString *)cellIdentifier
@@ -170,6 +179,11 @@
 
 - (NSInteger)currentScope {
     return self.searchController.searchBar.selectedScopeButtonIndex;
+}
+
+//Should be overridden in child files
+- (NSString *)notificationName {
+    return @"updatedLeftTable";
 }
 
 @end

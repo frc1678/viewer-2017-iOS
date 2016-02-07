@@ -10,13 +10,14 @@ import UIKit
 
 class MatchDetailsViewController: UIViewController {
     
+    var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher;
+    
     var matchNumber = -1
     
-    var firebaseFetcher = FirebaseDataFetcher()
     
     var match: Match? = nil {
         didSet {
-            //updateUI()
+            updateUI()
         }
     }
     
@@ -56,15 +57,13 @@ class MatchDetailsViewController: UIViewController {
         super.viewDidLoad()
         
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"checkRes:", name:"updateLeftTable", object:nil)
-        //updateUI()
-        print("-----------------")
+        updateUI()
         print(self.match)
     }
     
     private func updateUI() {
         if redOfficialScoreLabel == nil {
-            
+            return
         }
         
         if let match = match {
