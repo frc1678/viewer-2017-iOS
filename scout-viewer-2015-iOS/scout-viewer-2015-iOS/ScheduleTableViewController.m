@@ -66,17 +66,23 @@
 
     
     
-    if (match.redScore != -1 || match.blueScore != -1) {
+    if (match.redScore != -1) {
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore];
-        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore];
+        
         matchCell.redScoreLabel.alpha = 1;
-        matchCell.slash.alpha = 1;
-        matchCell.blueScoreLabel.alpha = 1;
     } else {
-        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedRedScore];
-        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedBlueScore];
+        matchCell.redScoreLabel.text = @"?";
+        
         matchCell.redScoreLabel.alpha = .3;
         matchCell.slash.alpha = .3;
+    }
+    if (match.blueScore != -1) {
+        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore];
+        matchCell.slash.alpha = 1;
+        matchCell.blueScoreLabel.alpha = 1;
+    }
+    else {
+        matchCell.blueScoreLabel.text = @"?";
         matchCell.blueScoreLabel.alpha = .3;
     }
 }

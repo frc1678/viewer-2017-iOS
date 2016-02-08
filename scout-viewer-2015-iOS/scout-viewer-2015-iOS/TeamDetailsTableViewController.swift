@@ -72,6 +72,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     "calculatedData.avgLowShotsTele",
     "calculatedData.sdLowShotsTele"
     ]
+    var obstacleKeys = [
+        "calculatedData.avgCdfCrossed",
+        "calculatedData.avgPcCrossed",
+        "calculatedData.avgMtCrossed",
+        "calculatedData.avgRpCrossed",
+        "calculatedData.avgDbCrossed",
+        "calculatedData.avgSpCrossed",
+        "calculatedData.avgRtCrossed",
+        "calculatedData.avgRwCrossed",
+        "calculatedData.avgLbCrossed"
+    ]
+
     
     
     let superKeys = [
@@ -132,6 +144,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     let keySetNames = [
         "Information",
+        "Defenses",
         "Ability - High Level",
         "Autonomous",
         "TeleOp",
@@ -144,6 +157,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
 
     var keySets: [[String]] {
         return [ defaultKeys,
+                obstacleKeys,
                 abilityKeys,
                 autoKeys,
                 teleKeys,
@@ -158,7 +172,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableViewHeightConstraint?.constant = (tableView.contentSize.height)
         if let team = data,
             let imageView = teamSelectedImageView {
-     //       firebaseFetcher.getTeamImage(team.number, ofSize: DBThumbSizeL)
+            self.firebaseFetcher.getTeamImage(team)
             imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
     }
@@ -178,6 +192,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         updateTitleAndTopInfo()
         photos = []
         reload()
+        self.firebaseFetcher.getAverageDefenseValuesForDict((data?.calculatedData.avgSuccessfulTimesCrossedDefensesTele)!)
     }
     
     override func viewWillDisappear(animated: Bool) {

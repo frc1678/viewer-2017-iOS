@@ -67,7 +67,16 @@ let humanReadableNames = [
     "pitBumperHeight" : "Bumper Height",
     "pitPotentialShotBlockerCapability" : "Shot Blocking Capacity",
     "pitNotes" : "Pit Notes",
-    "pitOrganization" : "Pit Organization"
+    "pitOrganization" : "Pit Organization",
+    "calculatedData.avgCdfCrossed" : "Avg. Times CDF Crossed",
+    "calculatedData.avgPcCrossed" : "Avg. Times PC Crossed",
+    "calculatedData.avgMtCrossed" : "Avg. Times MT Crossed",
+    "calculatedData.avgRpCrossed" : "Avg. Times RP Crossed",
+    "calculatedData.avgDbCrossed" : "Avg. Times DB Crossed",
+    "calculatedData.avgSpCrossed" : "Avg. Times SP Crossed",
+    "calculatedData.avgRtCrossed" : "Avg. Times RT Crossed",
+    "calculatedData.avgRwCrossed" : "Avg. Times RW Crossed",
+    "calculatedData.avgLbCrossed" : "Avg. Times LB Crossed"
 ]
 
 func roundValue(value: AnyObject, toDecimalPlaces numDecimalPlaces: Int) -> String {

@@ -49,7 +49,7 @@ import DATAStack
         "rankTorque",
         "teamNumber",
         // "timesCrossedDefensesAuto",
-        //"timesCrossedDefensesTele",
+        "timesCrossedDefensesTele",
     ]
     
     var teamCalcKeys = ["actualSeed",
@@ -68,7 +68,6 @@ import DATAStack
         "avgShotsBlocked",
         "avgSpeed",
         "avgSuccessfulTimesCrossedDefensesAuto",
-        "avgSuccessfulTimesCrossedDefensesTele",
         "avgTorque",
         "challengePercentage",
         "disabledPercentage",
@@ -351,6 +350,16 @@ import DATAStack
             let value = dict.objectForKey(key)
             calcData.setValue(value, forKey: key)
         }
+        let valueArray = self.getAverageDefenseValuesForDict((dict.objectForKey("avgSuccessfulTimesCrossedDefensesTele") as? NSDictionary)!)
+        calcData.avgCdfCrossed = valueArray[0]
+        calcData.avgPcCrossed = valueArray[1]
+        calcData.avgMtCrossed = valueArray[2]
+        calcData.avgRtCrossed = valueArray[3]
+        calcData.avgDbCrossed = valueArray[4]
+        calcData.avgSpCrossed = valueArray[5]
+        calcData.avgRtCrossed = valueArray[6]
+        calcData.avgRwCrossed = valueArray[7]
+        calcData.avgLbCrossed = valueArray[8]
         return calcData
         
     }
@@ -466,5 +475,47 @@ import DATAStack
         }
         return filteredTeams
     }
+    func getAverageDefenseValuesForDict(dict:NSDictionary) -> [Int] {
+        var valueArray = [Int]()
+        let keyArray = dict.allKeys as? [String]
+        for key in keyArray! {
+            let subDict = dict.objectForKey(key) as? NSDictionary
+            let subKeyArray = subDict?.allKeys
+            for subKey in subKeyArray! {
+                valueArray.append((subDict!.objectForKey(subKey) as? Int)!)
+            }
+        }
+        print(valueArray)
+        return valueArray
+    }
+    func geteTeamImage(team:Team) -> UIImage {
+        
+        let url = NSURL(string:"https://dl.dropboxusercontent.com/u/63662632/1678.jpeg")
+        let data = NSData(contentsOfURL:url!)
+        let image = UIImage(data: data!)
+        
+        return image!
+    }
+    func getTeamImage(team: Team){
+        let url = NSURL(string:"https://dl.dropboxusercontent.com/u/63662632/1678.jpeg")
+        print("Download Started")
+        print("lastPathComponent: " + (url!.lastPathComponent ?? ""))
+        getDataFromUrl(url!) { (data, response, error)  in
+            dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                guard let data = data where error == nil else { return }
+                print(response?.suggestedFilename ?? "")
+                print("Download Finished")
+                let image = UIImage(data: data)
+                let notification = NSNotification(name: "gotTeamImage", object: image, userInfo: nil)
+                NSNotificationCenter.defaultCenter().postNotification(notification)
+            }
+        }
+    }
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+    NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+    completion(data: data, response: response, error: error)
+    }.resume()
+    }
+    
 }
 
