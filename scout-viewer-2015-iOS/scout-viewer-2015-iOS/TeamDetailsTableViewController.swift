@@ -488,7 +488,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         print(values)
                         graphViewController.values = values
                         graphViewController.subDisplayLeftTitle = "Match: "
-                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("match.matchNumber", forTeam: firebaseFetcher.fetchTeam(data!.number)) as [AnyObject]
+                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("matchNumber", forTeam: firebaseFetcher.fetchTeam(data!.number)) as [AnyObject]
                         if let d = data {
                             graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number)))
                             

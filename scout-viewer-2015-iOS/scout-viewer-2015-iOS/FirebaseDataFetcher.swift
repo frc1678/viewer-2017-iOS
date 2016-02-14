@@ -254,7 +254,7 @@ import DATAStack
     func getTIMDataForTeam(team:Team) -> [TeamInMatchData] {
         var array = [TeamInMatchData]()
         print("This is the stuff in Firebase")
-        print(self.teamInMatches.count)
+        //print(self.teamInMatches.count)
         for TIM in self.teamInMatches {
             if TIM.identifier.rangeOfString(String(team.number)) != nil {
                 array.append(TIM)
@@ -297,7 +297,7 @@ import DATAStack
                 let TIMData = self.getTeamInMatchDataForDict((datasnapshot.value as? NSDictionary)!)
                 TIMData.identifier = datasnapshot.key
                 var TIMCalcData = TeamInMatchCalculatedData()
-                print(datasnapshot.value)
+                //print(datasnapshot.value)
                // TIMCalcData.firstPickAbility = (datasnapshot.value.objectForKey("calculatedData.firstPickAbility") as? Int)!
                 TIMData.calculatedData = TIMCalcData
                 TIMDatas.append(TIMData)
@@ -311,9 +311,9 @@ import DATAStack
         let teamInMatchDatas = self.getTIMDataForTeam(forTeam)
         
         
-        print(teamInMatchDatas.count)
+        //print(teamInMatchDatas.count)
         for data in teamInMatchDatas {
-            array.addObject((data.valueForKey(path as String)! as? Int)!)
+            array.addObject((data.valueForKeyPath(path as String)! as? Int)!)
             
         }
         return array
@@ -462,7 +462,7 @@ import DATAStack
 
         for key in self.teamInMatchKeys {
             let value = dict.objectForKey(key) as? Int
-            print(value)
+            //print(value)
             TIMData.setValue(value, forKey: key)
         }
         return TIMData
@@ -498,10 +498,10 @@ import DATAStack
         var teamNumberArray = [Int]()
         let array = Array(dict)
         var godSpeed = [(Int,Int)]()
-        print("here is the dict")
-        print(dict)
-        print("this is the array")
-        print(array)
+        //print("here is the dict")
+        //print(dict)
+        //print("this is the array")
+        //print(array)
         //First Loop ensures type safety
         for (k,v) in array {
             let intermed = k as? String
@@ -547,15 +547,15 @@ import DATAStack
         var filteredMatches = [Match]()
         for match in self.matches  {
             let matche = match as? Match
-            print(searchString)
-            print(matche!.matchName)
+            //print(searchString)
+            //print(matche!.matchName)
             if String(matche!.number).rangeOfString(searchString) != nil {
-                print("do we ever get here")
+                //print("do we ever get here")
                 filteredMatches.append(matche!)
             }
             
         }
-        print(filteredMatches)
+        //print(filteredMatches)
         return filteredMatches
     }
     func filteredTeamsForSearchString(searchString:String) -> [Team] {
@@ -684,7 +684,7 @@ import DATAStack
         let data = NSData(contentsOfFile: path)
         if data != nil {
             var image = UIImage(data:data!)
-            print(image)
+            //print(image)
             let notification = NSNotification(name: "gotTeamImage", object: image, userInfo: nil)
             NSNotificationCenter.defaultCenter().postNotification(notification)
             
