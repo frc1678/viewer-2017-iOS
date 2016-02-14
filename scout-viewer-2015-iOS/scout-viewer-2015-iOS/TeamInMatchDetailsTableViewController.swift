@@ -75,7 +75,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
         case (.None, .Some(let n)):
             title = "Unknown Match - \(n)"
         default:
-            title = "Unknown Match - Unkown Team"
+            title = "Unknown Match - Unknown Team"
         }
     }
     
@@ -94,7 +94,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if data == nil {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) 
             cell.textLabel?.text = "No data yet..."
             cell.accessoryType = UITableViewCellAccessoryType.None
             return cell
@@ -108,12 +108,12 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
             notesCell.titleLabel?.text = "Notes:"
             notesCell.notesLabel?.text = notes.characters.count == 0 ? "None" : notes
         } else if let array = dataPoint as? NSArray {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) 
 
             cell.detailTextLabel?.text = "some array"
             cell.textLabel?.text = humanReadableNames[keySets[indexPath.section][indexPath.row]]
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailValueCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailValueCell", forIndexPath: indexPath) 
 
             cell.detailTextLabel?.text = "\(dataPoint)"
             cell.textLabel?.text = humanReadableNames[keySets[indexPath.section][indexPath.row]]

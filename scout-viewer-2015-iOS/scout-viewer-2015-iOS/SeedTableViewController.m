@@ -29,6 +29,7 @@ FirebaseDataFetcher *firebaseFetcher;
    
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [super viewDidLoad];
     NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
     MultiCellTableViewCell *cell = [nib objectAtIndex:0];
     
@@ -44,7 +45,7 @@ FirebaseDataFetcher *firebaseFetcher;
     
     NSLog(@"How many rows?");
     NSLog([NSString stringWithFormat:@"%lu",(unsigned long)firebaseFetcher.teams.count]);
-    return firebaseFetcher.getPickList.count;
+    return [[firebaseFetcher getFirstPickList] count];
 }
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;

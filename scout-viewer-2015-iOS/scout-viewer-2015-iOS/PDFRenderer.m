@@ -198,7 +198,7 @@ static NSMutableArray *teamNums;
     [offenseDefenseSeparator moveToPoint:CGPointMake(defensePoint.x - 10, pageHeight - BOTTOM_MARGIN - CATEGORY_HEIGHT)];
     [offenseDefenseSeparator addLineToPoint:CGPointMake(defensePoint.x - 10, pageHeight - BOTTOM_MARGIN)];
     
-    separatorX = 398;
+    //separatorX = 398;
     UIBezierPath *defensePassingSeparator = [[UIBezierPath alloc] init];
     [defensePassingSeparator moveToPoint:CGPointMake(passingPoint.x - 10, pageHeight - BOTTOM_MARGIN - CATEGORY_HEIGHT)];
     [defensePassingSeparator addLineToPoint:CGPointMake(passingPoint.x - 10, pageHeight - BOTTOM_MARGIN)];

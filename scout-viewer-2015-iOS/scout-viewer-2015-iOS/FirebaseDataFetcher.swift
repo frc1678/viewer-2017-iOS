@@ -66,7 +66,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         "challengePercentage",
         "disabledPercentage",
         "disfunctionalPercentage",
-        "driverAbility",
+        //"driverAbility",
         "firstPickAbility",
         "highShotAccuracyAuto",
         "highShotAccuracyTele",
@@ -133,12 +133,16 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         let teamReference = Firebase(url:"https://1678-dev-2016.firebaseio.com/Teams")
         teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
             let team = Team()
-            team.name = (snapshot.value.objectForKey("name") as? String)!
-            team.number = (snapshot.value.objectForKey("number") as? Int)!
-            let teamDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)!
-            team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
+            let d = snapshot.value as! NSDictionary
+            if let name = (d["name"] as? String) {
+                team.name = name
+                team.number = (d["number"] as? Int)!
+                let teamDict = (d["calculatedData"] as? NSDictionary)!
+                team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
+                
+                self.teams.append(team)
+            }
             
-            self.teams.append(team)
         })
         //        let matchRef = Firebase(url:"https://1678-dev-2016.firebaseio.com/")
         //        matchRef.observeEventType(.Value, withBlock: { snapshot in
@@ -232,7 +236,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func valuesInCompetitionOfPathForTeams(path:NSString) -> NSArray {
         let array = NSMutableArray()
         for team in self.teams {
-            array.addObject(team.valueForKey(path as String)!)
+            array.addObject(team.valueForKeyPath(path as String)!)
         }
         return array
     }
@@ -247,7 +251,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         print("ayyylmao")
     }
     func fetchTeamsByDescriptor(descriptor:NSSortDescriptor) -> [Team] {
-        return self.teams
+        return NSArray(array: self.teams).sortedArrayUsingDescriptors([descriptor]) as! [Team]
     }
     
     func getTeamPDFImage(team:Int) -> UIImage {
@@ -287,14 +291,22 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         return array
     }
-    func getMatchCalculatedDatafromDict(dict:NSDictionary) -> MatchCalculatedData {
+    func getMatchCalculatedDatafromDict(dict: NSDictionary) -> MatchCalculatedData {
         
         let matchData = MatchCalculatedData()
         matchData.blueRPs = (dict.objectForKey("actualBlueRPs") as? Int)!
         matchData.numDefenseCrossesByBlue = (dict.objectForKey("numDefensesCrossedByBlue") as? Int)!
         matchData.numDefenseCrossesByRed = (dict.objectForKey("numDefensesCrossedByRed") as? Int)!
-        matchData.predictedBlueScore = (dict.objectForKey("predictedBlueScore") as? Int)!
-        matchData.predictedRedScore = (dict.objectForKey("predictedRedScore") as? Int)!
+        if let predictedBlueScore = dict.objectForKey("predictedBlueScore") as? NSMutableDictionary {
+            matchData.predictedBlueScore = predictedBlueScore["score"] as! Int
+        } else {
+            matchData.predictedBlueScore = dict.objectForKey("predictedBlueScore") as! Int
+        }
+        if let predictedRedScore = dict.objectForKey("predictedRedScore") as? NSMutableDictionary {
+            matchData.predictedRedScore = predictedRedScore["score"] as! Int
+        } else {
+            matchData.predictedRedScore = dict.objectForKey("predictedRedScore") as! Int
+        }
         matchData.redRPs = (dict.objectForKey("actualRedRPs") as? Int)!
         
         return matchData
@@ -329,10 +341,16 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return TIMData
     }
     
-    func getPickList() -> [Team] {
+    func getFirstPickList() -> [Team] {
         let sortedArray = self.teams.sort { $0.calculatedData.firstPickAbility < $1.calculatedData.firstPickAbility }
         print(sortedArray.count)
-        return sortedArray;
+        return sortedArray
+    }
+    
+    func getSecondPickList() -> [Team] {
+        let sortedArray = self.teams.sort { $0.calculatedData.secondPickAbility < $1.calculatedData.secondPickAbility }
+        print(sortedArray.count)
+        return sortedArray
     }
     func getMatchesForTeam(teamNumbah:Int) -> [Match] {
         var matches = [Match]()

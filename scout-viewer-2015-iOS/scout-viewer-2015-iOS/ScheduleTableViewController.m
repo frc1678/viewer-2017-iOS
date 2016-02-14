@@ -44,8 +44,8 @@ FirebaseDataFetcher *firebaseFetcher;
     MatchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier]];
     
     Match *match = [firebaseFetcher getIntMatch:[indexPath row]];
-    NSArray *redTeams = [firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
-    NSArray *blueTeams = [firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
+    //NSArray *redTeams = [firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
+    //NSArray *blueTeams = [firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
     cell.redOneLabel.text = [NSString stringWithFormat:@"%@",match.redAllianceTeamNumbers[0]];
     cell.redTwoLabel.text = [NSString stringWithFormat:@"%@",match.redAllianceTeamNumbers[1]];
     cell.redThreeLabel.text = [NSString stringWithFormat:@"%@",match.redAllianceTeamNumbers[2]];

@@ -21,7 +21,9 @@
 FirebaseDataFetcher *firebaseFetcher;
 
 -(void)viewDidLoad {
+    [super viewDidLoad];
     firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+    self.dataArray = [self loadDataArray:YES];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
@@ -39,8 +41,12 @@ FirebaseDataFetcher *firebaseFetcher;
     return MULTI_CELL_IDENTIFIER;
 }
 
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.dataArray count];
+}
+
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.secondPickAbility" ascending:NO]];
+    NSArray *returnData = [firebaseFetcher getSecondPickList];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
