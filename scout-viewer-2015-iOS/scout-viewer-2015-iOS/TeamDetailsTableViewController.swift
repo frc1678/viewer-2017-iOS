@@ -492,9 +492,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         if let d = data {
                             graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number)))
                             
-                            if let i = ((graphViewController.subValuesLeft as! [String]).indexOf(String(d.number))) {
-                                graphViewController.highlightIndex = i
-                            }
+                            let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
+                            graphViewController.highlightIndex = i
+                            
                         }
                         graphViewController.subDisplayRightTitle = "Rank: "
                     }
