@@ -48,6 +48,16 @@ class MatchDetailsViewController: UIViewController {
     @IBOutlet weak var blueTeamThreeButton: UIButton!
     @IBOutlet weak var blueTeamThreeAbilityLabel: UILabel!
     
+    @IBOutlet weak var redDefenseOneLabel: UILabel!
+    @IBOutlet weak var redDefenseTwoLabel: UILabel!
+    @IBOutlet weak var redDefenseThreeLabel: UILabel!
+    @IBOutlet weak var redDefenseFourLabel: UILabel!
+    
+    @IBOutlet weak var blueDefenseOneLabel: UILabel!
+    @IBOutlet weak var blueDefenseTwoLabel: UILabel!
+    @IBOutlet weak var blueDefenseThreeLabel: UILabel!
+    @IBOutlet weak var blueDefenseFourLabel: UILabel!
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -69,9 +79,18 @@ class MatchDetailsViewController: UIViewController {
         if let match = match {
             title = String(match.number)
             
+            redDefenseOneLabel.text = String(match.calculatedData.optimalRedDefenses[0])
+            redDefenseTwoLabel.text = String(match.calculatedData.optimalRedDefenses[1])
+            redDefenseThreeLabel.text = String(match.calculatedData.optimalRedDefenses[2])
+            redDefenseFourLabel.text = String(match.calculatedData.optimalRedDefenses[3])
+            blueDefenseOneLabel.text = String(match.calculatedData.optimalBlueDefenses[0])
+            blueDefenseTwoLabel.text = match.calculatedData.optimalBlueDefenses[1]
+            blueDefenseThreeLabel.text = match.calculatedData.optimalBlueDefenses[2]
+            blueDefenseFourLabel.text = match.calculatedData.optimalBlueDefenses[3]
+            
             redOfficialScoreLabel.text = getLabelTitle(match.redScore)
             redPredictedScoreLabel.text = getLabelTitle(Int(match.calculatedData.predictedRedScore))
-            redErrorPercentageLabel.text = getErrorLabelText(match.redScore, predictedScore: Float(match.calculatedData.predictedRedScore))
+            redErrorPercentageLabel.text = String(percentageValueOf(match.calculatedData.redWinChance))
             
             let redTeams = firebaseFetcher.getTeamsFromNumbers(match.redAllianceTeamNumbers)
             if redTeams.count > 0 {
@@ -86,7 +105,7 @@ class MatchDetailsViewController: UIViewController {
             
             blueOfficialScoreLabel.text = getLabelTitle(match.blueScore)
             bluePredictedScoreLabel.text = getLabelTitle(match.calculatedData.predictedBlueScore)
-            blueErrorPercentageLabel.text = getErrorLabelText(match.blueScore, predictedScore: Float(match.calculatedData.predictedBlueScore))
+            blueErrorPercentageLabel.text = String(percentageValueOf(match.calculatedData.blueWinChance))
 
             let blueTeams = firebaseFetcher.getTeamsFromNumbers(match.blueAllianceTeamNumbers)
             if blueTeams.count > 0 {
@@ -103,15 +122,16 @@ class MatchDetailsViewController: UIViewController {
     }
     
     @IBAction func teamTapped(sender: UIButton) {
-        if let teamNumTapped = Int((sender.titleLabel?.text)!) {
-            let match = firebaseFetcher.fetchTeamInMatchDataForTeam(firebaseFetcher.fetchTeam(teamNumTapped), inMatch: self.match!)
-            if match.matchNumber > 0 {
-                performSegueWithIdentifier("GoToTIMController", sender: sender)
-            } else {
+        print("WE STILL LOGGING")
+//        if let teamNumTapped = Int((sender.titleLabel?.text)!) {
+//            let match = firebaseFetcher.fetchTeamInMatchDataForTeam(firebaseFetcher.fetchTeam(teamNumTapped), inMatch: self.match!)
+//            if match.matchNumber > 0 {
+//                performSegueWithIdentifier("GoToTIMController", sender: sender)
+//            } else {
                 performSegueWithIdentifier("GoToTeamController", sender: sender)
             }
-        }
-    }
+      //  }
+    //}
     private func getLabelTitle(value: Int?) -> String {
         let unknown = "???"
         if let value = value {
@@ -165,7 +185,7 @@ class MatchDetailsViewController: UIViewController {
             if let dest = segue.destinationViewController as? TeamInMatchDetailsTableViewController {
                 dest.data = firebaseFetcher.fetchTeamInMatchDataForTeam(firebaseFetcher.fetchTeam(teamNumTapped), inMatch: match!)
             } else if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
-                dest.data = firebaseFetcher.fetchTeam(teamNumTapped) as? Team
+                dest.data = firebaseFetcher.fetchTeam(teamNumTapped)
             }
         }
     }

@@ -65,13 +65,14 @@ class CalculatedTeamData: NSObject {
     var siegeConsistency = -1
     var siegePower = -1
     
-    var avgCdfCrossed = -1
-    var avgPcCrossed = -1
-    var avgMtCrossed = -1
-    var avgRpCrossed = -1
-    var avgDbCrossed = -1
-    var avgSpCrossed = -1
-    var avgRtCrossed = -1
-    var avgRwCrossed = -1
-    var avgLbCrossed = -1
-}
+    var cdfCrossed = -1
+    var pcCrossed = -1
+    var mtCrossed = -1
+    var rpCrossed = -1
+    var dbCrossed = -1
+    var spCrossed = -1
+    var rtCrossed = -1
+    var rwCrossed = -1
+    var lbCrossed = -1
+    
+    }

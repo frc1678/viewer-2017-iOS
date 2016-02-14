@@ -57,7 +57,7 @@
 }
 
 - (void)setUpAppConnectionsDidAppear {
- //   [CC_DROPBOX_APP_DELEGATE possiblyLinkFromController:self];
+    
 }
 
 
@@ -89,7 +89,8 @@
 
 - (void) databaseUpdated:(NSNotification *)note {
     [self refreshData:nil];
-}
+    
+   }
 
 - (void) viewDidAppear:(BOOL)animated
 {

@@ -34,7 +34,7 @@
     [Firebase defaultConfig].persistenceEnabled = YES;
     self.firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     
-    return true;
+    return YES;
 }
 
 - (void)databaseUpdated:(NSNotification *)note {

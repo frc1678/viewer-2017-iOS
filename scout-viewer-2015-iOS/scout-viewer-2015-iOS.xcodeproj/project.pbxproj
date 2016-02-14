@@ -15,6 +15,7 @@
 		40780DCA1C59C05E00ACF489 /* MatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC81C59C05E00ACF489 /* MatchCalculatedData.swift */; };
 		40780DCB1C59C05E00ACF489 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC91C59C05E00ACF489 /* Team.swift */; };
 		40A0F4031C55A37200DEB64C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A0F4021C55A37200DEB64C /* NetworkExtension.framework */; };
+		40CF57A11C6C30DD00D9B63B /* DefenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */; };
 		40E43E341C54406900ABC378 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E43E331C54406900ABC378 /* Firebase.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		40E43E401C544E3900ABC378 /* FirebaseDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */; };
 		7209C3581A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7209C3571A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift */; };
@@ -74,6 +75,7 @@
 		40780DC91C59C05E00ACF489 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		40A0F3FF1C559EAE00DEB64C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		40A0F4021C55A37200DEB64C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefenseTableViewController.swift; sourceTree = "<group>"; };
 		40E43E331C54406900ABC378 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataFetcher.swift; sourceTree = "<group>"; };
 		7209C3571A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NthPickMechanismFilteredTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -276,6 +278,7 @@
 				72AE5AB31A87D5EB001BB94E /* Supporting Files */,
 				725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */,
 				725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */,
+				40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */,
 				725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */,
 				72AE5ADF1A87E7A0001BB94E /* TeamTableViewController.h */,
 				72AE5AE01A87E7A0001BB94E /* TeamTableViewController.m */,
@@ -526,6 +529,7 @@
 				725D09541A95919B009A0AB6 /* ResizableNotesTableViewCell.swift in Sources */,
 				7260D5441AC7779500B57D4E /* TeamScheduleTableViewController.m in Sources */,
 				72AE5AFB1A881FE3001BB94E /* ScheduleTableViewController.m in Sources */,
+				40CF57A11C6C30DD00D9B63B /* DefenseTableViewController.swift in Sources */,
 				72AE5AEE1A881CBA001BB94E /* MultiCellTableViewCell.m in Sources */,
 				72AE5ADE1A87D8D3001BB94E /* ArrayTableViewController.m in Sources */,
 				40780DCB1C59C05E00ACF489 /* Team.swift in Sources */,

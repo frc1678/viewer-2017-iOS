@@ -16,5 +16,9 @@ class MatchCalculatedData: NSObject {
     var predictedBlueScore = -1
     var predictedRedScore = -1
     var redRPs = -1
+    var optimalBlueDefenses = [String]()
+    var optimalRedDefenses = [String]()
+    var blueWinChance = -1
+    var redWinChance = -1
 
 }

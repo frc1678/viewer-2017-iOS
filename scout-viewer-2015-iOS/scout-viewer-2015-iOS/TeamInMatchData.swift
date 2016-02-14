@@ -10,6 +10,8 @@ import UIKit
 
 class TeamInMatchData: NSObject {
     
+    var identifier = ""
+    
     var ballsIntakedAuto = [Int]()
     var didChallengeTele = -1.0
     var didGetDisabled = -1.0

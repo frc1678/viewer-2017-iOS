@@ -12,7 +12,6 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     
     var teamNumber = -1
     var team = Team()
-    var conditionalSecondPickArray = [Team]()
     
 
     override func viewDidLoad() {
@@ -33,28 +32,19 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-
-        return self.conditionalSecondPickArray.count;
-    }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("secondPickToTeam", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
-
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
+        var multiCell = cell as? MultiCellTableViewCell
+        let team = data as? Team
+        multiCell!.teamLabel!.text = String(team!.number)
         
-        let nib = NSBundle.mainBundle().loadNibNamed("MultiCellTableViewCell", owner: self, options: nil)
-        let cell = nib.first
-        let team = self.conditionalSecondPickArray[indexPath.row]
-        cell!.teamLabel!!.text = String(team.number)
-        cell!.rankLabel!!.text = String(indexPath.row)
-        print(team.calculatedData.secondPickAbility)
-        print(team.number)
-        cell!.scoreLabel!!.text = team.calculatedData.secondPickAbility.objectForKey(team.number) as? String
 
-        return cell as! UITableViewCell
+    }
+    override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
+        print(self.firebaseFetcher.secondPickList(teamNumber))
+        return self.firebaseFetcher.secondPickList(teamNumber)
     }
 
 
@@ -105,15 +95,12 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         }
         // Pass the selected object to the new view controller.
     }
+    override func cellIdentifier() -> String! {
+        return "MultiCellTableViewCell"
+    }
+    override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
+        return self.firebaseFetcher.filteredTeamsForSearchString(text)
+    }
 
     
-    func checkRes(notification:NSNotification) {
-        if notification.name == "updateLeftTable" {
-            self.team = self.firebaseFetcher.fetchTeam(self.teamNumber)
-            self.title = String(self.team.number) + " - Second Pick"
-            self.conditionalSecondPickArray = self.firebaseFetcher.secondPickList(teamNumber)
-            print(self.conditionalSecondPickArray)
-            self.tableView.reloadData()
-        }
-    }
 }

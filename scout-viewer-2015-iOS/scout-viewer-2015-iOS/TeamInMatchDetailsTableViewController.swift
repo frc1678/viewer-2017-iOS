@@ -137,7 +137,8 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                     graphViewController.graphTitle = "\(cell.textLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                     let values = firebaseFetcher.valuesInTeamMatchesOfPath(keySets[indexPath.section][indexPath.row], forTeam: firebaseFetcher.fetchTeam((data?.teamNumber)!))
+                    let key = keySets[indexPath.section][indexPath.row]
+                    if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(key) as? [CGFloat] as [CGFloat]? {
                         graphViewController.values = (values as? [CGFloat])!
                         graphViewController.subDisplayLeftTitle = "Match: "
                         graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("match.match", forTeam: firebaseFetcher.fetchTeam(data!.teamNumber)) as [AnyObject]
@@ -149,6 +150,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
                             }
                         }
                         graphViewController.subDisplayRightTitle = "Rank: "
+                    }
 
                 }
             }
