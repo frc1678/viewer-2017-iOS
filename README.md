@@ -1,4 +1,4 @@
-scout-viewer-2015-ios
+scout-viewer-2016-ios
 =====================
 
-Testing the `Realm` database for `iOS` for use in the 2015 season.
+The iOS scout data viewing app for the 2016 FRC season.
