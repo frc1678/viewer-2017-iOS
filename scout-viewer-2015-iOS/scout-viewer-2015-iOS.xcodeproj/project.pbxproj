@@ -15,6 +15,7 @@
 		40780DCA1C59C05E00ACF489 /* MatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC81C59C05E00ACF489 /* MatchCalculatedData.swift */; };
 		40780DCB1C59C05E00ACF489 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC91C59C05E00ACF489 /* Team.swift */; };
 		40A0F4031C55A37200DEB64C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A0F4021C55A37200DEB64C /* NetworkExtension.framework */; };
+		40B551C91C702C01006089EA /* TeamInMatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B551C81C702C01006089EA /* TeamInMatchCalculatedData.swift */; };
 		40CF57A11C6C30DD00D9B63B /* DefenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */; };
 		40E43E341C54406900ABC378 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E43E331C54406900ABC378 /* Firebase.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		40E43E401C544E3900ABC378 /* FirebaseDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */; };
@@ -75,6 +76,7 @@
 		40780DC91C59C05E00ACF489 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		40A0F3FF1C559EAE00DEB64C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		40A0F4021C55A37200DEB64C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		40B551C81C702C01006089EA /* TeamInMatchCalculatedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchCalculatedData.swift; sourceTree = "<group>"; };
 		40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefenseTableViewController.swift; sourceTree = "<group>"; };
 		40E43E331C54406900ABC378 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataFetcher.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				40780DC21C59C05700ACF489 /* Match.swift */,
 				40780DC31C59C05700ACF489 /* CalculatedTeamData.swift */,
 				40780DC41C59C05700ACF489 /* TeamInMatchData.swift */,
+				40B551C81C702C01006089EA /* TeamInMatchCalculatedData.swift */,
 			);
 			name = "Firebase Models";
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				72C2DC0A1A96F4360000BCED /* Utils.swift in Sources */,
 				72AE5AF81A881FA5001BB94E /* SecondPickTableViewController.m in Sources */,
 				72EC17201AD9B2480044FEE9 /* UINavigationController+SGProgress.m in Sources */,
+				40B551C91C702C01006089EA /* TeamInMatchCalculatedData.swift in Sources */,
 				725D09541A95919B009A0AB6 /* ResizableNotesTableViewCell.swift in Sources */,
 				7260D5441AC7779500B57D4E /* TeamScheduleTableViewController.m in Sources */,
 				72AE5AFB1A881FE3001BB94E /* ScheduleTableViewController.m in Sources */,

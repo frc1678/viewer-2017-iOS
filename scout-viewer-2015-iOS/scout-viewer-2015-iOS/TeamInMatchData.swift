@@ -39,5 +39,6 @@ class TeamInMatchData: NSObject {
     var teamNumber = -1
     var timesDefensesCrossedAuto = [Int]()
     var timesCrossedDefensesTele = [Int]()
+    var calculatedData = TeamInMatchCalculatedData()
 
 }

@@ -245,12 +245,16 @@ import DATAStack
         
                 TIMData.setValue(dankMeme?.objectForKey(key), forKey: key)
             }
+            var TIMCalcData = TeamInMatchCalculatedData()
+            TIMData.calculatedData = TIMCalcData
         })
         return TIMData
         
     }
     func getTIMDataForTeam(team:Team) -> [TeamInMatchData] {
         var array = [TeamInMatchData]()
+        print("This is the stuff in Firebase")
+        print(self.teamInMatches.count)
         for TIM in self.teamInMatches {
             if TIM.identifier.rangeOfString(String(team.number)) != nil {
                 array.append(TIM)
@@ -290,8 +294,12 @@ import DATAStack
         ref.observeEventType(.ChildAdded, withBlock: { datasnapshot in
             let range = Range(start:teamNum.startIndex,end:teamNum.endIndex)
             if datasnapshot.key.substringWithRange(range) == teamNum {
-                print(datasnapshot.key)
-                var TIMData = self.getTeamInMatchDataForDict((datasnapshot.value as? NSDictionary)!)
+                let TIMData = self.getTeamInMatchDataForDict((datasnapshot.value as? NSDictionary)!)
+                TIMData.identifier = datasnapshot.key
+                var TIMCalcData = TeamInMatchCalculatedData()
+                print(datasnapshot.value)
+               // TIMCalcData.firstPickAbility = (datasnapshot.value.objectForKey("calculatedData.firstPickAbility") as? Int)!
+                TIMData.calculatedData = TIMCalcData
                 TIMDatas.append(TIMData)
                 self.teamInMatches.append(TIMData)
             }
@@ -300,11 +308,12 @@ import DATAStack
     }
     func valuesInTeamMatchesOfPath(path:NSString, forTeam:Team) -> NSArray {
         let array = NSMutableArray()
-        let teamInMatchDatas = self.getTeamInMatchDatasForTeam(forTeam)
-        print("This is the number of TIMDatas:")
+        let teamInMatchDatas = self.getTIMDataForTeam(forTeam)
+        
+        
         print(teamInMatchDatas.count)
         for data in teamInMatchDatas {
-            array.addObject(data.valueForKey(path as String)!)
+            array.addObject((data.valueForKey(path as String)! as? Int)!)
             
         }
         return array
@@ -450,6 +459,7 @@ import DATAStack
     }
     func getTeamInMatchDataForDict(dict:NSDictionary) -> TeamInMatchData {
         let TIMData = TeamInMatchData()
+
         for key in self.teamInMatchKeys {
             let value = dict.objectForKey(key) as? Int
             print(value)
