@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F2C7AEBD25BC155D497C7DDD'
+               BlueprintIdentifier = '2A2274C177B4C1839D82D241'
                BlueprintName = 'firebase-schema-2016-ios'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'firebase_schema_2016_ios.framework'>

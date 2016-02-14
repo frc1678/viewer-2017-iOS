@@ -276,13 +276,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/FirebaseDataFetcher.swift"
-            timestampString = "475978062.839333"
+            timestampString = "477119567.614493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
-            landmarkName = "getteamInMatchDataForDict(_:)"
-            landmarkType = "5">
+            startingLineNumber = "331"
+            endingLineNumber = "331"
+            landmarkName = "FirebaseDataFetcher"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

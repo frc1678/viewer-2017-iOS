@@ -16,7 +16,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var matches = [AnyObject]()
     var allTheData = NSDictionary()
     var firebase = Firebase(url: "https://1678-dev-2016.firebaseio.com")
-    var teamsCollection : FirebaseCollection = FirebaseCollection.init(node: self.firebase, dictionary: self.allTheData, type: Team)
     var teamInMatchKeys = [
         "ballsIntakedAuto",
         "didChallengeTele",

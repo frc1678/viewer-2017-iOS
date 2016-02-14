@@ -20,7 +20,7 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    Firebase.defaultConfig().persistenceEnabled = true //You need this so it stores to disk and doesnt go away when app is killed
+    [[Firebase defaultConfig] setPersistenceEnabled:YES]; //You need this so it stores to disk and doesnt go away when app is killed
     return true;
 }
 
@@ -28,11 +28,11 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [self.dataStack persistWithCompletion:nil];
+    //[self.dataStack persistWithCompletion:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self.dataStack persistWithCompletion:nil];
+    //[self.dataStack persistWithCompletion:nil];
 }
 
 
