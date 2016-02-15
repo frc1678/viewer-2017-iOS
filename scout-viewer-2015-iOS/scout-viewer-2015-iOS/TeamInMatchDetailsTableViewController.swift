@@ -127,7 +127,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
             if let number = data?.teamNumber {
-                dest.data = firebaseFetcher.fetchTeam(number)
+                dest.data = firebaseFetcher.fetchTeam(number.integerValue)
             }
         } else if segue.identifier == "Graph" {
             let graphViewController = segue.destinationViewController as! GraphViewController
@@ -141,9 +141,9 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
                     if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(key) as? [CGFloat] as [CGFloat]? {
                         graphViewController.values = (values as? [CGFloat])!
                         graphViewController.subDisplayLeftTitle = "Match: "
-                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("match.match", forTeam: firebaseFetcher.fetchTeam(data!.teamNumber)) as [AnyObject]
+                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("match.match", forTeam: firebaseFetcher.fetchTeam(data!.teamNumber!.integerValue)) as [AnyObject]
                         if let d = data {
-                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.teamNumber)))
+                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.teamNumber!.integerValue)))
                             
                             if let i = ((graphViewController.subValuesLeft as! [String]).indexOf(String(d.matchNumber))) {
                                 graphViewController.highlightIndex = i

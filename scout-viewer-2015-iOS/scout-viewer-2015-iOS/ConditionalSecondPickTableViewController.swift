@@ -38,7 +38,15 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
         var multiCell = cell as? MultiCellTableViewCell
         let team = data as? Team
-        multiCell!.teamLabel!.text = String(team!.number)
+        if team!.number != nil {
+            multiCell!.teamLabel!.text = String(team!.number!.integerValue)
+        }
+        if team!.calculatedData?.firstPickAbility != nil {
+            multiCell!.scoreLabel!.text = String(team!.calculatedData!.firstPickAbility!.integerValue)
+        }
+        multiCell!.rankLabel!.text = String(path.row)
+        
+        
         
 
     }

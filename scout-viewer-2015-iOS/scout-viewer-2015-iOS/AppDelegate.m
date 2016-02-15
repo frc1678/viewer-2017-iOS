@@ -31,7 +31,7 @@
 {
     
     self.dataStack = [[DATAStack alloc] initWithModelName:@"Model"];
-    [Firebase defaultConfig].persistenceEnabled = YES;
+    //[Firebase defaultConfig].persistenceEnabled = YES;
     self.firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     
     return YES;

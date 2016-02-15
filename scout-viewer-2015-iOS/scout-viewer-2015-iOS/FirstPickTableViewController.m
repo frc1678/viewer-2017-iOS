@@ -50,10 +50,16 @@
     
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
+    
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.firstPickAbility"]];
-    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
-    multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
+    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
+    if(team.calculatedData.firstPickAbility != nil) {
+        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
+                                     [Utils roundValue:team.calculatedData.firstPickAbility.floatValue toDecimalPlaces:2]];
+    } else {
+        multiCell.scoreLabel.text = @"";
+    }
+    
     
 }
 

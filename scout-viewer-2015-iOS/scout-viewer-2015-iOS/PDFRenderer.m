@@ -36,11 +36,11 @@ static NSMutableArray *teamNums;
     teamNums = [[NSMutableArray alloc] init];
     NSArray *teams = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]];
     for (Team *team in teams) {
-        [teamNums addObject:@(team.number)];
+        [teamNums addObject: team.number];
         NSMutableDictionary *teamDict = [[NSMutableDictionary alloc] init];
-        [teamsDict setObject:teamDict forKey:@(team.number)];
-        [teamDict setObject:@(team.number) forKey:@"number"];
-        [teamDict setObject:@(team.calculatedData.actualSeed) forKey:@"seed"];
+        [teamsDict setObject:teamDict forKey:team.number];
+        [teamDict setObject:team.number forKey:@"number"];
+        [teamDict setObject:team.calculatedData.actualSeed forKey:@"seed"];
         [teamDict setObject:team.name forKey:@"name"];
         for (NSString *prop in [self allPropertyNamesForClass:[CalculatedTeamData class]]) {
             [teamDict setObject:[team.calculatedData valueForKeyPath:prop] forKey:prop];

@@ -8,17 +8,17 @@
 
 import UIKit
 
-class MatchCalculatedData: NSObject {
+@objc class MatchCalculatedData: NSObject {
     
-    var blueRPs = -1
-    var numDefenseCrossesByBlue = -1
-    var numDefenseCrossesByRed = -1
-    var predictedBlueScore = -1
-    var predictedRedScore = -1
-    var redRPs = -1
-    var optimalBlueDefenses = [String]()
-    var optimalRedDefenses = [String]()
-    var blueWinChance = -1
-    var redWinChance = -1
+    var blueRPs: NSNumber?
+    var numDefenseCrossesByBlue = NSNumber?()
+    var numDefenseCrossesByRed = NSNumber?()
+    var predictedBlueScore = NSNumber?()
+    var predictedRedScore = NSNumber?()
+    var redRPs = NSNumber?()
+    var optimalBlueDefenses = [String]?()
+    var optimalRedDefenses = [String]?()
+    var blueWinChance = NSNumber?()
+    var redWinChance = NSNumber?()
 
 }

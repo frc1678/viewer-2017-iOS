@@ -10,20 +10,20 @@ import UIKit
 
 //The Dream, Never Forget
 
-class Match: NSObject {
+@ objc class Match: NSObject {
     
-    var matchNumber = -1
+    var matchNumber = NSNumber?()
     
-    var blueAllianceDidCapture = false
-    var blueAllianceTeamNumbers = [Int]()
-    var blueDefensePositions = [String]()
-    var blueScore = -1
-    var calculatedData = MatchCalculatedData()
-    var number = -1
-    var redAllianceDidCapture = false
-    var redAllianceTeamNumbers = [Int]()
-    var redDefensePositions = [String]()
-    var redScore = -1
+    var blueAllianceDidCapture = Bool?()
+    var blueAllianceTeamNumbers = [Int]?()
+    var blueDefensePositions = [String]?()
+    var blueScore = NSNumber?()
+    var calculatedData = MatchCalculatedData?()
+    var number = NSNumber?()
+    var redAllianceDidCapture = Bool?()
+    var redAllianceTeamNumbers = [Int]?()
+    var redDefensePositions = [String]?()
+    var redScore = NSNumber?()
     var matchName:String {
         return "Q" + String(matchNumber)
     }

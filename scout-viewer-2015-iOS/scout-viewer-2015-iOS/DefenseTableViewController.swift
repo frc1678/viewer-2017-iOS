@@ -65,16 +65,25 @@ class DefenseTableViewController: ArrayTableViewController {
     override func cellIdentifier() -> String! {
         return "MultiCellTableViewCell"
     }
-    override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
+    override func loadDataArray(shouldForce: Bool) -> [AnyObject]? {
         let team = self.firebaseFetcher.fetchTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
+        var intArray = [AnyObject]?()
         
-        let teleSuccessValue = team.calculatedData.avgSuccessfulTimesCrossedDefensesTele[key]
-        let autoSuccessValue = team.calculatedData.avgFailedTimesCrossedDefensesAuto[key]
-        let something = team.calculatedData.avgSuccessfulTimesCrossedDefensesAuto[key]
-        let somethingElse = team.calculatedData.avgSuccessfulTimesCrossedDefensesTele[key]
-            
-        let intArray = [teleSuccessValue!,autoSuccessValue!,something!,somethingElse!]
+        let teleSuccessValue = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key]
+        let autoSuccessValue = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key]
+        let something = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key]
+        let somethingElse = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key]
+        
+        if teleSuccessValue != nil {
+            if autoSuccessValue != nil {
+                if something != nil {
+                    if somethingElse != nil {
+                        intArray = [teleSuccessValue!,autoSuccessValue!,something!,somethingElse!]
+                    }
+                }
+            }
+        }
         
         return intArray
     }

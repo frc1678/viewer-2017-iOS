@@ -27,10 +27,10 @@
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.predictedSeed];
-    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.predictedSeed.integerValue];
+    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.predictedSeed toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.predictedSeed.floatValue toDecimalPlaces:2]];
     
 }
 

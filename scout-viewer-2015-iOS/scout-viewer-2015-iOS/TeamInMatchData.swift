@@ -8,37 +8,37 @@
 
 import UIKit
 
-class TeamInMatchData: NSObject {
+@objc class TeamInMatchData: NSObject {
     
-    var identifier = ""
+    var identifier = String?()
     
-    var ballsIntakedAuto = [Int]()
-    var didChallengeTele = -1.0
-    var didGetDisabled = -1.0
-    var didGetIncapacitated = -1.0
-    var didReachAuto = -1.0
-    var didScaleTele = -1.0
-    var matchNumber = -1
-    var numBallsKnockedOffMidlineAuto = -1.0
-    var numGroundIntakesTele = -1.0
-    var numHighShotsMadeAuto = -1.0
-    var numHighShotsMadeTele = -1.0
-    var numHighShotsMissedAuto = -1.0
-    var numHighShotsMissedTele = -1.0
-    var numLowShotsMadeAuto = -1.0
-    var numLowShotsMadeTele = -1
-    var numLowShotsMissedAuto = -1
-    var numLowShotsMissedTele = -1
-    var numShotsBlockedTele = -1
-    var rankBallControl = -1
-    var rankDefense = -1
-    var rankDefenseCrossingEffectiveness = [Int]()
-    var rankEvasion = -1
-    var rankSpeed = -1
-    var rankTorque = -1
-    var teamNumber = -1
-    var timesDefensesCrossedAuto = [Int]()
-    var timesCrossedDefensesTele = [Int]()
-    var calculatedData = TeamInMatchCalculatedData()
+    var ballsIntakedAuto = [NSNumber]()
+    var didChallengeTele = NSNumber?()
+    var didGetDisabled = NSNumber?()
+    var didGetIncapacitated = NSNumber?()
+    var didReachAuto = NSNumber?()
+    var didScaleTele = NSNumber?()
+    var matchNumber = NSNumber?()
+    var numBallsKnockedOffMidlineAuto = NSNumber?()
+    var numGroundIntakesTele = NSNumber?()
+    var numHighShotsMadeAuto = NSNumber?()
+    var numHighShotsMadeTele = NSNumber?()
+    var numHighShotsMissedAuto = NSNumber?()
+    var numHighShotsMissedTele = NSNumber?()
+    var numLowShotsMadeAuto = NSNumber?()
+    var numLowShotsMadeTele = NSNumber?()
+    var numLowShotsMissedAuto = NSNumber?()
+    var numLowShotsMissedTele = NSNumber?()
+    var numShotsBlockedTele = NSNumber?()
+    var rankBallControl = NSNumber?()
+    var rankDefense = NSNumber?()
+    var rankDefenseCrossingEffectiveness = [NSNumber]?()
+    var rankEvasion = NSNumber?()
+    var rankSpeed = NSNumber?()
+    var rankTorque = NSNumber?()
+    var teamNumber = NSNumber?()
+    var timesDefensesCrossedAuto = [NSNumber]?()
+    var timesCrossedDefensesTele = [NSNumber]?()
+    var calculatedData = TeamInMatchCalculatedData?()
 
 }

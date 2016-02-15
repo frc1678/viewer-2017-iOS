@@ -26,7 +26,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     var data: Team? = nil {
         didSet {
-            num = self.data?.number
+            num = self.data?.number?.integerValue
             updateTitleAndTopInfo()
             reload()
         }
@@ -442,11 +442,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         var seedText = "?"
         var predSeedText = "?"
-        if let seed = data?.calculatedData.actualSeed where seed > 0 {
+        if let seed = data?.calculatedData!.actualSeed where seed.integerValue > 0 {
             seedText = "\(seed)"
         }
         
-        if let predSeed = data?.calculatedData.predictedSeed where predSeed > 0 {
+        if let predSeed = data?.calculatedData!.predictedSeed where predSeed.integerValue > 0 {
             predSeedText = "\(predSeed)"
         }
         
@@ -477,7 +477,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let cell = tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell
             let dest = segue.destinationViewController as? DefenseTableViewController
             if let teamNumbah = data?.number {
-                dest!.teamNumber = teamNumbah
+                dest!.teamNumber = teamNumbah.integerValue
                 dest!.relevantDefense = cell!.teamLabel!.text!
             }
         }
@@ -498,7 +498,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let matchesForTeamController = segue.destinationViewController as! TeamScheduleTableViewController
             
             if let teamNum = data?.number {
-                matchesForTeamController.teamNumber = teamNum
+                matchesForTeamController.teamNumber = teamNum.integerValue
             }
         } else if segue.identifier == "CTIMDGraph" {
             let graphViewController = segue.destinationViewController as! GraphViewController
@@ -546,7 +546,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     graphViewController.subDisplayLeftTitle = "Team "
                     graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamsWithCharacteristic(keySets[indexPath.section][indexPath.row]) )
                     graphViewController.subDisplayRightTitle = "Rank: "
-                    if let i = ((graphViewController.subValuesLeft as! [Int]).indexOf(teamNum)) {
+                    if let i = ((graphViewController.subValuesLeft as! [Int]).indexOf(teamNum.integerValue)) {
                         graphViewController.highlightIndex = i
                     }
                 }

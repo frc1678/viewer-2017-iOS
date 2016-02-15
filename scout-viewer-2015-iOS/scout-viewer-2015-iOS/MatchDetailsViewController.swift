@@ -77,44 +77,53 @@ class MatchDetailsViewController: UIViewController {
         }
         
         if let match = match {
-            title = String(match.number)
+            if match.number != nil {
+                title = String(match.number!)
+            } else {
+                title = "???"
+            }
             
-            redDefenseOneLabel.text = String(match.calculatedData.optimalRedDefenses[0])
-            redDefenseTwoLabel.text = String(match.calculatedData.optimalRedDefenses[1])
-            redDefenseThreeLabel.text = String(match.calculatedData.optimalRedDefenses[2])
-            redDefenseFourLabel.text = String(match.calculatedData.optimalRedDefenses[3])
-            blueDefenseOneLabel.text = String(match.calculatedData.optimalBlueDefenses[0])
-            blueDefenseTwoLabel.text = match.calculatedData.optimalBlueDefenses[1]
-            blueDefenseThreeLabel.text = match.calculatedData.optimalBlueDefenses[2]
-            blueDefenseFourLabel.text = match.calculatedData.optimalBlueDefenses[3]
+            if(match.calculatedData?.optimalBlueDefenses != nil) {
+            redDefenseOneLabel.text = String(match.calculatedData!.optimalRedDefenses![0])
+            redDefenseTwoLabel.text = String(match.calculatedData!.optimalRedDefenses![1])
+            redDefenseThreeLabel.text = String(match.calculatedData!.optimalRedDefenses![2])
+            redDefenseFourLabel.text = String(match.calculatedData!.optimalRedDefenses![3])
+            blueDefenseOneLabel.text = String(match.calculatedData!.optimalBlueDefenses![0])
+            blueDefenseTwoLabel.text = match.calculatedData!.optimalBlueDefenses![1]
+            blueDefenseThreeLabel.text = match.calculatedData!.optimalBlueDefenses![2]
+            blueDefenseFourLabel.text = match.calculatedData!.optimalBlueDefenses![3]
+            }
             
-            redOfficialScoreLabel.text = getLabelTitle(match.redScore)
-            redPredictedScoreLabel.text = getLabelTitle(Int(match.calculatedData.predictedRedScore))
-            redErrorPercentageLabel.text = String(percentageValueOf(match.calculatedData.redWinChance))
+            redOfficialScoreLabel.text = getLabelTitle(match.redScore?.integerValue)
+            redPredictedScoreLabel.text = getLabelTitle(match.calculatedData?.predictedRedScore?.integerValue)
+            redErrorPercentageLabel.text = percentageValueOf(match.calculatedData?.redWinChance?.integerValue)
             
             let redTeams = firebaseFetcher.getTeamsFromNumbers(match.redAllianceTeamNumbers)
             if redTeams.count > 0 {
                 for index in 0...redTeams.count - 1 {
                     if index <= 2 {
-                        (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers[index])", forState: UIControlState.Normal)
+                        (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
                         
-                        (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData.driverAbility, toDecimalPlaces: 4)
+                        if redTeams[index].calculatedData!.driverAbility != nil {
+                        (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData!.driverAbility!, toDecimalPlaces: 4)
+                        }
                     }
                 }
             }
             
-            blueOfficialScoreLabel.text = getLabelTitle(match.blueScore)
-            bluePredictedScoreLabel.text = getLabelTitle(match.calculatedData.predictedBlueScore)
-            blueErrorPercentageLabel.text = String(percentageValueOf(match.calculatedData.blueWinChance))
+            blueOfficialScoreLabel.text = getLabelTitle(match.blueScore?.integerValue)
+            bluePredictedScoreLabel.text = getLabelTitle(match.calculatedData?.predictedBlueScore?.integerValue)
+            blueErrorPercentageLabel.text = percentageValueOf(match.calculatedData?.blueWinChance?.integerValue)
 
             let blueTeams = firebaseFetcher.getTeamsFromNumbers(match.blueAllianceTeamNumbers)
             if blueTeams.count > 0 {
                 for index in 0...(blueTeams.count - 1) {
                     if index <= 2 {
                         print(blueTeams[index].number)
-                        (valueForKey("blueTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers[index])", forState: UIControlState.Normal)
-                        
-                        (valueForKey("blueTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(blueTeams[index].calculatedData.driverAbility, toDecimalPlaces: 4)
+                        (valueForKey("blueTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index])", forState: UIControlState.Normal)
+                        if blueTeams[index].calculatedData!.driverAbility != nil {
+                        (valueForKey("blueTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(blueTeams[index].calculatedData!.driverAbility!, toDecimalPlaces: 4)
+                        }
                     }
                 }
             }
@@ -132,13 +141,11 @@ class MatchDetailsViewController: UIViewController {
             }
       //  }
     //}
-    private func getLabelTitle(value: Int?) -> String {
+    private func getLabelTitle(value: NSNumber?) -> String {
         let unknown = "???"
-        if let value = value {
-            if value != -1 {
+            if value != nil {
                 return "\(value)"
             }
-        }
         return unknown
     }
     

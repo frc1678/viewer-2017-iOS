@@ -30,11 +30,11 @@
     
     
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
-    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat: @"%d",match.number]];
+    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat: @"%d",match.number.integerValue]];
     
     for (int i = 0; i < 3; i++) {
         if(i < redTeams.count) {
-            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [TeamScheduleTableViewController mappings][i]]];
+            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number.integerValue]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [TeamScheduleTableViewController mappings][i]]];
         } else {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"???"]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [TeamScheduleTableViewController mappings][i]]];
         }
@@ -43,7 +43,7 @@
     
     for (int i = 0; i < 3; i++) {
         if(i < blueTeams.count) {
-            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [TeamScheduleTableViewController mappings][i]]];
+            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number.integerValue]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [TeamScheduleTableViewController mappings][i]]];
         } else {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"???"]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [TeamScheduleTableViewController mappings][i]]];
         }
@@ -56,17 +56,23 @@
         }
     }
     
-    if (match.redScore != -1 || match.blueScore != -1) {
+    if (match.redScore != nil || match.blueScore != nil) {
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore];
         matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore];
         matchCell.redScoreLabel.alpha = 1;
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;
-    } else {
+    } else if (match.calculatedData.predictedBlueScore != nil || match.calculatedData.predictedRedScore != nil) {
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedRedScore];
         matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedBlueScore];
         matchCell.redScoreLabel.alpha = .5;
         matchCell.slash.alpha = .5;
+        matchCell.blueScoreLabel.alpha = .5;
+    } else {
+        matchCell.redScoreLabel.text = @"?";
+        matchCell.blueScoreLabel.text = @"?";
+        matchCell.slash.alpha = .5;
+        matchCell.redScoreLabel.alpha = .5;
         matchCell.blueScoreLabel.alpha = .5;
     }
 }
@@ -90,8 +96,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     MatchTableViewCell *cell = sender;
     MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
-    detailController.match = [self.firebaseFetcher fetchMatch:cell.matchLabel.text];
-}
+    detailController.match = [self.firebaseFetcher.matches objectAtIndex:cell.matchLabel.text.integerValue-1];
+    detailController.matchNumber = cell.matchLabel.text.integerValue;}
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {

@@ -8,26 +8,26 @@
 
 import UIKit
 
-class TeamInMatchCalculatedData: NSObject {
+@objc class TeamInMatchCalculatedData: NSObject {
     
-    var firstPickAbility = -1
-    var RScoreTorque = -1
-    var RScoreEvasion = -1
-    var RScoreSpeed = -1
-    var highShotAccuracyAuto = -1.0
-    var lowShotAccuracyAuto = -1.0
-    var highShotAccuracyTele = -1.0
-    var lowShotAccuracyTele = -1.0
-    var siegeAbility = -1.0
-    var numRPs = -1
-    var numAutoPoints = -1
-    var numScaleAndChallengePoints = -1
-    var RScoreDefense = -1.0
-    var RScoreBallControl = -1.0
-    var RScoreDrivingAbility = -1.0
-    var citrusDPR = -1.0
-    var secondPickAbility = -1
-    var overallSecondPickAbility = -1.0
-    var scoreContribution = -1.0
+    var firstPickAbility = Int?()
+    var RScoreTorque = Int?()
+    var RScoreEvasion = Int?()
+    var RScoreSpeed = Int?()
+    var highShotAccuracyAuto = Int?()
+    var lowShotAccuracyAuto = Int?()
+    var highShotAccuracyTele = Int?()
+    var lowShotAccuracyTele = Int?()
+    var siegeAbility = Int?()
+    var numRPs = Int?()
+    var numAutoPoints = Int?()
+    var numScaleAndChallengePoints = Int?()
+    var RScoreDefense = Int?()
+    var RScoreBallControl = Int?()
+    var RScoreDrivingAbility = Int?()
+    var citrusDPR = Int?()
+    var secondPickAbility = Int?()
+    var overallSecondPickAbility = Int?()
+    var scoreContribution = Int?()
     
 }

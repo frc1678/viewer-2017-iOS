@@ -104,7 +104,7 @@ func roundValue(value: AnyObject, toDecimalPlaces numDecimalPlaces: Int) -> Stri
     return "\(value)"
 }
 
-func percentageValueOf(number: AnyObject) -> String {
+func percentageValueOf(number: AnyObject?) -> String {
     if let n = number as? Float {
         return "\(roundValue(n * 100, toDecimalPlaces: 2))%"
     }

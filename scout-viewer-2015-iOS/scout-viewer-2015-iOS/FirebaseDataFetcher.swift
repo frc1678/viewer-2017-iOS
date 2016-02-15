@@ -20,7 +20,7 @@ import DATAStack
             
         }
     }
-    let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-dev2-2016.firebaseio.com/"
     var matches = [Match]()
     var teamInMatches = [TeamInMatchData]()
     var imageUrls = Dictionary<Int,String>()
@@ -160,16 +160,19 @@ import DATAStack
             matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                 let match = Match()
                 //var hello = (snapshot.value.objectForKey("blueAllianceDidCapture") as? String)!
-                match.blueAllianceTeamNumbers = (snapshot.value.objectForKey("blueAllianceTeamNumbers") as? [Int])!
-                match.blueDefensePositions = (snapshot.value.objectForKey("blueDefensePositions") as? [String])!
-                match.blueScore = (snapshot.value.objectForKey("blueScore") as? Int)!
-                let calculatedDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)!
+                match.blueAllianceTeamNumbers = (snapshot.value.objectForKey("blueAllianceTeamNumbers") as? [Int])
+                match.blueDefensePositions = (snapshot.value.objectForKey("blueDefensePositions") as? [String])
+                match.blueScore = (snapshot.value.objectForKey("blueScore") as? Int)
+                let calculatedDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)
                 match.calculatedData = self.getMatchCalculatedDatafromDict(calculatedDict)
-                match.number = (snapshot.value.objectForKey("number") as? Int)!
+                print("Heres the matchNumber")
+                
+                print(snapshot.value.objectForKey("number"))
+                match.number = (snapshot.value.objectForKey("number") as? Int)
                 //match.redAllianceDidCapture = (snapshot.value.objectForKey("redAllianceDidCapture") as? Bool)!
-                match.redAllianceTeamNumbers = (snapshot.value.objectForKey("redAllianceTeamNumbers") as? [Int])!
-                match.redDefensePositions = (snapshot.value.objectForKey("redDefensePositions") as? [String])!
-                match.redScore = snapshot.value.objectForKey("redScore") as! Int
+                match.redAllianceTeamNumbers = (snapshot.value.objectForKey("redAllianceTeamNumbers") as? [Int])
+                match.redDefensePositions = (snapshot.value.objectForKey("redDefensePositions") as? [String])
+                match.redScore = (snapshot.value.objectForKey("redScore") as? Int)
                 
                 self.matches.append(match)
                 
@@ -194,19 +197,19 @@ import DATAStack
                 let v = snapshot.value as! NSDictionary
                 if let name = (v.objectForKey("name") as? String) {
                     team.name = name
-                    team.number = (v.objectForKey("number") as? Int)!
-                    team.pitDriveBaseLength = (v.objectForKey("pitDriveBaseLength") as? Int)!
-                    team.pitBumperHeight = (v.objectForKey("pitBumperHeight") as? Int)!
-                    team.pitDriveBaseWidth = (v.objectForKey("pitDriveBaseWidth") as? Int)!
-                    team.pitLowBarCapability = (v.objectForKey("pitLowBarCapability") as? Bool)!
-                    team.pitNotes = (v.objectForKey("pitNotes") as? String)!
-                    team.pitNumberOfWheels = (v.objectForKey("pitNumberOfWheels") as? Int)!
-                    team.pitOrganization = (v.objectForKey("pitOrganization") as? Int)!
-                    team.pitPotentialLowBarCapability = (v.objectForKey("pitPotentialLowBarCapability") as? Int)!
-                    team.pitPotentialMidlineBallCapability = (v.objectForKey("pitPotentialMidlineBallCapability") as? Int)!
-                    team.pitPotentialShotBlockerCapability = (v.objectForKey("pitPotentialShotBlockerCapability") as? Int)!
-                    team.selectedImageUrl = (v.objectForKey("selectedImageUrl") as? String)!
-                    let teamDict = (v.objectForKey("calculatedData") as? NSDictionary)!
+                    team.number = (v.objectForKey("number") as? Int)
+                    team.pitDriveBaseLength = (v.objectForKey("pitDriveBaseLength") as? Int)
+                    team.pitBumperHeight = (v.objectForKey("pitBumperHeight") as? Int)
+                    team.pitDriveBaseWidth = (v.objectForKey("pitDriveBaseWidth") as? Int)
+                    team.pitLowBarCapability = (v.objectForKey("pitLowBarCapability") as? Bool)
+                    team.pitNotes = (v.objectForKey("pitNotes") as? String)
+                    team.pitNumberOfWheels = (v.objectForKey("pitNumberOfWheels") as? Int)
+                    team.pitOrganization = (v.objectForKey("pitOrganization") as? Int)
+                    team.pitPotentialLowBarCapability = (v.objectForKey("pitPotentialLowBarCapability") as? Int)
+                    team.pitPotentialMidlineBallCapability = (v.objectForKey("pitPotentialMidlineBallCapability") as? Int)
+                    team.pitPotentialShotBlockerCapability = (v.objectForKey("pitPotentialShotBlockerCapability") as? Int)
+                    team.selectedImageUrl = (v.objectForKey("selectedImageUrl") as? String)
+                    let teamDict = (v.objectForKey("calculatedData") as? NSDictionary)
                     team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
                     
                     self.teams.append(team)
@@ -234,18 +237,18 @@ import DATAStack
                 }
                 teame.name = (snapshot.value.objectForKey("name") as? String)!
                 teame.number = (snapshot.value.objectForKey("number") as? Int)!
-                teame.pitDriveBaseLength = (snapshot.value.objectForKey("pitDriveBaseLength") as? Int)!
-                teame.pitBumperHeight = (snapshot.value.objectForKey("pitBumperHeight") as? Int)!
-                teame.pitDriveBaseWidth = (snapshot.value.objectForKey("pitDriveBaseWidth") as? Int)!
-                teame.pitLowBarCapability = (snapshot.value.objectForKey("pitLowBarCapability") as? Bool)!
-                teame.pitNotes = (snapshot.value.objectForKey("pitNotes") as? String)!
-                teame.pitNumberOfWheels = (snapshot.value.objectForKey("pitNumberOfWheels") as? Int)!
-                teame.pitOrganization = (snapshot.value.objectForKey("pitOrganization") as? Int)!
-                teame.pitPotentialLowBarCapability = (snapshot.value.objectForKey("pitPotentialLowBarCapability") as? Int)!
-                teame.pitPotentialMidlineBallCapability = (snapshot.value.objectForKey("pitPotentialMidlineBallCapability") as? Int)!
-                teame.pitPotentialShotBlockerCapability = (snapshot.value.objectForKey("pitPotentialShotBlockerCapability") as? Int)!
-                teame.selectedImageUrl = (snapshot.value.objectForKey("selectedImageUrl") as? String)!
-                let teamDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)!
+                teame.pitDriveBaseLength = (snapshot.value.objectForKey("pitDriveBaseLength") as? Int)
+                teame.pitBumperHeight = (snapshot.value.objectForKey("pitBumperHeight") as? Int)
+                teame.pitDriveBaseWidth = (snapshot.value.objectForKey("pitDriveBaseWidth") as? Int)
+                teame.pitLowBarCapability = (snapshot.value.objectForKey("pitLowBarCapability") as? Bool)
+                teame.pitNotes = (snapshot.value.objectForKey("pitNotes") as? String)
+                teame.pitNumberOfWheels = (snapshot.value.objectForKey("pitNumberOfWheels") as? Int)
+                teame.pitOrganization = (snapshot.value.objectForKey("pitOrganization") as? Int)
+                teame.pitPotentialLowBarCapability = (snapshot.value.objectForKey("pitPotentialLowBarCapability") as? Int)
+                teame.pitPotentialMidlineBallCapability = (snapshot.value.objectForKey("pitPotentialMidlineBallCapability") as? Int)
+                teame.pitPotentialShotBlockerCapability = (snapshot.value.objectForKey("pitPotentialShotBlockerCapability") as? Int)
+                teame.selectedImageUrl = (snapshot.value.objectForKey("selectedImageUrl") as? String)
+                let teamDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)
                 teame.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
                 self.teams[index] = teame
                 self.updateImages()
@@ -286,7 +289,7 @@ import DATAStack
         print("This is the stuff in Firebase")
         //print(self.teamInMatches.count)
         for TIM in self.teamInMatches {
-            if TIM.identifier.rangeOfString(String(team.number)) != nil {
+            if TIM.identifier!.rangeOfString(String(team.number)) != nil {
                 array.append(TIM)
             }
         }
@@ -304,33 +307,39 @@ import DATAStack
         var counter = 0
         for loopTeam in self.teams {
             counter++
-            if loopTeam.number == team.number {
+            if loopTeam.number == team.number?.integerValue {
                 return counter
             }
         }
         return counter
     }
-    func getTeamsFromNumbers(teamNums:[Int]) -> [Team] {
+    func getTeamsFromNumbers(teamNums:[Int]?) -> [Team] {
         var teams = [Team]()
-        for teamNum in teamNums {
+        if teamNums != nil {
+        for teamNum in teamNums! {
             teams.append(self.fetchTeam(teamNum))
+        }
         }
         return teams
     }
     func getTeamInMatchDatasForTeam(team:Team) -> [TeamInMatchData]{
         let ref = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
         var TIMDatas = [TeamInMatchData]()
-        let teamNum = String(team.number)
+        let teamNum = String(team.number!)
         ref.observeEventType(.ChildAdded, withBlock: { datasnapshot in
             let range = Range(start:teamNum.startIndex,end:teamNum.endIndex)
             if datasnapshot.key.substringWithRange(range) == teamNum {
                 let TIMData = self.getTeamInMatchDataForDict((datasnapshot.value as? NSDictionary)!)
-                TIMData.identifier = datasnapshot.key
-                let TIMCalcData = self.getCalculatedTeamInMatchDataForDict(datasnapshot.childSnapshotForPath("calculatedData").value as! NSDictionary)
+                if TIMData != nil {
+                TIMData!.identifier = datasnapshot.key
+                    let TIMCalcData = self.getCalculatedTeamInMatchDataForDict((datasnapshot.childSnapshotForPath("calculatedData").value as? NSDictionary))
                 // TIMCalcData.firstPickAbility = (datasnapshot.value.objectForKey("calculatedData.firstPickAbility") as? Int)!
-                TIMData.calculatedData = TIMCalcData
-                TIMDatas.append(TIMData)
-                self.teamInMatches.append(TIMData)
+                TIMData!.calculatedData = TIMCalcData
+                TIMDatas.append(TIMData!)
+                self.teamInMatches.append(TIMData!)
+                }
+                
+                
             }
         })
         return TIMDatas
@@ -357,16 +366,18 @@ import DATAStack
     }
     func rankOfTeamInMatchData(timData:TeamInMatchData, withCharacteristic:NSString) -> Int {
         var values = [Int]()
-        let TIMDatas = self.getTeamInMatchDatasForTeam(self.fetchTeam(timData.teamNumber))
+        let TIMDatas = self.getTeamInMatchDatasForTeam(self.fetchTeam(timData.teamNumber!.integerValue))
         for timData in TIMDatas {
-            values.append(timData.teamNumber)
+            values.append(timData.teamNumber!.integerValue)
         }
-        return values.indexOf(timData.matchNumber)! + 1
+        return values.indexOf(timData.matchNumber!.integerValue)! + 1
     }
     func valuesInCompetitionOfPathForTeams(path:String) -> NSArray {
         let array = NSMutableArray()
         for team in self.teams {
+            if team.valueForKeyPath(path) != nil {
             array.addObject(team.valueForKeyPath(path)!)
+            }
         }
         return array
     }
@@ -398,8 +409,8 @@ import DATAStack
         return Match()
     }
     func allTeamsInMatch(match:Match) -> [Team]  {
-        let redTeams = getTeamsFromNumbers(match.redAllianceTeamNumbers)
-        let blueTeams = getTeamsFromNumbers(match.blueAllianceTeamNumbers)
+        let redTeams = getTeamsFromNumbers(match.redAllianceTeamNumbers!)
+        let blueTeams = getTeamsFromNumbers(match.blueAllianceTeamNumbers!)
         
         return redTeams + blueTeams
         
@@ -416,12 +427,12 @@ import DATAStack
         var array = [Match]()
         for match in self.matches {
             if let matche = match as? Match {
-                for teamNumber in matche.redAllianceTeamNumbers {
+                for teamNumber in matche.redAllianceTeamNumbers! {
                     if teamNumber == number {
                         array.append(matche)
                     }
                 }
-                for teamNumber in matche.blueAllianceTeamNumbers {
+                for teamNumber in matche.blueAllianceTeamNumbers! {
                     if teamNumber == number {
                         array.append(matche)
                     }
@@ -430,20 +441,21 @@ import DATAStack
         }
         return array
     }
-    func getMatchCalculatedDatafromDict(dict:NSDictionary) -> MatchCalculatedData {
+    func getMatchCalculatedDatafromDict(dict:NSDictionary?) -> MatchCalculatedData {
         
         let matchData = MatchCalculatedData()
-        matchData.blueRPs = (dict.objectForKey("actualBlueRPs") as? Int)!
-        matchData.numDefenseCrossesByBlue = (dict.objectForKey("numDefensesCrossedByBlue") as? Int)!
-        matchData.numDefenseCrossesByRed = (dict.objectForKey("numDefensesCrossedByRed") as? Int)!
-        matchData.predictedBlueScore = (dict.objectForKey("predictedBlueScore") as? Int)!
-        matchData.predictedRedScore = (dict.objectForKey("predictedRedScore") as? Int)!
-        matchData.redRPs = (dict.objectForKey("actualRedRPs") as? Int)!
-        matchData.optimalBlueDefenses = (dict.objectForKey("optimalBlueDefenses") as? [String])!
-        matchData.optimalRedDefenses = (dict.objectForKey("optimalRedDefenses") as? [String])!
-        matchData.blueWinChance = (dict.objectForKey("blueWinChance") as? Int)!
-        matchData.redWinChance = (dict.objectForKey("redWinChance") as? Int)!
-        
+        if dict != nil {
+        matchData.blueRPs = (dict!.objectForKey("actualBlueRPs") as? Int)
+        matchData.numDefenseCrossesByBlue = (dict!.objectForKey("numDefensesCrossedByBlue") as? Int)
+        matchData.numDefenseCrossesByRed = (dict!.objectForKey("numDefensesCrossedByRed") as? Int)
+        matchData.predictedBlueScore = (dict!.objectForKey("predictedBlueScore") as? Int)
+        matchData.predictedRedScore = (dict!.objectForKey("predictedRedScore") as? Int)
+        matchData.redRPs = (dict!.objectForKey("actualRedRPs") as? Int)
+        matchData.optimalBlueDefenses = (dict!.objectForKey("optimalBlueDefenses") as? [String])
+        matchData.optimalRedDefenses = (dict!.objectForKey("optimalRedDefenses") as? [String])
+        matchData.blueWinChance = (dict!.objectForKey("blueWinChance") as? Int)
+        matchData.redWinChance = (dict!.objectForKey("redWinChance") as? Int)
+        }
         return matchData
         
     }
@@ -456,41 +468,46 @@ import DATAStack
         return self.matches[matchNumbah] 
     }
     
-    func getcalcDataForTeamFromDict(dict:NSDictionary) -> CalculatedTeamData {
+    func getcalcDataForTeamFromDict(dict:NSDictionary?) -> CalculatedTeamData {
         let calcData = CalculatedTeamData()
+        if dict != nil {
         for key in self.teamCalcKeys {
-            let value = dict.objectForKey(key)
+            let value = dict!.objectForKey(key)
             
             calcData.setValue(value, forKey: key)
         }
         for key in self.defenseKeys {
-            calcData.setValue(dict.objectForKey(key) as! NSDictionary, forKey: key)
+            calcData.setValue(dict!.objectForKey(key) as! NSDictionary, forKey: key)
         }
         
-        calcData.cdfCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["a"]!["cdf"] as? Int)!
-        calcData.pcCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["a"]!["pc"] as? Int)!
-        calcData.mtCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["b"]!["mt"] as? Int)!
-        calcData.rpCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["b"]!["rp"] as? Int)!
-        calcData.dbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["c"]!["db"] as? Int)!
-        calcData.spCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["c"]!["sp"] as? Int)!
-        calcData.rtCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["d"]!["rt"] as? Int)!
-        calcData.rwCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["d"]!["rw"] as? Int)!
-        calcData.lbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele["e"]!["lb"] as? Int)!
+        calcData.cdfCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["a"]!["cdf"] as? Int)
+        calcData.pcCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["a"]!["pc"] as? Int)
+        calcData.mtCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["b"]!["mt"] as? Int)
+        calcData.rpCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["b"]!["rp"] as? Int)
+        calcData.dbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["c"]!["db"] as? Int)
+        calcData.spCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["c"]!["sp"] as? Int)
+        calcData.rtCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["d"]!["rt"] as? Int)
+        calcData.rwCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["d"]!["rw"] as? Int)
+       // calcData.lbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["e"]!["lb"] as? Int)
+        }
         return calcData
         
     }
     
-    func getCalculatedTeamInMatchDataForDict(dict: NSDictionary) -> TeamInMatchCalculatedData {
+    func getCalculatedTeamInMatchDataForDict(dict: NSDictionary?) -> TeamInMatchCalculatedData? {
+        if dict != nil {
         let CTIMD = TeamInMatchCalculatedData()
         for key in self.calculatedTeamInMatchDataKeys {
-            if let value = dict.objectForKey(key) {
+            if let value = dict!.objectForKey(key) {
                 CTIMD.setValue(value, forKey: key)
             }
         }
         return CTIMD
+        }
+        return nil
     }
     
-    func getTeamInMatchDataForDict(dict:NSDictionary) -> TeamInMatchData {
+    func getTeamInMatchDataForDict(dict:NSDictionary) -> TeamInMatchData? {
         let TIMData = TeamInMatchData()
         
         for key in self.teamInMatchKeys {
@@ -504,13 +521,13 @@ import DATAStack
     }
     
     func getPickList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData.firstPickAbility > $1.calculatedData.firstPickAbility }
+        let sortedArray = self.teams.sort { $0.calculatedData!.firstPickAbility?.integerValue > $1.calculatedData!.firstPickAbility?.integerValue }
         return sortedArray;
     }
     func getMatchesForTeam(teamNumbah:Int) -> [Match] {
         var matches = [Match]()
         for match in self.matches {
-            let teamNumArray = (match as? Match)!.redAllianceTeamNumbers + match.blueAllianceTeamNumbers
+            let teamNumArray = (match as? Match)!.redAllianceTeamNumbers! + match.blueAllianceTeamNumbers!
             for number in teamNumArray {
                 if number == teamNumbah {
                     matches.append(match as! Match)
@@ -521,11 +538,11 @@ import DATAStack
     }
     
     func seedList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData.actualSeed > $1.calculatedData.actualSeed }
+        let sortedArray = self.teams.sort { $0.calculatedData!.actualSeed?.integerValue > $1.calculatedData!.actualSeed?.integerValue }
         return sortedArray
     }
     func predSeedList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData.predictedSeed > $1.calculatedData.predictedSeed }
+        let sortedArray = self.teams.sort { $0.calculatedData!.predictedSeed?.integerValue > $1.calculatedData!.predictedSeed?.integerValue }
         return sortedArray
     }
     
@@ -563,8 +580,8 @@ import DATAStack
     func secondPickList(teamNum:Int) -> [Team] {
         var tupleArray = [(Team,Int)]()
         for team in self.teams {
-            if(team.calculatedData.secondPickAbility.objectForKey(String(teamNum)) != nil) {
-                tupleArray.append(team,((team.calculatedData.secondPickAbility.objectForKey(String(teamNum))) as? Int)!)
+            if(team.calculatedData?.secondPickAbility?.objectForKey(String(teamNum)) != nil) {
+                tupleArray.append(team,((team.calculatedData!.secondPickAbility!.objectForKey(String(teamNum))) as? Int)!)
             }
             else {
                 tupleArray.append((team,-1))
@@ -632,10 +649,12 @@ import DATAStack
         return image
     }
     func returnSynchronousTeamImage(team:Team) -> UIImage? {
-        let url = NSURL(string:team.selectedImageUrl)
+        if team.selectedImageUrl != nil {
+        let url = NSURL(string:team.selectedImageUrl!)
         if let data = NSData(contentsOfURL: url!) {
             let image = UIImage(data:data)
             return image
+        }
         }
         return nil
     }
@@ -650,7 +669,7 @@ import DATAStack
             NSNotificationCenter.defaultCenter().postNotification(notification)
         }
         else {
-            let url = NSURL(string:team.selectedImageUrl)
+            let url = NSURL(string:team.selectedImageUrl!)
             //print("Download Started")
             //print("lastPathComponent: " + (url!.lastPathComponent ?? ""))
             if (String(url) != "-1") {
@@ -684,7 +703,7 @@ import DATAStack
     func downloadAllImages() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
             for team in self.teams {
-                self.imageUrls[team.number] = team.selectedImageUrl
+                self.imageUrls[team.number!.integerValue] = team.selectedImageUrl
                 let name = self.getTeamFileName(team)
                 let image = self.returnSynchronousTeamImage(team)
                 if image != nil {
@@ -701,7 +720,7 @@ import DATAStack
             var image = UIImage()
             var teame = Team()
             for team in self.teams {
-                if self.imageUrls[team.number] != team.selectedImageUrl {
+                if self.imageUrls[team.number!.integerValue] != team.selectedImageUrl {
                     image = self.returnTeamImage(team)
                     teame = team
                     self.saveImage(image, withName: (getTeamFileName(teame)))

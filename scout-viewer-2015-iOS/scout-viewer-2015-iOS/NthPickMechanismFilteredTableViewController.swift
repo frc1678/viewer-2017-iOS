@@ -69,6 +69,6 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
     }
     
     func checkIfTeamBeginsWith(string: String)(team: AnyObject) -> Bool {
-        return "\(team.number)".rangeOfString(string)?.startIndex == "\(team.number)".rangeOfString("\(team.number)")?.startIndex
+        return "\(team.number!!.integerValue)".rangeOfString(string)?.startIndex == ("\(team.number!!.integerValue)".rangeOfString("\(team.number!!.integerValue)")?.startIndex)!
     }
 }

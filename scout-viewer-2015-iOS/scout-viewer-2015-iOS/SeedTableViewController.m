@@ -29,10 +29,18 @@
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.actualSeed];
-    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
+    if(team.calculatedData.actualSeed != nil) {
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.actualSeed.integerValue];
+    } else {
+        multiCell.rankLabel.text = [NSString stringWithFormat:@"%d",path.row];
+    }
+    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
+    if(team.calculatedData.firstPickAbility != nil) {
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.firstPickAbility.floatValue toDecimalPlaces:2]];
+    } else {
+        multiCell.scoreLabel.text = @"";
+    }
     //Ask about this
 }
 
@@ -67,6 +75,9 @@
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
     return [self.dataArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Team *team, NSDictionary *bindings) {
+        if(team.number == nil) {
+            
+        }
         NSString *numberText = [NSString stringWithFormat:@"%ld", (long)team.number];
         return [numberText rangeOfString:searchString].location == 0;
     }]];
