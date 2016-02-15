@@ -173,28 +173,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     "Score Contribution"
     ]
     
-    let calculatedTeamInMatchDataKeys = [
-        "calculatedData.firstPickAbility",
-        "calculatedData.RScoreTorque",
-        "calculatedData.RScoreEvasion",
-        "calculatedData.RScoreSpeed",
-        "calculatedData.highShotAccuracyAuto",
-        "calculatedData.lowShotAccuracyAuto",
-        "calculatedData.highShotAccuracyTele",
-        "calculatedData.lowShotAccuracyTele",
-        "calculatedData.siegeAbility",
-        "calculatedData.siegePower",
-        "calculatedData.numRPs",
-        "calculatedData.numAutoPoints",
-        "calculatedData.numScaleAndChallengePoints",
-        "calculatedData.RScoreDefense",
-        "calculatedData.RScoreBallControl",
-        "calculatedData.RScoreDrivingAbility",
-        "calculatedData.citrusDPR",
-        "calculatedData.secondPickAbility",
-        "calculatedData.overallSecondPickAbility",
-        "calculatedData.scoreContribution"
-    ]
+    
     
     var keySets: [[String]] {
         return [ defaultKeys,
@@ -366,13 +345,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         let cell: UITableViewCell
         
         if data == nil {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) 
             cell.textLabel?.text = "No data yet..."
             cell.accessoryType = UITableViewCellAccessoryType.None
             return cell
         }
         
         let dataKey: String = keySets[indexPath.section][indexPath.row]
+        if dataKey == "calculatedData.numAutoPoints" {
+            
+        }
         if !moreInfoValues.contains(dataKey) {
             let dataPoint: AnyObject? = data!.valueForKeyPath(dataKey) ?? ""
             if dataPoint == nil {
@@ -527,14 +509,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
                     graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                    print("This is the key:")
-                    print(keySets[indexPath.section][indexPath.row])
-                    if let values = firebaseFetcher.valuesInTeamMatchesOfPath(self.calculatedTeamInMatchDataKeys[indexPath.row], forTeam:firebaseFetcher.fetchTeam(data!.number)) as? [CGFloat] {
+                    let i = self.calculatedTeamInMatchDataHumanReadableKeys.indexOf(graphViewController.graphTitle)
+                    let key = self.firebaseFetcher.calculatedTeamInMatchDataKeys[i!]
+                    //print("This is the key:")
+                    //print(keySets[indexPath.section][indexPath.row])
+                    if let values = firebaseFetcher.valuesInTeamMatchesOfPath(key, forTeam: data!) as? [CGFloat] {
                         print("These are the data points being passed:")
                         print(values)
                         graphViewController.values = values
                         graphViewController.subDisplayLeftTitle = "Match: "
-                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("matchNumber", forTeam: firebaseFetcher.fetchTeam(data!.number)) as [AnyObject]
+                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("matchNumber", forTeam: data!) as [AnyObject]
                         /*if let d = data {
                             graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number)))
                             

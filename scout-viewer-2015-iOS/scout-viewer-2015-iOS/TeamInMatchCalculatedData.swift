@@ -19,7 +19,6 @@ class TeamInMatchCalculatedData: NSObject {
     var highShotAccuracyTele = -1.0
     var lowShotAccuracyTele = -1.0
     var siegeAbility = -1.0
-    var siegePower = -1.0
     var numRPs = -1
     var numAutoPoints = -1
     var numScaleAndChallengePoints = -1
