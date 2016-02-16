@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalculatedTeamData: NSObject {
+class CalculatedTeamData: NSObject, Reflectable {
     
     
     

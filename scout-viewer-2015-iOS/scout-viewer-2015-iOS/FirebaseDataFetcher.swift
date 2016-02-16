@@ -13,7 +13,7 @@ import Firebase
 class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     var teams = [Team]()
-    var matches = [AnyObject]()
+    var matches = [Match]()
     var allTheData = NSDictionary()
     var firebase = Firebase(url: "https://1678-dev-2016.firebaseio.com")
     var teamInMatchKeys = [
@@ -111,9 +111,24 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         let matchReference = Firebase(url: "https://1678-dev-2016.firebaseio.com/Matches")
         matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
             let match = Match()
+            
+            for prop in match.propertys() {
+                if prop == "calculatedData" {
+                    match.setValue(self.getMatchCalculatedDatafromDict((snapshot.childSnapshotForPath("calculatedData").value as? NSDictionary)!), forKey: "calculatedData")
+                } else if(prop == "matchName") {
+                    // Do nothing
+                } else {
+                    if let value = snapshot.childSnapshotForPath(prop).value {
+                        if value == <NSNull> {
+                            match.setValue(value, forKey: prop)
+                        }
+                    }
+                }
+            }
+            /*
             //var hello = (snapshot.value.objectForKey("blueAllianceDidCapture") as? String)!
             match.blueAllianceTeamNumbers = (snapshot.value.objectForKey("blueAllianceTeamNumbers") as? [Int])!
-            match.blueDefensePositions = (snapshot.value.objectForKey("blueDefensePositions") as? [String])!
+            match.blueDefensePositions = (snapshot.value.objectForKey("blueDefensePositions") as? [String]) != nil ? (snapshot.value.objectForKey("blueDefensePositions") as? [String])! : []
             match.blueScore = (snapshot.value.objectForKey("blueScore") as? Int)!
             let calculatedDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)!
             match.calculatedData = self.getMatchCalculatedDatafromDict(calculatedDict)
@@ -122,7 +137,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             match.redAllianceTeamNumbers = (snapshot.value.objectForKey("redAllianceTeamNumbers") as? [Int])!
             match.redDefensePositions = (snapshot.value.objectForKey("redDefensePositions") as? [String])!
             match.redScore = snapshot.value.objectForKey("redScore") as! Int
-            
+            */
             self.matches.append(match)
             if(self.matches.count == 95) { //This is sketch and should not be done in this way
                 NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
@@ -353,7 +368,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return sortedArray
     }
     func getMatchesForTeam(teamNumbah:Int) -> [Match] {
-        var matches = [Match]()
+        var matches : [Match] = []
         for match in self.matches {
             let teamNumArray = (match as? Match)!.redAllianceTeamNumbers + match.blueAllianceTeamNumbers
             for number in teamNumArray {

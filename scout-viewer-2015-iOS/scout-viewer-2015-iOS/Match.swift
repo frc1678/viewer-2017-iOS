@@ -9,23 +9,42 @@
 import UIKit
 
 //The Dream, Never Forget
+protocol Reflectable {
+    func propertys()->[String]
+}
 
-class Match: NSObject {
+extension Reflectable
+{
+    func propertys()->[String]{
+        var s = [String]()
+        for c in Mirror(reflecting: self).children
+        {
+            if let name = c.label{
+                s.append(name)
+            }
+        }
+        return s
+    }
+}
+
+
+
+
+class Match: NSObject, Reflectable {
     
-    var matchNumber = -1
+    var number = -1
     
     var blueAllianceDidCapture = false
     var blueAllianceTeamNumbers = [Int]()
     var blueDefensePositions = [String]()
     var blueScore = -1
     var calculatedData = MatchCalculatedData()
-    var number = -1
     var redAllianceDidCapture = false
     var redAllianceTeamNumbers = [Int]()
     var redDefensePositions = [String]()
     var redScore = -1
     var matchName:String {
-        return "Q" + String(matchNumber)
+        return "Q" + String(number)
     }
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Team: NSObject {
+class Team: NSObject, Reflectable {
     
     var name = String()
     var number = -1

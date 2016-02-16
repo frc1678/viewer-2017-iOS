@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MatchCalculatedData: NSObject {
+class MatchCalculatedData: NSObject, Reflectable {
     
     var blueRPs = -1
     var numDefenseCrossesByBlue = -1
@@ -16,5 +16,5 @@ class MatchCalculatedData: NSObject {
     var predictedBlueScore = -1
     var predictedRedScore = -1
     var redRPs = -1
-
+    
 }

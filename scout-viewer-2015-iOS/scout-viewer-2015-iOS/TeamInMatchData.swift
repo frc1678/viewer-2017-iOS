@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamInMatchData: NSObject {
+class TeamInMatchData: NSObject, Reflectable {
     
     var ballsIntakedAuto = [Int]()
     var didChallengeTele = -1.0
