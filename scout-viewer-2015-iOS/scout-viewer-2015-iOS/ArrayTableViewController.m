@@ -18,6 +18,7 @@
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSMutableDictionary *highlighteds;
 
+
 @end
 
 @implementation ArrayTableViewController
@@ -27,6 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
+    self.starredMatchesArray = [[NSMutableArray alloc] init];
+    self.lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
+    self.lpgr.minimumPressDuration = .70;
+    [self.tableView addGestureRecognizer:self.lpgr];
 
     self.tableView.estimatedRowHeight = 100;
     [self.tableView registerNib:[UINib nibWithNibName:[self cellIdentifier] bundle:nil] forCellReuseIdentifier:[self cellIdentifier]];
@@ -186,5 +191,10 @@
 - (NSString *)notificationName {
     return @"updatedLeftTable";
 }
+//Should be overridden
+-(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
+    
+    }
+
 
 @end

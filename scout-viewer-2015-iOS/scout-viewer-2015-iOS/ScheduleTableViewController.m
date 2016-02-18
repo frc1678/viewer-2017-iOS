@@ -21,6 +21,9 @@
 @implementation ScheduleTableViewController
 
 
+- (IBAction)ourScheduleTapped:(id)sender {
+    [self performSegueWithIdentifier:@"citrusSchedule" sender:sender];
+}
 
 -(void)firebaseFinished {
     [self.tableView reloadData];
@@ -31,6 +34,12 @@
     
     [super viewDidLoad];
     [self cachePhotos:self.cacheButton];
+    
+    UILocalNotification *notification = [[UILocalNotification alloc] init];
+    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
+    notification.alertBody = @"Here we go, testing this thing";
+    notification.timeZone = [NSTimeZone defaultTimeZone];
+    [[UIApplication sharedApplication] setScheduledLocalNotifications:[NSArray arrayWithObject:notification]];
 }
 
 //RIP (2016 - 2016)
@@ -98,6 +107,15 @@
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
+-(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
+    if([self.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
+        matchCell.backgroundColor = [UIColor greenColor];
+    }
+    else {
+        matchCell.backgroundColor = [UIColor whiteColor];
+    }
+}
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,11 +124,16 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier  isEqual: @"citrusSchedule"]) {
+        TeamScheduleTableViewController *dest = segue.destinationViewController;
+        dest.teamNumber = 1678;
+    }else {
     MatchTableViewCell *cell = sender;
     MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
     NSLog([NSString stringWithFormat:@"%d",self.firebaseFetcher.matches.count]);
     detailController.match = [self.firebaseFetcher.matches objectAtIndex:cell.matchLabel.text.integerValue-1];
     detailController.matchNumber = cell.matchLabel.text.integerValue;
+    }
 }
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
@@ -177,5 +200,20 @@
 + (NSArray *)mappings {
     return @[@"One", @"Two", @"Three"];
 }
+-(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
+    if(UIGestureRecognizerStateBegan == sender.state) {
+        CGPoint p = [sender locationInView:self.tableView];
+        NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
+        MatchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        if([self.starredMatchesArray containsObject:cell.matchLabel.text]) {
+            [self.starredMatchesArray removeObject:cell.matchLabel.text];
+            cell.backgroundColor = [UIColor whiteColor];
+        } else {
+            cell.backgroundColor = [UIColor greenColor];
+            [self.starredMatchesArray addObject:cell.matchLabel.text];
+        }
+    }
+}
+
 
 @end

@@ -758,5 +758,14 @@ import DATAStack
         let notification = NSNotification(name: "gotTeamImage", object: image, userInfo: nil)
         NSNotificationCenter.defaultCenter().postNotification(notification)
     }
+    func getMatchValuesForTeamForPath(path:String, forTeam:Team) -> [CGFloat] {
+        var timDatas = getTeamInMatchDatasForTeam(forTeam)
+        var valueArray = [CGFloat]()
+        for timData in timDatas {
+            let value = timData.valueForKey(path) as? Int
+            valueArray.append((value as? CGFloat)!)
+        }
+        return valueArray
+    }
 }
 

@@ -43,6 +43,8 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         }
         if team!.calculatedData?.firstPickAbility != nil {
             multiCell!.scoreLabel!.text = String(team!.calculatedData!.firstPickAbility!.integerValue)
+        } else {
+            multiCell!.scoreLabel!.text = ""
         }
         multiCell!.rankLabel!.text = String(path.row)
         

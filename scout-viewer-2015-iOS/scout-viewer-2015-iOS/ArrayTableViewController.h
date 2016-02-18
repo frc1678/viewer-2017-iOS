@@ -15,6 +15,8 @@
 @property (strong, nonatomic) NSArray *dataArray;
 @property (strong, nonatomic) NSArray *filteredArray;
 @property (strong, nonatomic) FirebaseDataFetcher *firebaseFetcher;
+@property (nonatomic,strong) UILongPressGestureRecognizer *lpgr;
+@property (strong, nonatomic) NSMutableArray *starredMatchesArray;
 
 //Subclasses need to override these methods:
 - (NSArray *)loadDataArray:(BOOL)shouldForce;
@@ -27,5 +29,6 @@
 - (NSArray *)scopeButtonTitles;
 - (NSString *)highlightedStringForScope;
 - (NSInteger)currentScope;
+-(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender;
 
 @end

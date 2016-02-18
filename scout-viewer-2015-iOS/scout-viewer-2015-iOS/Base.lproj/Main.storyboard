@@ -27,6 +27,12 @@
                                 <action selector="cachePhotos:" destination="GTR-t1-4au" id="xwW-Vw-My3"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="1678" id="05e-XD-yOJ">
+                            <connections>
+                                <action selector="ourScheduleTapped:" destination="GTR-t1-4au" id="svP-S3-qJn"/>
+                                <segue destination="zsd-4H-i4N" kind="show" identifier="citrusSchedule" id="9HU-HQ-BBv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="cacheButton" destination="tLG-hK-bOv" id="9i6-Cc-mYy"/>
@@ -619,7 +625,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQG-Li-dnV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5384" y="-3301"/>
+            <point key="canvasLocation" x="1836" y="-3261"/>
         </scene>
         <!--Team-->
         <scene sceneID="JK7-pf-cWL">
@@ -1179,8 +1185,9 @@
         <image name="waiting" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XVc-rp-7iO"/>
         <segue reference="un0-kB-nkA"/>
+        <segue reference="1cq-k5-piP"/>
+        <segue reference="9HU-HQ-BBv"/>
         <segue reference="9CQ-ER-LRM"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>

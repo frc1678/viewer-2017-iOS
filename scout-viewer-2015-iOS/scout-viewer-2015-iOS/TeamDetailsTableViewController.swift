@@ -513,7 +513,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     let key = self.firebaseFetcher.calculatedTeamInMatchDataKeys[i!]
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
-                    if let values = firebaseFetcher.valuesInTeamMatchesOfPath(key, forTeam: data!) as? [CGFloat] {
+                    if let values = firebaseFetcher.getMatchValuesForTeamForPath(key, forTeam: data!) as? [CGFloat] {
                         print("These are the data points being passed:")
                         print(values)
                         graphViewController.values = values
@@ -526,7 +526,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             graphViewController.highlightIndex = i
                             
                         }*/
-                        graphViewController.subDisplayRightTitle = "Rank: "
+                        graphViewController.subDisplayRightTitle = ""
                     }
                     
                 }
