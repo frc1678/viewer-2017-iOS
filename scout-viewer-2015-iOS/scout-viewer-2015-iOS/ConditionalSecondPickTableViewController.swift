@@ -36,7 +36,7 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         performSegueWithIdentifier("secondPickToTeam", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
     override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
-        var multiCell = cell as? MultiCellTableViewCell
+        let multiCell = cell as? MultiCellTableViewCell
         let team = data as? Team
         if team!.number != nil {
             multiCell!.teamLabel!.text = String(team!.number!.integerValue)

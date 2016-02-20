@@ -30,8 +30,7 @@
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    self.dataStack = [[DATAStack alloc] initWithModelName:@"Model"];
-    //[Firebase defaultConfig].persistenceEnabled = YES;
+    [Firebase defaultConfig].persistenceEnabled = YES;
     self.firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     

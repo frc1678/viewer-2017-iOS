@@ -276,12 +276,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/FirebaseDataFetcher.swift"
-            timestampString = "477188607.771036"
+            timestampString = "477624408.152941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "373"
-            endingLineNumber = "373"
-            landmarkName = "ranksOfTeamsWithCharacteristic(_:)"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
+            landmarkName = "rankOfTeamInMatchData(_:withCharacteristic:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -308,11 +308,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/FirebaseDataFetcher.swift"
-            timestampString = "477188607.771036"
+            timestampString = "477624408.152941"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
             landmarkName = "fetchTeamInMatchDataForTeam(_:inMatch:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -348,12 +348,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/MatchDetailsViewController.swift"
-            timestampString = "477125466.907186"
+            timestampString = "477625648.084688"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "prepareForSegue(_:sender:)"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
+            landmarkName = "checkRes(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -402,6 +402,102 @@
             startingLineNumber = "360"
             endingLineNumber = "360"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "scout-viewer-2015-iOS/MatchDetailsViewController.swift"
+            timestampString = "477625641.004085"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "updateUI()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "scout-viewer-2015-iOS/TeamDetailsTableViewController.swift"
+            timestampString = "477626065.650813"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "prepareForSegue(_:sender:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "scout-viewer-2015-iOS/TeamDetailsTableViewController.swift"
+            timestampString = "477626096.16505"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
+            landmarkName = "prepareForSegue(_:sender:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "scout-viewer-2015-iOS/FirebaseDataFetcher.swift"
+            timestampString = "477626316.316495"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
+            landmarkName = "getTeamInMatchDatasForTeam(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "scout-viewer-2015-iOS/FirebaseDataFetcher.swift"
+            timestampString = "477626375.804939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "getTeamInMatchDatasForTeam(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "scout-viewer-2015-iOS/FirebaseDataFetcher.swift"
+            timestampString = "477626574.153792"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "764"
+            endingLineNumber = "764"
+            landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

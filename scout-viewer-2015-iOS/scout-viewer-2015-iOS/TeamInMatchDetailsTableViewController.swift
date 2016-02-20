@@ -94,7 +94,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if data == nil {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) 
             cell.textLabel?.text = "No data yet..."
             cell.accessoryType = UITableViewCellAccessoryType.None
             return cell

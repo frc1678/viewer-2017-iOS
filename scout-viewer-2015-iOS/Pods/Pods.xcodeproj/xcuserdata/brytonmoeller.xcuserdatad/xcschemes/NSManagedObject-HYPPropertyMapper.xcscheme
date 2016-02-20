@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '052B5D276BF96BC64A6029A9'
+               BlueprintIdentifier = '12A6EE75F385DEF541DFAD57'
                BlueprintName = 'NSManagedObject-HYPPropertyMapper'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'NSManagedObject_HYPPropertyMapper.framework'>

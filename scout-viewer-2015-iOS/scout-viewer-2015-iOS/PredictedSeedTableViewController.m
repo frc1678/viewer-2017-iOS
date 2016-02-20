@@ -62,7 +62,7 @@
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
     return [self.dataArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Team *team, NSDictionary *bindings) {
-        NSString *numberText = [NSString stringWithFormat:@"%ld", team.number];
+        NSString *numberText = [NSString stringWithFormat:@"%@", team.number];
         return [numberText rangeOfString:searchString].location == 0;
     }]];
 }

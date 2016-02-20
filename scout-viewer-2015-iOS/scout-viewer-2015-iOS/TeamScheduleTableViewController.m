@@ -30,7 +30,7 @@
     
     
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
-    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat: @"%d",match.number.integerValue]];
+    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat: @"%ld",match.number.integerValue]];
     
     for (int i = 0; i < 3; i++) {
         if(i < redTeams.count) {
@@ -84,7 +84,7 @@
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     NSArray *returnData = [self.firebaseFetcher fetchMatchesForTeamWithNumber:self.teamNumber];
     NSLog(@"Return Data");
-    NSLog(@"%d", returnData.count);
+    NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
 

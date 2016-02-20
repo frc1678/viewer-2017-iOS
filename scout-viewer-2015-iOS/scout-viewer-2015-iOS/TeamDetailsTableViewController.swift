@@ -151,26 +151,26 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let calculatedTeamInMatchDataHumanReadableKeys = [
-    "First Pick Ability",
-    "R Score Torque",
-    "R Score Evasion",
-    "R Score Speed",
-    "High Shot Accuracy Auto",
-    "Low Shot Accuracy Auto",
-    "High Shot Accuracy Tele",
-    "Low Shot Accuracy Tele",
-    "Siege Ability",
-    "Siege Power",
-    "Number of RPs",
-    "Number of Auto Points",
-    "Number of Scale And Challenge Points",
-    "R Score Defense",
-    "R Score Ball Control",
-    "R Score Driving Ability",
-    "Citrus DPR",
-    "Second Pick Ability",
-    "Overall Second Pick Ability",
-    "Score Contribution"
+        "First Pick Ability",
+        "R Score Torque",
+        "R Score Evasion",
+        "R Score Speed",
+        "High Shot Accuracy Auto",
+        "Low Shot Accuracy Auto",
+        "High Shot Accuracy Tele",
+        "Low Shot Accuracy Tele",
+        "Siege Ability",
+        "Siege Power",
+        "Number of RPs",
+        "Number of Auto Points",
+        "Number of Scale And Challenge Points",
+        "R Score Defense",
+        "R Score Ball Control",
+        "R Score Driving Ability",
+        "Citrus DPR",
+        "Second Pick Ability",
+        "Overall Second Pick Ability",
+        "Score Contribution"
     ]
     
     
@@ -502,8 +502,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
         } else if segue.identifier == "CTIMDGraph" {
             let graphViewController = segue.destinationViewController as! GraphViewController
-           
-        
+            
+            
             if let teamNum = data?.number {
                 let indexPath = sender as! NSIndexPath
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
@@ -513,21 +513,21 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     let key = self.firebaseFetcher.calculatedTeamInMatchDataKeys[i!]
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
-                    if let values = firebaseFetcher.getMatchValuesForTeamForPath(key, forTeam: data!) as? [CGFloat] {
-                        print("These are the data points being passed:")
-                        print(values)
-                        graphViewController.values = values
-                        graphViewController.subDisplayLeftTitle = "Match: "
-                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("matchNumber", forTeam: data!) as [AnyObject]
-                        /*if let d = data {
-                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number)))
-                            
-                            let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
-                            graphViewController.highlightIndex = i
-                            
-                        }*/
-                        graphViewController.subDisplayRightTitle = ""
-                    }
+                    let values = firebaseFetcher.getMatchValuesForTeamForPath(key, forTeam: data!) 
+                    print("These are the data points being passed:")
+                    print(values)
+                    graphViewController.values = values as NSArray as! [CGFloat]
+                    graphViewController.subDisplayLeftTitle = "Match: "
+                    graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("matchNumber", forTeam: data!) as [AnyObject]
+                    /*if let d = data {
+                    graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number)))
+                    
+                    let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
+                    graphViewController.highlightIndex = i
+                    
+                    }*/
+                    graphViewController.subDisplayRightTitle = ""
+                    
                     
                 }
             }

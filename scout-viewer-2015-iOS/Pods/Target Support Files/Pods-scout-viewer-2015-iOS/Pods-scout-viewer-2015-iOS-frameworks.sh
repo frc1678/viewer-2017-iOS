@@ -99,7 +99,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-scout-viewer-2015-iOS/SDWebImage.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Sync.framework"
   install_framework "Pods-scout-viewer-2015-iOS/TestCheck.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/firebase_schema_2016_ios.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-scout-viewer-2015-iOS/DACircularProgress.framework"
@@ -117,5 +116,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-scout-viewer-2015-iOS/SDWebImage.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Sync.framework"
   install_framework "Pods-scout-viewer-2015-iOS/TestCheck.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/firebase_schema_2016_ios.framework"
 fi

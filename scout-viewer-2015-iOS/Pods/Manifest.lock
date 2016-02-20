@@ -6,7 +6,6 @@ PODS:
   - DATAStack (4.0.3):
     - TestCheck (~> 0.3.0)
   - Firebase (2.5.0)
-  - firebase-schema-2016-ios (0.0.1)
   - JBChartView (3.0.6)
   - MBProgressHUD (0.9.2)
   - MWPhotoBrowser (2.1.1):
@@ -33,21 +32,15 @@ PODS:
 DEPENDENCIES:
   - DATAStack
   - Firebase (>= 2.5.0)
-  - firebase-schema-2016-ios (from `https://github.com/frc1678/firebase-schema-2016-ios.git`)
   - JBChartView
   - MWPhotoBrowser (from `https://github.com/mwaterfall/MWPhotoBrowser.git`)
   - Sync
 
 EXTERNAL SOURCES:
-  firebase-schema-2016-ios:
-    :git: https://github.com/frc1678/firebase-schema-2016-ios.git
   MWPhotoBrowser:
     :git: https://github.com/mwaterfall/MWPhotoBrowser.git
 
 CHECKOUT OPTIONS:
-  firebase-schema-2016-ios:
-    :commit: 7b47e7c16285ce81815404820367c48d9234737c
-    :git: https://github.com/frc1678/firebase-schema-2016-ios.git
   MWPhotoBrowser:
     :commit: 3d6efbb9240799408bdf47b1c0794e2068baefc8
     :git: https://github.com/mwaterfall/MWPhotoBrowser.git
@@ -58,7 +51,6 @@ SPEC CHECKSUMS:
   DATAObjectIDs: 33db74dd1c858c2d22a45a4013c95f1082182e4e
   DATAStack: 8622b05a7cc1dade21e105d20fdd9f8fbe63944d
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
-  firebase-schema-2016-ios: 172ffba71ecfd9b77c363c79960458a0e846907d
   JBChartView: 5e4ab567158a45184bc26b295b06e7cb9cf38349
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: cebf3540db6b5116f1ad3e3e4c1b9aa11c0bf25f

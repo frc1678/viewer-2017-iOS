@@ -41,7 +41,7 @@ class DefenseTableViewController: ArrayTableViewController {
     
     override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
         let value = data as? Int
-        var multiCell = cell as? MultiCellTableViewCell
+        let multiCell = cell as? MultiCellTableViewCell
         
         let title = humanReadableNames[defenseKeys[path.row]]
         

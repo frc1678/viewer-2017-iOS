@@ -76,7 +76,7 @@
     
     
     if (match.redScore != nil) {
-        NSLog([NSString stringWithFormat:@"%d", match.redScore.integerValue]);
+        NSLog([NSString stringWithFormat:@"%ld", match.redScore.integerValue]);
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore.integerValue];
         
         matchCell.redScoreLabel.alpha = 1;
@@ -87,7 +87,7 @@
         matchCell.slash.alpha = .3;
     }
     if (match.blueScore != nil) {
-        NSLog([NSString stringWithFormat:@"%d",match.blueScore.integerValue]);
+        NSLog([NSString stringWithFormat:@"%ld",match.blueScore.integerValue]);
         matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore.integerValue];
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;
@@ -127,10 +127,10 @@
     if([segue.identifier  isEqual: @"citrusSchedule"]) {
         TeamScheduleTableViewController *dest = segue.destinationViewController;
         dest.teamNumber = 1678;
-    }else {
+    } else {
     MatchTableViewCell *cell = sender;
     MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
-    NSLog([NSString stringWithFormat:@"%d",self.firebaseFetcher.matches.count]);
+    NSLog([NSString stringWithFormat:@"%lu",(unsigned long)self.firebaseFetcher.matches.count]);
     detailController.match = [self.firebaseFetcher.matches objectAtIndex:cell.matchLabel.text.integerValue-1];
     detailController.matchNumber = cell.matchLabel.text.integerValue;
     }

@@ -32,7 +32,7 @@
     if(team.calculatedData.actualSeed != nil) {
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.actualSeed.integerValue];
     } else {
-        multiCell.rankLabel.text = [NSString stringWithFormat:@"%d",path.row];
+        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld",(long)path.row];
     }
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     if(team.calculatedData.firstPickAbility != nil) {
@@ -67,7 +67,7 @@
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
     
         
-        Team *team = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        //Team *team = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         teamDetailsController.data = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
     }
 }
