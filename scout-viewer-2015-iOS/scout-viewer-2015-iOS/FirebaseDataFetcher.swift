@@ -172,100 +172,73 @@ import DATAStack
         return match
     }
     
+    func makeTeamFromSnapshot(snapshot: FDataSnapshot) -> Team {
+        let team = Team()
+        let v = snapshot.value as! NSDictionary
+        if let name = (v.objectForKey("name") as? String) {
+            team.name = name
+            team.number = (v.objectForKey("number") as? Int)
+            team.pitDriveBaseLength = (v.objectForKey("pitDriveBaseLength") as? Int)
+            team.pitBumperHeight = (v.objectForKey("pitBumperHeight") as? Int)
+            team.pitDriveBaseWidth = (v.objectForKey("pitDriveBaseWidth") as? Int)
+            team.pitLowBarCapability = (v.objectForKey("pitLowBarCapability") as? Bool)
+            team.pitNotes = (v.objectForKey("pitNotes") as? String)
+            team.pitNumberOfWheels = (v.objectForKey("pitNumberOfWheels") as? Int)
+            team.pitOrganization = (v.objectForKey("pitOrganization") as? Int)
+            team.pitPotentialLowBarCapability = (v.objectForKey("pitPotentialLowBarCapability") as? Int)
+            team.pitPotentialMidlineBallCapability = (v.objectForKey("pitPotentialMidlineBallCapability") as? Int)
+            team.pitPotentialShotBlockerCapability = (v.objectForKey("pitPotentialShotBlockerCapability") as? Int)
+            team.selectedImageUrl = (v.objectForKey("selectedImageUrl") as? String)
+            let teamDict = (v.objectForKey("calculatedData") as? NSDictionary)
+            team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
+            
+        }
+        return team
+    }
+    
     func getAllTheData() {
-        //Firebase.defaultConfig().persistenceEnabled = true
-        
-        let matchReference = Firebase(url: "\(self.firebaseURLFirstPart)/Matches")
-        matchReference.authWithCustomToken("qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee") { (E, A) -> Void in
-            matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
-                self.matches.append(self.makeMatchFromSnapshot(snapshot))
-                NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-            })
-            matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
-                let number = (snapshot.value.objectForKey("number") as? Int)!
-                for matchIndex in Range(start: 0, end: self.matches.count) {
-                    let match = self.matches[matchIndex]
-                    if match.number == number {
-                        self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                        break
+        let firebase = Firebase(url: self.firebaseURLFirstPart)
+        firebase.authWithCustomToken("qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee") { (E, A) -> Void in
+            
+            firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
+                let numTeams = snap.childSnapshotForPath("Teams").childrenCount
+                let matchReference = Firebase(url: "\(self.firebaseURLFirstPart)/Matches")
+                matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
+                    self.matches.append(self.makeMatchFromSnapshot(snapshot))
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                })
+                matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
+                    let number = (snapshot.value.objectForKey("number") as? Int)!
+                    for matchIndex in Range(start: 0, end: self.matches.count) {
+                        let match = self.matches[matchIndex]
+                        if match.number == number {
+                            self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
+                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                            break
+                        }
                     }
-                }
-            })
-            let teamReference = Firebase(url:"\(self.firebaseURLFirstPart)/Teams")
-            teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
-                let team = Team()
-                let v = snapshot.value as! NSDictionary
-                if let name = (v.objectForKey("name") as? String) {
-                    team.name = name
-                    team.number = (v.objectForKey("number") as? Int)
-                    team.pitDriveBaseLength = (v.objectForKey("pitDriveBaseLength") as? Int)
-                    team.pitBumperHeight = (v.objectForKey("pitBumperHeight") as? Int)
-                    team.pitDriveBaseWidth = (v.objectForKey("pitDriveBaseWidth") as? Int)
-                    team.pitLowBarCapability = (v.objectForKey("pitLowBarCapability") as? Bool)
-                    team.pitNotes = (v.objectForKey("pitNotes") as? String)
-                    team.pitNumberOfWheels = (v.objectForKey("pitNumberOfWheels") as? Int)
-                    team.pitOrganization = (v.objectForKey("pitOrganization") as? Int)
-                    team.pitPotentialLowBarCapability = (v.objectForKey("pitPotentialLowBarCapability") as? Int)
-                    team.pitPotentialMidlineBallCapability = (v.objectForKey("pitPotentialMidlineBallCapability") as? Int)
-                    team.pitPotentialShotBlockerCapability = (v.objectForKey("pitPotentialShotBlockerCapability") as? Int)
-                    team.selectedImageUrl = (v.objectForKey("selectedImageUrl") as? String)
-                    let teamDict = (v.objectForKey("calculatedData") as? NSDictionary)
-                    team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
+                })
+                let teamReference = Firebase(url:"\(self.firebaseURLFirstPart)/Teams")
+                teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
+                    self.teams.append(self.makeTeamFromSnapshot(snapshot))
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
                     
-                    self.teams.append(team)
-                    if(self.teams.count == 58) {
+                    if(UInt(self.teams.count) == numTeams) {
                         for team in self.teams {
                             self.getTeamInMatchDatasForTeam(team)
                         }
                         self.downloadAllImages()
                     }
-                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                }
-                
-            })
-            teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
-                let number = (snapshot.value.objectForKey("number")as? Int)!
-                let teame = Team()
-                var index = 0
-                for team in self.teams {
-                    if team.number == number {
-                        break;
+                })
+                teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
+                    let team = self.makeTeamFromSnapshot(snapshot)
+                    if let index = self.teams.indexOf(team) {
+                        self.teams[index] = team
+                        self.updateImages()
                     }
-                    print(index)
-                    index += 1
-                    
-                }
-                teame.name = (snapshot.value.objectForKey("name") as? String)!
-                teame.number = (snapshot.value.objectForKey("number") as? Int)!
-                teame.pitDriveBaseLength = (snapshot.value.objectForKey("pitDriveBaseLength") as? Int)
-                teame.pitBumperHeight = (snapshot.value.objectForKey("pitBumperHeight") as? Int)
-                teame.pitDriveBaseWidth = (snapshot.value.objectForKey("pitDriveBaseWidth") as? Int)
-                teame.pitLowBarCapability = (snapshot.value.objectForKey("pitLowBarCapability") as? Bool)
-                teame.pitNotes = (snapshot.value.objectForKey("pitNotes") as? String)
-                teame.pitNumberOfWheels = (snapshot.value.objectForKey("pitNumberOfWheels") as? Int)
-                teame.pitOrganization = (snapshot.value.objectForKey("pitOrganization") as? Int)
-                teame.pitPotentialLowBarCapability = (snapshot.value.objectForKey("pitPotentialLowBarCapability") as? Int)
-                teame.pitPotentialMidlineBallCapability = (snapshot.value.objectForKey("pitPotentialMidlineBallCapability") as? Int)
-                teame.pitPotentialShotBlockerCapability = (snapshot.value.objectForKey("pitPotentialShotBlockerCapability") as? Int)
-                teame.selectedImageUrl = (snapshot.value.objectForKey("selectedImageUrl") as? String)
-                let teamDict = (snapshot.value.objectForKey("calculatedData") as? NSDictionary)
-                teame.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
-                self.teams[index] = teame
-                self.updateImages()
-                
+                })
             })
         }
-        
-        //        let matchRef = Firebase(url:"https://1678-dev-2016.firebaseio.com/")
-        //        matchRef.observeEventType(.Value, withBlock: { snapshot in
-        //            
-        //            self.allTheData = (snapshot.value as? NSDictionary)!
-        //            print(self.allTheData.objectForKey("Matches"))
-        //            let stuff = self.allTheData.objectForKey("Matches")! as? NSDictionary
-        //            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-        //            })
-        
     }
     func fetchTeamInMatchDataForTeam(team:Team, inMatch: Match) -> TeamInMatchData {
         let dankString = "\(self.firebaseURLFirstPart)/TeamInMatchDatas/"
