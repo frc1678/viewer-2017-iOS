@@ -194,7 +194,7 @@ class MatchDetailsViewController: UIViewController {
         if let button = sender as? UIButton,
             teamNumTapped = Int((button.titleLabel?.text)!) {
                 if let dest = segue.destinationViewController as? TeamInMatchDetailsTableViewController {
-                    dest.data = firebaseFetcher.fetchTeamInMatchDataForTeam(firebaseFetcher.fetchTeam(teamNumTapped), inMatch: match!)
+                    dest.data = firebaseFetcher.fetchTeam(teamNumTapped).TeamInMatchDatas[0]
                 } else if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
                     dest.data = firebaseFetcher.fetchTeam(teamNumTapped)
                 }

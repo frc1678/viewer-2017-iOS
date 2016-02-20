@@ -10,6 +10,7 @@ import UIKit
 
 @objc class Team: NSObject {
     
+    var TeamInMatchDatas = [TeamInMatchData]()
     var name = String?()
     var number = NSNumber?()
     var calculatedData = CalculatedTeamData?()

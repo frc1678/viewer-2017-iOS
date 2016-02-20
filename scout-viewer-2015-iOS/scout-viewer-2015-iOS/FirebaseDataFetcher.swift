@@ -240,7 +240,9 @@ import DATAStack
             })
         }
     }
-    func fetchTeamInMatchDataForTeam(team:Team, inMatch: Match) -> TeamInMatchData {
+    
+    
+    /*func fetchTeamInMatchDataForTeam(team:Team, inMatch: Match) -> TeamInMatchData {
         let dankString = "\(self.firebaseURLFirstPart)/TeamInMatchDatas/"
         let TIMRef = Firebase(url:dankString)
         let TIMData = TeamInMatchData()
@@ -257,7 +259,7 @@ import DATAStack
         })
         return TIMData
         
-    }
+    }*/
     func getTIMDataForTeam(team:Team) -> [TeamInMatchData] {
         var array = [TeamInMatchData]()
         print("This is the stuff in Firebase")
@@ -296,7 +298,8 @@ import DATAStack
         }
         return teams
     }
-    func getTeamInMatchDatasForTeam(team:Team) -> [TeamInMatchData]{
+    
+    func getTeamInMatchDatasForTeam(team: Team) -> [TeamInMatchData]{
         let ref = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
         var TIMDatas = [TeamInMatchData]()
         let teamNum = String(team.number!)
@@ -311,13 +314,13 @@ import DATAStack
                     TIMData!.calculatedData = TIMCalcData
                     TIMDatas.append(TIMData!)
                     self.teamInMatches.append(TIMData!)
+                    team.TeamInMatchDatas.append(TIMData!)
                 }
-                
-                
             }
         })
         return TIMDatas
     }
+    
     func valuesInTeamMatchesOfPath(path:NSString, forTeam:Team) -> NSArray {
         let array = NSMutableArray()
         let teamInMatchDatas = self.getTIMDataForTeam(forTeam)
@@ -332,7 +335,7 @@ import DATAStack
     }
     func ranksOfTeamInMatchDatasWithCharacteristic(characteristic:NSString, forTeam:Team) -> [Int] {
         var array = [Int]()
-        let TIMDatas = self.getTeamInMatchDatasForTeam(forTeam)
+        let TIMDatas = forTeam.TeamInMatchDatas
         for timData in TIMDatas {
             array.append(self.rankOfTeamInMatchData(timData, withCharacteristic: characteristic))
         }
@@ -340,11 +343,12 @@ import DATAStack
     }
     func rankOfTeamInMatchData(timData:TeamInMatchData, withCharacteristic:NSString) -> Int {
         var values = [Int]()
-        let TIMDatas = self.getTeamInMatchDatasForTeam(self.fetchTeam(timData.teamNumber!.integerValue))
+        let teamNum = timData.teamNumber!.integerValue
+        let TIMDatas = self.fetchTeam(teamNum).TeamInMatchDatas
         for timData in TIMDatas {
-            values.append(timData.teamNumber!.integerValue)
+            values.append((timData.matchNumber?.integerValue)!)
         }
-        return values.indexOf(timData.matchNumber!.integerValue)! + 1
+        return values.indexOf(teamNum)! + 1
     }
     func valuesInCompetitionOfPathForTeams(path:String) -> NSArray {
         let array = NSMutableArray()
@@ -732,10 +736,10 @@ import DATAStack
         NSNotificationCenter.defaultCenter().postNotification(notification)
     }
     func getMatchValuesForTeamForPath(path:String, forTeam:Team) -> [Float] {
-        let timDatas = getTeamInMatchDatasForTeam(forTeam)
+        let timDatas = forTeam.TeamInMatchDatas
         var valueArray = [Float]()
         for timData in timDatas {
-            let value = timData.valueForKey(path) as? Float
+            let value = timData.valueForKeyPath(path) as? Float
             valueArray.append(value!)
         }
         return valueArray

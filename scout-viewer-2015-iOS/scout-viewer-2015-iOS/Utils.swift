@@ -167,4 +167,11 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
     class func getHumanReadableNameForKey(key: String) -> String? {
         return humanReadableNames[key]
     }
+    class func isNull(object: AnyObject?) -> Bool {
+        if object_getClass(object) == object_getClass(NSNull()) {
+            return true
+        }
+        return false
+    }
+
 }
