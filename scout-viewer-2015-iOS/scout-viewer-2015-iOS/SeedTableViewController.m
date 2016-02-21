@@ -74,14 +74,7 @@
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
-    return [self.dataArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Team *team, NSDictionary *bindings) {
-        if(team.number == nil) {
-            
-        }
-        NSString *numberText = [NSString stringWithFormat:@"%ld", (long)team.number];
-        return [numberText rangeOfString:searchString].location == 0;
-    }]];
+    return [self.firebaseFetcher filteredTeamsForSearchString:searchString];
 }
-
 
 @end

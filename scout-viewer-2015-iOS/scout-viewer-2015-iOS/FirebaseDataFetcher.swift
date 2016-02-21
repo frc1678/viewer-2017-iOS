@@ -14,7 +14,8 @@ import DATAStack
 
 @objc class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
-    var currentMatchNum = 0;
+    var currentMatchNum = 0
+    
     var teams = [Team]() {
         willSet {
             
@@ -158,6 +159,7 @@ import DATAStack
     override init() {
         super.init()
         self.getAllTheData()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "starredMatchesUpdated", name: "starredMatchesChanged", object: nil)
     }
     
     //    func coreDataImport() {
@@ -251,6 +253,7 @@ import DATAStack
                             self.getTeamInMatchDatasForTeam(team)
                         }
                         self.downloadAllImages()
+                        self.getCurrentMatch()
                     }
                 })
                 teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
@@ -547,7 +550,7 @@ import DATAStack
         return sortedArray
     }
     func predSeedList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.predictedSeed?.integerValue > $1.calculatedData!.predictedSeed?.integerValue }
+        let sortedArray = self.teams.sort { $0.calculatedData!.predictedSeed?.integerValue < $1.calculatedData!.predictedSeed?.integerValue }
         return sortedArray
     }
     
@@ -796,10 +799,22 @@ import DATAStack
             if match.redScore == nil || match.redScore?.integerValue == -1 && match.blueScore == nil || match.blueScore?.integerValue == -1 {
                 print("This is the current match")
                 print(counter)
+                self.currentMatchNum = counter
                 return counter
             }
         }
         return 1;
+    }
+    func starredMatchesUpdated(notification:NSNotification) {
+        let array = notification.userInfo!["starredMatchArray"] as! NSMutableArray
+        self.getCurrentMatch()
+        for item in array {
+            if let subItem = item as? Int {
+                if subItem == self.currentMatchNum || subItem + 1 == self.currentMatchNum || subItem + 2 == self.currentMatchNum || subItem + 3 == self.currentMatchNum {
+                    self.postNotification()
+                }
+            }
+        }
     }
 }
 

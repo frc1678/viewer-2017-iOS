@@ -18,11 +18,13 @@
 @property (strong, nonatomic) UISearchController *searchController;
 @property (strong, nonatomic) NSMutableDictionary *highlighteds;
 
+@end
+
+@interface NSMutableArray ()
 
 @end
 
 @implementation ArrayTableViewController
-
 
 
 - (void)viewDidLoad {
@@ -137,7 +139,6 @@
     }
     
     [self configureCell:cell atIndexPath:indexPath forData:data inTableView:tableView];
-    [self checkForNotification];
     
     return cell;
 }

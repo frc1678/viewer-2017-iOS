@@ -159,6 +159,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "Low Shot Accuracy Auto",
         "High Shot Accuracy Tele",
         "Low Shot Accuracy Tele",
+        "Avg. High Shots in Tele",
         "Siege Ability",
         "Siege Power",
         "Number of RPs",
@@ -518,15 +519,19 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
-                    graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("matchNumber", forTeam: data!) as [AnyObject]
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamsWithCharacteristic(keySets[indexPath.section][indexPath.row]))
+                    print("Here are the subValues")
+                    print(graphViewController.subValuesLeft)
                     /*if let d = data {
-                    graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number)))
+                    graphViewController.subValuesRight =
+                        nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
                     
                     let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
                     graphViewController.highlightIndex = i
                     
                     }*/
-                    graphViewController.subDisplayRightTitle = ""
+                    graphViewController.subDisplayRightTitle = "Team: "
+                    graphViewController.subValuesRight = [teamNum,teamNum,teamNum,teamNum,teamNum]
                     
                     
                 }
