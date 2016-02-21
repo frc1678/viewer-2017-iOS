@@ -14,7 +14,7 @@ import DATAStack
 
 @objc class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
-    
+    var currentMatchNum = 0;
     var teams = [Team]() {
         willSet {
             
@@ -27,6 +27,7 @@ import DATAStack
     var allTheData = NSDictionary()
     var dataStack : DATAStack = DATAStack()
     var teamInMatchKeys = [
+        "firstPickAbility",
         "ballsIntakedAuto",
         //"didChallengeTele",
         //"didGetDisabled",
@@ -51,7 +52,7 @@ import DATAStack
         "rankSpeed",
         "rankTorque",
         "teamNumber",
-        // "timesCrossedDefensesAuto",
+        "timesCrossedDefensesAuto",
         "timesCrossedDefensesTele",
     ]
     var defenseKeys = ["avgFailedTimesCrossedDefensesAuto",
@@ -131,6 +132,28 @@ import DATAStack
         "calculatedData.overallSecondPickAbility",
         "calculatedData.scoreContribution"
     ]
+    let calculatedTIMDataKeys = [
+        "firstPickAbility",
+        "RScoreTorque",
+        "RScoreEvasion",
+        "RScoreSpeed",
+        "highShotAccuracyAuto",
+        "lowShotAccuracyAuto",
+        "highShotAccuracyTele",
+        "lowShotAccuracyTele",
+        "siegeAbility",
+        "numRPs",
+        "numAutoPoints",
+        "numScaleAndChallengePoints",
+        "RScoreDefense",
+        "RScoreBallControl",
+        "RScoreDrivingAbility",
+        "citrusDPR",
+      //  "secondPickAbility",
+        "overallSecondPickAbility",
+        "scoreContribution"
+    ]
+
     
     override init() {
         super.init()
@@ -310,11 +333,13 @@ import DATAStack
                 if TIMData != nil {
                     TIMData!.identifier = datasnapshot.key
                     let TIMCalcData = self.getCalculatedTeamInMatchDataForDict((datasnapshot.childSnapshotForPath("calculatedData").value as? NSDictionary))
-                    // TIMCalcData.firstPickAbility = (datasnapshot.value.objectForKey("calculatedData.firstPickAbility") as? Int)!
+                    if(TIMCalcData != nil) {
                     TIMData!.calculatedData = TIMCalcData
+                    }
                     TIMDatas.append(TIMData!)
                     self.teamInMatches.append(TIMData!)
                     team.TeamInMatchDatas.append(TIMData!)
+                    
                 }
             }
         })
@@ -474,8 +499,11 @@ import DATAStack
     func getCalculatedTeamInMatchDataForDict(dict: NSDictionary?) -> TeamInMatchCalculatedData? {
         if dict != nil {
             let CTIMD = TeamInMatchCalculatedData()
-            for key in self.calculatedTeamInMatchDataKeys {
+            for key in self.calculatedTIMDataKeys {
                 if let value = dict!.objectForKey(key) {
+                    print("CalculatedStuff")
+                    print(value)
+                    print(key)
                     CTIMD.setValue(value, forKey: key)
                 }
             }
@@ -486,17 +514,17 @@ import DATAStack
     
     func getTeamInMatchDataForDict(dict:NSDictionary) -> TeamInMatchData? {
         let TIMData = TeamInMatchData()
-        
         for key in self.teamInMatchKeys {
-            if let value = dict.objectForKey(key) as? Int {
+            let value = dict.objectForKey(key) as? Int
+            if value != nil {
                 TIMData.setValue(value, forKey: key)
-                
+            }
+            
             }
             //print(value)
-        }
         return TIMData
     }
-    
+   
     func getPickList() -> [Team] {
         let sortedArray = self.teams.sort { $0.calculatedData!.firstPickAbility?.integerValue > $1.calculatedData!.firstPickAbility?.integerValue }
         return sortedArray;
@@ -737,12 +765,41 @@ import DATAStack
     }
     func getMatchValuesForTeamForPath(path:String, forTeam:Team) -> [Float] {
         let timDatas = forTeam.TeamInMatchDatas
+        print(path)
         var valueArray = [Float]()
         for timData in timDatas {
-            let value = timData.valueForKeyPath(path) as? Float
-            valueArray.append(value!)
+            print(timData)
+            let value = timData.valueForKeyPath(path)
+            if value != nil {
+                let floatVal = value as! Float
+                valueArray.append(floatVal)
+            }
+            else {
+                valueArray.append(0.0)
+            }
         }
         return valueArray
+    }
+    func postNotification() {
+        let localNotification = UILocalNotification()
+        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
+        localNotification.alertBody = "Starred Match Coming Up!"
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+    }
+    func getCurrentMatch() -> Int {
+        var sortedMatches = self.matches.sort { $0.matchNumber?.integerValue > $1.matchNumber?.integerValue }
+        var counter = 0
+        for match in sortedMatches {
+            counter += 1
+            if match.redScore == nil || match.redScore?.integerValue == -1 && match.blueScore == nil || match.blueScore?.integerValue == -1 {
+                print("This is the current match")
+                print(counter)
+                return counter
+            }
+        }
+        return 1;
     }
 }
 

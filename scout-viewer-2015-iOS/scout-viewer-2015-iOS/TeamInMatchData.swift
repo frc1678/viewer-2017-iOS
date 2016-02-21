@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc class TeamInMatchData: NSObject {
+@objc class TeamInMatchData: NSObject, Reflectable{
     
     var identifier = String?()
     

@@ -117,12 +117,17 @@
         return self.dataArray.count;
     }
 }
+-(void)checkForNotification {
+    if([self.starredMatchesArray containsObject:[NSString stringWithFormat:@"%d",self.currentNumber]]) {
+        [self.firebaseFetcher postNotification];
+    }
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier] forIndexPath:indexPath];
-
+    
     id data = nil;
 
     if (self.filteredArray) {
@@ -132,9 +137,11 @@
     }
     
     [self configureCell:cell atIndexPath:indexPath forData:data inTableView:tableView];
+    [self checkForNotification];
     
     return cell;
 }
+
 
 //Should be overridden by child classes
 - (NSString *)cellIdentifier
@@ -195,6 +202,7 @@
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     
     }
+
 
 
 @end

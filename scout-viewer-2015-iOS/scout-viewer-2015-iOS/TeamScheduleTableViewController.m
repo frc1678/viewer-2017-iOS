@@ -57,14 +57,14 @@
     }
     
     if (match.redScore != nil || match.blueScore != nil) {
-        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore];
-        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore];
+        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore.integerValue];
+        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore.integerValue];
         matchCell.redScoreLabel.alpha = 1;
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;
     } else if (match.calculatedData.predictedBlueScore != nil || match.calculatedData.predictedRedScore != nil) {
-        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedRedScore];
-        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedBlueScore];
+        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedRedScore.integerValue];
+        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.calculatedData.predictedBlueScore.integerValue];
         matchCell.redScoreLabel.alpha = .5;
         matchCell.slash.alpha = .5;
         matchCell.blueScoreLabel.alpha = .5;

@@ -9,8 +9,35 @@
 import UIKit
 
 //The Dream, Never Forget
+protocol Reflectable {
+    func propertys() ->[String]
+}
 
-@ objc class Match: NSObject {
+extension Reflectable
+{
+    func propertys() -> [String] {
+        var s = [String]()
+        for c in Mirror(reflecting: self).children
+        {
+            if let name = c.label {
+                s.append(name)
+            }
+        }
+        return s
+    }
+    func propertyForKey(path:String) -> AnyObject? {
+        for c in Mirror(reflecting: self).children
+        {
+            if c.label == path {
+                print(c.label)
+                print(c.value)
+                return c.value as? AnyObject
+            }
+        }
+        return nil
+    }
+}
+@objc class Match: NSObject, Reflectable {
     
     var matchNumber = NSNumber?()
     

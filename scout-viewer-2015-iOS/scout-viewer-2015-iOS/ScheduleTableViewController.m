@@ -34,13 +34,7 @@
     
     [super viewDidLoad];
     [self cachePhotos:self.cacheButton];
-    
-    UILocalNotification *notification = [[UILocalNotification alloc] init];
-    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:1];
-    notification.alertBody = @"Here we go, testing this thing";
-    notification.timeZone = [NSTimeZone defaultTimeZone];
-    [[UIApplication sharedApplication] setScheduledLocalNotifications:[NSArray arrayWithObject:notification]];
-}
+    }
 
 //RIP (2016 - 2016)
 
@@ -95,6 +89,13 @@
     else {
         matchCell.blueScoreLabel.text = @"?";
         matchCell.blueScoreLabel.alpha = .3;
+    }
+    if(![matchCell.blueScoreLabel.text  isEqual: @"?"] && ![matchCell.redScoreLabel.text  isEqual: @"?"] && ![matchCell.blueScoreLabel.text isEqual:@"-1"] && ![matchCell.redScoreLabel.text isEqual:@"-1"]) {
+        if ([matchCell.matchLabel.text integerValue] > self.currentNumber) {
+            self.currentNumber = [matchCell.matchLabel.text integerValue];
+        }
+        NSLog(@"Here is the current number:");
+        NSLog([NSString stringWithFormat:@"%d",self.currentNumber]);
     }
 }
 

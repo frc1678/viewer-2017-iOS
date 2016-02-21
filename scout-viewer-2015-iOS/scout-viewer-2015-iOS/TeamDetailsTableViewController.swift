@@ -513,11 +513,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     let key = self.firebaseFetcher.calculatedTeamInMatchDataKeys[i!]
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
-                    var values = [Float]()
-                    if Utils.isNull(firebaseFetcher.getMatchValuesForTeamForPath(key, forTeam: data!)) {
-                    } else {
-                        values = firebaseFetcher.getMatchValuesForTeamForPath(key, forTeam: data!)
-                    }
+                    let values = firebaseFetcher.getMatchValuesForTeamForPath(key, forTeam: data!)
                     print("These are the data points being passed:")
                     print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]

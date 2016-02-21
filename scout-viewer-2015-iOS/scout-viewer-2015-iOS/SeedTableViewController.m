@@ -37,7 +37,7 @@
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     if(team.calculatedData.firstPickAbility != nil) {
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.firstPickAbility.floatValue toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.actualSeed.floatValue toDecimalPlaces:2]];
     } else {
         multiCell.scoreLabel.text = @"";
     }
