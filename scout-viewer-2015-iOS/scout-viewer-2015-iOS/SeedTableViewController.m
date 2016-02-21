@@ -49,7 +49,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [self.firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"seed" ascending:YES]];
+    NSArray *returnData = [self.firebaseFetcher seedList];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }

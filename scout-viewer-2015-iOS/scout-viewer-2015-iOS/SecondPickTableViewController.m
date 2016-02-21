@@ -46,7 +46,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [self.firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.secondPickAbility" ascending:NO]];
+    NSArray *returnData = [self.firebaseFetcher getPickList];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
