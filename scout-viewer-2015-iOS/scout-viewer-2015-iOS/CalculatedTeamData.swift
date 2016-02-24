@@ -64,6 +64,7 @@ import UIKit
     var siegeAbility = NSNumber?()
     var siegeConsistency = NSNumber?()
     var siegePower = NSNumber?()
+    var overallSecondPickAbility = NSNumber?()
     
     var cdfCrossed = NSNumber?()
     var pcCrossed = NSNumber?()

@@ -108,6 +108,7 @@ import DATAStack
         "sdShotsBlocked",
         "sdSuccessfulDefenseCrossesAuto",
         "sdSuccessfulDefenseCrossesTele",
+        "overallSecondPickAbility",
         "secondPickAbility",
         "siegeAbility",
         "siegeConsistency"]
@@ -528,10 +529,16 @@ import DATAStack
         return TIMData
     }
    
-    func getPickList() -> [Team] {
+    func getFirstPickList() -> [Team] {
         let sortedArray = self.teams.sort { $0.calculatedData!.firstPickAbility?.integerValue > $1.calculatedData!.firstPickAbility?.integerValue }
         return sortedArray;
     }
+    
+    func getSecondPickList() -> [Team] {
+        let sortedArray = self.teams.sort { $0.calculatedData!.overallSecondPickAbility?.integerValue > $1.calculatedData!.overallSecondPickAbility?.integerValue }
+        return sortedArray;
+    }
+    
     func getMatchesForTeam(teamNumbah:Int) -> [Match] {
         var matches = [Match]()
         for match in self.matches {

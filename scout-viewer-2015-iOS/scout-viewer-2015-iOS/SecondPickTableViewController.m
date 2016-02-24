@@ -30,11 +30,11 @@
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
     
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.secondPickAbility"]];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.overallSecondPickAbility"]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     if(team.calculatedData.firstPickAbility != nil) {
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.firstPickAbility.floatValue toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.overallSecondPickAbility.floatValue toDecimalPlaces:2]];
     } else {
         multiCell.scoreLabel.text = @"";
     }
@@ -46,7 +46,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [self.firebaseFetcher getPickList];
+    NSArray *returnData = [self.firebaseFetcher getSecondPickList];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }

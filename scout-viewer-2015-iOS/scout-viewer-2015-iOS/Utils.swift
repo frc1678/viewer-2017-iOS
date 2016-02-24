@@ -56,6 +56,7 @@ let humanReadableNames = [
     "calculatedData.sdSuccessfulDefenseCrossesAuto" : "σ Successful Defenses Auto",
     "calculatedData.sdSuccessfulDefenseCrossesTele" : "σ Successful Defenses Tele",
     "calculatedData.secondPickAbility" : "Second Pick Ability",
+    "calculatedData.overallSecondPickAbility" : "Overall Second Pick Ability",
     "calculatedData.siegeAbility" : "Siege Ability",
     "calculatedData.siegeConsistency" : "Siege Consistency",
     "calculatedData.siegePower" : "Siege Power",

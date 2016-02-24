@@ -69,7 +69,7 @@
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     //NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.firstPickAbility" ascending:NO]];
-    NSArray *returnData = [self.firebaseFetcher getPickList];
+    NSArray *returnData = [self.firebaseFetcher getFirstPickList];
     return returnData;
 }
 
