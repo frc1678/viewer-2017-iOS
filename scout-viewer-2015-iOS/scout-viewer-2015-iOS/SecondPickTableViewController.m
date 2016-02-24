@@ -30,7 +30,7 @@
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
     
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.overallSecondPickAbility"]];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.firstPickAbility"]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     if(team.calculatedData.firstPickAbility != nil) {
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
@@ -54,7 +54,7 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self performSegueWithIdentifier:@"classSpecSecondPickSegue" sender:[tableView cellForRowAtIndexPath:indexPath]];
+    [self performSegueWithIdentifier:@"ConditionalSecondPickSegue" sender:[tableView cellForRowAtIndexPath:indexPath]];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -72,6 +72,7 @@
         MultiCellTableViewCell *multiCell = sender;
         ConditionalSecondPickTableViewController *dest = segue.destinationViewController;
         dest.teamNumber = [multiCell.teamLabel.text integerValue];
+
     }
 }
 

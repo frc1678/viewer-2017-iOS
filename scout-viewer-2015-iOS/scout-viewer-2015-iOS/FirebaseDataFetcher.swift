@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import firebase_schema_2016_ios
+//import firebase_schema_2016_ios
 import Firebase
 import Sync
 import DATAStack
