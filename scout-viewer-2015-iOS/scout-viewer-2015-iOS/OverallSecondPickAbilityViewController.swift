@@ -13,7 +13,6 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     var teamNumber = -1
     var team = Team()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,13 +53,17 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         }
         multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "team.calculatedData.overallSecondPickAbility"))"
         
-        
-        
-        
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
         //print(self.firebaseFetcher.secondPickList(teamNumber))
         return self.firebaseFetcher.getSecondPickList()
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
+            let selectedCell = sender as? MultiCellTableViewCell
+            dest.data = firebaseFetcher.fetchTeam(Int((selectedCell?.teamLabel!.text)!)!)
+        }
+    
     }
     
     
