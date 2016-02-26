@@ -25,7 +25,7 @@ FirebaseDataFetcher *firebaseFetcher;
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]];
+    NSArray *returnData = [firebaseFetcher.teams sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
     return returnData;
 }
 

@@ -15,7 +15,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"reloadTableView", name:"updateLeftTable", object:nil)
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
@@ -51,7 +51,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         } else {
             multiCell!.scoreLabel!.text = ""
         }
-        multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "team.calculatedData.overallSecondPickAbility"))"
+        multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.overallSecondPickAbility"))"
         
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
@@ -114,6 +114,10 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     }
     // Pass the selected object to the new view controller.
     }*/
+    func reloadTableView() {
+        self.tableView.reloadData()
+    }
+    
     override func cellIdentifier() -> String! {
         return "MultiCellTableViewCell"
     }

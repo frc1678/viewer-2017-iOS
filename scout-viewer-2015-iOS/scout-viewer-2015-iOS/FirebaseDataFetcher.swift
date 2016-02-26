@@ -151,11 +151,11 @@ import DATAStack
         "RScoreBallControl",
         "RScoreDrivingAbility",
         "citrusDPR",
-      //  "secondPickAbility",
+        //  "secondPickAbility",
         "overallSecondPickAbility",
         "scoreContribution"
     ]
-
+    
     
     override init() {
         super.init()
@@ -259,9 +259,15 @@ import DATAStack
                 })
                 teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
                     let team = self.makeTeamFromSnapshot(snapshot)
-                    if let index = self.teams.indexOf(team) {
+                    let te = self.teams.filter({ (t) -> Bool in
+                        if t.number == team.number { return true }
+                        return false
+                    })
+                    if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
                         self.updateImages()
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+
                     }
                 })
             })
@@ -270,22 +276,22 @@ import DATAStack
     
     
     /*func fetchTeamInMatchDataForTeam(team:Team, inMatch: Match) -> TeamInMatchData {
-        let dankString = "\(self.firebaseURLFirstPart)/TeamInMatchDatas/"
-        let TIMRef = Firebase(url:dankString)
-        let TIMData = TeamInMatchData()
-        TIMRef.observeEventType(.Value, withBlock: { snapshot in
-            let key = String(team.number)+"Q"+String(inMatch.number)
-            TIMData.identifier = key
-            let dankMeme = (snapshot.value.objectForKey(key))
-            for key in self.teamInMatchKeys {
-                
-                TIMData.setValue(dankMeme?.objectForKey(key), forKey: key)
-            }
-            let TIMCalcData = self.getCalculatedTeamInMatchDataForDict(snapshot.childSnapshotForPath("calculatedData").value as? NSDictionary)
-            TIMData.calculatedData = TIMCalcData
-        })
-        return TIMData
-        
+    let dankString = "\(self.firebaseURLFirstPart)/TeamInMatchDatas/"
+    let TIMRef = Firebase(url:dankString)
+    let TIMData = TeamInMatchData()
+    TIMRef.observeEventType(.Value, withBlock: { snapshot in
+    let key = String(team.number)+"Q"+String(inMatch.number)
+    TIMData.identifier = key
+    let dankMeme = (snapshot.value.objectForKey(key))
+    for key in self.teamInMatchKeys {
+    
+    TIMData.setValue(dankMeme?.objectForKey(key), forKey: key)
+    }
+    let TIMCalcData = self.getCalculatedTeamInMatchDataForDict(snapshot.childSnapshotForPath("calculatedData").value as? NSDictionary)
+    TIMData.calculatedData = TIMCalcData
+    })
+    return TIMData
+    
     }*/
     func getTIMDataForTeam(team:Team) -> [TeamInMatchData] {
         var array = [TeamInMatchData]()
@@ -306,9 +312,12 @@ import DATAStack
         }
         return Team()
     }
-    func rankOfTeam(team:Team, withCharacteristic:NSString) -> Int {
+    
+    func rankOfTeam(team:Team, withCharacteristic: String) -> Int {
         var counter = 0
-        for loopTeam in self.teams {
+        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic)
+        
+        for loopTeam in sortedTeams {
             counter++
             if loopTeam.number == team.number?.integerValue {
                 return counter
@@ -316,6 +325,7 @@ import DATAStack
         }
         return counter
     }
+    
     func getTeamsFromNumbers(teamNums:[Int]?) -> [Team] {
         var teams = [Team]()
         if teamNums != nil {
@@ -338,7 +348,7 @@ import DATAStack
                     TIMData!.identifier = datasnapshot.key
                     let TIMCalcData = self.getCalculatedTeamInMatchDataForDict((datasnapshot.childSnapshotForPath("calculatedData").value as? NSDictionary))
                     if(TIMCalcData != nil) {
-                    TIMData!.calculatedData = TIMCalcData
+                        TIMData!.calculatedData = TIMCalcData
                     }
                     TIMDatas.append(TIMData!)
                     self.teamInMatches.append(TIMData!)
@@ -391,16 +401,16 @@ import DATAStack
     func ranksOfTeamsWithCharacteristic(characteristic:NSString) -> [Int] {
         var array = [Int]()
         for team in self.teams {
-            array.append(self.rankOfTeam(team, withCharacteristic: characteristic))
+            array.append(self.rankOfTeam(team, withCharacteristic: characteristic as String))
         }
         return array
     }
     func getTeamImagesForTeam(team:Team, callBack:(progress:Float,done:Bool,teamNum:Int)->()) {
         print("ayyylmao")
     }
-    func fetchTeamsByDescriptor(descriptor:NSSortDescriptor) -> [Team] {
-        return self.teams
-    }
+    /*func fetchTeamsByKeyPath(keyPath: String) -> [Team] {
+        return self.teams.sort { $0.(keyPath) > $1.objectForKeyPath(keyPath) }
+    }*/
     
     func getTeamPDFImage(team:Int) -> UIImage {
         let pdfImage = UIImage()
@@ -483,18 +493,23 @@ import DATAStack
                 calcData.setValue(value, forKey: key)
             }
             for key in self.defenseKeys {
-                calcData.setValue(dict!.objectForKey(key) as! NSDictionary, forKey: key)
+                if let obj = dict!.objectForKey(key) as? NSDictionary {
+                    calcData.setValue(obj, forKey: key)
+                }
             }
             
-            calcData.cdfCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["a"]!["cdf"] as? Int)
-            calcData.pcCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["a"]!["pc"] as? Int)
-            calcData.mtCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["b"]!["mt"] as? Int)
-            calcData.rpCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["b"]!["rp"] as? Int)
-            calcData.dbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["c"]!["db"] as? Int)
-            calcData.spCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["c"]!["sp"] as? Int)
-            calcData.rtCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["d"]!["rt"] as? Int)
-            calcData.rwCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["d"]!["rw"] as? Int)
-            // calcData.lbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["e"]!["lb"] as? Int)
+            if let scd = calcData.avgSuccessfulTimesCrossedDefensesTele {
+                calcData.cdfCrossed = (scd["a"]!["cdf"] as? Int)
+                calcData.pcCrossed = (scd["a"]!["pc"] as? Int)
+                calcData.mtCrossed = (scd["b"]!["mt"] as? Int)
+                calcData.rpCrossed = (scd["b"]!["rp"] as? Int)
+                calcData.dbCrossed = (scd["c"]!["db"] as? Int)
+                calcData.spCrossed = (scd["c"]!["sp"] as? Int)
+                calcData.rtCrossed = (scd["d"]!["rt"] as? Int)
+                calcData.rwCrossed = (scd["d"]!["rw"] as? Int)
+
+            }
+                        // calcData.lbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["e"]!["lb"] as? Int)
         }
         return calcData
         
@@ -524,11 +539,11 @@ import DATAStack
                 TIMData.setValue(value, forKey: key)
             }
             
-            }
-            //print(value)
+        }
+        //print(value)
         return TIMData
     }
-   
+    
     func getFirstPickList() -> [Team] {
         let sortedArray = self.teams.sort { $0.calculatedData!.firstPickAbility?.integerValue > $1.calculatedData!.firstPickAbility?.integerValue }
         return sortedArray;
@@ -575,8 +590,6 @@ import DATAStack
             let key = Int(intermed!)
             let value = v as? Int
             
-            
-            
             godSpeed.append((key!,value!))
         }
         
@@ -588,19 +601,29 @@ import DATAStack
         return self.getTeamsFromNumbers(teamNumberArray)
     }
     
-    func getSortedListbyString(path:String) -> [Team] {
-        let sortedArray = self.teams.sort { $0.valueForKey(path) as? Int > $1.valueForKey(path) as? Int }
+    func getSortedListbyString(path: String) -> [Team] {
+        let sortedArray = self.teams.sort({ (t1, t2) -> Bool in
+            if let t1v = t1.valueForKeyPath(path) {
+                if let t2v = t2.valueForKeyPath(path) {
+                    if t1v.doubleValue > t2v.doubleValue {
+                        return true
+                    }
+                }
+            }
+            return false
+        })
         return sortedArray;
     }
+    
     func secondPickList(teamNum:Int) -> [Team] {
         var tupleArray = [(Team,Int)]()
         for team in self.teams {
             if(team.calculatedData?.secondPickAbility?.objectForKey(String(teamNum)) != nil) {
-                tupleArray.append(team,((team.calculatedData!.secondPickAbility!.objectForKey(String(teamNum))) as? Int)!)
+                tupleArray.append(team, ((team.calculatedData!.secondPickAbility!.objectForKey(String(teamNum))) as? Int)!)
             }
-            else {
+            /*else {
                 tupleArray.append((team,-1))
-            }
+            }*/
             
         }
         let sortedTuple = tupleArray.sort { $0.1 > $1.1 }

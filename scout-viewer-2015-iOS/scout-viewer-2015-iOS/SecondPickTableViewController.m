@@ -34,7 +34,7 @@
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     if(team.calculatedData.firstPickAbility != nil) {
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.overallSecondPickAbility.floatValue toDecimalPlaces:2]];
+                                 [Utils roundValue:team.calculatedData.firstPickAbility.floatValue toDecimalPlaces:2]];
     } else {
         multiCell.scoreLabel.text = @"";
     }
@@ -46,7 +46,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [self.firebaseFetcher getSecondPickList];
+    NSArray *returnData = [self.firebaseFetcher getFirstPickList];
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }

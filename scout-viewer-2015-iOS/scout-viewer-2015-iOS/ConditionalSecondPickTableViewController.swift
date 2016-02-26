@@ -17,6 +17,7 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = String(self.teamNumber) + " - Second Pick"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"reloadTableView", name:"updateLeftTable", object:nil)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,6 +34,7 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
         performSegueWithIdentifier("secondPickToTeam", sender: tableView.cellForRowAtIndexPath(indexPath))
     }
     override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
@@ -92,7 +94,9 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         return true
     }
     */
-
+    func reloadTableView() {
+        self.tableView.reloadData()
+    }
    
     // MARK: - Navigation
 

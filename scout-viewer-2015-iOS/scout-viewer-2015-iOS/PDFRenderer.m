@@ -34,7 +34,7 @@ static NSMutableArray *teamNums;
 {
     teamsDict = [[NSMutableDictionary alloc] init];
     teamNums = [[NSMutableArray alloc] init];
-    NSArray *teams = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]];
+    NSArray *teams = [firebaseFetcher.teams sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"number" ascending:YES]]];
     for (Team *team in teams) {
         [teamNums addObject: team.number];
         NSMutableDictionary *teamDict = [[NSMutableDictionary alloc] init];

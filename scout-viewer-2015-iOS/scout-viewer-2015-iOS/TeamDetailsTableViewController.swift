@@ -345,7 +345,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         let cell: UITableViewCell
         
-        if data == nil {
+        if data!.number == nil {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) 
             cell.textLabel?.text = "No data yet..."
             cell.accessoryType = UITableViewCellAccessoryType.None
