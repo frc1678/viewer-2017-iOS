@@ -12,13 +12,13 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     
     var teamNumber = -1
     var team = Team()
-    
+    var secondPickListRanks = [Int: Int]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = String(self.teamNumber) + " - Second Pick"
         NSNotificationCenter.defaultCenter().addObserver(self, selector:"reloadTableView", name:"updateLeftTable", object:nil)
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -48,14 +48,17 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         } else {
             multiCell!.scoreLabel!.text = ""
         }
-        multiCell!.rankLabel!.text = String(path.row)
+        multiCell!.rankLabel!.text = "\(self.secondPickListRanks[team!.number! as Int]!)"
         
         
         
 
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
-        print(self.firebaseFetcher.secondPickList(teamNumber))
+        let picks = self.firebaseFetcher.secondPickList(teamNumber)
+        for pick in picks {
+            self.secondPickListRanks[pick.number as! Int] = (picks.indexOf(pick)! + 1)
+        }
         return self.firebaseFetcher.secondPickList(teamNumber)
     }
 
@@ -112,8 +115,11 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     override func cellIdentifier() -> String! {
         return "MultiCellTableViewCell"
     }
-    override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
-        return self.firebaseFetcher.filteredTeamsForSearchString(text)
+    
+    
+    override func filteredArrayForSearchText(searchString: String!, inScope scope: Int) -> [AnyObject]! {
+        let filteredData = self.dataArray.filter { String(($0 as! Team).number).rangeOfString(searchString) != nil }
+        return filteredData
     }
 
     

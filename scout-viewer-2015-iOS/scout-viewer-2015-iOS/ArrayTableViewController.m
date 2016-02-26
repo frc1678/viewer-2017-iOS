@@ -120,7 +120,7 @@
     }
 }
 -(void)checkForNotification {
-    if([self.starredMatchesArray containsObject:[NSString stringWithFormat:@"%d",self.currentNumber]]) {
+    if([self.starredMatchesArray containsObject:[NSString stringWithFormat:@"%ld",(long)self.currentNumber]]) {
         [self.firebaseFetcher postNotification];
     }
 }

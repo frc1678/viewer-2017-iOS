@@ -139,7 +139,12 @@
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
-    return [self.firebaseFetcher filteredMatchesForSearchString:searchString];
+    if(scope == 0) {
+        return [self.firebaseFetcher filteredMatchesForMatchSearchString:searchString];
+    } else if(scope == 1) {
+        return [self.firebaseFetcher filteredMatchesforTeamSearchString:searchString];
+    }
+    return @[@"ERROR"];
     
 //    return [firebaseFetcher.matches filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Match *match, NSDictionary *bindings) {
 //        if (scope == 0) {

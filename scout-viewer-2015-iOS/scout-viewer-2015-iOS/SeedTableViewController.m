@@ -32,7 +32,7 @@
     if(team.calculatedData.actualSeed != nil) {
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.actualSeed.integerValue];
     } else {
-        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld",(long)path.row];
+        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
     }
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     if(team.calculatedData.firstPickAbility != nil) {

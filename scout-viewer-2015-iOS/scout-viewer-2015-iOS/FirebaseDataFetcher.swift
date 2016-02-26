@@ -267,7 +267,7 @@ import DATAStack
                         self.teams[index] = team
                         self.updateImages()
                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-
+                        
                     }
                 })
             })
@@ -409,7 +409,7 @@ import DATAStack
         print("ayyylmao")
     }
     /*func fetchTeamsByKeyPath(keyPath: String) -> [Team] {
-        return self.teams.sort { $0.(keyPath) > $1.objectForKeyPath(keyPath) }
+    return self.teams.sort { $0.(keyPath) > $1.objectForKeyPath(keyPath) }
     }*/
     
     func getTeamPDFImage(team:Int) -> UIImage {
@@ -507,9 +507,9 @@ import DATAStack
                 calcData.spCrossed = (scd["c"]!["sp"] as? Int)
                 calcData.rtCrossed = (scd["d"]!["rt"] as? Int)
                 calcData.rwCrossed = (scd["d"]!["rw"] as? Int)
-
+                
             }
-                        // calcData.lbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["e"]!["lb"] as? Int)
+            // calcData.lbCrossed = (calcData.avgSuccessfulTimesCrossedDefensesTele!["e"]!["lb"] as? Int)
         }
         return calcData
         
@@ -622,7 +622,7 @@ import DATAStack
                 tupleArray.append(team, ((team.calculatedData!.secondPickAbility!.objectForKey(String(teamNum))) as? Int)!)
             }
             /*else {
-                tupleArray.append((team,-1))
+            tupleArray.append((team,-1))
             }*/
             
         }
@@ -633,7 +633,9 @@ import DATAStack
         }
         return teamArray
     }
-    func filteredMatchesForSearchString(searchString:String) -> [Match] {
+    
+    
+    func filteredMatchesForMatchSearchString(searchString:String) -> [Match] {
         var filteredMatches = [Match]()
         for match in self.matches  {
             let matche = match
@@ -648,6 +650,28 @@ import DATAStack
         //print(filteredMatches)
         return filteredMatches
     }
+    
+    func filteredMatchesforTeamSearchString(searchString: String) -> [Match] {
+        var filteredMatches = [Match]()
+        //return self.getMatchesForTeam(Int(searchString)!)
+        
+        for match in self.matches  {
+            for teamNum in match.redAllianceTeamNumbers! {
+                if String(teamNum).rangeOfString(searchString) != nil {
+                    filteredMatches.append(match)
+                }
+            }
+            for teamNum in match.blueAllianceTeamNumbers! {
+                if String(teamNum).rangeOfString(searchString) != nil {
+                    filteredMatches.append(match)
+                }
+            }
+            
+        }
+        //print(filteredMatches)
+        return filteredMatches
+    }
+    
     func filteredTeamsForSearchString(searchString:String) -> [Team] {
         var filteredTeams = [Team]()
         for team in self.teams {
