@@ -24,12 +24,12 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView;
 - (NSString *)cellIdentifier;
 - (NSString *)notificationName;
-
+-(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender;
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)text inScope:(NSInteger)scope;
 - (NSArray *)scopeButtonTitles;
 - (NSString *)highlightedStringForScope;
 - (NSInteger)currentScope;
--(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender;
+
 
 @end

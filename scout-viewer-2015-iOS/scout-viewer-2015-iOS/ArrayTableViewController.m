@@ -27,6 +27,8 @@
 @implementation ArrayTableViewController
 
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
@@ -65,6 +67,12 @@
 
 - (void)setUpAppConnectionsDidAppear {
     
+}
+-(void)setcurrentNumber:(NSInteger)currentNumber {
+    self.currentNumber = currentNumber;
+    NSDictionary *infoDict = @{@"currentNum":[NSNumber numberWithInt:currentNumber]};
+    NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:self.starredMatchesArray userInfo:infoDict];
+    [[NSNotificationCenter defaultCenter] postNotification:note];
 }
 
 
@@ -117,11 +125,6 @@
         return self.filteredArray.count;
     } else {
         return self.dataArray.count;
-    }
-}
--(void)checkForNotification {
-    if([self.starredMatchesArray containsObject:[NSString stringWithFormat:@"%ld",(long)self.currentNumber]]) {
-        [self.firebaseFetcher postNotification];
     }
 }
 
@@ -203,7 +206,6 @@
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     
     }
-
 
 
 @end

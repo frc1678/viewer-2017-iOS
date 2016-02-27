@@ -218,6 +218,8 @@
             cell.backgroundColor = [UIColor greenColor];
             [self.starredMatchesArray addObject:cell.matchLabel.text];
         }
+        NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:self.starredMatchesArray userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:note];
     }
 }
 

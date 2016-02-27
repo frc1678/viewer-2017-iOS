@@ -159,8 +159,9 @@ import DATAStack
     
     override init() {
         super.init()
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:"currentMatchChanged",name:"currentNumberChanged",object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "lpgrTriggered:", name: "lpgrTriggered", object: nil)
         self.getAllTheData()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "starredMatchesUpdated", name: "starredMatchesChanged", object: nil)
     }
     
     //    func coreDataImport() {
@@ -699,7 +700,9 @@ import DATAStack
         let data = NSData(contentsOfFile: path)
         var image = UIImage()
         if data != nil {
-            image = UIImage(data:data!)!
+            if data!.length != 0 {
+                image = UIImage(data:data!)!
+            }
             
         } else {
             let url = NSURL(string:"https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg")
@@ -811,7 +814,11 @@ import DATAStack
         
     }
     func getTeamFileName(team:Team) -> String {
-        return String(team.number) + "_Selected_Image"
+        if team.number != nil {
+            return String(team.number!) + "_Selected_Image"
+        } else {
+            return "???_Selected_Image"
+        }
     }
     func test(team:Team) {
         let url = NSURL(string:"https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg")
@@ -859,15 +866,20 @@ import DATAStack
         }
         return 1;
     }
-    func starredMatchesUpdated(notification:NSNotification) {
-        let array = notification.userInfo!["starredMatchArray"] as! NSMutableArray
-        self.getCurrentMatch()
-        for item in array {
-            if let subItem = item as? Int {
-                if subItem == self.currentMatchNum || subItem + 1 == self.currentMatchNum || subItem + 2 == self.currentMatchNum || subItem + 3 == self.currentMatchNum {
-                    self.postNotification()
-                }
-            }
+    
+    func checkForNotification(array:NSMutableArray) {
+        let swiftArray = array as AnyObject as! [String]
+        let currentMatch = self.currentMatchNum
+        if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
+            postNotification()
+        }
+    }
+    func lpgrTriggered(notification:NSNotification) {
+        let array = notification.object as? NSMutableArray
+        let swiftArray = array as! AnyObject as! [String]
+        let currentMatch = self.getCurrentMatch()
+        if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
+            postNotification()
         }
     }
 }
