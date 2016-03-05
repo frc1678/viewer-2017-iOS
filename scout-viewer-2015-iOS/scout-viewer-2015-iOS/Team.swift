@@ -13,11 +13,11 @@ import UIKit
     var TeamInMatchDatas = [TeamInMatchData]()
     var name = String?()
     var number = NSNumber?()
+    var pitLowBarCapability = Bool?()
     var calculatedData = CalculatedTeamData?()
     var pitBumperHeight = NSNumber?()
     var pitDriveBaseLength = NSNumber?()
     var pitDriveBaseWidth = NSNumber?()
-    var pitLowBarCapability = Bool?()
     var pitNotes = String?()
     var pitNumberOfWheels = NSNumber?()
     var pitOrganization = NSNumber?()
@@ -26,5 +26,5 @@ import UIKit
     var pitPotentialShotBlockerCapability = NSNumber?()
     var selectedImageUrl = String?()
     var pitHeightOfBallLeavingShooter = NSNumber?()
-
+    
 }

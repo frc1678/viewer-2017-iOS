@@ -12,7 +12,6 @@ import UIKit
     
     
     
-    //may not be in final implementation actualSeed = NSNumber?()
     var actualSeed = NSNumber?()
     var avgBallControl = NSNumber?()
     var avgBallsKnockedOffMidlineAuto = NSNumber?()
@@ -27,8 +26,9 @@ import UIKit
     var avgHighShotsTele = NSNumber?()
     var avgLowShotsAuto = NSNumber?()
     var avgLowShotsTele = NSNumber?()
-    var avgMidlineBallsIntakedAuto = NSNumber?()
     var avgShotsBlocked = NSNumber?()
+    var autoAbility = NSNumber?()
+    var avgMidlineBallsIntakedAuto = NSNumber?()
     var avgSpeed = NSNumber?()
     var avgSuccessfulTimesCrossedDefensesAuto = NSDictionary?()
     var avgSuccessfulTimesCrossedDefensesTele = NSDictionary?()
@@ -62,11 +62,13 @@ import UIKit
     var sdShotsBlocked = NSNumber?()
     var sdSuccessfulDefenseCrossesAuto = NSDictionary?()
     var sdSuccessfulDefenseCrossesTele = NSDictionary?()
+    var RScoreDrivingAbility = NSNumber?()
     var secondPickAbility = NSDictionary?()
     var siegeAbility = NSNumber?()
     var siegeConsistency = NSNumber?()
     var siegePower = NSNumber?()
     var overallSecondPickAbility = NSNumber?()
+    var citrusDPR = NSNumber?()
     var cdfCrossed = NSNumber?()
     var pcCrossed = NSNumber?()
     var mtCrossed = NSNumber?()

@@ -44,6 +44,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     let abilityKeys = [
         "calculatedData.firstPickAbility",
+        "calculatedData.overallSecondPickAbility",
+        "calculatedData.autoAbility",
+        "calculatedData.citrusDPR",
+        "calculatedData.RScoreDrivingAbility",
+        "calculatedData.avgGroundIntakes",
         "calculatedData.avgTorque",
         "calculatedData.avgEvasion",
         "calculatedData.avgSpeed",
@@ -70,7 +75,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.avgHighShotsTele",
         "calculatedData.sdHighShotsTele",
         "calculatedData.avgLowShotsTele",
-        "calculatedData.sdLowShotsTele"
+        "calculatedData.sdLowShotsTele",
+        "calculatedData.avgShotsBlocked"
     ]
     var obstacleKeys = [
         "calculatedData.cdfCrossed",
@@ -93,13 +99,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     let statusKeys = [
         "calculatedData.challengePercentage",
-        "calculatedData.disabledPercentage",
         "calculatedData.disfunctionalPercentage",
+        "calculatedData.disabledPercentage",
         "calculatedData.incapacitatedPercentage",
     ]
     
     let pitKeys = [
-        "",
+        "pitLowBarCapability",
         "pitPotentialLowBarCapability",
         "pitPotentialMidlineBallCapability",
         "pitDriveBaseWidth",
@@ -192,12 +198,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func reload() {
         tableView?.reloadData()
+
         tableViewHeightConstraint?.constant = (tableView.contentSize.height)
         if let team = data,
             let imageView = teamSelectedImageView {
                 self.firebaseFetcher.LoadImageForTeam(team)
                 imageView.contentMode = UIViewContentMode.ScaleAspectFit
         }
+        self.updateTitleAndTopInfo()
     }
     
     override func viewDidLoad() {
@@ -359,7 +367,12 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
         }
         if !moreInfoValues.contains(dataKey) {
-            let dataPoint: AnyObject? = data!.valueForKeyPath(dataKey) ?? ""
+            var dataPoint = AnyObject?()
+            if dataKey == "pitLowBarCapability" { //This is horrible.
+                dataPoint = data!.pitLowBarCapability
+            } else {
+                dataPoint = data!.valueForKeyPath(dataKey) ?? ""
+            }
             if dataPoint == nil {
                 print(dataKey)
             }
@@ -414,7 +427,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if percentageValues.contains(dataKey) {
                     multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
                 } else {
-                    multiCell.scoreLabel!.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
+                    if dataPoint != nil {
+                        if object_getClass(dataPoint!) == object_getClass(Bool?()) {
+                            if dataPoint! as! Bool == true {
+                                multiCell.scoreLabel?.text = "Yes"
+                            } else {
+                                multiCell.scoreLabel?.text = "No"
+                            }
+                        } else {
+                            multiCell.scoreLabel!.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
+                        }
+                        
+                    }
                 }
                 
                 multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
@@ -469,7 +493,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         teamNameLabel?.text = nameText
         teamNumberLabel?.text = numText
         seed?.text = seedText
-        predictedSeed?.text = seedText
+        predictedSeed?.text = predSeedText
     }
     
     func numberOfPhotosInPhotoBrowser(photoBrowser: MWPhotoBrowser!) -> UInt {
@@ -539,7 +563,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     print(graphViewController.subValuesLeft)
                     /*if let d = data {
                     graphViewController.subValuesRight =
-                        nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
+                    nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
                     
                     let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
                     graphViewController.highlightIndex = i

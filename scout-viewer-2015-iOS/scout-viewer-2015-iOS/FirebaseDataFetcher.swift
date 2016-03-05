@@ -478,10 +478,10 @@ import DATAStack
         return matchData
         
     }
-    func getTeamCalculatedDataFromDict(dict:NSDictionary) -> CalculatedTeamData {
+    /*func getTeamCalculatedDataFromDict(dict:NSDictionary) -> CalculatedTeamData {
         let teamData = CalculatedTeamData()
         return teamData
-    }
+    }*/
     
     func getIntMatch(matchNumbah:Int) -> Match {        
         return self.matches[matchNumbah] 
@@ -606,13 +606,25 @@ import DATAStack
     
     func getSortedListbyString(path: String) -> [Team] {
         let sortedArray = self.teams.sort({ (t1, t2) -> Bool in
-            if let t1v = t1.valueForKeyPath(path) {
-                if let t2v = t2.valueForKeyPath(path) {
-                    if t1v.doubleValue > t2v.doubleValue {
-                        return true
+            if path == "pitLowBarCapability" { //THis if horrible and stuipd but I just want it to work
+                if let t1v = t1.pitLowBarCapability {
+                    if let t2v = t2.pitLowBarCapability {
+                        if t1v && !t2v {
+                            return true
+                        }
+                    }
+                }
+
+            } else {
+                if let t1v = t1.valueForKeyPath(path) {
+                    if let t2v = t2.valueForKeyPath(path) {
+                        if t1v.doubleValue > t2v.doubleValue {
+                            return true
+                        }
                     }
                 }
             }
+            
             return false
         })
         return sortedArray;

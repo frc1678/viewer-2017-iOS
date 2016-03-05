@@ -11,7 +11,7 @@ import Foundation
 let humanReadableNames = [
     "calculatedData.actualSeed" : "Seed",
     "calculatedData.avgBallControl" : "Avg. Ball Controll",
-    "calculatedData.avgBallsKnockedOffMidlineAuto" : "Avg. Balls Off Mid Line",
+    "calculatedData.avgBallsKnockedOffMidlineAuto" : "Avg. Mid. Auto Balls Knocked",
     "calculatedData.avgDefense" : "Avg. Defense",
     "calculatedData.avgEvasion" : "Avg. Evasion",
     "calculatedData.avgFailedTimesCrossedDefensesAuto" : "Avg. Cross Fails Auto",
@@ -21,7 +21,7 @@ let humanReadableNames = [
     "calculatedData.avgHighShotsTele" : "Avg. High Shots in Tele",
     "calculatedData.avgLowShotsAuto" : "Avg. Low Shots in Auto",
     "calculatedData.avgLowShotsTele" : "Avg. Low Shots in Tele",
-    "calculatedData.avgMidlineBallsIntakedAuto" : "Avg. Mid Balls in Auto",
+    "calculatedData.avgMidlineBallsIntakedAuto" : "Avg. Mid. Auto Balls Intaked",
     "calculatedData.avgShotsBlocked" : "Avg. Shots Blocked",
     "calculatedData.avgSpeed" : "Avg. Speed",
     "calculatedData.avgSuccessfulTimesCrossedDefensesAuto" : "Avg. Times Crossed Auto",
@@ -61,13 +61,17 @@ let humanReadableNames = [
     "calculatedData.siegeConsistency" : "Siege Consistency",
     "calculatedData.siegePower" : "Siege Power",
     "matchDatas" : "Matches",
-    "pitPotentialLowBarCapability" : "Low Bar Capability",
+    "pitLowBarCapability": "Low Bar Ability",
+    "calculatedData.autoAbility" : "Auto Ability",
+    "calculatedData.citrusDPR" : "Citrus DPR",
+    "calculatedData.RScoreDrivingAbility": "Driving Ability",
+    "pitPotentialLowBarCapability" : "Low Bar Potential",
     "pitHeightOfBallLeavingShooter": "Shot Release Height",
-    "pitPotentialMidlineBallCapability" : "Mid Line Ball Capability",
+    "pitPotentialMidlineBallCapability" : "Mid Line Ball Potential",
     "pitDriveBaseWidth" : "Drive Base Width",
     "pitDriveBaseLength" : "Drive Base Length",
     "pitBumperHeight" : "Bumper Height",
-    "pitPotentialShotBlockerCapability" : "Shot Blocking Capacity",
+    "pitPotentialShotBlockerCapability" : "Shot Blocking Potential",
     "pitNotes" : "Pit Notes",
     "pitOrganization" : "Pit Organization",
     "calculatedData.cdfCrossed": "CDF Times Crossed",
@@ -151,7 +155,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
 }
 
 @objc class Utils: NSObject {
-
+    
     
     class func roundValue(value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
@@ -175,5 +179,5 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         }
         return false
     }
-
+    
 }
