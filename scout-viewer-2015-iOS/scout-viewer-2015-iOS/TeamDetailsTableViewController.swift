@@ -99,6 +99,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let pitKeys = [
+        "",
         "pitPotentialLowBarCapability",
         "pitPotentialMidlineBallCapability",
         "pitDriveBaseWidth",
@@ -106,6 +107,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "pitBumperHeight",
         "pitPotentialShotBlockerCapability",
         "pitOrganization",
+        "pitHeightOfBallLeavingShooter"
     ]
     
     
@@ -114,8 +116,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let unrankedCells = [
-        "calculatedData.pitOrganization",
-        "calculatedData.pitNotes" ]
+        "pitOrganization",
+        "pitNotes" ]
     
     let percentageValues = [
         "calculatedData.challengePercentage",
@@ -201,7 +203,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"checkRes:", name:"updateLeftTable", object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView:", name:"updateLeftTable", object:nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "gotTeamImage:", name: "gotTeamImage", object: nil);
         
@@ -388,6 +390,19 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 } else {
                     unrankedCell.detailLabel.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
                 }
+                
+                if dataKey == "pitOrganization" {
+                    switch unrankedCell.detailLabel!.text! {
+                    case "0": unrankedCell.detailLabel.text = "Terrible"
+                    case "1": unrankedCell.detailLabel.text = "Bad"
+                    case "2": unrankedCell.detailLabel.text = "OK"
+                    case "3": unrankedCell.detailLabel.text = "Good"
+                    case "4": unrankedCell.detailLabel.text = "Great"
+                    default: break
+                    }
+                }
+                
+                
                 
                 unrankedCell.selectionStyle = UITableViewCellSelectionStyle.None
                 cell = unrankedCell
@@ -605,11 +620,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
             
         }
-        func checkRes(notification:NSNotification) {
-            if notification.name == "updateLeftTable" {
-                self.reload()
-            }
-        }
         
+        
+        
+    }
+    
+    func reloadTableView(note: NSNotification) {
+        if note.name == "updateLeftTable" {
+            self.data = note.object as? Team
+            self.reload()
+        }
     }
 }

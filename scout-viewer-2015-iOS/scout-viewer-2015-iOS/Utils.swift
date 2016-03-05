@@ -62,6 +62,7 @@ let humanReadableNames = [
     "calculatedData.siegePower" : "Siege Power",
     "matchDatas" : "Matches",
     "pitPotentialLowBarCapability" : "Low Bar Capability",
+    "pitHeightOfBallLeavingShooter": "Shot Release Height",
     "pitPotentialMidlineBallCapability" : "Mid Line Ball Capability",
     "pitDriveBaseWidth" : "Drive Base Width",
     "pitDriveBaseLength" : "Drive Base Length",

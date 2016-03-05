@@ -20,6 +20,8 @@ import UIKit
     var avgEvasion = NSNumber?()
     var avgFailedTimesCrossedDefensesAuto = NSDictionary?()
     var avgFailedTimesCrossedDefensesTele = NSDictionary?()
+    var avgTimeForDefenseCrossTele = NSDictionary?()
+    var avgTimeForDefenseCrossAuto = NSDictionary?()
     var avgGroundIntakes = NSNumber?()
     var avgHighShotsAuto = NSNumber?()
     var avgHighShotsTele = NSNumber?()
@@ -65,7 +67,6 @@ import UIKit
     var siegeConsistency = NSNumber?()
     var siegePower = NSNumber?()
     var overallSecondPickAbility = NSNumber?()
-    
     var cdfCrossed = NSNumber?()
     var pcCrossed = NSNumber?()
     var mtCrossed = NSNumber?()

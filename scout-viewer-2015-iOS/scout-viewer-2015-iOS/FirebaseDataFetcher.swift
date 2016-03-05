@@ -205,9 +205,9 @@ import DATAStack
         if let name = (v.objectForKey("name") as? String) {
             team.name = name
             team.number = (v.objectForKey("number") as? Int)
-            team.pitDriveBaseLength = (v.objectForKey("pitDriveBaseLength") as? Int)
-            team.pitBumperHeight = (v.objectForKey("pitBumperHeight") as? Int)
-            team.pitDriveBaseWidth = (v.objectForKey("pitDriveBaseWidth") as? Int)
+            team.pitDriveBaseLength = (v.objectForKey("pitDriveBaseLength") as? Double)
+            team.pitBumperHeight = (v.objectForKey("pitBumperHeight") as? Double)
+            team.pitDriveBaseWidth = (v.objectForKey("pitDriveBaseWidth") as? Double)
             team.pitLowBarCapability = (v.objectForKey("pitLowBarCapability") as? Bool)
             team.pitNotes = (v.objectForKey("pitNotes") as? String)
             team.pitNumberOfWheels = (v.objectForKey("pitNumberOfWheels") as? Int)
@@ -216,6 +216,8 @@ import DATAStack
             team.pitPotentialMidlineBallCapability = (v.objectForKey("pitPotentialMidlineBallCapability") as? Int)
             team.pitPotentialShotBlockerCapability = (v.objectForKey("pitPotentialShotBlockerCapability") as? Int)
             team.selectedImageUrl = (v.objectForKey("selectedImageUrl") as? String)
+            team.pitHeightOfBallLeavingShooter = (v.objectForKey("pitHeightOfBallLeavingShooter") as? Double)
+            
             let teamDict = (v.objectForKey("calculatedData") as? NSDictionary)
             team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
             
@@ -267,7 +269,7 @@ import DATAStack
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
                         self.updateImages()
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                         
                     }
                 })
