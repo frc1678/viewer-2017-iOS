@@ -151,7 +151,6 @@ import DATAStack
         "RScoreBallControl",
         "RScoreDrivingAbility",
         "citrusDPR",
-        //  "secondPickAbility",
         "overallSecondPickAbility",
         "scoreContribution"
     ]
@@ -342,24 +341,27 @@ import DATAStack
     func getTeamInMatchDatasForTeam(team: Team) -> [TeamInMatchData]{
         let ref = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
         var TIMDatas = [TeamInMatchData]()
-        let teamNum = String(team.number!)
-        ref.observeEventType(.ChildAdded, withBlock: { datasnapshot in
-            //let range = Range(start:teamNum.startIndex,end:teamNum.endIndex)
-            if datasnapshot.key.containsString(teamNum) {
-                let TIMData = self.getTeamInMatchDataForDict((datasnapshot.value as? NSDictionary)!)
-                if TIMData != nil {
-                    TIMData!.identifier = datasnapshot.key
-                    let TIMCalcData = self.getCalculatedTeamInMatchDataForDict((datasnapshot.childSnapshotForPath("calculatedData").value as? NSDictionary))
-                    if(TIMCalcData != nil) {
-                        TIMData!.calculatedData = TIMCalcData
+        if let teamNumber = team.number {
+            let teamNum = "\(teamNumber)"
+            ref.observeEventType(.ChildAdded, withBlock: { datasnapshot in
+                //let range = Range(start:teamNum.startIndex,end:teamNum.endIndex)
+                if datasnapshot.key.containsString(teamNum) {
+                    let TIMData = self.getTeamInMatchDataForDict((datasnapshot.value as? NSDictionary)!)
+                    if TIMData != nil {
+                        TIMData!.identifier = datasnapshot.key
+                        let TIMCalcData = self.getCalculatedTeamInMatchDataForDict((datasnapshot.childSnapshotForPath("calculatedData").value as? NSDictionary))
+                        if(TIMCalcData != nil) {
+                            TIMData!.calculatedData = TIMCalcData
+                        }
+                        TIMDatas.append(TIMData!)
+                        self.teamInMatches.append(TIMData!)
+                        team.TeamInMatchDatas.append(TIMData!)
+                        
                     }
-                    TIMDatas.append(TIMData!)
-                    self.teamInMatches.append(TIMData!)
-                    team.TeamInMatchDatas.append(TIMData!)
-                    
                 }
-            }
-        })
+            })
+        }
+        
         return TIMDatas
     }
     
@@ -460,6 +462,16 @@ import DATAStack
         }
         return array
     }
+    
+    func matchNumbersForTeamNumber(number: Int) -> [NSNumber] {
+        let matches = self.fetchMatchesForTeamWithNumber(number)
+        var matchNumbers = [NSNumber]()
+        for match in matches {
+            matchNumbers.append(match.number!)
+        }
+        return matchNumbers
+    }
+    
     func getMatchCalculatedDatafromDict(dict:NSDictionary?) -> MatchCalculatedData {
         
         let matchData = MatchCalculatedData()
@@ -490,10 +502,10 @@ import DATAStack
     func getcalcDataForTeamFromDict(dict:NSDictionary?) -> CalculatedTeamData {
         let calcData = CalculatedTeamData()
         if dict != nil {
-            for key in self.teamCalcKeys {
+            for key in PDFRenderer.allPropertyNamesForClass(CalculatedTeamData) {
                 let value = dict!.objectForKey(key)
                 
-                calcData.setValue(value, forKey: key)
+                calcData.setValue(value, forKey: key as! String)
             }
             for key in self.defenseKeys {
                 if let obj = dict!.objectForKey(key) as? NSDictionary {
@@ -575,7 +587,7 @@ import DATAStack
         return sortedArray
     }
     func predSeedList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.predictedSeed?.integerValue < $1.calculatedData!.predictedSeed?.integerValue }
+        let sortedArray = self.teams.sort { $0.calculatedData!.predictedSeed?.integerValue > $1.calculatedData!.predictedSeed?.integerValue }
         return sortedArray
     }
     
@@ -846,7 +858,7 @@ import DATAStack
         print(path)
         var valueArray = [Float]()
         for timData in timDatas {
-            print(timData)
+            //print(timData)
             let value = timData.valueForKeyPath(path)
             if value != nil {
                 let floatVal = value as! Float

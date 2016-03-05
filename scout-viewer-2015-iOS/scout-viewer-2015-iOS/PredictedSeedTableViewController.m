@@ -27,7 +27,7 @@
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.predictedSeed.integerValue];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)(path.row + 1)];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
                                  [Utils roundValue:team.calculatedData.predictedSeed.floatValue toDecimalPlaces:2]];

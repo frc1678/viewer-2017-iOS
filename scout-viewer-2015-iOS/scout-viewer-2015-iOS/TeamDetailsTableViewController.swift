@@ -42,6 +42,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "matchDatas"
     ]
     
+    let plus1Keys = [
+        "pitPotentialLowBarCapability",
+        "pitPotentialMidlineBallCapability",
+        "pitPotentialShotBlockerCapability"
+    ]
+    
+    let yesNoKeys = [
+        "pitLowBarCapability"
+    ]
+    
     let abilityKeys = [
         "calculatedData.firstPickAbility",
         "calculatedData.overallSecondPickAbility",
@@ -197,15 +207,21 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func reload() {
-        tableView?.reloadData()
-
-        tableViewHeightConstraint?.constant = (tableView.contentSize.height)
-        if let team = data,
-            let imageView = teamSelectedImageView {
-                self.firebaseFetcher.LoadImageForTeam(team)
-                imageView.contentMode = UIViewContentMode.ScaleAspectFit
+        if data != nil {
+            if data?.number != nil {
+                tableView?.reloadData()
+                self.updateTitleAndTopInfo()
+                tableViewHeightConstraint?.constant = (tableView.contentSize.height)
+                if let team = data,
+                    let imageView = teamSelectedImageView {
+                        self.firebaseFetcher.LoadImageForTeam(team)
+                        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                }
+                
+                
+            }
         }
-        self.updateTitleAndTopInfo()
+        
     }
     
     override func viewDidLoad() {
@@ -220,7 +236,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.registerNib(UINib(nibName: "MultiCellTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiCellTableViewCell")
         tableView.delegate = self
         navigationController?.delegate = self
-        updateTitleAndTopInfo()
         photos = []
         reload()
         // self.firebaseFetcher.getAverageDefenseValuesForDict((data?.calculatedData.avgSuccessfulTimesCrossedDefensesTele)!)
@@ -353,147 +368,168 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell: UITableViewCell
-        
-        if data!.number == nil {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) 
-            cell.textLabel?.text = "No data yet..."
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            return cell
-        }
-        
-        let dataKey: String = keySets[indexPath.section][indexPath.row]
-        if dataKey == "calculatedData.numAutoPoints" {
+        var cell = UITableViewCell()
+        if data != nil {
+            if data!.number == nil {
+                cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath)
+                cell.textLabel?.text = "No data yet..."
+                cell.accessoryType = UITableViewCellAccessoryType.None
+                return cell
+            }
             
-        }
-        if !moreInfoValues.contains(dataKey) {
-            var dataPoint = AnyObject?()
-            if dataKey == "pitLowBarCapability" { //This is horrible.
-                dataPoint = data!.pitLowBarCapability
-            } else {
-                dataPoint = data!.valueForKeyPath(dataKey) ?? ""
-            }
-            if dataPoint == nil {
-                print(dataKey)
-            }
-            if longTextCells.contains(dataKey) {
-                let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
+            let dataKey: String = keySets[indexPath.section][indexPath.row]
+            if dataKey == "calculatedData.numAutoPoints" {
                 
-                notesCell.titleLabel?.text = humanReadableNames[dataKey]
-                //            notesCell.notesLabel?.text = "\(roundDataPoint(dataPoint))"
-                
-                if "\(dataPoint)".isEmpty {
-                    notesCell.notesLabel?.text = "none"
+            }
+            if !moreInfoValues.contains(dataKey) {
+                var dataPoint = AnyObject?()
+                if dataKey == "pitLowBarCapability" { //This is horrible.
+                    dataPoint = data!.pitLowBarCapability ?? ""
                 } else {
-                    notesCell.notesLabel?.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
+                    dataPoint = data!.valueForKeyPath(dataKey) ?? ""
                 }
-                notesCell.selectionStyle = UITableViewCellSelectionStyle.None
-                cell = notesCell
-            } else if unrankedCells.contains(dataKey) {
+                
+                if dataPoint == nil {
+                    print("\(dataKey) is nil")
+                }
+                if longTextCells.contains(dataKey) {
+                    let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
+                    
+                    notesCell.titleLabel?.text = humanReadableNames[dataKey]
+                    //            notesCell.notesLabel?.text = "\(roundDataPoint(dataPoint))"
+                    
+                    if "\(dataPoint)".isEmpty {
+                        notesCell.notesLabel?.text = "none"
+                    } else {
+                        
+                            notesCell.notesLabel?.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
+                        
+                    }
+                    notesCell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell = notesCell
+                } else if unrankedCells.contains(dataKey) {
+                    let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
+                    
+                    unrankedCell.titleLabel.text = humanReadableNames[dataKey]
+                    
+                    if "\(dataPoint)".isEmpty || isZero(dataPoint!) {
+                        unrankedCell.detailLabel.text = "-"
+                    } else if addCommasBetweenCapitals.contains(dataKey) {
+                        unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
+                    } else if boolValues.contains(dataKey) {
+                        unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as! Bool))"
+                    } else {
+                        unrankedCell.detailLabel.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
+                    }
+                    
+                    if dataKey == "pitOrganization" {
+                        switch unrankedCell.detailLabel!.text! {
+                        case "0": unrankedCell.detailLabel.text = "Terrible"
+                        case "1": unrankedCell.detailLabel.text = "Bad"
+                        case "2": unrankedCell.detailLabel.text = "OK"
+                        case "3": unrankedCell.detailLabel.text = "Good"
+                        case "4": unrankedCell.detailLabel.text = "Great"
+                        default: break
+                        }
+                    }
+                    
+                    
+                    
+                    unrankedCell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell = unrankedCell
+                } else {
+                    let multiCell: MultiCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("MultiCellTableViewCell", forIndexPath: indexPath) as! MultiCellTableViewCell
+                    
+                    multiCell.teamLabel!.text = humanReadableNames[dataKey]
+                    
+                    if percentageValues.contains(dataKey) {
+                        multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
+                    } else {
+                        if dataPoint as? String != "" {
+                            if plus1Keys.contains(dataKey) {
+                                multiCell.scoreLabel?.text = "\(roundValue(dataPoint! as! Float + 1.00, toDecimalPlaces: 2))"
+                            } else if yesNoKeys.contains(dataKey) {
+                                if dataPoint! as! Bool == true {
+                                    multiCell.scoreLabel?.text = "Yes"
+                                } else {
+                                    multiCell.scoreLabel?.text = "No"
+                                }
+                            } else {
+                                multiCell.scoreLabel!.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
+                            }
+                            
+                        } else {
+                            multiCell.scoreLabel?.text = ""
+                        }
+                    }
+                    
+                    multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
+                    
+                    //                multiCell.selectionStyle = UITableViewCellSelectionStyle.None
+                    cell = multiCell
+                }
+            } else {
                 let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
                 
                 unrankedCell.titleLabel.text = humanReadableNames[dataKey]
+                unrankedCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 
-                if "\(dataPoint)".isEmpty || isZero(dataPoint!) {
-                    unrankedCell.detailLabel.text = "-"
-                } else if addCommasBetweenCapitals.contains(dataKey) {
-                    unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
-                } else if boolValues.contains(dataKey) {
-                    unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as! Bool))"
-                } else {
-                    unrankedCell.detailLabel.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
-                }
-                
-                if dataKey == "pitOrganization" {
-                    switch unrankedCell.detailLabel!.text! {
-                    case "0": unrankedCell.detailLabel.text = "Terrible"
-                    case "1": unrankedCell.detailLabel.text = "Bad"
-                    case "2": unrankedCell.detailLabel.text = "OK"
-                    case "3": unrankedCell.detailLabel.text = "Good"
-                    case "4": unrankedCell.detailLabel.text = "Great"
-                    default: break
-                    }
-                }
-                
-                
-                
-                unrankedCell.selectionStyle = UITableViewCellSelectionStyle.None
                 cell = unrankedCell
-            } else {
-                let multiCell: MultiCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("MultiCellTableViewCell", forIndexPath: indexPath) as! MultiCellTableViewCell
-                
-                multiCell.teamLabel!.text = humanReadableNames[dataKey]
-                
-                if percentageValues.contains(dataKey) {
-                    multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
-                } else {
-                    if dataPoint != nil {
-                        if object_getClass(dataPoint!) == object_getClass(Bool?()) {
-                            if dataPoint! as! Bool == true {
-                                multiCell.scoreLabel?.text = "Yes"
-                            } else {
-                                multiCell.scoreLabel?.text = "No"
-                            }
-                        } else {
-                            multiCell.scoreLabel!.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
-                        }
-                        
-                    }
-                }
-                
-                multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
-                
-                //                multiCell.selectionStyle = UITableViewCellSelectionStyle.None
-                cell = multiCell
             }
+            
+            
         } else {
-            let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath)
+            cell.textLabel?.text = "No data yet..."
+            cell.accessoryType = UITableViewCellAccessoryType.None
             
-            unrankedCell.titleLabel.text = humanReadableNames[dataKey]
-            unrankedCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            
-            cell = unrankedCell
         }
-        
         return cell
     }
     
     func updateTitleAndTopInfo() {
-        let numText: String
-        let nameText: String
-        switch (data?.number, data?.name) {
-        case (.Some(let num), .Some(let name)):
-            title = "\(num)"
-            numText = "\(num)"
-            nameText = "\(name)"
-        case (.Some(let num), .None):
-            title = "\(num)"
-            numText = "\(num)"
-            nameText = "Unknown name..."
-        case (.None, .Some(let name)):
-            title = "Unkown Number"
-            numText = "????"
-            nameText = "\(name)"
-        default:
-            title = "Unknown Number"
-            numText = "????"
-            nameText = "Unknown name..."
+        if self.teamNameLabel != nil {
+            if self.teamNameLabel.text == "" || self.teamNameLabel.text == "Unknown name..." {
+                let numText: String
+                let nameText: String
+                switch (data?.number, data?.name) {
+                case (.Some(let num), .Some(let name)):
+                    title = "\(num)"
+                    numText = "\(num)"
+                    nameText = "\(name)"
+                case (.Some(let num), .None):
+                    title = "\(num)"
+                    numText = "\(num)"
+                    nameText = "Unknown name..."
+                case (.None, .Some(let name)):
+                    title = "Unkown Number"
+                    numText = "????"
+                    nameText = "\(name)"
+                default:
+                    title = "Unknown Number"
+                    numText = "????"
+                    nameText = "Unknown name..."
+                }
+                
+                teamNameLabel?.text = nameText
+                teamNumberLabel?.text = numText
+            }
+            
+            
+            var seedText = "?"
+            var predSeedText = "?"
+            if let seed = data?.calculatedData!.actualSeed where seed.integerValue > 0 {
+                seedText = "\(seed)"
+            }
+            
+            if let predSeed = data?.calculatedData!.predictedSeed where predSeed.integerValue > 0 {
+                predSeedText = "\(predSeed)"
+            }
+            
+            
+            seed?.text = seedText
+            predictedSeed?.text = predSeedText
         }
-        
-        var seedText = "?"
-        var predSeedText = "?"
-        if let seed = data?.calculatedData!.actualSeed where seed.integerValue > 0 {
-            seedText = "\(seed)"
-        }
-        
-        if let predSeed = data?.calculatedData!.predictedSeed where predSeed.integerValue > 0 {
-            predSeedText = "\(predSeed)"
-        }
-        
-        teamNameLabel?.text = nameText
-        teamNumberLabel?.text = numText
-        seed?.text = seedText
-        predictedSeed?.text = predSeedText
     }
     
     func numberOfPhotosInPhotoBrowser(photoBrowser: MWPhotoBrowser!) -> UInt {
@@ -558,7 +594,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamsWithCharacteristic(keySets[indexPath.section][indexPath.row]))
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
                     print("Here are the subValues")
                     print(graphViewController.subValuesLeft)
                     /*if let d = data {

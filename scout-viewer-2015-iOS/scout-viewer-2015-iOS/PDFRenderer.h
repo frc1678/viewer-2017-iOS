@@ -11,5 +11,6 @@
 @interface PDFRenderer : NSObject
 
 + (void) renderPDFToPath:(NSString *)filePath withProgressCallback:(void(^)(float progress, BOOL done))progressCallback;
++ (NSArray *)allPropertyNamesForClass:(Class)cls;
 
 @end

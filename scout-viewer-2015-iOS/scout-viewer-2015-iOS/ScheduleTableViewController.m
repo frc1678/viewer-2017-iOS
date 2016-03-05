@@ -34,7 +34,7 @@
     
     [super viewDidLoad];
     [self cachePhotos:self.cacheButton];
-    }
+}
 
 //RIP (2016 - 2016)
 
@@ -111,7 +111,7 @@
 -(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
     if([self.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
-        matchCell.backgroundColor = [UIColor greenColor];
+        matchCell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
     }
     else {
         matchCell.backgroundColor = [UIColor whiteColor];
@@ -215,7 +215,7 @@
             [self.starredMatchesArray removeObject:cell.matchLabel.text];
             cell.backgroundColor = [UIColor whiteColor];
         } else {
-            cell.backgroundColor = [UIColor greenColor];
+            cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
             [self.starredMatchesArray addObject:cell.matchLabel.text];
         }
         NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:self.starredMatchesArray userInfo:nil];
