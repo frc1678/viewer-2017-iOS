@@ -300,7 +300,7 @@ import DATAStack
                         team.TeamInMatchDatas[i!] = timd!
                     }
                 })
-                self.downloadAllImages()
+                //self.downloadAllImages()
             })
         }
     }
@@ -775,7 +775,7 @@ import DATAStack
     
     return image
     }*/
-    func returnSynchronousTeamImage(team:Team) -> UIImage? {
+    /*func returnSynchronousTeamImage(team:Team) -> UIImage? {
         if team.selectedImageUrl != nil {
             let url = NSURL(string:team.selectedImageUrl!)
             if let data = NSData(contentsOfURL: url!) {
@@ -819,8 +819,8 @@ import DATAStack
         NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
             completion(data: data, response: response, error: error)
             }.resume()
-    }
-    func saveImage(image:UIImage, withName:String) {
+    }*/
+    /*func saveImage(image:UIImage, withName:String) {
         if let jpgImageData = UIImageJPEGRepresentation(image,1.0) {
             let imagePath = getDocumentsPath().stringByAppendingString("/\(withName)")
             jpgImageData.writeToFile(imagePath, atomically:true)
@@ -884,7 +884,7 @@ import DATAStack
         } else {
             return "???_Selected_Image"
         }
-    }
+    }*/
     /* func test(team:Team) {
     let url = NSURL(string:"https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg")
     let data = NSData(contentsOfURL: url!)

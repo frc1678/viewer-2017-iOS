@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HanekeSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JBChartView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -97,6 +102,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>250E81F80CC96FF30AB5A987175880CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3354D5442C5F85B5C04BA84D9D8B422A</key>
 		<dict>
 			<key>primary</key>
@@ -107,12 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5EF58EB6727DE6418BFC72991F7CF65D</key>
+		<key>6461FF73E606AC17ECB9C28944E4F30F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6461FF73E606AC17ECB9C28944E4F30F</key>
+		<key>797C5EC31FC83893AC788B40EE2E35EB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7DDF79495F24B309AF089ACC99FC1151</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -138,11 +153,6 @@
 			<true/>
 		</dict>
 		<key>B96A16C54F8F4A5D1A7C1A1D8F47B43E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BB9DABCB6868DFA0CB78D2AF3DAAF574</key>
 		<dict>
 			<key>primary</key>
 			<true/>

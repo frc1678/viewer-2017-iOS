@@ -12,9 +12,11 @@
 #import "scout_viewer_2015_iOS-Swift.h"
 #import "UINavigationController+SGProgress.h"
 
+
 @interface ScheduleTableViewController ()
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cacheButton;
+
 
 @end
 
@@ -192,7 +194,7 @@
 
 
     // Prepare PDF file
-    [self.firebaseFetcher downloadAllImages];
+    //[self.firebaseFetcher downloadAllImages];
 }
 
 + (NSArray *)mappings {

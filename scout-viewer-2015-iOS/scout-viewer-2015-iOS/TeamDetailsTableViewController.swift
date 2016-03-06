@@ -9,6 +9,7 @@
 import UIKit
 import MWPhotoBrowser
 import SDWebImage
+import Haneke
 
 
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate {
@@ -23,6 +24,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var seed: UILabel!
     @IBOutlet weak var predictedSeed: UILabel!
+    
+    
     
     var data: Team? = nil {
         didSet {
@@ -214,12 +217,34 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 tableViewHeightConstraint?.constant = (tableView.contentSize.height)
                 if let team = data,
                     let imageView = teamSelectedImageView {
-                        self.firebaseFetcher.loadImageForTeam(team)
-                        imageView.contentMode = UIViewContentMode.ScaleAspectFit
+                        //imageView.contentMode = UIViewContentMode.A
+                        
+                        if team.selectedImageUrl != nil {
+                            imageView.hnk_setImageFromURL(NSURL(string: team.selectedImageUrl!)!)
+                        }
+                        //self.firebaseFetcher.loadImageForTeam(team)
                 }
             }
         }
         
+    }
+    
+    func normalizeImageOrientationIfNeeded(image: UIImage) -> UIImage {
+        
+        /*
+        let size = image.size
+        let scale = image.scale
+        
+        let rect = CGRectMake(0, 0, size.width, size.height)
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        
+        image.drawInRect(rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        */
+        
+        
+        return image.imageRotatedByDegrees(90, flip: false)
     }
     
     override func viewDidLoad() {
@@ -235,6 +260,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.delegate = self
         navigationController?.delegate = self
         photos = []
+        
         
         if data?.TeamInMatchDatas.count == 0 {
             print("tc")
@@ -262,35 +288,35 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
-    func gotTeamImage(notification: NSNotification) {
-        self.photos = []
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            if let image = notification.object as? UIImage {
-                self.teamSelectedImageView.image = image
-                self.imageViewHeightConstraint.constant = (image.size.height / image.size.width) * self.teamSelectedImageView.frame.width
-                self.teamSelectedImageView.alpha = 1.0
-            } else {
-                self.imageViewHeightConstraint.constant = 0
-            }
-            
-            if let team = self.data {
-                self.teamSelectedImageView.userInteractionEnabled = false;
-                self.navigationController?.setSGProgressPercentage(1.0)
-                //                self.firebaseFetcher.getTeamImagesForTeam(team, callBack: {
-                //                    (progress: Float, done: Bool, teamDownloaded: Int)->() in
-                //                    if teamDownloaded == self.num {
-                //                        self.navigationController?.setSGProgressPercentage(progress * 100);
-                ////                        self.lastProgress = progress
-                //                    }
-                ////
-                //                    if done {
-                //                        self.teamSelectedImageView.userInteractionEnabled = true;
-                //                    }
-                //                })
-                //                firebaseFetcher.getTeamImagesForTeam(team.number)
-            }
-        })
+    /*func gotTeamImage(notification: NSNotification) {
+    self.photos = []
+    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+    if let image = notification.object as? UIImage {
+    self.teamSelectedImageView.image = image
+    self.imageViewHeightConstraint.constant = (image.size.height / image.size.width) * self.teamSelectedImageView.frame.width
+    self.teamSelectedImageView.alpha = 1.0
+    } else {
+    self.imageViewHeightConstraint.constant = 0
     }
+    
+    if let team = self.data {
+    self.teamSelectedImageView.userInteractionEnabled = false;
+    self.navigationController?.setSGProgressPercentage(1.0)
+    //                self.firebaseFetcher.getTeamImagesForTeam(team, callBack: {
+    //                    (progress: Float, done: Bool, teamDownloaded: Int)->() in
+    //                    if teamDownloaded == self.num {
+    //                        self.navigationController?.setSGProgressPercentage(progress * 100);
+    ////                        self.lastProgress = progress
+    //                    }
+    ////
+    //                    if done {
+    //                        self.teamSelectedImageView.userInteractionEnabled = true;
+    //                    }
+    //                })
+    //                firebaseFetcher.getTeamImagesForTeam(team.number)
+    }
+    })
+    }*/
     
     @IBAction func exportTeamPDFs(sender: UIBarButtonItem) {
         sender.enabled = false
@@ -317,27 +343,27 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         return self
     }
     
-    func gotTeamImageToAdd(notification: NSNotification) {
-        let objArr = notification.object as! [AnyObject]
-        let numOfImage = objArr[1] as! Int
-        if let currentNumber = self.num {
-            if numOfImage == currentNumber {
-                photos.append(objArr[0] as! MWPhoto)
-            }
-        }
-        
-        
-        // Filter to a unique array
-        photos = photos.filter { photo in
-            for p in self.photos {
-                if UIImagePNGRepresentation(p.underlyingImage)!.isEqualToData(UIImagePNGRepresentation(photo.underlyingImage)!) && photo != p {
-                    return false
-                }
-            }
-            return true
-        }
+    /*func gotTeamImageToAdd(notification: NSNotification) {
+    let objArr = notification.object as! [AnyObject]
+    let numOfImage = objArr[1] as! Int
+    if let currentNumber = self.num {
+    if numOfImage == currentNumber {
+    photos.append(objArr[0] as! MWPhoto)
+    }
     }
     
+    
+    // Filter to a unique array
+    photos = photos.filter { photo in
+    for p in self.photos {
+    if UIImagePNGRepresentation(p.underlyingImage)!.isEqualToData(UIImagePNGRepresentation(photo.underlyingImage)!) && photo != p {
+    return false
+    }
+    }
+    return true
+    }
+    }
+    */
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if data == nil {
             return 44
@@ -405,7 +431,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         notesCell.notesLabel?.text = "none"
                     } else {
                         
-                            notesCell.notesLabel?.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
+                        notesCell.notesLabel?.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
                         
                     }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.None
@@ -693,4 +719,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             self.reload()
         }
     }
+}
+
+
 }

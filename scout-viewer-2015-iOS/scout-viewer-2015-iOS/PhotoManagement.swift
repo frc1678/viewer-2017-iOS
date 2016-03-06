@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyDropbox
 import Firebase
 import Haneke
 
@@ -25,7 +24,6 @@ class PhotoManager : NSObject {
     var numberOfPhotosForTeam = [Int: Int]()
     var callbackForPhotoCasheUpdated = { }
     var currentlyNotifyingTeamNumber = 0
-    let dropboxClient : DropboxClient
     let photoSaver = CustomPhotoAlbum()
     let dropboxURLBeginning = "https://dl.dropboxusercontent.com/u/63662632/"
     var activeImages = [[String: AnyObject]]()
@@ -43,7 +41,6 @@ class PhotoManager : NSObject {
         for number in teamNumbers {
             self.numberOfPhotosForTeam[number] = 0
         }
-        self.dropboxClient = Dropbox.authorizedClient!
         super.init()
         //self.checkInternetAndSync(self.timer)
     }

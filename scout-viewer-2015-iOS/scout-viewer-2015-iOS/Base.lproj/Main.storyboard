@@ -762,7 +762,7 @@
                                             <outlet property="dataSource" destination="qeH-s8-X6p" id="nF5-h4-7eC"/>
                                         </connections>
                                     </tableView>
-                                    <imageView autoresizesSubviews="NO" alpha="0.29999999999999966" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SorryNoRobotPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SorryNoRobotPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
                                         <rect key="frame" x="8" y="8" width="584" height="442"/>
                                         <gestureRecognizers/>
                                         <constraints>

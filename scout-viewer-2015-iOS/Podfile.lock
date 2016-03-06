@@ -6,6 +6,7 @@ PODS:
   - DATAStack (4.0.3):
     - TestCheck (~> 0.3.0)
   - Firebase (2.5.0)
+  - HanekeSwift (0.10.1)
   - JBChartView (3.0.6)
   - MBProgressHUD (0.9.2)
   - MWPhotoBrowser (2.1.1):
@@ -30,8 +31,8 @@ PODS:
   - TestCheck (0.3.0)
 
 DEPENDENCIES:
-  - DATAStack
   - Firebase (>= 2.5.0)
+  - HanekeSwift
   - JBChartView
   - MWPhotoBrowser (from `https://github.com/mwaterfall/MWPhotoBrowser.git`)
   - Sync
@@ -51,6 +52,7 @@ SPEC CHECKSUMS:
   DATAObjectIDs: 33db74dd1c858c2d22a45a4013c95f1082182e4e
   DATAStack: 8622b05a7cc1dade21e105d20fdd9f8fbe63944d
   Firebase: 744617c0733b45198f9486ebd5cac64ec2d10d79
+  HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   JBChartView: 5e4ab567158a45184bc26b295b06e7cb9cf38349
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: cebf3540db6b5116f1ad3e3e4c1b9aa11c0bf25f
