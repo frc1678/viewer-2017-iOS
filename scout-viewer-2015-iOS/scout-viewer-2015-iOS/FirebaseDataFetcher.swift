@@ -271,7 +271,7 @@ import DATAStack
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
-                        //self.getTeamInMatchDatasForTeam(team)
+                        self.checkForNotification()
                     }
                 })
                 let timdRef = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
@@ -933,9 +933,9 @@ import DATAStack
         return 1;
     }
     
-    func checkForNotification(array:NSMutableArray) {
-        let swiftArray = array as AnyObject as! [String]
-        let currentMatch = self.currentMatchNum
+    func checkForNotification() {
+        let swiftArray = self.starredMatchesArray as AnyObject as! [String]
+        let currentMatch = self.getCurrentMatch()
         if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
             postNotification()
         }

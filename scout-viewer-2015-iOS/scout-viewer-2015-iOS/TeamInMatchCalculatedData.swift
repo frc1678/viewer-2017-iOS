@@ -32,6 +32,13 @@ import UIKit
     var citrusDPR = -1
     var overallSecondPickAbility = -1
     var scoreContribution = -1
+    var avgGroundIntakes = -1
+    var avgTorque = -1
+    var avgEvasion = -1
+    var avgBallControl = -1
+    var avgDefense = -1
+    var predictedNumRPs = -1
+    
     
 }
 
