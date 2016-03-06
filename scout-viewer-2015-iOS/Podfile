@@ -10,6 +10,7 @@ target 'scout-viewer-2015-iOS' do
     pod 'MWPhotoBrowser', :git => 'https://github.com/mwaterfall/MWPhotoBrowser.git'
     pod 'JBChartView'
     pod 'Sync'
+    pod 'HanekeSwift'
 end
 
 

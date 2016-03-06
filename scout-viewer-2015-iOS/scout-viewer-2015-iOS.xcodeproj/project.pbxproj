@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1927616F1C8C9EF0005BB950 /* PhotoManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1927616E1C8C9EF0005BB950 /* PhotoManagement.swift */; };
 		194587981C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */; };
 		19634FB01C5EDF2A00FAAAC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19634FAE1C5EDF2A00FAAAC6 /* Model.xcdatamodeld */; };
 		400F75ED1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F75EC1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift */; };
@@ -67,6 +68,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1927616E1C8C9EF0005BB950 /* PhotoManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoManagement.swift; sourceTree = "<group>"; };
 		194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverallSecondPickAbilityViewController.swift; sourceTree = "<group>"; };
 		19634FAF1C5EDF2A00FAAAC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		2B501781A08722DD81DB27FC /* Pods-scout-viewer-2015-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scout-viewer-2015-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scout-viewer-2015-iOS/Pods-scout-viewer-2015-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */,
 				72AE5ADF1A87E7A0001BB94E /* TeamTableViewController.h */,
 				72AE5AE01A87E7A0001BB94E /* TeamTableViewController.m */,
+				1927616E1C8C9EF0005BB950 /* PhotoManagement.swift */,
 				40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */,
 				40E43E3A1C54434D00ABC378 /* Firebase Models */,
 				72AE5ADC1A87D8D3001BB94E /* ArrayTableViewController.h */,
@@ -544,6 +547,7 @@
 				400F75ED1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift in Sources */,
 				72AE5AFF1A882014001BB94E /* MatchTableViewCell.m in Sources */,
 				72AE5AF51A881F8C001BB94E /* FirstPickTableViewController.m in Sources */,
+				1927616F1C8C9EF0005BB950 /* PhotoManagement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
