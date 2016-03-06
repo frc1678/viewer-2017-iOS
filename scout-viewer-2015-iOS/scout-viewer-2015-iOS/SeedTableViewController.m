@@ -29,18 +29,13 @@
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
-    if(team.calculatedData.actualSeed != nil) {
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)team.calculatedData.actualSeed.integerValue];
-    } else {
-        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", path.row + 1];
-    }
+    
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", path.row + 1];
+    
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
-    if(team.calculatedData.firstPickAbility != nil) {
-    multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                 [Utils roundValue:team.calculatedData.actualSeed.floatValue toDecimalPlaces:2]];
-    } else {
-        multiCell.scoreLabel.text = @"";
-    }
+    
+    multiCell.scoreLabel.text = @"";
+    
     //Ask about this
 }
 
@@ -69,6 +64,7 @@
         
         //Team *team = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         teamDetailsController.data = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        NSLog(@"HERE: %@",teamDetailsController.data.TeamInMatchDatas);
     }
 }
 

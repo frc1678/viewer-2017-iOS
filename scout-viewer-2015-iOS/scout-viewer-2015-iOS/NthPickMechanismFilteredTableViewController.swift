@@ -10,7 +10,6 @@ import UIKit
 
 class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
     
-    var dataObject = FirebaseDataFetcher()
     
     var order = 2
     var landfill = false
@@ -21,7 +20,7 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
         let team = data as! Team
         
         let mechCell = cell as! MechanismTableViewCell
-        mechCell.rankLabel.text = "\(dataObject.rankOfTeam(team, withCharacteristic: getKeyFromOrder()))"
+        mechCell.rankLabel.text = "\(self.firebaseFetcher.rankOfTeam(team, withCharacteristic: getKeyFromOrder()))"
         mechCell.teamLabel.text = "\(team.number)"
      //   mechCell.easeLabel.text = "Ease: \(team.uploadedData.easeOfMounting)"
        // mechCell.programmingLanguageLabel.text = team.uploadedData.programmingLanguage.isEmpty ? "???" : team.uploadedData.programmingLanguage
@@ -30,7 +29,7 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
     
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
         let descriptor = NSSortDescriptor(key: getKeyFromOrder(), ascending: false)
-        let returnData = dataObject.teams
+        let returnData = self.firebaseFetcher.teams
         
         return returnData
     }
@@ -45,8 +44,8 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
             teamNum = Int(((sender as? MechanismTableViewCell)?.teamLabel?.text)!),
             mechCell = sender as? MechanismTableViewCell {
                 
-            let team = dataObject.fetchTeam(teamNum)
-                dest.data = dataObject.fetchTeam(teamNum)
+            let team = firebaseFetcher.fetchTeam(teamNum)
+                dest.data = firebaseFetcher.fetchTeam(teamNum)
         }
     }
     

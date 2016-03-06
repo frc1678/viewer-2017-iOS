@@ -20,7 +20,7 @@
 FirebaseDataFetcher *firebaseFetcher;
 
 - (void)viewDidLoad {
-    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+    firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
     [super viewDidLoad];
 }
 

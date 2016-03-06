@@ -11,7 +11,16 @@ import UIKit
 class DefenseTableViewController: ArrayTableViewController {
     
     var teamNumber = -1
-    var relevantDefense = ""
+    var relevantDefense = "" {
+        didSet {
+            if relevantDefense != "" {
+                print(relevantDefense)
+                print(getKeyFromTeamLabel(relevantDefense))
+                self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
+                
+            }
+        }
+    }
     
     var defenseKeys = [
         "calculatedData.avgFailedTimesCrossedDefensesAuto",
@@ -24,16 +33,16 @@ class DefenseTableViewController: ArrayTableViewController {
         print(stringArray[0].lowercaseString)
         return stringArray[0].lowercaseString
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(relevantDefense)
         print(getKeyFromTeamLabel(relevantDefense))
-        self.title = humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
-
+        self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
+        
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -43,23 +52,23 @@ class DefenseTableViewController: ArrayTableViewController {
         let value = data as? Int
         let multiCell = cell as? MultiCellTableViewCell
         
-        let title = humanReadableNames[defenseKeys[path.row]]
+        let title = Utils.humanReadableNames[defenseKeys[path.row]]
         
         multiCell?.teamLabel!.text = title
         multiCell?.scoreLabel!.text = String(value!)
         multiCell?.rankLabel!.text = ""
         
         
-
+        
     }
-
+    
     /*
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
     }
     */
     override func cellIdentifier() -> String! {
@@ -87,5 +96,5 @@ class DefenseTableViewController: ArrayTableViewController {
         
         return intArray
     }
-
+    
 }

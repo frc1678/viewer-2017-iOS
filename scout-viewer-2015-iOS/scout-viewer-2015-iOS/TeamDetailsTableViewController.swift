@@ -214,11 +214,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 tableViewHeightConstraint?.constant = (tableView.contentSize.height)
                 if let team = data,
                     let imageView = teamSelectedImageView {
-                        self.firebaseFetcher.LoadImageForTeam(team)
+                        self.firebaseFetcher.loadImageForTeam(team)
                         imageView.contentMode = UIViewContentMode.ScaleAspectFit
                 }
-                
-                
             }
         }
         
@@ -237,6 +235,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.delegate = self
         navigationController?.delegate = self
         photos = []
+        
+        if data?.TeamInMatchDatas.count == 0 {
+            print("tc")
+            print(firebaseFetcher.teamInMatches.count)
+        }
         reload()
         // self.firebaseFetcher.getAverageDefenseValuesForDict((data?.calculatedData.avgSuccessfulTimesCrossedDefensesTele)!)
     }
@@ -344,7 +347,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         if longTextCells.contains(dataKey) {
             let dataPoint: AnyObject = data!.valueForKeyPath(dataKey) ?? ""
             
-            let titleText = humanReadableNames[dataKey]
+            let titleText = Utils.humanReadableNames[dataKey]
             let notesText = "\(roundValue(dataPoint, toDecimalPlaces: 2))"
             
             let attrs = [NSFontAttributeName : UIFont.systemFontOfSize(16)]
@@ -395,7 +398,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if longTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
                     
-                    notesCell.titleLabel?.text = humanReadableNames[dataKey]
+                    notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
                     //            notesCell.notesLabel?.text = "\(roundDataPoint(dataPoint))"
                     
                     if "\(dataPoint)".isEmpty {
@@ -410,7 +413,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 } else if unrankedCells.contains(dataKey) {
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
                     
-                    unrankedCell.titleLabel.text = humanReadableNames[dataKey]
+                    unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                     
                     if "\(dataPoint)".isEmpty || isZero(dataPoint!) {
                         unrankedCell.detailLabel.text = "-"
@@ -440,7 +443,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 } else {
                     let multiCell: MultiCellTableViewCell = tableView.dequeueReusableCellWithIdentifier("MultiCellTableViewCell", forIndexPath: indexPath) as! MultiCellTableViewCell
                     
-                    multiCell.teamLabel!.text = humanReadableNames[dataKey]
+                    multiCell.teamLabel!.text = Utils.humanReadableNames[dataKey]
                     
                     if percentageValues.contains(dataKey) {
                         multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
@@ -471,7 +474,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             } else {
                 let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
                 
-                unrankedCell.titleLabel.text = humanReadableNames[dataKey]
+                unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 
                 cell = unrankedCell
@@ -585,11 +588,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
                     graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                    let i = self.calculatedTeamInMatchDataHumanReadableKeys.indexOf(graphViewController.graphTitle)
-                    let key = self.firebaseFetcher.calculatedTeamInMatchDataKeys[i!]
+                    let key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
-                    let values = firebaseFetcher.getMatchValuesForTeamForPath(key, forTeam: data!)
+                    let values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
                     print("These are the data points being passed:")
                     print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
@@ -671,7 +673,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 performSegueWithIdentifier("defenseCrossedSegue", sender:indexPath)
                 
             }
-            else if(self.calculatedTeamInMatchDataHumanReadableKeys.contains(cs!)) {
+            else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 performSegueWithIdentifier("CTIMDGraph", sender: indexPath)
             } else {

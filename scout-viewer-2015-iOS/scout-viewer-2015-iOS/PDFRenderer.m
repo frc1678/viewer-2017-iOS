@@ -27,7 +27,7 @@ static NSMutableDictionary *teamsDict;
 static NSMutableArray *teamNums;
 
 -(void)viewDidLoad {
-    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+    firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
 }
 
 + (void) renderPDFToPath:(NSString *)filePath withProgressCallback:(void(^)(float progress, BOOL done))progressCallback

@@ -21,7 +21,7 @@ FirebaseDataFetcher *firebaseFetcher;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    firebaseFetcher = [[FirebaseDataFetcher alloc] init];
+    firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
     
     self.key = [self keyForIndex:0];
 }

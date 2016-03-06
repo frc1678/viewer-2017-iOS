@@ -611,7 +611,7 @@
             <objects>
                 <tableViewController id="zsd-4H-i4N" customClass="TeamScheduleTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bxk-J4-1Bf">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -762,7 +762,7 @@
                                             <outlet property="dataSource" destination="qeH-s8-X6p" id="nF5-h4-7eC"/>
                                         </connections>
                                     </tableView>
-                                    <imageView autoresizesSubviews="NO" alpha="0.29999999999999966" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waiting" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
+                                    <imageView autoresizesSubviews="NO" alpha="0.29999999999999966" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SorryNoRobotPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
                                         <rect key="frame" x="8" y="8" width="584" height="442"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -1224,6 +1224,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SorryNoRobotPhoto" width="3024" height="1596"/>
         <image name="cache" width="64" height="64"/>
         <image name="firstPick" width="50" height="50"/>
         <image name="fortune_teller" width="50" height="50"/>
@@ -1231,13 +1232,12 @@
         <image name="secondPick" width="50" height="50"/>
         <image name="seeding" width="50" height="50"/>
         <image name="thirdPick" width="50" height="50"/>
-        <image name="waiting" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Vse-87-4RY"/>
         <segue reference="XVc-rp-7iO"/>
-        <segue reference="9HU-HQ-BBv"/>
         <segue reference="XfQ-Lp-UlN"/>
+        <segue reference="R2d-hJ-s5p"/>
         <segue reference="BGa-X6-1aO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>

@@ -9,7 +9,7 @@
 import UIKit
 
 class TeamInMatchDetailsTableViewController: UITableViewController {
-    var firebaseFetcher = FirebaseDataFetcher()
+    var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
     var data: TeamInMatchData? = nil {
         didSet {
@@ -111,12 +111,12 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) as! UITableViewCell
 
             cell.detailTextLabel?.text = "some array"
-            cell.textLabel?.text = humanReadableNames[keySets[indexPath.section][indexPath.row]]
+            cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
         } else {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailValueCell", forIndexPath: indexPath) as! UITableViewCell
 
             cell.detailTextLabel?.text = "\(dataPoint)"
-            cell.textLabel?.text = humanReadableNames[keySets[indexPath.section][indexPath.row]]
+            cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
             
             graphableCells.append(cell.textLabel!.text!)
         }
