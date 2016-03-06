@@ -79,7 +79,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
-    if([self.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
+    if([self.firebaseFetcher.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
         matchCell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
     }
     else {
@@ -147,14 +147,14 @@
         CGPoint p = [sender locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
         MatchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        if([self.starredMatchesArray containsObject:cell.matchLabel.text]) {
-            [self.starredMatchesArray removeObject:cell.matchLabel.text];
+        if([self.firebaseFetcher.starredMatchesArray containsObject:cell.matchLabel.text]) {
+            [self.firebaseFetcher.starredMatchesArray removeObject:cell.matchLabel.text];
             cell.backgroundColor = [UIColor whiteColor];
         } else {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
-            [self.starredMatchesArray addObject:cell.matchLabel.text];
+            [self.firebaseFetcher.starredMatchesArray addObject:cell.matchLabel.text];
         }
-        NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:self.starredMatchesArray userInfo:nil];
+        NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:note];
     }
 }

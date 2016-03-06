@@ -15,6 +15,7 @@ import DATAStack
 @objc class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     var currentMatchNum = 0
+    var starredMatchesArray = NSMutableArray()
     
     var teams = [Team]() {
         willSet {
@@ -940,7 +941,7 @@ import DATAStack
         }
     }
     func lpgrTriggered(notification:NSNotification) {
-        let array = notification.object as? NSMutableArray
+        let array = self.starredMatchesArray
         let swiftArray = array as! AnyObject as! [String]
         let currentMatch = self.getCurrentMatch()
         if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {

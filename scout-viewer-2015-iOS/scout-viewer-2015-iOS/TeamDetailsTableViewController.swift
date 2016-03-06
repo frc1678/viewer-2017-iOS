@@ -229,23 +229,23 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
     }
     
-    func normalizeImageOrientationIfNeeded(image: UIImage) -> UIImage {
-        
-        /*
-        let size = image.size
-        let scale = image.scale
-        
-        let rect = CGRectMake(0, 0, size.width, size.height)
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        
-        image.drawInRect(rect)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        */
-        
-        
-        return image.imageRotatedByDegrees(90, flip: false)
-    }
+//    func normalizeImageOrientationIfNeeded(image: UIImage) -> UIImage {
+//        
+//        /*
+//        let size = image.size
+//        let scale = image.scale
+//        
+//        let rect = CGRectMake(0, 0, size.width, size.height)
+//        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+//        
+//        image.drawInRect(rect)
+//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+//        UIGraphicsEndImageContext()
+//        */
+//        
+//        
+//        return image.imageRotatedByDegrees(90, flip: false)
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -722,4 +722,3 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
 }
 
 
-}

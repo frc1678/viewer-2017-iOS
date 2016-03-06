@@ -14,6 +14,7 @@ import UIKit
 @objc class TeamInMatchCalculatedData: NSObject, Reflectable {
     
     var firstPickAbility = -2
+    var autoAbility = -1
     var RScoreTorque = -1
     var RScoreEvasion = -1
     var RScoreSpeed = -1
@@ -29,7 +30,6 @@ import UIKit
     var RScoreBallControl = -1
     var RScoreDrivingAbility = -1
     var citrusDPR = -1
-    //var secondPickAbility = -1
     var overallSecondPickAbility = -1
     var scoreContribution = -1
     

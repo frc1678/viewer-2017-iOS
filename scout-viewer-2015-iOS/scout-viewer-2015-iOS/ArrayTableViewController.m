@@ -32,7 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.firebaseFetcher = [AppDelegate getAppDelegate].firebaseFetcher;
-    self.starredMatchesArray = [[NSMutableArray alloc] init];
     self.lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     self.lpgr.minimumPressDuration = .70;
     [self.tableView addGestureRecognizer:self.lpgr];
@@ -71,7 +70,7 @@
 -(void)setcurrentNumber:(NSInteger)currentNumber {
     self.currentNumber = currentNumber;
     NSDictionary *infoDict = @{@"currentNum":[NSNumber numberWithInt:currentNumber]};
-    NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:self.starredMatchesArray userInfo:infoDict];
+    NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:infoDict];
     [[NSNotificationCenter defaultCenter] postNotification:note];
 }
 
