@@ -192,15 +192,7 @@
 
 
     // Prepare PDF file
-    [self.firebaseFetcher downloadAllwithProgressCallback:^(float progress, BOOL done) {
-        [self.navigationController setSGProgressPercentage:progress * 100];
-    
-        if(done) {
-            NSLog(@"Done caching images...");
-
-            sender.enabled = YES;
-        }
-    }];
+    [self.firebaseFetcher downloadAllImages];
 }
 
 + (NSArray *)mappings {

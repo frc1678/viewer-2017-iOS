@@ -441,9 +441,9 @@ import DATAStack
         }
         return array
     }
-    func getTeamImagesForTeam(team:Team, callBack:(progress:Float,done:Bool,teamNum:Int)->()) {
+    /*func getTeamImagesForTeam(team:Team, callBack:(progress:Float,done:Bool,teamNum:Int)->()) {
         print("ayyylmao")
-    }
+    }*/
     /*func fetchTeamsByKeyPath(keyPath: String) -> [Team] {
     return self.teams.sort { $0.(keyPath) > $1.objectForKeyPath(keyPath) }
     }*/
@@ -472,9 +472,9 @@ import DATAStack
     func fetchMatches(shouldForce:Bool) -> [AnyObject] {
         return matches
     }
-    func downloadAllwithProgressCallback(callback:(Float, Bool)->()) {
+    /*func downloadAllwithProgressCallback(callback:(Float, Bool)->()) {
         print("OH DEAR GOD SOMEONE TEACH ME THIS PLEASE")
-    }
+    }*/
     
     func fetchMatchesForTeamWithNumber(number:Int) -> [Match] {
         var array = [Match]()
@@ -822,7 +822,7 @@ import DATAStack
     }
     func saveImage(image:UIImage, withName:String) {
         if let jpgImageData = UIImageJPEGRepresentation(image,1.0) {
-            let imagePath = getDocumentsPath().stringByAppendingString(withName)
+            let imagePath = getDocumentsPath().stringByAppendingString("/\(withName)")
             jpgImageData.writeToFile(imagePath, atomically:true)
             print("Saved to: " + imagePath)
         }
@@ -861,7 +861,7 @@ import DATAStack
         return documentsPath
     }
     func loadImageForTeam(team:Team) -> UIImage {
-        let path = getDocumentsPath().stringByAppendingString(self.getTeamFileName(team))
+        let path = getDocumentsPath().stringByAppendingString("/\(self.getTeamFileName(team))")
         let data = NSData(contentsOfFile: path)
         let image : UIImage
         if data != nil {

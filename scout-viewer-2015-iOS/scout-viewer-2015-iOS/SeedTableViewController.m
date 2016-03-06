@@ -64,7 +64,7 @@
         
         //Team *team = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         teamDetailsController.data = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
-        NSLog(@"HERE: %@",teamDetailsController.data.TeamInMatchDatas);
+        //NSLog(@"HERE: %@",teamDetailsController.data.TeamInMatchDatas);
     }
 }
 
