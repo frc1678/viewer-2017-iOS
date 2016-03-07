@@ -327,7 +327,6 @@ import DATAStack
     }*/
     func getTIMDataForTeam(team:Team) -> [TeamInMatchData] {
         var array = [TeamInMatchData]()
-        print("This is the stuff in Firebase")
         //print(self.teamInMatches.count)
         for TIM in self.teamInMatches {
             if TIM.teamNumber == team.number {
@@ -899,12 +898,28 @@ import DATAStack
         var valueArray = [Float]()
         for timData in timDatas {
             //print(timData)
-            let value = timData.valueForKeyPath(path)
-            if value != nil {
-                let floatVal = value as! Float
-                valueArray.append(floatVal)
+            let value : AnyObject?
+            if path == "calculatedData.siegeConsistency" {
+                value = timData.calculatedData?.siegeConsistency
+            } else {
+                value = timData.valueForKeyPath(path)
             }
-            else {
+
+            if value != nil {
+                
+                if let floatVal = value as? Float {
+                    valueArray.append(floatVal)
+                    
+                } else {
+                    let boolValue: Bool
+                    if let boolBoolValue = value as? Bool { //Such ugly
+                        boolValue = boolBoolValue
+                    } else {
+                        boolValue = value as? String == "true" ? true : false
+                    }
+                    valueArray.append((boolValue ? 1.0 : 0.0))
+                }
+            } else {
                 valueArray.append(0.0)
             }
         }

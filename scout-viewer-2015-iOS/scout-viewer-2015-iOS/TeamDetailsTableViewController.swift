@@ -135,8 +135,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let unrankedCells = [
-        "pitOrganization",
-        "pitNotes" ]
+        "selectedImageUrl",
+        "otherUrls"
+    ]
     
     let percentageValues = [
         "calculatedData.challengePercentage",
@@ -407,9 +408,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
             
             let dataKey: String = keySets[indexPath.section][indexPath.row]
-            if dataKey == "calculatedData.numAutoPoints" {
-                
-            }
+            
             if !moreInfoValues.contains(dataKey) {
                 var dataPoint = AnyObject?()
                 if dataKey == "pitLowBarCapability" { //This is horrible.
@@ -436,7 +435,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.None
                     cell = notesCell
-                } else if unrankedCells.contains(dataKey) {
+                } else if unrankedCells.contains(dataKey) || dataKey.containsString("pit") || dataKey == "disfunctionalPercentage" {
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
                     
                     unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
@@ -614,11 +613,21 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
                     graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                    let key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
+                    var key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
+                    
+                    if percentageValues.contains(key!) && key?.rangeOfString("siege") == nil {
+                        key = key?.stringByReplacingOccurrencesOfString("calculatedData.", withString: "")
+                        switch key! {
+                            case "scalePercentage": key = "didScaleTele"
+                            case "incapacitatedPercentage": key = "didGetIncapacitated"
+                            case "disabledPercentage": key = "didGetDisabled"
+                            case "challengePercentage": key = "didChallengeTele"
+                        default: break
+                        }
+                    }
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
                     let values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
-                    print("These are the data points being passed:")
                     print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
@@ -686,30 +695,23 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     //    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? UnrankedTableViewCell {
-            tableView.deselectRowAtIndexPath(indexPath, animated: true)
             if cell.titleLabel.text == "Matches" {
                 performSegueWithIdentifier("Matches", sender: nil)
             }
         } else if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
             let cs = cell.teamLabel!.text
-            print(cs)
             if (cs!.containsString("Times Crossed"))  {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 performSegueWithIdentifier("defenseCrossedSegue", sender:indexPath)
-                
-            }
-            else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
+            } else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
                 performSegueWithIdentifier("CTIMDGraph", sender: indexPath)
             } else {
-                tableView.deselectRowAtIndexPath(indexPath, animated: true)
                 performSegueWithIdentifier("TGraph", sender: indexPath)
             }
             
         }
-        
-        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
     }
     
