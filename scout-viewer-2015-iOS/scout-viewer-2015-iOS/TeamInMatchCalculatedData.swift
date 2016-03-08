@@ -12,33 +12,33 @@ import UIKit
 
 
 @objc class TeamInMatchCalculatedData: NSObject, Reflectable {
-    var firstPickAbility = Float?()
-    var autoAbility = Float?()
-    var RScoreTorque = Float?()
-    var RScoreEvasion = Float?()
-    var RScoreSpeed = Float?()
-    var siegeConsistency = Float?()
-    var scalePercentage = Float?()
-    var highShotAccuracyAuto = Float?()
-    var lowShotAccuracyAuto = Float?()
-    var highShotAccuracyTele = Float?()
-    var lowShotAccuracyTele = Float?()
-    var siegeAbility = Float?()
-    var numRPs = Int?()
-    var numAutoPoints = Int?()
-    var numScaleAndChallengePoints = Int?()
-    var RScoreDefense = Float?()
-    var RScoreBallControl = Float?()
-    var RScoreDrivingAbility = Float?()
-    var citrusDPR = Float?()
-    var overallSecondPickAbility = Float?()
-    var scoreContribution = Float?()
-    var avgGroundIntakes = Float?()
-    var avgTorque = Float?()
-    var avgEvasion = Float?()
-    var avgBallControl = Float?()
-    var avgDefense = Float?()
-    var predictedNumRPs = Float?()
+    var firstPickAbility : NSNumber?
+    var autoAbility : NSNumber?
+    var RScoreTorque : NSNumber?
+    var RScoreEvasion : NSNumber?
+    var RScoreSpeed : NSNumber?
+    var siegeConsistency : NSNumber?
+    var scalePercentage : NSNumber?
+    var highShotAccuracyAuto : NSNumber?
+    var lowShotAccuracyAuto : NSNumber?
+    var highShotAccuracyTele : NSNumber?
+    var lowShotAccuracyTele : NSNumber?
+    var siegeAbility : NSNumber?
+    var numRPs : NSNumber?
+    var numAutoPoints : NSNumber?
+    var numScaleAndChallengePoints : NSNumber?
+    var RScoreDefense : NSNumber?
+    var RScoreBallControl : NSNumber?
+    var RScoreDrivingAbility : NSNumber?
+    var citrusDPR : NSNumber?
+    var overallSecondPickAbility : NSNumber?
+    var scoreContribution : NSNumber?
+    var avgGroundIntakes : NSNumber?
+    var avgTorque : NSNumber?
+    var avgEvasion : NSNumber?
+    var avgBallControl : NSNumber?
+    var avgDefense : NSNumber?
+    var predictedNumRPs : NSNumber?
 }
 
 

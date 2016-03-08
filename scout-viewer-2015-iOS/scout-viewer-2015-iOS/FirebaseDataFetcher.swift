@@ -348,7 +348,7 @@ import DATAStack
     
     func rankOfTeam(team:Team, withCharacteristic: String) -> Int {
         var counter = 0
-        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic)
+        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reverse()
         
         for loopTeam in sortedTeams {
             counter++
@@ -899,8 +899,12 @@ import DATAStack
         for timData in timDatas {
             //print(timData)
             let value : AnyObject?
-            if path == "calculatedData.siegeConsistency" {
+            if path == "calculatedData.siegeConsistency" { //This is terrible, but Donald couldnt figure out the problem either.
                 value = timData.calculatedData?.siegeConsistency
+            } else if path == "calculatedData.highShotAccuracyTele" {
+                value = timData.calculatedData?.highShotAccuracyTele
+            } else if path == "calculatedData.lowShotAccuracyTele" {
+                value = timData.calculatedData?.lowShotAccuracyTele
             } else {
                 value = timData.valueForKeyPath(path)
             }

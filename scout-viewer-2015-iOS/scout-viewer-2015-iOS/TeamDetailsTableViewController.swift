@@ -146,8 +146,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.incapacitatedPercentage",
         "calculatedData.scalePercentage",
         "calculatedData.siegeConsistency"
-        
     ]
+    
+    let otherNoCalcDataValues = [
+        "calculatedData.avgShotsBlocked",
+        "calculatedData.avgLowShotsTele",
+        "calculatedData.avgHighShotsTele",
+        "calculatedData.avgBallsKnockedOffMidlineAuto",
+        "calculatedData.avgMidlineBallsIntakedAuto"
+    ]
+    
     let addCommasBetweenCapitals = [
         "calculatedData.reconAcquisitionTypes"
     ]
@@ -230,23 +238,23 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
     }
     
-//    func normalizeImageOrientationIfNeeded(image: UIImage) -> UIImage {
-//        
-//        /*
-//        let size = image.size
-//        let scale = image.scale
-//        
-//        let rect = CGRectMake(0, 0, size.width, size.height)
-//        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-//        
-//        image.drawInRect(rect)
-//        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        */
-//        
-//        
-//        return image.imageRotatedByDegrees(90, flip: false)
-//    }
+    //    func normalizeImageOrientationIfNeeded(image: UIImage) -> UIImage {
+    //        
+    //        /*
+    //        let size = image.size
+    //        let scale = image.scale
+    //        
+    //        let rect = CGRectMake(0, 0, size.width, size.height)
+    //        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+    //        
+    //        image.drawInRect(rect)
+    //        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+    //        UIGraphicsEndImageContext()
+    //        */
+    //        
+    //        
+    //        return image.imageRotatedByDegrees(90, flip: false)
+    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -409,7 +417,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             let dataKey: String = keySets[indexPath.section][indexPath.row]
             
-            if !moreInfoValues.contains(dataKey) {
+            if !moreInfoValues.contains(dataKey) && dataKey != "disfunctionalPercentage" {
                 var dataPoint = AnyObject?()
                 if dataKey == "pitLowBarCapability" { //This is horrible.
                     dataPoint = data!.pitLowBarCapability ?? ""
@@ -615,16 +623,31 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
                     var key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
                     
-                    if percentageValues.contains(key!) && key?.rangeOfString("siege") == nil {
+                    if (percentageValues.contains(key!) || otherNoCalcDataValues.contains(key!)) && key?.rangeOfString("siege") == nil {
                         key = key?.stringByReplacingOccurrencesOfString("calculatedData.", withString: "")
                         switch key! {
-                            case "scalePercentage": key = "didScaleTele"
-                            case "incapacitatedPercentage": key = "didGetIncapacitated"
-                            case "disabledPercentage": key = "didGetDisabled"
-                            case "challengePercentage": key = "didChallengeTele"
+                        case "scalePercentage": key = "didScaleTele"
+                        case "incapacitatedPercentage": key = "didGetIncapacitated"
+                        case "disabledPercentage": key = "didGetDisabled"
+                        case "challengePercentage": key = "didChallengeTele"
+                        case "avgShotsBlocked": key = "numShotsBlockedTele"
+                        case "avgLowShotsTele": key = "numLowShotsMadeTele"
+                        case "avgHighShotsTele": key = "numHighShotsMadeTele"
+                        case "avgBallsKnockedOffMidlineAuto": key = "numBallsKnockedOffMidlineAuto"
+                        case "avgMidlineBallsIntakedAuto": key = "ballsIntakedAuto"
+                            
+                        default: break
+                        }
+                    } else {
+                        
+                        switch key! {
+                        case "calculatedData.avgSpeed": key = "calculatedData.RScoreSpeed"
+                        case "calculatedData.avgEvasion": key = "calculatedData.RScoreEvasion"
+                        case "calculatedData.avgTorque": key = "calculatedData.RScoreTorque"
                         default: break
                         }
                     }
+                    
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
                     let values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
@@ -705,7 +728,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if (cs!.containsString("Times Crossed"))  {
                 performSegueWithIdentifier("defenseCrossedSegue", sender:indexPath)
             } else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
-                performSegueWithIdentifier("CTIMDGraph", sender: indexPath)
+                if !["Disfunctional Percentage"].contains(cs!) && !cs!.containsString("σ") { performSegueWithIdentifier("CTIMDGraph", sender: indexPath) }
             } else {
                 performSegueWithIdentifier("TGraph", sender: indexPath)
             }

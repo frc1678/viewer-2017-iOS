@@ -30,7 +30,7 @@
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", path.row + 1];
+    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
     
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     
