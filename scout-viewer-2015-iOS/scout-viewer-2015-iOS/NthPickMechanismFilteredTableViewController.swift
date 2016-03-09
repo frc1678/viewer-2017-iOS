@@ -28,9 +28,7 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
     }
     
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
-        let descriptor = NSSortDescriptor(key: getKeyFromOrder(), ascending: false)
         let returnData = self.firebaseFetcher.teams
-        
         return returnData
     }
     
@@ -42,9 +40,8 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
         if let
             dest = segue.destinationViewController as? TeamDetailsTableViewController,
             teamNum = Int(((sender as? MechanismTableViewCell)?.teamLabel?.text)!),
-            mechCell = sender as? MechanismTableViewCell {
+            _ = sender as? MechanismTableViewCell {
                 
-            let team = firebaseFetcher.fetchTeam(teamNum)
                 dest.data = firebaseFetcher.fetchTeam(teamNum)
         }
     }

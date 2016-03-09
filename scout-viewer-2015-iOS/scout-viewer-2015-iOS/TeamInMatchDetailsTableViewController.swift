@@ -107,13 +107,13 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
             let notesCell = cell as! ResizableNotesTableViewCell
             notesCell.titleLabel?.text = "Notes:"
             notesCell.notesLabel?.text = notes.characters.count == 0 ? "None" : notes
-        } else if let array = dataPoint as? NSArray {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) as! UITableViewCell
+        } else if let _ = dataPoint as? NSArray {
+            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) 
 
             cell.detailTextLabel?.text = "some array"
             cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailValueCell", forIndexPath: indexPath) as! UITableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailValueCell", forIndexPath: indexPath)
 
             cell.detailTextLabel?.text = "\(dataPoint)"
             cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
@@ -132,14 +132,14 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
         } else if segue.identifier == "Graph" {
             let graphViewController = segue.destinationViewController as! GraphViewController
             
-            if let teamNum = data?.teamNumber {
+            if let _ = data?.teamNumber {
                 let indexPath = sender as! NSIndexPath
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                     graphViewController.graphTitle = "\(cell.textLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
                     let key = keySets[indexPath.section][indexPath.row]
                     if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(key) as? [CGFloat] as [CGFloat]? {
-                        graphViewController.values = (values as? [CGFloat])!
+                        graphViewController.values = (values)
                         graphViewController.subDisplayLeftTitle = "Match: "
                         graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("match.match", forTeam: firebaseFetcher.fetchTeam(data!.teamNumber!.integerValue)) as [AnyObject]
                         if let d = data {

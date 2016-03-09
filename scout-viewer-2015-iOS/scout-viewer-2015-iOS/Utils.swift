@@ -52,7 +52,7 @@ func insertCommasAndSpacesBetweenCapitalsInString(string: String) -> String {
         }
     }
     
-    for i in 0...1 {
+    for _ in 0...1 {
         toReturn.removeAtIndex(string.startIndex)
     }
     

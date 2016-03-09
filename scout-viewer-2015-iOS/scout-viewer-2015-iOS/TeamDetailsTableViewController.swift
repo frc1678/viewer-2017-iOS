@@ -286,15 +286,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
-        if let willShow = viewController as? GraphViewController {
+        /*if let willShow = viewController as? GraphViewController {
             //Do nothing
         } else if let willShow = viewController as? MWPhotoBrowser {
             //Do nothing
         } else if let willShow = viewController as? TeamDetailsTableViewController {
             //Do nothing
-        } else {
+        } else {*/
             navigationController.immediatelyCancelSGProgress()
-        }
+       // }
     }
     
     /*func gotTeamImage(notification: NSNotification) {
@@ -701,7 +701,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func setupControllerWithURL(fileURL: NSURL, usingDelegate: UIDocumentInteractionControllerDelegate) -> UIDocumentInteractionController {
-        var interactionController = UIDocumentInteractionController(URL: fileURL)
+        let interactionController = UIDocumentInteractionController(URL: fileURL)
         interactionController.delegate = usingDelegate
         
         return interactionController

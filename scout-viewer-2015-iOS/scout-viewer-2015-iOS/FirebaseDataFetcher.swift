@@ -324,7 +324,7 @@ import DATAStack
     
     func rankOfTeam(team: Team, withCharacteristic: String) -> Int {
         var counter = 0
-        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reverse()
+        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic)
         
         for loopTeam in sortedTeams {
             counter++
@@ -545,12 +545,12 @@ import DATAStack
     }
     
     func getFirstPickList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.firstPickAbility?.integerValue > $1.calculatedData!.firstPickAbility?.integerValue }
+        let sortedArray = self.teams.sort { $0.calculatedData!.firstPickAbility?.floatValue > $1.calculatedData!.firstPickAbility?.floatValue }
         return sortedArray;
     }
     
     func getSecondPickList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.overallSecondPickAbility?.integerValue > $1.calculatedData!.overallSecondPickAbility?.integerValue }
+        let sortedArray = self.teams.sort { $0.calculatedData!.overallSecondPickAbility?.floatValue > $1.calculatedData!.overallSecondPickAbility?.floatValue }
         return sortedArray;
     }
     
@@ -568,12 +568,12 @@ import DATAStack
     }
     
     func seedList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.actualSeed?.integerValue < $1.calculatedData!.actualSeed?.integerValue }
+        let sortedArray = self.teams.sort { $0.calculatedData!.actualSeed?.floatValue < $1.calculatedData!.actualSeed?.floatValue }
         return sortedArray
     }
     
     func predSeedList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.predictedSeed?.integerValue < $1.calculatedData!.predictedSeed?.integerValue }
+        let sortedArray = self.teams.sort { $0.calculatedData!.predictedSeed?.floatValue < $1.calculatedData!.predictedSeed?.floatValue }
         return sortedArray
     }
     
