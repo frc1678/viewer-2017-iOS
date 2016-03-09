@@ -99,7 +99,7 @@ class MatchDetailsViewController: UIViewController {
                 redErrorPercentageLabel.text = percentageValueOf(cd.redWinChance?.integerValue)
             }
             
-            let redTeams = firebaseFetcher.getTeamsFromNumbers(match.redAllianceTeamNumbers)
+            let redTeams = firebaseFetcher.getTeamsFromNumbers(match.redAllianceTeamNumbers as? [Int])
             if redTeams.count > 0 {
                 for index in 0...redTeams.count - 1 {
                     if index <= 2 {
@@ -117,7 +117,7 @@ class MatchDetailsViewController: UIViewController {
             bluePredictedScoreLabel.text = getLabelTitle(match.calculatedData?.predictedBlueScore?.integerValue)
             blueErrorPercentageLabel.text = percentageValueOf(match.calculatedData?.blueWinChance?.integerValue)
             
-            let blueTeams = firebaseFetcher.getTeamsFromNumbers(match.blueAllianceTeamNumbers)
+            let blueTeams = firebaseFetcher.getTeamsFromNumbers(match.blueAllianceTeamNumbers as? [Int])
             if blueTeams.count > 0 {
                 for index in 0...(blueTeams.count - 1) {
                     if index <= 2 {

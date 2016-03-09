@@ -10,7 +10,7 @@ import UIKit
 
 //The Dream, Never Forget
 protocol Reflectable {
-    func propertys() ->[String]
+    func propertys() -> [String]
 }
 
 extension Reflectable
@@ -39,19 +39,19 @@ extension Reflectable
 }
 @objc class Match: NSObject, Reflectable {
     
-    var matchNumber = NSNumber?()
+    var matchNumber : NSNumber?
     
-    var blueAllianceDidCapture = Bool?()
-    var blueAllianceTeamNumbers = [Int]?()
-    var blueDefensePositions = [String]?()
-    var blueScore = NSNumber?()
-    var calculatedData = MatchCalculatedData?()
-    var number = NSNumber?()
-    var redAllianceDidCapture = Bool?()
-    var redAllianceTeamNumbers = [Int]?()
-    var redDefensePositions = [String]?()
-    var redScore = NSNumber?()
-    var matchName:String {
+    var blueAllianceDidCapture : AnyObject?
+    var blueAllianceTeamNumbers : [NSNumber]?
+    var blueDefensePositions : [NSString]?
+    var blueScore : NSNumber?
+    var calculatedData : MatchCalculatedData?
+    var number : NSNumber?
+    var redAllianceDidCapture : AnyObject?
+    var redAllianceTeamNumbers : [NSNumber]?
+    var redDefensePositions : [NSString]?
+    var redScore : NSNumber?
+    var matchName : NSString {
         return "Q" + String(matchNumber)
     }
 

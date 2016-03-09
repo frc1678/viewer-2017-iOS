@@ -97,7 +97,7 @@
             self.currentNumber = [matchCell.matchLabel.text integerValue];
         }
         NSLog(@"Here is the current number:");
-        NSLog([NSString stringWithFormat:@"%d",self.currentNumber]);
+        NSLog([NSString stringWithFormat:@"%ld",(long)self.currentNumber]);
     }
 }
 
@@ -106,10 +106,11 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [self.firebaseFetcher fetchMatches:shouldForce];
+    NSArray *returnData = self.firebaseFetcher.matches;
     NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
+
 -(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
     if([self.firebaseFetcher.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
@@ -119,7 +120,6 @@
         matchCell.backgroundColor = [UIColor whiteColor];
     }
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];

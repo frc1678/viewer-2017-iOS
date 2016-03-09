@@ -8,23 +8,23 @@
 
 import UIKit
 
-@objc class Team: NSObject {
+@objc class Team: NSObject, Reflectable {
     
-    var TeamInMatchDatas = [TeamInMatchData]()
-    var name = String?()
-    var number = NSNumber?()
-    var pitLowBarCapability = Bool?()
+    var TeamInMatchDatas : [TeamInMatchData] = []
+    var name : String?
+    var number : NSNumber?
+    var pitLowBarCapability : AnyObject?
     var calculatedData = CalculatedTeamData?()
-    var pitBumperHeight = NSNumber?()
-    var pitDriveBaseLength = NSNumber?()
-    var pitDriveBaseWidth = NSNumber?()
-    var pitNotes = String?()
-    var pitNumberOfWheels = NSNumber?()
-    var pitOrganization = NSNumber?()
-    var pitPotentialLowBarCapability = NSNumber?()
-    var pitPotentialMidlineBallCapability = NSNumber?()
-    var pitPotentialShotBlockerCapability = NSNumber?()
-    var selectedImageUrl = String?()
-    var pitHeightOfBallLeavingShooter = NSNumber?()
+    var pitBumperHeight : NSNumber?
+    var pitDriveBaseLength : NSNumber?
+    var pitDriveBaseWidth : NSNumber?
+    var pitNotes : String?
+    var pitNumberOfWheels : NSNumber?
+    var pitOrganization : NSNumber?
+    var pitPotentialLowBarCapability : NSNumber?
+    var pitPotentialMidlineBallCapability : NSNumber?
+    var pitPotentialShotBlockerCapability : NSNumber?
+    var selectedImageUrl : String?
+    var pitHeightOfBallLeavingShooter : NSNumber?
     
 }

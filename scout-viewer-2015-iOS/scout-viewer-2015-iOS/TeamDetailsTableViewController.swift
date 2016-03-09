@@ -419,11 +419,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             if !moreInfoValues.contains(dataKey) && dataKey != "disfunctionalPercentage" {
                 var dataPoint = AnyObject?()
-                if dataKey == "pitLowBarCapability" { //This is horrible.
-                    dataPoint = data!.pitLowBarCapability ?? ""
-                } else {
+                
                     dataPoint = data!.valueForKeyPath(dataKey) ?? ""
-                }
+                
                 
                 if dataPoint == nil {
                     print("\(dataKey) is nil")
