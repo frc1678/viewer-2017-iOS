@@ -69,6 +69,16 @@
         matchCell.slash.alpha = .5;
         matchCell.blueScoreLabel.alpha = .5;
     } else {
+        if(match.calculatedData.predictedRedScore != nil) {
+            matchCell.redScoreLabel.text = match.calculatedData.predictedRedScore.stringValue;
+        } else {
+            matchCell.redScoreLabel.text = @"?";
+        }
+        if(match.calculatedData.predictedBlueScore != nil) {
+            matchCell.blueScoreLabel.text = match.calculatedData.predictedBlueScore.stringValue;
+        } else {
+            matchCell.blueScoreLabel.text = @"?";
+        }
         matchCell.redScoreLabel.text = @"?";
         matchCell.blueScoreLabel.text = @"?";
         matchCell.slash.alpha = .5;

@@ -77,7 +77,11 @@
         
         matchCell.redScoreLabel.alpha = 1;
     } else {
-        matchCell.redScoreLabel.text = @"?";
+        if(match.calculatedData.predictedRedScore != nil) {
+            matchCell.redScoreLabel.text = match.calculatedData.predictedRedScore.stringValue;
+        } else {
+            matchCell.redScoreLabel.text = @"?";
+        }
         
         matchCell.redScoreLabel.alpha = .3;
         matchCell.slash.alpha = .3;
@@ -89,7 +93,11 @@
         matchCell.blueScoreLabel.alpha = 1;
     }
     else {
+        if (match.calculatedData.predictedBlueScore != nil) {
+            matchCell.blueScoreLabel.text = match.calculatedData.predictedBlueScore.stringValue;
+        } else {
         matchCell.blueScoreLabel.text = @"?";
+        }
         matchCell.blueScoreLabel.alpha = .3;
     }
     if(![matchCell.blueScoreLabel.text  isEqual: @"?"] && ![matchCell.redScoreLabel.text  isEqual: @"?"] && ![matchCell.blueScoreLabel.text isEqual:@"-1"] && ![matchCell.redScoreLabel.text isEqual:@"-1"]) {
