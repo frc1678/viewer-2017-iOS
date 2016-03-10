@@ -61,6 +61,9 @@ class DefenseTableViewController: ArrayTableViewController {
         
         
     }
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
     
     /*
     // MARK: - Navigation

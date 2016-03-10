@@ -645,8 +645,8 @@ import DATAStack
     }
     
     func getMatchValuesForTeamForPath(path: String, forTeam: Team) -> [Float] {
-        let timDatas = forTeam.TeamInMatchDatas
-        print(path)
+        let timDatas = getTIMDataForTeam(forTeam)
+        print(forTeam.TeamInMatchDatas)
         var valueArray = [Float]()
         for timData in timDatas {
             let value : AnyObject?
