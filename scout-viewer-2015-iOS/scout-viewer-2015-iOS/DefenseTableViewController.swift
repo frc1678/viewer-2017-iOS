@@ -77,7 +77,7 @@ class DefenseTableViewController: ArrayTableViewController {
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]? {
         let team = self.firebaseFetcher.fetchTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
-        var intArray = [AnyObject]?()
+        var intArray = [AnyObject]()
         
         let teleSuccessValue = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key]
         let autoSuccessValue = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key]
@@ -85,15 +85,17 @@ class DefenseTableViewController: ArrayTableViewController {
         let somethingElse = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key]
         
         if teleSuccessValue != nil {
-            if autoSuccessValue != nil {
-                if something != nil {
-                    if somethingElse != nil {
-                        intArray = [teleSuccessValue!,autoSuccessValue!,something!,somethingElse!]
-                    }
-                }
-            }
+            intArray.append(teleSuccessValue!)
         }
-        
+        if autoSuccessValue != nil {
+            intArray.append(autoSuccessValue!)
+        }
+        if something != nil {
+            intArray.append(something!)
+        }
+        if somethingElse != nil {
+            intArray.append(somethingElse!)
+        }
         return intArray
     }
     
