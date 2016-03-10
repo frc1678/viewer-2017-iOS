@@ -18,9 +18,10 @@ import DATAStack
     var starredMatchesArray = NSMutableArray()
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-dev3-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-dev2-2016.firebaseio.com/"
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
+    let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
     var matches = [Match]()
     var teamInMatches = [TeamInMatchData]()
     var imageUrls = Dictionary<Int,String>()
@@ -201,32 +202,13 @@ import DATAStack
 
                 }
             }
-            /*
-            team.name = name
-            team.number = (v.objectForKey("number") as? Int)
-            team.pitDriveBaseLength = (v.objectForKey("pitDriveBaseLength") as? Double)
-            team.pitBumperHeight = (v.objectForKey("pitBumperHeight") as? Double)
-            team.pitDriveBaseWidth = (v.objectForKey("pitDriveBaseWidth") as? Double)
-            team.pitLowBarCapability = (v.objectForKey("pitLowBarCapability") as? Bool)
-            team.pitNotes = (v.objectForKey("pitNotes") as? String)
-            team.pitNumberOfWheels = (v.objectForKey("pitNumberOfWheels") as? Int)
-            team.pitOrganization = (v.objectForKey("pitOrganization") as? Int)
-            team.pitPotentialLowBarCapability = (v.objectForKey("pitPotentialLowBarCapability") as? Int)
-            team.pitPotentialMidlineBallCapability = (v.objectForKey("pitPotentialMidlineBallCapability") as? Int)
-            team.pitPotentialShotBlockerCapability = (v.objectForKey("pitPotentialShotBlockerCapability") as? Int)
-            team.selectedImageUrl = (v.objectForKey("selectedImageUrl") as? String)
-            team.pitHeightOfBallLeavingShooter = (v.objectForKey("pitHeightOfBallLeavingShooter") as? Double)
-            
-            let teamDict = (v.objectForKey("calculatedData") as? NSDictionary)
-            team.calculatedData = self.getcalcDataForTeamFromDict(teamDict)
-            */
-        }
+                    }
         return team
     }
     
     func getAllTheData() {
         let firebase = Firebase(url: self.firebaseURLFirstPart)
-        firebase.authWithCustomToken(dev3Token) { (E, A) -> Void in
+        firebase.authWithCustomToken(dev2Token) { (E, A) -> Void in
             
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
                 
@@ -482,19 +464,7 @@ import DATAStack
             for key in matchData.propertys() {
                 matchData.setValue(dict!.objectForKey(key), forKey: key)
             }
-            /*
-            matchData.blueRPs = (dict!.objectForKey("actualBlueRPs") as? Int)
-            matchData.numDefenseCrossesByBlue = (dict!.objectForKey("numDefensesCrossedByBlue") as? Int)
-            matchData.numDefenseCrossesByRed = (dict!.objectForKey("numDefensesCrossedByRed") as? Int)
-            matchData.predictedBlueScore = (dict!.objectForKey("predictedBlueScore") as? Int)
-            matchData.predictedRedScore = (dict!.objectForKey("predictedRedScore") as? Int)
-            matchData.redRPs = (dict!.objectForKey("actualRedRPs") as? Int)
-            matchData.optimalBlueDefenses = (dict!.objectForKey("optimalBlueDefenses") as? [String])
-            matchData.optimalRedDefenses = (dict!.objectForKey("optimalRedDefenses") as? [String])
-            matchData.blueWinChance = (dict!.objectForKey("blueWinChance") as? Int)
-            matchData.redWinChance = (dict!.objectForKey("redWinChance") as? Int)
-*/
-        }
+                    }
         return matchData
     }
     

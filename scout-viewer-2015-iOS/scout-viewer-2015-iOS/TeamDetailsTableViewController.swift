@@ -650,7 +650,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //print(keySets[indexPath.section][indexPath.row])
                     let values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
                     if values.reduce(0, combine: +) == 0 || values.count == 0 {
-                        graphViewController.graphTitle = "Data not available...yet"
+                        graphViewController.graphTitle = "Data Is All 0s"
                     }
                     print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]

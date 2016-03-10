@@ -22,7 +22,6 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-   
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
@@ -34,7 +33,12 @@
     
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     
-    multiCell.scoreLabel.text = @"";
+    if(team.calculatedData.numRPs != nil) {
+        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%ld",
+                                     team.calculatedData.numRPs.integerValue];
+    } else {
+        multiCell.scoreLabel.text = @"";
+    }
     
     //Ask about this
 }
