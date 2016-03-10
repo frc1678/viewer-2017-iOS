@@ -65,7 +65,7 @@ class MatchDetailsViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "checkRes:", name: "updateLeftTable", object: nil)
         
         updateUI()
         print(self.match)
@@ -105,8 +105,8 @@ class MatchDetailsViewController: UIViewController {
                     if index <= 2 {
                         (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
                         if let cd = redTeams[index].calculatedData {
-                            if cd.driverAbility != nil {
-                                (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData!.driverAbility!, toDecimalPlaces: 4)
+                            if cd.teleopShotAbility != nil {
+                                (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData!.teleopShotAbility!, toDecimalPlaces: 4)
                             }
                         }
                     }
@@ -124,8 +124,8 @@ class MatchDetailsViewController: UIViewController {
                         print(blueTeams[index].number)
                         (valueForKey("blueTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index])", forState: UIControlState.Normal)
                         if let cd = blueTeams[index].calculatedData {
-                            if cd.driverAbility != nil {
-                                (valueForKey("blueTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(cd.driverAbility!, toDecimalPlaces: 4)
+                            if cd.teleopShotAbility != nil {
+                                (valueForKey("blueTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(cd.teleopShotAbility!, toDecimalPlaces: 4)
                             }
                         }
                     }

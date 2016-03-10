@@ -11,7 +11,7 @@ import UIKit
 @objc class CalculatedTeamData: NSObject, Reflectable {
     
     
-    
+    var teleopShotAbility = NSNumber?()
     var actualSeed = NSNumber?()
     var avgBallControl = NSNumber?()
     var avgBallsKnockedOffMidlineAuto = NSNumber?()
