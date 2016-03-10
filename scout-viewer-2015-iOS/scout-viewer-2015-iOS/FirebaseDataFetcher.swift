@@ -237,6 +237,7 @@ import DATAStack
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
                     let number = (snapshot.value.objectForKey("number") as? Int)!
+                    self.checkForNotification()
                     for matchIndex in Range(start: 0, end: self.matches.count) {
                         let match = self.matches[matchIndex]
                         if match.number == number {
@@ -266,7 +267,7 @@ import DATAStack
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
-                        self.checkForNotification()
+                        
                     }
                 })
                 
@@ -325,6 +326,18 @@ import DATAStack
     func rankOfTeam(team: Team, withCharacteristic: String) -> Int {
         var counter = 0
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic)
+        
+        for loopTeam in sortedTeams {
+            counter++
+            if loopTeam.number == team.number?.integerValue {
+                return counter
+            }
+        }
+        return counter
+    }
+    func reverseRankOfTeam(team: Team, withCharacteristic:String) -> Int {
+        var counter = 0
+        let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reverse()
         
         for loopTeam in sortedTeams {
             counter++
@@ -690,10 +703,10 @@ import DATAStack
         return valueArray
     }
     
-    func postNotification() {
+    func postNotification(notificationBody:String) {
         let localNotification = UILocalNotification()
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
-        localNotification.alertBody = "Starred Match Coming Up!"
+        localNotification.alertBody = notificationBody
         localNotification.timeZone = NSTimeZone.defaultTimeZone()
         localNotification.soundName = UILocalNotificationDefaultSoundName
         localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
@@ -718,8 +731,14 @@ import DATAStack
     func checkForNotification() {
         let swiftArray = self.starredMatchesArray as AnyObject as! [String]
         let currentMatch = self.getCurrentMatch()
-        if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
-            postNotification()
+        if swiftArray.contains(String(currentMatch)) {
+            postNotification("Match coming up: " + String(currentMatch))
+        }
+        if swiftArray.contains(String(currentMatch + 1)) {
+             postNotification("Match coming up: " + String(currentMatch + 1 ))
+        }
+        if swiftArray.contains(String(currentMatch + 2)) {
+            postNotification("Match coming up: " + String(currentMatch + 2))
         }
     }
     
@@ -728,9 +747,10 @@ import DATAStack
         let swiftArray = array as AnyObject as! [String]
         let currentMatch = self.getCurrentMatch()
         if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
-            postNotification()
+            postNotification("Starred Match coming up!")
         }
     }
+    
 }
 
 
