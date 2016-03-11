@@ -11,11 +11,18 @@ import UIKit
 import Firebase
 import Sync
 import DATAStack
+import Haneke
 
 @objc class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     var currentMatchNum = 0
-    var starredMatchesArray = NSMutableArray()
+    let cache = Shared.dataCache
+
+    var starredMatchesArray = [String]() {
+        didSet {
+            cache.set(value: NSKeyedArchiver.archivedDataWithRootObject(starredMatchesArray ?? NSMutableArray()), key: "starredMatches")
+        }
+    }
     
     var teams = [Team]()
     let firebaseURLFirstPart = "https://1678-dev3-2016.firebaseio.com/"
@@ -26,7 +33,6 @@ import DATAStack
     var teamInMatches = [TeamInMatchData]()
     var imageUrls = Dictionary<Int,String>()
     var allTheData = NSDictionary()
-    var dataStack : DATAStack = DATAStack()
     
     var teamInMatchKeys = [
         "firstPickAbility",
@@ -159,6 +165,8 @@ import DATAStack
         super.init()
         NSNotificationCenter.defaultCenter().addObserver(self,selector:"currentMatchChanged",name:"currentNumberChanged",object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "lpgrTriggered:", name: "lpgrTriggered", object: nil)
+        
+        
         self.getAllTheData()
     }
     
@@ -208,6 +216,16 @@ import DATAStack
     }
     
     func getAllTheData() {
+        cache.fetch(key: "starredMatches").onSuccess { (d) -> () in
+            if let starred = NSKeyedUnarchiver.unarchiveObjectWithData(d) as? [String] {
+                if self.starredMatchesArray != starred {
+                    self.starredMatchesArray = starred
+                }
+            } else {
+                self.starredMatchesArray = [String]()
+            }
+        }
+        
         let firebase = Firebase(url: self.firebaseURLFirstPart)
         firebase.authWithCustomToken(dev3Token) { (E, A) -> Void in
             
@@ -237,7 +255,7 @@ import DATAStack
                 teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.teams.append(team)
-                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team.number)
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                     if(UInt(self.teams.count) == numTeams) {
                         self.getCurrentMatch()
                     }
@@ -251,7 +269,7 @@ import DATAStack
                     })
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team.number)
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                         
                     }
                 })
@@ -486,14 +504,14 @@ import DATAStack
             }
             
             /*if let scd = calcData.avgSuccessfulTimesCrossedDefensesTele {
-                calcData.avgSuccessfulTimesCrossedDefenses.cdfCrossed = (scd["cdf"] as? Int)
-                calcData.pcCrossed = (scd["pc"] as? Int)
-                calcData.mtCrossed = (scd["mt"] as? Int)
-                calcData.rpCrossed = (scd["rp"] as? Int)
-                calcData.dbCrossed = (scd["db"] as? Int)
-                calcData.spCrossed = (scd["sp"] as? Int)
-                calcData.rtCrossed = (scd["rt"] as? Int)
-                calcData.rwCrossed = (scd["rw"] as? Int)
+            calcData.avgSuccessfulTimesCrossedDefenses.cdfCrossed = (scd["cdf"] as? Int)
+            calcData.pcCrossed = (scd["pc"] as? Int)
+            calcData.mtCrossed = (scd["mt"] as? Int)
+            calcData.rpCrossed = (scd["rp"] as? Int)
+            calcData.dbCrossed = (scd["db"] as? Int)
+            calcData.spCrossed = (scd["sp"] as? Int)
+            calcData.rtCrossed = (scd["rt"] as? Int)
+            calcData.rwCrossed = (scd["rw"] as? Int)
             }*/
         }
         return calcData
@@ -660,7 +678,7 @@ import DATAStack
     func getMatchDataValuesForTeamForPath(var path: String, forTeam: Team) -> [Float] {
         let matches = getMatchesForTeam(forTeam.number as! Int)
         var valueArray = [Float]()
-
+        
         for match in matches {
             let value : AnyObject?
             if path == "calculatedData.predictedNumRPs" {
@@ -751,25 +769,33 @@ import DATAStack
     }
     
     func checkForNotification() {
-        let swiftArray = self.starredMatchesArray as AnyObject as! [String]
-        let currentMatch = self.getCurrentMatch()
-        if swiftArray.contains(String(currentMatch)) {
-            postNotification("Match coming up: " + String(currentMatch))
-        }
-        if swiftArray.contains(String(currentMatch + 1)) {
-            postNotification("Match coming up: " + String(currentMatch + 1 ))
-        }
-        if swiftArray.contains(String(currentMatch + 2)) {
-            postNotification("Match coming up: " + String(currentMatch + 2))
+        if let swiftArray = self.starredMatchesArray as? AnyObject as? [String] {
+            let currentMatch = self.getCurrentMatch()
+            if swiftArray.contains(String(currentMatch)) {
+                postNotification("Match coming up: " + String(currentMatch))
+            }
+            if swiftArray.contains(String(currentMatch + 1)) {
+                postNotification("Match coming up: " + String(currentMatch + 1 ))
+            }
+            if swiftArray.contains(String(currentMatch + 2)) {
+                postNotification("Match coming up: " + String(currentMatch + 2))
+            }
+        } else {
+            self.starredMatchesArray = [String]()
+            self.checkForNotification()
         }
     }
     
     func lpgrTriggered(notification:NSNotification) {
         let array = self.starredMatchesArray
-        let swiftArray = array as AnyObject as! [String]
+        if let swiftArray = array as? AnyObject as? [String] {
         let currentMatch = self.getCurrentMatch()
         if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
             postNotification("Starred Match coming up!")
+        }
+        } else {
+            self.starredMatchesArray = [String]()
+            lpgrTriggered(notification)
         }
     }
     

@@ -158,11 +158,13 @@
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
         MatchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
         if([self.firebaseFetcher.starredMatchesArray containsObject:cell.matchLabel.text]) {
-            [self.firebaseFetcher.starredMatchesArray removeObject:cell.matchLabel.text];
+            NSMutableArray *a = [NSMutableArray arrayWithArray:self.firebaseFetcher.starredMatchesArray];
+            [a removeObject:cell.matchLabel.text];
+            self.firebaseFetcher.starredMatchesArray = a;
             cell.backgroundColor = [UIColor whiteColor];
         } else {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
-            [self.firebaseFetcher.starredMatchesArray addObject:cell.matchLabel.text];
+            self.firebaseFetcher.starredMatchesArray = [self.firebaseFetcher.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
         }
         NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:note];

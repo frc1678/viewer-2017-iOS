@@ -753,10 +753,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func reloadTableView(note: NSNotification) {
         if note.name == "updateLeftTable" {
-            if note.object == nil || note.object as? NSNumber == data?.number {
-                self.data = note.object as? Team
-                self.reload()
+            if let t = note.object as? Team {
+                if t.number == data?.number {
+                    self.data = t
+                    self.reload()
+                }
             }
+            
         }
     }
 }
