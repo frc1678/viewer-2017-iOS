@@ -14,7 +14,6 @@ class DefenseTableViewController: ArrayTableViewController {
     var relevantDefense = "" {
         didSet {
             if relevantDefense != "" {
-                print(relevantDefense)
                 print(getKeyFromTeamLabel(relevantDefense))
                 self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
                 
@@ -23,10 +22,11 @@ class DefenseTableViewController: ArrayTableViewController {
     }
     
     var defenseKeys = [
-        "calculatedData.avgFailedTimesCrossedDefensesAuto",
-        "calculatedData.avgFailedTimesCrossedDefensesTele",
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto",
         "calculatedData.avgSuccessfulTimesCrossedDefensesTele",
+        "calculatedData.avgFailedTimesCrossedDefensesAuto",
+        "calculatedData.avgFailedTimesCrossedDefensesTele",
+        
     ]
     func getKeyFromTeamLabel(relevantString:String) -> String {
         let stringArray = relevantString.characters.split{$0==" "}.map(String.init)
@@ -49,7 +49,7 @@ class DefenseTableViewController: ArrayTableViewController {
     }
     
     override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
-        let value = data as? Int
+        let value = data as? Float
         let multiCell = cell as? MultiCellTableViewCell
         
         let title = Utils.humanReadableNames[defenseKeys[path.row]]
@@ -80,26 +80,22 @@ class DefenseTableViewController: ArrayTableViewController {
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]? {
         let team = self.firebaseFetcher.fetchTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
-        var intArray = [AnyObject]()
+        var crossesData = [Float]()
         
-        let teleSuccessValue = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key]
-        let autoSuccessValue = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key]
-        let something = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key]
-        let somethingElse = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key]
+        let teleSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key] as? Float
+        let autoFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key] as? Float
+        let autoSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key] as? Float
+        let teleFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesTele?[key] as? Float
         
-        if teleSuccessValue != nil {
-            intArray.append(teleSuccessValue!)
-        }
-        if autoSuccessValue != nil {
-            intArray.append(autoSuccessValue!)
-        }
-        if something != nil {
-            intArray.append(something!)
-        }
-        if somethingElse != nil {
-            intArray.append(somethingElse!)
-        }
-        return intArray
+            crossesData.append(autoSuccessAvg ?? 0.0)
+        
+            crossesData.append(teleSuccessAvg ?? 0.0)
+        
+            crossesData.append(autoFailAvg ?? 0.0)
+        
+            crossesData.append(teleFailAvg ?? 0.0)
+        
+        return crossesData
     }
     
 }

@@ -10,11 +10,13 @@ import UIKit
 
 @objc class MatchCalculatedData: NSObject, Reflectable {
     var blueRPs: NSNumber?
+    var predictedBlueRPs: NSNumber?
     var numDefenseCrossesByBlue : NSNumber?
     var numDefenseCrossesByRed : NSNumber?
     var predictedBlueScore : NSNumber?
     var predictedRedScore : NSNumber?
     var redRPs : NSNumber?
+    var predictedRedRPs: NSNumber?
     var optimalBlueDefenses : [NSString]?
     var optimalRedDefenses : [NSString]?
     var blueWinChance : NSNumber?

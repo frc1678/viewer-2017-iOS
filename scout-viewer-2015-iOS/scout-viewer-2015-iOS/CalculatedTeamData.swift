@@ -69,14 +69,6 @@ import UIKit
     var siegePower = NSNumber?()
     var overallSecondPickAbility = NSNumber?()
     var citrusDPR = NSNumber?()
-    var cdfCrossed = NSNumber?()
-    var pcCrossed = NSNumber?()
-    var mtCrossed = NSNumber?()
-    var rpCrossed = NSNumber?()
-    var dbCrossed = NSNumber?()
-    var spCrossed = NSNumber?()
-    var rtCrossed = NSNumber?()
-    var rwCrossed = NSNumber?()
-    var lbCrossed = NSNumber?()
+    var avgSuccessfulTimesCrossedDefenses = NSDictionary?()
     
     }

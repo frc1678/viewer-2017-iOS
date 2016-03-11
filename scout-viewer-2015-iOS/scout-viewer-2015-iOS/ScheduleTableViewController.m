@@ -78,7 +78,7 @@
         matchCell.redScoreLabel.alpha = 1;
     } else {
         if(match.calculatedData.predictedRedScore != nil) {
-            matchCell.redScoreLabel.text = match.calculatedData.predictedRedScore.stringValue;
+            matchCell.redScoreLabel.text = [Utils roundValue: match.calculatedData.predictedRedScore.floatValue toDecimalPlaces:1];
         } else {
             matchCell.redScoreLabel.text = @"?";
         }
@@ -94,7 +94,7 @@
     }
     else {
         if (match.calculatedData.predictedBlueScore != nil) {
-            matchCell.blueScoreLabel.text = match.calculatedData.predictedBlueScore.stringValue;
+            matchCell.blueScoreLabel.text = [Utils roundValue: match.calculatedData.predictedBlueScore.floatValue toDecimalPlaces:1];
         } else {
         matchCell.blueScoreLabel.text = @"?";
         }

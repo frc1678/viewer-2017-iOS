@@ -11,7 +11,7 @@
 NSInteger const SGProgresstagId = 222122323;
 NSInteger const SGProgressMasktagId = 221222322;
 NSInteger const SGProgressMiniMasktagId = 221222321;
-CGFloat const SGProgressBarHeight = 2.5;
+CGFloat const SGProgressBarHeight = 0.0; //2.5;
 
 @implementation UINavigationController (SGProgress)
 

@@ -18,7 +18,7 @@ import DATAStack
     var starredMatchesArray = NSMutableArray()
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-dev2-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-dev3-2016.firebaseio.com/"
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
@@ -170,7 +170,7 @@ import DATAStack
             if key == "calculatedData" {
                 match.calculatedData = self.getMatchCalculatedDatafromDict(snapshot.value.objectForKey("calculatedData") as? NSDictionary)
             } else {
-            match.setValue(snapshot.value.objectForKey(key), forKey: key)
+                match.setValue(snapshot.value.objectForKey(key), forKey: key)
             }
         }
         /*
@@ -190,25 +190,26 @@ import DATAStack
     
     func makeTeamFromSnapshot(snapshot: FDataSnapshot) -> Team {
         let team = Team()
-        let v = snapshot.value as! NSDictionary
-        if let _ = (v.objectForKey("name") as? String) {
-            
-            for key in team.propertys() {
-                if key == "calculatedData" {
-                    let teamCDDict = (v.objectForKey("calculatedData") as? NSDictionary)
-                    team.calculatedData = self.getcalcDataForTeamFromDict(teamCDDict)
-                } else {
-                    team.setValue(snapshot.value.objectForKey(key), forKey: key)
-
+        if let v = snapshot.value as? NSDictionary {
+            if let _ = (v.objectForKey("name") as? String) {
+                
+                for key in team.propertys() {
+                    if key == "calculatedData" {
+                        let teamCDDict = (v.objectForKey("calculatedData") as? NSDictionary)
+                        team.calculatedData = self.getcalcDataForTeamFromDict(teamCDDict)
+                    } else {
+                        team.setValue(snapshot.value.objectForKey(key), forKey: key)
+                        
+                    }
                 }
             }
-                    }
+        }
         return team
     }
     
     func getAllTheData() {
         let firebase = Firebase(url: self.firebaseURLFirstPart)
-        firebase.authWithCustomToken(dev2Token) { (E, A) -> Void in
+        firebase.authWithCustomToken(dev3Token) { (E, A) -> Void in
             
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
                 
@@ -220,7 +221,7 @@ import DATAStack
                 })
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
-                    let number = (snapshot.value.objectForKey("number") as? Int)!
+                    let number = (snapshot.childSnapshotForPath("number").value as? Int)!
                     self.checkForNotification()
                     for matchIndex in Range(start: 0, end: self.matches.count) {
                         let match = self.matches[matchIndex]
@@ -236,7 +237,7 @@ import DATAStack
                 teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.teams.append(team)
-                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team.number)
                     if(UInt(self.teams.count) == numTeams) {
                         self.getCurrentMatch()
                     }
@@ -250,7 +251,7 @@ import DATAStack
                     })
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team.number)
                         
                     }
                 })
@@ -353,7 +354,7 @@ import DATAStack
                     if TIMData != nil {
                         TIMData!.identifier = datasnapshot.key
                         let TIMCalcData = self.getCalculatedTeamInMatchDataForDict((datasnapshot.childSnapshotForPath("calculatedData").value as? NSDictionary))
-                            TIMData!.calculatedData = TIMCalcData
+                        TIMData!.calculatedData = TIMCalcData
                         TIMDatas.append(TIMData!)
                         self.teamInMatches.append(TIMData!)
                         team.TeamInMatchDatas.append(TIMData!)
@@ -415,9 +416,9 @@ import DATAStack
         return pdfImage
     }
     
-    func fetchMatch(match: String) -> Match {
+    func fetchMatch(matchNum: Int) -> Match {
         for m in self.matches {
-            if String(m.number) == m {
+            if m.number == matchNum {
                 return m
             }
         }
@@ -444,6 +445,7 @@ import DATAStack
                 }
             }
         }
+        array.sortInPlace { Int($0.number!) < Int($1.number!) }
         return array
     }
     
@@ -453,6 +455,7 @@ import DATAStack
         for match in matches {
             matchNumbers.append(match.number!)
         }
+        
         return matchNumbers
     }
     
@@ -464,7 +467,7 @@ import DATAStack
             for key in matchData.propertys() {
                 matchData.setValue(dict!.objectForKey(key), forKey: key)
             }
-                    }
+        }
         return matchData
     }
     
@@ -482,8 +485,8 @@ import DATAStack
                 }
             }
             
-            if let scd = calcData.avgSuccessfulTimesCrossedDefensesTele {
-                calcData.cdfCrossed = (scd["cdf"] as? Int)
+            /*if let scd = calcData.avgSuccessfulTimesCrossedDefensesTele {
+                calcData.avgSuccessfulTimesCrossedDefenses.cdfCrossed = (scd["cdf"] as? Int)
                 calcData.pcCrossed = (scd["pc"] as? Int)
                 calcData.mtCrossed = (scd["mt"] as? Int)
                 calcData.rpCrossed = (scd["rp"] as? Int)
@@ -491,7 +494,7 @@ import DATAStack
                 calcData.spCrossed = (scd["sp"] as? Int)
                 calcData.rtCrossed = (scd["rt"] as? Int)
                 calcData.rwCrossed = (scd["rw"] as? Int)
-            }
+            }*/
         }
         return calcData
     }
@@ -525,7 +528,7 @@ import DATAStack
         let matchIDParts = key.componentsSeparatedByString("Q")
         TIMData.teamNumber = Int(matchIDParts[0])
         TIMData.matchNumber = Int(matchIDParts[1])
-
+        
         return TIMData
     }
     
@@ -549,6 +552,7 @@ import DATAStack
                 }
             }
         }
+        matches.sortInPlace { Int($0.number!) > Int($1.number!) }
         return matches
     }
     
@@ -562,15 +566,24 @@ import DATAStack
         return sortedArray
     }
     
+    func predictedRPsKeyForTeamNum(teamNumber: Int, matchNum: Int) -> String {
+        let match = self.fetchMatch(matchNum)
+        if ((match.redAllianceTeamNumbers?.contains(teamNumber)) != nil) {
+            return "calculatedData.predictedRedRPs"
+        } else {
+            return "calculatedData.predictedBlueRPs"
+        }
+    }
+    
     func getSortedListbyString(path: String) -> [Team] {
         let sortedArray = self.teams.sort({ (t1, t2) -> Bool in
-                if let t1v = t1.valueForKeyPath(path) {
-                    if let t2v = t2.valueForKeyPath(path) {
-                        if t1v.doubleValue > t2v.doubleValue {
-                            return true
-                        }
+            if let t1v = t1.valueForKeyPath(path) {
+                if let t2v = t2.valueForKeyPath(path) {
+                    if t1v.doubleValue > t2v.doubleValue {
+                        return true
                     }
                 }
+            }
             
             return false
         })
@@ -644,16 +657,51 @@ import DATAStack
         return valueArray
     }
     
+    func getMatchDataValuesForTeamForPath(var path: String, forTeam: Team) -> [Float] {
+        let matches = getMatchesForTeam(forTeam.number as! Int)
+        var valueArray = [Float]()
+
+        for match in matches {
+            let value : AnyObject?
+            if path == "calculatedData.predictedNumRPs" {
+                path = predictedRPsKeyForTeamNum(forTeam.number as! Int, matchNum: match.number as! Int)
+            }
+            value = match.valueForKeyPath(path)
+            
+            
+            if value != nil {
+                
+                if let floatVal = value as? Float {
+                    valueArray.append(floatVal)
+                    
+                } else { // Pretty much, if its false it's 0, if its true it's 1
+                    let boolValue: Bool
+                    if let boolBoolValue = value as? Bool { //Such ugly
+                        boolValue = boolBoolValue
+                    } else {
+                        boolValue = value as? String == "true" ? true : false
+                    }
+                    valueArray.append((boolValue ? 1.0 : 0.0))
+                }
+            } else {
+                valueArray.append(0.0)
+            }
+        }
+        return valueArray
+    }
+    
+    
     func getMatchValuesForTeamForPath(path: String, forTeam: Team) -> [Float] {
-        let timDatas = getTIMDataForTeam(forTeam)
+        var timDatas = getTIMDataForTeam(forTeam)
+        timDatas.sortInPlace { Int($0.matchNumber!) < Int($1.matchNumber!) }
         print(forTeam.TeamInMatchDatas)
         var valueArray = [Float]()
         for timData in timDatas {
             let value : AnyObject?
             
-                value = timData.valueForKeyPath(path)
+            value = timData.valueForKeyPath(path)
             
-
+            
             if value != nil {
                 
                 if let floatVal = value as? Float {
@@ -707,7 +755,7 @@ import DATAStack
             postNotification("Match coming up: " + String(currentMatch))
         }
         if swiftArray.contains(String(currentMatch + 1)) {
-             postNotification("Match coming up: " + String(currentMatch + 1 ))
+            postNotification("Match coming up: " + String(currentMatch + 1 ))
         }
         if swiftArray.contains(String(currentMatch + 2)) {
             postNotification("Match coming up: " + String(currentMatch + 2))

@@ -91,16 +91,17 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.sdLowShotsTele",
         "calculatedData.avgShotsBlocked"
     ]
+    
     var obstacleKeys = [
-        "calculatedData.cdfCrossed",
-        "calculatedData.pcCrossed",
-        "calculatedData.mtCrossed",
-        "calculatedData.rpCrossed",
-        "calculatedData.dbCrossed",
-        "calculatedData.spCrossed",
-        "calculatedData.rtCrossed",
-        "calculatedData.rwCrossed",
-        "calculatedData.lbCrossed"
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.cdf",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.pc",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.mt",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.rp",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.db",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.sp",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.rt",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.rw",
+        "calculatedData.avgSuccessfulTimesCrossedDefenses.lb"
     ]
     
     
@@ -293,7 +294,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else if let willShow = viewController as? TeamDetailsTableViewController {
             //Do nothing
         } else {*/
-            navigationController.immediatelyCancelSGProgress()
+            //navigationController.immediatelyCancelSGProgress()
        // }
     }
     
@@ -335,7 +336,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         let pdfURL = NSURL(fileURLWithPath: pdfPath)
         print("Rendering PDF...")
         
-        PDFRenderer.renderPDFToPath(pdfPath) {(progress: Float, done: Bool) -> () in
+        /*PDFRenderer.renderPDFToPath(pdfPath) {(progress: Float, done: Bool) -> () in
             self.navigationController?.setSGProgressPercentage(progress * 100)
             
             if(done) {
@@ -345,7 +346,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 self.shareController.presentPreviewAnimated(true)
                 sender.enabled = true
             }
-        }
+        }*/
     }
     
     func documentInteractionControllerViewControllerForPreview(controller: UIDocumentInteractionController) -> UIViewController {
@@ -581,7 +582,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.teamSelectedImageView.userInteractionEnabled = true;
         //        self.n
-        navigationController?.setSGProgressPercentage(50.0)
+        //navigationController?.setSGProgressPercentage(50.0)
         if segue.identifier == "defenseCrossedSegue" {
             let indexPath = sender as? NSIndexPath
             let cell = tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell
@@ -642,22 +643,34 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         case "calculatedData.avgSpeed": key = "calculatedData.RScoreSpeed"
                         case "calculatedData.avgEvasion": key = "calculatedData.RScoreEvasion"
                         case "calculatedData.avgTorque": key = "calculatedData.RScoreTorque"
+                        case "calculatedData.avgBallControl": key = "rankBallControl"
+                        
+                            
                         default: break
                         }
                     }
                     
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
-                    let values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
+                    let values: [Float]
+                    if key == "calculatedData.predictedNumRPs" {
+                        
+                        values = firebaseFetcher.getMatchDataValuesForTeamForPath(key!, forTeam: data!)
+                    } else {
+                    values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
+                    }
                     if values.reduce(0, combine: +) == 0 || values.count == 0 {
                         graphViewController.graphTitle = "Data Is All 0s"
-                    }
+                        graphViewController.values = [CGFloat]()
+                        graphViewController.subValuesLeft = [CGFloat]()
+                    } else {
                     print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
                     graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
-                    print("Here are the subValues")
+                    print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
                     print(graphViewController.subValuesLeft)
+                    }
                     /*if let d = data {
                     graphViewController.subValuesRight =
                     nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
@@ -719,7 +732,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     //    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? UnrankedTableViewCell {
             if cell.titleLabel.text == "Matches" {
                 performSegueWithIdentifier("Matches", sender: nil)
@@ -741,8 +753,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func reloadTableView(note: NSNotification) {
         if note.name == "updateLeftTable" {
-            self.data = note.object as? Team
-            self.reload()
+            if note.object == nil || note.object as? NSNumber == data?.number {
+                self.data = note.object as? Team
+                self.reload()
+            }
         }
     }
 }
