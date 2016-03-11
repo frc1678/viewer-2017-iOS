@@ -647,9 +647,11 @@ import DATAStack
     func getMatchValuesForTeamForPath(path: String, forTeam: Team) -> [Float] {
         let timDatas = getTIMDataForTeam(forTeam)
         print(forTeam.TeamInMatchDatas)
+        let sortedTimDatas = timDatas.sort { $0.matchNumber!.integerValue < $1.matchNumber?.integerValue }
         var valueArray = [Float]()
-        for timData in timDatas {
+        for timData in sortedTimDatas {
             let value : AnyObject?
+            print(timData.matchNumber!.integerValue)
             
                 value = timData.valueForKeyPath(path)
             
