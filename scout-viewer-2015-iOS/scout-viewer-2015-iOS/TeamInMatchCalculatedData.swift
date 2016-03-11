@@ -34,6 +34,7 @@ import UIKit
     var overallSecondPickAbility : NSNumber?
     var scoreContribution : NSNumber?
     var avgGroundIntakes : NSNumber?
+    var numBallsIntakedOffMidlineAuto : NSNumber?
     var avgTorque : NSNumber?
     var avgEvasion : NSNumber?
     var avgBallControl : NSNumber?

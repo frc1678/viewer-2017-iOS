@@ -633,7 +633,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         case "avgLowShotsTele": key = "numLowShotsMadeTele"
                         case "avgHighShotsTele": key = "numHighShotsMadeTele"
                         case "avgBallsKnockedOffMidlineAuto": key = "numBallsKnockedOffMidlineAuto"
-                        case "avgMidlineBallsIntakedAuto": key = "ballsIntakedAuto"
+                        case "avgMidlineBallsIntakedAuto": key = "calculatedData.numBallsIntakedOffMidlineAuto"
                             
                         default: break
                         }
