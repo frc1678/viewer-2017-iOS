@@ -166,8 +166,9 @@
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
             self.firebaseFetcher.starredMatchesArray = [self.firebaseFetcher.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
         }
-        NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:note];
+        [self.firebaseFetcher checkForNotification];
+       /* NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:note];*/
     }
 }
 - (NSAttributedString *)textForLabelForString:(NSString *)string highlightOccurencesOfString:(NSString *)highlightString {

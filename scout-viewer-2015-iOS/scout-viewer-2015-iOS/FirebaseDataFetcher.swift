@@ -13,11 +13,11 @@ import Sync
 import DATAStack
 import Haneke
 
-@objc class FirebaseDataFetcher: NSObject, UITableViewDelegate {
+class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     var currentMatchNum = 0
     let cache = Shared.dataCache
-
+    
     var starredMatchesArray = [String]() {
         didSet {
             cache.set(value: NSKeyedArchiver.archivedDataWithRootObject(starredMatchesArray ?? NSMutableArray()), key: "starredMatches")
@@ -240,7 +240,6 @@ import Haneke
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
                     let number = (snapshot.childSnapshotForPath("number").value as? Int)!
-                    self.checkForNotification()
                     for matchIndex in Range(start: 0, end: self.matches.count) {
                         let match = self.matches[matchIndex]
                         if match.number == number {
@@ -248,6 +247,7 @@ import Haneke
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
                             break
                         }
+                        self.getCurrentMatch()
                     }
                 })
                 
@@ -272,6 +272,7 @@ import Haneke
                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                         
                     }
+                    self.getCurrentMatch()
                 })
                 
                 let timdRef = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
@@ -769,35 +770,30 @@ import Haneke
     }
     
     func checkForNotification() {
-        if let swiftArray = self.starredMatchesArray as? AnyObject as? [String] {
-            let currentMatch = self.getCurrentMatch()
-            if swiftArray.contains(String(currentMatch)) {
-                postNotification("Match coming up: " + String(currentMatch))
-            }
-            if swiftArray.contains(String(currentMatch + 1)) {
-                postNotification("Match coming up: " + String(currentMatch + 1 ))
-            }
-            if swiftArray.contains(String(currentMatch + 2)) {
-                postNotification("Match coming up: " + String(currentMatch + 2))
-            }
-        } else {
-            self.starredMatchesArray = [String]()
-            self.checkForNotification()
+        let currentMatch = self.getCurrentMatch()
+        if starredMatchesArray.contains(String(currentMatch)) {
+            postNotification("Match coming up: " + String(currentMatch))
+        }
+        if starredMatchesArray.contains(String(currentMatch + 1)) {
+            postNotification("Match coming up: " + String(currentMatch + 1 ))
+        }
+        if starredMatchesArray.contains(String(currentMatch + 2)) {
+            postNotification("Match coming up: " + String(currentMatch + 2))
         }
     }
     
-    func lpgrTriggered(notification:NSNotification) {
-        let array = self.starredMatchesArray
-        if let swiftArray = array as? AnyObject as? [String] {
-        let currentMatch = self.getCurrentMatch()
-        if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
-            postNotification("Starred Match coming up!")
-        }
-        } else {
-            self.starredMatchesArray = [String]()
-            lpgrTriggered(notification)
-        }
+    /*func lpgrTriggered(notification:NSNotification) {
+    let array = self.starredMatchesArray
+    if let swiftArray = array as? AnyObject as? [String] {
+    let currentMatch = self.getCurrentMatch()
+    if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
+    postNotification("Starred Match coming up!")
     }
+    } else {
+    self.starredMatchesArray = [String]()
+    lpgrTriggered(notification)
+    }
+    }*/
     
 }
 

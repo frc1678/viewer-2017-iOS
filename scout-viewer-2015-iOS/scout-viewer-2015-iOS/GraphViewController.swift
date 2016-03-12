@@ -10,7 +10,7 @@ import UIKit
 import JBChartView
 
 class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChartViewDelegate {
-
+    
     @IBOutlet weak var graph: JBBarChartView!
     @IBOutlet weak var mainDisplay: UILabel!
     @IBOutlet weak var subDisplayLeft: UILabel!
@@ -33,6 +33,22 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     
     var lens: UIView!
     
+    let titleSwitch = [
+        "didScaleTele" : "scalePercentage",
+        "didGetIncapacitated" : "incapacitatedPercentage",
+        "didGetDisabled" : "disabledPercentage",
+        "didChallengeTele" : "challengePercentage",
+        "numShotsBlockedTele" : "avgShotsBlocked",
+        "numLowShotsMadeTele" : "avgLowShotsTele",
+        "numHighShotsMadeTele" : "avgHighShotsTele",
+        "numBallsKnockedOffMidlineAuto" : "avgBallsKnockedOffMidlineAuto",
+        "calculatedData.numBallsIntakedOffMidlineAuto" : "avgMidlineBallsIntakedAuto",
+        "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
+        "calculatedData.RScoreEvasion" : "calculatedData.avgEvasion",
+        "calculatedData.RScoreTorque" : "calculatedData.avgTorque",
+        "rankBallControl" : "calculatedData.avgBallControl", //
+    ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +57,18 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        var reverseTitleSwitch = [String: String]()
+        for (key, value) in titleSwitch {
+            reverseTitleSwitch[value] = key
+        }
+        if let k = Utils.getKeyForHumanReadableName(self.graphTitle) {
+            if reverseTitleSwitch.keys.contains(k) {
+                if Utils.humanReadableNames.keys.contains(reverseTitleSwitch[k]!) {
+                    self.graphTitle = Utils.humanReadableNames[reverseTitleSwitch[k]!]!
+                }
+            }
+        }
+        
         defaultHeight = graph.frame.height
         graph.dataSource = self
         graph.delegate = self

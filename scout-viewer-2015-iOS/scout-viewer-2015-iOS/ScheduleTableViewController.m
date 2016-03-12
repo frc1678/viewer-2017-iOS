@@ -208,6 +208,7 @@
 + (NSArray *)mappings {
     return @[@"One", @"Two", @"Three"];
 }
+
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     if(UIGestureRecognizerStateBegan == sender.state) {
         CGPoint p = [sender locationInView:self.tableView];
@@ -216,13 +217,15 @@
         if([self.firebaseFetcher.starredMatchesArray containsObject:cell.matchLabel.text]) {
             NSMutableArray *a = [NSMutableArray arrayWithArray:self.firebaseFetcher.starredMatchesArray];
             [a removeObject:cell.matchLabel.text];
-            self.firebaseFetcher.starredMatchesArray = a;            cell.backgroundColor = [UIColor whiteColor];
+            self.firebaseFetcher.starredMatchesArray = a;
+            cell.backgroundColor = [UIColor whiteColor];
         } else {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
             self.firebaseFetcher.starredMatchesArray = [self.firebaseFetcher.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
         }
-        NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:note];
+        [self.firebaseFetcher checkForNotification];
+        //NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
+        //[[NSNotificationCenter defaultCenter] postNotification:note];
     }
 }
 

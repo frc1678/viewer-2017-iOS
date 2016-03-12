@@ -154,7 +154,21 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "sp" : "Sallyport",
         "rt" : "Rough Terrain",
         "rw" : "Rock Wall",
-        "lb" : "Low Bar"
+        "lb" : "Low Bar",
+        "rankBallControl" : "Ball Control Rank",
+        "RScoreBallControl": "R Score Ball Control",
+        "didScaleTele" : "Did Scale",
+        "didGetIncapacitated" : "Was Incap.",
+        "didGetDisabled" : "Was Disabled",
+        "didChallengeTele" : "Did Challenge",
+        "numShotsBlockedTele" : "Num Shots Blocked Tele",
+        "numLowShotsMadeTele" : "Num Low Shots Made Tele",
+        "numHighShotsMadeTele" : "Num High Shots Made Tele",
+        "numBallsKnockedOffMidlineAuto" : "Num Balls Knocked Off Midline Auto",
+        "calculatedData.numBallsIntakedOffMidlineAuto" : "Num Mid Balls Intaked Auto",
+        "calculatedData.RScoreSpeed" : "R Score Speed",
+        "calculatedData.RScoreEvasion" : "R Score Evasion",
+        "calculatedData.RScoreTorque" : "R Score Torque",
     ]
     
     class func roundValue(value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
@@ -174,6 +188,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         return humanReadableNames[key]
     }
     
+    
     class func getKeyForHumanReadableName(name: String) -> String? {
         var computerReadableNames = [String: String]()
         for (key, value) in humanReadableNames {
@@ -189,3 +204,6 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
     }
     
 }
+
+
+
