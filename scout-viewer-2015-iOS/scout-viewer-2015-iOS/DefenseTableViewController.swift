@@ -63,7 +63,11 @@ class DefenseTableViewController: ArrayTableViewController {
         let title = Utils.humanReadableNames[defenseKeys[path.row]]
         
         multiCell?.teamLabel!.text = title
-        multiCell?.scoreLabel!.text = String(value!)
+        if value! == -1.0 {
+            multiCell?.scoreLabel?.text = "None"
+        } else {
+            multiCell?.scoreLabel!.text = String(value!)
+        }
         multiCell?.rankLabel!.text = ""
         
         
@@ -95,18 +99,18 @@ class DefenseTableViewController: ArrayTableViewController {
             let autoSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key] as? Double
             let teleFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesTele?[key] as? Double
             
-            crossesData.append(autoSuccessAvg ?? 0.0)
-            crossesData.append(teleSuccessAvg ?? 0.0)
-            crossesData.append(autoFailAvg ?? 0.0)
-            crossesData.append(teleFailAvg ?? 0.0)
+            crossesData.append(autoSuccessAvg ?? -1.0)
+            crossesData.append(teleSuccessAvg ?? -1.0)
+            crossesData.append(autoFailAvg ?? -1.0)
+            crossesData.append(teleFailAvg ?? -1.0)
 
-            crossesData.append(cd.avgTimeForDefenseCrossAuto?[key] as? Double ?? 0.0)
-            crossesData.append(cd.avgTimeForDefenseCrossTele?[key] as? Double ?? 0.0)
-            crossesData.append(cd.predictedSuccessfulCrossingsForDefenseTele?[key] as? Double ?? 0.0)
-            crossesData.append(cd.sdFailedDefenseCrossesAuto?[key] as? Double ?? 0.0)
-            crossesData.append(cd.sdFailedDefenseCrossesTele?[key] as? Double ?? 0.0)
-            crossesData.append(cd.sdSuccessfulDefenseCrossesAuto?[key] as? Double ?? 0.0)
-            crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? 0.0)
+            crossesData.append(cd.avgTimeForDefenseCrossAuto?[key] as? Double ?? -1.0)
+            crossesData.append(cd.avgTimeForDefenseCrossTele?[key] as? Double ?? -1.0)
+            crossesData.append(cd.predictedSuccessfulCrossingsForDefenseTele?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdFailedDefenseCrossesAuto?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdFailedDefenseCrossesTele?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdSuccessfulDefenseCrossesAuto?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? -1.0)
         }
         for i in 0..<crossesData.count {
             crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2))!

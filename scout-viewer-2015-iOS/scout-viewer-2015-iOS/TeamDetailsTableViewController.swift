@@ -647,9 +647,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     } else {
                         
                         switch key! {
-                        case "calculatedData.avgSpeed": key = "calculatedData.RScoreSpeed"
-                        case "calculatedData.avgEvasion": key = "calculatedData.RScoreEvasion"
-                        case "calculatedData.avgTorque": key = "calculatedData.RScoreTorque"
+                        case "calculatedData.avgSpeed": key = "rankSpeed"
+                        case "calculatedData.avgEvasion": key = "rankEvasion"
+                        case "calculatedData.avgTorque": key = "rankTorque"
                         case "calculatedData.avgBallControl": key = "rankBallControl"
                         case "calculatedData.avgLowShotsAttemptedTele": key = "calculatedData.lowShotsAttemptedTele"
                         case "calculatedData.avgHighShotsAttemptedAuto": key = "calculatedData.highShotsAttemptedAuto"
