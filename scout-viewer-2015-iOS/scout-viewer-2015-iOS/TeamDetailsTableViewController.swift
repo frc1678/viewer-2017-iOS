@@ -69,7 +69,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.avgBallControl",
         "calculatedData.avgDefense",
         "calculatedData.numRPs",
-        "calculatedData.predictedNumRPs"
+        "calculatedData.predictedNumRPs",
+        "calculatedData.siegeAbility"
     ]
     
     // Add carrying stability into stacking security
@@ -89,7 +90,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.sdHighShotsTele",
         "calculatedData.avgLowShotsTele",
         "calculatedData.sdLowShotsTele",
-        "calculatedData.avgShotsBlocked"
+        "calculatedData.avgShotsBlocked",
+        "calculatedData.avgLowShotsAttemptedTele",
+        "calculatedData.avgHighShotsAttemptedTele",
+        "calculatedData.teleopShotAbility",
+        
     ]
     
     var obstacleKeys = [
@@ -146,7 +151,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.disfunctionalPercentage",
         "calculatedData.incapacitatedPercentage",
         "calculatedData.scalePercentage",
-        "calculatedData.siegeConsistency"
+        "calculatedData.siegeConsistency",
+        "calculatedData.reachPercentage"
     ]
     
     let otherNoCalcDataValues = [
@@ -625,6 +631,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if (percentageValues.contains(key!) || otherNoCalcDataValues.contains(key!)) && key?.rangeOfString("siege") == nil {
                         key = key?.stringByReplacingOccurrencesOfString("calculatedData.", withString: "")
                         switch key! {
+                            case "reachPercentage": key = "didReachAuto"
                         case "scalePercentage": key = "didScaleTele"
                         case "incapacitatedPercentage": key = "didGetIncapacitated"
                         case "disabledPercentage": key = "didGetDisabled"
@@ -644,7 +651,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         case "calculatedData.avgEvasion": key = "calculatedData.RScoreEvasion"
                         case "calculatedData.avgTorque": key = "calculatedData.RScoreTorque"
                         case "calculatedData.avgBallControl": key = "rankBallControl"
-                        
+                        case "calculatedData.avgLowShotsAttemptedTele": key = "calculatedData.lowShotsAttemptedTele"
+                        case "calculatedData.avgHighShotsAttemptedAuto": key = "calculatedData.highShotsAttemptedAuto"
+                        case "calculatedData.avgHighShotsAttemptedTele": key = "calculatedData.highShotsAttemptedTele"
+
                             
                         default: break
                         }

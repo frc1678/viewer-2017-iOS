@@ -25,7 +25,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-dev3-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
@@ -227,7 +227,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         
         let firebase = Firebase(url: self.firebaseURLFirstPart)
-        firebase.authWithCustomToken(dev3Token) { (E, A) -> Void in
+        firebase.authWithCustomToken(scoutingToken) { (E, A) -> Void in
             
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
                 
@@ -552,12 +552,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getFirstPickList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.firstPickAbility?.floatValue > $1.calculatedData!.firstPickAbility?.floatValue }
+        let sortedArray = self.teams.sort { $0.calculatedData?.firstPickAbility?.floatValue > $1.calculatedData!.firstPickAbility?.floatValue }
         return sortedArray;
     }
     
     func getSecondPickList() -> [Team] {
-        let sortedArray = self.teams.sort { $0.calculatedData!.overallSecondPickAbility?.floatValue > $1.calculatedData!.overallSecondPickAbility?.floatValue }
+        let sortedArray = self.teams.sort { $0.calculatedData?.overallSecondPickAbility?.floatValue > $1.calculatedData?.overallSecondPickAbility?.floatValue }
         return sortedArray;
     }
     

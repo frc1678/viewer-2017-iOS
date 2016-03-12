@@ -10,7 +10,8 @@ import UIKit
 
 @objc class CalculatedTeamData: NSObject, Reflectable {
     
-    
+    var predictedSuccessfulCrossingsForDefenseTele = NSDictionary?()
+    var avgLowShotsAttemptedTele = NSNumber?()
     var teleopShotAbility = NSNumber?()
     var actualSeed = NSNumber?()
     var avgBallControl = NSNumber?()
@@ -24,6 +25,8 @@ import UIKit
     var avgGroundIntakes = NSNumber?()
     var avgHighShotsAuto = NSNumber?()
     var avgHighShotsTele = NSNumber?()
+    var avgHighShotsAttemptedTele = NSNumber?()
+    var avgHighShotsAttemptedAuto = NSNumber?()
     var avgLowShotsAuto = NSNumber?()
     var avgLowShotsTele = NSNumber?()
     var avgShotsBlocked = NSNumber?()

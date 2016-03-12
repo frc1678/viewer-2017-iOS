@@ -107,8 +107,10 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.predictedSeed" : "Predicted Seed",
         "calculatedData.reachPercentage" : "Reach Percentage",
         "calculatedData.scalePercentage" : "Scale Percentage",
-        "calculatedData.sdBallsKnockedOffMidlineAuto" : "σ Balls off Midline Auto",
-        "calculatedData.sdFailedDefenseCrossesAuto" : "σ Failed Defenses Auto",
+        "siegeConsistency": "Siege Consistency",
+        "calculatedData.avgHighShotsAttemptedTele": "Avg. High Shots Attempted Tele",
+        //"calculatedData.sdBallsKnockedOffMidlineAuto" : "σ Balls off Midline Auto",
+        //"calculatedData.sdFailedDefenseCrossesAuto" : "σ Failed Defenses Auto",
         "calculatedData.sdGroundIntakes" : "σ Ground Intakes",
         "calculatedData.sdHighShotsAuto" : "σ High Shots Auto",
         "calculatedData.sdHighShotsTele" : "σ High Shots Tele",
@@ -169,9 +171,31 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.RScoreSpeed" : "R Score Speed",
         "calculatedData.RScoreEvasion" : "R Score Evasion",
         "calculatedData.RScoreTorque" : "R Score Torque",
+        
+        "calculatedData.avgLowShotsAttemptedTele": "Avg. Low Shots Attempted Tele",
+        "calculatedData.teleopShotAbility": "Teleop Shot Ability",
+        "calculatedData.avgTimeForDefenseCrossAuto": "Avg. Secs Defense Cross Auto",
+        "calculatedData.avgTimeForDefenseCrossTele":"Avg. Secs Defense Cross Tele",
+        "calculatedData.predictedSuccessfulCrossingsForDefenseTele": "Pred Successful Crossings Tele",
+        "calculatedData.sdFailedDefenseCrossesAuto": "σ Failed Defense Crosses Auto",
+        "calculatedData.sdFailedDefenseCrossesTele":"σ Failed Defense Crosses Tele",
+        
     ]
     
     class func roundValue(value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
+        let val = value as NSNumber
+        let f = NSNumberFormatter()
+        f.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        f.maximumFractionDigits = numDecimalPlaces
+        
+        if val == 0 {
+            return "0"
+        }
+        
+        return f.stringFromNumber(val)!
+    }
+    
+    class func roundDoubleValue(value: Double, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
         let f = NSNumberFormatter()
         f.numberStyle = NSNumberFormatterStyle.DecimalStyle

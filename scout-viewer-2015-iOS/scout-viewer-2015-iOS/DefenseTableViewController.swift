@@ -27,6 +27,14 @@ class DefenseTableViewController: ArrayTableViewController {
         "calculatedData.avgFailedTimesCrossedDefensesAuto",
         "calculatedData.avgFailedTimesCrossedDefensesTele",
         
+        "calculatedData.avgTimeForDefenseCrossAuto",
+        "calculatedData.avgTimeForDefenseCrossTele",
+        "calculatedData.predictedSuccessfulCrossingsForDefenseTele",
+        "calculatedData.sdFailedDefenseCrossesAuto",
+        "calculatedData.sdFailedDefenseCrossesTele",
+        "calculatedData.sdSuccessfulDefenseCrossesAuto",
+        "calculatedData.sdSuccessfulDefenseCrossesTele",
+        
     ]
     func getKeyFromTeamLabel(relevantString:String) -> String {
         let stringArray = relevantString.characters.split{$0==" "}.map(String.init)
@@ -80,21 +88,29 @@ class DefenseTableViewController: ArrayTableViewController {
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]? {
         let team = self.firebaseFetcher.fetchTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
-        var crossesData = [Float]()
-        
-        let teleSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key] as? Float
-        let autoFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key] as? Float
-        let autoSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key] as? Float
-        let teleFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesTele?[key] as? Float
-        
+        var crossesData = [Double]()
+        if let cd = team.calculatedData {
+            let teleSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key] as? Double
+            let autoFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key] as? Double
+            let autoSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key] as? Double
+            let teleFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesTele?[key] as? Double
+            
             crossesData.append(autoSuccessAvg ?? 0.0)
-        
             crossesData.append(teleSuccessAvg ?? 0.0)
-        
             crossesData.append(autoFailAvg ?? 0.0)
-        
             crossesData.append(teleFailAvg ?? 0.0)
-        
+
+            crossesData.append(cd.avgTimeForDefenseCrossAuto?[key] as? Double ?? 0.0)
+            crossesData.append(cd.avgTimeForDefenseCrossTele?[key] as? Double ?? 0.0)
+            crossesData.append(cd.predictedSuccessfulCrossingsForDefenseTele?[key] as? Double ?? 0.0)
+            crossesData.append(cd.sdFailedDefenseCrossesAuto?[key] as? Double ?? 0.0)
+            crossesData.append(cd.sdFailedDefenseCrossesTele?[key] as? Double ?? 0.0)
+            crossesData.append(cd.sdSuccessfulDefenseCrossesAuto?[key] as? Double ?? 0.0)
+            crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? 0.0)
+        }
+        for i in 0..<crossesData.count {
+            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2))!
+        }
         return crossesData
     }
     

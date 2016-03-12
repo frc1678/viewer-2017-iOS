@@ -13,6 +13,9 @@ import UIKit
 
 @objc class TeamInMatchCalculatedData: NSObject, Reflectable {
     var firstPickAbility : NSNumber?
+    var highShotsAttemptedTele : NSNumber?
+    var highShotsAttemptedAuto : NSNumber?
+    var lowShotsAttemptedTele : NSNumber?
     var autoAbility : NSNumber?
     var RScoreTorque : NSNumber?
     var RScoreEvasion : NSNumber?
@@ -22,6 +25,7 @@ import UIKit
     var highShotAccuracyAuto : NSNumber?
     var lowShotAccuracyAuto : NSNumber?
     var highShotAccuracyTele : NSNumber?
+    var teleopShotAbility : NSNumber?
     var lowShotAccuracyTele : NSNumber?
     var siegeAbility : NSNumber?
     var numRPs : NSNumber?
