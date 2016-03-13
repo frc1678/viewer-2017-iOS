@@ -94,7 +94,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         "lowShotAccuracyAuto",
         "lowShotAccuracyTele",
         "numAutoPoints",
-        "numRPs",
+        "actualNumRPs",
         "predictedNumRPs",
         "numScaleAndChallengePoints",
         "predictedSeed",
@@ -149,7 +149,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         "highShotAccuracyTele",
         "lowShotAccuracyTele",
         "siegeAbility",
-        "numRPs",
+        "actualNumRPs",
         "numAutoPoints",
         "numScaleAndChallengePoints",
         "RScoreDefense",
@@ -521,9 +521,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func getCalculatedTeamInMatchDataForDict(dict: NSDictionary?) -> TeamInMatchCalculatedData {
         if dict != nil {
             let CTIMD = TeamInMatchCalculatedData()
-            for key in PDFRenderer.allPropertyNamesForClass(TeamInMatchCalculatedData) {
+            for key in CTIMD.propertys() {
                 if let value = dict!.objectForKey(key) {
-                    CTIMD.setValue(value, forKey: key as! String)
+                    CTIMD.setValue(value, forKey: key)
                 }
             }
             return CTIMD
@@ -713,12 +713,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func getMatchValuesForTeamForPath(path: String, forTeam: Team) -> [Float] {
         var timDatas = getTIMDataForTeam(forTeam)
         timDatas.sortInPlace { Int($0.matchNumber!) < Int($1.matchNumber!) }
-        print(forTeam.TeamInMatchDatas)
+        //print(forTeam.TeamInMatchDatas)
         let sortedTimDatas = timDatas.sort { $0.matchNumber!.integerValue < $1.matchNumber?.integerValue }
         var valueArray = [Float]()
         for timData in sortedTimDatas {
             let value : AnyObject?
-            print(timData.matchNumber!.integerValue)
+            //print(timData.matchNumber!.integerValue)
             
             value = timData.valueForKeyPath(path)
             
@@ -760,8 +760,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         for match in sortedMatches {
             counter += 1
             if match.redScore == nil || match.redScore?.integerValue == -1 && match.blueScore == nil || match.blueScore?.integerValue == -1 {
-                print("This is the current match")
-                print(counter)
+                //print("This is the current match")
+                //print(counter)
                 self.currentMatchNum = counter
                 return counter
             }

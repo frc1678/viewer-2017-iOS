@@ -13,6 +13,12 @@ import UIKit
 
 @objc class TeamInMatchCalculatedData: NSObject, Reflectable {
     var firstPickAbility : NSNumber?
+    var numTimesSuccesfulCrossedDefensesAuto : NSDictionary?
+    var numTimesSuccesfulCrossedDefensesTele : NSDictionary?
+    var numTimesFailedCrossedDefensesAuto : NSDictionary?
+    var numTimesFailedCrossedDefensesTele : NSDictionary?
+    var crossingTimeForDefenseAuto : NSDictionary?
+    var crossingTimeForDefenseTele : NSDictionary?
     var highShotsAttemptedTele : NSNumber?
     var highShotsAttemptedAuto : NSNumber?
     var lowShotsAttemptedTele : NSNumber?
@@ -34,6 +40,7 @@ import UIKit
     var RScoreDefense : NSNumber?
     var RScoreBallControl : NSNumber?
     var RScoreDrivingAbility : NSNumber?
+    var drivingAbility : NSNumber?
     var citrusDPR : NSNumber?
     var overallSecondPickAbility : NSNumber?
     var scoreContribution : NSNumber?

@@ -68,7 +68,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.numAutoPoints",
         "calculatedData.avgBallControl",
         "calculatedData.avgDefense",
-        "calculatedData.numRPs",
+        "calculatedData.actualNumRPs",
         "calculatedData.predictedNumRPs",
         "calculatedData.siegeAbility"
     ]
@@ -98,15 +98,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     var obstacleKeys = [
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.cdf",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.pc",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.mt",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.rp",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.db",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.sp",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.rt",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.rw",
-        "calculatedData.avgSuccessfulTimesCrossedDefenses.lb"
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.cdf",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.pc",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.mt",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rp",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.db",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.sp",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rt",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rw",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.lb"
     ]
     
     
@@ -279,8 +279,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         
         if data?.TeamInMatchDatas.count == 0 {
-            print("tc")
-            print(firebaseFetcher.teamInMatches.count)
+            //print("tc")
+            //print(firebaseFetcher.teamInMatches.count)
         }
         reload()
         // self.firebaseFetcher.getAverageDefenseValuesForDict((data?.calculatedData.avgSuccessfulTimesCrossedDefensesTele)!)
@@ -596,6 +596,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let teamNumbah = data?.number {
                 dest!.teamNumber = teamNumbah.integerValue
                 dest!.relevantDefense = cell!.teamLabel!.text!
+                dest!.defenseKey = Utils.getKeyForHumanReadableName(dest!.relevantDefense)!.characters.split{$0 == "."}.map(String.init)[2]
             }
         }
         else if segue.identifier == "Photos" {
@@ -654,8 +655,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         case "calculatedData.avgLowShotsAttemptedTele": key = "calculatedData.lowShotsAttemptedTele"
                         case "calculatedData.avgHighShotsAttemptedAuto": key = "calculatedData.highShotsAttemptedAuto"
                         case "calculatedData.avgHighShotsAttemptedTele": key = "calculatedData.highShotsAttemptedTele"
-
-                            
+                        case "calculatedData.RScoreDrivingAbility": key = "calculatedData.drivingAbility"
+                        case "calculatedData.avgGroundIntakes": key = "numGroundIntakesTele"
+                            case "calculatedData.avgDefense": key = "rankDefense"
+                            case "calculatedData.actualNumRPs": key = "calculatedData.numRPs"
                         default: break
                         }
                     }
@@ -674,12 +677,12 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         graphViewController.values = [CGFloat]()
                         graphViewController.subValuesLeft = [CGFloat]()
                     } else {
-                    print(values)
+                    //print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
                     graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
-                    print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
-                    print(graphViewController.subValuesLeft)
+                    //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
+                    //print(graphViewController.subValuesLeft)
                     }
                     /*if let d = data {
                     graphViewController.subValuesRight =

@@ -14,12 +14,13 @@ class DefenseTableViewController: ArrayTableViewController {
     var relevantDefense = "" {
         didSet {
             if relevantDefense != "" {
-                print(getKeyFromTeamLabel(relevantDefense))
+                //print(getKeyFromTeamLabel(relevantDefense))
                 self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
                 
             }
         }
     }
+    var defenseKey = ""
     
     var defenseKeys = [
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto",
@@ -38,14 +39,14 @@ class DefenseTableViewController: ArrayTableViewController {
     ]
     func getKeyFromTeamLabel(relevantString:String) -> String {
         let stringArray = relevantString.characters.split{$0==" "}.map(String.init)
-        print(stringArray[0].lowercaseString)
+        //print(stringArray[0].lowercaseString)
         return stringArray[0].lowercaseString
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(relevantDefense)
-        print(getKeyFromTeamLabel(relevantDefense))
+        //print(relevantDefense)
+        //print(getKeyFromTeamLabel(relevantDefense))
         self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
         
         // Do any additional setup after loading the view.
@@ -74,7 +75,76 @@ class DefenseTableViewController: ArrayTableViewController {
         
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var key : String? = ""
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
+            let text = cell.teamLabel?.text
+            key = Utils.getKeyForHumanReadableName(text!)
+        }
+        if (key != "") {
+            if ["calculatedData.avgSuccessfulTimesCrossedDefensesAuto","calculatedData.avgSuccessfulTimesCrossedDefensesTele","calculatedData.avgFailedTimesCrossedDefensesAuto","calculatedData.avgFailedTimesCrossedDefensesTele","calculatedData.numTimesFailedCrossedDefensesTele","calculatedData.avgTimeForDefenseCrossAuto", "calculatedData.avgTimeForDefenseCrossTele"].contains(key!) {
+                performSegueWithIdentifier("DefenseToGraph", sender: indexPath)
+            }
+        }
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let graphViewController = segue.destinationViewController as! GraphViewController
+        
+        
+            let indexPath = sender as! NSIndexPath
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
+                let text = cell.teamLabel?.text
+
+                var key = Utils.getKeyForHumanReadableName(text!)
+                if key != nil {
+                    switch key! {
+                    case "calculatedData.avgSuccessfulTimesCrossedDefensesAuto": key = "calculatedData.numTimesSuccesfulCrossedDefensesAuto"
+                    case "calculatedData.avgSuccessfulTimesCrossedDefensesTele": key = "calculatedData.numTimesSuccesfulCrossedDefensesTele"
+                    case "calculatedData.avgFailedTimesCrossedDefensesAuto": key = "calculatedData.numTimesFailedCrossedDefensesAuto"
+                    case "calculatedData.avgFailedTimesCrossedDefensesTele": key = "calculatedData.numTimesFailedCrossedDefensesTele"
+                        
+                    case "calculatedData.avgTimeForDefenseCrossAuto": key = "calculatedData.crossingTimeForDefenseAuto"
+                    case "calculatedData.avgTimeForDefenseCrossTele": key = "calculatedData.crossingTimeForDefenseTele"
+                    default: key = ""
+                    }
+                }
+                graphViewController.graphTitle = "\(Utils.getHumanReadableNameForKey(key!) ?? relevantDefense)"
+                graphViewController.displayTitle = "\(graphViewController.graphTitle): "
+                if key != nil && key != "" {
+                
+                                //print("This is the key:")
+                //print(keySets[indexPath.section][indexPath.row])
+                let values: [Float]
+                
+                values = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
+                
+                if values.reduce(0, combine: +) == 0 || values.count == 0 {
+                    graphViewController.graphTitle = "Data Is All 0s"
+                    graphViewController.values = [CGFloat]()
+                    graphViewController.subValuesLeft = [CGFloat]()
+                } else {
+                    //print(values)
+                    graphViewController.values = values as NSArray as! [CGFloat]
+                    graphViewController.subDisplayLeftTitle = "\(relevantDefense): "
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(teamNumber))
+                    //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
+                    //print(graphViewController.subValuesLeft)
+                }
+                /*if let d = data {
+                graphViewController.subValuesRight =
+                nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
+                
+                let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
+                graphViewController.highlightIndex = i
+                
+                }*/
+                graphViewController.subDisplayRightTitle = ""
+                graphViewController.subValuesRight = ["","","","",""]
+                }
+                
+            }
+        
     }
     
     /*
@@ -113,7 +183,7 @@ class DefenseTableViewController: ArrayTableViewController {
             crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? -1.0)
         }
         for i in 0..<crossesData.count {
-            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2))!
+            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2)) ?? -1.0
         }
         return crossesData
     }

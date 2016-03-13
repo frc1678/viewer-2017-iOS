@@ -29,8 +29,8 @@ extension Reflectable
         for c in Mirror(reflecting: self).children
         {
             if c.label == path {
-                print(c.label)
-                print(c.value)
+                //print(c.label)
+               // print(c.value)
                 return c.value as? AnyObject
             }
         }

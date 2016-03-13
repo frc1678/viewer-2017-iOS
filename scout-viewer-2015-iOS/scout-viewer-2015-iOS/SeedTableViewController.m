@@ -33,9 +33,9 @@
     
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     
-    if(team.calculatedData.numRPs != nil) {
+    if(team.calculatedData.actualNumRPs != nil) {
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%ld",
-                                     team.calculatedData.numRPs.integerValue];
+                                     team.calculatedData.actualNumRPs.integerValue];
     } else {
         multiCell.scoreLabel.text = @"";
     }

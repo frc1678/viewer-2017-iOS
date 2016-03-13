@@ -104,7 +104,6 @@
         if ([matchCell.matchLabel.text integerValue] > self.currentNumber) {
             self.currentNumber = [matchCell.matchLabel.text integerValue];
         }
-        NSLog(@"Here is the current number:");
         NSLog([NSString stringWithFormat:@"%ld",(long)self.currentNumber]);
     }
 }

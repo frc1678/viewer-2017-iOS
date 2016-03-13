@@ -47,7 +47,7 @@ import UIKit
     var lowShotAccuracyAuto = NSNumber?()
     var lowShotAccuracyTele = NSNumber?()
     var numAutoPoints = NSNumber?()
-    var numRPs = NSNumber?()
+    var actualNumRPs = NSNumber?()
     var predictedNumRPs = NSNumber?()
     var numScaleAndChallengePoints = NSNumber?()
     var predictedSeed = NSNumber?()
@@ -72,6 +72,6 @@ import UIKit
     var siegePower = NSNumber?()
     var overallSecondPickAbility = NSNumber?()
     var citrusDPR = NSNumber?()
-    var avgSuccessfulTimesCrossedDefenses = NSDictionary?()
+    //var avgSuccessfulTimesCrossedDefenses = NSDictionary?()
     
     }

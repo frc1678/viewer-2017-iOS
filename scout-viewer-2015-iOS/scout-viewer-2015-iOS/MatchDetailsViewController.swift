@@ -68,7 +68,7 @@ class MatchDetailsViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "checkRes:", name: "updateLeftTable", object: nil)
         
         updateUI()
-        print(self.match)
+       // print(self.match)
     }
     
     private func updateUI() {
@@ -121,7 +121,7 @@ class MatchDetailsViewController: UIViewController {
             if blueTeams.count > 0 {
                 for index in 0...(blueTeams.count - 1) {
                     if index <= 2 {
-                        print(blueTeams[index].number)
+                        //print(blueTeams[index].number)
                         (valueForKey("blueTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index])", forState: UIControlState.Normal)
                         if let cd = blueTeams[index].calculatedData {
                             if cd.teleopShotAbility != nil {
