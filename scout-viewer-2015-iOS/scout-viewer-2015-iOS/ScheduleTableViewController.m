@@ -35,7 +35,8 @@
     
     
     [super viewDidLoad];
-    [self cachePhotos:self.cacheButton];
+    //[self cachePhotos:self.cacheButton];
+   // [self.tableView setUserInteractionEnabled:NO];
 }
 
 //RIP (2016 - 2016)
@@ -115,6 +116,7 @@
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     NSArray *returnData = self.firebaseFetcher.matches;
     //NSLog(@"%lu", (unsigned long)returnData.count);
+    //[self.tableView setUserInteractionEnabled:YES];
     return returnData;
 }
 

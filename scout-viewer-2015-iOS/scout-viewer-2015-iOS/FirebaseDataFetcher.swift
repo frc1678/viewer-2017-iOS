@@ -245,9 +245,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         if match.number == number {
                             self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                            self.checkForNotification()
                             break
                         }
-                        self.checkForNotification()
+                        
                     }
                 })
                 

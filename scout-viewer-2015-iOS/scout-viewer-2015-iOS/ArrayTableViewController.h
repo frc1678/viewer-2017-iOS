@@ -10,7 +10,7 @@
 
 @class FirebaseDataFetcher;
 @interface ArrayTableViewController : UITableViewController
-    <UISearchResultsUpdating, UISearchBarDelegate>
+    <UISearchResultsUpdating, UISearchBarDelegate, UITableViewDelegate>
 
 @property (strong, nonatomic) NSArray *dataArray;
 @property (strong, nonatomic) NSArray *filteredArray;
