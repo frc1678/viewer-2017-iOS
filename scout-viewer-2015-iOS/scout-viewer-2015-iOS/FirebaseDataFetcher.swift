@@ -247,7 +247,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
                             break
                         }
-                        self.getCurrentMatch()
+                        self.checkForNotification()
                     }
                 })
                 
@@ -755,18 +755,18 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getCurrentMatch() -> Int {
-        let sortedMatches = self.matches.sort { $0.matchNumber?.integerValue > $1.matchNumber?.integerValue }
-        var counter = 0
+        let sortedMatches = self.matches.sort { $0.number?.integerValue > $1.number?.integerValue }
+        var counter = self.matches.count + 1
         for match in sortedMatches {
-            counter += 1
-            if match.redScore == nil || match.redScore?.integerValue == -1 && match.blueScore == nil || match.blueScore?.integerValue == -1 {
+            counter -= 1
+            if match.redScore != nil && match.redScore?.integerValue != -1 && match.blueScore != nil && match.blueScore?.integerValue != -1 {
                 //print("This is the current match")
                 //print(counter)
                 self.currentMatchNum = counter
                 return counter
             }
         }
-        return 1;
+        return self.matches.count;
     }
     
     func checkForNotification() {

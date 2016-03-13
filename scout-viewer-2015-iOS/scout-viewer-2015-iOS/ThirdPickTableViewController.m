@@ -75,7 +75,7 @@ FirebaseDataFetcher *firebaseFetcher;
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     NSArray *returnData = firebaseFetcher.teams;
-    NSLog(@"%lu", (unsigned long)returnData.count);
+    //NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
 

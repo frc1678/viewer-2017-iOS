@@ -104,7 +104,7 @@
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     NSArray *returnData = [self.firebaseFetcher fetchMatchesForTeamWithNumber:self.teamNumber];
     NSLog(@"Return Data");
-    NSLog(@"%lu", (unsigned long)returnData.count);
+    //NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
 

@@ -72,7 +72,7 @@
     
     
     if (match.redScore != nil) {
-        NSLog([NSString stringWithFormat:@"%ld", match.redScore.integerValue]);
+       // NSLog([NSString stringWithFormat:@"%ld", match.redScore.integerValue]);
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore.integerValue];
         
         matchCell.redScoreLabel.alpha = 1;
@@ -87,7 +87,7 @@
         matchCell.slash.alpha = .3;
     }
     if (match.blueScore != nil) {
-        NSLog([NSString stringWithFormat:@"%ld",match.blueScore.integerValue]);
+        //NSLog([NSString stringWithFormat:@"%ld",match.blueScore.integerValue]);
         matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore.integerValue];
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;
@@ -104,7 +104,7 @@
         if ([matchCell.matchLabel.text integerValue] > self.currentNumber) {
             self.currentNumber = [matchCell.matchLabel.text integerValue];
         }
-        NSLog([NSString stringWithFormat:@"%ld",(long)self.currentNumber]);
+        //NSLog([NSString stringWithFormat:@"%ld",(long)self.currentNumber]);
     }
 }
 
@@ -114,7 +114,7 @@
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     NSArray *returnData = self.firebaseFetcher.matches;
-    NSLog(@"%lu", (unsigned long)returnData.count);
+    //NSLog(@"%lu", (unsigned long)returnData.count);
     return returnData;
 }
 
@@ -140,7 +140,7 @@
     } else {
     MatchTableViewCell *cell = sender;
     MatchDetailsViewController *detailController = (MatchDetailsViewController *)segue.destinationViewController;
-    NSLog([NSString stringWithFormat:@"%lu",(unsigned long)self.firebaseFetcher.matches.count]);
+    //NSLog([NSString stringWithFormat:@"%lu",(unsigned long)self.firebaseFetcher.matches.count]);
     detailController.match = [self.firebaseFetcher.matches objectAtIndex:cell.matchLabel.text.integerValue-1];
     detailController.matchNumber = cell.matchLabel.text.integerValue;
     }
