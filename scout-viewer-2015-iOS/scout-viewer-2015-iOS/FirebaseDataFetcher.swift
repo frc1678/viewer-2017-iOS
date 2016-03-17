@@ -14,7 +14,7 @@ import DATAStack
 import Haneke
 
 class FirebaseDataFetcher: NSObject, UITableViewDelegate {
-    
+    var notificationCounter = 0
     var currentMatchNum = 0
     let cache = Shared.dataCache
     
@@ -163,9 +163,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     override init() {
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:"currentMatchChanged",name:"currentNumberChanged",object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self,selector:"currentMatchChanged:",name:"currentNumberChanged",object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "lpgrTriggered:", name: "lpgrTriggered", object: nil)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self,selector: "notificationTriggeredCheckForNotification:", name: "currentMatchUpdated", object:nil)
         
         self.getAllTheData()
     }
@@ -245,7 +245,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         if match.number == number {
                             self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                            self.checkForNotification()
                             break
                         }
                         
@@ -764,6 +763,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 //print("This is the current match")
                 //print(counter)
                 self.currentMatchNum = counter
+                let counterDict = ["counter":counter]
+                NSNotificationCenter.defaultCenter().postNotificationName("currentMatchUpdated",object:nil,userInfo: counterDict)
                 return counter
             }
         }
@@ -781,6 +782,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         if starredMatchesArray.contains(String(currentMatch + 2)) {
             postNotification("Match coming up: " + String(currentMatch + 2))
         }
+    }
+    func notificationTriggeredCheckForNotification(note:NSNotification) {
+        let currentMatch = note.userInfo!["counter"] as? Int
+        if starredMatchesArray.contains(String(currentMatch)) {
+            postNotification("Match coming up: " + String(currentMatch))
+        }
+        if starredMatchesArray.contains(String(currentMatch! + 1)) {
+            postNotification("Match coming up: " + String(currentMatch! + 1 ))
+        }
+        if starredMatchesArray.contains(String(currentMatch! + 2)) {
+            postNotification("Match coming up: " + String(currentMatch! + 2))
+        }
+
     }
     
     /*func lpgrTriggered(notification:NSNotification) {
