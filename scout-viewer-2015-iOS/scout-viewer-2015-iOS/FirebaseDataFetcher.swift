@@ -17,6 +17,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var notificationCounter = 0
     var currentMatchNum = 0
     let cache = Shared.dataCache
+    var NSCounter = 0
     
     var starredMatchesArray = [String]() {
         didSet {
@@ -166,8 +167,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self,selector:"currentMatchChanged:",name:"currentNumberChanged",object:nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "lpgrTriggered:", name: "lpgrTriggered", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self,selector: "notificationTriggeredCheckForNotification:", name: "currentMatchUpdated", object:nil)
-        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
+        self.NSCounter = -2
         self.getAllTheData()
+        })
     }
     
     
@@ -230,36 +233,47 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         firebase.authWithCustomToken(scoutingToken) { (E, A) -> Void in
             
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
-                
                 let numTeams = snap.childSnapshotForPath("Teams").childrenCount
                 let matchReference = Firebase(url: "\(self.firebaseURLFirstPart)/Matches")
+               
                 matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     self.matches.append(self.makeMatchFromSnapshot(snapshot))
+                    if self.NSCounter != -2 {
                     NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                    }
                 })
+                    
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
+                    
                     let number = (snapshot.childSnapshotForPath("number").value as? Int)!
                     for matchIndex in Range(start: 0, end: self.matches.count) {
                         let match = self.matches[matchIndex]
                         if match.number == number {
                             self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
-                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                            if self.NSCounter != -2 {
+                                NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                                }
                             break
                         }
                         
                     }
                 })
+              
+                
                 
                 let teamReference = Firebase(url:"\(self.firebaseURLFirstPart)/Teams")
                 teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.teams.append(team)
-                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                    if self.NSCounter != -2 {
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                    }
                     if(UInt(self.teams.count) == numTeams) {
                         self.getCurrentMatch()
                     }
                 })
+                    
                 
                 teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
                     let team = self.makeTeamFromSnapshot(snapshot)
@@ -269,21 +283,26 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     })
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
-                        
+                        if self.NSCounter != -2 {
+                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                        }
                     }
                     self.getCurrentMatch()
                 })
+               
+                //Here
                 
                 let timdRef = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
                 timdRef.observeEventType(.ChildAdded, withBlock: { (snap) -> Void in
+                   
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
-                    
                     let team = self.fetchTeam(timd!.teamNumber as! Int)
                     team.TeamInMatchDatas.append(timd!)
                     
                     self.teamInMatches.append(timd!)
+                    if self.NSCounter != -2 {
                     NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object: nil)
+                        }
                 })
                 
                 timdRef.observeEventType(.ChildChanged, withBlock: { (snap) -> Void in
@@ -303,8 +322,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         team.TeamInMatchDatas[i!] = timd!
                     }
                 })
+                self.NSCounter = 0
+                 print("Finished data fetching")
             })
         }
+       
     }
     
     
@@ -367,6 +389,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         var TIMDatas = [TeamInMatchData]()
         if let teamNumber = team.number {
             let teamNum = "\(teamNumber)"
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
             ref.observeEventType(.ChildAdded, withBlock: { datasnapshot in
                 if datasnapshot.key.containsString(teamNum) {
                     let TIMData = self.getTeamInMatchDataForDict((datasnapshot.value as? NSDictionary)!, key: datasnapshot.key)
@@ -379,6 +402,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         team.TeamInMatchDatas.append(TIMData!)
                     }
                 }
+            })
             })
         }
         return TIMDatas
