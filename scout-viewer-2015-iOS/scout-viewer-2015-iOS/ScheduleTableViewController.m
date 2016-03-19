@@ -17,7 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *cacheButton;
 
-
+@property (weak, nonatomic) NSTimer *timer;
+@property (nonatomic) NSInteger currentMatch;
 @end
 
 @implementation ScheduleTableViewController
@@ -35,8 +36,23 @@
     
     
     [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     //[self cachePhotos:self.cacheButton];
    // [self.tableView setUserInteractionEnabled:NO];
+}
+
+- (void)scrollToCurrentMatch:(NSNotification*)note {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"currentMatchUpdated" object:nil];
+    self.currentMatch = (NSInteger)[self.firebaseFetcher currentMatchNum];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2 target: self selector:@selector(scroll:) userInfo:nil repeats:NO];
+}
+
+-(void)scroll:(NSTimer*)timer {
+    //NSIndexPath *i = ;
+   // UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:i];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentMatch - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
 }
 
 //RIP (2016 - 2016)
