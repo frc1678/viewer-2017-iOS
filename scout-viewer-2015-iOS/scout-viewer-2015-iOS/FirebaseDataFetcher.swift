@@ -35,7 +35,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-dev-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
@@ -233,32 +233,32 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }.resume()
     }
     
-    func cacheImage(team : Team) {
-        if let urlString = team.selectedImageUrl {
+    func cacheImage(teamNum : Int, url : String?) {
+        if let urlString = url {
             let url = NSURL(string: urlString)
             getDataFromUrl(url!) { (data, response, error)  in
-                dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                    guard let data = data where error == nil else { return }
-                    print(response?.suggestedFilename ?? "")
-                    print("Download Finished")
-                    self.imageCache.set(value: UIImage(data: data)!, key: "\(team.number)")
+                guard let data = data where error == nil else { return }
+                if let image = UIImage(data: data) {
+                    self.imageCache.set(value: image, key: "\(teamNum)")
+                } else {
+                    print(url)
                 }
             }
         }
     }
     
-    func fetchImageForTeam(teamNumber : Int, fetchedCallback : (UIImage)->()) { // Is already async
+    func fetchImageForTeam(teamNumber : Int, fetchedCallback : (UIImage)->(), couldNotFetch: ()->()) { // Is already async
         self.imageCache.fetch(key: "\(teamNumber)").onSuccess { (image) -> () in
             fetchedCallback(image)
+            }.onFailure { (E) -> () in
+                couldNotFetch()
         }
     }
     
     func updateCacheIfNeeded(snap : FDataSnapshot, team : Team) {
-        if team.selectedImageUrl == nil || team.selectedImageUrl == String?() {
-            if let newURL = snap.childSnapshotForPath("selectedImageUrl").value {
-                if team.selectedImageUrl != newURL as? String {
-                    cacheImage(team)
-                }
+        if let newURL = snap.childSnapshotForPath("selectedImageUrl").value {
+            if team.selectedImageUrl != newURL as? String {
+                cacheImage(snap.childSnapshotForPath("number").value as! Int, url: newURL as? String)
             }
         }
     }
@@ -275,7 +275,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         
         let firebase = Firebase(url: self.firebaseURLFirstPart)
-        firebase.authWithCustomToken(devToken) { (E, A) -> Void in //TOKENN
+        firebase.authWithCustomToken(scoutingToken) { (E, A) -> Void in //TOKENN
             
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
                 let numTeams = snap.childSnapshotForPath("Teams").childrenCount
@@ -332,6 +332,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     
                     let team = self.makeTeamFromSnapshot(snapshot)
+                    self.updateCacheIfNeeded(snapshot, team: self.fetchTeam(team.number as! Int))
                     self.teams.append(team)
                     if UInt(self.teams.count) == numTeams {
                         print("NumTeams Notification")
@@ -339,7 +340,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                         }
                     }
-                    self.updateCacheIfNeeded(snapshot, team: team)
+                    
                 })
                 
                 
@@ -347,6 +348,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     let deltaTeams = snapshot.childrenCount
                     self.teamCounter += 1
                     let team = self.makeTeamFromSnapshot(snapshot)
+                    self.updateCacheIfNeeded(snapshot, team: team)
+                    
                     let te = self.teams.filter({ (t) -> Bool in
                         if t.number == team.number { return true }
                         return false
@@ -361,7 +364,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             self.teamCounter = 0
                         }
                     }
-                    self.updateCacheIfNeeded(snapshot, team: team)
                 })
                 
                 //Here

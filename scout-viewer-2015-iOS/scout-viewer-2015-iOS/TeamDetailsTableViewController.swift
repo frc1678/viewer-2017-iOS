@@ -238,6 +238,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         if team.selectedImageUrl != nil {
                             self.firebaseFetcher.fetchImageForTeam(self.data?.number as! Int, fetchedCallback: { (image) -> () in
                                 imageView.image = image
+                                }, couldNotFetch: {
+                                    imageView.hnk_setImageFromURL(NSURL(string: team.selectedImageUrl!)!)
                             })
                         }
                         //self.firebaseFetcher.loadImageForTeam(team)
