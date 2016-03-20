@@ -34,7 +34,7 @@
 
 - (void)viewDidLoad {
     
-    
+    self.cacheButton.enabled = NO;
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
@@ -58,6 +58,7 @@
 //RIP (2016 - 2016)
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
+    
    
     Match *match = data;
     NSArray *redTeams = [self.firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
@@ -131,6 +132,7 @@
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
     NSArray *returnData = self.firebaseFetcher.matches;
+    
     //NSLog(@"%lu", (unsigned long)returnData.count);
     //[self.tableView setUserInteractionEnabled:YES];
     return returnData;
