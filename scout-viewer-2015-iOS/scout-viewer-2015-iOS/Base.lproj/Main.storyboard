@@ -765,7 +765,7 @@
                                             <outlet property="dataSource" destination="qeH-s8-X6p" id="nF5-h4-7eC"/>
                                         </connections>
                                     </tableView>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SorryNoRobotPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cache" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
                                         <rect key="frame" x="8" y="8" width="584" height="442"/>
                                         <gestureRecognizers/>
                                         <constraints>
@@ -1227,7 +1227,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SorryNoRobotPhoto" width="3024" height="1596"/>
         <image name="cache" width="64" height="64"/>
         <image name="firstPick" width="50" height="50"/>
         <image name="fortune_teller" width="50" height="50"/>
@@ -1237,11 +1236,11 @@
         <image name="thirdPick" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XVc-rp-7iO"/>
         <segue reference="Vse-87-4RY"/>
+        <segue reference="XVc-rp-7iO"/>
         <segue reference="XfQ-Lp-UlN"/>
         <segue reference="R2d-hJ-s5p"/>
-        <segue reference="RqP-Sw-Hz7"/>
+        <segue reference="BGa-X6-1aO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

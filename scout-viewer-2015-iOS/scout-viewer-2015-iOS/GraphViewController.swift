@@ -49,6 +49,8 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         "rankBallControl" : "calculatedData.avgBallControl", //
     ]
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

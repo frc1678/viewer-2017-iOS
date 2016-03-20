@@ -17,9 +17,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var notificationCounter = 0
     var currentMatchNum = 0
     let cache = Shared.dataCache
+    let imageCache = Shared.imageCache
     var NSCounter = 0
     var hasUpdatedMatchOnSetup = false
     var firstCurrentMatchUpdate = true
+    
+    var imageViewsForTeamNumbers = [Int: UIImageView]()
     
     var starredMatchesArray = [String]() {
         didSet {
@@ -28,10 +31,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-dev-2016.firebaseio.com/"
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
+    let devToken = "j1r2wo3RUPMeUZosxwvVSFEFVcrXuuMAGjk6uPOc"
     var matches = [Match]()
     var teamInMatches = [TeamInMatchData]()
     var imageUrls = Dictionary<Int,String>()
@@ -232,7 +236,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         
         let firebase = Firebase(url: self.firebaseURLFirstPart)
-        firebase.authWithCustomToken(scoutingToken) { (E, A) -> Void in
+        firebase.authWithCustomToken(devToken) { (E, A) -> Void in //TOKENN
             
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
                 let numTeams = snap.childSnapshotForPath("Teams").childrenCount
@@ -269,8 +273,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             break
                         }
                         
-                        
                     }
+                    
                 })
                 
                 
@@ -282,9 +286,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     if self.NSCounter != -2 {
                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                     }
-                    if(UInt(self.teams.count) == numTeams) {
-                        // self.getCurrentMatch()
-                    }
+                    //self.updateImageViews(team)
                 })
                 
                 
@@ -300,6 +302,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                         }
                     }
+                    //self.updateImageViews(team)
                     //self.getCurrentMatch()
                 })
                 
@@ -340,9 +343,25 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 print("Finished data fetching")
             })
         }
-        
     }
     
+    /*func updateImageViews(team : Team) {
+        if imageViewsForTeamNumbers[team.number as! Int] == nil {
+            let td = TeamDetailsTableViewController()
+            td.data = team
+            td.reload()
+            /*let imageView = UIImageView()
+            if let url = team.selectedImageUrl {
+                if url != "" && url != String() {
+                    imageView.image = UIImage(named: "SorryNoRobotPhoto")
+                    imageView.sizeToFit()
+                    //self.imageCache.
+                    imageView.hnk_setImageFromURL(NSURL(string: url)!)
+                    imageViewsForTeamNumbers[team.number as! Int] = imageView
+                }
+            }*/
+        }
+    }*/
     
     func getTIMDataForTeam(team: Team) -> [TeamInMatchData] {
         var array = [TeamInMatchData]()
