@@ -139,8 +139,8 @@ class DefenseTableViewController: ArrayTableViewController {
                 graphViewController.highlightIndex = i
                 
                 }*/
-                graphViewController.subDisplayRightTitle = ""
-                graphViewController.subValuesRight = ["","","","",""]
+                graphViewController.subDisplayRightTitle = "Team: "
+                graphViewController.subValuesRight = [teamNumber,teamNumber,teamNumber,teamNumber,teamNumber]
                 }
                 
             }

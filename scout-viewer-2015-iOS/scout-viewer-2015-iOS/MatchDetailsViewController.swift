@@ -37,6 +37,8 @@ class MatchDetailsViewController: UIViewController {
     @IBOutlet weak var R1TL: UILabel!
     @IBOutlet weak var R1D: UILabel!
     
+   
+    
     @IBOutlet weak var redTeamTwoButton: UIButton!
     @IBOutlet weak var R2S: UILabel!
     @IBOutlet weak var R2FP: UILabel!
@@ -142,6 +144,15 @@ class MatchDetailsViewController: UIViewController {
                 for index in 0...redTeams.count - 1 {
                     if index <= 2 {
                         (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
+                        if let cd = redTeams[index].calculatedData {
+                            
+                            (valueForKey("R\(index+1)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele?.integerValue, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)D") as! UILabel).text = "Drive: \(roundValue(cd.driverAbility, toDecimalPlaces: 0))"
+                        }
+
                         /*if let cd = redTeams[index].calculatedData {
                             if cd.teleopShotAbility != nil {
                                 (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData!.teleopShotAbility!, toDecimalPlaces: 4)
@@ -165,9 +176,9 @@ class MatchDetailsViewController: UIViewController {
                             
                             (valueForKey("B\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
                             (valueForKey("B\(index)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
-                            (valueForKey("B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele, toDecimalPlaces: 0))"
-                            (valueForKey("B\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele, toDecimalPlaces: 0))"
+                            (valueForKey("B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele?.integerValue, toDecimalPlaces: 0))"
                             (valueForKey("B\(index)D") as! UILabel).text = "Drive: \(roundValue(cd.driverAbility, toDecimalPlaces: 0))"
+                            (valueForKey("B\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele, toDecimalPlaces: 0))"
                         }
                     }
                 }
