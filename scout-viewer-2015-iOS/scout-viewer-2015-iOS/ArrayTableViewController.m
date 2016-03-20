@@ -102,6 +102,7 @@
 
 
 - (void) databaseUpdated:(NSNotification *)note {
+    NSLog(@"We hit another update");
     [self refreshData:nil];
     
    }

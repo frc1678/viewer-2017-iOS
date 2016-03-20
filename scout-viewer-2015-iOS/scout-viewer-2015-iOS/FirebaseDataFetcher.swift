@@ -18,7 +18,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var currentMatchNum = 0
     let cache = Shared.dataCache
     let imageCache = Shared.imageCache
-    var NSCounter = 0
+    var NSCounter = -2
     var hasUpdatedMatchOnSetup = false
     var firstCurrentMatchUpdate = true
     
@@ -174,7 +174,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "lpgrTriggered:", name: "lpgrTriggered", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self,selector: "notificationTriggeredCheckForNotification:", name: "currentMatchUpdated", object:nil)
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
-            self.NSCounter = -2
             self.getAllTheData()
         })
     }
@@ -241,17 +240,18 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
                 let numTeams = snap.childSnapshotForPath("Teams").childrenCount
                 let numMatches = snap.childSnapshotForPath("Matches").childrenCount
+                let numTIMDs = snap.childSnapshotForPath("TeamInMatchDatas").childrenCount
                 let matchReference = Firebase(url: "\(self.firebaseURLFirstPart)/Matches")
                 
                 matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     self.matches.append(self.makeMatchFromSnapshot(snapshot))
-                    if self.NSCounter != -2 {
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                        
-                    }
+    
                     if UInt(self.matches.count) == numMatches && self.hasUpdatedMatchOnSetup == false {
                         self.hasUpdatedMatchOnSetup = true
                         self.getCurrentMatch()
+                    }
+                    if UInt(self.matches.count) == numTeams {
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable,", object: nil)
                     }
                 })
                 
@@ -267,9 +267,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             if match.redScore == nil && self.matches[matchIndex].redScore != nil {
                                 self.getCurrentMatch()
                             }
-                            if self.NSCounter != -2 {
-                                NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                            }
+                            
+                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
                             break
                         }
                         
@@ -281,9 +280,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 
                 let teamReference = Firebase(url:"\(self.firebaseURLFirstPart)/Teams")
                 teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
+                    
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.teams.append(team)
-                    if self.NSCounter != -2 {
+                    if UInt(self.teams.count) == numTeams {
                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                     }
                     //self.updateImageViews(team)
@@ -311,13 +311,14 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 let timdRef = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
                 timdRef.observeEventType(.ChildAdded, withBlock: { (snap) -> Void in
                     
+                    
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
                     let team = self.fetchTeam(timd!.teamNumber as! Int)
                     team.TeamInMatchDatas.append(timd!)
                     
                     self.teamInMatches.append(timd!)
-                    if self.NSCounter != -2 {
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object: nil)
+                    if UInt(self.teamInMatches.count) == numTIMDs {
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object: nil)
                     }
                 })
                 
@@ -338,9 +339,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         team.TeamInMatchDatas[i!] = timd!
                     }
                 })
-                self.NSCounter = 0
+                
                 self.getCurrentMatch()
-                print("Finished data fetching")
+                
             })
         }
     }
