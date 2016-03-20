@@ -406,7 +406,15 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         return array
     }
-    
+    func getTimDataForTeamInMatch(team:Team, inMatch:Match) -> TeamInMatchData? {
+        var TIMDatas = getTIMDataForTeam(team)
+        for TIMData in TIMDatas {
+            if TIMData.matchNumber?.integerValue == inMatch.matchNumber?.integerValue {
+                return TIMData
+            }
+        }
+        return nil
+    }
     func fetchTeam(teamNum: Int) -> Team{
         for team in self.teams {
             if team.number == teamNum {
