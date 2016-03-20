@@ -483,6 +483,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     multiCell.teamLabel!.text = Utils.humanReadableNames[dataKey]
                     
+                    
                     if percentageValues.contains(dataKey) {
                         multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
                     } else {
@@ -503,6 +504,30 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             multiCell.scoreLabel?.text = ""
                         }
                     }
+                    if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil && multiCell.teamLabel!.text!.rangeOfString("Low") != nil {
+                        var counter = 0
+                        for TIM in (data?.TeamInMatchDatas)! {
+                            if TIM.calculatedData?.lowShotsAttemptedTele != nil {
+                                counter += (TIM.calculatedData!.lowShotsAttemptedTele?.integerValue)!
+                            }
+                        }
+                        if(counter == 0) {
+                            multiCell.scoreLabel!.text = "None"
+                        }
+                    }
+                    if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil && multiCell.teamLabel!.text!.rangeOfString("High") != nil {
+                        var counter = 0
+                        for TIM in (data?.TeamInMatchDatas)! {
+                            if TIM.calculatedData?.highShotsAttemptedTele != nil {
+                                counter += (TIM.calculatedData!.highShotsAttemptedTele?.integerValue)!
+                            }
+                        }
+                        if(counter == 0) {
+                            multiCell.scoreLabel!.text = "None"
+                        }
+                    }
+
+                
                     
                     multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
                     

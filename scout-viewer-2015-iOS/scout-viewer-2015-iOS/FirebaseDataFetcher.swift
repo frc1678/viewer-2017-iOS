@@ -845,13 +845,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     func notify(currentMatch : Int) {
         if starredMatchesArray.contains(String(currentMatch)) {
-            postNotification("Match coming up: " + String(currentMatch))
+            postNotification("Match coming up: " + String(currentMatch + 1))
         }
         if starredMatchesArray.contains(String(currentMatch + 1)) {
             postNotification("Match coming up: " + String(currentMatch + 1 ))
         }
         if starredMatchesArray.contains(String(currentMatch + 2)) {
-            postNotification("Match coming up: " + String(currentMatch + 2))
+            postNotification("Match coming up: " + String(currentMatch + 1))
         }
     }
     

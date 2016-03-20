@@ -109,7 +109,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.reachPercentage" : "Reach Percentage",
         "calculatedData.scalePercentage" : "Scale Percentage",
         "siegeConsistency": "Siege Consistency",
-        "calculatedData.avgHighShotsAttemptedTele": "Avg. High Shots Attempted Tele",
+        "calculatedData.avgHighShotsAttemptedTele": "Avg. H Shots Tried Tele",
         //"calculatedData.sdBallsKnockedOffMidlineAuto" : "σ Balls off Midline Auto",
         //"calculatedData.sdFailedDefenseCrossesAuto" : "σ Failed Defenses Auto",
         "calculatedData.sdGroundIntakes" : "σ Ground Intakes",
@@ -174,7 +174,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.RScoreEvasion" : "R Score Evasion",
         "calculatedData.RScoreTorque" : "R Score Torque",
         
-        "calculatedData.avgLowShotsAttemptedTele": "Avg. Low Shots Attempted Tele",
+        "calculatedData.avgLowShotsAttemptedTele": "Avg. L Shots Tried Tele",
         "calculatedData.teleopShotAbility": "Teleop Shot Ability",
         "calculatedData.avgTimeForDefenseCrossAuto": "Avg. Secs Defense Cross Auto",
         "calculatedData.avgTimeForDefenseCrossTele":"Avg. Secs Defense Cross Tele",
