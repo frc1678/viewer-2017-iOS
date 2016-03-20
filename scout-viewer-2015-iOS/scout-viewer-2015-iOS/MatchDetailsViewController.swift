@@ -83,6 +83,17 @@ class MatchDetailsViewController: UIViewController {
                 title = "???"
             }
             if let cd = match.calculatedData {
+                
+                //Remove Following Block to Enable Optimal Defenses
+                redDefenseOneLabel.hidden = true
+                redDefenseTwoLabel.hidden = true
+                redDefenseThreeLabel.hidden = true
+                redDefenseFourLabel.hidden = true
+                blueDefenseOneLabel.hidden = true
+                blueDefenseTwoLabel.hidden = true
+                blueDefenseThreeLabel.hidden = true
+                blueDefenseFourLabel.hidden = true
+                
                 if(match.calculatedData?.optimalBlueDefenses != nil) {
                     redDefenseOneLabel.text = String(cd.optimalRedDefenses![0])
                     redDefenseTwoLabel.text = String(cd.optimalRedDefenses![1])
@@ -92,6 +103,8 @@ class MatchDetailsViewController: UIViewController {
                     blueDefenseTwoLabel.text = String(cd.optimalBlueDefenses![1])
                     blueDefenseThreeLabel.text = String(cd.optimalBlueDefenses![2])
                     blueDefenseFourLabel.text = String(cd.optimalBlueDefenses![3])
+                    
+                   
                 }
                 
                 redOfficialScoreLabel.text = getLabelTitle(match.redScore?.integerValue)

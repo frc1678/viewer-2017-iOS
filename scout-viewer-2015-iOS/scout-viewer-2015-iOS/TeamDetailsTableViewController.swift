@@ -504,6 +504,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             multiCell.scoreLabel?.text = ""
                         }
                     }
+                    if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil || multiCell.teamLabel!.text!.rangeOfString("Consistency") != nil {
+                        
+                    multiCell.scoreLabel!.text = percentageValueOf(multiCell.scoreLabel!.text)
+                    }
                     if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil && multiCell.teamLabel!.text!.rangeOfString("Low") != nil {
                         var counter = 0
                         for TIM in (data?.TeamInMatchDatas)! {
