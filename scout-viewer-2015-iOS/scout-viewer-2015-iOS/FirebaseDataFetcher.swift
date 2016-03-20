@@ -252,11 +252,15 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
                     if UInt(self.matches.count) == numMatches && self.hasUpdatedMatchOnSetup == false {
                         self.hasUpdatedMatchOnSetup = true
-                        self.getCurrentMatch()
+                        //self.getCurrentMatch()
+                        print("Num Matches Notification")
+                        if self.NSCounter != -2 {
+                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable,", object: nil)
+                        }
                     }
-                    if UInt(self.matches.count) == numTeams {
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable,", object: nil)
-                    }
+                    
+                    
+                    
                 })
                 
                 
@@ -273,9 +277,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                                 self.getCurrentMatch()
                             }
                             if UInt(self.matchCounter) == deltaMatches {
-                              //  NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                                self.matchCounter = 0
-                                break
+                                print("Delta Matches Notification")
+                                if self.NSCounter != -2 {
+                                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                                    self.matchCounter = 0
+                                    break
+                                }
                             }
                         }
                         
@@ -291,7 +298,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.teams.append(team)
                     if UInt(self.teams.count) == numTeams {
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                        print("NumTeams Notification")
+                        if self.NSCounter != -2 {
+                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                        }
                     }
                     //self.updateImageViews(team)
                 })
@@ -309,6 +319,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         self.teams[index] = team
                         if UInt(self.teamCounter) == deltaTeams {
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                            print("DeltaTeam Notification")
+                            self.getCurrentMatch()
+                            self.NSCounter = 0
                             self.teamCounter = 0
                         }
                     }
@@ -328,7 +341,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     
                     self.teamInMatches.append(timd!)
                     if UInt(self.teamInMatches.count) == numTIMDs {
-                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object: nil)
+                        print("num TIMDs notification")
+                        if self.NSCounter != -2 {
+                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object: nil)
+                        }
                     }
                 })
                 
@@ -344,7 +360,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     if let index = self.teamInMatches.indexOf(tm[0]) {
                         self.teamInMatches[index] = timd!
                         if UInt(self.TIMDCounter) == deltaTIMDs {
-                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                            print("Num DeltaTimds Notification")
+                          //  NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
                             self.TIMDCounter = 0
                         }
                
