@@ -126,7 +126,7 @@ class DefenseTableViewController: ArrayTableViewController {
                 } else {
                     //print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
-                    graphViewController.subDisplayLeftTitle = "\(relevantDefense): "
+                    graphViewController.subDisplayLeftTitle = "Match: "
                     graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(teamNumber))
                     //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
                     //print(graphViewController.subValuesLeft)

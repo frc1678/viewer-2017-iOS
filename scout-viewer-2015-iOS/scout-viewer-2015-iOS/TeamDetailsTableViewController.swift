@@ -507,6 +507,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil || multiCell.teamLabel!.text!.rangeOfString("Consistency") != nil {
                         
                     multiCell.scoreLabel!.text = percentageValueOf(multiCell.scoreLabel!.text)
+                        if multiCell.scoreLabel!.text == "" {
+                            multiCell.scoreLabel!.text = "None"
+                        }
                     }
                     if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil && multiCell.teamLabel!.text!.rangeOfString("Low") != nil {
                         var counter = 0
