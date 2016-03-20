@@ -31,22 +31,47 @@ class MatchDetailsViewController: UIViewController {
     @IBOutlet weak var blueErrorPercentageLabel: UILabel!
     
     @IBOutlet weak var redTeamOneButton: UIButton!
-    @IBOutlet weak var redTeamOneAbilityLabel: UILabel!
+    @IBOutlet weak var R1S: UILabel!
+    @IBOutlet weak var R1FP: UILabel!
+    @IBOutlet weak var R1TH: UILabel!
+    @IBOutlet weak var R1TL: UILabel!
+    @IBOutlet weak var R1D: UILabel!
     
     @IBOutlet weak var redTeamTwoButton: UIButton!
-    @IBOutlet weak var redTeamTwoAbilityLabel: UILabel!
+    @IBOutlet weak var R2S: UILabel!
+    @IBOutlet weak var R2FP: UILabel!
+    @IBOutlet weak var R2TH: UILabel!
+    @IBOutlet weak var R2TL: UILabel!
+    @IBOutlet weak var R2D: UILabel!
     
     @IBOutlet weak var redTeamThreeButton: UIButton!
-    @IBOutlet weak var redTeamThreeAbilityLabel: UILabel!
+    @IBOutlet weak var R3FP: UILabel!
+    @IBOutlet weak var R3S: UILabel!
+    @IBOutlet weak var R3TH: UILabel!
+    @IBOutlet weak var R3TL: UILabel!
+    @IBOutlet weak var R3D: UILabel!
     
     @IBOutlet weak var blueTeamOneButton: UIButton!
-    @IBOutlet weak var blueTeamOneAbilityLabel: UILabel!
+    @IBOutlet weak var B1FP: UILabel!
+    @IBOutlet weak var B1S: UILabel!
+    @IBOutlet weak var B1TH: UILabel!
+    @IBOutlet weak var B1TL: UILabel!
+    @IBOutlet weak var B1D: UILabel!
     
     @IBOutlet weak var blueTeamTwoButton: UIButton!
-    @IBOutlet weak var blueTeamTwoAbilityLabel: UILabel!
+    @IBOutlet weak var B2FP: UILabel!
+    @IBOutlet weak var B2S: UILabel!
+    @IBOutlet weak var B2TH: UILabel!
+    @IBOutlet weak var B2TL: UILabel!
+    @IBOutlet weak var B2D: UILabel!
     
     @IBOutlet weak var blueTeamThreeButton: UIButton!
-    @IBOutlet weak var blueTeamThreeAbilityLabel: UILabel!
+    @IBOutlet weak var B3FP: UILabel!
+    @IBOutlet weak var B3S: UILabel!
+    @IBOutlet weak var B3TH: UILabel!
+    @IBOutlet weak var B3TL: UILabel!
+    @IBOutlet weak var B3D: UILabel!
+    
     
     @IBOutlet weak var redDefenseOneLabel: UILabel!
     @IBOutlet weak var redDefenseTwoLabel: UILabel!
@@ -117,11 +142,11 @@ class MatchDetailsViewController: UIViewController {
                 for index in 0...redTeams.count - 1 {
                     if index <= 2 {
                         (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
-                        if let cd = redTeams[index].calculatedData {
+                        /*if let cd = redTeams[index].calculatedData {
                             if cd.teleopShotAbility != nil {
                                 (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData!.teleopShotAbility!, toDecimalPlaces: 4)
                             }
-                        }
+                        }*/
                     }
                 }
             }
@@ -132,14 +157,16 @@ class MatchDetailsViewController: UIViewController {
             
             let blueTeams = firebaseFetcher.getTeamsFromNumbers(match.blueAllianceTeamNumbers as? [Int])
             if blueTeams.count > 0 {
-                for index in 0...(blueTeams.count - 1) {
-                    if index <= 2 {
+                for index in 1...(blueTeams.count) {
+                    if index <= 3 {
                         //print(blueTeams[index].number)
-                        (valueForKey("blueTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index])", forState: UIControlState.Normal)
-                        if let cd = blueTeams[index].calculatedData {
-                            if cd.teleopShotAbility != nil {
-                                (valueForKey("blueTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(cd.teleopShotAbility!, toDecimalPlaces: 4)
-                            }
+                        (valueForKey("blueTeam\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", forState: UIControlState.Normal)
+                        if let cd = blueTeams[index - 1].calculatedData {
+                            (valueForKey("B\(index)S") as! UILabel).text = "Seed: \(cd.actualSeed)"
+                            (valueForKey("B\(index)FP") as! UILabel).text = "1st Pick: \(cd.firstPickAbility)"
+                            (valueForKey("B\(index)TH") as! UILabel).text = "H Shots Tele: \(cd.avgHighShotsTele)"
+                            (valueForKey("B\(index)TL") as! UILabel).text = "L Shots Tele: \(cd.avgLowShotsTele)"
+                            (valueForKey("B\(index)D") as! UILabel).text = "Driving: \(cd.driverAbility)"
                         }
                     }
                 }

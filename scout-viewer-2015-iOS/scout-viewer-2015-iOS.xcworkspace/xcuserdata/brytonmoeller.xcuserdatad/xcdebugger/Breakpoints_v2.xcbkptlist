@@ -268,12 +268,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/MatchDetailsViewController.swift"
-            timestampString = "477625648.084688"
+            timestampString = "480194666.771268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "checkRes(_:)"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
+            landmarkName = "getError(_:predictedScore:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -284,11 +284,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/MatchDetailsViewController.swift"
-            timestampString = "477625641.004085"
+            timestampString = "480194666.771268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "updateUI()"
             landmarkType = "5">
          </BreakpointContent>
@@ -481,7 +481,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "703"
             endingLineNumber = "703"
-            landmarkName = "filteredMatchesforTeamSearchString(_:)"
+            landmarkName = "filteredMatchesForMatchSearchString(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -593,7 +593,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "715"
             endingLineNumber = "715"
-            landmarkName = "filteredTeamsForSearchString(_:)"
+            landmarkName = "filteredMatchesforTeamSearchString(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -604,12 +604,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/MatchDetailsViewController.swift"
-            timestampString = "479272849.488274"
+            timestampString = "480194666.771268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
-            landmarkName = "checkRes(_:)"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "getErrorLabelText(_:predictedScore:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -673,7 +673,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "781"
             endingLineNumber = "781"
-            landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
+            landmarkName = "getMatchDataValuesForTeamForPath(_:forTeam:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -785,8 +785,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "785"
             endingLineNumber = "785"
-            landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
-            landmarkType = "5">
+            landmarkName = "FirebaseDataFetcher"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -897,7 +897,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "811"
             endingLineNumber = "811"
-            landmarkName = "postNotification(_:)"
+            landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -924,13 +924,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/MatchDetailsViewController.swift"
-            timestampString = "479572190.129492"
+            timestampString = "480194666.771268"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "checkRes(_:)"
-            landmarkType = "5">
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "MatchDetailsViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -993,7 +993,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "815"
             endingLineNumber = "815"
-            landmarkName = "getCurrentMatch()"
+            landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
             landmarkType = "5">
             <Locations>
                <Location
@@ -1041,7 +1041,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "824"
             endingLineNumber = "824"
-            landmarkName = "getCurrentMatch()"
+            landmarkName = "postNotification(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1073,8 +1073,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "847"
             endingLineNumber = "847"
-            landmarkName = "notify(_:)"
-            landmarkType = "5">
+            landmarkName = "FirebaseDataFetcher"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1089,7 +1089,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "837"
             endingLineNumber = "837"
-            landmarkName = "notificationTriggeredCheckForNotification(_:)"
+            landmarkName = "getCurrentMatch()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1105,8 +1105,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "360"
             endingLineNumber = "360"
-            landmarkName = "FirebaseDataFetcher"
-            landmarkType = "3">
+            landmarkName = "getAllTheData()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1121,8 +1121,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "352"
             endingLineNumber = "352"
-            landmarkName = "FirebaseDataFetcher"
-            landmarkType = "3">
+            landmarkName = "getAllTheData()"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
