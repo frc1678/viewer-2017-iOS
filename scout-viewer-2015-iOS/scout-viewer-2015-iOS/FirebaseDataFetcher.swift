@@ -273,7 +273,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                                 self.getCurrentMatch()
                             }
                             if UInt(self.matchCounter) == deltaMatches {
-                                NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                              //  NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
                                 self.matchCounter = 0
                                 break
                             }
