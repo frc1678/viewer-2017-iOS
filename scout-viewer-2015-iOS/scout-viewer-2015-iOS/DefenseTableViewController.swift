@@ -69,7 +69,8 @@ class DefenseTableViewController: ArrayTableViewController {
         } else {
             multiCell?.scoreLabel!.text = String(value!)
         }
-        multiCell?.rankLabel!.text = ""
+        var team = firebaseFetcher.fetchTeam(teamNumber)
+        multiCell?.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team, withCharacteristic: defenseKeys[path.row]))"
         
         
         
@@ -139,8 +140,8 @@ class DefenseTableViewController: ArrayTableViewController {
                 graphViewController.highlightIndex = i
                 
                 }*/
-                graphViewController.subDisplayRightTitle = ""
-                graphViewController.subValuesRight = ["","","","",""]
+                graphViewController.subDisplayRightTitle = "Team: "
+                graphViewController.subValuesRight = [teamNumber,teamNumber,teamNumber,teamNumber,teamNumber]
                 }
                 
             }

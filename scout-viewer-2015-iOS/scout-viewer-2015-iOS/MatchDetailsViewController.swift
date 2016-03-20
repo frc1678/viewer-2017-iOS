@@ -37,6 +37,8 @@ class MatchDetailsViewController: UIViewController {
     @IBOutlet weak var R1TL: UILabel!
     @IBOutlet weak var R1D: UILabel!
     
+   
+    
     @IBOutlet weak var redTeamTwoButton: UIButton!
     @IBOutlet weak var R2S: UILabel!
     @IBOutlet weak var R2FP: UILabel!
@@ -142,6 +144,17 @@ class MatchDetailsViewController: UIViewController {
                 for index in 0...redTeams.count - 1 {
                     if index <= 2 {
                         (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
+                        if let cd = redTeams[index].calculatedData {
+                            let match = firebaseFetcher.fetchMatch(matchNumber)
+                            var propTimData = firebaseFetcher.getTimDataForTeamInMatch(redTeams[index], inMatch: match)
+                            
+                            (valueForKey("R\(index+1)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele?.integerValue, toDecimalPlaces: 0))"
+                            (valueForKey("R\(index+1)D") as! UILabel).text = "Drive: \(roundValue(propTimData?.calculatedData!.drivingAbility, toDecimalPlaces: 2))"
+                        }
+
                         /*if let cd = redTeams[index].calculatedData {
                             if cd.teleopShotAbility != nil {
                                 (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData!.teleopShotAbility!, toDecimalPlaces: 4)
@@ -162,12 +175,27 @@ class MatchDetailsViewController: UIViewController {
                         //print(blueTeams[index].number)
                         (valueForKey("blueTeam\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", forState: UIControlState.Normal)
                         if let cd = blueTeams[index - 1].calculatedData {
+                            let match = firebaseFetcher.fetchMatch(matchNumber)
+                            var TIMDatas = blueTeams[index-1].TeamInMatchDatas
+                            var teamInMatchData = TeamInMatchData()
+                            for TIMData in TIMDatas {
+                                print(TIMData.matchNumber!.integerValue)
+                                print(matchNumber)
+                                if TIMData.matchNumber?.integerValue == matchNumber {
+                                    print("We made it")
+                                    teamInMatchData = TIMData
+                                }
+                            }
                             
                             (valueForKey("B\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
                             (valueForKey("B\(index)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
-                            (valueForKey("B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele, toDecimalPlaces: 0))"
+                            (valueForKey("B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele?.integerValue, toDecimalPlaces: 0))"
+                            if teamInMatchData.calculatedData?.drivingAbility != nil {
+                            (valueForKey("B\(index)D") as! UILabel).text = "Drive: \(roundValue(teamInMatchData.calculatedData!.drivingAbility, toDecimalPlaces: 0))"
+                            } else {
+                                (valueForKey("B\(index)D") as! UILabel).text = "???"
+                            }
                             (valueForKey("B\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele, toDecimalPlaces: 0))"
-                            (valueForKey("B\(index)D") as! UILabel).text = "Drive: \(roundValue(cd.driverAbility, toDecimalPlaces: 0))"
                         }
                     }
                 }
