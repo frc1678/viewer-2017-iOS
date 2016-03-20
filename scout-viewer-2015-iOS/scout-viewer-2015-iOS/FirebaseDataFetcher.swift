@@ -227,6 +227,42 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return team
     }
     
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in //Should already be async
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
+    
+    func cacheImage(team : Team) {
+        if let urlString = team.selectedImageUrl {
+            let url = NSURL(string: urlString)
+            getDataFromUrl(url!) { (data, response, error)  in
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    guard let data = data where error == nil else { return }
+                    print(response?.suggestedFilename ?? "")
+                    print("Download Finished")
+                    self.imageCache.set(value: UIImage(data: data)!, key: "\(team.number)")
+                }
+            }
+        }
+    }
+    
+    func fetchImageForTeam(teamNumber : Int, fetchedCallback : (UIImage)->()) { // Is already async
+        self.imageCache.fetch(key: "\(teamNumber)").onSuccess { (image) -> () in
+            fetchedCallback(image)
+        }
+    }
+    
+    func updateCacheIfNeeded(snap : FDataSnapshot, team : Team) {
+        if team.selectedImageUrl == nil || team.selectedImageUrl == String?() {
+            if let newURL = snap.childSnapshotForPath("selectedImageUrl").value {
+                if team.selectedImageUrl != newURL as? String {
+                    cacheImage(team)
+                }
+            }
+        }
+    }
+    
     func getAllTheData() {
         cache.fetch(key: "starredMatches").onSuccess { (d) -> () in
             if let starred = NSKeyedUnarchiver.unarchiveObjectWithData(d) as? [String] {
@@ -249,13 +285,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 
                 matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     self.matches.append(self.makeMatchFromSnapshot(snapshot))
-    
+                    
                     if UInt(self.matches.count) == numMatches && self.hasUpdatedMatchOnSetup == false {
                         self.hasUpdatedMatchOnSetup = true
                         //self.getCurrentMatch()
                         print("Num Matches Notification")
                         if self.NSCounter != -2 {
-                         NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable,", object: nil)
+                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable,", object: nil)
                         }
                     }
                     
@@ -303,7 +339,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
                         }
                     }
-                    //self.updateImageViews(team)
+                    self.updateCacheIfNeeded(snapshot, team: team)
                 })
                 
                 
@@ -325,8 +361,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             self.teamCounter = 0
                         }
                     }
-                    //self.updateImageViews(team)
-                    //self.getCurrentMatch()
+                    self.updateCacheIfNeeded(snapshot, team: team)
                 })
                 
                 //Here
@@ -361,10 +396,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         self.teamInMatches[index] = timd!
                         if UInt(self.TIMDCounter) == deltaTIMDs {
                             print("Num DeltaTimds Notification")
-                          //  NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                            //  NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
                             self.TIMDCounter = 0
                         }
-               
+                        
                     }
                     let team = self.fetchTeam(timd?.teamNumber as! Int)
                     let i = team.TeamInMatchDatas.indexOf { $0.matchNumber == timd!.matchNumber }
@@ -380,21 +415,21 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     /*func updateImageViews(team : Team) {
-        if imageViewsForTeamNumbers[team.number as! Int] == nil {
-            let td = TeamDetailsTableViewController()
-            td.data = team
-            td.reload()
-            /*let imageView = UIImageView()
-            if let url = team.selectedImageUrl {
-                if url != "" && url != String() {
-                    imageView.image = UIImage(named: "SorryNoRobotPhoto")
-                    imageView.sizeToFit()
-                    //self.imageCache.
-                    imageView.hnk_setImageFromURL(NSURL(string: url)!)
-                    imageViewsForTeamNumbers[team.number as! Int] = imageView
-                }
-            }*/
-        }
+    if imageViewsForTeamNumbers[team.number as! Int] == nil {
+    let td = TeamDetailsTableViewController()
+    td.data = team
+    td.reload()
+    /*let imageView = UIImageView()
+    if let url = team.selectedImageUrl {
+    if url != "" && url != String() {
+    imageView.image = UIImage(named: "SorryNoRobotPhoto")
+    imageView.sizeToFit()
+    //self.imageCache.
+    imageView.hnk_setImageFromURL(NSURL(string: url)!)
+    imageViewsForTeamNumbers[team.number as! Int] = imageView
+    }
+    }*/
+    }
     }*/
     
     func getTIMDataForTeam(team: Team) -> [TeamInMatchData] {

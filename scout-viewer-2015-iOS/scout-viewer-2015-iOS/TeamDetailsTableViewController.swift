@@ -236,7 +236,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         //imageView.contentMode = UIViewContentMode.A
                         
                         if team.selectedImageUrl != nil {
-                            imageView.hnk_setImageFromURL(NSURL(string: team.selectedImageUrl!)!)
+                            self.firebaseFetcher.fetchImageForTeam(self.data?.number as! Int, fetchedCallback: { (image) -> () in
+                                imageView.image = image
+                            })
                         }
                         //self.firebaseFetcher.loadImageForTeam(team)
                 }
@@ -294,14 +296,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
         /*if let willShow = viewController as? GraphViewController {
-            //Do nothing
+        //Do nothing
         } else if let willShow = viewController as? MWPhotoBrowser {
-            //Do nothing
+        //Do nothing
         } else if let willShow = viewController as? TeamDetailsTableViewController {
-            //Do nothing
+        //Do nothing
         } else {*/
-            //navigationController.immediatelyCancelSGProgress()
-       // }
+        //navigationController.immediatelyCancelSGProgress()
+        // }
     }
     
     /*func gotTeamImage(notification: NSNotification) {
@@ -343,15 +345,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         print("Rendering PDF...")
         
         /*PDFRenderer.renderPDFToPath(pdfPath) {(progress: Float, done: Bool) -> () in
-            self.navigationController?.setSGProgressPercentage(progress * 100)
-            
-            if(done) {
-                print("Done rendering PDF")
-                
-                self.shareController = self.setupControllerWithURL(pdfURL, usingDelegate: self)
-                self.shareController.presentPreviewAnimated(true)
-                sender.enabled = true
-            }
+        self.navigationController?.setSGProgressPercentage(progress * 100)
+        
+        if(done) {
+        print("Done rendering PDF")
+        
+        self.shareController = self.setupControllerWithURL(pdfURL, usingDelegate: self)
+        self.shareController.presentPreviewAnimated(true)
+        sender.enabled = true
+        }
         }*/
     }
     
@@ -427,7 +429,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if !moreInfoValues.contains(dataKey) && dataKey != "disfunctionalPercentage" {
                 var dataPoint = AnyObject?()
                 
-                    dataPoint = data!.valueForKeyPath(dataKey) ?? ""
+                dataPoint = data!.valueForKeyPath(dataKey) ?? ""
                 
                 
                 if dataPoint == nil {
@@ -506,7 +508,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil || multiCell.teamLabel!.text!.rangeOfString("Consistency") != nil {
                         
-                    multiCell.scoreLabel!.text = percentageValueOf(multiCell.scoreLabel!.text)
+                        multiCell.scoreLabel!.text = percentageValueOf(multiCell.scoreLabel!.text)
                         if multiCell.scoreLabel!.text == "" {
                             multiCell.scoreLabel!.text = "None"
                         }
@@ -533,8 +535,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             multiCell.scoreLabel!.text = "None"
                         }
                     }
-
-                
+                    
+                    
                     
                     multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
                     
@@ -664,7 +666,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if (percentageValues.contains(key!) || otherNoCalcDataValues.contains(key!)) && key?.rangeOfString("siege") == nil {
                         key = key?.stringByReplacingOccurrencesOfString("calculatedData.", withString: "")
                         switch key! {
-                            case "reachPercentage": key = "didReachAuto"
+                        case "reachPercentage": key = "didReachAuto"
                         case "scalePercentage": key = "didScaleTele"
                         case "incapacitatedPercentage": key = "didGetIncapacitated"
                         case "disabledPercentage": key = "didGetDisabled"
@@ -689,8 +691,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         case "calculatedData.avgHighShotsAttemptedTele": key = "calculatedData.highShotsAttemptedTele"
                         case "calculatedData.RScoreDrivingAbility": key = "calculatedData.drivingAbility"
                         case "calculatedData.avgGroundIntakes": key = "numGroundIntakesTele"
-                            case "calculatedData.avgDefense": key = "rankDefense"
-                            case "calculatedData.actualNumRPs": key = "calculatedData.numRPs"
+                        case "calculatedData.avgDefense": key = "rankDefense"
+                        case "calculatedData.actualNumRPs": key = "calculatedData.numRPs"
                         default: break
                         }
                     }
@@ -702,19 +704,19 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         
                         values = firebaseFetcher.getMatchDataValuesForTeamForPath(key!, forTeam: data!)
                     } else {
-                    values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
+                        values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
                     }
                     if values.reduce(0, combine: +) == 0 || values.count == 0 {
                         graphViewController.graphTitle = "Data Is All 0s"
                         graphViewController.values = [CGFloat]()
                         graphViewController.subValuesLeft = [CGFloat]()
                     } else {
-                    //print(values)
-                    graphViewController.values = values as NSArray as! [CGFloat]
-                    graphViewController.subDisplayLeftTitle = "Match: "
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
-                    //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
-                    //print(graphViewController.subValuesLeft)
+                        //print(values)
+                        graphViewController.values = values as NSArray as! [CGFloat]
+                        graphViewController.subDisplayLeftTitle = "Match: "
+                        graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
+                        //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
+                        //print(graphViewController.subValuesLeft)
                     }
                     /*if let d = data {
                     graphViewController.subValuesRight =
