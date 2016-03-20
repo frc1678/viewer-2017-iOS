@@ -22,6 +22,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var hasUpdatedMatchOnSetup = false
     var firstCurrentMatchUpdate = true
     
+    var matchCounter = 0
+    var TIMDCounter = 0
+    var teamCounter = 0
+    
     var imageViewsForTeamNumbers = [Int: UIImageView]()
     
     var starredMatchesArray = [String]() {
@@ -257,7 +261,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
-                    
+                    let deltaMatches = snapshot.childrenCount
+                    self.matchCounter += 1
                     let number = (snapshot.childSnapshotForPath("number").value as? Int)!
                     for matchIndex in Range(start: 0, end: self.matches.count) {
                         let match = self.matches[matchIndex]
@@ -267,9 +272,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             if match.redScore == nil && self.matches[matchIndex].redScore != nil {
                                 self.getCurrentMatch()
                             }
-                            
-                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                            break
+                            if UInt(self.matchCounter) == deltaMatches {
+                                NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                                self.matchCounter = 0
+                                break
+                            }
                         }
                         
                     }
@@ -291,6 +298,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 
                 
                 teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
+                    let deltaTeams = snapshot.childrenCount
+                    self.teamCounter += 1
                     let team = self.makeTeamFromSnapshot(snapshot)
                     let te = self.teams.filter({ (t) -> Bool in
                         if t.number == team.number { return true }
@@ -298,8 +307,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     })
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
-                        if self.NSCounter != -2 {
+                        if UInt(self.teamCounter) == deltaTeams {
                             NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
+                            self.teamCounter = 0
                         }
                     }
                     //self.updateImageViews(team)
@@ -323,6 +333,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 })
                 
                 timdRef.observeEventType(.ChildChanged, withBlock: { (snap) -> Void in
+                    let deltaTIMDs = snap.childrenCount
+                    self.TIMDCounter += 1
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
                     
                     let tm = self.teamInMatches.filter({ (t) -> Bool in
@@ -331,7 +343,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     })
                     if let index = self.teamInMatches.indexOf(tm[0]) {
                         self.teamInMatches[index] = timd!
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                        if UInt(self.TIMDCounter) == deltaTIMDs {
+                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
+                            self.TIMDCounter = 0
+                        }
+               
                     }
                     let team = self.fetchTeam(timd?.teamNumber as! Int)
                     let i = team.TeamInMatchDatas.indexOf { $0.matchNumber == timd!.matchNumber }
