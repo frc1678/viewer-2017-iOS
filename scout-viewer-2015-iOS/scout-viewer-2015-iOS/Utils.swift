@@ -10,7 +10,7 @@ import Foundation
 
 
 
-func roundValue(value: AnyObject, toDecimalPlaces numDecimalPlaces: Int) -> String {
+func roundValue(value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> String {
     if let val = value as? NSNumber {
         let f = NSNumberFormatter()
         f.numberStyle = NSNumberFormatterStyle.DecimalStyle
@@ -20,10 +20,10 @@ func roundValue(value: AnyObject, toDecimalPlaces numDecimalPlaces: Int) -> Stri
             return "0"
         }
         
-        return f.stringFromNumber(val)!
+        return f.stringFromNumber(val as NSNumber!)!
     }
     
-    return "\(value)"
+    return "???"
 }
 
 func percentageValueOf(number: AnyObject?) -> String {

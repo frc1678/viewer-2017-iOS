@@ -162,11 +162,12 @@ class MatchDetailsViewController: UIViewController {
                         //print(blueTeams[index].number)
                         (valueForKey("blueTeam\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", forState: UIControlState.Normal)
                         if let cd = blueTeams[index - 1].calculatedData {
-                            (valueForKey("B\(index)S") as! UILabel).text = "Seed: \(cd.actualSeed)"
-                            (valueForKey("B\(index)FP") as! UILabel).text = "1st Pick: \(cd.firstPickAbility)"
-                            (valueForKey("B\(index)TH") as! UILabel).text = "H Shots Tele: \(cd.avgHighShotsTele)"
-                            (valueForKey("B\(index)TL") as! UILabel).text = "L Shots Tele: \(cd.avgLowShotsTele)"
-                            (valueForKey("B\(index)D") as! UILabel).text = "Driving: \(cd.driverAbility)"
+                            
+                            (valueForKey("B\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
+                            (valueForKey("B\(index)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
+                            (valueForKey("B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele, toDecimalPlaces: 0))"
+                            (valueForKey("B\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele, toDecimalPlaces: 0))"
+                            (valueForKey("B\(index)D") as! UILabel).text = "Drive: \(roundValue(cd.driverAbility, toDecimalPlaces: 0))"
                         }
                     }
                 }
