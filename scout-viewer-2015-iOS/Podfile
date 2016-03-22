@@ -11,6 +11,7 @@ target 'scout-viewer-2015-iOS' do
     pod 'JBChartView'
     pod 'Sync'
     pod 'HanekeSwift'
+    pod 'Instabug'
 end
 
 

@@ -12,3 +12,5 @@
 #import "PDFRenderer.h"
 #import "UINavigationController+SGProgress.h"
 #import "AppDelegate.h"
+#import <Instabug/Instabug.h>
+

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2505E96499871F1E21ADCD88'
+               BlueprintIdentifier = 'BAE5D5E43819F48ED2785E48'
                BlueprintName = 'TestCheck'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'TestCheck.framework'>

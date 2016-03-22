@@ -9,13 +9,12 @@
 #import "AppDelegate.h"
 #import "scout_viewer_2015_iOS-Swift.h"
 #import "Firebase/Firebase.h"
-@import DATAStack;
+#import <Instabug/Instabug.h>
 
 
 @interface AppDelegate ()
 
 @property (nonatomic) bool hasCached;
-@property (nonatomic) DATAStack *dataStack;
 
 @end
 
@@ -33,7 +32,9 @@
     [Firebase defaultConfig].persistenceEnabled = YES;
     self.firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
-    
+    [Instabug startWithToken: @"98616ae556601b6b72101615cd3f7f9a" invocationEvent: IBGInvocationEventShake];
+//    Instabug startWithToken: "98616ae556601b6b72101615cd3f7f9a", invocationEvent:
+
     return YES;
 }
 
@@ -41,11 +42,9 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    [self.dataStack persistWithCompletion:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    [self.dataStack persistWithCompletion:nil];
 }
 
 
