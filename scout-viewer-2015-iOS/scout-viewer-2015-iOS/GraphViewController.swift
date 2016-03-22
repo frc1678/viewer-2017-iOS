@@ -16,12 +16,13 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     @IBOutlet weak var subDisplayLeft: UILabel!
     @IBOutlet weak var subDisplayRight: UILabel!
     
+    
     var values: [CGFloat] = []
     var subValuesLeft: [AnyObject] = []
     var subValuesRight: [AnyObject] = []
-    var color = UIColor.orangeColor()
+    var color = UIColor.greenColor()
     var negativeColor = UIColor.blueColor()
-    var highlightColor = UIColor.yellowColor()
+    var highlightColor = UIColor.grayColor()
     var fadeColor = UIColor.blackColor()
     var highlightIndex = -1;
     var defaultHeight: CGFloat!
@@ -30,6 +31,9 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     var subDisplayLeftTitle = ""
     var subDisplayRightTitle = ""
     var negativeMultiplier = 0.5
+    var zeroAndOneReplacementValues = [CGFloat : String]()
+    var newValuesArray = [String]()
+    var isPercentageGraph = false
     
     var lens: UIView!
     
@@ -55,6 +59,15 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         super.viewDidLoad()
         
         title = graphTitle
+        if zeroAndOneReplacementValues.count > 0 {
+            newValuesArray = [String]()
+            for i in values.indices {
+                let v = values[i]
+                if let newValue = zeroAndOneReplacementValues[v] {
+                    newValuesArray.append(newValue)
+                }
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -93,7 +106,17 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     }
     
     func barChartView(barChartView: JBBarChartView!, didSelectBarAtIndex index: UInt) {
-        self.mainDisplay.text = "\(displayTitle)\(roundValue(values[Int(index)], toDecimalPlaces: 2))"
+        let mainDisplayText : String
+        if newValuesArray.count == 0 {
+            if !isPercentageGraph {
+                mainDisplayText = "\(displayTitle)\(roundValue(values[Int(index)], toDecimalPlaces: 2))"
+            } else {
+                mainDisplayText = "\(displayTitle)\(percentageValueOf(values[Int(index)]))"
+            }
+        } else {
+            mainDisplayText = "\(displayTitle)\(newValuesArray[Int(index)])"
+        }
+        self.mainDisplay.text = mainDisplayText
         
         if Int(index) < subValuesLeft.count {
             self.subDisplayLeft.text = "\(subDisplayLeftTitle)\(subValuesLeft[Int(index)])"

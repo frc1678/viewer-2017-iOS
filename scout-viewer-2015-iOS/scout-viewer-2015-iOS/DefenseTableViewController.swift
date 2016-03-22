@@ -69,8 +69,8 @@ class DefenseTableViewController: ArrayTableViewController {
         } else {
             multiCell?.scoreLabel!.text = String(value!)
         }
-        var team = firebaseFetcher.fetchTeam(teamNumber)
-        multiCell?.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team, withCharacteristic: defenseKeys[path.row]))"
+        let team = firebaseFetcher.fetchTeam(teamNumber)
+        multiCell?.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team, withCharacteristic: "\(defenseKeys[path.row]).\(defenseKey)"))"
         
         
         
@@ -118,7 +118,7 @@ class DefenseTableViewController: ArrayTableViewController {
                 //print(keySets[indexPath.section][indexPath.row])
                 let values: [Float]
                 
-                values = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
+                (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
                 
                 if values.reduce(0, combine: +) == 0 || values.count == 0 {
                     graphViewController.graphTitle = "Data Is All 0s"

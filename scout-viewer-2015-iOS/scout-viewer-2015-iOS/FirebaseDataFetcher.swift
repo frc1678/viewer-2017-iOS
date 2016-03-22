@@ -812,9 +812,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return valueArray
     }
     
-    func getMatchDataValuesForTeamForPath(var path: String, forTeam: Team) -> [Float] {
+    func getMatchDataValuesForTeamForPath(var path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
         let matches = getMatchesForTeam(forTeam.number as! Int)
         var valueArray = [Float]()
+        var altValueMapping : [CGFloat : String]?
         
         for match in matches {
             let value : AnyObject?
@@ -830,6 +831,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     valueArray.append(floatVal)
                     
                 } else { // Pretty much, if its false it's 0, if its true it's 1
+                    altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
+                    
                     let boolValue: Bool
                     if let boolBoolValue = value as? Bool { //Such ugly
                         boolValue = boolBoolValue
@@ -842,16 +845,18 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 valueArray.append(0.0)
             }
         }
-        return valueArray
+        return (valueArray, altValueMapping)
     }
     
     
-    func getMatchValuesForTeamForPath(path: String, forTeam: Team) -> [Float] {
+    func getMatchValuesForTeamForPath(path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
         var timDatas = getTIMDataForTeam(forTeam)
         timDatas.sortInPlace { Int($0.matchNumber!) < Int($1.matchNumber!) }
-        //print(forTeam.TeamInMatchDatas)
+
         let sortedTimDatas = timDatas.sort { $0.matchNumber!.integerValue < $1.matchNumber?.integerValue }
         var valueArray = [Float]()
+        var altValueMapping : [CGFloat: String]?
+        
         for timData in sortedTimDatas {
             let value : AnyObject?
             //print(timData.matchNumber!.integerValue)
@@ -865,6 +870,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     valueArray.append(floatVal)
                     
                 } else { // Pretty much, if its false it's 0, if its true it's 1
+                    altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
+
                     let boolValue: Bool
                     if let boolBoolValue = value as? Bool { //Such ugly
                         boolValue = boolBoolValue
@@ -877,7 +884,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 valueArray.append(0.0)
             }
         }
-        return valueArray
+        return (valueArray, altValueMapping)
     }
     
     func postNotification(notificationBody:String) {

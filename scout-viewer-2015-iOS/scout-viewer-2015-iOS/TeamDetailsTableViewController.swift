@@ -444,7 +444,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //            notesCell.notesLabel?.text = "\(roundDataPoint(dataPoint))"
                     
                     if "\(dataPoint)".isEmpty {
-                        notesCell.notesLabel?.text = "none"
+                        notesCell.notesLabel?.text = "None"
                     } else {
                         
                         notesCell.notesLabel?.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
@@ -510,9 +510,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil || multiCell.teamLabel!.text!.rangeOfString("Consistency") != nil {
                         
-                        multiCell.scoreLabel!.text = percentageValueOf(multiCell.scoreLabel!.text)
+                        multiCell.scoreLabel!.text = percentageValueOf(dataPoint!)
                         if multiCell.scoreLabel!.text == "" {
-                            multiCell.scoreLabel!.text = "None"
+                            multiCell.scoreLabel!.text = "-"
                         }
                     }
                     if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil && multiCell.teamLabel!.text!.rangeOfString("Low") != nil {
@@ -702,21 +702,31 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //print("This is the key:")
                     //print(keySets[indexPath.section][indexPath.row])
                     let values: [Float]
+                    let altMapping : [CGFloat: String]?
                     if key == "calculatedData.predictedNumRPs" {
                         
-                        values = firebaseFetcher.getMatchDataValuesForTeamForPath(key!, forTeam: data!)
+                        (values, altMapping) = firebaseFetcher.getMatchDataValuesForTeamForPath(key!, forTeam: data!)
                     } else {
-                        values = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
+                        (values, altMapping) = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
+                    }
+                    if key?.rangeOfString("Accuracy") != nil {
+                        graphViewController.isPercentageGraph = true
                     }
                     if values.reduce(0, combine: +) == 0 || values.count == 0 {
                         graphViewController.graphTitle = "Data Is All 0s"
                         graphViewController.values = [CGFloat]()
                         graphViewController.subValuesLeft = [CGFloat]()
+                        if altMapping != nil {
+                            graphViewController.zeroAndOneReplacementValues = altMapping!
+                        }
                     } else {
                         //print(values)
                         graphViewController.values = values as NSArray as! [CGFloat]
                         graphViewController.subDisplayLeftTitle = "Match: "
                         graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
+                        if altMapping != nil {
+                            graphViewController.zeroAndOneReplacementValues = altMapping!
+                        }
                         //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
                         //print(graphViewController.subValuesLeft)
                     }
