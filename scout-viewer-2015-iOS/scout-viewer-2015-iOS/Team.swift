@@ -26,5 +26,6 @@ import UIKit
     var pitPotentialShotBlockerCapability : NSNumber?
     var selectedImageUrl : String?
     var pitHeightOfBallLeavingShooter : NSNumber?
-    
+    var pitCheesecakeAbility : NSNumber?
+    var pitAvailableWeight : NSNumber?
 }

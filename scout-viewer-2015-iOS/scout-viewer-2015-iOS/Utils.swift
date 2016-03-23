@@ -140,6 +140,8 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "pitBumperHeight" : "Bumper Height",
         "pitPotentialShotBlockerCapability" : "Shot Blocking Potential",
         "pitNotes" : "Pit Notes",
+        "pitCheesecakeAbility" : "Cheesecake Ease",
+        "pitAvailableWeight" : "Avail. Weight",
         "pitOrganization" : "Pit Organization",
         "calculatedData.avgSuccessfulTimesCrossedDefensesTele.cdf": "CDF Times Crossed",
         "calculatedData.avgSuccessfulTimesCrossedDefensesTele.pc" : "PC Times Crossed",

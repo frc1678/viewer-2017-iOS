@@ -954,6 +954,20 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     }*/
     
+    func matchesUntilTeamNextMatch(teamNumber : Int) -> String? {
+        let sortedMatches = self.matches.sort { Int($0.number!) > Int($1.number!) }
+        let indexOfCurrentMatch = sortedMatches.indexOf(self.fetchMatch(self.currentMatchNum))
+        var counter = 1
+        for i in indexOfCurrentMatch! + 1..<self.matches.count {
+            let match = sortedMatches[i]
+            counter++
+            if (match.redAllianceTeamNumbers?.contains(teamNumber) != nil) || (match.blueAllianceTeamNumbers?.contains(teamNumber) != nil) {
+                return "\(counter)"
+            }
+        }
+        return nil
+    }
+    
 }
 
 

@@ -124,15 +124,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let pitKeys = [
-        "pitLowBarCapability",
-        "pitPotentialLowBarCapability",
-        "pitPotentialMidlineBallCapability",
-        "pitDriveBaseWidth",
-        "pitDriveBaseLength",
-        "pitBumperHeight",
-        "pitPotentialShotBlockerCapability",
         "pitOrganization",
-        "pitHeightOfBallLeavingShooter"
+        "pitCheesecakeAbility",
+        "pitAvailableWeight"
     ]
     
     
@@ -428,6 +422,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             let dataKey: String = keySets[indexPath.section][indexPath.row]
             
+            
             if !moreInfoValues.contains(dataKey) && dataKey != "disfunctionalPercentage" {
                 var dataPoint = AnyObject?()
                 
@@ -437,6 +432,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 if dataPoint == nil {
                     print("\(dataKey) is nil")
                 }
+                
+                
                 if longTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
                     
@@ -550,7 +547,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 
                 unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-                
+                if dataKey == "matchDatas" {
+                    let NA = "NA"
+                    unrankedCell.titleLabel.text = unrankedCell.titleLabel.text?.stringByAppendingString(" - (\(firebaseFetcher.matchesUntilTeamNextMatch(data?.number as! Int) ?? NA))")
+                }
                 cell = unrankedCell
             }
             
