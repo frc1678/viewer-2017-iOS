@@ -152,6 +152,8 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rt" : "RT Times Crossed",
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rw" : "RW Times Crossed",
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.lb" : "LB Times Crossed",
+        "calculatedData.beachedPercentage" : "Beached Percentage",
+        "calculatedData.slowedPercentage" : "Slowed Percentage",
         "cdf":"Cheval De Frise",
         "pc" : "Portcullis",
         "mt" : "Moat",

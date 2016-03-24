@@ -51,6 +51,8 @@ import UIKit
     var avgBallControl : NSNumber?
     var avgDefense : NSNumber?
     var predictedNumRPs : NSNumber?
+    var beachedPercentage : NSNumber?
+    var slowedPercentage : NSNumber?
 }
 
 

@@ -77,6 +77,8 @@ import UIKit
     var siegePower = NSNumber?()
     var overallSecondPickAbility = NSNumber?()
     var citrusDPR = NSNumber?()
+    var beachedPercentage = NSDictionary?()
+    var slowedPercentage = NSDictionary?()
     //var avgSuccessfulTimesCrossedDefenses = NSDictionary?()
     
     }
