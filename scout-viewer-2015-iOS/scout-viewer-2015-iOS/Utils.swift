@@ -23,12 +23,12 @@ func roundValue(value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> Str
         return f.stringFromNumber(val as NSNumber!)!
     }
     
-    return "???"
+    return ""
 }
 
 func percentageValueOf(number: AnyObject?) -> String {
     if let n = number as? Float {
-        return "\(roundValue(n * 100, toDecimalPlaces: 2))%"
+        return "\(roundValue(n * 100, toDecimalPlaces: 1))%"
     }
     
     return ""
@@ -130,7 +130,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "pitLowBarCapability": "Low Bar Ability",
         "calculatedData.autoAbility" : "Auto Ability",
         "calculatedData.citrusDPR" : "Citrus DPR",
-        "calculatedData.RScoreDrivingAbility": "Driving Ability",
+        "calculatedData.RScoreDrivingAbility": " R Score Driving Ability",
         "calculatedData.drivingAbility": "Driving Ability",
         "pitPotentialLowBarCapability" : "Low Bar Potential",
         "pitHeightOfBallLeavingShooter": "Shot Release Height",
@@ -143,15 +143,15 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "pitCheesecakeAbility" : "Cheesecake Ease",
         "pitAvailableWeight" : "Avail. Weight",
         "pitOrganization" : "Pit Organization",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.cdf": "CDF Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.pc" : "PC Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.mt" : "MT Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rp" : "RP Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.db" : "DB Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.sp" : "SP Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rt" : "RT Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rw" : "RW Times Crossed",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.lb" : "LB Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.cdf": "CDF Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.pc" : "PC Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.mt" : "MT Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rp" : "RP Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.db" : "DB Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.sp" : "SP Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rt" : "RT Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rw" : "RW Times Crossed",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.lb" : "LB Times Crossed",
         "cdf":"Cheval De Frise",
         "pc" : "Portcullis",
         "mt" : "Moat",
@@ -163,6 +163,10 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "lb" : "Low Bar",
         "rankBallControl" : "Ball Control Rank",
         "RScoreBallControl": "R Score Ball Control",
+        "RScoreSpeed" : "R Score Speed",
+        "RScoreTorque": "R Score Torque",
+        "RScoreAgility": "R Score Agility",
+        "RScoreDefense": "R Score Defense",
         "didScaleTele" : "Did Scale",
         "didGetIncapacitated" : "Was Incap.",
         "didGetDisabled" : "Was Disabled",
@@ -175,14 +179,16 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.RScoreSpeed" : "R Score Speed",
         "calculatedData.RScoreEvasion" : "R Score Evasion",
         "calculatedData.RScoreTorque" : "R Score Torque",
-        
+        "calculatedData.RScoreAgility": "R Score Agility",
+        "calculatedData.RScoreDefense": "R Score Defense",
+        "calculatedData.RScoreBallControl": "R Score Ball Control",
         "calculatedData.avgLowShotsAttemptedTele": "Avg. L Shots Tried Tele",
         "calculatedData.teleopShotAbility": "Teleop Shot Ability",
         "calculatedData.avgTimeForDefenseCrossAuto": "Avg. Time Cross Auto",
         "calculatedData.avgTimeForDefenseCrossTele":"Avg. Time Cross Tele",
         "calculatedData.predictedSuccessfulCrossingsForDefenseTele": "Pred Crossings Tele",
-        "calculatedData.sdFailedDefenseCrossesAuto": "σ Failed Defense Crosses Auto",
-        "calculatedData.sdFailedDefenseCrossesTele":"σ Failed Defense Crosses Tele",
+        "calculatedData.sdFailedDefenseCrossesAuto": "σ Failed Crosses Auto",
+        "calculatedData.sdFailedDefenseCrossesTele":"σ Failed Crosses Tele",
         
     ]
     

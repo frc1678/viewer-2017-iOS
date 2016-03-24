@@ -46,13 +46,15 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"currentMatchUpdated" object:nil];
     self.currentMatch = (NSInteger)[self.firebaseFetcher currentMatchNum];
     
-    [NSTimer scheduledTimerWithTimeInterval:2 target: self selector:@selector(scroll:) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:3 target: self selector:@selector(scroll:) userInfo:nil repeats:NO];
 }
 
 -(void)scroll:(NSTimer*)timer {
     //NSIndexPath *i = ;
    // UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:i];
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentMatch - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    if([self.tableView numberOfRowsInSection:0] >= self.currentMatch - 1) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentMatch - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
+    }
 }
 
 //RIP (2016 - 2016)

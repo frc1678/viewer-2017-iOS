@@ -146,7 +146,7 @@ class MatchDetailsViewController: UIViewController {
                         (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
                         if let cd = redTeams[index].calculatedData {
                             let match = firebaseFetcher.fetchMatch(matchNumber)
-                            var propTimData = firebaseFetcher.getTimDataForTeamInMatch(redTeams[index], inMatch: match)
+                            let propTimData = firebaseFetcher.getTimDataForTeamInMatch(redTeams[index], inMatch: match)
                             
                             (valueForKey("R\(index+1)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
                             (valueForKey("R\(index+1)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
@@ -190,11 +190,7 @@ class MatchDetailsViewController: UIViewController {
                             (valueForKey("B\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
                             (valueForKey("B\(index)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
                             (valueForKey("B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele?.integerValue, toDecimalPlaces: 0))"
-                            if teamInMatchData.calculatedData?.drivingAbility != nil {
                             (valueForKey("B\(index)D") as! UILabel).text = "Drive: \(roundValue(teamInMatchData.calculatedData!.drivingAbility, toDecimalPlaces: 0))"
-                            } else {
-                                (valueForKey("B\(index)D") as! UILabel).text = "???"
-                            }
                             (valueForKey("B\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele, toDecimalPlaces: 0))"
                         }
                     }

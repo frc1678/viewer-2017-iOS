@@ -33,7 +33,7 @@ import UIKit
     var rankBallControl : NSNumber?
     var rankDefense : NSNumber?
     var rankDefenseCrossingEffectiveness : [NSNumber]?
-    var rankEvasion : NSNumber?
+    var rankAgility : NSNumber?
     var rankSpeed : NSNumber?
     var rankTorque : NSNumber?
     var teamNumber : NSNumber?

@@ -24,7 +24,7 @@ import UIKit
     var lowShotsAttemptedTele : NSNumber?
     var autoAbility : NSNumber?
     var RScoreTorque : NSNumber?
-    var RScoreEvasion : NSNumber?
+    var RScoreAgility : NSNumber?
     var RScoreSpeed : NSNumber?
     var siegeConsistency : NSNumber?
     var scalePercentage : NSNumber?

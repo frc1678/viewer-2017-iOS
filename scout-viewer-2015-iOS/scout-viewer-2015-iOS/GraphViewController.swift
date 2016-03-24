@@ -107,14 +107,15 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     
     func barChartView(barChartView: JBBarChartView!, didSelectBarAtIndex index: UInt) {
         let mainDisplayText : String
+        let displayTitleWithoutAvg = displayTitle.stringByReplacingOccurrencesOfString("Avg. ", withString: "")
         if newValuesArray.count == 0 {
             if !isPercentageGraph {
-                mainDisplayText = "\(displayTitle)\(roundValue(values[Int(index)], toDecimalPlaces: 2))"
+                mainDisplayText = "\(displayTitleWithoutAvg)\(roundValue(values[Int(index)], toDecimalPlaces: 2))"
             } else {
-                mainDisplayText = "\(displayTitle)\(percentageValueOf(values[Int(index)]))"
+                mainDisplayText = "\(displayTitleWithoutAvg)\(percentageValueOf(values[Int(index)]))"
             }
         } else {
-            mainDisplayText = "\(displayTitle)\(newValuesArray[Int(index)])"
+            mainDisplayText = "\(displayTitleWithoutAvg)\(newValuesArray[Int(index)])"
         }
         self.mainDisplay.text = mainDisplayText
         

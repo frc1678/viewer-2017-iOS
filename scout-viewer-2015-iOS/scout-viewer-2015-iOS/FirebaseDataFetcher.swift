@@ -21,7 +21,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var NSCounter = -2
     var hasUpdatedMatchOnSetup = false
     var firstCurrentMatchUpdate = true
-    
+    let notificationManager : NotificationManager
     var matchCounter = 0
     var TIMDCounter = 0
     var teamCounter = 0
@@ -35,7 +35,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-dev3-2016.firebaseio.com/"
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
@@ -62,7 +62,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         "numShotsBlockedTele",
         "rankBallControl",
         "rankDefense",
-        "rankEvasion",
+        "rankAgility",
         "rankSpeed",
         "rankTorque",
         "teamNumber",
@@ -173,10 +173,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     override init() {
+        self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self,selector:"currentMatchChanged:",name:"currentNumberChanged",object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "lpgrTriggered:", name: "lpgrTriggered", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self,selector: "notificationTriggeredCheckForNotification:", name: "currentMatchUpdated", object:nil)
+        self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated", selector: "notificationTriggeredCheckForNotification:", object: nil))
+        self.notificationManager.notifications.append(NotificationManager.Notification(name: "updateLeftTable"))
+        //self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated"))
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
             self.getAllTheData()
         })
@@ -275,24 +277,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         
         let firebase = Firebase(url: self.firebaseURLFirstPart)
-        firebase.authWithCustomToken(scoutingToken) { (E, A) -> Void in //TOKENN
+        firebase.authWithCustomToken(dev3Token) { (E, A) -> Void in //TOKENN
             
             firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
-                let numTeams = snap.childSnapshotForPath("Teams").childrenCount
-                let numMatches = snap.childSnapshotForPath("Matches").childrenCount
-                let numTIMDs = snap.childSnapshotForPath("TeamInMatchDatas").childrenCount
                 let matchReference = Firebase(url: "\(self.firebaseURLFirstPart)/Matches")
                 
                 matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     self.matches.append(self.makeMatchFromSnapshot(snapshot))
                     
-                    if UInt(self.matches.count) == numMatches && self.hasUpdatedMatchOnSetup == false {
+                    if self.hasUpdatedMatchOnSetup == false {
                         self.hasUpdatedMatchOnSetup = true
                         //self.getCurrentMatch()
-                        print("Num Matches Notification")
-                        if self.NSCounter != -2 {
-                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable,", object: nil)
-                        }
+                            self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
+                        
                     }
                     
                     
@@ -301,8 +298,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
-                    let deltaMatches = snapshot.childrenCount
-                    self.matchCounter += 1
+                    self.matchCounter++
                     let number = (snapshot.childSnapshotForPath("number").value as? Int)!
                     for matchIndex in Range(start: 0, end: self.matches.count) {
                         let match = self.matches[matchIndex]
@@ -312,14 +308,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             if match.redScore == nil && self.matches[matchIndex].redScore != nil {
                                 self.getCurrentMatch()
                             }
-                            if UInt(self.matchCounter) == deltaMatches {
-                                print("Delta Matches Notification")
-                                if self.NSCounter != -2 {
-                                    NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                                    self.matchCounter = 0
-                                    break
-                                }
-                            }
+                            self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                         }
                         
                     }
@@ -334,19 +323,15 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.updateCacheIfNeeded(snapshot, team: self.fetchTeam(team.number as! Int))
                     self.teams.append(team)
-                    if UInt(self.teams.count) == numTeams {
-                        print("NumTeams Notification")
-                        if self.NSCounter != -2 {
-                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
-                        }
-                    }
+                    
+                            self.notificationManager.queueNote("updateLeftTable", specialObject: team)
                     
                 })
                 
                 
                 teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
                     let deltaTeams = snapshot.childrenCount
-                    self.teamCounter += 1
+                    self.teamCounter++
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.updateCacheIfNeeded(snapshot, team: team)
                     
@@ -356,13 +341,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     })
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
-                        if UInt(self.teamCounter) == deltaTeams {
-                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:team)
-                            print("DeltaTeam Notification")
+                            self.notificationManager.queueNote("updateLeftTable", specialObject: team)
                             self.getCurrentMatch()
                             self.NSCounter = 0
                             self.teamCounter = 0
-                        }
+                        
                     }
                 })
                 
@@ -377,16 +360,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     team.TeamInMatchDatas.append(timd!)
                     
                     self.teamInMatches.append(timd!)
-                    if UInt(self.teamInMatches.count) == numTIMDs {
-                        print("num TIMDs notification")
-                        if self.NSCounter != -2 {
-                            NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object: nil)
-                        }
-                    }
+                            self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
+                    
                 })
                 
                 timdRef.observeEventType(.ChildChanged, withBlock: { (snap) -> Void in
-                    let deltaTIMDs = snap.childrenCount
                     self.TIMDCounter += 1
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
                     
@@ -396,12 +374,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     })
                     if let index = self.teamInMatches.indexOf(tm[0]) {
                         self.teamInMatches[index] = timd!
-                        if UInt(self.TIMDCounter) == deltaTIMDs {
-                            print("Num DeltaTimds Notification")
-                            //  NSNotificationCenter.defaultCenter().postNotificationName("updateLeftTable", object:nil)
-                            self.TIMDCounter = 0
-                        }
-                        
                     }
                     let team = self.fetchTeam(timd?.teamNumber as! Int)
                     let i = team.TeamInMatchDatas.indexOf { $0.matchNumber == timd!.matchNumber }
@@ -852,7 +824,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func getMatchValuesForTeamForPath(path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
         var timDatas = getTIMDataForTeam(forTeam)
         timDatas.sortInPlace { Int($0.matchNumber!) < Int($1.matchNumber!) }
-
+        
         let sortedTimDatas = timDatas.sort { $0.matchNumber!.integerValue < $1.matchNumber?.integerValue }
         var valueArray = [Float]()
         var altValueMapping : [CGFloat: String]?
@@ -871,7 +843,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     
                 } else { // Pretty much, if its false it's 0, if its true it's 1
                     altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
-
+                    
                     let boolValue: Bool
                     if let boolBoolValue = value as? Bool { //Such ugly
                         boolValue = boolBoolValue
@@ -955,19 +927,90 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }*/
     
     func matchesUntilTeamNextMatch(teamNumber : Int) -> String? {
-        let sortedMatches = self.matches.sort { Int($0.number!) > Int($1.number!) }
-        let indexOfCurrentMatch = sortedMatches.indexOf(self.fetchMatch(self.currentMatchNum))
-        var counter = 1
-        for i in indexOfCurrentMatch! + 1..<self.matches.count {
-            let match = sortedMatches[i]
-            counter++
-            if (match.redAllianceTeamNumbers?.contains(teamNumber) != nil) || (match.blueAllianceTeamNumbers?.contains(teamNumber) != nil) {
-                return "\(counter)"
+        let sortedMatches = self.matches.sort { Int($0.number!) < Int($1.number!) }
+        if let indexOfCurrentMatch = sortedMatches.indexOf(self.fetchMatch(self.currentMatchNum + 1)) {
+            var counter = 0
+            for i in indexOfCurrentMatch + 1..<self.matches.count {
+                let match = sortedMatches[i]
+                counter++
+                if (match.redAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) || (match.blueAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) {
+                    return "\(counter)"
+                }
             }
         }
         return nil
     }
     
+}
+
+class NotificationManager : NSObject {
+    let timer = NSTimer()
+    let secsBetweenUpdates : Double
+    var notifications : [Notification]
+    var notificationNamesToPost = [String: AnyObject?]()
+    
+    struct Notification {
+        let name : String
+        var selector : String?
+        var object : AnyObject?
+        
+        init(name : String, selector : String?, object: AnyObject?) {
+            self.selector = nil
+            if selector != nil {
+                if selector!.rangeOfString(":") == nil {
+                    print("Notification Selector Function Must have exactly one parameter, an NSNotification Object")
+                    self.selector = selector
+                }
+            }
+            self.name = name
+            self.object = object
+        }
+        
+        init(name : String) {
+            self.name = name
+            self.selector = nil
+            self.object = nil
+        }
+    }
+    
+    init (secsBetweenUpdates : Double, notifications: [Notification]) {
+        self.secsBetweenUpdates = secsBetweenUpdates
+        self.notifications = notifications
+        super.init()
+
+        for note in notifications {
+            if let selector = note.selector {
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(selector), name: note.name, object: nil)
+            }
+        }
+        NSTimer.scheduledTimerWithTimeInterval(secsBetweenUpdates, target: self, selector: "notify:", userInfo: nil, repeats: false)
+
+    }
+    
+    func queueNote(name: String, specialObject: AnyObject?) {
+        self.notificationNamesToPost[name] = specialObject
+    }
+    
+    func postNotification(noteName : String, specialObject : AnyObject?) {
+        let noteArray = self.notifications.filter { $0.name == noteName }
+        if noteArray.count > 0 {
+            let note = noteArray[0]
+            if specialObject != nil {
+                NSNotificationCenter.defaultCenter().postNotificationName(note.name, object: specialObject, userInfo: nil)
+            } else {
+                NSNotificationCenter.defaultCenter().postNotificationName(note.name, object: note.object, userInfo: nil)
+            }
+        }
+    }
+    
+    func notify(timer : NSTimer) {
+        for (noteName, specialObject) in self.notificationNamesToPost {
+            postNotification(noteName, specialObject: specialObject)
+        }
+        notificationNamesToPost = [String: AnyObject?]()
+        self.timer.invalidate()
+        NSTimer.scheduledTimerWithTimeInterval(secsBetweenUpdates, target: self, selector: "notify:", userInfo: nil, repeats: false)
+    }
 }
 
 

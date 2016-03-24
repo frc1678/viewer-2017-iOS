@@ -41,9 +41,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     var photos: [MWPhoto] = []
     
-    let defaultKeys = [
-        "matchDatas"
-    ]
     
     let plus1Keys = [
         "pitPotentialLowBarCapability",
@@ -75,58 +72,21 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     // Add carrying stability into stacking security
     
-    let autoKeys = [
-        //TODO: Add Avg. Num Shots in 2 ball Auto
-        "calculatedData.numAutoPoints",
-        "calculatedData.highShotAccuracyAuto",
-        "calculatedData.lowShotAccuracyAuto",
-        "calculatedData.avgBallsKnockedOffMidlineAuto",
-        "calculatedData.avgMidlineBallsIntakedAuto"]
     
-    let teleKeys = [
-        "calculatedData.highShotAccuracyTele",
-        "calculatedData.lowShotAccuracyTele",
-        "calculatedData.avgHighShotsTele",
-        "calculatedData.sdHighShotsTele",
-        "calculatedData.avgLowShotsTele",
-        "calculatedData.sdLowShotsTele",
-        "calculatedData.avgShotsBlocked",
-        "calculatedData.avgLowShotsAttemptedTele",
-        "calculatedData.avgHighShotsAttemptedTele",
-        "calculatedData.teleopShotAbility",
-        
+    
+    
+    
+    
+    /* let superKeys = [
+    "calculatedData.avgEvasion",
+    "calculatedData.avgDefense"
     ]
+    */
     
-    var obstacleKeys = [
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.cdf",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.pc",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.mt",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rp",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.db",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.sp",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rt",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rw",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele.lb"
-    ]
-    
-    
-    
-    let superKeys = [
-        "calculatedData.avgEvasion",
-        "calculatedData.avgDefense"
-    ]
-    
-    let statusKeys = [
-        "calculatedData.challengePercentage",
-        "calculatedData.disfunctionalPercentage",
-        "calculatedData.disabledPercentage",
-        "calculatedData.incapacitatedPercentage",
-    ]
-    
-    let pitKeys = [
-        "pitOrganization",
-        "pitCheesecakeAbility",
-        "pitAvailableWeight"
+    let notGraphingValues = [
+        "Disfunctional Percentage",
+        "First Pick Ability",
+        "Second Pick Ability"
     ]
     
     
@@ -167,10 +127,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.incapacitatedPercentage",
     ]
     
-    let moreInfoValues = [
-        "matchDatas"
-    ]
-    let keySetNames = [
+    
+    let keySetNamesOld = [
         "Information",
         "Ability - High Level",
         "Autonomous",
@@ -180,6 +138,102 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "Pit Scouting / Robot Design",
         "Additional Info",
     ]
+    
+    let keySetNames = [
+        "Matches",
+        "High Level",
+        "Auto",
+        "Teleop",
+        "Defenses",
+        "Siege",
+        "Status",
+        "Super",
+        "Pit"
+    ]
+    
+    var keySets: [[String]] {
+        return [
+            defaultKeys,
+            highLevel,
+            autoKeys,
+            teleKeys,
+            obstacleKeys,
+            siegeKeys,
+            statusKeys,
+            superKeys,
+            pitKeys,
+        ]
+    }
+    
+    let defaultKeys = [
+        "matchDatas"
+    ]
+    
+    let highLevel = [
+        "calculatedData.firstPickAbility",
+        "calculatedData.overallSecondPickAbility"
+    ]
+    
+    let autoKeys = [
+        //TODO: Add Avg. Num Shots in 2 ball Auto
+        "calculatedData.numAutoPoints",
+        "calculatedData.highShotAccuracyAuto",
+        "calculatedData.lowShotAccuracyAuto",
+        "calculatedData.avgBallsKnockedOffMidlineAuto",
+        "calculatedData.avgMidlineBallsIntakedAuto"]
+    
+    let teleKeys = [
+        "calculatedData.highShotAccuracyTele",
+        "calculatedData.lowShotAccuracyTele",
+        "calculatedData.avgHighShotsTele",
+        "calculatedData.sdHighShotsTele",
+        "calculatedData.avgLowShotsTele",
+        "calculatedData.sdLowShotsTele",
+        "calculatedData.avgShotsBlocked",
+        "calculatedData.avgLowShotsAttemptedTele",
+        "calculatedData.avgHighShotsAttemptedTele",
+        "calculatedData.teleopShotAbility",
+    ]
+    
+    var obstacleKeys = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.cdf",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.pc",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.mt",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rp",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.db",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.sp",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rt",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rw",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.lb"
+    ]
+    
+    let siegeKeys = [
+        "calculatedData.siegeConsistency"
+    ]
+    
+    let statusKeys = [
+        "calculatedData.disfunctionalPercentage",
+        "calculatedData.disabledPercentage",
+        "calculatedData.incapacitatedPercentage",
+    ]
+    
+    let superKeys = [
+        "calculatedData.RScoreDrivingAbility",
+        "calculatedData.RScoreSpeed",
+        "calculatedData.RScoreTorque",
+        "calculatedData.RScoreAgility",
+        "calculatedData.RScoreDefense",
+        "calculatedData.RScoreBallControl"
+    ]
+    
+    
+    let pitKeys = [
+        "pitOrganization",
+        "pitCheesecakeAbility",
+        "pitAvailableWeight",
+        "pitNotes"
+    ]
+    
     
     let calculatedTeamInMatchDataHumanReadableKeys = [
         "First Pick Ability",
@@ -207,17 +261,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     
     
-    var keySets: [[String]] {
-        return [ defaultKeys,
-            abilityKeys,
-            autoKeys,
-            obstacleKeys,
-            teleKeys,
-            percentageValues,
-            pitKeys,
-            longTextCells
-        ]
-    }
     
     func reload() {
         if data != nil {
@@ -423,7 +466,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let dataKey: String = keySets[indexPath.section][indexPath.row]
             
             
-            if !moreInfoValues.contains(dataKey) && dataKey != "disfunctionalPercentage" {
+            if !defaultKeys.contains(dataKey) && dataKey != "disfunctionalPercentage" {
                 var dataPoint = AnyObject?()
                 
                 dataPoint = data!.valueForKeyPath(dataKey) ?? ""
@@ -455,7 +498,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                     
                     if "\(dataPoint)".isEmpty || isZero(dataPoint!) {
-                        unrankedCell.detailLabel.text = "-"
+                        unrankedCell.detailLabel.text = ""
                     } else if addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if boolValues.contains(dataKey) {
@@ -505,14 +548,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             multiCell.scoreLabel?.text = ""
                         }
                     }
-                    if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil || multiCell.teamLabel!.text!.rangeOfString("Consistency") != nil {
+                    if multiCell.teamLabel?.text?.rangeOfString("Accuracy") != nil || multiCell.teamLabel?.text?.rangeOfString("Consistency") != nil {
                         
                         multiCell.scoreLabel!.text = percentageValueOf(dataPoint!)
                         if multiCell.scoreLabel!.text == "" {
-                            multiCell.scoreLabel!.text = "-"
+                            multiCell.scoreLabel!.text = ""
                         }
                     }
-                    if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil && multiCell.teamLabel!.text!.rangeOfString("Low") != nil {
+                    if multiCell.teamLabel?.text?.rangeOfString("Accuracy") != nil && multiCell.teamLabel?.text?.rangeOfString("Low") != nil {
                         var counter = 0
                         for TIM in (data?.TeamInMatchDatas)! {
                             if TIM.calculatedData?.lowShotsAttemptedTele != nil {
@@ -523,7 +566,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             multiCell.scoreLabel!.text = "None"
                         }
                     }
-                    if multiCell.teamLabel!.text!.rangeOfString("Accuracy") != nil && multiCell.teamLabel!.text!.rangeOfString("High") != nil {
+                    if multiCell.teamLabel?.text?.rangeOfString("Accuracy") != nil && multiCell.teamLabel?.text?.rangeOfString("High") != nil {
                         var counter = 0
                         for TIM in (data?.TeamInMatchDatas)! {
                             if TIM.calculatedData?.highShotsAttemptedTele != nil {
@@ -665,42 +708,46 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
                     var key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
                     
-                    if (percentageValues.contains(key!) || otherNoCalcDataValues.contains(key!)) && key?.rangeOfString("siege") == nil {
-                        key = key?.stringByReplacingOccurrencesOfString("calculatedData.", withString: "")
-                        switch key! {
-                        case "reachPercentage": key = "didReachAuto"
-                        case "scalePercentage": key = "didScaleTele"
-                        case "incapacitatedPercentage": key = "didGetIncapacitated"
-                        case "disabledPercentage": key = "didGetDisabled"
-                        case "challengePercentage": key = "didChallengeTele"
-                        case "avgShotsBlocked": key = "numShotsBlockedTele"
-                        case "avgLowShotsTele": key = "numLowShotsMadeTele"
-                        case "avgHighShotsTele": key = "numHighShotsMadeTele"
-                        case "avgBallsKnockedOffMidlineAuto": key = "numBallsKnockedOffMidlineAuto"
-                        case "avgMidlineBallsIntakedAuto": key = "calculatedData.numBallsIntakedOffMidlineAuto"
-                            
-                        default: break
-                        }
-                    } else {
-                        
-                        switch key! {
-                        case "calculatedData.avgSpeed": key = "rankSpeed"
-                        case "calculatedData.avgEvasion": key = "rankEvasion"
-                        case "calculatedData.avgTorque": key = "rankTorque"
-                        case "calculatedData.avgBallControl": key = "rankBallControl"
-                        case "calculatedData.avgLowShotsAttemptedTele": key = "calculatedData.lowShotsAttemptedTele"
-                        case "calculatedData.avgHighShotsAttemptedAuto": key = "calculatedData.highShotsAttemptedAuto"
-                        case "calculatedData.avgHighShotsAttemptedTele": key = "calculatedData.highShotsAttemptedTele"
-                        case "calculatedData.RScoreDrivingAbility": key = "calculatedData.drivingAbility"
-                        case "calculatedData.avgGroundIntakes": key = "numGroundIntakesTele"
-                        case "calculatedData.avgDefense": key = "rankDefense"
-                        case "calculatedData.actualNumRPs": key = "calculatedData.numRPs"
-                        default: break
-                        }
+                    
+                    key = key?.stringByReplacingOccurrencesOfString("calculatedData.", withString: "")
+                    switch key! { // Should really just be a dictionary
+                    case "reachPercentage": key = "didReachAuto"
+                    case "scalePercentage": key = "didScaleTele"
+                    case "incapacitatedPercentage": key = "didGetIncapacitated"
+                    case "disabledPercentage": key = "didGetDisabled"
+                    case "challengePercentage": key = "didChallengeTele"
+                    case "avgShotsBlocked": key = "numShotsBlockedTele"
+                    case "avgLowShotsTele": key = "numLowShotsMadeTele"
+                    case "avgHighShotsTele": key = "numHighShotsMadeTele"
+                    case "avgBallsKnockedOffMidlineAuto": key = "numBallsKnockedOffMidlineAuto"
+                    case "avgMidlineBallsIntakedAuto": key = "calculatedData.numBallsIntakedOffMidlineAuto"
+                    case "avgSpeed": key = "rankSpeed"
+                    case "avgAgility": key = "rankAgility"
+                    case "avgTorque": key = "rankTorque"
+                    case "avgBallControl": key = "rankBallControl"
+                    case "avgLowShotsAttemptedTele": key = "calculatedData.lowShotsAttemptedTele"
+                    case "avgHighShotsAttemptedAuto": key = "calculatedData.highShotsAttemptedAuto"
+                    case "avgHighShotsAttemptedTele": key = "calculatedData.highShotsAttemptedTele"
+                    case "RScoreDrivingAbility": key = "calculatedData.RScoreDrivingAbility"
+                    case "RScoreBallControl": key = "calculatedData.RScoreBallControl"
+                    case "RScoreAgility": key = "calculatedData.RScoreAgility"
+                    case "RScoreDefense": key = "calculatedData.RScoreDefense"
+                    case "RScoreSpeed": key = "calculatedData.RScoreSpeed"
+                    case "RScoreTorque": key = "calculatedData.RScoreTorque"
+                    case "avgGroundIntakes": key = "numGroundIntakesTele"
+                    case "avgDefense": key = "rankDefense"
+                    case "actualNumRPs": key = "calculatedData.numRPs"
+                    case "siegeConsistency": key = "calculatedData.siegeConsistency"
+                    case "teleopShotAbility": key = "calculatedData.teleopShotAbility"
+                    case "lowShotAccuracyTele": key = "calculatedData.lowShotAccuracyTele"
+                    case "highShotAccuracyTele": key = "calculatedData.highShotAccuracyTele"
+                    case "lowShotAccuracyAuto": key = "calculatedData.lowShotAccuracyAuto"
+                    case "highShotAccuracyAuto": key = "calculatedData.highShotAccuracyAuto"
+                    case "numAutoPoints": key = "calculatedData.numAutoPoints"
+                    default: break
                     }
                     
-                    //print("This is the key:")
-                    //print(keySets[indexPath.section][indexPath.row])
+                    
                     let values: [Float]
                     let altMapping : [CGFloat: String]?
                     if key == "calculatedData.predictedNumRPs" {
@@ -792,15 +839,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? UnrankedTableViewCell {
-            if cell.titleLabel.text == "Matches" {
+            if cell.titleLabel.text?.rangeOfString("Matches") != nil {
                 performSegueWithIdentifier("Matches", sender: nil)
             }
         } else if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
             let cs = cell.teamLabel!.text
-            if (cs!.containsString("Times Crossed"))  {
+            if ((cs ?? "").containsString("Times Crossed"))  {
                 performSegueWithIdentifier("defenseCrossedSegue", sender:indexPath)
             } else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
-                if !["Disfunctional Percentage"].contains(cs!) && !cs!.containsString("σ") { performSegueWithIdentifier("CTIMDGraph", sender: indexPath) }
+                if !notGraphingValues.contains(cs!) && !cs!.containsString("σ") { performSegueWithIdentifier("CTIMDGraph", sender: indexPath) }
             } else {
                 performSegueWithIdentifier("TGraph", sender: indexPath)
             }

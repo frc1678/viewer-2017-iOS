@@ -184,7 +184,7 @@ class DefenseTableViewController: ArrayTableViewController {
             crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? -1.0)
         }
         for i in 0..<crossesData.count {
-            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2)) ?? -1.0
+            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2).stringByReplacingOccurrencesOfString(",", withString: "")) ?? -1.0
         }
         return crossesData
     }
