@@ -759,7 +759,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if key?.rangeOfString("Accuracy") != nil {
                         graphViewController.isPercentageGraph = true
                     }
-                    if values.reduce(0, combine: +) == 0 || values.count == 0 {
+                    /*if values.reduce(0, combine: +) == 0 || values.count == 0 {
                         graphViewController.graphTitle = "Data Is All 0s"
                         graphViewController.values = [CGFloat]()
                         graphViewController.subValuesLeft = [CGFloat]()
@@ -767,7 +767,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             graphViewController.zeroAndOneReplacementValues = altMapping!
                         }
                     } else {
-                        //print(values)
+                        //print(values)*/
                         graphViewController.values = values as NSArray as! [CGFloat]
                         graphViewController.subDisplayLeftTitle = "Match: "
                         graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
@@ -776,7 +776,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         }
                         //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
                         //print(graphViewController.subValuesLeft)
-                    }
+                    //}
                     /*if let d = data {
                     graphViewController.subValuesRight =
                     nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
