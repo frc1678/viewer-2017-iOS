@@ -38,6 +38,8 @@
     return YES;
 }
 
+
+
 - (void)databaseUpdated:(NSNotification *)note {
 }
 
@@ -46,6 +48,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 }
+
 
 
 @end

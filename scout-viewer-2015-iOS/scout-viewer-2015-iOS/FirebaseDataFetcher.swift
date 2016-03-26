@@ -230,7 +230,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in //Should already be async
+        NSURLSession.sharedSession().dataTaskWithURL(url) {  (data, response, error) in //Should already be async
             completion(data: data, response: response, error: error)
             }.resume()
     }
@@ -238,7 +238,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func cacheImage(teamNum : Int, url : String?) {
         if let urlString = url {
             let url = NSURL(string: urlString)
-            getDataFromUrl(url!) { (data, response, error)  in
+            getDataFromUrl(url!) { [unowned self] (data, response, error)  in
                 guard let data = data where error == nil else { return }
                 if let image = UIImage(data: data) {
                     self.imageCache.set(value: image, key: "\(teamNum)")
@@ -834,6 +834,61 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             //print(timData.matchNumber!.integerValue)
             
             value = timData.valueForKeyPath(path)
+            
+            
+            if value != nil {
+                
+                if let floatVal = value as? Float {
+                    valueArray.append(floatVal)
+                    
+                } else { // Pretty much, if its false it's 0, if its true it's 1
+                    altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
+                    
+                    let boolValue: Bool
+                    if let boolBoolValue = value as? Bool { //Such ugly
+                        boolValue = boolBoolValue
+                    } else {
+                        boolValue = value as? String == "true" ? true : false
+                    }
+                    valueArray.append((boolValue ? 1.0 : 0.0))
+                }
+            } else {
+                valueArray.append(0.0)
+            }
+        }
+        return (valueArray, altValueMapping)
+    }
+    
+    func getMatchValuesForTeamForPathForDefense(path: String, forTeam: Team, defenseKey: String) -> ([Float], [CGFloat : String]?) {
+        var timDatas = getTIMDataForTeam(forTeam)
+        timDatas.sortInPlace { Int($0.matchNumber!) < Int($1.matchNumber!) }
+        
+        let sortedTimDatas = timDatas.sort { $0.matchNumber!.integerValue < $1.matchNumber?.integerValue }
+        var valueArray = [Float]()
+        var altValueMapping : [CGFloat: String]?
+        
+        for timData in sortedTimDatas {
+            let value : AnyObject?
+            //print(timData.matchNumber!.integerValue)
+            let m = self.fetchMatch(timData.matchNumber as! Int)
+            if m.redDefensePositions != nil {
+            if (m.redAllianceTeamNumbers!.filter {$0 == timData.teamNumber}).count > 0 {
+                if (m.redDefensePositions!.filter {$0 == defenseKey}).count > 0 {
+                    value = timData.valueForKeyPath(path)
+                } else {
+                    value = 0.0
+                }
+            } else {
+                if (m.blueDefensePositions!.filter {$0 == defenseKey}).count > 0 {
+                    value = timData.valueForKeyPath(path)
+                } else {
+                    value = 0.0
+                }
+            }
+            } else {
+                value = 0.0
+            }
+            
             
             
             if value != nil {

@@ -7,7 +7,6 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'scout-viewer-2015-iOS' do
     
     pod 'Firebase', '>= 2.5.0'
-    pod 'MWPhotoBrowser', :git => 'https://github.com/mwaterfall/MWPhotoBrowser.git'
     pod 'JBChartView'
     pod 'Sync'
     pod 'HanekeSwift'

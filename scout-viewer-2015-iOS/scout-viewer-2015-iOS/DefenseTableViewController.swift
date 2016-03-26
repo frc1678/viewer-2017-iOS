@@ -124,7 +124,7 @@ class DefenseTableViewController: ArrayTableViewController {
                 if key?.rangeOfString("beached") == nil && key?.rangeOfString("slowed") == nil {
                     (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
                 } else {
-                    (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
+                    (values, _) = firebaseFetcher.getMatchValuesForTeamForPathForDefense("\(key!)", forTeam: firebaseFetcher.fetchTeam(teamNumber), defenseKey: self.defenseKey)
                 }
                 
                 /*if values.reduce(0, combine: +) == 0 || values.count == 0 {

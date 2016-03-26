@@ -118,6 +118,8 @@
 
 }
 
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
     
@@ -165,11 +167,15 @@
     return nil;
 }
 
+
 -(IBAction)refreshData:(UIRefreshControl *)refreshControl
 {
     //Write code to refresh Matches
     self.dataArray = [self loadDataArray:YES];
-    self.filteredArray = nil;
+    //self.filteredArray = nil;
+    if(self.searchController.searchBar.text.length > 0) {
+        self.filteredArray = [self filteredArrayForSearchText:self.searchController.searchBar.text inScope:self.searchController.searchBar.selectedScopeButtonIndex];
+    }
     [self.tableView reloadData];
     //[refreshControl endRefreshing];
 }
