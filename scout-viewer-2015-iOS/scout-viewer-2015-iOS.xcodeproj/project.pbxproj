@@ -16,6 +16,7 @@
 		40780DCA1C59C05E00ACF489 /* MatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC81C59C05E00ACF489 /* MatchCalculatedData.swift */; };
 		40780DCB1C59C05E00ACF489 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC91C59C05E00ACF489 /* Team.swift */; };
 		40A0F4031C55A37200DEB64C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A0F4021C55A37200DEB64C /* NetworkExtension.framework */; };
+		40A14D721CACC70800CCFC2C /* sortedRankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */; };
 		40B551C91C702C01006089EA /* TeamInMatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B551C81C702C01006089EA /* TeamInMatchCalculatedData.swift */; };
 		40CF57A11C6C30DD00D9B63B /* DefenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */; };
 		40E43E341C54406900ABC378 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E43E331C54406900ABC378 /* Firebase.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -78,6 +79,7 @@
 		40780DC91C59C05E00ACF489 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		40A0F3FF1C559EAE00DEB64C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		40A0F4021C55A37200DEB64C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sortedRankTableViewController.swift; sourceTree = "<group>"; };
 		40B551C81C702C01006089EA /* TeamInMatchCalculatedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchCalculatedData.swift; sourceTree = "<group>"; };
 		40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefenseTableViewController.swift; sourceTree = "<group>"; };
 		40E43E331C54406900ABC378 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 				72AE5AB31A87D5EB001BB94E /* Supporting Files */,
 				725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */,
 				725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */,
+				40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */,
 				40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */,
 				725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */,
 				72AE5ADF1A87E7A0001BB94E /* TeamTableViewController.h */,
@@ -558,6 +561,7 @@
 				40780DCB1C59C05E00ACF489 /* Team.swift in Sources */,
 				400F75ED1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift in Sources */,
 				72AE5AFF1A882014001BB94E /* MatchTableViewCell.m in Sources */,
+				40A14D721CACC70800CCFC2C /* sortedRankTableViewController.swift in Sources */,
 				72AE5AF51A881F8C001BB94E /* FirstPickTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

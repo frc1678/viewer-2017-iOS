@@ -223,7 +223,18 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
     class func getHumanReadableNameForKey(key: String) -> String? {
         return humanReadableNames[key]
     }
-    
+   class func findKeyForValue(value: String) ->String?
+    {
+        for (key, stringValue) in humanReadableNames
+        {
+            if (stringValue == value)
+            {
+                return key
+            }
+        }
+        
+        return nil
+    }
     
     class func getKeyForHumanReadableName(name: String) -> String? {
         var computerReadableNames = [String: String]()

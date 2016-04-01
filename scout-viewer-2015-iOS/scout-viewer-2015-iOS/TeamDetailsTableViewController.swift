@@ -318,7 +318,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         navigationController?.delegate = self
         photos = []
         
-        
+        var longPress = UILongPressGestureRecognizer(target:self, action:"rankingDetailsSegue:")
+        self.view.addGestureRecognizer(longPress)
         if data?.TeamInMatchDatas.count == 0 {
             //print("tc")
             //print(firebaseFetcher.teamInMatches.count)
@@ -668,6 +669,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         self.teamSelectedImageView.userInteractionEnabled = true;
         //        self.n
         //navigationController?.setSGProgressPercentage(50.0)
+        if segue.identifier == "sortedRankSegue" {
+            if let dest = segue.destinationViewController as? sortedRankTableViewController {
+                dest.keyPath = sender as! String
+            }
+        }
         if segue.identifier == "defenseCrossedSegue" {
             let indexPath = sender as? NSIndexPath
             let cell = tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell
@@ -866,6 +872,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 }
             }
             
+        }
+    }
+    func rankingDetailsSegue(gesture: UIGestureRecognizer) {
+        
+        if(gesture.state == UIGestureRecognizerState.Began) {
+            let p = gesture.locationInView(self.tableView)
+            let indexPath = self.tableView.indexPathForRowAtPoint(p)
+            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell {
+                performSegueWithIdentifier("sortedRankSegue", sender: cell.teamLabel!.text)
+            }
+        
+
         }
     }
 }
