@@ -231,6 +231,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "pitOrganization",
         "pitCheesecakeAbility",
         "pitAvailableWeight",
+        "pitNumberOfWheels",
         "pitNotes"
     ]
     

@@ -191,6 +191,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.predictedSuccessfulCrossingsForDefenseTele": "Pred Crossings Tele",
         "calculatedData.sdFailedDefenseCrossesAuto": "σ Failed Crosses Auto",
         "calculatedData.sdFailedDefenseCrossesTele":"σ Failed Crosses Tele",
+        "pitNumberOfWheels":"Number of Wheels"
         
     ]
     
