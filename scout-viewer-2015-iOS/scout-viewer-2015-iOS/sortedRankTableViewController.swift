@@ -30,7 +30,7 @@ class sortedRankTableViewController: ArrayTableViewController {
         let team = data as! Team
         let multiCell = cell as! MultiCellTableViewCell
         multiCell.rankLabel!.text = String(path.row + 1)
-        multiCell.teamLabel!.text = team.name
+        multiCell.teamLabel!.text = String(team.number!)
         if translatedKeyPath.rangeOfString("calculatedData") != nil {
             let propIndex = translatedKeyPath.startIndex.advancedBy(15)
             let propPath = translatedKeyPath.substringFromIndex(propIndex)
@@ -49,6 +49,26 @@ class sortedRankTableViewController: ArrayTableViewController {
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
         return self.firebaseFetcher.getSortedListbyString(translatedKeyPath)
+    }
+    override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
+        var filteredTeamArray = [Team]()
+        for team in self.dataArray {
+            let typeSafeTeam = team as! Team
+            if String(typeSafeTeam.number).containsString(text) != false {
+                filteredTeamArray.append(typeSafeTeam)
+            }
+        }
+        return filteredTeamArray
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        performSegueWithIdentifier("sortRankToTeam", sender: tableView.cellForRowAtIndexPath(indexPath))
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
+            let multiCell = sender as? MultiCellTableViewCell
+            dest.data = firebaseFetcher.fetchTeam(Int(multiCell!.teamLabel!.text!)!)
+        }
     }
 
     /*

@@ -665,7 +665,7 @@
                         <viewControllerLayoutGuide type="bottom" id="NPS-pZ-M9y"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="z3Z-gq-bIu">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BaH-DN-vWb" userLabel="Y">
@@ -676,7 +676,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lgn-RU-76d" userLabel="X">
-                                <rect key="frame" x="14" y="504" width="570" height="1"/>
+                                <rect key="frame" x="14" y="553" width="570" height="1"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="x1S-jR-WJN"/>
@@ -723,7 +723,7 @@
                                 <rect key="frame" x="16" y="220" width="564" height="315"/>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cf5-HX-Tdb">
-                                <rect key="frame" x="64" y="513" width="468" height="31"/>
+                                <rect key="frame" x="64" y="562" width="468" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="gK5-2p-V11"/>
                                 </constraints>
@@ -830,10 +830,13 @@
                             <outlet property="delegate" destination="ojt-9Z-11a" id="spJ-Un-VbD"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="qeH-s8-X6p" kind="show" identifier="sortRankToTeam" id="wMy-oa-Yu3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rS3-w9-3ml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5372" y="-468"/>
+            <point key="canvasLocation" x="5384" y="-477"/>
         </scene>
         <!--Team Schedule Table View Controller-->
         <scene sceneID="ihy-8G-753">
@@ -991,16 +994,6 @@
                                             <outlet property="dataSource" destination="qeH-s8-X6p" id="nF5-h4-7eC"/>
                                         </connections>
                                     </tableView>
-                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SorryNoRobotPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
-                                        <rect key="frame" x="8" y="8" width="584" height="442"/>
-                                        <gestureRecognizers/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="442" id="LcJ-aj-6aX"/>
-                                        </constraints>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="Ro4-6y-Oji" appends="YES" id="kFG-hA-Vic"/>
-                                        </connections>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="26" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFc-Ax-siZ">
                                         <rect key="frame" x="540" y="458" width="44" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
@@ -1013,6 +1006,16 @@
                                         <color key="textColor" red="0.50196081399917603" green="0.50196081399917603" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SorryNoRobotPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="E9H-uJ-eX2">
+                                        <rect key="frame" x="8" y="8" width="584" height="442"/>
+                                        <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="442" id="LcJ-aj-6aX"/>
+                                        </constraints>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Ro4-6y-Oji" appends="YES" id="kFG-hA-Vic"/>
+                                        </connections>
+                                    </imageView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Wgi-0q-wmd" firstAttribute="top" secondItem="E9H-uJ-eX2" secondAttribute="bottom" constant="8" id="2rs-jc-gZ6"/>
@@ -1460,10 +1463,10 @@
         <image name="thirdPick" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XVc-rp-7iO"/>
-        <segue reference="aDm-wS-orf"/>
+        <segue reference="wMy-oa-Yu3"/>
         <segue reference="R2d-hJ-s5p"/>
         <segue reference="BGa-X6-1aO"/>
+        <segue reference="XVc-rp-7iO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>
