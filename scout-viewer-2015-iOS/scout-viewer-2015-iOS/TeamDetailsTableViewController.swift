@@ -575,7 +575,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     cell = multiCell
                     multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
-
+                    
                 }
             } else {
                 let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
@@ -831,9 +831,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 }
                 for TIMD in firebaseFetcher.getTIMDataForTeam(data!) {
                     if let note = TIMD.superNotes {
-                        notesTableViewController.data.append(["\(TIMD.matchNumber!.integerValue)":"\(note)"])
+                        notesTableViewController.data.append(["Match \(TIMD.matchNumber!.integerValue)":"\(note)"])
                     } else {
-                        notesTableViewController.data.append(["\(TIMD.matchNumber!.integerValue)":"None"])
+                        notesTableViewController.data.append(["Match \(TIMD.matchNumber!.integerValue)":"None"])
                     }
                 }
                 notesTableViewController.title = "\(teamNum) Notes"
