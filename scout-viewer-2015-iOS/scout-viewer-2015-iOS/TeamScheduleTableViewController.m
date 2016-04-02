@@ -126,7 +126,7 @@
             return ([match.matchName rangeOfString:searchString].location == 0 || [match.matchName rangeOfString:searchString].location == 1);
         } else if (scope == 1) {
             for (Team *team in [self.firebaseFetcher allTeamsInMatch:match]) {
-                NSString *numberText = [NSString stringWithFormat:@"%ld", (long)team.number];
+                NSString *numberText = [NSString stringWithFormat:@"%@", team.number];
                 if ([numberText rangeOfString:searchString].location == 0) {
                     return YES;
                 }

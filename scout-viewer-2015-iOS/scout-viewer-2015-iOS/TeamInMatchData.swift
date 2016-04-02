@@ -39,6 +39,7 @@ import UIKit
     var teamNumber : NSNumber?
     var timesDefensesCrossedAuto : [NSNumber]?
     var timesCrossedDefensesTele : [NSNumber]?
+    var superNotes : String?
     var calculatedData : TeamInMatchCalculatedData?
 
 }

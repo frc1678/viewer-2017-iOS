@@ -57,6 +57,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var nilValueIndecies = []
         
         title = graphTitle
         if zeroAndOneReplacementValues.count > 0 {
