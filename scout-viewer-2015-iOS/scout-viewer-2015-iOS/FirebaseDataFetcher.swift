@@ -923,6 +923,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getCurrentMatch() -> Int {
+        print("Getting Current Match")
         let sortedMatches = self.matches.sort { $0.number?.integerValue > $1.number?.integerValue }
         var counter = self.matches.count + 1
         for match in sortedMatches {

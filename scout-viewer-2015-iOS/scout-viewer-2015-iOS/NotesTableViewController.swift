@@ -12,7 +12,8 @@ class NotesTableViewController : UITableViewController {
     var data = [[String: String]]()
     
     override func viewDidLoad() {
-        
+        tableView.estimatedRowHeight = 200.0
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -23,12 +24,14 @@ class NotesTableViewController : UITableViewController {
         return data.count
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+   
+    
+   /* override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let attrs = [NSFontAttributeName : UIFont.systemFontOfSize(16)]
         let cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath) as! ResizableNotesTableViewCell
         return (cell.notesLabel?.text ?? "" as NSString).sizeWithAttributes(attrs).height + (cell.titleLabel?.text ?? "" as NSString).sizeWithAttributes(attrs).height + 44
     }
-    
+    */
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("NotesCell") as! ResizableNotesTableViewCell
         
