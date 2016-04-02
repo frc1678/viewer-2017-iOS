@@ -342,7 +342,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
                             self.notificationManager.queueNote("updateLeftTable", specialObject: team)
-                            self.getCurrentMatch()
                             self.NSCounter = 0
                             self.teamCounter = 0
                         
@@ -383,7 +382,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 })
                 
                 self.getCurrentMatch()
-                
+                self.firstCurrentMatchUpdate = false
             })
         }
     }
@@ -934,6 +933,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 self.currentMatchNum = counter
                 let counterDict = ["counter":counter]
                 NSNotificationCenter.defaultCenter().postNotificationName("currentMatchUpdated",object:nil,userInfo: counterDict)
+                
                 return counter
             }
         }
@@ -948,6 +948,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func notificationTriggeredCheckForNotification(note:NSNotification) {
         if !self.firstCurrentMatchUpdate {
             let currentMatch = note.userInfo!["counter"] as? Int
+            print("Hello, this is the checked current match")
+            print(currentMatch)
             notify(currentMatch!)
         } else {
             self.firstCurrentMatchUpdate = false
@@ -956,6 +958,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func notify(currentMatch : Int) {
+        print("Hi, this is starred matches: ")
+        print(starredMatchesArray)
         if starredMatchesArray.contains(String(currentMatch)) {
             postNotification("Match coming up: " + String(currentMatch + 1))
         }
