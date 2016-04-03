@@ -32,7 +32,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-dev2-2016.firebaseio.com/"
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
@@ -285,6 +285,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
                     self.matchCounter++
+                    print(self.getCurrentMatch())
                     self.currentMatchManager.currentMatch = self.getCurrentMatch()
                     let number = (snapshot.childSnapshotForPath("number").value as? Int)!
                     for matchIndex in Range(start: 0, end: self.matches.count) {
@@ -370,6 +371,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 self.firstCurrentMatchUpdate = false
             })
         }
+        
     }
     
     func getTIMDataForTeam(team: Team) -> [TeamInMatchData] {
@@ -896,7 +898,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         var counter = self.matches.count + 1
         for match in sortedMatches {
             counter -= 1
-            if match.redScore != nil && match.redScore?.integerValue != -1 && match.blueScore != nil && match.blueScore?.integerValue != -1 {
+            if match.redScore != nil || match.redScore?.integerValue != nil {
                 print("This is the current match")
                 print(counter)
                 
@@ -925,7 +927,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
        let matchArray = getMatchesForTeam(teamNum)
         var remainingArray = [Match]()
         for match in matchArray {
-            if match.number?.integerValue >= self.currentMatchManager.currentMatch {
+            if match.number?.integerValue > self.currentMatchManager.currentMatch {
                 remainingArray.append(match)
             }
         }

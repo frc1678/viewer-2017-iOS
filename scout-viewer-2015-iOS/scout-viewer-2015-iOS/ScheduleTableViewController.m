@@ -30,6 +30,7 @@
 
 -(void)firebaseFinished {
     [self.tableView reloadData];
+    
 }
 
 - (void)viewDidLoad {
@@ -47,9 +48,11 @@
     self.currentMatch = (NSInteger)[self.firebaseFetcher getCurrentMatch];
     
     [NSTimer scheduledTimerWithTimeInterval:3 target: self selector:@selector(scroll:) userInfo:nil repeats:NO];
+    
 }
 
 -(void)scroll:(NSTimer*)timer {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     //NSIndexPath *i = ;
    // UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:i];
     if([self.tableView numberOfRowsInSection:0] >= self.currentMatch - 1) {

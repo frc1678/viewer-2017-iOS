@@ -41,9 +41,9 @@ class CurrentMatchManager: NSObject {
     
     var currentMatch = 0 {
         didSet {
-            print("This is the newValue \(currentMatch)")
-            print("This is the formerValue \(oldValue)")
+            print("currentMatch changed!")
             if currentMatch != oldValue {
+                NSNotificationCenter.defaultCenter().postNotificationName("currentMatchUpdated", object: nil)
                 notifyIfNeeded()
             }
           
@@ -72,9 +72,6 @@ class CurrentMatchManager: NSObject {
     }
     
     func postNotification(notificationBody:String) {
-        if initCounter < 3 * starredMatchesArray.count {
-            initCounter += 1
-        } else {
             let localNotification = UILocalNotification()
             localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
             localNotification.alertBody = notificationBody
@@ -82,7 +79,8 @@ class CurrentMatchManager: NSObject {
             localNotification.soundName = UILocalNotificationDefaultSoundName
             localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        }
+     
+        
     }
 
     func notificationTriggeredCheckForNotification(note:NSNotification) {
