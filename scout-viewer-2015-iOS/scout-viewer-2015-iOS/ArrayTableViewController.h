@@ -17,6 +17,7 @@
 @property (strong, nonatomic) FirebaseDataFetcher *firebaseFetcher;
 @property (nonatomic,strong) UILongPressGestureRecognizer *lpgr;
 @property (nonatomic) NSInteger currentNumber;
+@property (strong,nonatomic) UISearchController *searchController;
 
 //Subclasses need to override these methods:
 - (NSArray *)loadDataArray:(BOOL)shouldForce;

@@ -15,7 +15,7 @@
 
 @interface ArrayTableViewController ()
 
-@property (strong, nonatomic) UISearchController *searchController;
+
 @property (strong, nonatomic) NSMutableDictionary *highlighteds;
 
 @end
