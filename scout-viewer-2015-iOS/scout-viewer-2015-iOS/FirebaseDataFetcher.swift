@@ -921,6 +921,17 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return nil
     }
     
+    func remainingMatchesForTeam(teamNum:Int) -> Int {
+       let matchArray = getMatchesForTeam(teamNum)
+        var remainingArray = [Match]()
+        for match in matchArray {
+            if match.number?.integerValue >= self.currentMatchManager.currentMatch {
+                remainingArray.append(match)
+            }
+        }
+        return remainingArray.count
+    }
+    
 }
 
 class NotificationManager : NSObject {

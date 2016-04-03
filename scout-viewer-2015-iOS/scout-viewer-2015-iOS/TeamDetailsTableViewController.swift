@@ -582,9 +582,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 
                 unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
+                
                 if dataKey == "matchDatas" {
                     let NA = "NA"
-                    unrankedCell.titleLabel.text = unrankedCell.titleLabel.text?.stringByAppendingString(" - (\(firebaseFetcher.matchesUntilTeamNextMatch(data?.number as! Int) ?? NA))")
+                    unrankedCell.titleLabel.text = unrankedCell.titleLabel.text?.stringByAppendingString(" - (\(firebaseFetcher.matchesUntilTeamNextMatch(data?.number as! Int) ?? NA))".stringByAppendingString(" Remaining: \(firebaseFetcher.remainingMatchesForTeam((data?.number?.integerValue)!))"))
                 }
                 cell = unrankedCell
             }
