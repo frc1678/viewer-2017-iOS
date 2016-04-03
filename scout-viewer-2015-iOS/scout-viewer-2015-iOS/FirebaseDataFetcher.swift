@@ -27,16 +27,17 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var TIMDCounter = 0
     var teamCounter = 0
     
-    var imageViewsForTeamNumbers = [Int: UIImageView]()
     
     
     
     var teams = [Team]()
     let firebaseURLFirstPart = "https://1678-dev2-2016.firebaseio.com/"
+
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
     let devToken = "j1r2wo3RUPMeUZosxwvVSFEFVcrXuuMAGjk6uPOc"
+    let stratDevToken = "IMXOxXD3FjOOUoMGJlkAK5pAtn89mGIWAEnaKJhP"
     var matches = [Match]()
     var teamInMatches = [TeamInMatchData]()
     var imageUrls = Dictionary<Int,String>()
@@ -167,9 +168,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         "overallSecondPickAbility",
         "scoreContribution"
     ]
+    let firebase : Firebase
+    
     
     
     override init() {
+        firebase = Firebase(url: self.firebaseURLFirstPart)
         self.currentMatchManager = CurrentMatchManager()
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         super.init()
@@ -180,6 +184,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), {
             self.getAllTheData()
         })
+        
     }
     
     
@@ -227,22 +232,22 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return team
     }
     
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) {  (data, response, error) in //Should already be async
-            completion(data: data, response: response, error: error)
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) {  (data, _, error) in //Should already be async
+            completion(data: data, error: error)
+            //
+            
+            NSURLSession.sharedSession().invalidateAndCancel()
             }.resume()
     }
     
     func cacheImage(teamNum : Int, url : String?) {
         if let urlString = url {
             let url = NSURL(string: urlString)
-            getDataFromUrl(url!) { [unowned self] (data, response, error)  in
+            getDataFromUrl(url!) { [unowned self] (data, error) in
                 guard let data = data where error == nil else { return }
-                if let image = UIImage(data: data) {
-                    self.imageCache.set(value: image, key: "\(teamNum)")
-                } else {
-                    print(url)
-                }
+                self.imageCache.set(value: UIImage(data: data) ?? UIImage(), key: "\(teamNum)")
+                UIApplication.sharedApplication().performSelector("_performMemoryWarning")
             }
         }
     }
@@ -256,34 +261,41 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func updateCacheIfNeeded(snap : FDataSnapshot, team : Team) {
-        if let newURL = snap.childSnapshotForPath("selectedImageUrl").value {
-            if team.selectedImageUrl != newURL as? String {
-                cacheImage(snap.childSnapshotForPath("number").value as! Int, url: newURL as? String)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let shouldAggressivelyDownload = defaults.boolForKey("predownloadPreference")
+        if shouldAggressivelyDownload {
+            if let newURL = snap.childSnapshotForPath("selectedImageUrl").value {
+                if team.selectedImageUrl != newURL as? String {
+                    cacheImage(snap.childSnapshotForPath("number").value as! Int, url: newURL as? String)
+                }
             }
         }
     }
     
     func getAllTheData() {
         
-        let firebase = Firebase(url: self.firebaseURLFirstPart)
-        firebase.authWithCustomToken(scoutingToken) { (E, A) -> Void in //TOKENN
+        firebase.authWithCustomToken(dev3Token) { [unowned self] (E, A) -> Void in //TOKENN
             
-            firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
+            self.firebase.observeSingleEventOfType(.Value, withBlock: { [unowned self] (snap) -> Void in
                 let matchReference = Firebase(url: "\(self.firebaseURLFirstPart)/Matches")
                 
-                matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
+                matchReference.observeEventType(.ChildAdded, withBlock: { [unowned self] snapshot in
                     self.matches.append(self.makeMatchFromSnapshot(snapshot))
                     self.currentMatchManager.currentMatch = self.getCurrentMatch()
                     if self.hasUpdatedMatchOnSetup == false {
                         self.hasUpdatedMatchOnSetup = true
-                            self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
+                        //self.getCurrentMatch()
+                        self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                         
                     }
                     
-                })
+                    
+                    
+                    })
+
                 
                 
-                matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
+                matchReference.observeEventType(.ChildChanged, withBlock: { [unowned self] snapshot in
                     self.matchCounter++
                     print(self.getCurrentMatch())
                     self.currentMatchManager.currentMatch = self.getCurrentMatch()
@@ -300,24 +312,23 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         
                     }
                     
-                })
+                    })
                 
                 
                 
                 let teamReference = Firebase(url:"\(self.firebaseURLFirstPart)/Teams")
-                teamReference.observeEventType(.ChildAdded, withBlock: { snapshot in
+                teamReference.observeEventType(.ChildAdded, withBlock: { [unowned self] snapshot in
                     
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.updateCacheIfNeeded(snapshot, team: self.fetchTeam(team.number as! Int))
                     self.teams.append(team)
                     
-                            self.notificationManager.queueNote("updateLeftTable", specialObject: team)
+                    self.notificationManager.queueNote("updateLeftTable", specialObject: team)
                     
-                })
+                    })
                 
                 
-                teamReference.observeEventType(.ChildChanged, withBlock: { snapshot in
-                    let deltaTeams = snapshot.childrenCount
+                teamReference.observeEventType(.ChildChanged, withBlock: { [unowned self] snapshot in
                     self.teamCounter++
                     let team = self.makeTeamFromSnapshot(snapshot)
                     self.updateCacheIfNeeded(snapshot, team: team)
@@ -328,17 +339,18 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     })
                     if let index = self.teams.indexOf(te[0]) {
                         self.teams[index] = team
+
                             self.notificationManager.queueNote("updateLeftTable", specialObject: team)
                             self.NSCounter = 0
                             self.teamCounter = 0
                         
                     }
-                })
+                    })
                 
                 //Here
                 
                 let timdRef = Firebase(url:"\(self.firebaseURLFirstPart)/TeamInMatchDatas")
-                timdRef.observeEventType(.ChildAdded, withBlock: { (snap) -> Void in
+                timdRef.observeEventType(.ChildAdded, withBlock: { [unowned self] (snap) -> Void in
                     
                     
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
@@ -346,11 +358,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     team.TeamInMatchDatas.append(timd!)
                     
                     self.teamInMatches.append(timd!)
-                            self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
+                    self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                     
-                })
+                    })
                 
-                timdRef.observeEventType(.ChildChanged, withBlock: { (snap) -> Void in
+                timdRef.observeEventType(.ChildChanged, withBlock: { [unowned self] (snap) -> Void in
                     self.TIMDCounter += 1
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
                     
@@ -366,7 +378,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     if i != nil {
                         team.TeamInMatchDatas[i!] = timd!
                     }
-                })
+                    })
                 
                 self.firstCurrentMatchUpdate = false
             })
@@ -385,7 +397,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getTimDataForTeamInMatch(team:Team, inMatch:Match) -> TeamInMatchData? {
-        var TIMDatas = getTIMDataForTeam(team)
+        let TIMDatas = getTIMDataForTeam(team)
         for TIMData in TIMDatas {
             if TIMData.matchNumber?.integerValue == inMatch.matchNumber?.integerValue {
                 return TIMData
@@ -843,19 +855,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             //print(timData.matchNumber!.integerValue)
             let m = self.fetchMatch(timData.matchNumber as! Int)
             if m.redDefensePositions != nil {
-            if (m.redAllianceTeamNumbers!.filter {$0 == timData.teamNumber}).count > 0 {
-                if (m.redDefensePositions!.filter {$0 == defenseKey}).count > 0 {
-                    value = timData.valueForKeyPath(path)
+                if (m.redAllianceTeamNumbers!.filter {$0 == timData.teamNumber}).count > 0 {
+                    if (m.redDefensePositions!.filter {$0 == defenseKey}).count > 0 {
+                        value = timData.valueForKeyPath(path)
+                    } else {
+                        value = 0.0
+                    }
                 } else {
-                    value = 0.0
+                    if (m.blueDefensePositions!.filter {$0 == defenseKey}).count > 0 {
+                        value = timData.valueForKeyPath(path)
+                    } else {
+                        value = 0.0
+                    }
                 }
-            } else {
-                if (m.blueDefensePositions!.filter {$0 == defenseKey}).count > 0 {
-                    value = timData.valueForKeyPath(path)
-                } else {
-                    value = 0.0
-                }
-            }
             } else {
                 value = 0.0
             }
@@ -970,14 +982,14 @@ class NotificationManager : NSObject {
         self.secsBetweenUpdates = secsBetweenUpdates
         self.notifications = notifications
         super.init()
-
+        
         for note in notifications {
             if let selector = note.selector {
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(selector), name: note.name, object: nil)
             }
         }
         NSTimer.scheduledTimerWithTimeInterval(secsBetweenUpdates, target: self, selector: "notify:", userInfo: nil, repeats: false)
-
+        
     }
     
     func queueNote(name: String, specialObject: AnyObject?) {
