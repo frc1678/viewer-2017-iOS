@@ -52,7 +52,7 @@
 -(void)scroll:(NSTimer*)timer {
     //NSIndexPath *i = ;
    // UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:i];
-    if([self.tableView numberOfRowsInSection:0] >= self.currentMatch - 1) {
+    if([self.tableView numberOfRowsInSection:0] > self.currentMatch - 1) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentMatch - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     }
 }

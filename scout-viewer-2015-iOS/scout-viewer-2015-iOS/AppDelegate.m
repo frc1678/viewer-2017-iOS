@@ -34,7 +34,12 @@
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     [Instabug startWithToken: @"98616ae556601b6b72101615cd3f7f9a" invocationEvent: IBGInvocationEventShake];
 //    Instabug startWithToken: "98616ae556601b6b72101615cd3f7f9a", invocationEvent:
-
+//    NSMutableDictionary *itemDefaults = [[NSMutableDictionary alloc] init];
+//    itemDefaults[@"predownloadPreference"] = NO;
+//    
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    [userDefaults registerDefaults: itemDefaults];
+//    [userDefaults synchronize];
     return YES;
 }
 

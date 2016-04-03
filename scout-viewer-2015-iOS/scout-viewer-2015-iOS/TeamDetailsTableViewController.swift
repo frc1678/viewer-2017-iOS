@@ -451,7 +451,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     secondDataPoint = data!.valueForKeyPath(dataKey.stringByReplacingOccurrencesOfString("Auto", withString: "Tele"))
                     
                     if let sf = secondDataPoint as? Float? {
-                        secondDataPoint = "\(roundValue(sf!, toDecimalPlaces: 1))"
+                        secondDataPoint = "\(roundValue(sf, toDecimalPlaces: 1))"
                     }
                     
                     
