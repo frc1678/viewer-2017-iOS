@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.title = [NSString stringWithFormat:@"%ld - Matches", (long)self.teamNumber];
 }
 
@@ -89,7 +89,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
-    if([self.firebaseFetcher.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
+    if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:matchCell.matchLabel.text]) {
         matchCell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
     }
     else {
@@ -157,16 +157,16 @@
         CGPoint p = [sender locationInView:self.tableView];
         NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:p];
         MatchTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        if([self.firebaseFetcher.starredMatchesArray containsObject:cell.matchLabel.text]) {
-            NSMutableArray *a = [NSMutableArray arrayWithArray:self.firebaseFetcher.starredMatchesArray];
+        if([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject:cell.matchLabel.text]) {
+            NSMutableArray *a = [NSMutableArray arrayWithArray:self.firebaseFetcher.currentMatchManager.starredMatchesArray];
             [a removeObject:cell.matchLabel.text];
-            self.firebaseFetcher.starredMatchesArray = a;
+            self.firebaseFetcher.currentMatchManager.starredMatchesArray = a;
             cell.backgroundColor = [UIColor whiteColor];
         } else {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
-            self.firebaseFetcher.starredMatchesArray = [self.firebaseFetcher.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
+            self.firebaseFetcher.currentMatchManager.starredMatchesArray = [self.firebaseFetcher.currentMatchManager.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
         }
-        [self.firebaseFetcher checkForNotification];
+        //[self.firebaseFetcher checkForNotification];
        /* NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
         [[NSNotificationCenter defaultCenter] postNotification:note];*/
     }
