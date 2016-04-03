@@ -15,24 +15,21 @@ import Haneke
 
 class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var notificationCounter = 0
-    var currentMatchNum = 0
     let cache = Shared.dataCache
     let imageCache = Shared.imageCache
+    let notificationManager : NotificationManager
     var NSCounter = -2
     var hasUpdatedMatchOnSetup = false
     var firstCurrentMatchUpdate = true
-    let notificationManager : NotificationManager
+    let currentMatchManager : CurrentMatchManager
+    
     var matchCounter = 0
     var TIMDCounter = 0
     var teamCounter = 0
     
     var imageViewsForTeamNumbers = [Int: UIImageView]()
     
-    var starredMatchesArray = [String]() {
-        didSet {
-            cache.set(value: NSKeyedArchiver.archivedDataWithRootObject(starredMatchesArray ?? NSMutableArray()), key: "starredMatches")
-        }
-    }
+    
     
     var teams = [Team]()
     let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
@@ -173,9 +170,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     override init() {
+        self.currentMatchManager = CurrentMatchManager()
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         super.init()
-        self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated", selector: "notificationTriggeredCheckForNotification:", object: nil))
+        
         self.notificationManager.notifications.append(NotificationManager.Notification(name: "updateLeftTable"))
         //self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated"))
         
@@ -266,15 +264,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getAllTheData() {
-        cache.fetch(key: "starredMatches").onSuccess { (d) -> () in
-            if let starred = NSKeyedUnarchiver.unarchiveObjectWithData(d) as? [String] {
-                if self.starredMatchesArray != starred {
-                    self.starredMatchesArray = starred
-                }
-            } else {
-                self.starredMatchesArray = [String]()
-            }
-        }
         
         let firebase = Firebase(url: self.firebaseURLFirstPart)
         firebase.authWithCustomToken(scoutingToken) { (E, A) -> Void in //TOKENN
@@ -284,21 +273,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 
                 matchReference.observeEventType(.ChildAdded, withBlock: { snapshot in
                     self.matches.append(self.makeMatchFromSnapshot(snapshot))
-                    
+                    self.currentMatchManager.currentMatch = self.getCurrentMatch()
                     if self.hasUpdatedMatchOnSetup == false {
                         self.hasUpdatedMatchOnSetup = true
-                        //self.getCurrentMatch()
                             self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                         
                     }
-                    
-                    
                     
                 })
                 
                 
                 matchReference.observeEventType(.ChildChanged, withBlock: { snapshot in
                     self.matchCounter++
+                    self.currentMatchManager.currentMatch = self.getCurrentMatch()
                     let number = (snapshot.childSnapshotForPath("number").value as? Int)!
                     for matchIndex in Range(start: 0, end: self.matches.count) {
                         let match = self.matches[matchIndex]
@@ -306,7 +293,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             
                             self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
                             if match.redScore == nil && self.matches[matchIndex].redScore != nil {
-                                self.getCurrentMatch()
                             }
                             self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                         }
@@ -381,29 +367,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     }
                 })
                 
-                self.getCurrentMatch()
                 self.firstCurrentMatchUpdate = false
             })
         }
     }
-    
-    /*func updateImageViews(team : Team) {
-    if imageViewsForTeamNumbers[team.number as! Int] == nil {
-    let td = TeamDetailsTableViewController()
-    td.data = team
-    td.reload()
-    /*let imageView = UIImageView()
-    if let url = team.selectedImageUrl {
-    if url != "" && url != String() {
-    imageView.image = UIImage(named: "SorryNoRobotPhoto")
-    imageView.sizeToFit()
-    //self.imageCache.
-    imageView.hnk_setImageFromURL(NSURL(string: url)!)
-    imageViewsForTeamNumbers[team.number as! Int] = imageView
-    }
-    }*/
-    }
-    }*/
     
     func getTIMDataForTeam(team: Team) -> [TeamInMatchData] {
         var array = [TeamInMatchData]()
@@ -414,6 +381,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         return array
     }
+    
     func getTimDataForTeamInMatch(team:Team, inMatch:Match) -> TeamInMatchData? {
         var TIMDatas = getTIMDataForTeam(team)
         for TIMData in TIMDatas {
@@ -423,6 +391,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         return nil
     }
+    
     func fetchTeam(teamNum: Int) -> Team{
         for team in self.teams {
             if team.number == teamNum {
@@ -444,6 +413,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
         return counter
     }
+    
     func reverseRankOfTeam(team: Team, withCharacteristic:String) -> Int {
         var counter = 0
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reverse()
@@ -922,71 +892,23 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getCurrentMatch() -> Int {
-        print("Getting Current Match")
         let sortedMatches = self.matches.sort { $0.number?.integerValue > $1.number?.integerValue }
         var counter = self.matches.count + 1
         for match in sortedMatches {
             counter -= 1
             if match.redScore != nil && match.redScore?.integerValue != -1 && match.blueScore != nil && match.blueScore?.integerValue != -1 {
-                //print("This is the current match")
-                //print(counter)
-                self.currentMatchNum = counter
-                let counterDict = ["counter":counter]
-                NSNotificationCenter.defaultCenter().postNotificationName("currentMatchUpdated",object:nil,userInfo: counterDict)
+                print("This is the current match")
+                print(counter)
                 
                 return counter
             }
         }
-        return self.matches.count;
+        return 0
     }
-    
-    func checkForNotification() {
-        let currentMatch = self.getCurrentMatch()
-        notify(currentMatch)
-    }
-    
-    func notificationTriggeredCheckForNotification(note:NSNotification) {
-        if !self.firstCurrentMatchUpdate {
-            let currentMatch = note.userInfo!["counter"] as? Int
-            print("Hello, this is the checked current match")
-            print(currentMatch)
-            notify(currentMatch!)
-        } else {
-            self.firstCurrentMatchUpdate = false
-        }
-        
-    }
-    
-    func notify(currentMatch : Int) {
-        print("Hi, this is starred matches: ")
-        print(starredMatchesArray)
-        if starredMatchesArray.contains(String(currentMatch)) {
-            postNotification("Match coming up: " + String(currentMatch + 1))
-        }
-        if starredMatchesArray.contains(String(currentMatch + 1)) {
-            postNotification("Match coming up: " + String(currentMatch + 1 ))
-        }
-        if starredMatchesArray.contains(String(currentMatch + 2)) {
-            postNotification("Match coming up: " + String(currentMatch + 1))
-        }
-    }
-    
-    /*func lpgrTriggered(notification:NSNotification) {
-    let array = self.starredMatchesArray
-    if let swiftArray = array as? AnyObject as? [String] {
-    let currentMatch = self.getCurrentMatch()
-    if swiftArray.contains(String(currentMatch)) || swiftArray.contains(String(currentMatch + 1)) || swiftArray.contains(String(currentMatch + 2)) {
-    postNotification("Starred Match coming up!")
-    }
-    } else {
-    self.starredMatchesArray = [String]()
-    lpgrTriggered(notification)
-    }
-    }*/
     
     func matchesUntilTeamNextMatch(teamNumber : Int) -> String? {
         let sortedMatches = self.matches.sort { Int($0.number!) < Int($1.number!) }
-        if let indexOfCurrentMatch = sortedMatches.indexOf(self.fetchMatch(self.currentMatchNum + 1)) {
+        if let indexOfCurrentMatch = sortedMatches.indexOf(self.fetchMatch(self.getCurrentMatch() + 1)) {
             var counter = 0
             for i in indexOfCurrentMatch + 1..<self.matches.count {
                 let match = sortedMatches[i]
