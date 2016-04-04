@@ -12,17 +12,19 @@ class sortedRankTableViewController: ArrayTableViewController {
     
     //Should be provided by Segue
     var keyPath = ""
-
+    var altTitle = ""
     var translatedKeyPath = ""
     override func cellIdentifier() -> String! {
         return "MultiCellTableViewCell"
     }
     
     override func viewDidLoad() {
-        translatedKeyPath = Utils.findKeyForValue(keyPath)!
+        translatedKeyPath = Utils.findKeyForValue(keyPath) ?? keyPath
         super.viewDidLoad()
         print(keyPath)
-        self.title = keyPath
+        if self.title!.characters.count == 0 {
+            self.title = keyPath
+        }
 
         // Do any additional setup after loading the view.
     }
@@ -34,12 +36,12 @@ class sortedRankTableViewController: ArrayTableViewController {
         if translatedKeyPath.rangeOfString("calculatedData") != nil {
             let propIndex = translatedKeyPath.startIndex.advancedBy(15)
             let propPath = translatedKeyPath.substringFromIndex(propIndex)
-            if team.calculatedData!.valueForKey(propPath) != nil {
+            if team.calculatedData!.valueForKeyPath(propPath) != nil {
                 
-                multiCell.scoreLabel!.text = roundValue(team.calculatedData!.valueForKey(propPath), toDecimalPlaces: 2)
+                multiCell.scoreLabel!.text = roundValue(team.calculatedData!.valueForKeyPath(propPath), toDecimalPlaces: 2)
             }
         } else {
-            multiCell.scoreLabel!.text = roundValue(team.valueForKey(translatedKeyPath), toDecimalPlaces: 2)
+            multiCell.scoreLabel!.text = roundValue(team.valueForKeyPath(translatedKeyPath), toDecimalPlaces: 2)
         }
     }
 

@@ -52,6 +52,8 @@ class DefenseTableViewController: ArrayTableViewController {
         //print(getKeyFromTeamLabel(relevantDefense))
         self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
         
+        let longPress = UILongPressGestureRecognizer(target:self, action:"rankingDetailsSegue:")
+        self.view.addGestureRecognizer(longPress)
         // Do any additional setup after loading the view.
     }
     
@@ -93,64 +95,70 @@ class DefenseTableViewController: ArrayTableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let graphViewController = segue.destinationViewController as! GraphViewController
-        
-        
-        let indexPath = sender as! NSIndexPath
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
-            let text = cell.teamLabel?.text
+        if segue.identifier == "sortedRankSegue" {
+            let rankViewController = segue.destinationViewController as! sortedRankTableViewController
+            rankViewController.keyPath = sender as! String
+            rankViewController.title = " "
+        } else {
+            let graphViewController = segue.destinationViewController as! GraphViewController
             
-            var key = Utils.getKeyForHumanReadableName(text!)
-            if key != nil {
-                switch key! {
-                case "calculatedData.avgSuccessfulTimesCrossedDefensesAuto": key = "calculatedData.numTimesSuccesfulCrossedDefensesAuto"
-                case "calculatedData.avgSuccessfulTimesCrossedDefensesTele": key = "calculatedData.numTimesSuccesfulCrossedDefensesTele"
-                case "calculatedData.avgFailedTimesCrossedDefensesAuto": key = "calculatedData.numTimesFailedCrossedDefensesAuto"
-                case "calculatedData.avgFailedTimesCrossedDefensesTele": key = "calculatedData.numTimesFailedCrossedDefensesTele"
+            
+            let indexPath = sender as! NSIndexPath
+            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
+                let text = cell.teamLabel?.text
+                
+                var key = Utils.getKeyForHumanReadableName(text!)
+                if key != nil {
+                    switch key! {
+                    case "calculatedData.avgSuccessfulTimesCrossedDefensesAuto": key = "calculatedData.numTimesSuccesfulCrossedDefensesAuto"
+                    case "calculatedData.avgSuccessfulTimesCrossedDefensesTele": key = "calculatedData.numTimesSuccesfulCrossedDefensesTele"
+                    case "calculatedData.avgFailedTimesCrossedDefensesAuto": key = "calculatedData.numTimesFailedCrossedDefensesAuto"
+                    case "calculatedData.avgFailedTimesCrossedDefensesTele": key = "calculatedData.numTimesFailedCrossedDefensesTele"
+                        
+                    case "calculatedData.avgTimeForDefenseCrossAuto": key = "calculatedData.crossingTimeForDefenseAuto"
+                    case "calculatedData.avgTimeForDefenseCrossTele": key = "calculatedData.crossingTimeForDefenseTele"
+                        //Beached and slowed stay the same
+                    default: break
+                    }
+                }
+                graphViewController.graphTitle = "\(Utils.getHumanReadableNameForKey(key!) ?? relevantDefense)"
+                graphViewController.displayTitle = "\(graphViewController.graphTitle): "
+                if key != nil && key != "" {
                     
-                case "calculatedData.avgTimeForDefenseCrossAuto": key = "calculatedData.crossingTimeForDefenseAuto"
-                case "calculatedData.avgTimeForDefenseCrossTele": key = "calculatedData.crossingTimeForDefenseTele"
-                    //Beached and slowed stay the same
-                default: break
-                }
-            }
-            graphViewController.graphTitle = "\(Utils.getHumanReadableNameForKey(key!) ?? relevantDefense)"
-            graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-            if key != nil && key != "" {
-                
-                //print("This is the key:")
-                //print(keySets[indexPath.section][indexPath.row])
-                let values: [Float]
-                if key?.rangeOfString("beached") == nil && key?.rangeOfString("slowed") == nil {
-                    (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
-                } else {
-                    (values, _) = firebaseFetcher.getMatchValuesForTeamForPathForDefense("\(key!)", forTeam: firebaseFetcher.fetchTeam(teamNumber), defenseKey: self.defenseKey)
-                }
-                
-                /*if values.reduce(0, combine: +) == 0 || values.count == 0 {
+                    //print("This is the key:")
+                    //print(keySets[indexPath.section][indexPath.row])
+                    let values: [Float]
+                    if key?.rangeOfString("beached") == nil && key?.rangeOfString("slowed") == nil {
+                        (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
+                    } else {
+                        (values, _) = firebaseFetcher.getMatchValuesForTeamForPathForDefense("\(key!)", forTeam: firebaseFetcher.fetchTeam(teamNumber), defenseKey: self.defenseKey)
+                    }
+                    
+                    /*if values.reduce(0, combine: +) == 0 || values.count == 0 {
                     graphViewController.graphTitle = "Data Is All 0s"
                     graphViewController.values = [CGFloat]()
                     graphViewController.subValuesLeft = [CGFloat]()
-                } else {*/
+                    } else {*/
                     //print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
                     graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(teamNumber))
                     //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
                     //print(graphViewController.subValuesLeft)
-               // }
-                /*if let d = data {
-                graphViewController.subValuesRight =
-                nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
+                    // }
+                    /*if let d = data {
+                    graphViewController.subValuesRight =
+                    nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
+                    
+                    let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
+                    graphViewController.highlightIndex = i
+                    
+                    }*/
+                    graphViewController.subDisplayRightTitle = "Team: "
+                    graphViewController.subValuesRight = [teamNumber,teamNumber,teamNumber,teamNumber,teamNumber]
+                }
                 
-                let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
-                graphViewController.highlightIndex = i
-                
-                }*/
-                graphViewController.subDisplayRightTitle = "Team: "
-                graphViewController.subValuesRight = [teamNumber,teamNumber,teamNumber,teamNumber,teamNumber]
             }
-            
         }
         
     }
@@ -203,4 +211,14 @@ class DefenseTableViewController: ArrayTableViewController {
         return crossesData
     }
     
+    func rankingDetailsSegue(gesture: UIGestureRecognizer) {
+        
+        if(gesture.state == UIGestureRecognizerState.Began) {
+            let p = gesture.locationInView(self.tableView)
+            let indexPath = self.tableView.indexPathForRowAtPoint(p)
+            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell {
+                performSegueWithIdentifier("sortedRankSegue", sender: "\(Utils.getKeyForHumanReadableName(cell.teamLabel!.text!) ?? "ERROR").\(defenseKey)")
+            }
+        }
+    }
 }
