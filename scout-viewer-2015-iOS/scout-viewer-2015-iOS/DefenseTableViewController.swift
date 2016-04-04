@@ -210,6 +210,42 @@ class DefenseTableViewController: ArrayTableViewController {
         }
         return crossesData
     }
+    override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
+        let team = self.firebaseFetcher.fetchTeam(teamNumber)
+        let key = getKeyFromTeamLabel(relevantDefense)
+        var crossesData = [Double]()
+        if let cd = team.calculatedData {
+            let teleSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key] as? Double
+            let autoFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key] as? Double
+            let autoSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key] as? Double
+            let teleFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesTele?[key] as? Double
+            
+            crossesData.append(autoSuccessAvg ?? -1.0)
+            crossesData.append(teleSuccessAvg ?? -1.0)
+            crossesData.append(autoFailAvg ?? -1.0)
+            crossesData.append(teleFailAvg ?? -1.0)
+            
+            crossesData.append(cd.avgTimeForDefenseCrossAuto?[key] as? Double ?? -1.0)
+            crossesData.append(cd.avgTimeForDefenseCrossTele?[key] as? Double ?? -1.0)
+            crossesData.append(cd.predictedSuccessfulCrossingsForDefenseTele?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdFailedDefenseCrossesAuto?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdFailedDefenseCrossesTele?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdSuccessfulDefenseCrossesAuto?[key] as? Double ?? -1.0)
+            crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? -1.0)
+            if key == "pc" || key == "cdf" {
+                crossesData.append(cd.beachedPercentage?[key] as? Double ?? -1.0)
+                crossesData.append(cd.slowedPercentage?[key] as? Double ?? -1.0)
+            } else {
+                crossesData.append(-1.0)
+                crossesData.append(-1.0)
+            }
+        }
+        for i in 0..<crossesData.count {
+            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2).stringByReplacingOccurrencesOfString(",", withString: "")) ?? -1.0
+        }
+        return crossesData
+
+    }
     
     func rankingDetailsSegue(gesture: UIGestureRecognizer) {
         
