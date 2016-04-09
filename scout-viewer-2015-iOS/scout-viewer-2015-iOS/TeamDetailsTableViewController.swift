@@ -901,9 +901,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         if(gesture.state == UIGestureRecognizerState.Began) {
             let p = gesture.locationInView(self.tableView)
             let indexPath = self.tableView.indexPathForRowAtPoint(p)
-            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell {
-                if cell.teamLabel!.text!.containsString("Crossed") == false {
-                    performSegueWithIdentifier("sortedRankSegue", sender: cell.teamLabel!.text)
+            if let index = indexPath {
+                if let cell = self.tableView.cellForRowAtIndexPath(index) as? MultiCellTableViewCell {
+                    if cell.teamLabel!.text!.containsString("Crossed") == false {
+                        performSegueWithIdentifier("sortedRankSegue", sender: cell.teamLabel!.text)
+                    }
                 }
             }
             

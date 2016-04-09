@@ -31,7 +31,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     var teams = [Team]()
-    let firebaseURLFirstPart = "https://1678-dev2-2016.firebaseio.com/"
+    let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
 
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
     let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
@@ -274,7 +274,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     func getAllTheData() {
         
-        firebase.authWithCustomToken(dev3Token) { [unowned self] (E, A) -> Void in //TOKENN
+        firebase.authWithCustomToken(scoutingToken) { [unowned self] (E, A) -> Void in //TOKENN
             
             self.firebase.observeSingleEventOfType(.Value, withBlock: { [unowned self] (snap) -> Void in
                 let matchReference = Firebase(url: "\(self.firebaseURLFirstPart)/Matches")

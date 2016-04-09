@@ -22,6 +22,11 @@ class sortedRankTableViewController: ArrayTableViewController {
         translatedKeyPath = Utils.findKeyForValue(keyPath) ?? keyPath
         super.viewDidLoad()
         print(keyPath)
+        if let title = self.title {
+            print(title)
+        } else {
+            self.title = keyPath
+        }
         if self.title!.characters.count == 0 {
             self.title = keyPath
         }
