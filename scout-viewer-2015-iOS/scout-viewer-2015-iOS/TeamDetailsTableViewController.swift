@@ -36,7 +36,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     var num: Int? = nil
-    
+    var showMinimalistTeamDetails = true
     var shareController: UIDocumentInteractionController!
     
     var photos: [MWPhoto] = []
@@ -152,17 +152,39 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     var keySets: [[String]] {
+        if self.showMinimalistTeamDetails {
+            return [
+                defaultKeys,
+                highLevel,
+                autoKeysMini,
+                teleKeysMini,
+                A,
+                B,
+                C,
+                D,
+                LB,
+                siegeKeysMini,
+                statusKeysMini,
+                //superKeys,
+                //pitKeys,
+            ]
+        }
         return [
             defaultKeys,
             highLevel,
             autoKeys,
             teleKeys,
-            obstacleKeys,
+            A,
+            B,
+            C,
+            D,
+            LB,
             siegeKeys,
             statusKeys,
             superKeys,
             pitKeys,
         ]
+        
     }
     
     let defaultKeys = [
@@ -174,20 +196,49 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.overallSecondPickAbility"
     ]
     
+    let autoKeysMini = [
+        //TODO: Add Avg. Num Shots in 2 ball Auto
+        "calculatedData.numAutoPoints",
+        "calculatedData.avgHighShotsAuto",
+        "calculatedData.avgLowShotsAuto",
+        "calculatedData.avgNumCrossingsAuto"
+        //"calculatedData.highShotAccuracyAuto",
+        //"calculatedData.lowShotAccuracyAuto",
+        //"calculatedData.avgBallsKnockedOffMidlineAuto",
+        //"calculatedData.avgMidlineBallsIntakedAuto"
+    ]
+    
     let autoKeys = [
         //TODO: Add Avg. Num Shots in 2 ball Auto
         "calculatedData.numAutoPoints",
+        "calculatedData.avgHighShotsAuto",
+        "calculatedData.avgLowShotsAuto",
+        "calculatedData.avgNumCrossingsAuto",
         "calculatedData.highShotAccuracyAuto",
         "calculatedData.lowShotAccuracyAuto",
         "calculatedData.avgBallsKnockedOffMidlineAuto",
-        "calculatedData.avgMidlineBallsIntakedAuto"]
+        "calculatedData.avgMidlineBallsIntakedAuto"
+    ]
     
-    let teleKeys = [
+    let teleKeysMini = [
+        "calculatedData.avgHighShotsTele",
+        //"calculatedData.sdHighShotsTele",
+        "calculatedData.avgLowShotsTele",
         "calculatedData.highShotAccuracyTele",
         "calculatedData.lowShotAccuracyTele",
+        //"calculatedData.sdLowShotsTele",
+        //"calculatedData.avgShotsBlocked",
+        //"calculatedData.avgLowShotsAttemptedTele",
+        //"calculatedData.avgHighShotsAttemptedTele",
+        "calculatedData.teleopShotAbility",
+    ]
+    
+    let teleKeys = [
         "calculatedData.avgHighShotsTele",
         "calculatedData.sdHighShotsTele",
         "calculatedData.avgLowShotsTele",
+        "calculatedData.highShotAccuracyTele",
+        "calculatedData.lowShotAccuracyTele",
         "calculatedData.sdLowShotsTele",
         "calculatedData.avgShotsBlocked",
         "calculatedData.avgLowShotsAttemptedTele",
@@ -195,7 +246,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.teleopShotAbility",
     ]
     
-    var obstacleKeys = [
+    
+    let obstacleKeys = [
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.cdf",
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.pc",
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.mt",
@@ -207,7 +259,27 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.lb",
     ]
     
-    var obstacleTeleKeys = [
+    let A = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.cdf",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.pc",
+    ]
+    let B = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.mt",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rp",
+    ]
+    let C = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.db",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.sp",
+    ]
+    let D = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rt",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rw",
+    ]
+    let LB = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.lb",
+    ]
+    
+    let obstacleTeleKeys = [
         "calculatedData.avgSuccessfulTimesCrossedDefensesTele.cdf",
         "calculatedData.avgSuccessfulTimesCrossedDefensesTele.pc",
         "calculatedData.avgSuccessfulTimesCrossedDefensesTele.mt",
@@ -220,7 +292,21 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     ]
     
     let siegeKeys = [
-        "calculatedData.siegeConsistency"
+        "calculatedData.siegeConsistency",
+        "calculatedData.scalePercentage",
+        "calculatedData.challengePercentage"
+    ]
+    
+    let siegeKeysMini = [
+        //"calculatedData.siegeConsistency",
+        "calculatedData.scalePercentage",
+        "calculatedData.challengePercentage"
+    ]
+    
+    let statusKeysMini = [
+        "calculatedData.disfunctionalPercentage",
+        //"calculatedData.disabledPercentage",
+        //"calculatedData.incapacitatedPercentage",
     ]
     
     let statusKeys = [
@@ -331,14 +417,25 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         navigationController?.delegate = self
         photos = []
         
-        var longPress = UILongPressGestureRecognizer(target:self, action:"rankingDetailsSegue:")
+        let longPress = UILongPressGestureRecognizer(target: self, action: "rankingDetailsSegue:")
         self.view.addGestureRecognizer(longPress)
+        
+        let longPressForMoreDetail = UILongPressGestureRecognizer(target: self, action: "didLongPressForMoreDetail:")
+        self.teamNumberLabel.addGestureRecognizer(longPressForMoreDetail)
+        
         if data?.TeamInMatchDatas.count == 0 {
             //print("tc")
             //print(firebaseFetcher.teamInMatches.count)
         }
         reload()
         // self.firebaseFetcher.getAverageDefenseValuesForDict((data?.calculatedData.avgSuccessfulTimesCrossedDefensesTele)!)
+    }
+    
+    func didLongPressForMoreDetail(recognizer: UIGestureRecognizer) {
+        if recognizer.state == UIGestureRecognizerState.Ended {
+            self.showMinimalistTeamDetails = !self.showMinimalistTeamDetails
+            self.reload()
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {

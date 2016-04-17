@@ -38,9 +38,12 @@
     self.cacheButton.enabled = NO;
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
     //[self cachePhotos:self.cacheButton];
    // [self.tableView setUserInteractionEnabled:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
 }
 
 - (void)scrollToCurrentMatch:(NSNotification*)note {
