@@ -418,7 +418,7 @@
 				TargetAttributes = {
 					72AE5AAF1A87D5EB001BB94E = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 45548PTD9R;
+						DevelopmentTeam = J3MNNM5PHM;
 					};
 					72AE5ACB1A87D5EB001BB94E = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -713,7 +713,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cunger.scout-viewer-2015-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bryton.moeller.scout-viewer-2015-iOS";
 				PRODUCT_NAME = "scout-viewer-2015-iOS";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -741,7 +741,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.cunger.scout-viewer-2015-iOS";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bryton.moeller.scout-viewer-2015-iOS";
 				PRODUCT_NAME = "scout-viewer-2015-iOS";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;

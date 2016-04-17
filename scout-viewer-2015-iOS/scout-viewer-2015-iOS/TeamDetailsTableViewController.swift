@@ -84,14 +84,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     */
     
     let notGraphingValues = [
-        "Disfunctional Percentage",
         "First Pick Ability",
-        "Second Pick Ability"
+        "Second Pick Ability",
+        "2 Ball Tried Auto",
+        "2 Ball Accuracy Auto"
     ]
     
     
     let longTextCells = [
-        "pitNotes"
+        "pitNotes",
+        "calculatedData.defensesCrossableAuto"
     ]
     
     let unrankedCells = [
@@ -139,17 +141,40 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "Additional Info",
     ]
     
-    let keySetNames = [
-        "Matches",
-        "High Level",
-        "Auto",
-        "Teleop",
-        "Defenses",
-        "Siege",
-        "Status",
-        "Super",
-        "Pit"
-    ]
+    var keySetNames : [String] {
+        if self.showMinimalistTeamDetails {
+            return [
+                "",
+                "High Level",
+                "Autonomous",
+                "Teleoperated",
+                "A",
+                "B",
+                "C",
+                "D",
+                "LB",
+                "Siege",
+                "Status",
+                //superKeys,
+                //pitKeys,
+            ]
+        }
+        return [
+            "",
+            "High Level",
+            "Autonomous",
+            "Teleoperated",
+            "A",
+            "B",
+            "C",
+            "D",
+            "LB",
+            "Siege",
+            "Status",
+            "Super Scout",
+            "Pit Scout",
+        ]
+    }
     
     var keySets: [[String]] {
         if self.showMinimalistTeamDetails {
@@ -201,7 +226,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.numAutoPoints",
         "calculatedData.avgHighShotsAuto",
         "calculatedData.avgLowShotsAuto",
-        "calculatedData.avgNumCrossingsAuto"
+        "calculatedData.avgNumTimesCrossedDefensesAuto",
+        "calculatedData.defensesCrossableAuto",
         //"calculatedData.highShotAccuracyAuto",
         //"calculatedData.lowShotAccuracyAuto",
         //"calculatedData.avgBallsKnockedOffMidlineAuto",
@@ -213,11 +239,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.numAutoPoints",
         "calculatedData.avgHighShotsAuto",
         "calculatedData.avgLowShotsAuto",
-        "calculatedData.avgNumCrossingsAuto",
+        "calculatedData.avgNumTimesCrossedDefensesAuto",
         "calculatedData.highShotAccuracyAuto",
         "calculatedData.lowShotAccuracyAuto",
+        "calculatedData.defensesCrossableAuto",
         "calculatedData.avgBallsKnockedOffMidlineAuto",
-        "calculatedData.avgMidlineBallsIntakedAuto"
+        "calculatedData.avgMidlineBallsIntakedAuto",
+        "calculatedData.twoBallAutoTriedPercentage",
+        "calculatedData.twoBallAutoAccuracy",
     ]
     
     let teleKeysMini = [
@@ -324,7 +353,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "calculatedData.RScoreBallControl"
     ]
     
-    
     let pitKeys = [
         "pitOrganization",
         "pitCheesecakeAbility",
@@ -332,7 +360,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "pitNumberOfWheels",
         "pitNotes"
     ]
-    
     
     let calculatedTeamInMatchDataHumanReadableKeys = [
         "First Pick Ability",
@@ -357,9 +384,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "Overall Second Pick Ability",
         "Score Contribution"
     ]
-    
-    
-    
     
     func reload() {
         if data != nil {
@@ -839,6 +863,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     case "lowShotAccuracyAuto": key = "calculatedData.lowShotAccuracyAuto"
                     case "highShotAccuracyAuto": key = "calculatedData.highShotAccuracyAuto"
                     case "numAutoPoints": key = "calculatedData.numAutoPoints"
+                    case "disfunctionalPercentage": key = "calculatedData.wasDisfunctional"
+                    case "avgNumTimesCrossedDefensesAuto": key = "calculatedData.totalNumTimesCrossedDefensesAuto"
                     default: break
                     }
                     

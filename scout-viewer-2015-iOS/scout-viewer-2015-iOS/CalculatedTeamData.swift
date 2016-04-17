@@ -29,6 +29,7 @@ import UIKit
     var avgHighShotsAttemptedAuto = NSNumber?()
     var avgLowShotsAuto = NSNumber?()
     var avgLowShotsTele = NSNumber?()
+    var avgNumTimesCrossedDefensesAuto = NSNumber?()
     var avgShotsBlocked = NSNumber?()
     var autoAbility = NSNumber?()
     var avgMidlineBallsIntakedAuto = NSNumber?()
@@ -79,6 +80,7 @@ import UIKit
     var citrusDPR = NSNumber?()
     var beachedPercentage = NSDictionary?()
     var slowedPercentage = NSDictionary?()
-    //var avgSuccessfulTimesCrossedDefenses = NSDictionary?()
-    
+    var defensesCrossableAuto = NSString?()
+    var twoBallAutoTriedPercentage = NSNumber?()
+    var twoBallAutoAccuracy = NSNumber?()
     }

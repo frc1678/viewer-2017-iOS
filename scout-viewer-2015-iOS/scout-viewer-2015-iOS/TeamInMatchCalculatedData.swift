@@ -13,6 +13,7 @@ import UIKit
 
 @objc class TeamInMatchCalculatedData: NSObject, Reflectable {
     var firstPickAbility : NSNumber?
+    var totalNumTimesCrossedDefensesAuto : NSNumber?
     var numTimesSuccesfulCrossedDefensesAuto : NSDictionary?
     var numTimesSuccesfulCrossedDefensesTele : NSDictionary?
     var numTimesFailedCrossedDefensesAuto : NSDictionary?
@@ -53,6 +54,7 @@ import UIKit
     var predictedNumRPs : NSNumber?
     var beachedPercentage : NSNumber?
     var slowedPercentage : NSNumber?
+    var wasDisfunctional : NSNumber?
 }
 
 

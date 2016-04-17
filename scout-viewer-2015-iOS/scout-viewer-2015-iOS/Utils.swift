@@ -191,8 +191,11 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.predictedSuccessfulCrossingsForDefenseTele": "Pred Crossings Tele",
         "calculatedData.sdFailedDefenseCrossesAuto": "σ Failed Crosses Auto",
         "calculatedData.sdFailedDefenseCrossesTele":"σ Failed Crosses Tele",
-        "pitNumberOfWheels":"Number of Wheels"
-        
+        "pitNumberOfWheels":"Number of Wheels",
+        "calculatedData.avgNumTimesCrossedDefensesAuto": "Avg. Crossings in Auto",
+        "calculatedData.defensesCrossableAuto": "Has Crossed in Auto",
+        "calculatedData.twoBallAutoTriedPercentage":"2 Ball Tried Auto",
+        "calculatedData.twoBallAutoAccuracy":"2 Ball Accuracy Auto",
     ]
     
     class func roundValue(value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
