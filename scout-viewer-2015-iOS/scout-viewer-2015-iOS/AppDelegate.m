@@ -33,6 +33,7 @@
     self.firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     [Instabug startWithToken: @"98616ae556601b6b72101615cd3f7f9a" invocationEvent: IBGInvocationEventShake];
+     [application setApplicationIconBadgeNumber:0];
 //    Instabug startWithToken: "98616ae556601b6b72101615cd3f7f9a", invocationEvent:
 //    NSMutableDictionary *itemDefaults = [[NSMutableDictionary alloc] init];
 //    itemDefaults[@"predownloadPreference"] = NO;
@@ -43,12 +44,8 @@
     return YES;
 }
 
-
-
-- (void)databaseUpdated:(NSNotification *)note {
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    [application setApplicationIconBadgeNumber:0];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

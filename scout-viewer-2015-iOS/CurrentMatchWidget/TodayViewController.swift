@@ -1,0 +1,99 @@
+//
+//  TodayViewController.swift
+//  CurrentMatchWidget
+//
+//  Created by Bryton Moeller on 4/17/16.
+//  Copyright © 2016 Citrus Circuits. All rights reserved.
+//
+
+import UIKit
+import NotificationCenter
+import Firebase
+
+class TodayViewController: UIViewController, NCWidgetProviding {
+        
+    @IBOutlet weak var b3: UILabel!
+    @IBOutlet weak var b2: UILabel!
+    @IBOutlet weak var r1: UILabel!
+
+    @IBOutlet weak var b1: UILabel!
+    @IBOutlet weak var r3: UILabel!
+    @IBOutlet weak var r2: UILabel!
+       @IBOutlet weak var MatchNum: UILabel!
+    var firebase : Firebase?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.preferredContentSize = CGSizeMake(320, 90);
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(NSUserDefaultsDidChangeNotification), name: "currentMatchUpdated", object: nil)
+        
+        let sharedDefaults = NSUserDefaults(suiteName: "group.CurrentMatchWidget")
+        sharedDefaults?.setObject(nil, forKey: "match")
+        sharedDefaults?.synchronize()   // (!!) This is crucial.
+        
+        let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
+        
+        let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
+        let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
+        let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
+        let devToken = "j1r2wo3RUPMeUZosxwvVSFEFVcrXuuMAGjk6uPOc"
+        let stratDevToken = "IMXOxXD3FjOOUoMGJlkAK5pAtn89mGIWAEnaKJhP"
+        
+        firebase = Firebase(url: firebaseURLFirstPart)
+        firebase!.authWithCustomToken(scoutingToken) { [unowned self] (E, A) -> Void in //TOKENN
+            self.MatchNum.text = "ZZ"
+            self.firebase!.observeEventType(.Value, withBlock: { (snap) -> Void in
+                self.MatchNum.text = "AA"
+                let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as! Int
+                self.MatchNum.text = "BB"
+                let redTeamNumbers = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).childSnapshotForPath("redAllianceTeamNumbers").value as! [Int]
+                let blueTeamNumbers = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).childSnapshotForPath("blueAllianceTeamNumbers").value as! [Int]
+                self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
+            })
+        }
+        // Do any additional setup after loading the view from its nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        //
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+        // Perform any setup necessary in order to update the view.
+
+        // If an error is encountered, use NCUpdateResult.Failed
+        // If there's no update required, use NCUpdateResult.NoData
+        // If there's an update, use NCUpdateResult.NewData
+
+        completionHandler(NCUpdateResult.NewData)
+    }
+    
+    func currentMatchUpdated(note: NSNotification) {
+        self.MatchNum.text = "QQQQ"
+        let match = NSUserDefaults.standardUserDefaults().objectForKey("match")!
+        self.updateCurrentMatch(match["num"] as! Int, redTeams: match["redTeams"] as! [Int], blueTeams: match["blueTeams"] as! [Int])
+    }
+    
+    func updateCurrentMatch(matchNum: Int, redTeams: [Int], blueTeams: [Int]) {
+        print("TTTTTTTTTTT")
+
+        self.MatchNum.text = "Q\(matchNum)"
+        self.r1.text = String(redTeams[0])
+        self.r2.text = String(redTeams[1])
+        self.r3.text = String(redTeams[2])
+        self.b1.text = String(blueTeams[0])
+        self.b2.text = String(blueTeams[1])
+        self.b3.text = String(blueTeams[2])
+    }
+    
+}

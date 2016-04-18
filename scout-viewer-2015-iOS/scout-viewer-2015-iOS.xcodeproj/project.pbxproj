@@ -11,6 +11,10 @@
 		194587981C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */; };
 		19498EE31CB04EA500CF5236 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */; };
 		19634FB01C5EDF2A00FAAAC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19634FAE1C5EDF2A00FAAAC6 /* Model.xcdatamodeld */; };
+		19707E8F1CC435270080B3B6 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19707E8E1CC435270080B3B6 /* NotificationCenter.framework */; };
+		19707E921CC435270080B3B6 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19707E911CC435270080B3B6 /* TodayViewController.swift */; };
+		19707E951CC435270080B3B6 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19707E931CC435270080B3B6 /* MainInterface.storyboard */; };
+		19707E991CC435270080B3B6 /* CurrentMatchWidget.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 19707E8D1CC435260080B3B6 /* CurrentMatchWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		400603FC1CB197CA005ADEC5 /* CurrentMatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */; };
 		400F75ED1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F75EC1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift */; };
 		40780DC51C59C05700ACF489 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC21C59C05700ACF489 /* Match.swift */; };
@@ -61,6 +65,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		19707E971CC435270080B3B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 72AE5AA81A87D5EB001BB94E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19707E8C1CC435260080B3B6;
+			remoteInfo = CurrentMatchWidget;
+		};
 		72AE5ACD1A87D5EB001BB94E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 72AE5AA81A87D5EB001BB94E /* Project object */;
@@ -70,11 +81,32 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		19707E9D1CC435270080B3B6 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				19707E991CC435270080B3B6 /* CurrentMatchWidget.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		191B81141CB1BDC200139FC3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "scout-viewer-2015-iOS/Settings.bundle"; sourceTree = "<group>"; };
 		194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverallSecondPickAbilityViewController.swift; sourceTree = "<group>"; };
 		19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		19634FAF1C5EDF2A00FAAAC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		19707E8D1CC435260080B3B6 /* CurrentMatchWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CurrentMatchWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		19707E8E1CC435270080B3B6 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		19707E911CC435270080B3B6 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		19707E941CC435270080B3B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		19707E961CC435270080B3B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19707E9E1CC443930080B3B6 /* scout-viewer-2015-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "scout-viewer-2015-iOS.entitlements"; sourceTree = "<group>"; };
+		19707E9F1CC443A00080B3B6 /* CurrentMatchWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = CurrentMatchWidget.entitlements; sourceTree = "<group>"; };
 		2B501781A08722DD81DB27FC /* Pods-scout-viewer-2015-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scout-viewer-2015-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scout-viewer-2015-iOS/Pods-scout-viewer-2015-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentMatchManager.swift; sourceTree = "<group>"; };
 		400F75EC1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalSecondPickTableViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +182,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		19707E8A1CC435260080B3B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19707E8F1CC435270080B3B6 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		72AE5AAD1A87D5EB001BB94E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -170,6 +210,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		19707E901CC435270080B3B6 /* CurrentMatchWidget */ = {
+			isa = PBXGroup;
+			children = (
+				19707E9F1CC443A00080B3B6 /* CurrentMatchWidget.entitlements */,
+				19707E911CC435270080B3B6 /* TodayViewController.swift */,
+				19707E931CC435270080B3B6 /* MainInterface.storyboard */,
+				19707E961CC435270080B3B6 /* Info.plist */,
+			);
+			path = CurrentMatchWidget;
+			sourceTree = "<group>";
+		};
 		40E43E3A1C54434D00ABC378 /* Firebase Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -189,6 +240,7 @@
 				40A0F4021C55A37200DEB64C /* NetworkExtension.framework */,
 				40A0F3FF1C559EAE00DEB64C /* SystemConfiguration.framework */,
 				E4CEDCD4E71DC245F2A412B2 /* Pods_scout_viewer_2015_iOS.framework */,
+				19707E8E1CC435270080B3B6 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -266,6 +318,7 @@
 				19634FAE1C5EDF2A00FAAAC6 /* Model.xcdatamodeld */,
 				72AE5AB21A87D5EB001BB94E /* scout-viewer-2015-iOS */,
 				72AE5ACF1A87D5EB001BB94E /* scout-viewer-2015-iOSTests */,
+				19707E901CC435270080B3B6 /* CurrentMatchWidget */,
 				72AE5AB11A87D5EB001BB94E /* Products */,
 				CEDCDF688B2719FDC4C6842A /* Pods */,
 				6CDB04411470B0C2897EDD29 /* Frameworks */,
@@ -277,6 +330,7 @@
 			children = (
 				72AE5AB01A87D5EB001BB94E /* scout-viewer-2015-iOS.app */,
 				72AE5ACC1A87D5EB001BB94E /* scout-viewer-2015-iOSTests.xctest */,
+				19707E8D1CC435260080B3B6 /* CurrentMatchWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -284,6 +338,7 @@
 		72AE5AB21A87D5EB001BB94E /* scout-viewer-2015-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				19707E9E1CC443930080B3B6 /* scout-viewer-2015-iOS.entitlements */,
 				72A048101AC4C29100FA2A46 /* Tabs */,
 				72AE5AC01A87D5EB001BB94E /* Main.storyboard */,
 				19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */,
@@ -367,6 +422,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		19707E8C1CC435260080B3B6 /* CurrentMatchWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19707E9A1CC435270080B3B6 /* Build configuration list for PBXNativeTarget "CurrentMatchWidget" */;
+			buildPhases = (
+				19707E891CC435260080B3B6 /* Sources */,
+				19707E8A1CC435260080B3B6 /* Frameworks */,
+				19707E8B1CC435260080B3B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CurrentMatchWidget;
+			productName = CurrentMatchWidget;
+			productReference = 19707E8D1CC435260080B3B6 /* CurrentMatchWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		72AE5AAF1A87D5EB001BB94E /* scout-viewer-2015-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 72AE5AD61A87D5EB001BB94E /* Build configuration list for PBXNativeTarget "scout-viewer-2015-iOS" */;
@@ -378,10 +450,12 @@
 				F7A3E3F811E37E39BE34403D /* Copy Pods Resources */,
 				4F0753AB88B56BA5BBD814A1 /* Embed Pods Frameworks */,
 				19E19DAE1CA1C3BD0043E3BC /* ShellScript */,
+				19707E9D1CC435270080B3B6 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				19707E981CC435270080B3B6 /* PBXTargetDependency */,
 			);
 			name = "scout-viewer-2015-iOS";
 			productName = "scout-viewer-2015-iOS";
@@ -416,9 +490,23 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Citrus Circuits";
 				TargetAttributes = {
+					19707E8C1CC435260080B3B6 = {
+						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = J3MNNM5PHM;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					72AE5AAF1A87D5EB001BB94E = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = J3MNNM5PHM;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					72AE5ACB1A87D5EB001BB94E = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -441,11 +529,20 @@
 			targets = (
 				72AE5AAF1A87D5EB001BB94E /* scout-viewer-2015-iOS */,
 				72AE5ACB1A87D5EB001BB94E /* scout-viewer-2015-iOSTests */,
+				19707E8C1CC435260080B3B6 /* CurrentMatchWidget */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		19707E8B1CC435260080B3B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19707E951CC435270080B3B6 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		72AE5AAE1A87D5EB001BB94E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -531,6 +628,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		19707E891CC435260080B3B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19707E921CC435270080B3B6 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		72AE5AAC1A87D5EB001BB94E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -589,6 +694,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		19707E981CC435270080B3B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19707E8C1CC435260080B3B6 /* CurrentMatchWidget */;
+			targetProxy = 19707E971CC435270080B3B6 /* PBXContainerItemProxy */;
+		};
 		72AE5ACE1A87D5EB001BB94E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 72AE5AAF1A87D5EB001BB94E /* scout-viewer-2015-iOS */;
@@ -597,6 +707,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		19707E931CC435270080B3B6 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19707E941CC435270080B3B6 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		72AE5AC01A87D5EB001BB94E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -616,6 +734,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		19707E9B1CC435270080B3B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CurrentMatchWidget/CurrentMatchWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = CurrentMatchWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bryton.moeller.scout-viewer-2015-iOS.CurrentMatchWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		19707E9C1CC435270080B3B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = CurrentMatchWidget/CurrentMatchWidget.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = CurrentMatchWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bryton.moeller.scout-viewer-2015-iOS.CurrentMatchWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		72AE5AD41A87D5EB001BB94E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -702,9 +858,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_ENTITLEMENTS = "scout-viewer-2015-iOS/scout-viewer-2015-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/scout-viewer-2015-iOS",
@@ -729,9 +887,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
+				CODE_SIGN_ENTITLEMENTS = "scout-viewer-2015-iOS/scout-viewer-2015-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/scout-viewer-2015-iOS",
@@ -788,6 +948,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		19707E9A1CC435270080B3B6 /* Build configuration list for PBXNativeTarget "CurrentMatchWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19707E9B1CC435270080B3B6 /* Debug */,
+				19707E9C1CC435270080B3B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		72AE5AAB1A87D5EB001BB94E /* Build configuration list for PBXProject "scout-viewer-2015-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

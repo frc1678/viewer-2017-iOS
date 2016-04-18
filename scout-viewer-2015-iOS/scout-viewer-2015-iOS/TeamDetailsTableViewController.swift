@@ -456,10 +456,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func didLongPressForMoreDetail(recognizer: UIGestureRecognizer) {
-        if recognizer.state == UIGestureRecognizerState.Ended {
+        if recognizer.state == UIGestureRecognizerState.Recognized {
             self.showMinimalistTeamDetails = !self.showMinimalistTeamDetails
             self.reload()
-        }
+            self.teamNumberLabel.textColor = UIColor.blackColor()
+        } else if recognizer.state == UIGestureRecognizerState.Began {
+            self.teamNumberLabel.textColor = UIColor.greenColor()
+        } 
     }
     
     override func viewWillDisappear(animated: Bool) {

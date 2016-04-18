@@ -8,6 +8,7 @@
 
 import UIKit
 import Haneke
+//import FirebaseDataFetcher
 
 class CurrentMatchManager: NSObject {
     
@@ -16,13 +17,14 @@ class CurrentMatchManager: NSObject {
     var initCounter = 0
     
     
-    
     override init() {
         
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
+
         super.init()
         
         self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated", selector: "notificationTriggeredCheckForNotification:", object: nil))
+        
         self.setUpHank()
     }
     
@@ -41,9 +43,12 @@ class CurrentMatchManager: NSObject {
     
     var currentMatch = 0 {
         didSet {
-            print("currentMatch changed!")
             if currentMatch != oldValue {
-                NSNotificationCenter.defaultCenter().postNotificationName("currentMatchUpdated", object: nil)
+                print("currentMatch changed!")
+
+                let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.fetchMatch(currentMatch)
+                let m : [String: AnyObject] = ["num":currentMatch, "redTeams": currentMatchFetch.redAllianceTeamNumbers!, "blueTeams": currentMatchFetch.blueAllianceTeamNumbers!]
+                NSUserDefaults.standardUserDefaults().setObject(m, forKey: "match")
                 notifyIfNeeded()
             }
           

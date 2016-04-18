@@ -30,7 +30,6 @@
 
 -(void)firebaseFinished {
     [self.tableView reloadData];
-    
 }
 
 - (void)viewDidLoad {
@@ -42,9 +41,7 @@
    // [self.tableView setUserInteractionEnabled:NO];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
-}
+
 
 - (void)scrollToCurrentMatch:(NSNotification*)note {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"currentMatchUpdated" object:nil];

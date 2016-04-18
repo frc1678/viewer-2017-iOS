@@ -381,6 +381,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     })
                 
                 self.firstCurrentMatchUpdate = false
+                
+                let currentMatchFetch = self.fetchMatch(self.currentMatchManager.currentMatch)
+                let m : [String: AnyObject] = ["num":self.currentMatchManager.currentMatch, "redTeams": currentMatchFetch.redAllianceTeamNumbers ?? [0,0,0], "blueTeams": currentMatchFetch.blueAllianceTeamNumbers ?? [0,0,0]]
+                NSUserDefaults.standardUserDefaults().setObject(m, forKey: "match")
             })
         }
         
