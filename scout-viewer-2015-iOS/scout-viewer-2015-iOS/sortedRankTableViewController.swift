@@ -32,6 +32,7 @@ class sortedRankTableViewController: ArrayTableViewController {
             self.title = keyPath
         }
         let rotation = UIRotationGestureRecognizer(target: self, action: "rotationDetected:")
+        
         self.view.addGestureRecognizer(rotation)
         
         // Do any additional setup after loading the view.
@@ -85,14 +86,60 @@ class sortedRankTableViewController: ArrayTableViewController {
         }
     }
     
-    func rotationDetected(recognizer: UIGestureRecognizer) {
-        if recognizer.state == UIGestureRecognizerState.Ended {
-            self.shouldReverseRank = !self.shouldReverseRank
-            self.dataArray = self.dataArray.reverse()
-            //self.filteredArray = self.filteredArray.reverse()
-            self.loadDataArray(true)
-            self.tableView.reloadData()
-            self.tableView.setNeedsDisplay()
+    func rotationDetected(recognizer: UIRotationGestureRecognizer) {
+        let rot = recognizer.rotation
+        print(rot)
+        
+        let layer = self.tableView.layer
+        
+        
+        var transform = CGAffineTransformMakeScale(1.0, 1.0)
+        transform = CGAffineTransformRotate(transform, rot)
+
+        if recognizer.state == UIGestureRecognizerState.Began {
+            
+            layer.opaque = false
+            UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+                layer.setAffineTransform(transform)
+                layer.opacity = 0.8
+            }, completion: nil)
+            
+        } else if recognizer.state == UIGestureRecognizerState.Changed {
+            
+            layer.setAffineTransform(transform)
+            
+        } else if recognizer.state == UIGestureRecognizerState.Ended {
+            let shouldRotate = cos(rot) < 0
+            
+            if shouldRotate {
+                UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+                    layer.opacity = 0.0
+                }, completion: { c in
+                    layer.setAffineTransform(CGAffineTransformIdentity)
+                    UIView.animateWithDuration(0.1, animations: { 
+                        layer.opacity = 1.0
+                    }, completion: { d in
+                        
+                        if shouldRotate {
+                            self.shouldReverseRank = !self.shouldReverseRank
+                            self.dataArray = self.dataArray.reverse()
+                            //self.filteredArray = self.filteredArray.reverse()
+                            self.loadDataArray(true)
+                            self.tableView.reloadData()
+                            self.tableView.setNeedsDisplay()
+                        }
+                    })
+                })
+            } else {
+                UIView.animateWithDuration(0.2) {
+                    layer.opacity = 1.0
+                    layer.setAffineTransform(CGAffineTransformIdentity)
+                }
+            }
+            
+            
+            
+            
         }
     }
     
