@@ -9,6 +9,7 @@
 import UIKit
 import NotificationCenter
 import Firebase
+import Haneke
 
 class TodayViewController: UIViewController, NCWidgetProviding {
         
@@ -21,16 +22,13 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var r2: UILabel!
        @IBOutlet weak var MatchNum: UILabel!
     var firebase : Firebase?
+    //let cache = Shared.dataCache
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.preferredContentSize = CGSizeMake(320, 90);
+        Firebase.defaultConfig().persistenceEnabled = true
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(NSUserDefaultsDidChangeNotification), name: "currentMatchUpdated", object: nil)
-        
-        let sharedDefaults = NSUserDefaults(suiteName: "group.CurrentMatchWidget")
-        sharedDefaults?.setObject(nil, forKey: "match")
-        sharedDefaults?.synchronize()   // (!!) This is crucial.
         
         let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
         
@@ -42,11 +40,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         firebase = Firebase(url: firebaseURLFirstPart)
         firebase!.authWithCustomToken(scoutingToken) { [unowned self] (E, A) -> Void in //TOKENN
-            self.MatchNum.text = "ZZ"
             self.firebase!.observeEventType(.Value, withBlock: { (snap) -> Void in
-                self.MatchNum.text = "AA"
                 let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as! Int
-                self.MatchNum.text = "BB"
                 let redTeamNumbers = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).childSnapshotForPath("redAllianceTeamNumbers").value as! [Int]
                 let blueTeamNumbers = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).childSnapshotForPath("blueAllianceTeamNumbers").value as! [Int]
                 self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
@@ -78,15 +73,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.NewData)
     }
     
-    func currentMatchUpdated(note: NSNotification) {
-        self.MatchNum.text = "QQQQ"
-        let match = NSUserDefaults.standardUserDefaults().objectForKey("match")!
-        self.updateCurrentMatch(match["num"] as! Int, redTeams: match["redTeams"] as! [Int], blueTeams: match["blueTeams"] as! [Int])
-    }
     
     func updateCurrentMatch(matchNum: Int, redTeams: [Int], blueTeams: [Int]) {
-        print("TTTTTTTTTTT")
-
         self.MatchNum.text = "Q\(matchNum)"
         self.r1.text = String(redTeams[0])
         self.r2.text = String(redTeams[1])
