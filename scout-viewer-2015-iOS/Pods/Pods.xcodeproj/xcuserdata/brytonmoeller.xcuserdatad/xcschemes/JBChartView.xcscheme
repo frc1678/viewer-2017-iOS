@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1038B10F174EAA0CE75ED001'
+               BlueprintIdentifier = '200D427609316DBF8646EB7D'
                BlueprintName = 'JBChartView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'JBChartView.framework'>

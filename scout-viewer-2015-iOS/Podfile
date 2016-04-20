@@ -11,6 +11,7 @@ target 'scout-viewer-2015-iOS' do
     pod 'Sync'
     pod 'HanekeSwift'
     pod 'Instabug'
+    pod 'MWPhotoBrowser'
 end
 
 

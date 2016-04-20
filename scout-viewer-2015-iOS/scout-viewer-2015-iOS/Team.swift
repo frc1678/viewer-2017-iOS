@@ -28,4 +28,5 @@ import UIKit
     var pitHeightOfBallLeavingShooter : NSNumber?
     var pitCheesecakeAbility : NSNumber?
     var pitAvailableWeight : NSNumber?
+    var otherImageUrls : NSDictionary?
 }

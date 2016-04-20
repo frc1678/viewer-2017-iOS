@@ -38,7 +38,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     var num: Int? = nil
     var showMinimalistTeamDetails = true
     var shareController: UIDocumentInteractionController!
-    
+    var photoBrowser = MWPhotoBrowser()
     var photos: [MWPhoto] = []
     
     
@@ -402,7 +402,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                                     imageView.hnk_setImageFromURL(NSURL(string: team.selectedImageUrl!)!)
                             })
                         }
-                        //self.firebaseFetcher.loadImageForTeam(team)
+                        if self.teamSelectedImageView.image != UIImage(named: "SorryNoRobotPhoto") {
+                            photos.append(MWPhoto(image: self.teamSelectedImageView.image))
+                        }
+                        if let urls = data?.otherImageUrls {
+                            for (_, url) in urls {
+                                photos.append(MWPhoto(URL: NSURL(string: url as! String)))
+                            }
+                        }
                 }
             }
         }
@@ -440,19 +447,17 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         tableView.delegate = self
         navigationController?.delegate = self
         photos = []
-        
+        self.photoBrowser.delegate = self
         let longPress = UILongPressGestureRecognizer(target: self, action: "rankingDetailsSegue:")
         self.view.addGestureRecognizer(longPress)
         
         let longPressForMoreDetail = UILongPressGestureRecognizer(target: self, action: "didLongPressForMoreDetail:")
         self.teamNumberLabel.addGestureRecognizer(longPressForMoreDetail)
         
-        if data?.TeamInMatchDatas.count == 0 {
-            //print("tc")
-            //print(firebaseFetcher.teamInMatches.count)
-        }
+        let tap = UITapGestureRecognizer(target: self, action: "didTapImage:")
+        self.teamSelectedImageView.addGestureRecognizer(tap)
+        
         reload()
-        // self.firebaseFetcher.getAverageDefenseValuesForDict((data?.calculatedData.avgSuccessfulTimesCrossedDefensesTele)!)
     }
     
     func didLongPressForMoreDetail(recognizer: UIGestureRecognizer) {
@@ -463,6 +468,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else if recognizer.state == UIGestureRecognizerState.Began {
             self.teamNumberLabel.textColor = UIColor.greenColor()
         } 
+    }
+    
+    func didTapImage(recognizer: UITapGestureRecognizer) {
+        if recognizer.state == UIGestureRecognizerState.Recognized {
+            let nav = UINavigationController(rootViewController: self.photoBrowser)
+            nav.delegate = self
+            self.presentViewController(nav, animated: true, completion: nil)
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -498,27 +511,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         return self
     }
     
-    /*func gotTeamImageToAdd(notification: NSNotification) {
-    let objArr = notification.object as! [AnyObject]
-    let numOfImage = objArr[1] as! Int
-    if let currentNumber = self.num {
-    if numOfImage == currentNumber {
-    photos.append(objArr[0] as! MWPhoto)
-    }
-    }
     
-    
-    // Filter to a unique array
-    photos = photos.filter { photo in
-    for p in self.photos {
-    if UIImagePNGRepresentation(p.underlyingImage)!.isEqualToData(UIImagePNGRepresentation(photo.underlyingImage)!) && photo != p {
-    return false
-    }
-    }
-    return true
-    }
-    }
-    */
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if data == nil {
             return 44
@@ -777,7 +770,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         if index < UInt(photos.count) {
             return photos[Int(index)]
         }
-        
         return nil;
     }
     
