@@ -84,30 +84,36 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-scout-viewer-2015-iOS/DACircularProgress.framework"
   install_framework "Pods-scout-viewer-2015-iOS/DATAFilter.framework"
   install_framework "Pods-scout-viewer-2015-iOS/DATAObjectIDs.framework"
   install_framework "Pods-scout-viewer-2015-iOS/DATAStack.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Firebase.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Haneke.framework"
   install_framework "Pods-scout-viewer-2015-iOS/JBChartView.framework"
+  install_framework "Pods-scout-viewer-2015-iOS/MBProgressHUD.framework"
+  install_framework "Pods-scout-viewer-2015-iOS/MWPhotoBrowser.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSDictionary_ANDYSafeValue.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSEntityDescription_SYNCPrimaryKey.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSManagedObject_HYPPropertyMapper.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSString_HYPNetworking.framework"
+  install_framework "Pods-scout-viewer-2015-iOS/SDWebImage.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Sync.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/TestCheck.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-scout-viewer-2015-iOS/DACircularProgress.framework"
   install_framework "Pods-scout-viewer-2015-iOS/DATAFilter.framework"
   install_framework "Pods-scout-viewer-2015-iOS/DATAObjectIDs.framework"
   install_framework "Pods-scout-viewer-2015-iOS/DATAStack.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Firebase.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Haneke.framework"
   install_framework "Pods-scout-viewer-2015-iOS/JBChartView.framework"
+  install_framework "Pods-scout-viewer-2015-iOS/MBProgressHUD.framework"
+  install_framework "Pods-scout-viewer-2015-iOS/MWPhotoBrowser.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSDictionary_ANDYSafeValue.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSEntityDescription_SYNCPrimaryKey.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSManagedObject_HYPPropertyMapper.framework"
   install_framework "Pods-scout-viewer-2015-iOS/NSString_HYPNetworking.framework"
+  install_framework "Pods-scout-viewer-2015-iOS/SDWebImage.framework"
   install_framework "Pods-scout-viewer-2015-iOS/Sync.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/TestCheck.framework"
 fi

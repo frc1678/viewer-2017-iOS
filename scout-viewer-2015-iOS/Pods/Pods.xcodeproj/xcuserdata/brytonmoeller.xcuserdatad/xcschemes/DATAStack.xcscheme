@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FD2E3D2334B6F4701E9393F4'
+               BlueprintIdentifier = '5D98401C1CB6ED3A6AE9FD01'
                BlueprintName = 'DATAStack'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'DATAStack.framework'>

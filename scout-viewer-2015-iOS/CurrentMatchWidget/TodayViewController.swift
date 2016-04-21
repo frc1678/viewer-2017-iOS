@@ -27,9 +27,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.preferredContentSize = CGSizeMake(320, 90);
-        Firebase.defaultConfig().persistenceEnabled = true
-        
-        
+        //Firebase.defaultConfig().persistenceEnabled = true
         let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
         
         let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
@@ -40,18 +38,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         
         firebase = Firebase(url: firebaseURLFirstPart)
         firebase!.authWithCustomToken(scoutingToken) { [unowned self] (E, A) -> Void in //TOKENN
-            self.firebase!.observeEventType(.Value, withBlock: { (snap) -> Void in
-                let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as! Int
-                if let match = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).value as? NSDictionary {
-                    let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
-                    let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]
-                    self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
-                } else {
-                    self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
-                }
+            self.firebase?.childByAppendingPath("currentMatchNum").observeEventType(.Value, withBlock: { (snap) -> Void in
+                self.refreshMatchNum()
             })
         }
-        // Do any additional setup after loading the view from its nib.
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -59,12 +50,28 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     override func viewWillAppear(animated: Bool) {
-        //
+        
+        
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func refreshMatchNum() {
+        self.firebase!.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
+            let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as! Int
+            if let match = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).value as? NSDictionary {
+                let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
+                let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]
+                self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
+            } else {
+                self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
+            }
+        })
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {

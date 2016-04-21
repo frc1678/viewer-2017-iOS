@@ -860,6 +860,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     case "numAutoPoints": key = "calculatedData.numAutoPoints"
                     case "disfunctionalPercentage": key = "calculatedData.wasDisfunctional"
                     case "avgNumTimesCrossedDefensesAuto": key = "calculatedData.totalNumTimesCrossedDefensesAuto"
+                    case "avgHighShotsAuto": key = "numHighShotsMadeAuto"
+                    case "avgLowShotsAuto": key = "numLowShotsMadeAuto"
                     default: break
                     }
                     
@@ -997,7 +999,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
         } else if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ResizableNotesTableViewCell {
             //Currently the only one is pit notes. We want it to segue to super notes per match
+            if cell.textLabel?.text == "Pit Notes" {
             performSegueWithIdentifier("NotesSegue", sender: indexPath)
+            }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -1014,6 +1018,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
         }
     }
+    
     func rankingDetailsSegue(gesture: UIGestureRecognizer) {
         
         if(gesture.state == UIGestureRecognizerState.Began) {

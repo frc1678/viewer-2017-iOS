@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '2BAB1910DA0D4CB61E97ABCE'
+               BlueprintIdentifier = '3001968B87883F158CBA520A'
                BlueprintName = 'DATAFilter'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'DATAFilter.framework'>

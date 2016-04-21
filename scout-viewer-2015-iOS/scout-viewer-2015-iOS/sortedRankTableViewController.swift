@@ -88,7 +88,6 @@ class sortedRankTableViewController: ArrayTableViewController {
     
     func rotationDetected(recognizer: UIRotationGestureRecognizer) {
         let rot = recognizer.rotation
-        print(rot)
         
         let layer = self.tableView.layer
         

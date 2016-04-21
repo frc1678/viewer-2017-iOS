@@ -111,6 +111,10 @@ static UIColor *kJBBarChartViewDefaultBarColor = nil;
 
 - (void)construct
 {
+	_chartData = [NSArray array];
+	_barViews = [NSArray array];
+	_cachedBarViewHeights = [NSArray array];
+
 	_showsVerticalSelection = YES;
 	_cachedMinHeight = kJBBarChartViewUndefinedCachedHeight;
 	_cachedMaxHeight = kJBBarChartViewUndefinedCachedHeight;

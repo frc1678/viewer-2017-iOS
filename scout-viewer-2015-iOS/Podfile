@@ -8,10 +8,13 @@ target 'scout-viewer-2015-iOS' do
     
     pod 'Firebase', '>= 2.5.0'
     pod 'JBChartView'
-    pod 'Sync'
     pod 'HanekeSwift'
     pod 'Instabug'
     pod 'MWPhotoBrowser'
 end
 
+target 'CurrentMatchWidget' do
+    pod 'Firebase', '>= 2.5.0'
+    pod 'HanekeSwift'
+end
 

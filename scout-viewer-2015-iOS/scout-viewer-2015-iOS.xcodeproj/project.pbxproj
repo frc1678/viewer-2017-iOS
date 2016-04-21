@@ -28,6 +28,7 @@
 		40CF57A11C6C30DD00D9B63B /* DefenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */; };
 		40E43E341C54406900ABC378 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E43E331C54406900ABC378 /* Firebase.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		40E43E401C544E3900ABC378 /* FirebaseDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */; };
+		4B9B7C5334D5F3E138C6242E /* Pods_CurrentMatchWidget.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C83BE370772B6F0D47F7BEF2 /* Pods_CurrentMatchWidget.framework */; };
 		7209C3581A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7209C3571A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift */; };
 		7253A7FE1AC8900E00188364 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7253A7FD1AC8900E00188364 /* GraphViewController.swift */; };
 		72553D8B1AD9913D0091F5D2 /* PDFRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 72553D8A1AD9913D0091F5D2 /* PDFRenderer.m */; };
@@ -96,6 +97,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02477AEE5BA0CB93AA549DA7 /* Pods-CurrentMatchWidget.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatchWidget.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatchWidget/Pods-CurrentMatchWidget.debug.xcconfig"; sourceTree = "<group>"; };
 		191B81141CB1BDC200139FC3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "scout-viewer-2015-iOS/Settings.bundle"; sourceTree = "<group>"; };
 		194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverallSecondPickAbilityViewController.swift; sourceTree = "<group>"; };
 		19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +180,8 @@
 		72EC171E1AD9B2480044FEE9 /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
 		72EC171F1AD9B2480044FEE9 /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
 		7372297EEB144BA00CEC7C1C /* Pods-scout-viewer-2015-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scout-viewer-2015-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-scout-viewer-2015-iOS/Pods-scout-viewer-2015-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		C83BE370772B6F0D47F7BEF2 /* Pods_CurrentMatchWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrentMatchWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1185C684892DB28937232BE /* Pods-CurrentMatchWidget.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatchWidget.release.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatchWidget/Pods-CurrentMatchWidget.release.xcconfig"; sourceTree = "<group>"; };
 		E4CEDCD4E71DC245F2A412B2 /* Pods_scout_viewer_2015_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_scout_viewer_2015_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -187,6 +191,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				19707E8F1CC435270080B3B6 /* NotificationCenter.framework in Frameworks */,
+				4B9B7C5334D5F3E138C6242E /* Pods_CurrentMatchWidget.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,6 +246,7 @@
 				40A0F3FF1C559EAE00DEB64C /* SystemConfiguration.framework */,
 				E4CEDCD4E71DC245F2A412B2 /* Pods_scout_viewer_2015_iOS.framework */,
 				19707E8E1CC435270080B3B6 /* NotificationCenter.framework */,
+				C83BE370772B6F0D47F7BEF2 /* Pods_CurrentMatchWidget.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -415,6 +421,8 @@
 			children = (
 				2B501781A08722DD81DB27FC /* Pods-scout-viewer-2015-iOS.debug.xcconfig */,
 				7372297EEB144BA00CEC7C1C /* Pods-scout-viewer-2015-iOS.release.xcconfig */,
+				02477AEE5BA0CB93AA549DA7 /* Pods-CurrentMatchWidget.debug.xcconfig */,
+				E1185C684892DB28937232BE /* Pods-CurrentMatchWidget.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -426,9 +434,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19707E9A1CC435270080B3B6 /* Build configuration list for PBXNativeTarget "CurrentMatchWidget" */;
 			buildPhases = (
+				1746F2C955D196D7542A4634 /* Check Pods Manifest.lock */,
 				19707E891CC435260080B3B6 /* Sources */,
 				19707E8A1CC435260080B3B6 /* Frameworks */,
 				19707E8B1CC435260080B3B6 /* Resources */,
+				B3D6FA87994C3D43F0FD394C /* Embed Pods Frameworks */,
+				1BB0853413B9C486A340BEEC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -495,7 +506,7 @@
 						DevelopmentTeam = J3MNNM5PHM;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -504,7 +515,7 @@
 						DevelopmentTeam = J3MNNM5PHM;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -567,6 +578,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		1746F2C955D196D7542A4634 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		19E19DAE1CA1C3BD0043E3BC /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -579,6 +605,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "#--- SCRIPT BEGIN ---\n# SKIP_SIMULATOR_BUILDS=1\nSCRIPT_SRC=$(find \"$PROJECT_DIR\" -name 'Instabug_dsym_upload.sh' | head -1)\nif [ ! \"${SCRIPT_SRC}\" ]; then\necho \"Instabug: err: script not found. Make sure that you're including Instabug.bundle in your project directory\"\nexit 1\nfi\nAPP_TOKEN=\"98616ae556601b6b72101615cd3f7f9a\"\nsource \"${SCRIPT_SRC}\"\n#--- SCRIPT END ---\n";
+		};
+		1BB0853413B9C486A340BEEC /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CurrentMatchWidget/Pods-CurrentMatchWidget-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		4F0753AB88B56BA5BBD814A1 /* Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -593,6 +634,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-scout-viewer-2015-iOS/Pods-scout-viewer-2015-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3D6FA87994C3D43F0FD394C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CurrentMatchWidget/Pods-CurrentMatchWidget-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		C951F42DB1E55AF2FFFBB697 /* Check Pods Manifest.lock */ = {
@@ -736,8 +792,8 @@
 /* Begin XCBuildConfiguration section */
 		19707E9B1CC435270080B3B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02477AEE5BA0CB93AA549DA7 /* Pods-CurrentMatchWidget.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CurrentMatchWidget/CurrentMatchWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -755,8 +811,8 @@
 		};
 		19707E9C1CC435270080B3B6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E1185C684892DB28937232BE /* Pods-CurrentMatchWidget.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = CurrentMatchWidget/CurrentMatchWidget.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -858,7 +914,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
-				CODE_SIGN_ENTITLEMENTS = "scout-viewer-2015-iOS/scout-viewer-2015-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -887,7 +942,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_USE_OPTIMIZATION_PROFILE = NO;
-				CODE_SIGN_ENTITLEMENTS = "scout-viewer-2015-iOS/scout-viewer-2015-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -955,6 +1009,7 @@
 				19707E9C1CC435270080B3B6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		72AE5AAB1A87D5EB001BB94E /* Build configuration list for PBXProject "scout-viewer-2015-iOS" */ = {
 			isa = XCConfigurationList;
