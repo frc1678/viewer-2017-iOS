@@ -403,12 +403,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                                     imageView.hnk_setImageFromURL(NSURL(string: team.selectedImageUrl!)!)
                             })
                         }
-                        if self.teamSelectedImageView.image != UIImage(named: "SorryNoRobotPhoto") {
+                        let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
+                        if self.teamSelectedImageView.image != noRobotPhoto {
                             photos.append(MWPhoto(image: self.teamSelectedImageView.image))
                         }
                         if let urls = data?.otherImageUrls {
                             for (_, url) in urls {
                                 photos.append(MWPhoto(URL: NSURL(string: url as! String)))
+                            }
+                        }
+                        if self.teamSelectedImageView.image == noRobotPhoto && photos.count > 0 {
+                            if photos[0].underlyingImage != noRobotPhoto && (photos[0].underlyingImage ?? UIImage()).size.height > 0 {
+                                self.teamSelectedImageView.image = photos[0].underlyingImage
                             }
                         }
                 }
@@ -458,6 +464,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         let tap = UITapGestureRecognizer(target: self, action: "didTapImage:")
         self.teamSelectedImageView.addGestureRecognizer(tap)
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         reload()
     }
     

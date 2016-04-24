@@ -1504,10 +1504,10 @@
         <image name="thirdPick" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="9HU-HQ-BBv"/>
         <segue reference="XVc-rp-7iO"/>
         <segue reference="aDm-wS-orf"/>
         <segue reference="BGa-X6-1aO"/>
-        <segue reference="R2d-hJ-s5p"/>
         <segue reference="hw9-do-Pyv"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
