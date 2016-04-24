@@ -87,7 +87,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         "First Pick Ability",
         "Second Pick Ability",
         "2 Ball Tried Auto",
-        "2 Ball Accuracy Auto"
+        "2 Ball Accuracy Auto",
+        "R Score Driving Ability"
     ]
     
     
@@ -355,7 +356,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     let pitKeys = [
         "pitOrganization",
-        "pitCheesecakeAbility",
+        "pitProgrammingLanguage",
         "pitAvailableWeight",
         "pitNumberOfWheels",
         "pitNotes"
@@ -613,6 +614,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         case "2": unrankedCell.detailLabel.text = "OK"
                         case "3": unrankedCell.detailLabel.text = "Good"
                         case "4": unrankedCell.detailLabel.text = "Great"
+                        default: break
+                        }
+                    }
+                    if dataKey == "pitProgrammingLanguage" {
+                        switch unrankedCell.detailLabel!.text! {
+                        case "0": unrankedCell.detailLabel.text = "C++"
+                        case "1": unrankedCell.detailLabel.text = "Java"
+                        case "2": unrankedCell.detailLabel.text = "Labview"
+                        case "3": unrankedCell.detailLabel.text = "Other"
                         default: break
                         }
                     }

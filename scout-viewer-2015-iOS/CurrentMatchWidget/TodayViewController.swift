@@ -35,7 +35,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
         let devToken = "j1r2wo3RUPMeUZosxwvVSFEFVcrXuuMAGjk6uPOc"
         let stratDevToken = "IMXOxXD3FjOOUoMGJlkAK5pAtn89mGIWAEnaKJhP"
-        
+        print("View Did Load")
         firebase = Firebase(url: firebaseURLFirstPart)
         firebase!.authWithCustomToken(scoutingToken) { [unowned self] (E, A) -> Void in //TOKENN
             self.firebase?.childByAppendingPath("currentMatchNum").observeEventType(.Value, withBlock: { (snap) -> Void in
@@ -51,9 +51,6 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewWillAppear(animated: Bool) {
         
-        
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,12 +59,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func refreshMatchNum() {
+        print("Refresh")
         self.firebase!.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
-            let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as! Int
-            if let match = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).value as? NSDictionary {
-                let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
-                let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]
-                self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
+            if let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as? Int {
+                if let match = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).value as? NSDictionary {
+                    let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
+                    let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]
+                    self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
+                } else {
+                    self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
+                }
             } else {
                 self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
             }
@@ -86,6 +87,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     
     func updateCurrentMatch(matchNum: Int, redTeams: [Int], blueTeams: [Int]) {
+        print("Update")
         self.MatchNum.text = "Q\(matchNum)"
         self.r1.text = String(redTeams[0])
         self.r2.text = String(redTeams[1])

@@ -320,10 +320,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 teamReference.observeEventType(.ChildAdded, withBlock: { [unowned self] snapshot in
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                         let team = self.makeTeamFromSnapshot(snapshot)
-                        self.updateCacheIfNeeded(snapshot, team: self.fetchTeam(team.number as! Int))
-                        dispatch_async(dispatch_get_main_queue()) {
-                            self.teams.append(team)
-                            self.notificationManager.queueNote("updateLeftTable", specialObject: team)
+                        if let num = team.number as? Int {
+                            self.updateCacheIfNeeded(snapshot, team: self.fetchTeam(num))
+                            dispatch_async(dispatch_get_main_queue()) {
+                                self.teams.append(team)
+                                self.notificationManager.queueNote("updateLeftTable", specialObject: team)
+                            }
                         }
                     })
                     })
@@ -333,19 +335,21 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
                         self.teamCounter++
                         let team = self.makeTeamFromSnapshot(snapshot)
-                        self.updateCacheIfNeeded(snapshot, team: team)
-                        dispatch_async(dispatch_get_main_queue()) {
-                            let te = self.teams.filter({ (t) -> Bool in
-                                if t.number == team.number { return true }
-                                return false
-                            })
-                            if let index = self.teams.indexOf(te[0]) {
-                                self.teams[index] = team
-                                
-                                self.notificationManager.queueNote("updateLeftTable", specialObject: team)
-                                self.NSCounter = 0
-                                self.teamCounter = 0
-                                
+                        if team.number != nil {
+                            self.updateCacheIfNeeded(snapshot, team: team)
+                            dispatch_async(dispatch_get_main_queue()) {
+                                let te = self.teams.filter({ (t) -> Bool in
+                                    if t.number == team.number { return true }
+                                    return false
+                                })
+                                if let index = self.teams.indexOf(te[0]) {
+                                    self.teams[index] = team
+                                    
+                                    self.notificationManager.queueNote("updateLeftTable", specialObject: team)
+                                    self.NSCounter = 0
+                                    self.teamCounter = 0
+                                    
+                                }
                             }
                         }
                     })

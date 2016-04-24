@@ -1,9 +1,5 @@
 PODS:
   - DACircularProgress (2.3.1)
-  - DATAFilter (0.9.1):
-    - DATAObjectIDs (~> 0.5.1)
-  - DATAObjectIDs (0.5.1)
-  - DATAStack (4.2.4)
   - Firebase (2.5.1)
   - HanekeSwift (0.10.1)
   - Instabug (5.2.2)
@@ -13,21 +9,9 @@ PODS:
     - DACircularProgress (~> 2.3)
     - MBProgressHUD (~> 0.9)
     - SDWebImage (!= 3.7.2, ~> 3.7)
-  - NSDictionary-ANDYSafeValue (0.3.1)
-  - NSEntityDescription-SYNCPrimaryKey (0.1.2):
-    - NSString-HYPNetworking (~> 0.4.0)
-  - NSManagedObject-HYPPropertyMapper (3.6.0):
-    - NSString-HYPNetworking (~> 0.4.0)
-  - NSString-HYPNetworking (0.4.0)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
   - SDWebImage/Core (3.7.5)
-  - Sync (1.6.4):
-    - DATAFilter (~> 0.9.1)
-    - DATAStack (~> 4.2.4)
-    - NSDictionary-ANDYSafeValue (~> 0.3.1)
-    - NSEntityDescription-SYNCPrimaryKey (~> 0.1.2)
-    - NSManagedObject-HYPPropertyMapper (~> 3.6.0)
 
 DEPENDENCIES:
   - Firebase (>= 2.5.0)
@@ -35,24 +19,15 @@ DEPENDENCIES:
   - Instabug
   - JBChartView
   - MWPhotoBrowser
-  - Sync
 
 SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
-  DATAFilter: 4a1bdc065847e19d9fa1c9dd92ed2d85847967a1
-  DATAObjectIDs: 33db74dd1c858c2d22a45a4013c95f1082182e4e
-  DATAStack: 1574febd31668d7abfd898ce0b2913f8785027af
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   HanekeSwift: 08e47d3d0f2899ec58e5d257beba0de619aca9e8
   Instabug: 01bf89d7869b79b15795c847bb0f79ac96d7ae67
   JBChartView: 47aa5c25d3231fe1b08b714ac470eba886558951
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: ba0d0c09ffda3a7ea10093518738c502c1c7141c
-  NSDictionary-ANDYSafeValue: 2d7adf339b6e302d71fec5f1d71ae00aacda993e
-  NSEntityDescription-SYNCPrimaryKey: 9a2b2f7b838913eb445f20cc2f2edca7281fcfa5
-  NSManagedObject-HYPPropertyMapper: dbcaa74a43b522d45dacf1ad1c56b41ef008a0c0
-  NSString-HYPNetworking: 24c3828eebde8a37cc16101a475934a56ac820c0
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
-  Sync: d6408c2da4c1f510a8538ef1d00ee62eb6c9c4eb
 
 COCOAPODS: 0.39.0

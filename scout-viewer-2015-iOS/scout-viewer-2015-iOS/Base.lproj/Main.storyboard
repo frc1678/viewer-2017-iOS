@@ -1261,7 +1261,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Second Pick" id="Hd5-uu-cqF">
-                        <barButtonItem key="rightBarButtonItem" title="FP-&gt;SP" id="2Cs-yp-tDh"/>
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="FP-&gt;SP" id="2Cs-yp-tDh"/>
                     </navigationItem>
                     <connections>
                         <segue destination="qeH-s8-X6p" kind="show" identifier="TeamDetails" id="aDm-wS-orf"/>
