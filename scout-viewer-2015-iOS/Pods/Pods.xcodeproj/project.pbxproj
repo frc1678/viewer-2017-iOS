@@ -26,6 +26,9 @@
 		15F8C0548F961144786BC564C2597EFA /* UIBarButtonItemArrowRight.png in Resources */ = {isa = PBXBuildFile; fileRef = E5EF96348075817F94CEFF6DA3E91059 /* UIBarButtonItemArrowRight.png */; };
 		16741E7223082F742EEDAB17CFB94BB2 /* ImageSelectedOff@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 25A0596B476AB57E48BC2F123BE9F03B /* ImageSelectedOff@2x.png */; };
 		191DE2EB9A35585AE0A88BA9F833A1F4 /* FTransactionResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 25893CFE69CFCB695C11CA87B0713AF1 /* FTransactionResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		19BDB4181CD01DAF00DFCFDB /* DACircularProgress-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 19BDB4151CD01DAF00DFCFDB /* DACircularProgress-umbrella.h */; };
+		19BDB4191CD01DAF00DFCFDB /* DACircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 19BDB4161CD01DAF00DFCFDB /* DACircularProgressView.h */; };
+		19BDB41A1CD01DAF00DFCFDB /* DALabeledCircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = 19BDB4171CD01DAF00DFCFDB /* DALabeledCircularProgressView.h */; };
 		1C04A7CD5B70C4561F6D98C882731C65 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB93C06ECEBE96A33CC3A8E9B4E230DC /* Security.framework */; };
 		1C32E403CB75EC53CC1930851CF84C8A /* CGSize+Swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77023BCCAB99A55B1A082EC7DE9C66DE /* CGSize+Swift.swift */; };
 		1C3DCD7C099921F3800706830759134C /* MWGridCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 78298CA8076F34B4B5F0F0F9A1FF1281 /* MWGridCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -291,6 +294,9 @@
 		18183598A5C31AF223BE90B9AF86D73A /* MWPhotoBrowser-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MWPhotoBrowser-dummy.m"; sourceTree = "<group>"; };
 		187A81547D4A18BF2E340B110D8BC89D /* JBLineChartLine.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = JBLineChartLine.m; path = Classes/Line/Models/JBLineChartLine.m; sourceTree = "<group>"; };
 		1939CB133F771A1D8A68A74459871F44 /* Pods_CurrentMatchWidget.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CurrentMatchWidget.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		19BDB4151CD01DAF00DFCFDB /* DACircularProgress-umbrella.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DACircularProgress-umbrella.h"; sourceTree = "<group>"; };
+		19BDB4161CD01DAF00DFCFDB /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		19BDB4171CD01DAF00DFCFDB /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
 		1A99A6E2FBA0D776D663F1C4BC80D2F7 /* JBGradientLineLayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = JBGradientLineLayer.h; path = Classes/Line/Layers/JBGradientLineLayer.h; sourceTree = "<group>"; };
 		1A9D7DE35DBD37A9B7F68B7C54EDED39 /* MWPhotoBrowser-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MWPhotoBrowser-umbrella.h"; sourceTree = "<group>"; };
 		1D26A92227B1981233B9D239979DFCFD /* MWPhotoBrowser-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MWPhotoBrowser-prefix.pch"; sourceTree = "<group>"; };
@@ -821,6 +827,9 @@
 		888C3BF37233EA843618F073B0505E44 /* DACircularProgress */ = {
 			isa = PBXGroup;
 			children = (
+				19BDB4151CD01DAF00DFCFDB /* DACircularProgress-umbrella.h */,
+				19BDB4161CD01DAF00DFCFDB /* DACircularProgressView.h */,
+				19BDB4171CD01DAF00DFCFDB /* DALabeledCircularProgressView.h */,
 			);
 			path = DACircularProgress;
 			sourceTree = "<group>";
@@ -1058,7 +1067,9 @@
 			files = (
 				C23FCF31260D47CEC1494A292DAA1A1E /* FAuthData.h in Headers */,
 				1D925BB011B04DDED982C7946571A67A /* FAuthType.h in Headers */,
+				19BDB4191CD01DAF00DFCFDB /* DACircularProgressView.h in Headers */,
 				E60FA42EEC3ECC48701DB55986D25D69 /* FConfig.h in Headers */,
+				19BDB41A1CD01DAF00DFCFDB /* DALabeledCircularProgressView.h in Headers */,
 				E8B534D15D2B25919ACD898217266891 /* FDataSnapshot.h in Headers */,
 				239B10F388840841389B7F09648735B1 /* FEventType.h in Headers */,
 				60F9139BDD38565B78214C4FC5F5729D /* Firebase-umbrella.h in Headers */,
@@ -1066,6 +1077,7 @@
 				2F1496011DBBB75777645194AAAFE92D /* FirebaseApp.h in Headers */,
 				6646DA26298257396C7FFE141BB84CC3 /* FirebaseServerValue.h in Headers */,
 				DB05A9DD8244D10C28B6915C514AE15F /* FMutableData.h in Headers */,
+				19BDB4181CD01DAF00DFCFDB /* DACircularProgress-umbrella.h in Headers */,
 				4D75CF0089B20355B17A851513C4A002 /* FQuery.h in Headers */,
 				191DE2EB9A35585AE0A88BA9F833A1F4 /* FTransactionResult.h in Headers */,
 			);

@@ -392,43 +392,57 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 tableView?.reloadData()
                 self.updateTitleAndTopInfo()
                 tableViewHeightConstraint?.constant = (tableView.contentSize.height)
-                if let team = data,
-                    let imageView = teamSelectedImageView {
-                        //imageView.contentMode = UIViewContentMode.A
-                        
-                        if team.selectedImageUrl != nil {
-                            self.firebaseFetcher.fetchImageForTeam(self.data?.number as! Int, fetchedCallback: { (image) -> () in
-                                imageView.image = image
-                                }, couldNotFetch: {
-                                    imageView.hnk_setImageFromURL(NSURL(string: team.selectedImageUrl!)!)
-                            })
-                        }
-                        let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
-                        if self.teamSelectedImageView.image != noRobotPhoto {
-                            photos.append(MWPhoto(image: self.teamSelectedImageView.image))
-                        }
-                        if let urls = data?.otherImageUrls {
-                            for (_, url) in urls {
-                                photos.append(MWPhoto(URL: NSURL(string: url as! String)))
-                            }
-                        }
-                        if self.teamSelectedImageView.image == noRobotPhoto && photos.count > 0 {
-                            if photos[0].underlyingImage != noRobotPhoto && (photos[0].underlyingImage ?? UIImage()).size.height > 0 {
-                                self.teamSelectedImageView.image = photos[0].underlyingImage
-                            }
-                        }
-                }
+                
+                self.reloadImage()
             }
         }
         
     }
     
+    func reloadImage() {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
+            if let team = self.data,
+                let imageView = self.teamSelectedImageView {
+                    if team.selectedImageUrl != nil {
+                        self.firebaseFetcher.fetchImageForTeam(self.data?.number as! Int, fetchedCallback: { (image) -> () in
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                imageView.image = image
+                            })
+                            }, couldNotFetch: {
+                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                    
+                                    imageView.hnk_setImageFromURL(NSURL(string: team.selectedImageUrl!)!)
+                                })
+                        })
+                    }
+                    let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
+                    if self.teamSelectedImageView.image != noRobotPhoto {
+                        self.photos.append(MWPhoto(image: self.teamSelectedImageView.image))
+                    }
+                    if let urls = self.data?.otherImageUrls {
+                        for (_, url) in urls {
+                            self.photos.append(MWPhoto(URL: NSURL(string: url as! String)))
+                        }
+                    }
+                    if self.teamSelectedImageView.image == noRobotPhoto && self.photos.count > 0 {
+                        if self.photos[0].underlyingImage != noRobotPhoto && (self.photos[0].underlyingImage ?? UIImage()).size.height > 0 {
+                            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                
+                                self.teamSelectedImageView.image = self.photos[0].underlyingImage
+                            })
+                        }
+                    }
+            }
+        })
+        
+    }
+    
     //    func normalizeImageOrientationIfNeeded(image: UIImage) -> UIImage {
-    //        
+    //
     //        /*
     //        let size = image.size
     //        let scale = image.scale
-    //        
+    //
     //        let rect = CGRectMake(0, 0, size.width, size.height)
     //        UIGraphicsBeginImageContextWithOptions(size, false, scale)
     //        
@@ -443,13 +457,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.reload()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView:", name:"updateLeftTable", object:nil)
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "gotTeamImage:", name: "gotTeamImage", object: nil);
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "gotTeamImageToAdd:", name: "gotTeamImageToAdd", object: nil);
-        
         tableView.registerNib(UINib(nibName: "MultiCellTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiCellTableViewCell")
         tableView.delegate = self
         navigationController?.delegate = self
@@ -463,11 +474,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         let tap = UITapGestureRecognizer(target: self, action: "didTapImage:")
         self.teamSelectedImageView.addGestureRecognizer(tap)
-        
     }
     
     override func viewDidAppear(animated: Bool) {
-        reload()
+        reloadImage()
     }
     
     func didLongPressForMoreDetail(recognizer: UIGestureRecognizer) {
@@ -1019,7 +1029,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else if let cell = tableView.cellForRowAtIndexPath(indexPath) as? ResizableNotesTableViewCell {
             //Currently the only one is pit notes. We want it to segue to super notes per match
             if cell.textLabel?.text == "Pit Notes" {
-            performSegueWithIdentifier("NotesSegue", sender: indexPath)
+                performSegueWithIdentifier("NotesSegue", sender: indexPath)
             }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
