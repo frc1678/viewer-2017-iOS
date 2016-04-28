@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>DACircularProgress.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Firebase.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,7 +39,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-CurrentMatchWidget.xcscheme</key>
+		<key>Pods-CurrentMatch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,17 +57,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>40539CBD5672C2933E789B0778B9F3F7</key>
+		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4798742B0C7D45B51A39BECCF4205E0D</key>
+		<key>2D881936CF47AA55CDDC12B61341E2A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6142A8F5587A802A10700010CA554E6C</key>
+		<key>6461FF73E606AC17ECB9C28944E4F30F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -72,7 +77,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>922D853038E26FE7F7AB8069D66C38F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>94624EC6C9739263AA965CFE2D8933F5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B7AC9326D819482593FE118E915409D7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BE7A5E8E0FDE9CA58316BC4D6568818D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,16 +103,6 @@
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F4090BACB57AC7C0771A60DCB558DB6E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FB4891E3166E7FCE184A5615B1FE7CE0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

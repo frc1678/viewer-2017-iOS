@@ -84,20 +84,10 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "Pods-scout-viewer-2015-iOS/DACircularProgress.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/Firebase.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/Haneke.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/JBChartView.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/MBProgressHUD.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/MWPhotoBrowser.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/SDWebImage.framework"
+  install_framework "Pods-CurrentMatch/Firebase.framework"
+  install_framework "Pods-CurrentMatch/Haneke.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "Pods-scout-viewer-2015-iOS/DACircularProgress.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/Firebase.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/Haneke.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/JBChartView.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/MBProgressHUD.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/MWPhotoBrowser.framework"
-  install_framework "Pods-scout-viewer-2015-iOS/SDWebImage.framework"
+  install_framework "Pods-CurrentMatch/Firebase.framework"
+  install_framework "Pods-CurrentMatch/Haneke.framework"
 fi

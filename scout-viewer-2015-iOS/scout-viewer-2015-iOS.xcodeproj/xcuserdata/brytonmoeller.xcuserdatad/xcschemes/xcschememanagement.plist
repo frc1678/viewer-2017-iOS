@@ -4,10 +4,10 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>CurrentMatchWidget.xcscheme</key>
+		<key>CurrentMatch.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>12</integer>
 		</dict>
 		<key>scout-viewer-2015-iOS.xcscheme</key>
 		<dict>
@@ -18,6 +18,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>19707E8C1CC435260080B3B6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1976B0251CD27D98007E3B39</key>
 		<dict>
 			<key>primary</key>
 			<true/>
