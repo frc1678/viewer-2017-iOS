@@ -14,7 +14,7 @@
 		1976B0271CD27D98007E3B39 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19707E8E1CC435270080B3B6 /* NotificationCenter.framework */; };
 		1976B0311CD27D98007E3B39 /* CurrentMatch.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1976B0261CD27D98007E3B39 /* CurrentMatch.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DAC4601CD28F3200C90B79 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAC45F1CD28F3200C90B79 /* TodayViewController.swift */; };
-		19DAC4621CD290B800C90B79 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DAC4611CD290B800C90B79 /* Storyboard.storyboard */; };
+		19DAC4651CD2930100C90B79 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DAC4631CD2930100C90B79 /* Storyboard.storyboard */; };
 		400603FC1CB197CA005ADEC5 /* CurrentMatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */; };
 		400F75ED1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F75EC1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift */; };
 		40780DC51C59C05700ACF489 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC21C59C05700ACF489 /* Match.swift */; };
@@ -107,7 +107,7 @@
 		1976B02E1CD27D98007E3B39 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19DAC45E1CD28F3200C90B79 /* CurrentMatch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CurrentMatch-Bridging-Header.h"; sourceTree = "<group>"; };
 		19DAC45F1CD28F3200C90B79 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
-		19DAC4611CD290B800C90B79 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		19DAC4641CD2930100C90B79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		3457F7C2F7CD6D87F120C84D /* Pods-scout-viewer-2015-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scout-viewer-2015-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-scout-viewer-2015-iOS/Pods-scout-viewer-2015-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentMatchManager.swift; sourceTree = "<group>"; };
 		400F75EC1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalSecondPickTableViewController.swift; sourceTree = "<group>"; };
@@ -218,10 +218,10 @@
 		1976B0281CD27D98007E3B39 /* CurrentMatch */ = {
 			isa = PBXGroup;
 			children = (
+				19DAC4631CD2930100C90B79 /* Storyboard.storyboard */,
 				19DAC45F1CD28F3200C90B79 /* TodayViewController.swift */,
 				1976B02E1CD27D98007E3B39 /* Info.plist */,
 				19DAC45E1CD28F3200C90B79 /* CurrentMatch-Bridging-Header.h */,
-				19DAC4611CD290B800C90B79 /* Storyboard.storyboard */,
 			);
 			path = CurrentMatch;
 			sourceTree = "<group>";
@@ -545,7 +545,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19DAC4621CD290B800C90B79 /* Storyboard.storyboard in Resources */,
+				19DAC4651CD2930100C90B79 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -758,6 +758,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		19DAC4631CD2930100C90B79 /* Storyboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19DAC4641CD2930100C90B79 /* Base */,
+			);
+			name = Storyboard.storyboard;
+			sourceTree = "<group>";
+		};
 		72AE5AC01A87D5EB001BB94E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
