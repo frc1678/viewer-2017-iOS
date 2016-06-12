@@ -71,6 +71,138 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
 }
 
 @objc class Utils: NSObject {
+    static let autoKeys = ["uploadedData.stackedToteSet", "uploadedData.numContainersMovedIntoAutoZone"]
+    static let teleKeys = ["uploadedData.numTotesStacked", "uploadedData.numReconLevels", "uploadedData.numNoodlesContributed", "uploadedData.numReconsStacked", "uploadedData.numTeleopReconsFromStep", "uploadedData.numHorizontalReconsPickedUp", "uploadedData.numVerticalReconsPickedUp", "calculatedData.numReconsPickedUp", "uploadedData.numTotesPickedUpFromGround", "uploadedData.numLitterDropped", "uploadedData.numStacksDamaged", "uploadedData.coopActions", "uploadedData.maxFieldToteHeight", "uploadedData.maxReconHeight", "uploadedData.reconAcquisitions" ]
+    static let superKeys = ["uploadedData.agility", "uploadedData.stackPlacing" ]
+    static let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
+    static let miscKeys = ["uploadedData.miscellaneousNotes"]
+    
+    static let teamInMatchKeys = [
+        "firstPickAbility",
+        "ballsIntakedAuto",
+        "matchNumber",
+        "numBallsKnockedOffMidlineAuto",
+        "numGroundIntakesTele",
+        "numHighShotsMadeAuto",
+        "numHighShotsMadeTele",
+        "numHighShotsMissedAuto",
+        "numHighShotsMissedTele",
+        "numLowShotsMadeAuto",
+        "numLowShotsMadeTele",
+        "numLowShotsMissedAuto",
+        "numLowShotsMissedTele",
+        "numShotsBlockedTele",
+        "rankBallControl",
+        "rankDefense",
+        "rankAgility",
+        "rankSpeed",
+        "rankTorque",
+        "teamNumber",
+        "timesCrossedDefensesAuto",
+        "timesCrossedDefensesTele",
+    ]
+    
+    static let defenseKeys = ["avgFailedTimesCrossedDefensesAuto",
+        "avgFailedTimesCrossedDefensesTele",
+        "avgSuccessfulTimesCrossedDefensesAuto",
+        "avgSuccessfulTimesCrossedDefensesTele",
+        "sdFailedDefenseCrossesAuto"
+    ]
+    
+    static let teamCalcKeys = [
+        "actualSeed",
+        "avgBallControl",
+        "avgBallsKnockedOffMidlineAuto",
+        "avgDefense",
+        "avgEvasion",
+        "avgFailedTimesCrossedDefensesAuto",
+        "avgFailedTimesCrossedDefensesTele",
+        "avgGroundIntakes",
+        "avgHighShotsAuto",
+        "avgHighShotsTele",
+        "avgLowShotsAuto",
+        "avgLowShotsTele",
+        "avgMidlineBallsIntakedAuto",
+        "avgShotsBlocked",
+        "avgSpeed",
+        "avgSuccessfulTimesCrossedDefensesAuto",
+        "avgTorque",
+        "challengePercentage",
+        "disabledPercentage",
+        "disfunctionalPercentage",
+        "firstPickAbility",
+        "highShotAccuracyAuto",
+        "highShotAccuracyTele",
+        "incapacitatedPercentage",
+        "lowShotAccuracyAuto",
+        "lowShotAccuracyTele",
+        "numAutoPoints",
+        "actualNumRPs",
+        "predictedNumRPs",
+        "numScaleAndChallengePoints",
+        "predictedSeed",
+        "reachPercentage",
+        "scalePercentage",
+        "sdBallsKnockedOffMidlineAuto",
+        "sdFailedDefenseCrossesAuto",
+        "sdFailedDefenseCrossesTele",
+        "sdGroundIntakes",
+        "sdHighShotsAuto",
+        "sdHighShotsTele",
+        "sdLowShotsAuto",
+        "sdLowShotsTele",
+        "sdMidlineBallsIntakedAuto",
+        "sdShotsBlocked",
+        "sdSuccessfulDefenseCrossesAuto",
+        "sdSuccessfulDefenseCrossesTele",
+        "overallSecondPickAbility",
+        "secondPickAbility",
+        "siegeAbility",
+        "siegeConsistency"
+    ]
+    
+    static let calculatedTeamInMatchDataKeys = [
+        "calculatedData.firstPickAbility",
+        "calculatedData.RScoreTorque",
+        "calculatedData.RScoreEvasion",
+        "calculatedData.RScoreSpeed",
+        "calculatedData.highShotAccuracyAuto",
+        "calculatedData.lowShotAccuracyAuto",
+        "calculatedData.highShotAccuracyTele",
+        "calculatedData.lowShotAccuracyTele",
+        "calculatedData.siegeAbility",
+        "calculatedData.numRPs",
+        "calculatedData.numAutoPoints",
+        "calculatedData.numScaleAndChallengePoints",
+        "calculatedData.RScoreDefense",
+        "calculatedData.RScoreBallControl",
+        "calculatedData.RScoreDrivingAbility",
+        "calculatedData.citrusDPR",
+        "calculatedData.secondPickAbility",
+        "calculatedData.overallSecondPickAbility",
+        "calculatedData.scoreContribution"
+    ]
+    static let calculatedTIMDataKeys = [
+        "firstPickAbility",
+        "RScoreTorque",
+        "RScoreEvasion",
+        "RScoreSpeed",
+        "highShotAccuracyAuto",
+        "lowShotAccuracyAuto",
+        "highShotAccuracyTele",
+        "lowShotAccuracyTele",
+        "siegeAbility",
+        "actualNumRPs",
+        "numAutoPoints",
+        "numScaleAndChallengePoints",
+        "RScoreDefense",
+        "RScoreBallControl",
+        "RScoreDrivingAbility",
+        "citrusDPR",
+        "overallSecondPickAbility",
+        "scoreContribution"
+    ]
+    
     static let humanReadableNames = [
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.avgBallControl" : "Avg. Ball Controll",
@@ -221,7 +353,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
     class func getHumanReadableNameForKey(key: String) -> String? {
         return humanReadableNames[key]
     }
-   class func findKeyForValue(value: String) ->String?
+    class func findKeyForValue(value: String) ->String?
     {
         for (key, stringValue) in humanReadableNames
         {

@@ -928,6 +928,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
                     graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
+                    for i in nilValueIndecies.reverse() {
+                        graphViewController.subValuesLeft.removeAtIndex(i)
+                    }
+                    
                     if altMapping != nil {
                         graphViewController.zeroAndOneReplacementValues = altMapping!
                     }

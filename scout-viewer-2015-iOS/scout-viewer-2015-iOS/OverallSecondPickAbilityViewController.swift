@@ -55,13 +55,12 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
-        //print(self.firebaseFetcher.secondPickList(teamNumber))
         return self.firebaseFetcher.getSecondPickList()
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
             let selectedCell = sender as? MultiCellTableViewCell
-            dest.data = firebaseFetcher.fetchTeam(Int((selectedCell?.teamLabel!.text)!)!)
+            dest.data = firebaseFetcher.getTeam(Int((selectedCell?.teamLabel!.text)!)!)
         }
     
     }

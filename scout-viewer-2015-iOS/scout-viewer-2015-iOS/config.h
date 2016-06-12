@@ -15,6 +15,6 @@
 #define MATCH_CELL_IDENTIFIER @"MatchTableViewCell"
 #define MATCH_DETAIL_CELL_IDENTIFIER @"MatchDetailCollectionViewCell"
 #define MECHANISM_CELL_IDENTIFIER @"MechanismCell"
-#define CAN_PROGRAM_LANGUAGES @[@"C++", @"Java"]
+#define CAN_PROGRAM_LANGUAGES @[@"C++", @"Java"] //Not used anymore
 
 #endif

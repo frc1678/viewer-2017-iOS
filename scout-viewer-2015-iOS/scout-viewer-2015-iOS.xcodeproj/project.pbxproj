@@ -47,12 +47,10 @@
 		72AE5AC71A87D5EB001BB94E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AE5AC51A87D5EB001BB94E /* LaunchScreen.xib */; };
 		72AE5AD31A87D5EB001BB94E /* scout_viewer_2015_iOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AD21A87D5EB001BB94E /* scout_viewer_2015_iOSTests.m */; };
 		72AE5ADE1A87D8D3001BB94E /* ArrayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5ADD1A87D8D3001BB94E /* ArrayTableViewController.m */; };
-		72AE5AE11A87E7A0001BB94E /* TeamTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AE01A87E7A0001BB94E /* TeamTableViewController.m */; };
 		72AE5AEE1A881CBA001BB94E /* MultiCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AEC1A881CBA001BB94E /* MultiCellTableViewCell.m */; };
 		72AE5AEF1A881CBA001BB94E /* MultiCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AE5AED1A881CBA001BB94E /* MultiCellTableViewCell.xib */; };
 		72AE5AF21A881E94001BB94E /* SeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AF11A881E94001BB94E /* SeedTableViewController.m */; };
 		72AE5AF51A881F8C001BB94E /* FirstPickTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AF41A881F8C001BB94E /* FirstPickTableViewController.m */; };
-		72AE5AF81A881FA5001BB94E /* SecondPickTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AF71A881FA5001BB94E /* SecondPickTableViewController.m */; };
 		72AE5AFB1A881FE3001BB94E /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AFA1A881FE3001BB94E /* ScheduleTableViewController.m */; };
 		72AE5AFF1A882014001BB94E /* MatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AFD1A882014001BB94E /* MatchTableViewCell.m */; };
 		72AE5B001A882014001BB94E /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 72AE5AFE1A882014001BB94E /* MatchTableViewCell.xib */; };
@@ -155,8 +153,6 @@
 		72AE5AD21A87D5EB001BB94E /* scout_viewer_2015_iOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = scout_viewer_2015_iOSTests.m; sourceTree = "<group>"; };
 		72AE5ADC1A87D8D3001BB94E /* ArrayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayTableViewController.h; sourceTree = "<group>"; };
 		72AE5ADD1A87D8D3001BB94E /* ArrayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayTableViewController.m; sourceTree = "<group>"; };
-		72AE5ADF1A87E7A0001BB94E /* TeamTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamTableViewController.h; sourceTree = "<group>"; };
-		72AE5AE01A87E7A0001BB94E /* TeamTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamTableViewController.m; sourceTree = "<group>"; };
 		72AE5AE51A87F287001BB94E /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
 		72AE5AEB1A881CBA001BB94E /* MultiCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCellTableViewCell.h; sourceTree = "<group>"; };
 		72AE5AEC1A881CBA001BB94E /* MultiCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiCellTableViewCell.m; sourceTree = "<group>"; };
@@ -165,8 +161,6 @@
 		72AE5AF11A881E94001BB94E /* SeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedTableViewController.m; sourceTree = "<group>"; };
 		72AE5AF31A881F8C001BB94E /* FirstPickTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPickTableViewController.h; sourceTree = "<group>"; };
 		72AE5AF41A881F8C001BB94E /* FirstPickTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FirstPickTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
-		72AE5AF61A881FA5001BB94E /* SecondPickTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondPickTableViewController.h; sourceTree = "<group>"; };
-		72AE5AF71A881FA5001BB94E /* SecondPickTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondPickTableViewController.m; sourceTree = "<group>"; };
 		72AE5AF91A881FE3001BB94E /* ScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewController.h; sourceTree = "<group>"; };
 		72AE5AFA1A881FE3001BB94E /* ScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewController.m; sourceTree = "<group>"; };
 		72AE5AFC1A882014001BB94E /* MatchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchTableViewCell.h; sourceTree = "<group>"; };
@@ -224,6 +218,27 @@
 				19DAC45E1CD28F3200C90B79 /* CurrentMatch-Bridging-Header.h */,
 			);
 			path = CurrentMatch;
+			sourceTree = "<group>";
+		};
+		19A0FAFA1D0DEF47009BB7F7 /* Multi Cell Table View Cell */ = {
+			isa = PBXGroup;
+			children = (
+				72AE5ADC1A87D8D3001BB94E /* ArrayTableViewController.h */,
+				72AE5ADD1A87D8D3001BB94E /* ArrayTableViewController.m */,
+				72AE5AEB1A881CBA001BB94E /* MultiCellTableViewCell.h */,
+				72AE5AEC1A881CBA001BB94E /* MultiCellTableViewCell.m */,
+				72AE5AED1A881CBA001BB94E /* MultiCellTableViewCell.xib */,
+			);
+			name = "Multi Cell Table View Cell";
+			sourceTree = "<group>";
+		};
+		19A0FAFB1D0DEFD7009BB7F7 /* Mechanism Table View Cell */ = {
+			isa = PBXGroup;
+			children = (
+				72EB84BD1A9A7C84005690BD /* MechanismTableViewCell.swift */,
+				72EB84BE1A9A7C84005690BD /* MechanismTableViewCell.xib */,
+			);
+			name = "Mechanism Table View Cell";
 			sourceTree = "<group>";
 		};
 		40E43E3A1C54434D00ABC378 /* Firebase Models */ = {
@@ -309,8 +324,6 @@
 		72A048141AC4C2DE00FA2A46 /* Second Pick */ = {
 			isa = PBXGroup;
 			children = (
-				72AE5AF61A881FA5001BB94E /* SecondPickTableViewController.h */,
-				72AE5AF71A881FA5001BB94E /* SecondPickTableViewController.m */,
 				194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */,
 				400F75EC1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift */,
 			);
@@ -320,11 +333,11 @@
 		72AE5AA71A87D5EB001BB94E = {
 			isa = PBXGroup;
 			children = (
-				191B81141CB1BDC200139FC3 /* Settings.bundle */,
-				19634FAE1C5EDF2A00FAAAC6 /* Model.xcdatamodeld */,
 				72AE5AB21A87D5EB001BB94E /* scout-viewer-2015-iOS */,
-				72AE5ACF1A87D5EB001BB94E /* scout-viewer-2015-iOSTests */,
+				19634FAE1C5EDF2A00FAAAC6 /* Model.xcdatamodeld */,
+				191B81141CB1BDC200139FC3 /* Settings.bundle */,
 				1976B0281CD27D98007E3B39 /* CurrentMatch */,
+				72AE5ACF1A87D5EB001BB94E /* scout-viewer-2015-iOSTests */,
 				72AE5AB11A87D5EB001BB94E /* Products */,
 				6CDB04411470B0C2897EDD29 /* Frameworks */,
 				BCDCF1ACBDE4DBB33F052EB7 /* Pods */,
@@ -344,41 +357,26 @@
 		72AE5AB21A87D5EB001BB94E /* scout-viewer-2015-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				19707E9E1CC443930080B3B6 /* scout-viewer-2015-iOS.entitlements */,
-				72A048101AC4C29100FA2A46 /* Tabs */,
 				72AE5AC01A87D5EB001BB94E /* Main.storyboard */,
+				72A048101AC4C29100FA2A46 /* Tabs */,
+				40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */,
 				19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */,
-				72AE5AC31A87D5EB001BB94E /* Images.xcassets */,
-				72AE5AC51A87D5EB001BB94E /* LaunchScreen.xib */,
-				72AE5AE51A87F287001BB94E /* config.h */,
-				72DC10BA1A92AE9C0092EA5F /* scout-viewer-2015-iOS-Bridging-Header.h */,
-				72AE5AB31A87D5EB001BB94E /* Supporting Files */,
-				725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */,
 				725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */,
+				725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */,
 				40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */,
 				40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */,
 				400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */,
-				725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */,
-				72AE5ADF1A87E7A0001BB94E /* TeamTableViewController.h */,
-				72AE5AE01A87E7A0001BB94E /* TeamTableViewController.m */,
-				40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */,
-				40E43E3A1C54434D00ABC378 /* Firebase Models */,
-				72AE5ADC1A87D8D3001BB94E /* ArrayTableViewController.h */,
-				72AE5ADD1A87D8D3001BB94E /* ArrayTableViewController.m */,
-				72AE5AEB1A881CBA001BB94E /* MultiCellTableViewCell.h */,
-				72AE5AEC1A881CBA001BB94E /* MultiCellTableViewCell.m */,
-				72AE5AED1A881CBA001BB94E /* MultiCellTableViewCell.xib */,
 				7209C3571A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift */,
-				72EB84BD1A9A7C84005690BD /* MechanismTableViewCell.swift */,
-				72EB84BE1A9A7C84005690BD /* MechanismTableViewCell.xib */,
-				72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */,
 				7260D5421AC7779500B57D4E /* TeamScheduleTableViewController.h */,
 				7260D5431AC7779500B57D4E /* TeamScheduleTableViewController.m */,
 				7253A7FD1AC8900E00188364 /* GraphViewController.swift */,
+				40E43E3A1C54434D00ABC378 /* Firebase Models */,
+				72C2DC091A96F4360000BCED /* Utils.swift */,
 				72553D891AD9913D0091F5D2 /* PDFRenderer.h */,
 				72553D8A1AD9913D0091F5D2 /* PDFRenderer.m */,
-				72553D8C1AD999FE0091F5D2 /* NSAttributedString+OrdinalFormat.h */,
-				72553D8D1AD999FE0091F5D2 /* NSAttributedString+OrdinalFormat.m */,
+				72AE5AB71A87D5EB001BB94E /* AppDelegate.h */,
+				72AE5AB81A87D5EB001BB94E /* AppDelegate.m */,
+				72AE5AB31A87D5EB001BB94E /* Supporting Files */,
 			);
 			path = "scout-viewer-2015-iOS";
 			sourceTree = "<group>";
@@ -386,15 +384,23 @@
 		72AE5AB31A87D5EB001BB94E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				72DC10BA1A92AE9C0092EA5F /* scout-viewer-2015-iOS-Bridging-Header.h */,
+				72AE5AC51A87D5EB001BB94E /* LaunchScreen.xib */,
+				72AE5AC31A87D5EB001BB94E /* Images.xcassets */,
+				725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */,
+				72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */,
+				19A0FAFB1D0DEFD7009BB7F7 /* Mechanism Table View Cell */,
+				19A0FAFA1D0DEF47009BB7F7 /* Multi Cell Table View Cell */,
+				72553D8C1AD999FE0091F5D2 /* NSAttributedString+OrdinalFormat.h */,
+				72553D8D1AD999FE0091F5D2 /* NSAttributedString+OrdinalFormat.m */,
 				72EC171E1AD9B2480044FEE9 /* UINavigationController+SGProgress.h */,
 				72EC171F1AD9B2480044FEE9 /* UINavigationController+SGProgress.m */,
-				72C2DC091A96F4360000BCED /* Utils.swift */,
 				72A0480C1AC4C22500FA2A46 /* UIColor+HexString.h */,
 				72A0480D1AC4C22500FA2A46 /* UIColor+HexString.m */,
-				72AE5AB71A87D5EB001BB94E /* AppDelegate.h */,
-				72AE5AB81A87D5EB001BB94E /* AppDelegate.m */,
+				72AE5AE51A87F287001BB94E /* config.h */,
 				72AE5AB41A87D5EB001BB94E /* Info.plist */,
 				72AE5AB51A87D5EB001BB94E /* main.m */,
+				19707E9E1CC443930080B3B6 /* scout-viewer-2015-iOS.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -711,11 +717,9 @@
 				727345501AC5E72E009DB484 /* ThirdPickTableViewController.m in Sources */,
 				40E43E401C544E3900ABC378 /* FirebaseDataFetcher.swift in Sources */,
 				72AE5AB61A87D5EB001BB94E /* main.m in Sources */,
-				72AE5AE11A87E7A0001BB94E /* TeamTableViewController.m in Sources */,
 				19634FB01C5EDF2A00FAAAC6 /* Model.xcdatamodeld in Sources */,
 				72DC10B91A929FA30092EA5F /* PredictedSeedTableViewController.m in Sources */,
 				72C2DC0A1A96F4360000BCED /* Utils.swift in Sources */,
-				72AE5AF81A881FA5001BB94E /* SecondPickTableViewController.m in Sources */,
 				72EC17201AD9B2480044FEE9 /* UINavigationController+SGProgress.m in Sources */,
 				40B551C91C702C01006089EA /* TeamInMatchCalculatedData.swift in Sources */,
 				725D09541A95919B009A0AB6 /* ResizableNotesTableViewCell.swift in Sources */,

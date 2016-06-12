@@ -14,7 +14,9 @@
 @interface PDFRenderer ()
 
 @end
-
+/**
+ *  Not used in 2016
+ */
 @implementation PDFRenderer
 
 FirebaseDataFetcher *firebaseFetcher;
@@ -49,11 +51,11 @@ static NSMutableArray *teamNums;
             [teamDict setObject:[team.calculatedData valueForKeyPath:prop] forKey:prop];
         }
     }
-        
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         float width = 612;
         float height = 792;
-    
+        
         
 #pragma mark - PDF Render Loop
         // Begin PDF context
@@ -136,11 +138,11 @@ static NSMutableArray *teamNums;
     // Style used for generic body text
     NSDictionary *bodyStyle = @{NSForegroundColorAttributeName: [UIColor blackColor],
                                 NSFontAttributeName: [UIFont fontWithName:@"HelveticaNeue" size:11]};
-
     
-    #pragma mark - PDF Rendering
+    
+#pragma mark - PDF Rendering
     UIGraphicsBeginPDFPage();
-
+    
     UIImage *robotImage = [firebaseFetcher getTeamPDFImage:[[team objectForKey:@"number"] integerValue]];
     
     NSAttributedString *numberTitle = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long)[[team objectForKey:@"number"] integerValue]] attributes:titleStyle];
@@ -167,7 +169,7 @@ static NSMutableArray *teamNums;
     // Render robot image
     [robotImage drawInRect:CGRectMake(LEFT_MARGIN, ((pageHeight - BOTTOM_MARGIN - CATEGORY_HEIGHT - CATEGORY_TOP_MARGIN - TOP_MARGIN - AFTER_LABEL_MARGIN - topLabelHeight) / 2 + TOP_MARGIN + AFTER_LABEL_MARGIN + topLabelHeight) - imageHeight / 2, imageWidth, imageHeight)];
     CGPoint graphPoint = CGPointMake(pageWidth - GRAPH_WIDTH - RIGHT_MARGIN + GRAPH_IMAGE_MARGIN, pageHeight - BOTTOM_MARGIN - CATEGORY_HEIGHT - CATEGORY_TOP_MARGIN);
-   
+    
     [self createGraphAtLocation:graphPoint withWidth:(pageWidth - RIGHT_MARGIN - graphPoint.x) withHeight:pageHeight - BOTTOM_MARGIN - CATEGORY_HEIGHT - CATEGORY_TOP_MARGIN - AFTER_LABEL_MARGIN - TOP_MARGIN - topLabelHeight withDataValues:[self graphValuesForTeamDict:team] withMaxValues:[self maxValues] withMinValues:[self minValues] withLabels:[self dataLabelsForTeam:team] withColors:COLORS];
     
     
@@ -281,13 +283,13 @@ static NSMutableArray *teamNums;
     [rankRowText appendAttributedString:[[NSAttributedString alloc] initWithString:numberString attributes:dataNumberStyle]];
     [rankRowText appendAttributedString:[[NSAttributedString alloc] initWithString:@") " attributes:bodyStyle]];
     [rankRowText appendAttributedString:[[NSAttributedString alloc] initWithString:title attributes:bodyStyle]];
-
+    
     if (color) {
         [rankRowText appendAttributedString:[[NSAttributedString alloc] initWithString:@" ⦁" attributes:@{NSForegroundColorAttributeName : color}]];
     }
     
     [rankRowText appendAttributedString:[[NSAttributedString alloc] initWithString:@"\n"]];
-
+    
     return rankRowText;
 }
 
@@ -306,41 +308,41 @@ static NSMutableArray *teamNums;
     
     // Auto text
     [firstPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"firstPickAbility"
-                                                                              inTeam:team
-                                                                           withTitle:@"1st Ability"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"firstPickAbility"]]];
+                                                                                inTeam:team
+                                                                             withTitle:@"1st Ability"
+                                                                       dataNumberStyle:dataNumberStyle
+                                                                       rankNumberStyle:rankNumberStyle
+                                                                             bodyStyle:bodyStyle
+                                                                             asPercent:NO
+                                                                              forColor:[self colorFromKey:@"firstPickAbility"]]];
     
     [firstPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"isStackedToteSetPercentage"
-                                                                              inTeam:team
-                                                                           withTitle:@"Auto Stack"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:YES
-                                                                            forColor:[self colorFromKey:@"isStackedToteSetPercentage"]]];
-//
-//    // Tele text
+                                                                                inTeam:team
+                                                                             withTitle:@"Auto Stack"
+                                                                       dataNumberStyle:dataNumberStyle
+                                                                       rankNumberStyle:rankNumberStyle
+                                                                             bodyStyle:bodyStyle
+                                                                             asPercent:YES
+                                                                              forColor:[self colorFromKey:@"isStackedToteSetPercentage"]]];
+    //
+    //    // Tele text
     [firstPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"avgNumTotesFromHP"
-                                                                              inTeam:team
-                                                                           withTitle:@"HP Totes"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"avgNumTotesFromHP"]]];
-
+                                                                                inTeam:team
+                                                                             withTitle:@"HP Totes"
+                                                                       dataNumberStyle:dataNumberStyle
+                                                                       rankNumberStyle:rankNumberStyle
+                                                                             bodyStyle:bodyStyle
+                                                                             asPercent:NO
+                                                                              forColor:[self colorFromKey:@"avgNumTotesFromHP"]]];
+    
     [firstPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"avgNumTotesPickedUpFromGround"
-                                                                              inTeam:team
-                                                                           withTitle:@"Ground Totes"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"avgNumTotesPickedUpFromGround"]]];
+                                                                                inTeam:team
+                                                                             withTitle:@"Ground Totes"
+                                                                       dataNumberStyle:dataNumberStyle
+                                                                       rankNumberStyle:rankNumberStyle
+                                                                             bodyStyle:bodyStyle
+                                                                             asPercent:NO
+                                                                              forColor:[self colorFromKey:@"avgNumTotesPickedUpFromGround"]]];
     
     return firstPickCategoryText;
 }
@@ -351,52 +353,52 @@ static NSMutableArray *teamNums;
     NSMutableAttributedString *secondPickCategoryText = [[NSMutableAttributedString alloc] initWithString:@"Second Pick:\n" attributes:categoryHeaderStyle];
     
     [secondPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"secondPickAbility"
-                                                                              inTeam:team
-                                                                           withTitle:@"2nd Ability"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"secondPickAbility"]]];
+                                                                                 inTeam:team
+                                                                              withTitle:@"2nd Ability"
+                                                                        dataNumberStyle:dataNumberStyle
+                                                                        rankNumberStyle:rankNumberStyle
+                                                                              bodyStyle:bodyStyle
+                                                                              asPercent:NO
+                                                                               forColor:[self colorFromKey:@"secondPickAbility"]]];
     
     // Auto text
     [secondPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"stackingAbility"
-                                                                              inTeam:team
-                                                                           withTitle:@"Avg. Stk. Pts."
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"stackingAbility"]]];
+                                                                                 inTeam:team
+                                                                              withTitle:@"Avg. Stk. Pts."
+                                                                        dataNumberStyle:dataNumberStyle
+                                                                        rankNumberStyle:rankNumberStyle
+                                                                              bodyStyle:bodyStyle
+                                                                              asPercent:NO
+                                                                               forColor:[self colorFromKey:@"stackingAbility"]]];
     //
-//    // Tele text
+    //    // Tele text
     [secondPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"avgMaxFieldToteHeight"
-                                                                              inTeam:team
-                                                                           withTitle:@"Avg. Max T"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"avgMaxFieldToteHeight"]]];
-//
+                                                                                 inTeam:team
+                                                                              withTitle:@"Avg. Max T"
+                                                                        dataNumberStyle:dataNumberStyle
+                                                                        rankNumberStyle:rankNumberStyle
+                                                                              bodyStyle:bodyStyle
+                                                                              asPercent:NO
+                                                                               forColor:[self colorFromKey:@"avgMaxFieldToteHeight"]]];
+    //
     
     [secondPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"avgMaxReconHeight"
-                                                                              inTeam:team
-                                                                           withTitle:@"Avg. Max RC"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"avgMaxReconHeight"]]];
+                                                                                 inTeam:team
+                                                                              withTitle:@"Avg. Max RC"
+                                                                        dataNumberStyle:dataNumberStyle
+                                                                        rankNumberStyle:rankNumberStyle
+                                                                              bodyStyle:bodyStyle
+                                                                              asPercent:NO
+                                                                               forColor:[self colorFromKey:@"avgMaxReconHeight"]]];
     
     [secondPickCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"avgNumCappedSixStacks"
-                                                                              inTeam:team
-                                                                           withTitle:@"Avg. Cap 5/6"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
-                                                                            forColor:[self colorFromKey:@"avgNumCappedSixStacks"]]];
+                                                                                 inTeam:team
+                                                                              withTitle:@"Avg. Cap 5/6"
+                                                                        dataNumberStyle:dataNumberStyle
+                                                                        rankNumberStyle:rankNumberStyle
+                                                                              bodyStyle:bodyStyle
+                                                                              asPercent:NO
+                                                                               forColor:[self colorFromKey:@"avgNumCappedSixStacks"]]];
     
     return secondPickCategoryText;
 }
@@ -487,9 +489,9 @@ static NSMutableArray *teamNums;
         [bar stroke];
         
         UIColor *negativeColor = [UIColor colorWithRed:1 green:0 blue:0 alpha:dataPoint / [mins[i] floatValue]];
-
+        
         NSAttributedString *label = [[NSAttributedString alloc] initWithString:labels[i] attributes:@{NSBackgroundColorAttributeName : negativeColor}];
-
+        
         CGRect rect = CGRectMake(point.x + AXIS_LEFT_MARGIN + (BAR_SEPARATOR + barWidth) * i + barWidth / 2 - label.size.width / 2, point.y - AXIS_WIDTH - BAR_LIFT - (MAX(dataPoint, 0) / [maxes[i] floatValue]) * (height - AXIS_WIDTH - BAR_LIFT - GRAPH_TOP_MARGIN) - label.size.width / 2 - 15, label.size.width, label.size.height);
         CGContextAddRect(UIGraphicsGetCurrentContext(), rect);
         CGContextRef context = UIGraphicsGetCurrentContext();
@@ -510,25 +512,25 @@ static NSMutableArray *teamNums;
 + (NSAttributedString *)cheesecakeAttributedStringWithCategoryHeaderStyle:(NSDictionary *)categoryHeaderStyle dataNumberStyle:(NSDictionary *)dataNumberStyle rankNumberStyle:(NSDictionary *)rankNumberStyle bodyStyle:(NSDictionary *)bodyStyle team:(NSDictionary *)team
 {
     NSMutableAttributedString *cheesecakeCategoryText = [[NSMutableAttributedString alloc] initWithString:@"CC:\n" attributes:categoryHeaderStyle];
-        
+    
     NSString *mechanismMount = [[PDFRenderer mountConvert:[team[@"canMountMechanism"] boolValue]] stringByAppendingString:@"\n"];
     [cheesecakeCategoryText appendAttributedString:[[NSAttributedString alloc] initWithString:mechanismMount attributes:rankNumberStyle]];
     
     NSString *willingToMount = [[PDFRenderer willingConvert:[team[@"willingToMount"] boolValue]] stringByAppendingString:@"\n"];
     [cheesecakeCategoryText appendAttributedString:[[NSAttributedString alloc] initWithString:willingToMount attributes:rankNumberStyle]];
-
+    
     [cheesecakeCategoryText appendAttributedString:[PDFRenderer attributedRankRowForKey:@"easeOfMounting"
-                                                                              inTeam:team
-                                                                           withTitle:@"Mount Ease"
-                                                                     dataNumberStyle:dataNumberStyle
-                                                                     rankNumberStyle:rankNumberStyle
-                                                                           bodyStyle:bodyStyle
-                                                                           asPercent:NO
+                                                                                 inTeam:team
+                                                                              withTitle:@"Mount Ease"
+                                                                        dataNumberStyle:dataNumberStyle
+                                                                        rankNumberStyle:rankNumberStyle
+                                                                              bodyStyle:bodyStyle
+                                                                              asPercent:NO
                                                                                forColor:[self colorFromKey:@"easeOfMounting"]]];
     
     NSString *programmingLanguage = team[@"programmingLanguage"];
     [cheesecakeCategoryText appendAttributedString:[[NSAttributedString alloc] initWithString:@"Prog. Lang.: " attributes:bodyStyle]];
-
+    
     [cheesecakeCategoryText appendAttributedString:[[NSAttributedString alloc] initWithString:programmingLanguage attributes:rankNumberStyle]];
     
     return cheesecakeCategoryText;

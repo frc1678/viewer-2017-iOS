@@ -18,53 +18,14 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
         }
     }
     
-//    let humanReadableNames = ["uploadedData.robotMovedIntoAutoZone": "Moved into Auto Zone",
-//    "uploadedData.stackedToteSet": "Stacked Tote Set",
-//    "uploadedData.numTotesMovedIntoAutoZone": "Totes into Auto",
-//    "uploadedData.numContainersMovedIntoAutoZone": "Recons into Auto",
-//    "uploadedData.numTotesStacked": "Totes Stacked",
-//    "uploadedData.numReconLevels": "Recon Levels",
-//    "uploadedData.numReconsStacked": "Recons Stacked",
-//    "uploadedData.numNoodlesContributed": "Noodles Contributed",
-//    "uploadedData.numTotesPickedUpFromGround": "Totes from Ground",
-//    "uploadedData.numLitterDropped": "Litter Dropped",
-//    "uploadedData.numStacksDamaged": "Stacks Damaged",
-//    "uploadedData.coopActions": "Coop Actions",
-//    "uploadedData.maxFieldToteHeight": "Highest Tote Stacked",
-//    "uploadedData.maxReconHeight": "Highest Recon Stacked",
-//    "uploadedData.reconAcquisitions": "Step Recon Acquisitions",
-//    "uploadedData.numLitterThrownToOtherSide": "Thrown Litter",
-//    "uploadedData.agility": "Agility",
-//    "uploadedData.stackPlacing": "Stack Placing Security",
-//    "uploadedData.humanPlayerLoading": "HP Loading Ability",
-//    "uploadedData.incapacitated": "Incapacitated",
-//    "uploadedData.disabled": "Disabled",
-//    "uploadedData.miscellaneousNotes": "Notes",
-//    "calculatedData.numReconsPickedUp": "Recons Intaked",
-//    "uploadedData.numHorizontalReconsPickedUp": "H. Recons Intaked",
-//    "uploadedData.numVerticalReconsPickedUp": "V. Recons Intaked",
-//    "uploadedData.numTeleopReconsFromStep": "Step Recons Teleop" ]
-    
-    let autoKeys = ["uploadedData.stackedToteSet", "uploadedData.numContainersMovedIntoAutoZone"]
-    let teleKeys = ["uploadedData.numTotesStacked", "uploadedData.numReconLevels", "uploadedData.numNoodlesContributed", "uploadedData.numReconsStacked", "uploadedData.numTeleopReconsFromStep", "uploadedData.numHorizontalReconsPickedUp", "uploadedData.numVerticalReconsPickedUp", "calculatedData.numReconsPickedUp", "uploadedData.numTotesPickedUpFromGround", "uploadedData.numLitterDropped", "uploadedData.numStacksDamaged", "uploadedData.coopActions", "uploadedData.maxFieldToteHeight", "uploadedData.maxReconHeight", "uploadedData.reconAcquisitions" ]
-    let superKeys = ["uploadedData.agility", "uploadedData.stackPlacing" ]
-    let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
-    let miscKeys = ["uploadedData.miscellaneousNotes"]
-    
     var graphableCells: [String] = []
-    
-    var keySets: [[String]] {
-        return [autoKeys, teleKeys, superKeys, statusKeys, miscKeys]
-    }
-    
+    var keySets = [Utils.autoKeys, Utils.teleKeys, Utils.superKeys, Utils.statusKeys, Utils.miscKeys]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.estimatedRowHeight = 100
-        
         updateTitle()
     }
-    
     
     func updateTitle() {
         switch (data?.matchNumber, data?.teamNumber) {
@@ -109,15 +70,13 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
             notesCell.notesLabel?.text = notes.characters.count == 0 ? "None" : notes
         } else if let _ = dataPoint as? NSArray {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) 
-
+            
             cell.detailTextLabel?.text = "some array"
             cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
         } else {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailValueCell", forIndexPath: indexPath)
-
             cell.detailTextLabel?.text = "\(dataPoint)"
             cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
-            
             graphableCells.append(cell.textLabel!.text!)
         }
         
@@ -151,13 +110,13 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
                         }
                         graphViewController.subDisplayRightTitle = "Rank: "
                     }
-
+                    
                 }
             }
         }
     }
     
-     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             if graphableCells.contains(cell.textLabel!.text!) {
                 performSegueWithIdentifier("Graph", sender: indexPath)

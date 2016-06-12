@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3F8A7E3BDA6605C038D70336'
+               BlueprintIdentifier = '099BDCF869F2DDE80F1FD8EE'
                BlueprintName = 'Pods-scout-viewer-2015-iOS'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_scout_viewer_2015_iOS.framework'>

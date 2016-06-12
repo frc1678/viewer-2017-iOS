@@ -13,15 +13,23 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     
     @IBOutlet weak var graph: JBBarChartView!
     @IBOutlet weak var mainDisplay: UILabel!
+    
+    /// Text in the top left
     @IBOutlet weak var subDisplayLeft: UILabel!
+    /// Text in the top right
     @IBOutlet weak var subDisplayRight: UILabel!
     
-    
+    /// How high the bars are
     var values: [CGFloat] = []
+    /// When a bar is held down by the finger, what should you display on the left for that bar index? Maybe the team number? It depends on the particular graph.
     var subValuesLeft: [AnyObject] = []
+    /// When a bar is held down by the finger, what should you display on the right for that bar index? Maybe the team number? It depends on the particular graph.
     var subValuesRight: [AnyObject] = []
+    /// Normal color of the bars
     var color = UIColor.greenColor()
+    
     var negativeColor = UIColor.blueColor()
+    /// Color when you press and hold a bar
     var highlightColor = UIColor.grayColor()
     var fadeColor = UIColor.blackColor()
     var highlightIndex = -1;
@@ -31,12 +39,12 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     var subDisplayLeftTitle = ""
     var subDisplayRightTitle = ""
     var negativeMultiplier = 0.5
+    /// Values to replace 0 and 1 with (maybe true and false, or yes and no).
     var zeroAndOneReplacementValues = [CGFloat : String]()
     var newValuesArray = [String]()
     var isPercentageGraph = false
     
-    var lens: UIView!
-    
+    /// In Utils, we remap keys to nice titles. Use substitute keys in some cases to make the right titles come out.
     let titleSwitch = [
         "didScaleTele" : "scalePercentage",
         "didGetIncapacitated" : "incapacitatedPercentage",
@@ -50,14 +58,13 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
         "calculatedData.RScoreEvasion" : "calculatedData.avgEvasion",
         "calculatedData.RScoreTorque" : "calculatedData.avgTorque",
-        "rankBallControl" : "calculatedData.avgBallControl", //
+        "rankBallControl" : "calculatedData.avgBallControl",
     ]
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var nilValueIndecies = []
         
         title = graphTitle
         if zeroAndOneReplacementValues.count > 0 {
@@ -151,11 +158,6 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
             return color.colorWithAlphaComponent(((values[Int(index)] - min(values.minElement()!, 0.0)) / (values.maxElement()! - min(values.minElement()!, 0.0))) * 0.5 + 0.5)
         }
     }
-    
-    
-    
-    
-    
     
     func toggleDisplay(hide: Bool) {
         if hide {
