@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Citrus Circuits. All rights reserved.
 //
 
-#import "TeamTableViewController.h"
+#import "ArrayTableViewController.h"
 
 @interface FirstPickTableViewController : ArrayTableViewController
 

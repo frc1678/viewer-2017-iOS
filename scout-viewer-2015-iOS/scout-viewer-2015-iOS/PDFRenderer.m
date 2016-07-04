@@ -142,8 +142,8 @@ static NSMutableArray *teamNums;
     
 #pragma mark - PDF Rendering
     UIGraphicsBeginPDFPage();
-    
-    UIImage *robotImage = [firebaseFetcher getTeamPDFImage:[[team objectForKey:@"number"] integerValue]];
+    NSLog(@"PDF RENDERING WILL NOT WORK");
+    UIImage *robotImage = [[UIImage alloc] init];//[firebaseFetcher getTeamPDFImage:[[team objectForKey:@"number"] integerValue]];
     
     NSAttributedString *numberTitle = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld", (long)[[team objectForKey:@"number"] integerValue]] attributes:titleStyle];
     CGFloat topLabelHeight = numberTitle.size.height;

@@ -55,7 +55,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
-        return self.firebaseFetcher.getSecondPickList()
+        return self.firebaseFetcher.getOverallSecondPickList()
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {

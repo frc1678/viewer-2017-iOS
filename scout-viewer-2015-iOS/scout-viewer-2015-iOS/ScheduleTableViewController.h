@@ -10,6 +10,6 @@
 
 @interface ScheduleTableViewController : ArrayTableViewController
 
-@property (assign, nonatomic) NSInteger teamNumber;
+//@property (assign, nonatomic) NSInteger teamNumber;
 
 @end

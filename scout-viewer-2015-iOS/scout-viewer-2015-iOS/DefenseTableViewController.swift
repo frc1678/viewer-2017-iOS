@@ -74,7 +74,7 @@ class DefenseTableViewController: ArrayTableViewController {
         } else {
             multiCell?.scoreLabel!.text = String(value!)
         }
-        let team = firebaseFetcher.fetchTeam(teamNumber)
+        let team = firebaseFetcher.getTeam(teamNumber)
         multiCell?.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team, withCharacteristic: "\(defenseKeys[path.row]).\(defenseKey)"))"
         
         
@@ -129,9 +129,9 @@ class DefenseTableViewController: ArrayTableViewController {
                     //print(keySets[indexPath.section][indexPath.row])
                     let values: [Float]
                     if key?.rangeOfString("beached") == nil && key?.rangeOfString("slowed") == nil {
-                        (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.fetchTeam(teamNumber))
+                        (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.getTeam(teamNumber))
                     } else {
-                        (values, _) = firebaseFetcher.getMatchValuesForTeamForPathForDefense("\(key!)", forTeam: firebaseFetcher.fetchTeam(teamNumber), defenseKey: self.defenseKey)
+                        (values, _) = firebaseFetcher.getMatchValuesForTeamForPathForDefense("\(key!)", forTeam: firebaseFetcher.getTeam(teamNumber), defenseKey: self.defenseKey)
                     }
                     
                     /*if values.reduce(0, combine: +) == 0 || values.count == 0 {
@@ -148,7 +148,7 @@ class DefenseTableViewController: ArrayTableViewController {
                     // }
                     /*if let d = data {
                     graphViewController.subValuesRight =
-                    nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.fetchTeam(d.number!.integerValue)))
+                    nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.getTeam(d.number!.integerValue)))
                     
                     let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
                     graphViewController.highlightIndex = i
@@ -176,7 +176,7 @@ class DefenseTableViewController: ArrayTableViewController {
         return "MultiCellTableViewCell"
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]? {
-        let team = self.firebaseFetcher.fetchTeam(teamNumber)
+        let team = self.firebaseFetcher.getTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
         var crossesData = [Double]()
         if let cd = team.calculatedData {
@@ -211,7 +211,7 @@ class DefenseTableViewController: ArrayTableViewController {
         return crossesData
     }
     override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
-        let team = self.firebaseFetcher.fetchTeam(teamNumber)
+        let team = self.firebaseFetcher.getTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
         var crossesData = [Double]()
         if let cd = team.calculatedData {

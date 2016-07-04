@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Citrus Circuits. All rights reserved.
 //
 
-#import "seedTableViewController.h"
+#import "SeedTableViewController.h"
 
 #import "config.h"
 #import "MultiCellTableViewCell.h"
@@ -67,7 +67,7 @@
     
         
         //Team *team = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
-        teamDetailsController.data = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        teamDetailsController.data = [self.firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]];
         //NSLog(@"HERE: %@",teamDetailsController.data.TeamInMatchDatas);
     }
 }

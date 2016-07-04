@@ -80,7 +80,7 @@
         MultiCellTableViewCell *multiCell = sender;
         
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
-        Team *team = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        Team *team = [self.firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]];
         NSLog(@"This is the passed team Number:");
         teamDetailsController.data = team;
     } else if ([segue.destinationViewController isKindOfClass:[NthPickMechanismFilteredTableViewController class]]) {

@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// If our first pick is [xxxx] then the second pick ability of team [yyyy] is [...]. It is a predicted score by an alliance made up of 1678, xxxx, and yyyy.
 class ConditionalSecondPickTableViewController: ArrayTableViewController {
     
     var teamNumber = -1
@@ -55,11 +56,11 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
 
     }
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
-        let picks = self.firebaseFetcher.secondPickList(teamNumber)
+        let picks = self.firebaseFetcher.getConditionalSecondPickList(teamNumber)
         for pick in picks {
             self.secondPickListRanks[pick.number as! Int] = (picks.indexOf(pick)! + 1)
         }
-        return self.firebaseFetcher.secondPickList(teamNumber)
+        return self.firebaseFetcher.getConditionalSecondPickList(teamNumber)
     }
 
 
@@ -107,7 +108,7 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
             let cell = sender as? MultiCellTableViewCell
-            let team = firebaseFetcher.fetchTeam(Int((cell?.teamLabel!.text)!)!)
+            let team = firebaseFetcher.getTeam(Int((cell?.teamLabel!.text)!)!)
             dest.data = team;
         }
         // Pass the selected object to the new view controller.

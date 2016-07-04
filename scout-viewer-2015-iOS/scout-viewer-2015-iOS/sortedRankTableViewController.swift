@@ -82,7 +82,7 @@ class sortedRankTableViewController: ArrayTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
             let multiCell = sender as? MultiCellTableViewCell
-            dest.data = firebaseFetcher.fetchTeam(Int(multiCell!.teamLabel!.text!)!)
+            dest.data = firebaseFetcher.getTeam(Int(multiCell!.teamLabel!.text!)!)
         }
     }
     

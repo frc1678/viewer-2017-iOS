@@ -42,7 +42,7 @@ class NthPickMechanismFilteredTableViewController: ArrayTableViewController {
             teamNum = Int(((sender as? MechanismTableViewCell)?.teamLabel?.text)!),
             _ = sender as? MechanismTableViewCell {
                 
-                dest.data = firebaseFetcher.fetchTeam(teamNum)
+                dest.data = firebaseFetcher.getTeam(teamNum)
         }
     }
     

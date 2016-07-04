@@ -404,7 +404,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let team = self.data,
                 let imageView = self.teamSelectedImageView {
                     if team.selectedImageUrl != nil {
-                        self.firebaseFetcher.fetchImageForTeam(self.data?.number as! Int, fetchedCallback: { (image) -> () in
+                        self.firebaseFetcher.getImageForTeam(self.data?.number as! Int, fetchedCallback: { (image) -> () in
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 imageView.image = image
                             })
@@ -511,7 +511,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         let dir: AnyObject = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0]
         
         let pdfPath = dir.stringByAppendingPathComponent("team_cards.pdf")
-        let pdfURL = NSURL(fileURLWithPath: pdfPath)
+        _ = NSURL(fileURLWithPath: pdfPath)
         print("Rendering PDF...")
         
         /*PDFRenderer.renderPDFToPath(pdfPath) {(progress: Float, done: Bool) -> () in

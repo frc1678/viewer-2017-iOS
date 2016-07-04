@@ -28,10 +28,6 @@
     [self performSegueWithIdentifier:@"citrusSchedule" sender:sender];
 }
 
--(void)firebaseFinished {
-    [self.tableView reloadData];
-}
-
 - (void)viewDidLoad {
     
     self.cacheButton.enabled = NO;
@@ -40,8 +36,6 @@
     //[self cachePhotos:self.cacheButton];
    // [self.tableView setUserInteractionEnabled:NO];
 }
-
-
 
 - (void)scrollToCurrentMatch:(NSNotification*)note {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"currentMatchUpdated" object:nil];
@@ -60,16 +54,12 @@
     }
 }
 
-//RIP (2016 - 2016)
-
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     
    
     Match *match = data;
     NSArray *redTeams = [self.firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
     NSArray *blueTeams = [self.firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
-    
-    
     
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
     matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.number.integerValue]];

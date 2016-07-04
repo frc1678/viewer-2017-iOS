@@ -45,7 +45,7 @@ class CurrentMatchManager: NSObject {
             if currentMatch != oldValue {
                 print("currentMatch changed!")
 
-                let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.fetchMatch(currentMatch)
+                let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.getMatch(currentMatch)
                 let m : [String: AnyObject] = ["num":currentMatch, "redTeams": currentMatchFetch.redAllianceTeamNumbers!, "blueTeams": currentMatchFetch.blueAllianceTeamNumbers!]
                 NSUserDefaults.standardUserDefaults().setObject(m, forKey: "match")
                 notifyIfNeeded()

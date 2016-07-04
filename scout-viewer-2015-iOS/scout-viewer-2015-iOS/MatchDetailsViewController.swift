@@ -145,7 +145,7 @@ class MatchDetailsViewController: UIViewController {
                     if index <= 2 {
                         (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
                         if let cd = redTeams[index].calculatedData {
-                            let match = firebaseFetcher.fetchMatch(matchNumber)
+                            let match = firebaseFetcher.getMatch(matchNumber)
                             let propTimData = firebaseFetcher.getTimDataForTeamInMatch(redTeams[index], inMatch: match)
                             
                             (valueForKey("R\(index+1)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
@@ -175,7 +175,7 @@ class MatchDetailsViewController: UIViewController {
                         //print(blueTeams[index].number)
                         (valueForKey("blueTeam\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", forState: UIControlState.Normal)
                         if let cd = blueTeams[index - 1].calculatedData {
-                            /*let match = firebaseFetcher.fetchMatch(matchNumber)
+                            /*let match = firebaseFetcher.getMatch(matchNumber)
                             let TIMDatas = blueTeams[index-1].TeamInMatchDatas
                             var teamInMatchData = TeamInMatchData()
                             for TIMData in TIMDatas {
@@ -202,7 +202,7 @@ class MatchDetailsViewController: UIViewController {
     @IBAction func teamTapped(sender: UIButton) {
         print("WE STILL LOGGING")
         //        if let teamNumTapped = Int((sender.titleLabel?.text)!) {
-        //            let match = firebaseFetcher.fetchTeamInMatchDataForTeam(firebaseFetcher.fetchTeam(teamNumTapped), inMatch: self.match!)
+        //            let match = firebaseFetcher.getTeamInMatchDataForTeam(firebaseFetcher.getTeam(teamNumTapped), inMatch: self.match!)
         //            if match.matchNumber > 0 {
         //                performSegueWithIdentifier("GoToTIMController", sender: sender)
         //            } else {
@@ -259,9 +259,9 @@ class MatchDetailsViewController: UIViewController {
         if let button = sender as? UIButton,
             teamNumTapped = Int((button.titleLabel?.text)!) {
                 if let dest = segue.destinationViewController as? TeamInMatchDetailsTableViewController {
-                    dest.data = firebaseFetcher.fetchTeam(teamNumTapped).TeamInMatchDatas[0]
+                    dest.data = firebaseFetcher.getTeam(teamNumTapped).TeamInMatchDatas[0]
                 } else if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
-                    dest.data = firebaseFetcher.fetchTeam(teamNumTapped)
+                    dest.data = firebaseFetcher.getTeam(teamNumTapped)
                 }
         }
     }

@@ -4,6 +4,7 @@
 
 #import "MultiCellTableViewCell.h"
 #import "ArrayTableViewController.h"
+#import "ScheduleTableViewController.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import <SDWebImage/SDImageCache.h>
 #import "TeamScheduleTableViewController.h"

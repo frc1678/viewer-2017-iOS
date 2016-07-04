@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		191B81151CB1BFDF00139FC3 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 191B81141CB1BDC200139FC3 /* Settings.bundle */; };
+		19427B6F1D2AF6E80041FB1D /* SpecificTeamScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19427B6E1D2AF6E80041FB1D /* SpecificTeamScheduleTableViewController.swift */; };
 		194587981C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */; };
 		19498EE31CB04EA500CF5236 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */; };
 		19634FB01C5EDF2A00FAAAC6 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 19634FAE1C5EDF2A00FAAAC6 /* Model.xcdatamodeld */; };
@@ -96,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		191B81141CB1BDC200139FC3 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = "scout-viewer-2015-iOS/Settings.bundle"; sourceTree = "<group>"; };
+		19427B6E1D2AF6E80041FB1D /* SpecificTeamScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecificTeamScheduleTableViewController.swift; sourceTree = "<group>"; };
 		194587971C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverallSecondPickAbilityViewController.swift; sourceTree = "<group>"; };
 		19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
 		19634FAF1C5EDF2A00FAAAC6 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
@@ -293,6 +295,7 @@
 			children = (
 				72AE5AF91A881FE3001BB94E /* ScheduleTableViewController.h */,
 				72AE5AFA1A881FE3001BB94E /* ScheduleTableViewController.m */,
+				19427B6E1D2AF6E80041FB1D /* SpecificTeamScheduleTableViewController.swift */,
 				72DC10BB1A92AE9C0092EA5F /* MatchDetailsViewController.swift */,
 				72AE5AFC1A882014001BB94E /* MatchTableViewCell.h */,
 				72AE5AFD1A882014001BB94E /* MatchTableViewCell.m */,
@@ -360,8 +363,8 @@
 				72AE5AC01A87D5EB001BB94E /* Main.storyboard */,
 				72A048101AC4C29100FA2A46 /* Tabs */,
 				40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */,
-				19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */,
 				725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */,
+				19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */,
 				725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */,
 				40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */,
 				40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */,
@@ -735,6 +738,7 @@
 				72AE5AF51A881F8C001BB94E /* FirstPickTableViewController.m in Sources */,
 				19498EE31CB04EA500CF5236 /* NotesTableViewController.swift in Sources */,
 				400603FC1CB197CA005ADEC5 /* CurrentMatchManager.swift in Sources */,
+				19427B6F1D2AF6E80041FB1D /* SpecificTeamScheduleTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

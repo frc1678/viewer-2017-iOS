@@ -91,8 +91,8 @@ FirebaseDataFetcher *firebaseFetcher;
         
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
         
-        if ([firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
-            teamDetailsController.data = [firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
+        if ([firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]].calculatedData.actualSeed > 0) {
+            teamDetailsController.data = [firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]];
         }
     } else if ([segue.destinationViewController isKindOfClass:[NthPickMechanismFilteredTableViewController class]]) {
         NthPickMechanismFilteredTableViewController *secondPickController = segue.destinationViewController;
