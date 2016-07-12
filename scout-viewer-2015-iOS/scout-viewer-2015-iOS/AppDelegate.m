@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "scout_viewer_2015_iOS-Swift.h"
-#import "Firebase/Firebase.h"
+@import Firebase;
 #import <Instabug/Instabug.h>
 
 
@@ -28,19 +28,20 @@
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
-    [Firebase defaultConfig].persistenceEnabled = YES;
+    [FIRApp configure];
+    [FIRDatabase database].persistenceEnabled = YES;
     self.firebaseFetcher = [[FirebaseDataFetcher alloc] init];
     [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     [Instabug startWithToken: @"c82bc184e97be08093c702a3a1ccf80e" invocationEvent: IBGInvocationEventShake];
-     [application setApplicationIconBadgeNumber:0];
-//    Instabug startWithToken: "98616ae556601b6b72101615cd3f7f9a", invocationEvent:
-//    NSMutableDictionary *itemDefaults = [[NSMutableDictionary alloc] init];
-//    itemDefaults[@"predownloadPreference"] = NO;
-//    
-//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-//    [userDefaults registerDefaults: itemDefaults];
-//    [userDefaults synchronize];
+    [application setApplicationIconBadgeNumber:0];
+    //    Instabug startWithToken: "98616ae556601b6b72101615cd3f7f9a", invocationEvent:
+    //    NSMutableDictionary *itemDefaults = [[NSMutableDictionary alloc] init];
+    //    itemDefaults[@"predownloadPreference"] = NO;
+    //    
+    //    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    //    [userDefaults registerDefaults: itemDefaults];
+    //    [userDefaults synchronize];
+    
     return YES;
 }
 

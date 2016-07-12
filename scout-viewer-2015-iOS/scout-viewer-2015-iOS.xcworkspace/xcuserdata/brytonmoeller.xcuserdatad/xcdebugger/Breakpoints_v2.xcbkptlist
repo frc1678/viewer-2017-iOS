@@ -305,7 +305,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "596"
             endingLineNumber = "596"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -321,7 +321,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "658"
             endingLineNumber = "658"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -337,7 +337,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "602"
             endingLineNumber = "602"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -353,7 +353,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "615"
             endingLineNumber = "615"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -369,7 +369,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "667"
             endingLineNumber = "667"
-            landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkName = "reloadTableView(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -384,9 +384,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1018"
-            endingLineNumber = "1018"
-            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
-            landmarkType = "5">
+            endingLineNumber = "1018">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -416,9 +414,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "987"
-            endingLineNumber = "987"
-            landmarkName = "prepareForSegue(_:sender:)"
-            landmarkType = "5">
+            endingLineNumber = "987">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -449,7 +445,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "484"
             endingLineNumber = "484"
-            landmarkName = "didLongPressForMoreDetail(_:)"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

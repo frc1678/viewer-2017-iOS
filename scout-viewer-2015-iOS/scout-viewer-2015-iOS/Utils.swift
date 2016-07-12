@@ -71,6 +71,358 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
 }
 
 @objc class Utils: NSObject {
+    static let teamDetailsKeys = TeamDetailsKeys()
+    struct TeamDetailsKeys {
+        let plus1Keys = [
+            "pitPotentialLowBarCapability",
+            "pitPotentialMidlineBallCapability",
+            "pitPotentialShotBlockerCapability"
+        ]
+        
+        let yesNoKeys = [
+            "pitLowBarCapability"
+        ]
+        
+        let abilityKeys = [
+            "calculatedData.firstPickAbility",
+            "calculatedData.overallSecondPickAbility",
+            "calculatedData.autoAbility",
+            "calculatedData.citrusDPR",
+            "calculatedData.RScoreDrivingAbility",
+            "calculatedData.avgGroundIntakes",
+            "calculatedData.avgTorque",
+            "calculatedData.avgEvasion",
+            "calculatedData.avgSpeed",
+            "calculatedData.numAutoPoints",
+            "calculatedData.avgBallControl",
+            "calculatedData.avgDefense",
+            "calculatedData.actualNumRPs",
+            "calculatedData.predictedNumRPs",
+            "calculatedData.siegeAbility"
+        ]
+        
+        // Add carrying stability into stacking security
+        
+        
+        
+        
+        
+        
+        /* let superKeys = [
+        "calculatedData.avgEvasion",
+        "calculatedData.avgDefense"
+        ]
+        */
+        
+        let notGraphingValues = [
+            "First Pick Ability",
+            "Second Pick Ability",
+            "2 Ball Tried Auto",
+            "2 Ball Accuracy Auto",
+            "R Score Driving Ability"
+        ]
+        
+        
+        let longTextCells = [
+            "pitNotes",
+            "calculatedData.defensesCrossableAuto"
+        ]
+        
+        let unrankedCells = [
+            "selectedImageUrl",
+            "otherUrls"
+        ]
+        
+        let percentageValues = [
+            "calculatedData.challengePercentage",
+            "calculatedData.disabledPercentage",
+            "calculatedData.disfunctionalPercentage",
+            "calculatedData.incapacitatedPercentage",
+            "calculatedData.scalePercentage",
+            "calculatedData.siegeConsistency",
+            "calculatedData.reachPercentage"
+        ]
+        
+        let otherNoCalcDataValues = [
+            "calculatedData.avgShotsBlocked",
+            "calculatedData.avgLowShotsTele",
+            "calculatedData.avgHighShotsTele",
+            "calculatedData.avgBallsKnockedOffMidlineAuto",
+            "calculatedData.avgMidlineBallsIntakedAuto"
+        ]
+        
+        let addCommasBetweenCapitals = [
+            "calculatedData.reconAcquisitionTypes"
+        ]
+        
+        let boolValues = [
+            "calculatedData.challengePercentage",
+            "calculatedData.disabledPercentage",
+            "calculatedData.incapacitatedPercentage",
+        ]
+        
+        
+        let keySetNamesOld = [
+            "Information",
+            "Ability - High Level",
+            "Autonomous",
+            "Defenses",
+            "TeleOp",
+            "Percentages",
+            "Pit Scouting / Robot Design",
+            "Additional Info",
+        ]
+        
+        var keySetNames : [String] {
+            if self.showMinimalistTeamDetails {
+                return [
+                    "",
+                    "High Level",
+                    "Autonomous",
+                    "Teleoperated",
+                    "A",
+                    "B",
+                    "C",
+                    "D",
+                    "LB",
+                    "Siege",
+                    "Status",
+                    //superKeys,
+                    //pitKeys,
+                ]
+            }
+            return [
+                "",
+                "High Level",
+                "Autonomous",
+                "Teleoperated",
+                "A",
+                "B",
+                "C",
+                "D",
+                "LB",
+                "Siege",
+                "Status",
+                "Super Scout",
+                "Pit Scout",
+            ]
+        }
+        
+        var keySets: [[String]] {
+            if self.showMinimalistTeamDetails {
+                return [
+                    defaultKeys,
+                    highLevel,
+                    autoKeysMini,
+                    teleKeysMini,
+                    A,
+                    B,
+                    C,
+                    D,
+                    LB,
+                    siegeKeysMini,
+                    statusKeysMini,
+                    //superKeys,
+                    //pitKeys,
+                ]
+            }
+            return [
+                defaultKeys,
+                highLevel,
+                autoKeys,
+                teleKeys,
+                A,
+                B,
+                C,
+                D,
+                LB,
+                siegeKeys,
+                statusKeys,
+                superKeys,
+                pitKeys,
+            ]
+            
+        }
+        
+        let defaultKeys = [
+            "matchDatas"
+        ]
+        
+        let highLevel = [
+            "calculatedData.firstPickAbility",
+            "calculatedData.overallSecondPickAbility"
+        ]
+        
+        let autoKeysMini = [
+            //TODO: Add Avg. Num Shots in 2 ball Auto
+            "calculatedData.numAutoPoints",
+            "calculatedData.avgHighShotsAuto",
+            "calculatedData.avgLowShotsAuto",
+            "calculatedData.avgNumTimesCrossedDefensesAuto",
+            "calculatedData.defensesCrossableAuto",
+            //"calculatedData.highShotAccuracyAuto",
+            //"calculatedData.lowShotAccuracyAuto",
+            //"calculatedData.avgBallsKnockedOffMidlineAuto",
+            //"calculatedData.avgMidlineBallsIntakedAuto"
+        ]
+        
+        let autoKeys = [
+            //TODO: Add Avg. Num Shots in 2 ball Auto
+            "calculatedData.numAutoPoints",
+            "calculatedData.avgHighShotsAuto",
+            "calculatedData.avgLowShotsAuto",
+            "calculatedData.avgNumTimesCrossedDefensesAuto",
+            "calculatedData.highShotAccuracyAuto",
+            "calculatedData.lowShotAccuracyAuto",
+            "calculatedData.defensesCrossableAuto",
+            "calculatedData.avgBallsKnockedOffMidlineAuto",
+            "calculatedData.avgMidlineBallsIntakedAuto",
+            "calculatedData.twoBallAutoTriedPercentage",
+            "calculatedData.twoBallAutoAccuracy",
+        ]
+        
+        let teleKeysMini = [
+            "calculatedData.avgHighShotsTele",
+            //"calculatedData.sdHighShotsTele",
+            "calculatedData.avgLowShotsTele",
+            "calculatedData.highShotAccuracyTele",
+            "calculatedData.lowShotAccuracyTele",
+            //"calculatedData.sdLowShotsTele",
+            //"calculatedData.avgShotsBlocked",
+            //"calculatedData.avgLowShotsAttemptedTele",
+            //"calculatedData.avgHighShotsAttemptedTele",
+            "calculatedData.teleopShotAbility",
+        ]
+        
+        let teleKeys = [
+            "calculatedData.avgHighShotsTele",
+            "calculatedData.sdHighShotsTele",
+            "calculatedData.avgLowShotsTele",
+            "calculatedData.highShotAccuracyTele",
+            "calculatedData.lowShotAccuracyTele",
+            "calculatedData.sdLowShotsTele",
+            "calculatedData.avgShotsBlocked",
+            "calculatedData.avgLowShotsAttemptedTele",
+            "calculatedData.avgHighShotsAttemptedTele",
+            "calculatedData.teleopShotAbility",
+        ]
+        
+        
+        let obstacleKeys = [
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.cdf",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.pc",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.mt",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rp",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.db",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.sp",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rt",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rw",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.lb",
+        ]
+        
+        let A = [
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.cdf",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.pc",
+        ]
+        let B = [
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.mt",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rp",
+        ]
+        let C = [
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.db",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.sp",
+        ]
+        let D = [
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rt",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.rw",
+        ]
+        let LB = [
+            "calculatedData.avgSuccessfulTimesCrossedDefensesAuto.lb",
+        ]
+        
+        let obstacleTeleKeys = [
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.cdf",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.pc",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.mt",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rp",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.db",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.sp",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rt",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.rw",
+            "calculatedData.avgSuccessfulTimesCrossedDefensesTele.lb"
+        ]
+        
+        let siegeKeys = [
+            "calculatedData.siegeConsistency",
+            "calculatedData.scalePercentage",
+            "calculatedData.challengePercentage"
+        ]
+        
+        let siegeKeysMini = [
+            //"calculatedData.siegeConsistency",
+            "calculatedData.scalePercentage",
+            "calculatedData.challengePercentage"
+        ]
+        
+        let statusKeysMini = [
+            "calculatedData.disfunctionalPercentage",
+            //"calculatedData.disabledPercentage",
+            //"calculatedData.incapacitatedPercentage",
+        ]
+        
+        let statusKeys = [
+            "calculatedData.disfunctionalPercentage",
+            "calculatedData.disabledPercentage",
+            "calculatedData.incapacitatedPercentage",
+        ]
+        
+        let superKeys = [
+            "calculatedData.RScoreDrivingAbility",
+            "calculatedData.RScoreSpeed",
+            "calculatedData.RScoreTorque",
+            "calculatedData.RScoreAgility",
+            "calculatedData.RScoreDefense",
+            "calculatedData.RScoreBallControl"
+        ]
+        
+        let pitKeys = [
+            "pitOrganization",
+            "pitProgrammingLanguage",
+            "pitAvailableWeight",
+            "pitNumberOfWheels",
+            "pitNotes"
+        ]
+        
+        let calculatedTeamInMatchDataHumanReadableKeys = [
+            "First Pick Ability",
+            "R Score Torque",
+            "R Score Evasion",
+            "R Score Speed",
+            "High Shot Accuracy Auto",
+            "Low Shot Accuracy Auto",
+            "High Shot Accuracy Tele",
+            "Low Shot Accuracy Tele",
+            "Avg. High Shots in Tele",
+            "Siege Ability",
+            "Siege Power",
+            "Number of RPs",
+            "Number of Auto Points",
+            "Number of Scale And Challenge Points",
+            "R Score Defense",
+            "R Score Ball Control",
+            "R Score Driving Ability",
+            "Citrus DPR",
+            "Second Pick Ability",
+            "Overall Second Pick Ability",
+            "Score Contribution"
+        ]
+    }
+    
+    
+    
+    //End Team Details Keys
+    
+    
     static let autoKeys = ["uploadedData.stackedToteSet", "uploadedData.numContainersMovedIntoAutoZone"]
     static let teleKeys = ["uploadedData.numTotesStacked", "uploadedData.numReconLevels", "uploadedData.numNoodlesContributed", "uploadedData.numReconsStacked", "uploadedData.numTeleopReconsFromStep", "uploadedData.numHorizontalReconsPickedUp", "uploadedData.numVerticalReconsPickedUp", "calculatedData.numReconsPickedUp", "uploadedData.numTotesPickedUpFromGround", "uploadedData.numLitterDropped", "uploadedData.numStacksDamaged", "uploadedData.coopActions", "uploadedData.maxFieldToteHeight", "uploadedData.maxReconHeight", "uploadedData.reconAcquisitions" ]
     static let superKeys = ["uploadedData.agility", "uploadedData.stackPlacing" ]

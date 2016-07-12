@@ -10,7 +10,7 @@ import UIKit
 
 class SpecificTeamScheduleTableViewController : ScheduleTableViewController {
     
-    var 
+    var teamNumber : Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
