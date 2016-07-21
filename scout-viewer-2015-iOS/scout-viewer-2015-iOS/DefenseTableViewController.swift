@@ -77,7 +77,7 @@ class DefenseTableViewController: ArrayTableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "sortedRankSegue" {
-            let rankViewController = segue.destinationViewController as! sortedRankTableViewController
+            let rankViewController = segue.destinationViewController as! SortedRankTableViewController
             rankViewController.keyPath = sender as! String
             rankViewController.title = " "
         } else {

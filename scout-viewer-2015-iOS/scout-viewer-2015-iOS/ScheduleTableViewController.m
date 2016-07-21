@@ -33,8 +33,6 @@
     self.cacheButton.enabled = NO;
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
-    //[self cachePhotos:self.cacheButton];
-   // [self.tableView setUserInteractionEnabled:NO];
 }
 
 - (void)scrollToCurrentMatch:(NSNotification*)note {
@@ -47,8 +45,6 @@
 
 -(void)scroll:(NSTimer*)timer {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    //NSIndexPath *i = ;
-   // UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:i];
     if([self.tableView numberOfRowsInSection:0] > self.currentMatch - 1) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentMatch - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     }
@@ -56,7 +52,6 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     
-   
     Match *match = data;
     NSArray *redTeams = [self.firebaseFetcher getTeamsFromNumbers:match.redAllianceTeamNumbers];
     NSArray *blueTeams = [self.firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
@@ -70,10 +65,7 @@
         } else {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"???"]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
         }
-    }
-    
-    
-    for (int i = 0; i < 3; i++) {
+        
         if(i < blueTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number.integerValue]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
         } else {
@@ -81,31 +73,25 @@
         }
     }
     
-
-    
-    
     if (match.redScore != nil) {
-       // NSLog([NSString stringWithFormat:@"%ld", match.redScore.integerValue]);
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore.integerValue];
-        
+        matchCell.slash.alpha = 1;
         matchCell.redScoreLabel.alpha = 1;
     } else {
-        if(match.calculatedData.predictedRedScore != nil) {
+        if (match.calculatedData.predictedRedScore != nil) {
             matchCell.redScoreLabel.text = [Utils roundValue: match.calculatedData.predictedRedScore.floatValue toDecimalPlaces:1];
         } else {
             matchCell.redScoreLabel.text = @"?";
         }
-        
         matchCell.redScoreLabel.alpha = .3;
         matchCell.slash.alpha = .3;
     }
+    
     if (match.blueScore != nil) {
-        //NSLog([NSString stringWithFormat:@"%ld",match.blueScore.integerValue]);
         matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore.integerValue];
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;
-    }
-    else {
+    } else {
         if (match.calculatedData.predictedBlueScore != nil) {
             matchCell.blueScoreLabel.text = [Utils roundValue: match.calculatedData.predictedBlueScore.floatValue toDecimalPlaces:1];
         } else {

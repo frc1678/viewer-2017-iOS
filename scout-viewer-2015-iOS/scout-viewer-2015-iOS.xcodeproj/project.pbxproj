@@ -36,7 +36,6 @@
 		725D09541A95919B009A0AB6 /* ResizableNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */; };
 		725D09561A959D17009A0AB6 /* TeamDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */; };
 		7260D5441AC7779500B57D4E /* TeamScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D5431AC7779500B57D4E /* TeamScheduleTableViewController.m */; };
-		727345501AC5E72E009DB484 /* ThirdPickTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7273454F1AC5E72E009DB484 /* ThirdPickTableViewController.m */; };
 		72A0480E1AC4C22500FA2A46 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A0480D1AC4C22500FA2A46 /* UIColor+HexString.m */; };
 		72A048161AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */; };
 		72AE5AB61A87D5EB001BB94E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AB51A87D5EB001BB94E /* main.m */; };
@@ -135,8 +134,6 @@
 		725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsTableViewController.swift; sourceTree = "<group>"; };
 		7260D5421AC7779500B57D4E /* TeamScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamScheduleTableViewController.h; sourceTree = "<group>"; };
 		7260D5431AC7779500B57D4E /* TeamScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamScheduleTableViewController.m; sourceTree = "<group>"; };
-		7273454E1AC5E72E009DB484 /* ThirdPickTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdPickTableViewController.h; sourceTree = "<group>"; };
-		7273454F1AC5E72E009DB484 /* ThirdPickTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ThirdPickTableViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		72A0480C1AC4C22500FA2A46 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
 		72A0480D1AC4C22500FA2A46 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnrankedTableViewCell.swift; sourceTree = "<group>"; };
@@ -261,6 +258,16 @@
 			name = TableViewCells;
 			sourceTree = "<group>";
 		};
+		19F41FDE1D41605E007B9ACC /* Match Table View Cell */ = {
+			isa = PBXGroup;
+			children = (
+				72AE5AFC1A882014001BB94E /* MatchTableViewCell.h */,
+				72AE5AFD1A882014001BB94E /* MatchTableViewCell.m */,
+				72AE5AFE1A882014001BB94E /* MatchTableViewCell.xib */,
+			);
+			name = "Match Table View Cell";
+			sourceTree = "<group>";
+		};
 		40E43E3A1C54434D00ABC378 /* Firebase Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -289,8 +296,6 @@
 		721AB3D21AC5E6C700191577 /* Third Pick */ = {
 			isa = PBXGroup;
 			children = (
-				7273454E1AC5E72E009DB484 /* ThirdPickTableViewController.h */,
-				7273454F1AC5E72E009DB484 /* ThirdPickTableViewController.m */,
 			);
 			name = "Third Pick";
 			sourceTree = "<group>";
@@ -316,9 +321,7 @@
 				72DC10BB1A92AE9C0092EA5F /* MatchDetailsViewController.swift */,
 				7260D5421AC7779500B57D4E /* TeamScheduleTableViewController.h */,
 				7260D5431AC7779500B57D4E /* TeamScheduleTableViewController.m */,
-				72AE5AFC1A882014001BB94E /* MatchTableViewCell.h */,
-				72AE5AFD1A882014001BB94E /* MatchTableViewCell.m */,
-				72AE5AFE1A882014001BB94E /* MatchTableViewCell.xib */,
+				19F41FDE1D41605E007B9ACC /* Match Table View Cell */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -729,7 +732,6 @@
 				72A0480E1AC4C22500FA2A46 /* UIColor+HexString.m in Sources */,
 				194587981C7D6DC900507019 /* OverallSecondPickAbilityViewController.swift in Sources */,
 				72A048161AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift in Sources */,
-				727345501AC5E72E009DB484 /* ThirdPickTableViewController.m in Sources */,
 				40E43E401C544E3900ABC378 /* FirebaseDataFetcher.swift in Sources */,
 				72AE5AB61A87D5EB001BB94E /* main.m in Sources */,
 				19634FB01C5EDF2A00FAAAC6 /* Model.xcdatamodeld in Sources */,

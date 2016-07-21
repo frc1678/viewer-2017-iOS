@@ -442,7 +442,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         //        self.n
         //navigationController?.setSGProgressPercentage(50.0)
         if segue.identifier == "sortedRankSegue" {
-            if let dest = segue.destinationViewController as? sortedRankTableViewController {
+            if let dest = segue.destinationViewController as? SortedRankTableViewController {
                 dest.keyPath = sender as! String
             }
         }
