@@ -86,7 +86,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
             if let number = data?.teamNumber {
-                dest.data = firebaseFetcher.getTeam(number.integerValue)
+                dest.team = firebaseFetcher.getTeam(number.integerValue)
             }
         } else if segue.identifier == "Graph" {
             let graphViewController = segue.destinationViewController as! GraphViewController

@@ -173,9 +173,9 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
             "Additional Info",
         ]
         
-        var keySetNames : [String] {
-            if self.showMinimalistTeamDetails {
-                return [
+        func keySetNames(minimalist : Bool) -> [String] {
+            if minimalist {
+                return  [
                     "",
                     "High Level",
                     "Autonomous",
@@ -206,10 +206,10 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
                 "Super Scout",
                 "Pit Scout",
             ]
+            
         }
-        
-        var keySets: [[String]] {
-            if self.showMinimalistTeamDetails {
+        func keySets(minimalist : Bool) -> [[String]] {
+            if minimalist {
                 return [
                     defaultKeys,
                     highLevel,
@@ -454,12 +454,50 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "timesCrossedDefensesTele",
     ]
     
-    static let defenseKeys = ["avgFailedTimesCrossedDefensesAuto",
-        "avgFailedTimesCrossedDefensesTele",
-        "avgSuccessfulTimesCrossedDefensesAuto",
-        "avgSuccessfulTimesCrossedDefensesTele",
-        "sdFailedDefenseCrossesAuto"
+    static let defenseGraphableKeys = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele",
+        "calculatedData.avgFailedTimesCrossedDefensesAuto",
+        "calculatedData.avgFailedTimesCrossedDefensesTele",
+        "calculatedData.numTimesFailedCrossedDefensesTele",
+        "calculatedData.avgTimeForDefenseCrossAuto",
+        "calculatedData.avgTimeForDefenseCrossTele",
+        "calculatedData.beachedPercentage",
+        "calculatedData.slowedPercentage"
     ]
+    
+    static let defenseKeys = [
+        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto",
+        "calculatedData.avgSuccessfulTimesCrossedDefensesTele",
+        "calculatedData.avgFailedTimesCrossedDefensesAuto",
+        "calculatedData.avgFailedTimesCrossedDefensesTele",
+        
+        "calculatedData.avgTimeForDefenseCrossAuto",
+        "calculatedData.avgTimeForDefenseCrossTele",
+        "calculatedData.predictedSuccessfulCrossingsForDefenseTele",
+        "calculatedData.sdFailedDefenseCrossesAuto",
+        "calculatedData.sdFailedDefenseCrossesTele",
+        "calculatedData.sdSuccessfulDefenseCrossesAuto",
+        "calculatedData.sdSuccessfulDefenseCrossesTele",
+        
+        "calculatedData.beachedPercentage",
+        "calculatedData.slowedPercentage"
+        
+    ]
+    
+    class func defenseStatKeysToGraphableKeys(defenseStatKey: String) -> String {
+        switch defenseStatKey {
+        case "calculatedData.avgSuccessfulTimesCrossedDefensesAuto": return "calculatedData.numTimesSuccesfulCrossedDefensesAuto"
+        case "calculatedData.avgSuccessfulTimesCrossedDefensesTele": return "calculatedData.numTimesSuccesfulCrossedDefensesTele"
+        case "calculatedData.avgFailedTimesCrossedDefensesAuto": return "calculatedData.numTimesFailedCrossedDefensesAuto"
+        case "calculatedData.avgFailedTimesCrossedDefensesTele": return "calculatedData.numTimesFailedCrossedDefensesTele"
+            
+        case "calculatedData.avgTimeForDefenseCrossAuto": return "calculatedData.crossingTimeForDefenseAuto"
+        case "calculatedData.avgTimeForDefenseCrossTele": return "calculatedData.crossingTimeForDefenseTele"
+            //Beached and slowed stay the same
+        default: return "NO KEY"
+        }
+    }
     
     static let teamCalcKeys = [
         "actualSeed",

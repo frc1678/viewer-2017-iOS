@@ -21,46 +21,19 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBOutlet weak var r3: UILabel!
     @IBOutlet weak var r2: UILabel!
     @IBOutlet weak var MatchNum: UILabel!
-    var firebase : Firebase?
+    var firebase = FIRDatabase.database().reference()
     //let cache = Shared.dataCache
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.preferredContentSize = CGSizeMake(320, 90);
-        //Firebase.defaultConfig().persistenceEnabled = true
-        let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
-        
-        let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
-        let dev3Token = "AEduO6VFlZKD4v10eW81u9j3ZNopr5h2R32SPpeq"
-        let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
-        let devToken = "j1r2wo3RUPMeUZosxwvVSFEFVcrXuuMAGjk6uPOc"
-        let stratDevToken = "IMXOxXD3FjOOUoMGJlkAK5pAtn89mGIWAEnaKJhP"
-        print("View Did Load")
-        firebase = Firebase(url: firebaseURLFirstPart)
-        firebase!.authWithCustomToken(scoutingToken) { [unowned self] (E, A) -> Void in //TOKENN
-            self.firebase?.childByAppendingPath("currentMatchNum").observeEventType(.Value, withBlock: { (snap) -> Void in
-                self.refreshMatchNum()
-            })
-        }
-        
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.firebase.child("currentMatchNum").observeEventType(.Value, withBlock: { (snap) -> Void in
+            self.refreshMatchNum()
+        })
     }
     
     func refreshMatchNum() {
-        print("Refresh")
-        self.firebase!.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
+        self.firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
             if let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as? Int {
                 if let match = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).value as? NSDictionary {
                     let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
@@ -77,14 +50,12 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
-        
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
         completionHandler(NCUpdateResult.NewData)
     }
-    
     
     func updateCurrentMatch(matchNum: Int, redTeams: [Int], blueTeams: [Int]) {
         print("Update")

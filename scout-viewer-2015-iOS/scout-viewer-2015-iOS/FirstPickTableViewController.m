@@ -82,7 +82,7 @@
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
         Team *team = [self.firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]];
         NSLog(@"This is the passed team Number:");
-        teamDetailsController.data = team;
+        teamDetailsController.team = team;
     } else if ([segue.destinationViewController isKindOfClass:[NthPickMechanismFilteredTableViewController class]]) {
         NthPickMechanismFilteredTableViewController *secondPickController = segue.destinationViewController;
         

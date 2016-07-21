@@ -7,8 +7,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 target 'scout-viewer-2015-iOS' do
     
     pod 'Firebase/Core'
-    pod 'Firebase/Auth'
-    pod 'FirebaseUI', '~> 0.4'
+    #pod 'Firebase/Auth'
+    #pod 'FirebaseUI', '~> 0.4'
     pod 'Firebase/Database'
     pod 'Firebase/Storage'
     pod 'JBChartView'
@@ -19,8 +19,8 @@ end
 
 target 'CurrentMatch' do
     pod 'Firebase/Core'
-    pod 'Firebase/Auth'
-    pod 'FirebaseUI', '~> 0.4'
+    #pod 'Firebase/Auth'
+    #pod 'FirebaseUI', '~> 0.4'
     pod 'Firebase/Database'
     pod 'Firebase/Storage'
     pod 'HanekeSwift'

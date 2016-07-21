@@ -9,47 +9,34 @@
 import UIKit
 
 class DefenseTableViewController: ArrayTableViewController {
-    
+    /// The team number of the team whose defense crossing ability we are examining.
     var teamNumber = -1
+    /// The defense we are looking at, in human readable form, abbriviated I think
     var relevantDefense = "" {
         didSet {
             if relevantDefense != "" {
-                //print(getKeyFromTeamLabel(relevantDefense))
                 self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
-                
             }
         }
     }
+    /// The abriviation of the defense we are looking at
     var defenseKey = ""
     
-    var defenseKeys = [
-        "calculatedData.avgSuccessfulTimesCrossedDefensesAuto",
-        "calculatedData.avgSuccessfulTimesCrossedDefensesTele",
-        "calculatedData.avgFailedTimesCrossedDefensesAuto",
-        "calculatedData.avgFailedTimesCrossedDefensesTele",
-        
-        "calculatedData.avgTimeForDefenseCrossAuto",
-        "calculatedData.avgTimeForDefenseCrossTele",
-        "calculatedData.predictedSuccessfulCrossingsForDefenseTele",
-        "calculatedData.sdFailedDefenseCrossesAuto",
-        "calculatedData.sdFailedDefenseCrossesTele",
-        "calculatedData.sdSuccessfulDefenseCrossesAuto",
-        "calculatedData.sdSuccessfulDefenseCrossesTele",
-        
-        "calculatedData.beachedPercentage",
-        "calculatedData.slowedPercentage"
-        
-    ]
+    /**
+     Gets which defense it is.
+     
+     - parameter relevantString: String which is the title of the table view cell that brought us to this controller. The first word of this title is the defense.
+     
+     - returns: the defense key
+     */
     func getKeyFromTeamLabel(relevantString:String) -> String {
         let stringArray = relevantString.characters.split{$0==" "}.map(String.init)
-        //print(stringArray[0].lowercaseString)
         return stringArray[0].lowercaseString
     }
     
     override func viewDidLoad() {
+        searchbarIsEnabled = false
         super.viewDidLoad()
-        //print(relevantDefense)
-        //print(getKeyFromTeamLabel(relevantDefense))
         self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
         
         let longPress = UILongPressGestureRecognizer(target:self, action:"rankingDetailsSegue:")
@@ -66,31 +53,25 @@ class DefenseTableViewController: ArrayTableViewController {
         let value = data as? Float
         let multiCell = cell as? MultiCellTableViewCell
         
-        let title = Utils.humanReadableNames[defenseKeys[path.row]]
-        
-        multiCell?.teamLabel!.text = title
-        if value! == -1.0 {
+        multiCell?.teamLabel!.text = Utils.humanReadableNames[Utils.defenseKeys[path.row]]
+        if value! == -1.0 { //There is a system problem
             multiCell?.scoreLabel?.text = "None"
         } else {
             multiCell?.scoreLabel!.text = String(value!)
         }
         let team = firebaseFetcher.getTeam(teamNumber)
-        multiCell?.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team, withCharacteristic: "\(defenseKeys[path.row]).\(defenseKey)"))"
-        
-        
-        
+        multiCell?.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team, withCharacteristic: "\(Utils.defenseKeys[path.row]).\(defenseKey)"))"
     }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var key : String? = ""
         if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
-            let text = cell.teamLabel?.text
-            key = Utils.getKeyForHumanReadableName(text!)
+            key = Utils.getKeyForHumanReadableName((cell.teamLabel?.text!)!)
         }
-        if (key != "") {
-            if ["calculatedData.avgSuccessfulTimesCrossedDefensesAuto","calculatedData.avgSuccessfulTimesCrossedDefensesTele","calculatedData.avgFailedTimesCrossedDefensesAuto","calculatedData.avgFailedTimesCrossedDefensesTele","calculatedData.numTimesFailedCrossedDefensesTele","calculatedData.avgTimeForDefenseCrossAuto", "calculatedData.avgTimeForDefenseCrossTele", "calculatedData.beachedPercentage", "calculatedData.slowedPercentage"].contains(key!) {
-                performSegueWithIdentifier("DefenseToGraph", sender: indexPath)
-            }
+        if key != "" && Utils.defenseGraphableKeys.contains(key!) {
+            performSegueWithIdentifier("DefenseToGraph", sender: indexPath)
         }
+        
         tableView.deselectRowAtIndexPath(indexPath, animated: false)
     }
     
@@ -109,24 +90,12 @@ class DefenseTableViewController: ArrayTableViewController {
                 
                 var key = Utils.getKeyForHumanReadableName(text!)
                 if key != nil {
-                    switch key! {
-                    case "calculatedData.avgSuccessfulTimesCrossedDefensesAuto": key = "calculatedData.numTimesSuccesfulCrossedDefensesAuto"
-                    case "calculatedData.avgSuccessfulTimesCrossedDefensesTele": key = "calculatedData.numTimesSuccesfulCrossedDefensesTele"
-                    case "calculatedData.avgFailedTimesCrossedDefensesAuto": key = "calculatedData.numTimesFailedCrossedDefensesAuto"
-                    case "calculatedData.avgFailedTimesCrossedDefensesTele": key = "calculatedData.numTimesFailedCrossedDefensesTele"
-                        
-                    case "calculatedData.avgTimeForDefenseCrossAuto": key = "calculatedData.crossingTimeForDefenseAuto"
-                    case "calculatedData.avgTimeForDefenseCrossTele": key = "calculatedData.crossingTimeForDefenseTele"
-                        //Beached and slowed stay the same
-                    default: break
-                    }
+                    key = Utils.defenseStatKeysToGraphableKeys(key!)
                 }
-                graphViewController.graphTitle = "\(Utils.getHumanReadableNameForKey(key!) ?? relevantDefense)"
+                graphViewController.graphTitle = text!
                 graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                if key != nil && key != "" {
+                if key != nil && key != "" && key != "NO KEY" {
                     
-                    //print("This is the key:")
-                    //print(keySets[indexPath.section][indexPath.row])
                     let values: [Float]
                     if key?.rangeOfString("beached") == nil && key?.rangeOfString("slowed") == nil {
                         (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.getTeam(teamNumber))
@@ -134,28 +103,11 @@ class DefenseTableViewController: ArrayTableViewController {
                         (values, _) = firebaseFetcher.getMatchValuesForTeamForPathForDefense("\(key!)", forTeam: firebaseFetcher.getTeam(teamNumber), defenseKey: self.defenseKey)
                     }
                     
-                    /*if values.reduce(0, combine: +) == 0 || values.count == 0 {
-                    graphViewController.graphTitle = "Data Is All 0s"
-                    graphViewController.values = [CGFloat]()
-                    graphViewController.subValuesLeft = [CGFloat]()
-                    } else {*/
-                    //print(values)
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
                     graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(teamNumber))
-                    //print("Here are the subValues \(graphViewController.values.count)::\(graphViewController.subValuesLeft.count)")
-                    //print(graphViewController.subValuesLeft)
-                    // }
-                    /*if let d = data {
-                    graphViewController.subValuesRight =
-                    nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.getTeam(d.number!.integerValue)))
-                    
-                    let i = ((graphViewController.subValuesLeft as NSArray).indexOfObject("\(teamNum)"))
-                    graphViewController.highlightIndex = i
-                    
-                    }*/
                     graphViewController.subDisplayRightTitle = "Team: "
-                    graphViewController.subValuesRight = [teamNumber,teamNumber,teamNumber,teamNumber,teamNumber]
+                    graphViewController.subValuesRight = [teamNumber,teamNumber,teamNumber,teamNumber,teamNumber] //Why are there 5?
                 }
                 
             }
@@ -163,18 +115,10 @@ class DefenseTableViewController: ArrayTableViewController {
         
     }
     
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     override func cellIdentifier() -> String! {
         return "MultiCellTableViewCell"
     }
+    
     override func loadDataArray(shouldForce: Bool) -> [AnyObject]? {
         let team = self.firebaseFetcher.getTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
@@ -197,6 +141,7 @@ class DefenseTableViewController: ArrayTableViewController {
             crossesData.append(cd.sdFailedDefenseCrossesTele?[key] as? Double ?? -1.0)
             crossesData.append(cd.sdSuccessfulDefenseCrossesAuto?[key] as? Double ?? -1.0)
             crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? -1.0)
+            
             if key == "pc" || key == "cdf" {
                 crossesData.append(cd.beachedPercentage?[key] as? Double ?? -1.0)
                 crossesData.append(cd.slowedPercentage?[key] as? Double ?? -1.0)
@@ -205,46 +150,12 @@ class DefenseTableViewController: ArrayTableViewController {
                 crossesData.append(-1.0)
             }
         }
+        
         for i in 0..<crossesData.count {
             crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2).stringByReplacingOccurrencesOfString(",", withString: "")) ?? -1.0
         }
+        
         return crossesData
-    }
-    override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
-        let team = self.firebaseFetcher.getTeam(teamNumber)
-        let key = getKeyFromTeamLabel(relevantDefense)
-        var crossesData = [Double]()
-        if let cd = team.calculatedData {
-            let teleSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesTele?[key] as? Double
-            let autoFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesAuto?[key] as? Double
-            let autoSuccessAvg = team.calculatedData?.avgSuccessfulTimesCrossedDefensesAuto?[key] as? Double
-            let teleFailAvg = team.calculatedData?.avgFailedTimesCrossedDefensesTele?[key] as? Double
-            
-            crossesData.append(autoSuccessAvg ?? -1.0)
-            crossesData.append(teleSuccessAvg ?? -1.0)
-            crossesData.append(autoFailAvg ?? -1.0)
-            crossesData.append(teleFailAvg ?? -1.0)
-            
-            crossesData.append(cd.avgTimeForDefenseCrossAuto?[key] as? Double ?? -1.0)
-            crossesData.append(cd.avgTimeForDefenseCrossTele?[key] as? Double ?? -1.0)
-            crossesData.append(cd.predictedSuccessfulCrossingsForDefenseTele?[key] as? Double ?? -1.0)
-            crossesData.append(cd.sdFailedDefenseCrossesAuto?[key] as? Double ?? -1.0)
-            crossesData.append(cd.sdFailedDefenseCrossesTele?[key] as? Double ?? -1.0)
-            crossesData.append(cd.sdSuccessfulDefenseCrossesAuto?[key] as? Double ?? -1.0)
-            crossesData.append(cd.sdSuccessfulDefenseCrossesTele?[key] as? Double ?? -1.0)
-            if key == "pc" || key == "cdf" {
-                crossesData.append(cd.beachedPercentage?[key] as? Double ?? -1.0)
-                crossesData.append(cd.slowedPercentage?[key] as? Double ?? -1.0)
-            } else {
-                crossesData.append(-1.0)
-                crossesData.append(-1.0)
-            }
-        }
-        for i in 0..<crossesData.count {
-            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2).stringByReplacingOccurrencesOfString(",", withString: "")) ?? -1.0
-        }
-        return crossesData
-
     }
     
     func rankingDetailsSegue(gesture: UIGestureRecognizer) {

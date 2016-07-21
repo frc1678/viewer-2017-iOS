@@ -18,6 +18,7 @@
 @property (nonatomic,strong) UILongPressGestureRecognizer *lpgr;
 @property (nonatomic) NSInteger currentNumber;
 @property (strong,nonatomic) UISearchController *searchController;
+@property (nonatomic) BOOL searchbarIsEnabled;
 
 //Subclasses need to override these methods:
 - (NSArray *)loadDataArray:(BOOL)shouldForce;

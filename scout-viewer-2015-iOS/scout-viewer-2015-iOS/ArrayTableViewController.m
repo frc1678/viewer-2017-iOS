@@ -35,22 +35,22 @@
     self.lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     self.lpgr.minimumPressDuration = .70;
     [self.tableView addGestureRecognizer:self.lpgr];
-
+    
     self.tableView.estimatedRowHeight = 100;
     [self.tableView registerNib:[UINib nibWithNibName:[self cellIdentifier] bundle:nil] forCellReuseIdentifier:[self cellIdentifier]];
-
-    self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
-    self.searchController.searchResultsUpdater = self;
-    self.searchController.dimsBackgroundDuringPresentation = NO;
-    self.searchController.searchBar.delegate = self;
-    self.searchController.searchBar.keyboardType = UIKeyboardTypeNumberPad;
-    self.searchController.searchBar.scopeButtonTitles = [self scopeButtonTitles];
-    self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
-    
+    if(self.searchbarIsEnabled) {
+        self.searchController = [[UISearchController alloc] initWithSearchResultsController:nil];
+        self.searchController.searchResultsUpdater = self;
+        self.searchController.dimsBackgroundDuringPresentation = NO;
+        self.searchController.searchBar.delegate = self;
+        self.searchController.searchBar.keyboardType = UIKeyboardTypeNumberPad;
+        self.searchController.searchBar.scopeButtonTitles = [self scopeButtonTitles];
+        self.searchController.searchBar.frame = CGRectMake(self.searchController.searchBar.frame.origin.x, self.searchController.searchBar.frame.origin.y, self.searchController.searchBar.frame.size.width, 44.0);
+        self.tableView.tableHeaderView = self.searchController.searchBar;
+    }
     [self setUpAppConnectionsDidLoad];
-
     
-    self.tableView.tableHeaderView = self.searchController.searchBar;
+    
     self.definesPresentationContext = YES;
     
     [self.tableView reloadData];
@@ -58,8 +58,15 @@
     self.highlighteds = [[NSMutableDictionary alloc] init];
 }
 
+- (BOOL)searchbarIsEnabled {
+    if(_searchbarIsEnabled) {
+        return _searchbarIsEnabled;
+    }
+    return true;
+}
+
 - (void)setUpAppConnectionsDidLoad {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(databaseUpdated:) name:SCOUT_VIEWER_DATABASE_UPDATE object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(databaseUpdated:) name:SCOUT_VIEWER_DATABASE_UPDATE object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(databaseUpdated:) name:@"updateLeftTable" object:nil];
 }
@@ -105,7 +112,7 @@
     NSLog(@"We hit another update");
     [self refreshData:nil];
     
-   }
+}
 
 - (void) viewDidAppear:(BOOL)animated
 {
@@ -115,7 +122,7 @@
     self.filteredArray = nil;
     [self.tableView reloadData];
     
-
+    
 }
 
 
@@ -136,7 +143,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[self cellIdentifier] forIndexPath:indexPath];
     
     id data = nil;
-
+    
     if (self.filteredArray) {
         data = self.filteredArray[indexPath.row];
     } else {
@@ -211,7 +218,7 @@
 //Should be overridden
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     
-    }
+}
 
 
 @end

@@ -369,7 +369,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "667"
             endingLineNumber = "667"
-            landmarkName = "reloadTableView(_:)"
+            landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -423,22 +423,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "scout-viewer-2015-iOS/DefenseTableViewController.swift"
-            timestampString = "481421071.208616"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "filteredArrayForSearchText(_:inScope:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "scout-viewer-2015-iOS/TeamDetailsTableViewController.swift"
             timestampString = "483402778.962939"
             startingColumnNumber = "9223372036854775807"
@@ -447,30 +431,6 @@
             endingLineNumber = "484"
             landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "Yes"
-            filePath = "scout-viewer-2015-iOS/sortedRankTableViewController.swift"
-            timestampString = "482613442.686358"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "loadDataArray(_:)"
-            landmarkType = "5">
-            <Actions>
-               <BreakpointActionProxy
-                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
-                  <ActionContent
-                     consoleCommand = "p self.shouldReverseRank">
-                  </ActionContent>
-               </BreakpointActionProxy>
-            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -508,33 +468,17 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "scout-viewer-2015-iOS/sortedRankTableViewController.swift"
-            timestampString = "482614303.391398"
+            filePath = "scout-viewer-2015-iOS/DefenseTableViewController.swift"
+            timestampString = "490822126.544095"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
-            landmarkName = "loadDataArray(_:)"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "scout-viewer-2015-iOS/CurrentMatchManager.swift"
-            timestampString = "482629870.336956"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "CurrentMatchManager"
-            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

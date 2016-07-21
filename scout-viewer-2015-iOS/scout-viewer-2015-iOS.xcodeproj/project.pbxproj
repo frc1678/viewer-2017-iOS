@@ -25,12 +25,10 @@
 		40780DCA1C59C05E00ACF489 /* MatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC81C59C05E00ACF489 /* MatchCalculatedData.swift */; };
 		40780DCB1C59C05E00ACF489 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC91C59C05E00ACF489 /* Team.swift */; };
 		40A0F4031C55A37200DEB64C /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A0F4021C55A37200DEB64C /* NetworkExtension.framework */; };
-		40A14D721CACC70800CCFC2C /* sortedRankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */; };
+		40A14D721CACC70800CCFC2C /* SortedRankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A14D711CACC70800CCFC2C /* SortedRankTableViewController.swift */; };
 		40B551C91C702C01006089EA /* TeamInMatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B551C81C702C01006089EA /* TeamInMatchCalculatedData.swift */; };
 		40CF57A11C6C30DD00D9B63B /* DefenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */; };
-		40E43E341C54406900ABC378 /* Firebase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40E43E331C54406900ABC378 /* Firebase.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		40E43E401C544E3900ABC378 /* FirebaseDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */; };
-		7209C3581A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7209C3571A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift */; };
 		7253A7FE1AC8900E00188364 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7253A7FD1AC8900E00188364 /* GraphViewController.swift */; };
 		72553D8B1AD9913D0091F5D2 /* PDFRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 72553D8A1AD9913D0091F5D2 /* PDFRenderer.m */; };
 		72553D8E1AD999FE0091F5D2 /* NSAttributedString+OrdinalFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 72553D8D1AD999FE0091F5D2 /* NSAttributedString+OrdinalFormat.m */; };
@@ -123,12 +121,10 @@
 		40780DC91C59C05E00ACF489 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		40A0F3FF1C559EAE00DEB64C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		40A0F4021C55A37200DEB64C /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sortedRankTableViewController.swift; sourceTree = "<group>"; };
+		40A14D711CACC70800CCFC2C /* SortedRankTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortedRankTableViewController.swift; sourceTree = "<group>"; };
 		40B551C81C702C01006089EA /* TeamInMatchCalculatedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchCalculatedData.swift; sourceTree = "<group>"; };
 		40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefenseTableViewController.swift; sourceTree = "<group>"; };
-		40E43E331C54406900ABC378 /* Firebase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Firebase.framework; sourceTree = "<group>"; };
 		40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataFetcher.swift; sourceTree = "<group>"; };
-		7209C3571A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NthPickMechanismFilteredTableViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		7253A7FD1AC8900E00188364 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		72553D891AD9913D0091F5D2 /* PDFRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRenderer.h; sourceTree = "<group>"; };
 		72553D8A1AD9913D0091F5D2 /* PDFRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRenderer.m; sourceTree = "<group>"; };
@@ -198,7 +194,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				40A0F4031C55A37200DEB64C /* NetworkExtension.framework in Frameworks */,
-				40E43E341C54406900ABC378 /* Firebase.framework in Frameworks */,
 				7947A7851DF584D9BCF3FB34 /* Pods_scout_viewer_2015_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,8 +235,6 @@
 		19A0FAFA1D0DEF47009BB7F7 /* Multi Cell Table View Cell */ = {
 			isa = PBXGroup;
 			children = (
-				72AE5ADC1A87D8D3001BB94E /* ArrayTableViewController.h */,
-				72AE5ADD1A87D8D3001BB94E /* ArrayTableViewController.m */,
 				72AE5AEB1A881CBA001BB94E /* MultiCellTableViewCell.h */,
 				72AE5AEC1A881CBA001BB94E /* MultiCellTableViewCell.m */,
 				72AE5AED1A881CBA001BB94E /* MultiCellTableViewCell.xib */,
@@ -256,6 +249,16 @@
 				72EB84BE1A9A7C84005690BD /* MechanismTableViewCell.xib */,
 			);
 			name = "Mechanism Table View Cell";
+			sourceTree = "<group>";
+		};
+		19F41FDD1D415E67007B9ACC /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */,
+				72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */,
+				19A0FAFA1D0DEF47009BB7F7 /* Multi Cell Table View Cell */,
+			);
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 		40E43E3A1C54434D00ABC378 /* Firebase Models */ = {
@@ -295,7 +298,6 @@
 		72A048101AC4C29100FA2A46 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				40E43E331C54406900ABC378 /* Firebase.framework */,
 				72A048111AC4C2A900FA2A46 /* Schedule */,
 				72A048121AC4C2BE00FA2A46 /* Seeding */,
 				72A048131AC4C2D400FA2A46 /* First Pick */,
@@ -382,17 +384,9 @@
 				40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */,
 				725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */,
 				725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */,
-				40A14D711CACC70800CCFC2C /* sortedRankTableViewController.swift */,
 				40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */,
-				400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */,
-				7209C3571A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift */,
-				7253A7FD1AC8900E00188364 /* GraphViewController.swift */,
-				40E43E3A1C54434D00ABC378 /* Firebase Models */,
 				72C2DC091A96F4360000BCED /* Utils.swift */,
-				72553D891AD9913D0091F5D2 /* PDFRenderer.h */,
-				72553D8A1AD9913D0091F5D2 /* PDFRenderer.m */,
-				72AE5AB71A87D5EB001BB94E /* AppDelegate.h */,
-				72AE5AB81A87D5EB001BB94E /* AppDelegate.m */,
+				40E43E3A1C54434D00ABC378 /* Firebase Models */,
 				72AE5AB31A87D5EB001BB94E /* Supporting Files */,
 			);
 			path = "scout-viewer-2015-iOS";
@@ -401,18 +395,25 @@
 		72AE5AB31A87D5EB001BB94E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				194245CB1D33266400F9B8D7 /* GoogleService-Info.plist */,
+				72553D891AD9913D0091F5D2 /* PDFRenderer.h */,
+				72553D8A1AD9913D0091F5D2 /* PDFRenderer.m */,
+				7253A7FD1AC8900E00188364 /* GraphViewController.swift */,
+				400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */,
+				72AE5ADC1A87D8D3001BB94E /* ArrayTableViewController.h */,
+				72AE5ADD1A87D8D3001BB94E /* ArrayTableViewController.m */,
+				40A14D711CACC70800CCFC2C /* SortedRankTableViewController.swift */,
 				19498EE21CB04EA500CF5236 /* NotesTableViewController.swift */,
 				72DC10BA1A92AE9C0092EA5F /* scout-viewer-2015-iOS-Bridging-Header.h */,
 				72AE5AC51A87D5EB001BB94E /* LaunchScreen.xib */,
 				72AE5AC31A87D5EB001BB94E /* Images.xcassets */,
-				725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */,
-				72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */,
+				19F41FDD1D415E67007B9ACC /* TableViewCells */,
 				19A0FAFB1D0DEFD7009BB7F7 /* Mechanism Table View Cell */,
-				19A0FAFA1D0DEF47009BB7F7 /* Multi Cell Table View Cell */,
 				194245CD1D33274600F9B8D7 /* Old Obj-C Extensions */,
 				72AE5AE51A87F287001BB94E /* config.h */,
 				72AE5AB41A87D5EB001BB94E /* Info.plist */,
+				194245CB1D33266400F9B8D7 /* GoogleService-Info.plist */,
+				72AE5AB71A87D5EB001BB94E /* AppDelegate.h */,
+				72AE5AB81A87D5EB001BB94E /* AppDelegate.m */,
 				72AE5AB51A87D5EB001BB94E /* main.m */,
 				19707E9E1CC443930080B3B6 /* scout-viewer-2015-iOS.entitlements */,
 			);
@@ -714,7 +715,6 @@
 			files = (
 				72DC10BC1A92AE9C0092EA5F /* MatchDetailsViewController.swift in Sources */,
 				40780DC71C59C05700ACF489 /* TeamInMatchData.swift in Sources */,
-				7209C3581A9A75D2001E4E00 /* NthPickMechanismFilteredTableViewController.swift in Sources */,
 				72AE5AB91A87D5EB001BB94E /* AppDelegate.m in Sources */,
 				72553D8E1AD999FE0091F5D2 /* NSAttributedString+OrdinalFormat.m in Sources */,
 				72EB84BF1A9A7C84005690BD /* MechanismTableViewCell.swift in Sources */,
@@ -746,7 +746,7 @@
 				40780DCB1C59C05E00ACF489 /* Team.swift in Sources */,
 				400F75ED1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift in Sources */,
 				72AE5AFF1A882014001BB94E /* MatchTableViewCell.m in Sources */,
-				40A14D721CACC70800CCFC2C /* sortedRankTableViewController.swift in Sources */,
+				40A14D721CACC70800CCFC2C /* SortedRankTableViewController.swift in Sources */,
 				72AE5AF51A881F8C001BB94E /* FirstPickTableViewController.m in Sources */,
 				19498EE31CB04EA500CF5236 /* NotesTableViewController.swift in Sources */,
 				400603FC1CB197CA005ADEC5 /* CurrentMatchManager.swift in Sources */,

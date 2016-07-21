@@ -40,8 +40,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     var photos: [MWPhoto] = []
     
     func reload() {
-        if data != nil {
-            if data?.number != nil {
+        if team != nil {
+            if team?.number != nil {
                 tableView?.reloadData()
                 self.updateTitleAndTopInfo()
                 tableViewHeightConstraint?.constant = (tableView.contentSize.height)
@@ -54,10 +54,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     func reloadImage() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-            if let team = self.data,
+            if let team = self.team,
                 let imageView = self.teamSelectedImageView {
                     if team.selectedImageUrl != nil {
-                        self.firebaseFetcher.getImageForTeam(self.data?.number as! Int, fetchedCallback: { (image) -> () in
+                        self.firebaseFetcher.getImageForTeam(self.team?.number as! Int, fetchedCallback: { (image) -> () in
                             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                                 imageView.image = image
                             })
@@ -72,7 +72,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if self.teamSelectedImageView.image != noRobotPhoto {
                         self.photos.append(MWPhoto(image: self.teamSelectedImageView.image))
                     }
-                    if let urls = self.data?.otherImageUrls {
+                    if let urls = self.team?.otherImageUrls {
                         for (_, url) in urls {
                             self.photos.append(MWPhoto(URL: NSURL(string: url as! String)))
                         }
@@ -112,9 +112,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         reloadImage()
     }
     
-    func normalizeImageOrientationIfNeeded(image: UIImage) -> UIImage {
-        return image.imageRotatedByDegrees(90, flip: false)
-    }
+    
     
     func didLongPressForMoreDetail(recognizer: UIGestureRecognizer) {
         if recognizer.state == UIGestureRecognizerState.Recognized {
@@ -161,13 +159,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if data == nil {
+        if team == nil {
             return 44
         }
         
-        let dataKey: String = Utils.teamDetailsKeys.keySets[indexPath.section][indexPath.row]
+        let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[indexPath.section][indexPath.row]
         if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
-            let dataPoint: AnyObject = data!.valueForKeyPath(dataKey) ?? ""
+            let dataPoint: AnyObject = team!.valueForKeyPath(dataKey) ?? ""
             
             let titleText = Utils.humanReadableNames[dataKey]
             let notesText = "\(roundValue(dataPoint, toDecimalPlaces: 2))"
@@ -180,37 +178,37 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return data == nil ? nil : Utils.teamDetailsKeys.keySetNames[section]
+        return team == nil ? nil : Utils.teamDetailsKeys.keySetNames(self.showMinimalistTeamDetails)[section]
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return data == nil ? 1 : Utils.teamDetailsKeys.count
+        return team == nil ? 1 : Utils.teamDetailsKeys.keySetNames(self.showMinimalistTeamDetails).count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data == nil ? 1 : Utils.teamDetailsKeys.keySets[section].count
+        return team == nil ? 1 : Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[section].count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
-        if data != nil {
-            if data!.number == nil {
+        if team != nil {
+            if team!.number == nil {
                 cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath)
-                cell.textLabel?.text = "No data yet..."
+                cell.textLabel?.text = "No team yet..."
                 cell.accessoryType = UITableViewCellAccessoryType.None
                 return cell
             }
             
-            let dataKey: String = Utils.teamDetailsKeys.keySets[indexPath.section][indexPath.row]
+            let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[indexPath.section][indexPath.row]
             
             if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matches'
                 var dataPoint = AnyObject?()
                 var secondDataPoint = AnyObject?()
                 
-                dataPoint = data!.valueForKeyPath(dataKey) ?? ""
+                dataPoint = team!.valueForKeyPath(dataKey) ?? ""
                 
-                if obstacleKeys.contains(dataKey) {
-                    secondDataPoint = data!.valueForKeyPath(dataKey.stringByReplacingOccurrencesOfString("Auto", withString: "Tele"))
+                if Utils.teamDetailsKeys.obstacleKeys.contains(dataKey) {
+                    secondDataPoint = team!.valueForKeyPath(dataKey.stringByReplacingOccurrencesOfString("Auto", withString: "Tele"))
                     
                     if let sf = secondDataPoint as? Float? {
                         secondDataPoint = "\(roundValue(sf, toDecimalPlaces: 1))"
@@ -221,7 +219,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     secondDataPoint = nil
                 }
                 
-                if Utils.teamDetailsCells.longTextCells.contains(dataKey) {
+                if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
                     
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
@@ -233,7 +231,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.None
                     cell = notesCell
-                } else if Utils.teamDetailsCells.unrankedCells.contains(dataKey) || dataKey.containsString("pit") {
+                } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.containsString("pit") {
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
                     
                     unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
@@ -244,9 +242,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = pitOrgForNumberString(unrankedCell.detailLabel!.text!)
                     } else if dataKey == "pitProgrammingLanguage" {
                         unrankedCell.detailLabel!.text! = pitProgrammingLanguageForNumberString(unrankedCell.detailLabel!.text!)
-                    } else if addCommasBetweenCapitals.contains(dataKey) {
+                    } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
-                    } else if boolValues.contains(dataKey) {
+                    } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(boolToBoolString(dataPoint as! Bool))"
                     } else {
                         unrankedCell.detailLabel.text = "\(roundValue(dataPoint!, toDecimalPlaces: 2))"
@@ -268,13 +266,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         }
                     } else { //Its not a defense crossing
                         
-                        if percentageValues.contains(dataKey) {
+                        if Utils.teamDetailsKeys.percentageValues.contains(dataKey) {
                             multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
                         } else {
                             if dataPoint as? String != "" {
                                 if Utils.teamDetailsKeys.plus1Keys.contains(dataKey) { //Something ranked with a 1-5 selector, but the indecles that would come back from such a selector are 0-4
                                     multiCell.scoreLabel?.text = "\(roundValue(dataPoint! as! Float + 1.00, toDecimalPlaces: 2))"
-                                } else if yesNoKeys.contains(dataKey) {
+                                } else if Utils.teamDetailsKeys.yesNoKeys.contains(dataKey) {
                                     if dataPoint! as! Bool == true {
                                         multiCell.scoreLabel?.text = "Yes"
                                     } else {
@@ -321,7 +319,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         
                     }
                     cell = multiCell
-                    multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(data!, withCharacteristic: dataKey))"
+                    multiCell.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team!, withCharacteristic: dataKey))"
                 }
             } else {
                 let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCellWithIdentifier("UnrankedCell", forIndexPath: indexPath) as! UnrankedTableViewCell
@@ -330,7 +328,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
                 
                 if dataKey == "matchDatas" {
-                    unrankedCell.titleLabel.text = unrankedCell.titleLabel.text?.stringByAppendingString(" - (\(firebaseFetcher.matchesUntilTeamNextMatch(data?.number as! Int) ?? "NA"))".stringByAppendingString(" Remaining: \(firebaseFetcher.remainingMatchesForTeam((data?.number?.integerValue)!))"))
+                    unrankedCell.titleLabel.text = unrankedCell.titleLabel.text?.stringByAppendingString(" - (\(firebaseFetcher.matchesUntilTeamNextMatch(team?.number as! Int) ?? "NA"))".stringByAppendingString(" Remaining: \(firebaseFetcher.remainingMatchesForTeam((team?.number?.integerValue)!))"))
                 }
                 cell = unrankedCell
             }
@@ -338,7 +336,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
         } else {
             cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath)
-            cell.textLabel?.text = "No data yet..."
+            cell.textLabel?.text = "No team yet..."
             cell.accessoryType = UITableViewCellAccessoryType.None
         }
         return cell
@@ -351,7 +349,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
      - returns: A string with the human readable pit org
      */
     func pitOrgForNumberString(numString: String) -> String {
-        let translated = ""
+        var translated = ""
         switch numString {
         case "0": translated = "Terrible"
         case "1": translated = "Bad"
@@ -359,8 +357,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         case "3": translated = "Good"
         case "4": translated = "Great"
         default: break
-        return translated
         }
+        return translated
+
     }
     /**
      Translates numbers into what it actually means.
@@ -370,15 +369,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
      - returns: A string with the human readable prog lang name.
      */
     func pitProgrammingLanguageForNumberString(numString: String) -> String {
-        let translated = ""
+        var translated = ""
         switch numString {
         case "0": translated = "C++"
         case "1": translated = "Java"
         case "2": translated = "Labview"
         case "3": translated = "Other"
         default: break
-        return translated
         }
+        return translated
+
     }
     
     func updateTitleAndTopInfo() {
@@ -386,7 +386,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if self.teamNameLabel.text == "" || self.teamNameLabel.text == "Unknown name..." {
                 let numText: String
                 let nameText: String
-                switch (data?.number, data?.name) {
+                switch (team?.number, team?.name) {
                 case (.Some(let num), .Some(let name)):
                     title = "\(num)"
                     numText = "\(num)"
@@ -412,11 +412,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             var seedText = "?"
             var predSeedText = "?"
-            if let seed = data?.calculatedData!.actualSeed where seed.integerValue > 0 {
+            if let seed = team?.calculatedData!.actualSeed where seed.integerValue > 0 {
                 seedText = "\(seed)"
             }
             
-            if let predSeed = data?.calculatedData!.predictedSeed where predSeed.integerValue > 0 {
+            if let predSeed = team?.calculatedData!.predictedSeed where predSeed.integerValue > 0 {
                 predSeedText = "\(predSeed)"
             }
             
@@ -450,7 +450,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let indexPath = sender as? NSIndexPath
             let cell = tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell
             let dest = segue.destinationViewController as? DefenseTableViewController
-            if let teamNumbah = data?.number {
+            if let teamNumbah = team?.number {
                 dest!.teamNumber = teamNumbah.integerValue
                 dest!.relevantDefense = cell!.teamLabel!.text!
                 dest!.defenseKey = Utils.getKeyForHumanReadableName(dest!.relevantDefense)!.characters.split{$0 == "."}.map(String.init)[2]
@@ -472,14 +472,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else if segue.identifier == "Matches" {
             let matchesForTeamController = segue.destinationViewController as! SpecificTeamScheduleTableViewController
             
-            if let teamNum = data?.number {
+            if let teamNum = team?.number {
                 matchesForTeamController.teamNumber = teamNum.integerValue
             }
         } else if segue.identifier == "CTIMDGraph" {
             let graphViewController = segue.destinationViewController as! GraphViewController
             
             
-            if let teamNum = data?.number {
+            if let teamNum = team?.number {
                 let indexPath = sender as! NSIndexPath
                 if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
                     graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
@@ -534,9 +534,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     let altMapping : [CGFloat: String]?
                     if key == "calculatedData.predictedNumRPs" {
                         
-                        (values, altMapping) = firebaseFetcher.getMatchDataValuesForTeamForPath(key!, forTeam: data!)
+                        (values, altMapping) = firebaseFetcher.getMatchDataValuesForTeamForPath(key!, forTeam: team!)
                     } else {
-                        (values, altMapping) = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: data!)
+                        (values, altMapping) = firebaseFetcher.getMatchValuesForTeamForPath(key!, forTeam: team!)
                     }
                     if key?.rangeOfString("Accuracy") != nil {
                         graphViewController.isPercentageGraph = true
@@ -562,7 +562,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(data?.number as! Int))
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(team?.number as! Int))
                     for i in nilValueIndecies.reverse() {
                         graphViewController.subValuesLeft.removeAtIndex(i)
                     }
@@ -591,16 +591,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         else if segue.identifier == "TGraph" {
             let graphViewController = segue.destinationViewController as! GraphViewController
             
-            if let teamNum = data?.number {
+            if let teamNum = team?.number {
                 let indexPath = sender as! NSIndexPath
                 let cell = tableView.cellForRowAtIndexPath(indexPath) as! MultiCellTableViewCell
                 graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                 graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(keySets[indexPath.section][indexPath.row]) as? [CGFloat] {
+                if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[indexPath.section][indexPath.row]) as? [CGFloat] {
                     graphViewController.values = values
                     graphViewController.subValuesLeft = firebaseFetcher.valuesInCompetitionOfPathForTeams("number") as [AnyObject]
                     graphViewController.subDisplayLeftTitle = "Team "
-                    graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamsWithCharacteristic(keySets[indexPath.section][indexPath.row]) )
+                    graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamsWithCharacteristic(Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[indexPath.section][indexPath.row]) )
                     graphViewController.subDisplayRightTitle = "Rank: "
                     if let i = ((graphViewController.subValuesLeft as! [Int]).indexOf(teamNum.integerValue)) {
                         graphViewController.highlightIndex = i
@@ -612,13 +612,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
         } else if segue.identifier == "NotesSegue" {
             let notesTableViewController = segue.destinationViewController as! NotesTableViewController
-            if let teamNum = data?.number  {
-                if let p = data?.pitNotes {
+            if let teamNum = team?.number  {
+                if let p = team?.pitNotes {
                     notesTableViewController.data.append(["Pit Notes: ": p])
                 } else {
                     notesTableViewController.data.append(["Pit Notes: ": "None"])
                 }
-                for TIMD in firebaseFetcher.getTIMDataForTeam(data!) {
+                for TIMD in firebaseFetcher.getTIMDataForTeam(team!) {
                     if let note = TIMD.superNotes {
                         notesTableViewController.data.append(["Match \(TIMD.matchNumber!.integerValue)":"\(note)"])
                     } else {
@@ -660,7 +660,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if ((cs ?? "").containsString("Times Crossed"))  {
                 performSegueWithIdentifier("defenseCrossedSegue", sender:indexPath)
             } else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
-                if !notGraphingValues.contains(cs!) && !cs!.containsString("σ") { performSegueWithIdentifier("CTIMDGraph", sender: indexPath) }
+                if Utils.teamDetailsKeys.notGraphingValues.contains(cs!) && !cs!.containsString("σ") { performSegueWithIdentifier("CTIMDGraph", sender: indexPath) }
             } else {
                 performSegueWithIdentifier("TGraph", sender: indexPath)
             }
@@ -678,8 +678,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     func reloadTableView(note: NSNotification) {
         if note.name == "updateLeftTable" {
             if let t = note.object as? Team {
-                if t.number == data?.number {
-                    self.data = t
+                if t.number == team?.number {
+                    self.team = t
                     self.reload()
                 }
             }

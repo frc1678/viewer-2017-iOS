@@ -109,7 +109,7 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
             let cell = sender as? MultiCellTableViewCell
             let team = firebaseFetcher.getTeam(Int((cell?.teamLabel!.text)!)!)
-            dest.data = team;
+            dest.team = team;
         }
         // Pass the selected object to the new view controller.
     }

@@ -4,22 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Bolts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>DACircularProgress.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FBSDKCoreKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FBSDKLoginKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -67,11 +52,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0EB19C1377A747F81110D44E2D5FCF78</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>14E6E2E2484806AB62B60CA2EAD41F9B</key>
 		<dict>
 			<key>primary</key>
@@ -82,7 +62,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>34E19A7C57D8547B60407525C829AD15</key>
+		<key>5CEB7EEE71AE86CF2018AB5D8358FCDA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,22 +72,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>676B94CBDDE6C58B856AF6C2F587A9F1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6EDC37F3FA92533C6AC3562458AA91F1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>94624EC6C9739263AA965CFE2D8933F5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9D0F2E5EA1B46A5D72FFD42B0B39DBBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -123,6 +88,11 @@
 			<true/>
 		</dict>
 		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F81D9558147F84924E366AE4A98BD4E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -59,7 +59,7 @@
         MultiCellTableViewCell *multiCell = sender;
         
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
-        teamDetailsController.data = [self.firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]];
+        teamDetailsController.team = [self.firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]];
     }
 }
 
