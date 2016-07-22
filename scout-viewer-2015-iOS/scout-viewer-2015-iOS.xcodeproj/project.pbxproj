@@ -17,6 +17,7 @@
 		1976B0311CD27D98007E3B39 /* CurrentMatch.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 1976B0261CD27D98007E3B39 /* CurrentMatch.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		19DAC4601CD28F3200C90B79 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DAC45F1CD28F3200C90B79 /* TodayViewController.swift */; };
 		19DAC4651CD2930100C90B79 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19DAC4631CD2930100C90B79 /* Storyboard.storyboard */; };
+		19F41FE01D4166C7007B9ACC /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F41FDF1D4166C7007B9ACC /* Haneke.framework */; };
 		400603FC1CB197CA005ADEC5 /* CurrentMatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400603FB1CB197CA005ADEC5 /* CurrentMatchManager.swift */; };
 		400F75ED1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400F75EC1C666D4B00EA03FA /* ConditionalSecondPickTableViewController.swift */; };
 		40780DC51C59C05700ACF489 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40780DC21C59C05700ACF489 /* Match.swift */; };
@@ -107,6 +108,7 @@
 		19DAC45E1CD28F3200C90B79 /* CurrentMatch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CurrentMatch-Bridging-Header.h"; sourceTree = "<group>"; };
 		19DAC45F1CD28F3200C90B79 /* TodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		19DAC4641CD2930100C90B79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
+		19F41FDF1D4166C7007B9ACC /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = "Pods/../build/Debug-iphoneos/HanekeSwift/Haneke.framework"; sourceTree = "<group>"; };
 		1CCE9958898496FDFF28E555 /* Pods-CurrentMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatch/Pods-CurrentMatch.debug.xcconfig"; sourceTree = "<group>"; };
 		23811DCD94498A9FAA3F3796 /* Pods-scout-viewer-2015-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-scout-viewer-2015-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-scout-viewer-2015-iOS/Pods-scout-viewer-2015-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		2E651E68B091CB4023961752 /* Pods_scout_viewer_2015_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_scout_viewer_2015_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19F41FE01D4166C7007B9ACC /* Haneke.framework in Frameworks */,
 				40A0F4031C55A37200DEB64C /* NetworkExtension.framework in Frameworks */,
 				7947A7851DF584D9BCF3FB34 /* Pods_scout_viewer_2015_iOS.framework in Frameworks */,
 			);
@@ -284,6 +287,7 @@
 		6CDB04411470B0C2897EDD29 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19F41FDF1D4166C7007B9ACC /* Haneke.framework */,
 				40A0F4021C55A37200DEB64C /* NetworkExtension.framework */,
 				40A0F3FF1C559EAE00DEB64C /* SystemConfiguration.framework */,
 				19707E8E1CC435270080B3B6 /* NotificationCenter.framework */,
@@ -940,6 +944,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/scout-viewer-2015-iOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/HanekeSwift",
 				);
 				INFOPLIST_FILE = "scout-viewer-2015-iOS/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -968,6 +973,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/scout-viewer-2015-iOS",
+					"$(PROJECT_DIR)/build/Debug-iphoneos/HanekeSwift",
 				);
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "scout-viewer-2015-iOS/Info.plist";

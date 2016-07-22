@@ -99,7 +99,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             getDataFromUrl(url!) { [unowned self] (data, error) in
                 guard let data = data where error == nil else { return }
                 self.imageCache.set(value: UIImage(data: data) ?? UIImage(), key: "\(teamNum)")
-                UIApplication.sharedApplication().performSelector("_performMemoryWarning")
+                UIApplication.sharedApplication().performSelector(Selector("_performMemoryWarning"))
             }
         }
     }
@@ -138,11 +138,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 })
             
             matchReference.observeEventType(.ChildChanged, withBlock: { [unowned self] snapshot in
-                self.matchCounter++
+                self.matchCounter += 1
                 print(self.getCurrentMatch())
                 self.currentMatchManager.currentMatch = self.getCurrentMatch()
                 let number = (snapshot.childSnapshotForPath("number").value as? Int)!
-                for matchIndex in Range(start: 0, end: self.matches.count) {
+                for matchIndex in 0..<self.matches.count {
                     let match = self.matches[matchIndex]
                     if match.number == number {
                         
@@ -170,7 +170,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             
             teamReference.observeEventType(.ChildChanged, withBlock: { [unowned self] snapshot in
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                    self.teamCounter++
+                    self.teamCounter += 1
                     let team = self.makeTeamFromSnapshot(snapshot)
                     if team.number != nil {
                         self.updateCacheIfNeeded(snapshot, team: team)
@@ -253,11 +253,27 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getTeam(teamNum: Int) -> Team {
-        return teams.filter { $0.number as! Int == teamNum }[0]
+        let myTeams = teams.filter { $0.number as! Int == teamNum }
+        if myTeams.count == 1 { return myTeams[0] }
+        else if myTeams.count > 1 {
+            print("More than 1 team with number \(teamNum)")
+            return Team()
+        } else {
+            print("No Teams with number \(teamNum)")
+            return Team()
+        }
     }
     
     func getMatch(matchNum: Int) -> Match {
-        return matches.filter { $0.number as! Int == matchNum }[0]
+        let myMatches = matches.filter { $0.number as! Int == matchNum }
+        if myMatches.count == 1 { return myMatches[0] }
+        else if myMatches.count > 1 {
+            print("More than 1 match with number \(matchNum)")
+            return Match()
+        } else {
+            print("No Matches with number \(matchNum)")
+            return Match()
+        }
     }
     
     func getTeamsFromNumbers(teamNums: [Int]?) -> [Team] {
@@ -361,7 +377,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic)
         
         for loopTeam in sortedTeams {
-            counter++
+            counter += 1
             if loopTeam.number == team.number?.integerValue {
                 return counter
             }
@@ -374,7 +390,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reverse()
         
         for loopTeam in sortedTeams {
-            counter++
+            counter += 1
             if loopTeam.number == team.number?.integerValue {
                 return counter
             }
@@ -569,17 +585,18 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
      
      - returns: The second value in the tuple is the alternate value mapping. E.g. Yes and No instead of 1 and 0
      */
-    func getMatchDataValuesForTeamForPath(var path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
+    func getMatchDataValuesForTeamForPath(path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
         let matches = getMatchesForTeam(forTeam.number as! Int)
         var valueArray = [Float]()
         var altValueMapping : [CGFloat : String]?
         
         for match in matches {
             let value : AnyObject?
+            var newPath = path
             if path == "calculatedData.predictedNumRPs" {
-                path = predictedRPsKeyForTeamNum(forTeam.number as! Int, matchNum: match.number as! Int)
+                newPath = predictedRPsKeyForTeamNum(forTeam.number as! Int, matchNum: match.number as! Int)
             }
-            value = match.valueForKeyPath(path)
+            value = match.valueForKeyPath(newPath)
             
             if value != nil {
                 if let floatVal = value as? Float {
@@ -699,10 +716,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     // MARK: Dealing With Current Match
     /**
-    This puts up the little banner at the top, and increases the badge number on the app.
-    
-    - parameter notificationBody: What the text of the notification should be (that the person reads).
-    */
+     This puts up the little banner at the top, and increases the badge number on the app.
+     
+     - parameter notificationBody: What the text of the notification should be (that the person reads).
+     */
     func postNotification(notificationBody:String) {
         let localNotification = UILocalNotification()
         localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
@@ -731,7 +748,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             var counter = 0
             for i in indexOfCurrentMatch + 1..<self.matches.count {
                 let match = sortedMatches[i]
-                counter++
+                counter += 1
                 if (match.redAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) || (match.blueAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) {
                     return "\(counter)"
                 }
@@ -794,7 +811,7 @@ class NotificationManager : NSObject {
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector(selector), name: note.name, object: nil)
             }
         }
-        NSTimer.scheduledTimerWithTimeInterval(secsBetweenUpdates, target: self, selector: "notify:", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(secsBetweenUpdates, target: self, selector: #selector(NotificationManager.notify(_:)), userInfo: nil, repeats: false)
         
     }
     
@@ -820,6 +837,6 @@ class NotificationManager : NSObject {
         }
         notificationNamesToPost = [String: AnyObject?]()
         self.timer.invalidate()
-        NSTimer.scheduledTimerWithTimeInterval(secsBetweenUpdates, target: self, selector: "notify:", userInfo: nil, repeats: false)
+        NSTimer.scheduledTimerWithTimeInterval(secsBetweenUpdates, target: self, selector: #selector(NotificationManager.notify(_:)), userInfo: nil, repeats: false)
     }
 }

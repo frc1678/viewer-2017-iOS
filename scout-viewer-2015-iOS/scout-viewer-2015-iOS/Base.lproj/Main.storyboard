@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="49e-Tb-3d3">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -782,7 +782,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="NotesCell" rowHeight="138" id="dC3-Cx-bbD" customClass="ResizableNotesTableViewCell" customModule="scout_viewer_2015_iOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="138"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="138"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dC3-Cx-bbD" id="em4-6I-Hf5">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="137"/>
@@ -852,14 +852,14 @@
         <!--Sorted Rank Table View Controller-->
         <scene sceneID="BlG-2Q-zGr">
             <objects>
-                <tableViewController id="ojt-9Z-11a" customClass="sortedRankTableViewController" customModule="scout_viewer_2015_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ojt-9Z-11a" customClass="SortedRankTableViewController" customModule="scout_viewer_2015_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="V7L-j9-OOK">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zCr-bT-HE0">
-                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zCr-bT-HE0" id="OLQ-HK-gaC">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
@@ -880,10 +880,10 @@
             </objects>
             <point key="canvasLocation" x="5384" y="-477"/>
         </scene>
-        <!--Team Schedule Table View Controller-->
+        <!--Specific Team Schedule Table View Controller-->
         <scene sceneID="ihy-8G-753">
             <objects>
-                <tableViewController id="zsd-4H-i4N" customClass="TeamScheduleTableViewController" sceneMemberID="viewController">
+                <tableViewController id="zsd-4H-i4N" customClass="SpecificTeamScheduleTableViewController" customModule="scout_viewer_2015_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="bxk-J4-1Bf">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -910,11 +910,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Bfx-rX-9yV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="YEF-x5-lil">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQr-7D-beT">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1678" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wgi-0q-wmd">
                                         <rect key="frame" x="24" y="454" width="111" height="60"/>
@@ -1503,11 +1503,11 @@
         <image name="thirdPick" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9HU-HQ-BBv"/>
-        <segue reference="XVc-rp-7iO"/>
-        <segue reference="AMp-59-SZN"/>
-        <segue reference="e57-hB-uH0"/>
+        <segue reference="wMy-oa-Yu3"/>
         <segue reference="hw9-do-Pyv"/>
+        <segue reference="9HU-HQ-BBv"/>
+        <segue reference="1cq-k5-piP"/>
+        <segue reference="e57-hB-uH0"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="calibratedRGB"/>
 </document>

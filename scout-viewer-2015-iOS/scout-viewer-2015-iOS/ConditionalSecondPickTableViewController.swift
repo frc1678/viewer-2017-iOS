@@ -18,7 +18,7 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = String(self.teamNumber) + " - Second Pick"
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"reloadTableView", name:"updateLeftTable", object:nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ConditionalSecondPickTableViewController.reloadTableView), name:"updateLeftTable", object:nil)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

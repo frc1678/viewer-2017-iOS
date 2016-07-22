@@ -92,7 +92,7 @@ class MatchDetailsViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "checkRes:", name: "updateLeftTable", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MatchDetailsViewController.checkRes(_:)), name: "updateLeftTable", object: nil)
         
         updateUI()
        // print(self.match)
@@ -145,8 +145,6 @@ class MatchDetailsViewController: UIViewController {
                     if index <= 2 {
                         (valueForKey("redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", forState: UIControlState.Normal)
                         if let cd = redTeams[index].calculatedData {
-                            let match = firebaseFetcher.getMatch(matchNumber)
-                            let propTimData = firebaseFetcher.getTimDataForTeamInMatch(redTeams[index], inMatch: match)
                             
                             (valueForKey("R\(index+1)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
                             (valueForKey("R\(index+1)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
@@ -155,11 +153,7 @@ class MatchDetailsViewController: UIViewController {
                             (valueForKey("R\(index+1)D") as! UILabel).text = "R Drive: \(roundValue(cd.RScoreDrivingAbility, toDecimalPlaces: 2))"
                         }
 
-                        /*if let cd = redTeams[index].calculatedData {
-                            if cd.teleopShotAbility != nil {
-                                (valueForKey("redTeam\(mapping[index])AbilityLabel") as! UILabel).text = roundValue(redTeams[index].calculatedData!.teleopShotAbility!, toDecimalPlaces: 4)
-                            }
-                        }*/
+                        
                     }
                 }
             }

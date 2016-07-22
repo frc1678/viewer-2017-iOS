@@ -26,7 +26,7 @@ class SortedRankTableViewController: ArrayTableViewController {
             self.title = keyPath
         }
         //So you can litrally flip the list over to reverse the sort
-        let rotation = UIRotationGestureRecognizer(target: self, action: "rotationDetected:")
+        let rotation = UIRotationGestureRecognizer(target: self, action: #selector(SortedRankTableViewController.rotationDetected(_:)))
         
         self.view.addGestureRecognizer(rotation)
         

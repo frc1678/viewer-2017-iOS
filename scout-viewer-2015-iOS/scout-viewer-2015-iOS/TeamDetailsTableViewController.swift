@@ -92,19 +92,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
         self.reload()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "reloadTableView:", name:"updateLeftTable", object:nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "gotTeamImage:", name: "gotTeamImage", object: nil);
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "gotTeamImageToAdd:", name: "gotTeamImageToAdd", object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(TeamDetailsTableViewController.reloadTableView(_:)), name:"updateLeftTable", object:nil)
+       
         tableView.registerNib(UINib(nibName: "MultiCellTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiCellTableViewCell")
         tableView.delegate = self
         self.navigationController?.delegate = self
         self.photoBrowser.delegate = self
         photos = []
-        let longPress = UILongPressGestureRecognizer(target: self, action: "rankingDetailsSegue:")
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.rankingDetailsSegue(_:)))
         self.view.addGestureRecognizer(longPress)
-        let longPressForMoreDetail = UILongPressGestureRecognizer(target: self, action: "didLongPressForMoreDetail:")
+        let longPressForMoreDetail = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didLongPressForMoreDetail(_:)))
         self.teamNumberLabel.addGestureRecognizer(longPressForMoreDetail)
-        let tap = UITapGestureRecognizer(target: self, action: "didTapImage:")
+        let tap = UITapGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didTapImage(_:)))
         self.teamSelectedImageView.addGestureRecognizer(tap)
     }
     

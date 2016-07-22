@@ -39,7 +39,7 @@ class DefenseTableViewController: ArrayTableViewController {
         super.viewDidLoad()
         self.title = Utils.humanReadableNames[getKeyFromTeamLabel(relevantDefense)]
         
-        let longPress = UILongPressGestureRecognizer(target:self, action:"rankingDetailsSegue:")
+        let longPress = UILongPressGestureRecognizer(target:self, action:#selector(DefenseTableViewController.rankingDetailsSegue(_:)))
         self.view.addGestureRecognizer(longPress)
         // Do any additional setup after loading the view.
     }
