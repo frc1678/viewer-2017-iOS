@@ -20,17 +20,11 @@
 @implementation SeedTableViewController
 
 
--(void)viewDidLoad {
-    [super viewDidLoad];
-}
-
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
-    
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
-    
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
     
     if(team.calculatedData.actualNumRPs != nil) {
@@ -39,8 +33,6 @@
     } else {
         multiCell.scoreLabel.text = @"";
     }
-    
-    //Ask about this
 }
 
 - (NSString *)cellIdentifier {
@@ -48,9 +40,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [self.firebaseFetcher seedList];
-    //NSLog(@"%lu", (unsigned long)returnData.count);
-    return returnData;
+    return [self.firebaseFetcher seedList];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,13 +52,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.destinationViewController isKindOfClass:[TeamDetailsTableViewController class]]) {
         MultiCellTableViewCell *multiCell = sender;
-    
         TeamDetailsTableViewController *teamDetailsController = segue.destinationViewController;
-    
-        
-        //Team *team = [self.firebaseFetcher fetchTeam:[multiCell.teamLabel.text integerValue]];
         teamDetailsController.team = [self.firebaseFetcher getTeam:[multiCell.teamLabel.text integerValue]];
-        //NSLog(@"HERE: %@",teamDetailsController.data.TeamInMatchDatas);
     }
 }
 

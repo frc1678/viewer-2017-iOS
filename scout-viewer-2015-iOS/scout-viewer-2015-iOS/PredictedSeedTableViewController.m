@@ -35,7 +35,6 @@
     } else {
         multiCell.scoreLabel.text = @"";
     }
-    
 }
 
 - (NSString *)cellIdentifier {
@@ -43,9 +42,7 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    NSArray *returnData = [self.firebaseFetcher predSeedList];
-    NSLog(@"%lu", (unsigned long)returnData.count);
-    return returnData;
+    return [self.firebaseFetcher predSeedList];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,10 +62,7 @@
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
-    return [self.dataArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Team *team, NSDictionary *bindings) {
-        NSString *numberText = [NSString stringWithFormat:@"%@", team.number];
-        return [numberText rangeOfString:searchString].location == 0;
-    }]];
+    return [self.firebaseFetcher filteredTeamsForSearchString:searchString];
 }
 
 @end

@@ -17,38 +17,8 @@
 
 @implementation FirstPickTableViewController
 
-
--(void)viewDidLoad {
-    [super viewDidLoad];
-//    [[NSNotificationCenter defaultCenter] addObserver:self
-//                                             selector:@selector(checkRes:) name:@"updateLeftTable" object:nil];
-    
-
-}
-
-//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    NSLog(@"%lu",(unsigned long)firebaseFetcher.teams.count);
-//    return firebaseFetcher.getPickList.count;
-//}
-
-//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//    NSArray *nib =[[NSBundle mainBundle]loadNibNamed:@"MultiCellTableViewCell" owner:self options:nil];
-//    MultiCellTableViewCell *cell = [nib objectAtIndex:0];
-//    Team *team = firebaseFetcher.getPickList[indexPath.row];
-//    cell.teamLabel.text = [NSString stringWithFormat:@"%d",team.number];
-//    cell.rankLabel.text = [NSString stringWithFormat:@"%d",(indexPath.row+1)];
-//    cell.scoreLabel.text = [NSString stringWithFormat:@"%ld",(long)team.calculatedData.firstPickAbility];
-//    
-//    return cell;
-//}
-
-
-
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)path forData:(id)data inTableView:(UITableView *)tableView {
     Team *team = data;
-    
-    
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.firstPickAbility"]];
@@ -59,8 +29,6 @@
     } else {
         multiCell.scoreLabel.text = @"";
     }
-    
-    
 }
 
 - (NSString *)cellIdentifier {
@@ -68,14 +36,10 @@
 }
 
 - (NSArray *)loadDataArray:(BOOL)shouldForce {
-    //NSArray *returnData = [firebaseFetcher fetchTeamsByDescriptor:[NSSortDescriptor sortDescriptorWithKey:@"calculatedData.firstPickAbility" ascending:NO]];
-    NSArray *returnData = [self.firebaseFetcher getFirstPickList];
-    return returnData;
+    return [self.firebaseFetcher getFirstPickList];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    
     if ([segue.destinationViewController isKindOfClass:[TeamDetailsTableViewController class]]) {
         MultiCellTableViewCell *multiCell = sender;
         
@@ -95,18 +59,7 @@
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
     return [self.firebaseFetcher filteredTeamsForSearchString:searchString];
-//    return [self.dataArray filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(Team *team, NSDictionary *bindings) {
-//        NSString *numberText = [NSString stringWithFormat:@"%ld", (long)team.number];
-//        return [numberText rangeOfString:searchString].location == 0;
-//    }]];
 }
-//-(void)checkRes:(NSNotification *)notification
-//{
-//    if ([[notification name] isEqualToString:@"updateLeftTable"])
-//    {
-//        [self refreshData];
-//    }
-//}
 
 -(NSString *)notificationName {
     return @"updatedLeftTable";

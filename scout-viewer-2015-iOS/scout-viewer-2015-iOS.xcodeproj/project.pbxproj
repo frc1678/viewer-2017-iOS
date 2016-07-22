@@ -36,7 +36,6 @@
 		725D09521A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */; };
 		725D09541A95919B009A0AB6 /* ResizableNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */; };
 		725D09561A959D17009A0AB6 /* TeamDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */; };
-		7260D5441AC7779500B57D4E /* TeamScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7260D5431AC7779500B57D4E /* TeamScheduleTableViewController.m */; };
 		72A0480E1AC4C22500FA2A46 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A0480D1AC4C22500FA2A46 /* UIColor+HexString.m */; };
 		72A048161AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */; };
 		72AE5AB61A87D5EB001BB94E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72AE5AB51A87D5EB001BB94E /* main.m */; };
@@ -134,8 +133,6 @@
 		725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchDetailsTableViewController.swift; sourceTree = "<group>"; };
 		725D09531A95919B009A0AB6 /* ResizableNotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableNotesTableViewCell.swift; sourceTree = "<group>"; };
 		725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsTableViewController.swift; sourceTree = "<group>"; };
-		7260D5421AC7779500B57D4E /* TeamScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamScheduleTableViewController.h; sourceTree = "<group>"; };
-		7260D5431AC7779500B57D4E /* TeamScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamScheduleTableViewController.m; sourceTree = "<group>"; };
 		72A0480C1AC4C22500FA2A46 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
 		72A0480D1AC4C22500FA2A46 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
 		72A048151AC4C5CB00FA2A46 /* UnrankedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnrankedTableViewCell.swift; sourceTree = "<group>"; };
@@ -322,9 +319,6 @@
 				72AE5AF91A881FE3001BB94E /* ScheduleTableViewController.h */,
 				72AE5AFA1A881FE3001BB94E /* ScheduleTableViewController.m */,
 				19427B6E1D2AF6E80041FB1D /* SpecificTeamScheduleTableViewController.swift */,
-				72DC10BB1A92AE9C0092EA5F /* MatchDetailsViewController.swift */,
-				7260D5421AC7779500B57D4E /* TeamScheduleTableViewController.h */,
-				7260D5431AC7779500B57D4E /* TeamScheduleTableViewController.m */,
 				19F41FDE1D41605E007B9ACC /* Match Table View Cell */,
 			);
 			name = Schedule;
@@ -391,6 +385,7 @@
 				40E43E3F1C544E3900ABC378 /* FirebaseDataFetcher.swift */,
 				725D09551A959D17009A0AB6 /* TeamDetailsTableViewController.swift */,
 				725D09511A956F76009A0AB6 /* TeamInMatchDetailsTableViewController.swift */,
+				72DC10BB1A92AE9C0092EA5F /* MatchDetailsViewController.swift */,
 				40CF57A01C6C30DD00D9B63B /* DefenseTableViewController.swift */,
 				72C2DC091A96F4360000BCED /* Utils.swift */,
 				40E43E3A1C54434D00ABC378 /* Firebase Models */,
@@ -744,7 +739,6 @@
 				72EC17201AD9B2480044FEE9 /* UINavigationController+SGProgress.m in Sources */,
 				40B551C91C702C01006089EA /* TeamInMatchCalculatedData.swift in Sources */,
 				725D09541A95919B009A0AB6 /* ResizableNotesTableViewCell.swift in Sources */,
-				7260D5441AC7779500B57D4E /* TeamScheduleTableViewController.m in Sources */,
 				72AE5AFB1A881FE3001BB94E /* ScheduleTableViewController.m in Sources */,
 				40CF57A11C6C30DD00D9B63B /* DefenseTableViewController.swift in Sources */,
 				72AE5AEE1A881CBA001BB94E /* MultiCellTableViewCell.m in Sources */,
