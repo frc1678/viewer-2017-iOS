@@ -659,7 +659,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if ((cs ?? "").containsString("Times Crossed"))  {
                 performSegueWithIdentifier("defenseCrossedSegue", sender:indexPath)
             } else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
-                if Utils.teamDetailsKeys.notGraphingValues.contains(cs!) && !cs!.containsString("σ") { performSegueWithIdentifier("CTIMDGraph", sender: indexPath) }
+                if !Utils.teamDetailsKeys.notGraphingValues.contains(cs!) && !cs!.containsString("σ") { performSegueWithIdentifier("CTIMDGraph", sender: indexPath) }
             } else {
                 performSegueWithIdentifier("TGraph", sender: indexPath)
             }

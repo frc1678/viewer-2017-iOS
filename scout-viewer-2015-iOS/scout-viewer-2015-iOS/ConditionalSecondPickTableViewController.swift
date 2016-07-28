@@ -20,6 +20,10 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         self.title = String(self.teamNumber) + " - Second Pick"
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ConditionalSecondPickTableViewController.reloadTableView), name:"updateLeftTable", object:nil)
     }
+    func reloadTableView(note: NSNotification) {
+        tableView.reloadData()
+    }
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("secondPickToTeam", sender: tableView.cellForRowAtIndexPath(indexPath))

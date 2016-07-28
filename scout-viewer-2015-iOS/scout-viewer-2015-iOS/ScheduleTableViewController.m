@@ -136,7 +136,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier  isEqual: @"citrusSchedule"]) {
-        TeamScheduleTableViewController *dest = segue.destinationViewController;
+        SpecificTeamScheduleTableViewController *dest = (SpecificTeamScheduleTableViewController *)segue.destinationViewController;
         dest.teamNumber = 1678;
     } else {
     MatchTableViewCell *cell = sender;

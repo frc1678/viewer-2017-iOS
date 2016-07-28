@@ -18,6 +18,10 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(OverallSecondPickAbilityViewController.reloadTableView), name:"updateLeftTable", object:nil)
     }
     
+    func reloadTableView(note: NSNotification) {
+        tableView.reloadData()
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         self.performSegueWithIdentifier("TeamDetails", sender: tableView.cellForRowAtIndexPath(indexPath))

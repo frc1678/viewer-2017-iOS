@@ -7,7 +7,6 @@
 #import "ScheduleTableViewController.h"
 #import <MWPhotoBrowser/MWPhotoBrowser.h>
 #import <SDWebImage/SDImageCache.h>
-#import "TeamScheduleTableViewController.h"
 //#import <JBChartView/JBChartView.h>
 //#import <JBChartView/JBBarChartView.h>
 #import "PDFRenderer.h"
