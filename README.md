@@ -1,4 +1,4 @@
-scout-viewer-2015-ios
+#Scout Viewer 2016 iOS
 =====================
 
-Testing the `Realm` database for `iOS` for use in the 2015 season.
+The iOS data viewing app for the 1678 scouting system.
