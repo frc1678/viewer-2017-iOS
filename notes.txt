@@ -1,0 +1,2 @@
+1. rename the project to the correct year???
+2. add a .gitignore? Without one you are commiting a bunch of xcode files and .DS_Store files that just get in the way
