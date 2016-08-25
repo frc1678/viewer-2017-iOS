@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc class MatchCalculatedData: NSObject, Reflectable {
+class MatchCalculatedData: NSObject, Reflectable {
     var blueRPs: NSNumber?
     var predictedBlueRPs: NSNumber?
     var numDefenseCrossesByBlue : NSNumber?

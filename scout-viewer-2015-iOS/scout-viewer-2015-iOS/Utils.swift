@@ -34,7 +34,7 @@ func percentageValueOf(number: AnyObject?) -> String {
     return ""
 }
 
-func isZero(object: AnyObject) -> Bool {
+func isZero(object: AnyObject) -> Bool { // WHY DOES THIS EVEN EXIST!>!!?!??!?!?!?!??!>@,3/!@<?!>?!?!!!1
     if let obj = object as? Float where obj == 0 {
         return true
     }
@@ -764,7 +764,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         return computerReadableNames[name]
     }
     class func isNull(object: AnyObject?) -> Bool {
-        if object_getClass(object) == object_getClass(NSNull()) {
+        if object_getClass(object) == xobject_getClass(NSNull()) {
             return true
         }
         return false

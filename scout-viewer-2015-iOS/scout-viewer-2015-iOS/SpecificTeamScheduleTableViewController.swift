@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SpecificTeamScheduleTableViewController : ScheduleTableViewController {
+class SpecificTeamScheduleTableViewController : ScheduleTableViewController { // Very good subclassing! A+
     
     var teamNumber : Int = -1
     

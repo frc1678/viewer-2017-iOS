@@ -8,6 +8,7 @@
 
 #import "ArrayTableViewController.h"
 
+// The .m file of this is almost identical to SeedTableViewController.m.  Can they be combined?
 @interface PredictedSeedTableViewController : ArrayTableViewController
 
 @end

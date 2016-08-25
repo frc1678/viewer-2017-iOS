@@ -10,7 +10,7 @@ import UIKit
 
 //The Dream, Never Forget
 protocol Reflectable {
-    func propertys() -> [String]
+    func propertys() -> [String] // spelling?
 }
 
 extension Reflectable

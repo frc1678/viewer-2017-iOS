@@ -100,6 +100,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 guard let data = data where error == nil else { return }
                 self.imageCache.set(value: UIImage(data: data) ?? UIImage(), key: "\(teamNum)")
                 UIApplication.sharedApplication().performSelector(Selector("_performMemoryWarning"))
+                // This is the most horrifying thing I've seen in a long time.
+                // There are currently Apple employes that work on iOS that hate you for this.
             }
         }
     }
