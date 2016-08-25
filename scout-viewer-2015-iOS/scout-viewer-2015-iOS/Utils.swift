@@ -764,7 +764,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         return computerReadableNames[name]
     }
     class func isNull(object: AnyObject?) -> Bool {
-        if object_getClass(object) == xobject_getClass(NSNull()) {
+        if object_getClass(object) == object_getClass(NSNull()) {
             return true
         }
         return false
