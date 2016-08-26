@@ -4,4 +4,21 @@
 4. You have some entirely empty Model.xcdatamodeld? DELETE SHIT YOU DON'T NEED!
 5. The storyboard file is huge. I highly recommend looking at using Storyboard References.  You can split your Storyboard up into multiple separate Storyboards, and then instead of having a push transition go to a view controller, it would go to a storyboard reference to some other file. You still get the benefit of having a combined storyboard and having the flow that way, but without having a huge file.
 6. In the storyboard all the images render weirdly big.  This is likely because you are using Asset Catalogs really weirdly.  For example, with "cache" the 1x and 2x and 3x are all the same image OF THE SAME SIZE. This is the opposite of what asset catalogs should do.
-7. 
+7. Lets look at this example of a model:
+
+class MatchCalculatedData: NSObject, Reflectable {
+    var blueRPs: NSNumber?
+    var predictedBlueRPs: NSNumber?
+    var numDefenseCrossesByBlue : NSNumber?
+    var numDefenseCrossesByRed : NSNumber?
+    var predictedBlueScore : NSNumber?
+    var predictedRedScore : NSNumber?
+    var redRPs : NSNumber?
+    var predictedRedRPs: NSNumber?
+    var optimalBlueDefenses : [NSString]?
+    var optimalRedDefenses : [NSString]?
+    var blueWinChance : NSNumber?
+    var redWinChance : NSNumber?
+}
+
+It would probably be MUCH better to convert it to a struct, and strongly type all the properties.  This would ruin the automatic conversion from dictionaries, and you would have to manually write the types when pulling out all the properties from the dictionaries.  But I think the benefit would be worth it, literally everywhere else in your code.
