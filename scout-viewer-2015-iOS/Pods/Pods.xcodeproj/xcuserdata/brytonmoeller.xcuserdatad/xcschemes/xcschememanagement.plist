@@ -9,6 +9,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>GTMSessionFetcher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>GoogleToolboxForMac.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>HanekeSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,17 +67,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>23BA9083ED0D2392A167A8AFA04427FA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2A8C8A0F430063BB6E74F326E775DB16</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2C2B1953A91633859BF7AD238FF567A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5CEB7EEE71AE86CF2018AB5D8358FCDA</key>
+		<key>6461FF73E606AC17ECB9C28944E4F30F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6461FF73E606AC17ECB9C28944E4F30F</key>
+		<key>92BB131FA876445E027D20AE23EA7B5F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,12 +107,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
+		<key>CFC89526E1716CBC99B291B794340142</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F81D9558147F84924E366AE4A98BD4E6</key>
+		<key>E61CE3B6DFA1FE6B3E296965C76C0E10</key>
 		<dict>
 			<key>primary</key>
 			<true/>

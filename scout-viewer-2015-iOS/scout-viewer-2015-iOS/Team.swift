@@ -14,7 +14,7 @@ import UIKit
     var name : String?
     var number : NSNumber?
     var pitLowBarCapability : AnyObject?
-    var calculatedData = CalculatedTeamData?()
+    var calculatedData = CalculatedTeamData?.init(nilLiteral: ())
     var pitBumperHeight : NSNumber?
     var pitDriveBaseLength : NSNumber?
     var pitDriveBaseWidth : NSNumber?

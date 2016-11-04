@@ -26,12 +26,12 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     /// When a bar is held down by the finger, what should you display on the right for that bar index? Maybe the team number? It depends on the particular graph.
     var subValuesRight: [AnyObject] = []
     /// Normal color of the bars
-    var color = UIColor.greenColor()
+    var color = UIColor.green
     
-    var negativeColor = UIColor.blueColor()
+    var negativeColor = UIColor.blue
     /// Color when you press and hold a bar
-    var highlightColor = UIColor.grayColor()
-    var fadeColor = UIColor.blackColor()
+    var highlightColor = UIColor.gray
+    var fadeColor = UIColor.black
     var highlightIndex = -1;
     var defaultHeight: CGFloat!
     var graphTitle = ""
@@ -78,7 +78,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         var reverseTitleSwitch = [String: String]()
         for (key, value) in titleSwitch {
@@ -96,31 +96,31 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         graph.dataSource = self
         graph.delegate = self
         graph.minimumValue = 0.0
-        graph.setState(JBChartViewState.Collapsed, animated: false)
+        graph.setState(JBChartViewState.collapsed, animated: false)
         graph.reloadData()
-        graph.setState(JBChartViewState.Expanded, animated: true)
+        graph.setState(JBChartViewState.expanded, animated: true)
     }
     
-    func numberOfBarsInBarChartView(barChartView: JBBarChartView!) -> UInt {
+    func numberOfBars(in barChartView: JBBarChartView!) -> UInt {
         return UInt(values.count)
     }
     
-    func barChartView(barChartView: JBBarChartView!, heightForBarViewAtIndex index: UInt) -> CGFloat {
-        return values[Int(index)] - min(values.minElement()!, 0.0);
+    func barChartView(_ barChartView: JBBarChartView!, heightForBarViewAt index: UInt) -> CGFloat {
+        return values[Int(index)] - min(values.min()!, 0.0);
     }
     
-    func barSelectionColorForBarChartView(barChartView: JBBarChartView!) -> UIColor! {
+    func barSelectionColor(for barChartView: JBBarChartView!) -> UIColor! {
         return highlightColor
     }
     
-    func barChartView(barChartView: JBBarChartView!, didSelectBarAtIndex index: UInt) {
+    func barChartView(_ barChartView: JBBarChartView!, didSelectBarAt index: UInt) {
         let mainDisplayText : String
-        let displayTitleWithoutAvg = displayTitle.stringByReplacingOccurrencesOfString("Avg. ", withString: "").stringByReplacingOccurrencesOfString(" Consistency", withString: "").stringByReplacingOccurrencesOfString(" Percentage", withString: "")
+        let displayTitleWithoutAvg = displayTitle.replacingOccurrences(of: "Avg. ", with: "").replacingOccurrences(of: " Consistency", with: "").replacingOccurrences(of: " Percentage", with: "")
         if newValuesArray.count == 0 {
             if !isPercentageGraph {
-                mainDisplayText = "\(displayTitleWithoutAvg)\(roundValue(values[Int(index)], toDecimalPlaces: 2))"
+                mainDisplayText = "\(displayTitleWithoutAvg)\(roundValue(values[Int(index)] as AnyObject?, toDecimalPlaces: 2))"
             } else {
-                mainDisplayText = "\(displayTitleWithoutAvg)\(percentageValueOf(values[Int(index)]))"
+                mainDisplayText = "\(displayTitleWithoutAvg)\(percentageValueOf(values[Int(index)] as AnyObject?))"
             }
         } else {
             mainDisplayText = "\(displayTitleWithoutAvg)\(newValuesArray[Int(index)])"
@@ -139,35 +139,35 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         barChartView.becomeFirstResponder()
     }
     
-    func didDeselectBarChartView(barChartView: JBBarChartView!) {
+    func didDeselect(_ barChartView: JBBarChartView!) {
         toggleDisplay(true)
         barChartView.becomeFirstResponder()
     }
     
-    func barChartView(barChartView: JBBarChartView!, colorForBarViewAtIndex index: UInt) -> UIColor! {
+    func barChartView(_ barChartView: JBBarChartView!, colorForBarViewAt index: UInt) -> UIColor! {
         if Int(index) == highlightIndex {
             if values[Int(index)] < 0 {
-                return UIColor.purpleColor()
+                return UIColor.purple
             } else {
-                return UIColor.greenColor()
+                return UIColor.green
             }
         } else if values[Int(index)] < 0 {
-            let fraction = ((values.maxElement()! - min(values.minElement()!, 0.0)) / (values[Int(index)] - min(values.minElement()!, 0.0)))
-            return negativeColor.colorWithAlphaComponent((fraction * 0.3 + 0.2) * CGFloat(negativeMultiplier))
+            let fraction = ((values.max()! - min(values.min()!, 0.0)) / (values[Int(index)] - min(values.min()!, 0.0)))
+            return negativeColor.withAlphaComponent((fraction * 0.3 + 0.2) * CGFloat(negativeMultiplier))
         } else {
-            return color.colorWithAlphaComponent(((values[Int(index)] - min(values.minElement()!, 0.0)) / (values.maxElement()! - min(values.minElement()!, 0.0))) * 0.5 + 0.5)
+            return color.withAlphaComponent(((values[Int(index)] - min(values.min()!, 0.0)) / (values.max()! - min(values.min()!, 0.0))) * 0.5 + 0.5)
         }
     }
     
-    func toggleDisplay(hide: Bool) {
+    func toggleDisplay(_ hide: Bool) {
         if hide {
-            UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
                 self.mainDisplay.alpha = 0.0
                 self.subDisplayLeft.alpha = 0.0
                 self.subDisplayRight.alpha = 0.0
                 }, completion: nil)
         } else {
-            UIView.animateWithDuration(0.2, delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
                 self.mainDisplay.alpha = 1.0
                 self.subDisplayLeft.alpha = 1.0
                 self.subDisplayRight.alpha = 1.0
@@ -175,7 +175,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         }
     }
     
-    @IBAction func displayAlphaChanged(sender: UISlider) {
+    @IBAction func displayAlphaChanged(_ sender: UISlider) {
         negativeMultiplier = Double(sender.value)
         graph.reloadData()
     }

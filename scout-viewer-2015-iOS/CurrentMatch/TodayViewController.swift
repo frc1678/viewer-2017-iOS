@@ -26,16 +26,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.preferredContentSize = CGSizeMake(320, 90);
-        self.firebase.child("currentMatchNum").observeEventType(.Value, withBlock: { (snap) -> Void in
+        self.preferredContentSize = CGSize(width: 320, height: 90);
+        self.firebase.child("currentMatchNum").observe(.value, with: { (snap) -> Void in
             self.refreshMatchNum()
         })
     }
     
     func refreshMatchNum() {
-        self.firebase.observeSingleEventOfType(.Value, withBlock: { (snap) -> Void in
-            if let currentMatchNum = snap.childSnapshotForPath("currentMatchNum").value as? Int {
-                if let match = snap.childSnapshotForPath("Matches").childSnapshotForPath(String(currentMatchNum)).value as? NSDictionary {
+        self.firebase.observeSingleEvent(of: .value, with: { (snap) -> Void in
+            if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNum").value as? Int {
+                if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).value as? NSDictionary {
                     let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
                     let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]
                     self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
@@ -48,16 +48,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         })
     }
     
-    func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)) {
+    func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
         // Perform any setup necessary in order to update the view.
         // If an error is encountered, use NCUpdateResult.Failed
         // If there's no update required, use NCUpdateResult.NoData
         // If there's an update, use NCUpdateResult.NewData
         
-        completionHandler(NCUpdateResult.NewData)
+        completionHandler(NCUpdateResult.newData)
     }
     
-    func updateCurrentMatch(matchNum: Int, redTeams: [Int], blueTeams: [Int]) {
+    func updateCurrentMatch(_ matchNum: Int, redTeams: [Int], blueTeams: [Int]) {
         print("Update")
         self.MatchNum.text = "Q\(matchNum)"
         self.r1.text = String(redTeams[0])

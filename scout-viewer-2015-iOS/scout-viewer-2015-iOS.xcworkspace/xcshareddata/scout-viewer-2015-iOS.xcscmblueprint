@@ -1,16 +1,18 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "04EEBF08A650E80606F8628DED2EB514F189E27A",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "04EEBF08A650E80606F8628DED2EB514F189E27A+++179123C",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
-    "04EEBF08A650E80606F8628DED2EB514F189E27A" : 0,
-    "19AE1E801A5198418806CAD0F6F203618458D5C1" : 0
+    "04EEBF08A650E80606F8628DED2EB514F189E27A+++179123C" : 0,
+    "19AE1E801A5198418806CAD0F6F203618458D5C1+++6B58B05" : 0,
+    "04EEBF08A650E80606F8628DED2EB514F189E27A+++6EE6BCD" : 9223372036854775807
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2A23904E-FB64-4694-AC6B-49487B76C85D",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "04EEBF08A650E80606F8628DED2EB514F189E27A" : "ios-viewer-2016\/",
-    "19AE1E801A5198418806CAD0F6F203618458D5C1" : "scout-viewer-2015-ios"
+    "04EEBF08A650E80606F8628DED2EB514F189E27A+++179123C" : "ios-viewer-2016\/",
+    "19AE1E801A5198418806CAD0F6F203618458D5C1+++6B58B05" : "scout-viewer-2015-ios",
+    "04EEBF08A650E80606F8628DED2EB514F189E27A+++6EE6BCD" : "scout-viewer-2015-ios\/"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "scout-viewer-2015-iOS",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
@@ -19,12 +21,17 @@
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/frc1678\/ios-viewer-2016.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04EEBF08A650E80606F8628DED2EB514F189E27A"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04EEBF08A650E80606F8628DED2EB514F189E27A+++179123C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/frc1678\/ios-viewer-2016.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "04EEBF08A650E80606F8628DED2EB514F189E27A+++6EE6BCD"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/frc1678\/scout-viewer-2015-ios.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
-      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "19AE1E801A5198418806CAD0F6F203618458D5C1"
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "19AE1E801A5198418806CAD0F6F203618458D5C1+++6B58B05"
     }
   ]
 }

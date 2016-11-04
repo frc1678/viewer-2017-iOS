@@ -37,15 +37,15 @@ $ pod install
 
 ## Usage
 
-1. Import Instabug framework header
+1. Import Instabug framework header in your app delegate
 
     ```swift
-    // Swift: In your bridging header
-    #import <Instabug/Instabug.h>
+    // Swift
+    import Instabug
     ```
     
     ```objective-c
-    // Objective-C: In your app delegate
+    // Objective-C
     #import <Instabug/Instabug.h>
     ```
 
@@ -60,6 +60,21 @@ $ pod install
 	[Instabug startWithToken:@"{{app_token}}" invocationEvent:IBGInvocationEventShake];
 	```
 	Make sure to replace `{{app_token}}` with your application token. Find it [here](https://instabug.com/app/sdk/).
+
+## Notes
+Instabug needs access to the microphone and photo library. Starting from iOS 10, apps that don’t provide a usage description for those 2 permissions would be rejected when submitted to the App Store.
+
+For your app not to be rejected, you’ll need to add the following 2 keys to your app’s info.plist file with text explaining to the user why those permissions are needed:
+
+* `NSMicrophoneUsageDescription`
+* `NSPhotoLibraryUsageDescription`
+
+If your app doesn’t already access the microphone or photo library, we recommend using a usage description like:
+
+* "`<app name>` needs access to the microphone to be able to attach voice notes."
+* "`<app name>` needs access to your photo library for you to be able to attach images."
+
+**The permission alert for accessing the microphone/photo library will NOT appear unless users attempt to attach a voice note/photo while using Instabug.**
 	
 ## More
 

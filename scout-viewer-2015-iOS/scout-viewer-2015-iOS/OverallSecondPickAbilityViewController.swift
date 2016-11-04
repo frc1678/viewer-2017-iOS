@@ -15,23 +15,22 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(OverallSecondPickAbilityViewController.reloadTableView), name:"updateLeftTable", object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(OverallSecondPickAbilityViewController.reloadTableView), name:NSNotification.Name(rawValue: "updateLeftTable"), object:nil)
     }
     
-    func reloadTableView(note: NSNotification) {
+    func reloadTableView(_ note: Notification) {
         tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        self.performSegueWithIdentifier("TeamDetails", sender: tableView.cellForRowAtIndexPath(indexPath))
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "TeamDetails", sender: tableView.cellForRow(at: indexPath))
     }
-    
-    override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
+    override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let multiCell = cell as? MultiCellTableViewCell
         let team = data as? Team
         if team!.number != nil {
-            multiCell!.teamLabel!.text = String(team!.number!.integerValue)
+            multiCell!.teamLabel!.text = String(team!.number!.intValue)
         }
         if team!.calculatedData?.overallSecondPickAbility != nil {
             multiCell!.scoreLabel!.text = String(Utils.roundValue(team!.calculatedData!.overallSecondPickAbility!.floatValue, toDecimalPlaces: 2)
@@ -40,15 +39,15 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
             multiCell!.scoreLabel!.text = ""
         }
         multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.overallSecondPickAbility"))"
-        
     }
+   
     
-    override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
+    override func loadDataArray(_ shouldForce: Bool) -> [Any]! {
         return self.firebaseFetcher.getOverallSecondPickList()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? TeamDetailsTableViewController {
             let selectedCell = sender as? MultiCellTableViewCell
             dest.team = firebaseFetcher.getTeam(Int((selectedCell?.teamLabel!.text)!)!)
         }
@@ -57,7 +56,9 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     override func cellIdentifier() -> String! {
         return "MultiCellTableViewCell"
     }
-    override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
+    
+    override func filteredArray(forSearchText text: String!, inScope scope: Int) -> [Any]! {
         return self.firebaseFetcher.filteredTeamsForSearchString(text)
     }
+   
 }

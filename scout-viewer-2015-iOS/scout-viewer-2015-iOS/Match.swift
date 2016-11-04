@@ -17,15 +17,19 @@ extension Reflectable
 {
     func propertys() -> [String] {
         var s = [String]()
-        for c in Mirror(reflecting: self).children
+        let ch = Mirror(reflecting: self).children
+        var i = 0
+        for c in ch
         {
+            i += 1
+            //print(c.label)
             if let name = c.label {
                 s.append(name)
             }
         }
         return s
     }
-    func propertyForKey(path:String) -> AnyObject? {
+    func propertyForKey(_ path:String) -> AnyObject? {
         for c in Mirror(reflecting: self).children
         {
             if c.label == path {
@@ -51,8 +55,9 @@ extension Reflectable
     var redAllianceTeamNumbers : [NSNumber]?
     var redDefensePositions : [NSString]?
     var redScore : NSNumber?
-    var matchName : NSString {
-        return "Q" + String(matchNumber)
+    var matchName : NSString? {
+        
+        return NSString(string: "Q" + String(describing: matchNumber))
     }
 
 }

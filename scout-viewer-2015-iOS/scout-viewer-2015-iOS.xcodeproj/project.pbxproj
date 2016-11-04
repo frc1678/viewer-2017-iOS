@@ -527,10 +527,12 @@
 					1976B0251CD27D98007E3B39 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = J3MNNM5PHM;
+						LastSwiftMigration = 0800;
 					};
 					72AE5AAF1A87D5EB001BB94E = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = J3MNNM5PHM;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -822,6 +824,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "CurrentMatch/CurrentMatch-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -842,6 +845,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "CurrentMatch/CurrentMatch-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -950,6 +954,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "scout-viewer-2015-iOS/scout-viewer-2015-iOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -979,6 +984,7 @@
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = "scout-viewer-2015-iOS/scout-viewer-2015-iOS-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

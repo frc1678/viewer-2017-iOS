@@ -18,41 +18,41 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = String(self.teamNumber) + " - Second Pick"
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(ConditionalSecondPickTableViewController.reloadTableView), name:"updateLeftTable", object:nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(ConditionalSecondPickTableViewController.reloadTableView), name:NSNotification.Name(rawValue: "updateLeftTable"), object:nil)
     }
-    func reloadTableView(note: NSNotification) {
+    func reloadTableView(_ note: Notification) {
         tableView.reloadData()
     }
 
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("secondPickToTeam", sender: tableView.cellForRowAtIndexPath(indexPath))
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "secondPickToTeam", sender: tableView.cellForRow(at: indexPath))
     }
     
-    override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
+    override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let multiCell = cell as? MultiCellTableViewCell
         let team = data as? Team
         if team!.number != nil {
-            multiCell!.teamLabel!.text = String(team!.number!.integerValue)
+            multiCell!.teamLabel!.text = String(team!.number!.intValue)
         }
         if team!.calculatedData?.firstPickAbility != nil {
-            multiCell!.scoreLabel!.text = String(team!.calculatedData!.firstPickAbility!.integerValue)
+            multiCell!.scoreLabel!.text = String(team!.calculatedData!.firstPickAbility!.intValue)
         } else {
             multiCell!.scoreLabel!.text = ""
         }
         multiCell!.rankLabel!.text = "\(self.secondPickListRanks[team!.number! as Int]!)"
     }
     
-    override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
+    override func loadDataArray(_ shouldForce: Bool) -> [Any]! {
         let picks = self.firebaseFetcher.getConditionalSecondPickList(teamNumber)
         for pick in picks {
-            self.secondPickListRanks[pick.number as! Int] = (picks.indexOf(pick)! + 1)
+            self.secondPickListRanks[pick.number as! Int] = (picks.index(of: pick)! + 1)
         }
         return self.firebaseFetcher.getConditionalSecondPickList(teamNumber)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? TeamDetailsTableViewController {
             let cell = sender as? MultiCellTableViewCell
             let team = firebaseFetcher.getTeam(Int((cell?.teamLabel!.text)!)!)
             dest.team = team;
@@ -63,7 +63,7 @@ class ConditionalSecondPickTableViewController: ArrayTableViewController {
         return "MultiCellTableViewCell"
     }
     
-    override func filteredArrayForSearchText(searchString: String!, inScope scope: Int) -> [AnyObject]! {
-        return self.dataArray.filter { String(($0 as! Team).number).rangeOfString(searchString) != nil }
+    override func filteredArray(forSearchText searchString: String!, inScope scope: Int) -> [Any]! {
+        return self.dataArray.filter { String(describing: ($0 as! Team).number).range(of: searchString) != nil }
     }
 }

@@ -10,42 +10,42 @@ import Foundation
 
 
 
-func roundValue(value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> String {
+func roundValue(_ value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> String {
     if let val = value as? NSNumber {
-        let f = NSNumberFormatter()
-        f.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let f = NumberFormatter()
+        f.numberStyle = NumberFormatter.Style.decimal
         f.maximumFractionDigits = numDecimalPlaces
         
         if val == 0 {
             return "0"
         }
         
-        return f.stringFromNumber(val as NSNumber!)!
+        return f.string(from: val as NSNumber!)!
     }
     
     return ""
 }
 
-func percentageValueOf(number: AnyObject?) -> String {
+func percentageValueOf(_ number: AnyObject?) -> String {
     if let n = number as? Float {
-        return "\(roundValue(n * 100, toDecimalPlaces: 1))%"
+        return "\(roundValue(NSNumber(value: n * 100), toDecimalPlaces: 1))%"
     }
     
     return ""
 }
 
-func isZero(object: AnyObject) -> Bool {
-    if let obj = object as? Float where obj == 0 {
+func isZero(_ object: AnyObject) -> Bool {
+    if let obj = object as? Float , obj == 0 {
         return true
     }
     
     return false
 }
 
-func insertCommasAndSpacesBetweenCapitalsInString(string: String) -> String {
+func insertCommasAndSpacesBetweenCapitalsInString(_ string: String) -> String {
     var toReturn = ""
     for char in string.characters {
-        if "\(char)".uppercaseString == "\(char)" {
+        if "\(char)".uppercased() == "\(char)" {
             toReturn += ", \(char)"
         } else {
             toReturn.append(char)
@@ -53,13 +53,13 @@ func insertCommasAndSpacesBetweenCapitalsInString(string: String) -> String {
     }
     
     for _ in 0...1 {
-        toReturn.removeAtIndex(string.startIndex)
+        toReturn.remove(at: string.startIndex)
     }
     
     return toReturn
 }
 
-func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
+func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     var values: [Int] = []
     for num in nsNumberArray {
         if let int = Int("\(num)") {
@@ -173,7 +173,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
             "Additional Info",
         ]
         
-        func keySetNames(minimalist : Bool) -> [String] {
+        func keySetNames(_ minimalist : Bool) -> [String] {
             if minimalist {
                 return  [
                     "",
@@ -208,7 +208,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
             ]
             
         }
-        func keySets(minimalist : Bool) -> [[String]] {
+        func keySets(_ minimalist : Bool) -> [[String]] {
             if minimalist {
                 return [
                     defaultKeys,
@@ -485,7 +485,7 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         
     ]
     
-    class func defenseStatKeysToGraphableKeys(defenseStatKey: String) -> String {
+    class func defenseStatKeysToGraphableKeys(_ defenseStatKey: String) -> String {
         switch defenseStatKey {
         case "calculatedData.avgSuccessfulTimesCrossedDefensesAuto": return "calculatedData.numTimesSuccesfulCrossedDefensesAuto"
         case "calculatedData.avgSuccessfulTimesCrossedDefensesTele": return "calculatedData.numTimesSuccesfulCrossedDefensesTele"
@@ -714,36 +714,36 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.twoBallAutoAccuracy":"2 Ball Accuracy Auto",
     ]
     
-    class func roundValue(value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
+    class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
-        let f = NSNumberFormatter()
-        f.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let f = NumberFormatter()
+        f.numberStyle = NumberFormatter.Style.decimal
         f.maximumFractionDigits = numDecimalPlaces
         
         if val == 0 {
             return "0"
         }
         
-        return f.stringFromNumber(val)!
+        return f.string(from: val)!
     }
     
-    class func roundDoubleValue(value: Double, toDecimalPlaces numDecimalPlaces: Int) -> String {
+    class func roundDoubleValue(_ value: Double, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
-        let f = NSNumberFormatter()
-        f.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        let f = NumberFormatter()
+        f.numberStyle = NumberFormatter.Style.decimal
         f.maximumFractionDigits = numDecimalPlaces
         
         if val == 0 {
             return "0"
         }
         
-        return f.stringFromNumber(val)!
+        return f.string(from: val)!
     }
     
-    class func getHumanReadableNameForKey(key: String) -> String? {
+    class func getHumanReadableNameForKey(_ key: String) -> String? {
         return humanReadableNames[key]
     }
-    class func findKeyForValue(value: String) ->String?
+    class func findKeyForValue(_ value: String) ->String?
     {
         for (key, stringValue) in humanReadableNames
         {
@@ -756,14 +756,14 @@ func nsNumArrayToIntArray(nsNumberArray: [NSNumber]) -> [Int] {
         return nil
     }
     
-    class func getKeyForHumanReadableName(name: String) -> String? {
+    class func getKeyForHumanReadableName(_ name: String) -> String? {
         var computerReadableNames = [String: String]()
         for (key, value) in humanReadableNames {
             computerReadableNames[value] = key
         }
         return computerReadableNames[name]
     }
-    class func isNull(object: AnyObject?) -> Bool {
+    class func isNull(_ object: AnyObject?) -> Bool {
         if object_getClass(object) == object_getClass(NSNull()) {
             return true
         }

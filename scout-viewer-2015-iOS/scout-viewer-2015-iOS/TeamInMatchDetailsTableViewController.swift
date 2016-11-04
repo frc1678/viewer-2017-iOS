@@ -19,7 +19,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     }
     
     var graphableCells: [String] = []
-    var keySets = [Utils.autoKeys, Utils.teleKeys, Utils.superKeys, Utils.statusKeys, Utils.miscKeys]
+    var keySets : [[String]] = [Utils.autoKeys, Utils.teleKeys, Utils.superKeys, Utils.statusKeys, Utils.miscKeys]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,82 +29,82 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     
     func updateTitle() {
         switch (data?.matchNumber, data?.teamNumber) {
-        case (.Some(let m), .Some(let n)):
+        case (.some(let m), .some(let n)):
             title = "\(m) - \(n)"
-        case (.Some(let m), .None):
+        case (.some(let m), .none):
             title = "\(m) - Unknown Team"
-        case (.None, .Some(let n)):
+        case (.none, .some(let n)):
             title = "Unknown Match - \(n)"
         default:
             title = "Unknown Match - Unkown Team"
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return data == nil ? 1 : keySets.count
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data == nil ? 1 : keySets[section].count
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return data == nil ? nil : ["Auto", "Teleop", "Super", "Status", "Miscellaneous"][section]
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if data == nil {
-            let cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) 
+            let cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailRLMArrayCell", for: indexPath) 
             cell.textLabel?.text = "No data yet..."
-            cell.accessoryType = UITableViewCellAccessoryType.None
+            cell.accessoryType = UITableViewCellAccessoryType.none
             return cell
         }
         
         var cell: UITableViewCell
-        let dataPoint: AnyObject = data!.valueForKeyPath(keySets[indexPath.section][indexPath.row])!
+        let dataPoint: String = data!.value(forKeyPath: (keySets as [[String]])[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row])! as! String
         if let notes = dataPoint as? String {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailStringCell", forIndexPath: indexPath) as! ResizableNotesTableViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
             let notesCell = cell as! ResizableNotesTableViewCell
             notesCell.titleLabel?.text = "Notes:"
             notesCell.notesLabel?.text = notes.characters.count == 0 ? "None" : notes
         } else if let _ = dataPoint as? NSArray {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailRLMArrayCell", forIndexPath: indexPath) 
+            cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailRLMArrayCell", for: indexPath) 
             
             cell.detailTextLabel?.text = "some array"
-            cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
+            cell.textLabel?.text = Utils.humanReadableNames[keySets[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]]
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("TeamInMatchDetailValueCell", forIndexPath: indexPath)
+            cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailValueCell", for: indexPath)
             cell.detailTextLabel?.text = "\(dataPoint)"
-            cell.textLabel?.text = Utils.humanReadableNames[keySets[indexPath.section][indexPath.row]]
+            cell.textLabel?.text = Utils.humanReadableNames[keySets[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]]
             graphableCells.append(cell.textLabel!.text!)
         }
         
         return cell
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? TeamDetailsTableViewController {
             if let number = data?.teamNumber {
-                dest.team = firebaseFetcher.getTeam(number.integerValue)
+                dest.team = firebaseFetcher?.getTeam(number.intValue)
             }
         } else if segue.identifier == "Graph" {
-            let graphViewController = segue.destinationViewController as! GraphViewController
+            let graphViewController = segue.destination as! GraphViewController
             
             if let _ = data?.teamNumber {
-                let indexPath = sender as! NSIndexPath
-                if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                let indexPath = sender as! IndexPath
+                if let cell = tableView.cellForRow(at: indexPath) {
                     graphViewController.graphTitle = "\(cell.textLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                    let key = keySets[indexPath.section][indexPath.row]
-                    if let values = firebaseFetcher.valuesInCompetitionOfPathForTeams(key) as? [CGFloat] as [CGFloat]? {
+                    let key = keySets[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+                    if let values = firebaseFetcher?.valuesInCompetitionOfPathForTeams(key) as? [CGFloat] as [CGFloat]? {
                         graphViewController.values = (values)
                         graphViewController.subDisplayLeftTitle = "Match: "
-                        graphViewController.subValuesLeft = firebaseFetcher.valuesInTeamMatchesOfPath("match.match", forTeam: firebaseFetcher.getTeam(data!.teamNumber!.integerValue)) as [AnyObject]
+                        graphViewController.subValuesLeft = firebaseFetcher!.valuesInTeamMatchesOfPath("match.match", forTeam: (firebaseFetcher?.getTeam(data!.teamNumber!.intValue))!) as [AnyObject]
                         if let d = data {
-                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher.ranksOfTeamInMatchDatasWithCharacteristic(keySets[indexPath.section][indexPath.row], forTeam:firebaseFetcher.getTeam(d.teamNumber!.integerValue)))
+                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher!.ranksOfTeamInMatchDatasWithCharacteristic((keySets as [[String]])[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] as NSString, forTeam:firebaseFetcher!.getTeam(d.teamNumber!.intValue)) as [NSNumber]) as [AnyObject]
                             
-                            if let i = ((graphViewController.subValuesLeft as! [String]).indexOf(String(d.matchNumber))) {
+                            if let i = ((graphViewController.subValuesLeft as! [String]).index(of: String(describing: d.matchNumber))) {
                                 graphViewController.highlightIndex = i
                             }
                         }
@@ -116,10 +116,10 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
             if graphableCells.contains(cell.textLabel!.text!) {
-                performSegueWithIdentifier("Graph", sender: indexPath)
+                performSegue(withIdentifier: "Graph", sender: indexPath)
             }
         }
     }

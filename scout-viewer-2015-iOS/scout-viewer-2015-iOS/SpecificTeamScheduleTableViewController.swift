@@ -17,7 +17,7 @@ class SpecificTeamScheduleTableViewController : ScheduleTableViewController {
         self.title = "\(self.teamNumber)'s Matches"
     }
     
-    override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
+    override func loadDataArray(_ shouldForce: Bool) -> [Any]! {
         return self.firebaseFetcher.getMatchesForTeamWithNumber(self.teamNumber)
     }
 }

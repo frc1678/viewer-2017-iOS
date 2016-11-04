@@ -32,18 +32,18 @@ class SortedRankTableViewController: ArrayTableViewController {
         
         // Do any additional setup after loading the view.
     }
-    override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
+    override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let team = data as! Team
         let multiCell = cell as! MultiCellTableViewCell
         multiCell.rankLabel!.text = String(path.row + 1)
-        multiCell.teamLabel!.text = String(team.number!)
-        if translatedKeyPath.rangeOfString("calculatedData") != nil {
-            let propPath = translatedKeyPath.stringByReplacingOccurrencesOfString("calculatedData.", withString: "")
-            if let value = team.calculatedData!.valueForKeyPath(propPath) {
-                multiCell.scoreLabel!.text = roundValue(value, toDecimalPlaces: 2)
+        multiCell.teamLabel!.text = String(describing: team.number!)
+        if translatedKeyPath.range(of: "calculatedData") != nil {
+            let propPath = translatedKeyPath.replacingOccurrences(of: "calculatedData.", with: "")
+            if let value = team.calculatedData!.value(forKeyPath: propPath) {
+                multiCell.scoreLabel!.text = roundValue(value as AnyObject?, toDecimalPlaces: 2)
             }
         } else {
-            multiCell.scoreLabel!.text = roundValue(team.valueForKeyPath(translatedKeyPath), toDecimalPlaces: 2)
+            multiCell.scoreLabel!.text = roundValue(team.value(forKeyPath: translatedKeyPath) as AnyObject?, toDecimalPlaces: 2)
         }
     }
     
@@ -52,56 +52,56 @@ class SortedRankTableViewController: ArrayTableViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func loadDataArray(shouldForce: Bool) -> [AnyObject]! {
-        return self.shouldReverseRank ? self.firebaseFetcher.getSortedListbyString(translatedKeyPath).reverse() : self.firebaseFetcher.getSortedListbyString(translatedKeyPath)
+    override func loadDataArray(_ shouldForce: Bool) -> [Any]! {
+        return self.shouldReverseRank ? self.firebaseFetcher.getSortedListbyString(translatedKeyPath).reversed() : self.firebaseFetcher.getSortedListbyString(translatedKeyPath)
     }
     
-    override func filteredArrayForSearchText(text: String!, inScope scope: Int) -> [AnyObject]! {
-        return self.dataArray.filter { String(($0 as! Team).number).containsString(text) }
+    override func filteredArray(forSearchText text: String!, inScope scope: Int) -> [Any]! {
+        return self.dataArray.filter { String(describing: ($0 as! Team).number).contains(text) }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("sortRankToTeam", sender: tableView.cellForRowAtIndexPath(indexPath))
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "sortRankToTeam", sender: tableView.cellForRow(at: indexPath))
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let dest = segue.destinationViewController as? TeamDetailsTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let dest = segue.destination as? TeamDetailsTableViewController {
             let multiCell = sender as? MultiCellTableViewCell
             dest.team = firebaseFetcher.getTeam(Int(multiCell!.teamLabel!.text!)!)
         }
     }
     
-    func rotationDetected(recognizer: UIRotationGestureRecognizer) {
+    func rotationDetected(_ recognizer: UIRotationGestureRecognizer) {
         let rot = recognizer.rotation
         let layer = self.tableView.layer
-        var transform = CGAffineTransformMakeScale(1.0, 1.0)
-        transform = CGAffineTransformRotate(transform, rot)
+        var transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        transform = transform.rotated(by: rot)
         
         switch recognizer.state {
             
-        case .Began :
-            layer.opaque = false
-            UIView.animateWithDuration(0.2, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+        case .began :
+            layer.isOpaque = false
+            UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
                 layer.setAffineTransform(transform)
                 layer.opacity = 0.8
                 }, completion: nil)
             
-        case .Changed : layer.setAffineTransform(transform)
+        case .changed : layer.setAffineTransform(transform)
             
-        case .Ended :
+        case .ended :
             let shouldRotate = cos(rot) < 0
             if shouldRotate {
-                UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.AllowUserInteraction, animations: {
+                UIView.animate(withDuration: 0.1, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
                     layer.opacity = 0.0
                     }, completion: { c in
-                        layer.setAffineTransform(CGAffineTransformIdentity)
-                        UIView.animateWithDuration(0.1, animations: {
+                        layer.setAffineTransform(CGAffineTransform.identity)
+                        UIView.animate(withDuration: 0.1, animations: {
                             layer.opacity = 1.0
                             }, completion: { d in
                                 
                                 if shouldRotate {
                                     self.shouldReverseRank = !self.shouldReverseRank
-                                    self.dataArray = self.dataArray.reverse()
+                                    self.dataArray = self.dataArray.reversed()
                                     //self.filteredArray = self.filteredArray.reverse()
                                     self.loadDataArray(true)
                                     self.tableView.reloadData()
@@ -112,10 +112,10 @@ class SortedRankTableViewController: ArrayTableViewController {
             }
             
         default:
-            UIView.animateWithDuration(0.2) {
+            UIView.animate(withDuration: 0.2, animations: {
                 layer.opacity = 1.0
-                layer.setAffineTransform(CGAffineTransformIdentity)
-            }
+                layer.setAffineTransform(CGAffineTransform.identity)
+            }) 
         }
         
     }

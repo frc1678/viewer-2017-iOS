@@ -23,7 +23,7 @@ class CurrentMatchManager: NSObject {
     
     func setUp() {
         cache.fetch(key: "starredMatches").onSuccess { (d) -> () in
-            if let starred = NSKeyedUnarchiver.unarchiveObjectWithData(d) as? [String] {
+            if let starred = NSKeyedUnarchiver.unarchiveObject(with: d) as? [String] {
                 if self.starredMatchesArray != starred {
                     self.starredMatchesArray = starred
                 }
@@ -37,8 +37,8 @@ class CurrentMatchManager: NSObject {
         didSet {
             if currentMatch != oldValue {
                 let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.getMatch(currentMatch)
-                let m : [String: AnyObject] = ["num":currentMatch, "redTeams": currentMatchFetch.redAllianceTeamNumbers!, "blueTeams": currentMatchFetch.blueAllianceTeamNumbers!]
-                NSUserDefaults.standardUserDefaults().setObject(m, forKey: "match")
+                let m : [String: AnyObject] = ["num":currentMatch as AnyObject, "redTeams": currentMatchFetch.redAllianceTeamNumbers! as AnyObject, "blueTeams": currentMatchFetch.blueAllianceTeamNumbers! as AnyObject]
+                UserDefaults.standard.set(m, forKey: "match")
                 notifyIfNeeded()
             }
         }
@@ -46,7 +46,7 @@ class CurrentMatchManager: NSObject {
     
     var starredMatchesArray = [String]() {
         didSet {
-            cache.set(value: NSKeyedArchiver.archivedDataWithRootObject(starredMatchesArray ?? NSMutableArray()), key: "starredMatches")
+            cache.set(value: NSKeyedArchiver.archivedData(withRootObject: starredMatchesArray ?? NSMutableArray()), key: "starredMatches")
         }
     }
     
@@ -60,17 +60,17 @@ class CurrentMatchManager: NSObject {
         }
     }
     
-    func postNotification(notificationBody: String) {
+    func postNotification(_ notificationBody: String) {
         let localNotification = UILocalNotification()
-        localNotification.fireDate = NSDate(timeIntervalSinceNow: 1)
+        localNotification.fireDate = Date(timeIntervalSinceNow: 1)
         localNotification.alertBody = notificationBody
-        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        localNotification.timeZone = TimeZone.current
         localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.applicationIconBadgeNumber = UIApplication.sharedApplication().applicationIconBadgeNumber + 1
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        localNotification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
+        UIApplication.shared.scheduleLocalNotification(localNotification)
     }
     
-    func notificationTriggeredCheckForNotification(note: NSNotification) {
+    func notificationTriggeredCheckForNotification(_ note: Notification) {
         notifyIfNeeded()
     }
 }

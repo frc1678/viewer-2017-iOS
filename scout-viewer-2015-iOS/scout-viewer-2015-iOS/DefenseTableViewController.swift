@@ -29,9 +29,9 @@ class DefenseTableViewController: ArrayTableViewController {
      
      - returns: the defense key
      */
-    func getKeyFromTeamLabel(relevantString:String) -> String {
+    func getKeyFromTeamLabel(_ relevantString:String) -> String {
         let stringArray = relevantString.characters.split{$0==" "}.map(String.init)
-        return stringArray[0].lowercaseString
+        return stringArray[0].lowercased()
     }
     
     override func viewDidLoad() {
@@ -48,8 +48,7 @@ class DefenseTableViewController: ArrayTableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func configureCell(cell: UITableViewCell!, atIndexPath path: NSIndexPath!, forData data: AnyObject!, inTableView tableView: UITableView!) {
+    override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let value = data as? Float
         let multiCell = cell as? MultiCellTableViewCell
         
@@ -63,29 +62,29 @@ class DefenseTableViewController: ArrayTableViewController {
         multiCell?.rankLabel!.text = "\(firebaseFetcher.rankOfTeam(team, withCharacteristic: "\(Utils.defenseKeys[path.row]).\(defenseKey)"))"
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var key : String? = ""
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
+        if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
             key = Utils.getKeyForHumanReadableName((cell.teamLabel?.text!)!)
         }
         if key != "" && Utils.defenseGraphableKeys.contains(key!) {
-            performSegueWithIdentifier("DefenseToGraph", sender: indexPath)
+            performSegue(withIdentifier: "DefenseToGraph", sender: indexPath)
         }
         
-        tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sortedRankSegue" {
-            let rankViewController = segue.destinationViewController as! SortedRankTableViewController
+            let rankViewController = segue.destination as! SortedRankTableViewController
             rankViewController.keyPath = sender as! String
             rankViewController.title = " "
         } else {
-            let graphViewController = segue.destinationViewController as! GraphViewController
+            let graphViewController = segue.destination as! GraphViewController
             
             
-            let indexPath = sender as! NSIndexPath
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? MultiCellTableViewCell {
+            let indexPath = sender as! IndexPath
+            if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
                 let text = cell.teamLabel?.text
                 
                 var key = Utils.getKeyForHumanReadableName(text!)
@@ -97,7 +96,7 @@ class DefenseTableViewController: ArrayTableViewController {
                 if key != nil && key != "" && key != "NO KEY" {
                     
                     let values: [Float]
-                    if key?.rangeOfString("beached") == nil && key?.rangeOfString("slowed") == nil {
+                    if key?.range(of: "beached") == nil && key?.range(of: "slowed") == nil {
                         (values, _) = firebaseFetcher.getMatchValuesForTeamForPath("\(key!).\(defenseKey)", forTeam: firebaseFetcher.getTeam(teamNumber))
                     } else {
                         (values, _) = firebaseFetcher.getMatchValuesForTeamForPathForDefense("\(key!)", forTeam: firebaseFetcher.getTeam(teamNumber), defenseKey: self.defenseKey)
@@ -105,9 +104,9 @@ class DefenseTableViewController: ArrayTableViewController {
                     
                     graphViewController.values = values as NSArray as! [CGFloat]
                     graphViewController.subDisplayLeftTitle = "Match: "
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(teamNumber))
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher.matchNumbersForTeamNumber(teamNumber)) as [AnyObject]
                     graphViewController.subDisplayRightTitle = "Team: "
-                    graphViewController.subValuesRight = [teamNumber,teamNumber,teamNumber,teamNumber,teamNumber] //Why are there 5?
+                    graphViewController.subValuesRight = [teamNumber as AnyObject,teamNumber as AnyObject,teamNumber as AnyObject,teamNumber as AnyObject,teamNumber as AnyObject] //Why are there 5?
                 }
                 
             }
@@ -119,7 +118,7 @@ class DefenseTableViewController: ArrayTableViewController {
         return "MultiCellTableViewCell"
     }
     
-    override func loadDataArray(shouldForce: Bool) -> [AnyObject]? {
+    override func loadDataArray(_ shouldForce: Bool) -> [Any]? {
         let team = self.firebaseFetcher.getTeam(teamNumber)
         let key = getKeyFromTeamLabel(relevantDefense)
         var crossesData = [Double]()
@@ -152,19 +151,19 @@ class DefenseTableViewController: ArrayTableViewController {
         }
         
         for i in 0..<crossesData.count {
-            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2).stringByReplacingOccurrencesOfString(",", withString: "")) ?? -1.0
+            crossesData[i] = Double(Utils.roundDoubleValue(crossesData[i], toDecimalPlaces: 2).replacingOccurrences(of: ",", with: "")) ?? -1.0
         }
         
-        return crossesData
+        return crossesData as [AnyObject]?
     }
     
-    func rankingDetailsSegue(gesture: UIGestureRecognizer) {
+    func rankingDetailsSegue(_ gesture: UIGestureRecognizer) {
         
-        if(gesture.state == UIGestureRecognizerState.Began) {
-            let p = gesture.locationInView(self.tableView)
-            let indexPath = self.tableView.indexPathForRowAtPoint(p)
-            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? MultiCellTableViewCell {
-                performSegueWithIdentifier("sortedRankSegue", sender: "\(Utils.getKeyForHumanReadableName(cell.teamLabel!.text!) ?? "ERROR").\(defenseKey)")
+        if(gesture.state == UIGestureRecognizerState.began) {
+            let p = gesture.location(in: self.tableView)
+            let indexPath = self.tableView.indexPathForRow(at: p)
+            if let cell = self.tableView.cellForRow(at: indexPath!) as? MultiCellTableViewCell {
+                performSegue(withIdentifier: "sortedRankSegue", sender: "\(Utils.getKeyForHumanReadableName(cell.teamLabel!.text!) ?? "ERROR").\(defenseKey)")
             }
         }
     }

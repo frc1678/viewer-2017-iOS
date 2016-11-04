@@ -16,19 +16,19 @@ class NotesTableViewController : UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return data.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("NotesCell") as! ResizableNotesTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: "NotesCell") as! ResizableNotesTableViewCell
         
-        cell.titleLabel?.text = Array(data[indexPath.row].keys)[0]
-        cell.notesLabel?.text = Array(data[indexPath.row].values)[0]
+        cell.titleLabel?.text = (data[(indexPath as NSIndexPath).row].keys as! [String])[0]
+        cell.notesLabel?.text = (data[(indexPath as NSIndexPath).row].values as! [String])[0]
         
         return cell
     }
