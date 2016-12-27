@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Epm-UU-UBU">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Second Pick-->
+        <scene sceneID="bxp-H2-BUe">
+            <objects>
+                <navigationController id="Epm-UU-UBU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Second Pick" image="secondPick" id="MGo-Og-3tR"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO">
+                        <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.94598066806793213" green="0.94598066806793213" blue="0.94598066806793213" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </simulatedTabBarMetrics>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4_7.fullscreen"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UKe-RC-gKi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="FjR-OE-aFO" kind="relationship" relationship="rootViewController" id="x26-Wi-Atl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uco-RT-aMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1460" y="876"/>
+        </scene>
+        <!--SecondPick-->
+        <scene sceneID="kDm-UD-lDm">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SecondPick" id="FjR-OE-aFO" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="xaj-An-B9b"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xdj-tS-HVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4317" y="1538"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="secondPick" width="25" height="25"/>
+    </resources>
+    <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+</document>
