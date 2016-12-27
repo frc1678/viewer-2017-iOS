@@ -27,8 +27,11 @@ class NotesTableViewController : UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCell(withIdentifier: "NotesCell") as! ResizableNotesTableViewCell
         
-        cell.titleLabel?.text = (data[(indexPath as NSIndexPath).row].keys as! [String])[0]
-        cell.notesLabel?.text = (data[(indexPath as NSIndexPath).row].values as! [String])[0]
+        let keys : [String] = Array(data[(indexPath as IndexPath).row].keys)
+        let values : [String] = Array(data[(indexPath as IndexPath).row].values)
+
+        cell.titleLabel?.text = keys[0]
+        cell.notesLabel?.text = values[0]
         
         return cell
     }

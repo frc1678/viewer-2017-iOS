@@ -53,7 +53,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func reloadImage() {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: { () -> Void in
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             if let team = self.team,
                 let imageView = self.teamSelectedImageView {
                     if team.selectedImageUrl != nil {
@@ -86,7 +86,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         }
                     }
             }
-        })
+        }
     }
     
     override func viewDidLoad() {

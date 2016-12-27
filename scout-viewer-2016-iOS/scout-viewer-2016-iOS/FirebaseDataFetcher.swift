@@ -68,9 +68,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         self.notificationManager.notifications.append(NotificationManager.Notification(name: "updateLeftTable"))
         //self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated"))
         
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+       DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             self.getAllTheData()
-        })
+        }
         
     }
     
@@ -119,7 +119,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             getDataFromUrl(url!) { [unowned self] (data, error) in
                 guard let data = data , error == nil else { return }
                 self.imageCache.set(value: UIImage(data: data) ?? UIImage(), key: "\(teamNum)")
-                UIApplication.shared.perform(Selector("_performMemoryWarning"))
+                UIApplication.shared.perform(Selector(("_performMemoryWarning")))
             }
         }
     }
@@ -176,7 +176,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             
             let teamReference = self.firebase.child("Teams")
             teamReference.observe(.childAdded, with: { [unowned self] snapshot in
-                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                     let team = self.makeTeamFromSnapshot(snapshot)
                     if let num = team.number as? Int {
                         self.updateCacheIfNeeded(snapshot, team: self.getTeam(num))
@@ -185,11 +185,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             self.notificationManager.queueNote("updateLeftTable", specialObject: team)
                         }
                     }
-                })
+                }
                 })
             
             teamReference.observe(.childChanged, with: { [unowned self] snapshot in
-                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+               DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                     self.teamCounter += 1
                     let team = self.makeTeamFromSnapshot(snapshot)
                     if team.number != nil {
@@ -209,12 +209,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             }
                         }
                     }
-                })
+                }
                 })
             
             let timdRef = self.firebase.child("TeamInMatchDatas")
             timdRef.observe(.childAdded, with: { [unowned self] (snap) -> Void in
-                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
                     let team = self.getTeam(timd!.teamNumber as! Int)
                     DispatchQueue.main.async {
@@ -223,11 +223,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                         self.teamInMatches.append(timd!)
                         self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                     }
-                })
+                }
                 })
             
             timdRef.observe(.childChanged, with: { [unowned self] (snap) -> Void in
-                DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                     self.TIMDCounter += 1
                     let timd = self.getTeamInMatchDataForDict(snap.value as! NSDictionary, key: snap.key)
                     DispatchQueue.main.async {
@@ -244,7 +244,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                             team.TeamInMatchDatas[i!] = timd!
                         }
                     }
-                })
+                }
                 })
             
             self.firstCurrentMatchUpdate = false
@@ -307,8 +307,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func allTeamsInMatch(_ match: Match) -> [Team]  {
-        let redTeams = getTeamsFromNumbers(match.redAllianceTeamNumbers! as? [Int])
-        let blueTeams = getTeamsFromNumbers(match.blueAllianceTeamNumbers! as? [Int])
+        let redTeams = getTeamsFromNumbers(match.redAllianceTeamNumbers! as [Int])
+        let blueTeams = getTeamsFromNumbers(match.blueAllianceTeamNumbers! as [Int])
         return redTeams + blueTeams
     }
     

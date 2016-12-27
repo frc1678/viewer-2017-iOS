@@ -103,7 +103,7 @@ class SortedRankTableViewController: ArrayTableViewController {
                                     self.shouldReverseRank = !self.shouldReverseRank
                                     self.dataArray = self.dataArray.reversed()
                                     //self.filteredArray = self.filteredArray.reverse()
-                                    self.loadDataArray(true)
+                                    //self.loadDataArray(true)
                                     self.tableView.reloadData()
                                     self.tableView.setNeedsDisplay()
                                 }

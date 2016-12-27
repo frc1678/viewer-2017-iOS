@@ -62,7 +62,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
         }
         
         var cell: UITableViewCell
-        let dataPoint: String = data!.value(forKeyPath: (keySets as [[String]])[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row])! as! String
+        let dataPoint = data!.value(forKeyPath: (keySets as [[String]])[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row])!
         if let notes = dataPoint as? String {
             cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
             let notesCell = cell as! ResizableNotesTableViewCell
@@ -73,7 +73,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
             
             cell.detailTextLabel?.text = "some array"
             cell.textLabel?.text = Utils.humanReadableNames[keySets[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]]
-        } else {
+        }  else {
             cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailValueCell", for: indexPath)
             cell.detailTextLabel?.text = "\(dataPoint)"
             cell.textLabel?.text = Utils.humanReadableNames[keySets[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]]
