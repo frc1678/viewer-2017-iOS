@@ -90,15 +90,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func makeTeamFromSnapshot(_ snapshot: FIRDataSnapshot) -> Team {
         let team = Team()
         if let v = snapshot.value as? NSDictionary {
-            if let _ = (v.object(forKey: "name") as? String) {
-                for key in team.properties() {
-                    if key == "calculatedData" {
-                        let teamCDDict = (v.object(forKey: "calculatedData") as? NSDictionary)
-                        team.calculatedData = self.getcalcDataForTeamFromDict(teamCDDict)
-                    } else {
-                        team.setValue((snapshot.value! as AnyObject).object(forKey: key), forKey: key)
+            for key in team.properties() {
+                if key == "calculatedData" {
+                    let teamCDDict = (v.object(forKey: "calculatedData") as? NSDictionary)
+                    team.calculatedData = self.getcalcDataForTeamFromDict(teamCDDict)
+                } else {
+                    team.setValue((snapshot.value! as AnyObject).object(forKey: key), forKey: key)
                         
-                    }
                 }
             }
         }

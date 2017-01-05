@@ -57,8 +57,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "526"
             endingLineNumber = "526"
-            landmarkName = "getTeamInMatchDataForDict(_:key:)"
-            landmarkType = "7">
+            landmarkName = "FirebaseDataFetcher"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -121,8 +121,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "683"
             endingLineNumber = "683"
-            landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
-            landmarkType = "7">
+            landmarkName = "FirebaseDataFetcher"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
