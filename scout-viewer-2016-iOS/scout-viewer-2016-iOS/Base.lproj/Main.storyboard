@@ -616,8 +616,9 @@
         <!--Second Pick-->
         <scene sceneID="bxp-H2-BUe">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uco-RT-aMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Epm-UU-UBU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Second Pick" image="secondPick" id="MGo-Og-3tR"/>
+                    <tabBarItem key="tabBarItem" title="Second Pick" image="secondPick" selectedImage="secondPick" id="MGo-Og-3tR"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="UKe-RC-gKi">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -626,15 +627,15 @@
                         <segue destination="FjR-OE-aFO" kind="relationship" relationship="rootViewController" id="x26-Wi-Atl"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uco-RT-aMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2396" y="-1285"/>
         </scene>
         <!--First Pick-->
         <scene sceneID="sA7-5A-eyN">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tzJ-Dd-QyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="mf1-jP-Bbe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="First Pick" image="firstPick" id="Yh0-0e-gWF"/>
+                    <tabBarItem key="tabBarItem" title="First Pick" image="firstPick" selectedImage="firstPick" id="Yh0-0e-gWF"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="0y4-hS-Zq6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -643,55 +644,54 @@
                         <segue destination="a8q-Xo-3T1" kind="relationship" relationship="rootViewController" id="hU0-ml-3dJ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tzJ-Dd-QyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3158" y="-1746"/>
         </scene>
         <!--FirstPick-->
         <scene sceneID="nUk-jI-XSl">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QCi-AW-HA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="FirstPick" id="a8q-Xo-3T1" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="3Nn-R0-4JF"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QCi-AW-HA1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3157" y="-1312"/>
         </scene>
         <!--UITableViewController-zsd-4H-i4N-->
         <scene sceneID="Ra9-LZ-fUL">
             <objects>
-                <viewControllerPlaceholder storyboardName="Schedule" referencedIdentifier="UITableViewController-zsd-4H-i4N" id="aUa-OA-SWb" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A53-If-LVc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Schedule" referencedIdentifier="UITableViewController-zsd-4H-i4N" id="aUa-OA-SWb" sceneMemberID="viewController"/>
             </objects>
             <point key="canvasLocation" x="3793" y="-2324"/>
         </scene>
         <!--UINavigationController-PK8-PT-EdK-->
         <scene sceneID="DHh-7R-VOX">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dNl-yW-nX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Schedule" referencedIdentifier="UINavigationController-PK8-PT-EdK" id="DGq-W9-z0h" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="iyP-Uh-MsT"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dNl-yW-nX0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2005" y="-2270"/>
         </scene>
         <!--SecondPick-->
         <scene sceneID="kDm-UD-lDm">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xdj-tS-HVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="SecondPick" id="FjR-OE-aFO" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="xaj-An-B9b"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xdj-tS-HVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2394" y="-821"/>
         </scene>
         <!--Seeding-->
         <scene sceneID="3Yz-0G-aLw">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3ch-kK-TvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewControllerPlaceholder storyboardName="Seeding" id="n2d-MX-8J8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="FFw-l3-rhA"/>
                 </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3ch-kK-TvU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2266" y="-2134"/>
         </scene>
