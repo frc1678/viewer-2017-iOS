@@ -89,8 +89,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="fortune_teller" width="50" height="50"/>
-        <image name="seeding" width="25" height="25"/>
+        <image name="fortune_teller" width="30" height="30"/>
+        <image name="seeding" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="mKi-ac-C5L"/>
