@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "calendar-50.png"
+      "filename" : "calendar-50-2 copy.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "calendar-50-1.png"
+      "filename" : "calendar-50.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "calendar-50-2.png"
+      "filename" : "calendar-50-2.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

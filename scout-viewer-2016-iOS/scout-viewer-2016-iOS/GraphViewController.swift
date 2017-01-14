@@ -112,7 +112,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     func barSelectionColor(for barChartView: JBBarChartView!) -> UIColor! {
         return highlightColor
     }
-    
+        
     func barChartView(_ barChartView: JBBarChartView!, didSelectBarAt index: UInt) {
         let mainDisplayText : String
         let displayTitleWithoutAvg = displayTitle.replacingOccurrences(of: "Avg. ", with: "").replacingOccurrences(of: " Consistency", with: "").replacingOccurrences(of: " Percentage", with: "")
