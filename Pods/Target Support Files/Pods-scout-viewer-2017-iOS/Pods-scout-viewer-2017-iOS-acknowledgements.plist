@@ -37,6 +37,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>DACircularProgress</string>
 			<key>Type</key>
@@ -45,6 +47,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>Firebase</string>
 			<key>Type</key>
@@ -53,6 +57,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseAnalytics</string>
 			<key>Type</key>
@@ -61,6 +67,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseCore</string>
 			<key>Type</key>
@@ -69,6 +77,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseDatabase</string>
 			<key>Type</key>
@@ -77,6 +87,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseInstanceID</string>
 			<key>Type</key>
@@ -85,6 +97,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>FirebaseStorage</string>
 			<key>Type</key>
@@ -295,6 +309,8 @@ THE SOFTWARE.</string>
    See the License for the specific language governing permissions and
    limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>GTMSessionFetcher</string>
 			<key>Type</key>
@@ -303,6 +319,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>GoogleInterchangeUtilities</string>
 			<key>Type</key>
@@ -311,6 +329,8 @@ THE SOFTWARE.</string>
 		<dict>
 			<key>FooterText</key>
 			<string>Copyright 2016 Google</string>
+			<key>License</key>
+			<string>Copyright</string>
 			<key>Title</key>
 			<string>GoogleSymbolUtilities</string>
 			<key>Type</key>
@@ -521,6 +541,8 @@ THE SOFTWARE.</string>
    See the License for the specific language governing permissions and
    limitations under the License.
 </string>
+			<key>License</key>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>GoogleToolboxForMac</string>
 			<key>Type</key>
@@ -729,6 +751,8 @@ THE SOFTWARE.</string>
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.</string>
+			<key>License</key>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>HanekeSwift</string>
 			<key>Type</key>
@@ -750,6 +774,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>Commercial</string>
 			<key>Title</key>
 			<string>Instabug</string>
 			<key>Type</key>
@@ -770,6 +796,8 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.</string>
+			<key>License</key>
+			<string>Apache</string>
 			<key>Title</key>
 			<string>JBChartView</string>
 			<key>Type</key>
@@ -796,6 +824,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.</string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>MBProgressHUD</string>
 			<key>Type</key>
@@ -823,6 +853,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>MWPhotoBrowser</string>
 			<key>Type</key>
@@ -851,6 +883,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 </string>
+			<key>License</key>
+			<string>MIT</string>
 			<key>Title</key>
 			<string>SDWebImage</string>
 			<key>Type</key>
