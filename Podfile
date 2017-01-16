@@ -1,0 +1,37 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, '6.0'
+
+use_frameworks!
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'ios-viewer' do
+    post_install do |installer|
+        installer.pods_project.targets.each do |target|
+            target.build_configurations.each do |config|
+                config.build_settings['SWIFT_VERSION'] = '3.0'
+                config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.10'
+            end
+        end
+    end
+    pod 'Firebase/Core'
+    #pod 'Firebase/Auth'
+    #pod 'FirebaseUI', '~> 0.4'
+    pod 'MWPhotoBrowser'
+    pod 'Firebase/Database'
+    pod 'Firebase/Storage'
+    pod 'JBChartView'
+    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
+    pod 'Instabug'
+    pod 'MWPhotoBrowser'
+end
+
+#target 'CurrentMatch' do
+#    pod 'Firebase/Core'
+#    #pod 'Firebase/Auth'
+#    #pod 'FirebaseUI', '~> 0.4'
+#    pod 'Firebase/Database'
+#    pod 'Firebase/Storage'
+#    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
+#end
+
+

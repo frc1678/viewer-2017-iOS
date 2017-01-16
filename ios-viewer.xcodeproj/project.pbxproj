@@ -1,0 +1,591 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		19B037C01E2C5739006E25A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B037BF1E2C5739006E25A2 /* Assets.xcassets */; };
+		19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */; };
+		19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CB1E2C581C006E25A2 /* Main.storyboard */; };
+		19B037D31E2C581C006E25A2 /* FirstPick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */; };
+		19B037D41E2C581C006E25A2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */; };
+		19B037D51E2C581C006E25A2 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CE1E2C581C006E25A2 /* Schedule.storyboard */; };
+		19B037D61E2C581C006E25A2 /* SecondPick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */; };
+		19B037D71E2C581C006E25A2 /* Seeding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037D01E2C581C006E25A2 /* Seeding.storyboard */; };
+		19B037D81E2C581C006E25A2 /* ThirdPick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037D11E2C581C006E25A2 /* ThirdPick.storyboard */; };
+		19B037E71E2C586C006E25A2 /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037DA1E2C586C006E25A2 /* ScheduleTableViewController.m */; };
+		19B037E81E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037DB1E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift */; };
+		19B037E91E2C586C006E25A2 /* MatchTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037DD1E2C586C006E25A2 /* MatchTableViewCell.m */; };
+		19B037EA1E2C586C006E25A2 /* MatchTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B037DE1E2C586C006E25A2 /* MatchTableViewCell.xib */; };
+		19B037EB1E2C586C006E25A2 /* SeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E01E2C586C006E25A2 /* SeedTableViewController.m */; };
+		19B037EC1E2C586C006E25A2 /* PredictedSeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E21E2C586C006E25A2 /* PredictedSeedTableViewController.m */; };
+		19B037ED1E2C586C006E25A2 /* FirstPickTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E41E2C586C006E25A2 /* FirstPickTableViewController.m */; };
+		19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */; };
+		19B037EF1E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E61E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift */; };
+		19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */; };
+		19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */; };
+		19B038071E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */; };
+		19B038081E2C5891006E25A2 /* MatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */; };
+		19B038091E2C5891006E25A2 /* DefenseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F41E2C5891006E25A2 /* DefenseTableViewController.swift */; };
+		19B0380A1E2C5891006E25A2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F51E2C5891006E25A2 /* Utils.swift */; };
+		19B0380B1E2C5891006E25A2 /* MatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F61E2C5891006E25A2 /* MatchCalculatedData.swift */; };
+		19B0380C1E2C5891006E25A2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F71E2C5891006E25A2 /* Team.swift */; };
+		19B0380D1E2C5891006E25A2 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F81E2C5891006E25A2 /* Match.swift */; };
+		19B0380E1E2C5891006E25A2 /* CalculatedTeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F91E2C5891006E25A2 /* CalculatedTeamData.swift */; };
+		19B0380F1E2C5891006E25A2 /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FA1E2C5891006E25A2 /* TeamInMatchData.swift */; };
+		19B038101E2C5891006E25A2 /* TeamInMatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FB1E2C5891006E25A2 /* TeamInMatchCalculatedData.swift */; };
+		19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FC1E2C5891006E25A2 /* Reflectable.swift */; };
+		19B038121E2C5891006E25A2 /* PDFRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FE1E2C5891006E25A2 /* PDFRenderer.m */; };
+		19B038131E2C5891006E25A2 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FF1E2C5891006E25A2 /* GraphViewController.swift */; };
+		19B038141E2C5891006E25A2 /* CurrentMatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038001E2C5891006E25A2 /* CurrentMatchManager.swift */; };
+		19B038151E2C5891006E25A2 /* ArrayTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038021E2C5891006E25A2 /* ArrayTableViewController.m */; };
+		19B038161E2C5891006E25A2 /* SortedRankTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038031E2C5891006E25A2 /* SortedRankTableViewController.swift */; };
+		19B038171E2C5891006E25A2 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038041E2C5891006E25A2 /* NotesTableViewController.swift */; };
+		19B038261E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038181E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift */; };
+		19B038271E2C58D3006E25A2 /* UnrankedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038191E2C58D3006E25A2 /* UnrankedTableViewCell.swift */; };
+		19B038281E2C58D3006E25A2 /* MultiCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B0381B1E2C58D3006E25A2 /* MultiCellTableViewCell.m */; };
+		19B038291E2C58D3006E25A2 /* MultiCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B0381C1E2C58D3006E25A2 /* MultiCellTableViewCell.xib */; };
+		19B0382A1E2C58D3006E25A2 /* MechanismTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B0381D1E2C58D3006E25A2 /* MechanismTableViewCell.swift */; };
+		19B0382B1E2C58D3006E25A2 /* MechanismTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B0381E1E2C58D3006E25A2 /* MechanismTableViewCell.xib */; };
+		19B0382C1E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038201E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m */; };
+		19B0382D1E2C58D3006E25A2 /* UINavigationController+SGProgress.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038221E2C58D3006E25A2 /* UINavigationController+SGProgress.m */; };
+		19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038241E2C58D3006E25A2 /* UIColor+HexString.m */; };
+		19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038301E2C5919006E25A2 /* AppDelegate.m */; };
+		19B038331E2C5919006E25A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038311E2C5919006E25A2 /* main.m */; };
+		19B038351E2D4171006E25A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19B038341E2D4171006E25A2 /* GoogleService-Info.plist */; };
+		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		17C3CB7B0693450E7F32640F /* Pods-ios-viewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.debug.xcconfig"; sourceTree = "<group>"; };
+		19B037B51E2C5739006E25A2 /* ios-viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		19B037BF1E2C5739006E25A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		19B037C21E2C5739006E25A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		19B037C41E2C5739006E25A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		19B037CA1E2C5789006E25A2 /* ios-viewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-viewer-Bridging-Header.h"; sourceTree = "<group>"; };
+		19B037CB1E2C581C006E25A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FirstPick.storyboard; sourceTree = "<group>"; };
+		19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		19B037CE1E2C581C006E25A2 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
+		19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecondPick.storyboard; sourceTree = "<group>"; };
+		19B037D01E2C581C006E25A2 /* Seeding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Seeding.storyboard; sourceTree = "<group>"; };
+		19B037D11E2C581C006E25A2 /* ThirdPick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ThirdPick.storyboard; sourceTree = "<group>"; };
+		19B037D91E2C586C006E25A2 /* ScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewController.h; sourceTree = "<group>"; };
+		19B037DA1E2C586C006E25A2 /* ScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewController.m; sourceTree = "<group>"; };
+		19B037DB1E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecificTeamScheduleTableViewController.swift; sourceTree = "<group>"; };
+		19B037DC1E2C586C006E25A2 /* MatchTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchTableViewCell.h; sourceTree = "<group>"; };
+		19B037DD1E2C586C006E25A2 /* MatchTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchTableViewCell.m; sourceTree = "<group>"; };
+		19B037DE1E2C586C006E25A2 /* MatchTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchTableViewCell.xib; sourceTree = "<group>"; };
+		19B037DF1E2C586C006E25A2 /* SeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SeedTableViewController.h; sourceTree = "<group>"; };
+		19B037E01E2C586C006E25A2 /* SeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SeedTableViewController.m; sourceTree = "<group>"; };
+		19B037E11E2C586C006E25A2 /* PredictedSeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PredictedSeedTableViewController.h; sourceTree = "<group>"; };
+		19B037E21E2C586C006E25A2 /* PredictedSeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PredictedSeedTableViewController.m; sourceTree = "<group>"; };
+		19B037E31E2C586C006E25A2 /* FirstPickTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPickTableViewController.h; sourceTree = "<group>"; };
+		19B037E41E2C586C006E25A2 /* FirstPickTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPickTableViewController.m; sourceTree = "<group>"; };
+		19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverallSecondPickAbilityViewController.swift; sourceTree = "<group>"; };
+		19B037E61E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalSecondPickTableViewController.swift; sourceTree = "<group>"; };
+		19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataFetcher.swift; sourceTree = "<group>"; };
+		19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsTableViewController.swift; sourceTree = "<group>"; };
+		19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchDetailsTableViewController.swift; sourceTree = "<group>"; };
+		19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDetailsViewController.swift; sourceTree = "<group>"; };
+		19B037F41E2C5891006E25A2 /* DefenseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefenseTableViewController.swift; sourceTree = "<group>"; };
+		19B037F51E2C5891006E25A2 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		19B037F61E2C5891006E25A2 /* MatchCalculatedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCalculatedData.swift; sourceTree = "<group>"; };
+		19B037F71E2C5891006E25A2 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		19B037F81E2C5891006E25A2 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		19B037F91E2C5891006E25A2 /* CalculatedTeamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamData.swift; sourceTree = "<group>"; };
+		19B037FA1E2C5891006E25A2 /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = "<group>"; };
+		19B037FB1E2C5891006E25A2 /* TeamInMatchCalculatedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchCalculatedData.swift; sourceTree = "<group>"; };
+		19B037FC1E2C5891006E25A2 /* Reflectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reflectable.swift; sourceTree = "<group>"; };
+		19B037FD1E2C5891006E25A2 /* PDFRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFRenderer.h; sourceTree = "<group>"; };
+		19B037FE1E2C5891006E25A2 /* PDFRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFRenderer.m; sourceTree = "<group>"; };
+		19B037FF1E2C5891006E25A2 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		19B038001E2C5891006E25A2 /* CurrentMatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentMatchManager.swift; sourceTree = "<group>"; };
+		19B038011E2C5891006E25A2 /* ArrayTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayTableViewController.h; sourceTree = "<group>"; };
+		19B038021E2C5891006E25A2 /* ArrayTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayTableViewController.m; sourceTree = "<group>"; };
+		19B038031E2C5891006E25A2 /* SortedRankTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortedRankTableViewController.swift; sourceTree = "<group>"; };
+		19B038041E2C5891006E25A2 /* NotesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		19B038181E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableNotesTableViewCell.swift; sourceTree = "<group>"; };
+		19B038191E2C58D3006E25A2 /* UnrankedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnrankedTableViewCell.swift; sourceTree = "<group>"; };
+		19B0381A1E2C58D3006E25A2 /* MultiCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiCellTableViewCell.h; sourceTree = "<group>"; };
+		19B0381B1E2C58D3006E25A2 /* MultiCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiCellTableViewCell.m; sourceTree = "<group>"; };
+		19B0381C1E2C58D3006E25A2 /* MultiCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiCellTableViewCell.xib; sourceTree = "<group>"; };
+		19B0381D1E2C58D3006E25A2 /* MechanismTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MechanismTableViewCell.swift; sourceTree = "<group>"; };
+		19B0381E1E2C58D3006E25A2 /* MechanismTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MechanismTableViewCell.xib; sourceTree = "<group>"; };
+		19B0381F1E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString+OrdinalFormat.h"; sourceTree = "<group>"; };
+		19B038201E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString+OrdinalFormat.m"; sourceTree = "<group>"; };
+		19B038211E2C58D3006E25A2 /* UINavigationController+SGProgress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+SGProgress.h"; sourceTree = "<group>"; };
+		19B038221E2C58D3006E25A2 /* UINavigationController+SGProgress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SGProgress.m"; sourceTree = "<group>"; };
+		19B038231E2C58D3006E25A2 /* UIColor+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+HexString.h"; sourceTree = "<group>"; };
+		19B038241E2C58D3006E25A2 /* UIColor+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+HexString.m"; sourceTree = "<group>"; };
+		19B038251E2C58D3006E25A2 /* config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = config.h; sourceTree = "<group>"; };
+		19B0382F1E2C5919006E25A2 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		19B038301E2C5919006E25A2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		19B038311E2C5919006E25A2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		19B038341E2D4171006E25A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
+		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		19B037B21E2C5739006E25A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		19B037AC1E2C5739006E25A2 = {
+			isa = PBXGroup;
+			children = (
+				19B037B71E2C5739006E25A2 /* ios-viewer */,
+				19B037B61E2C5739006E25A2 /* Products */,
+				19B037CA1E2C5789006E25A2 /* ios-viewer-Bridging-Header.h */,
+				E88302B98B14AB62FE417541 /* Pods */,
+				48ECDB9D8F73FADD323959E9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		19B037B61E2C5739006E25A2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19B037B51E2C5739006E25A2 /* ios-viewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		19B037B71E2C5739006E25A2 /* ios-viewer */ = {
+			isa = PBXGroup;
+			children = (
+				19B037CB1E2C581C006E25A2 /* Main.storyboard */,
+				19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */,
+				19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */,
+				19B037CE1E2C581C006E25A2 /* Schedule.storyboard */,
+				19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */,
+				19B037D01E2C581C006E25A2 /* Seeding.storyboard */,
+				19B037D11E2C581C006E25A2 /* ThirdPick.storyboard */,
+				19B038341E2D4171006E25A2 /* GoogleService-Info.plist */,
+				19B037D91E2C586C006E25A2 /* ScheduleTableViewController.h */,
+				19B037DA1E2C586C006E25A2 /* ScheduleTableViewController.m */,
+				19B037DB1E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift */,
+				19B037DC1E2C586C006E25A2 /* MatchTableViewCell.h */,
+				19B037DD1E2C586C006E25A2 /* MatchTableViewCell.m */,
+				19B037DE1E2C586C006E25A2 /* MatchTableViewCell.xib */,
+				19B037DF1E2C586C006E25A2 /* SeedTableViewController.h */,
+				19B037E01E2C586C006E25A2 /* SeedTableViewController.m */,
+				19B037E11E2C586C006E25A2 /* PredictedSeedTableViewController.h */,
+				19B037E21E2C586C006E25A2 /* PredictedSeedTableViewController.m */,
+				19B037E31E2C586C006E25A2 /* FirstPickTableViewController.h */,
+				19B037E41E2C586C006E25A2 /* FirstPickTableViewController.m */,
+				19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */,
+				19B037E61E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift */,
+				19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */,
+				19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */,
+				19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */,
+				19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */,
+				19B037F41E2C5891006E25A2 /* DefenseTableViewController.swift */,
+				19B0382F1E2C5919006E25A2 /* AppDelegate.h */,
+				19B038301E2C5919006E25A2 /* AppDelegate.m */,
+				19B038311E2C5919006E25A2 /* main.m */,
+				19B037F51E2C5891006E25A2 /* Utils.swift */,
+				19B037F61E2C5891006E25A2 /* MatchCalculatedData.swift */,
+				19B037F71E2C5891006E25A2 /* Team.swift */,
+				19B037F81E2C5891006E25A2 /* Match.swift */,
+				19B037F91E2C5891006E25A2 /* CalculatedTeamData.swift */,
+				19B037FA1E2C5891006E25A2 /* TeamInMatchData.swift */,
+				19B037FB1E2C5891006E25A2 /* TeamInMatchCalculatedData.swift */,
+				19B037FC1E2C5891006E25A2 /* Reflectable.swift */,
+				19B037FD1E2C5891006E25A2 /* PDFRenderer.h */,
+				19B037FE1E2C5891006E25A2 /* PDFRenderer.m */,
+				19B037FF1E2C5891006E25A2 /* GraphViewController.swift */,
+				19B038001E2C5891006E25A2 /* CurrentMatchManager.swift */,
+				19B038011E2C5891006E25A2 /* ArrayTableViewController.h */,
+				19B038021E2C5891006E25A2 /* ArrayTableViewController.m */,
+				19B038031E2C5891006E25A2 /* SortedRankTableViewController.swift */,
+				19B038041E2C5891006E25A2 /* NotesTableViewController.swift */,
+				19B038181E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift */,
+				19B038191E2C58D3006E25A2 /* UnrankedTableViewCell.swift */,
+				19B0381A1E2C58D3006E25A2 /* MultiCellTableViewCell.h */,
+				19B0381B1E2C58D3006E25A2 /* MultiCellTableViewCell.m */,
+				19B0381C1E2C58D3006E25A2 /* MultiCellTableViewCell.xib */,
+				19B0381D1E2C58D3006E25A2 /* MechanismTableViewCell.swift */,
+				19B0381E1E2C58D3006E25A2 /* MechanismTableViewCell.xib */,
+				19B0381F1E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.h */,
+				19B038201E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m */,
+				19B038211E2C58D3006E25A2 /* UINavigationController+SGProgress.h */,
+				19B038221E2C58D3006E25A2 /* UINavigationController+SGProgress.m */,
+				19B038231E2C58D3006E25A2 /* UIColor+HexString.h */,
+				19B038241E2C58D3006E25A2 /* UIColor+HexString.m */,
+				19B038251E2C58D3006E25A2 /* config.h */,
+				19B037BF1E2C5739006E25A2 /* Assets.xcassets */,
+				19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */,
+				19B037C41E2C5739006E25A2 /* Info.plist */,
+			);
+			path = "ios-viewer";
+			sourceTree = "<group>";
+		};
+		48ECDB9D8F73FADD323959E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E88302B98B14AB62FE417541 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				17C3CB7B0693450E7F32640F /* Pods-ios-viewer.debug.xcconfig */,
+				ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		19B037B41E2C5739006E25A2 /* ios-viewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 19B037C71E2C5739006E25A2 /* Build configuration list for PBXNativeTarget "ios-viewer" */;
+			buildPhases = (
+				99413070950C583F7307D74D /* [CP] Check Pods Manifest.lock */,
+				19B037B11E2C5739006E25A2 /* Sources */,
+				19B037B21E2C5739006E25A2 /* Frameworks */,
+				19B037B31E2C5739006E25A2 /* Resources */,
+				0E372FC2A11D6315A93EA2AC /* [CP] Embed Pods Frameworks */,
+				10885DE3B5B3FE7B366CD7D9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ios-viewer";
+			productName = "ios-viewer";
+			productReference = 19B037B51E2C5739006E25A2 /* ios-viewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		19B037AD1E2C5739006E25A2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = brytonmoeller;
+				TargetAttributes = {
+					19B037B41E2C5739006E25A2 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = J3MNNM5PHM;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 19B037B01E2C5739006E25A2 /* Build configuration list for PBXProject "ios-viewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 19B037AC1E2C5739006E25A2;
+			productRefGroup = 19B037B61E2C5739006E25A2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				19B037B41E2C5739006E25A2 /* ios-viewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		19B037B31E2C5739006E25A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B038351E2D4171006E25A2 /* GoogleService-Info.plist in Resources */,
+				19B037D71E2C581C006E25A2 /* Seeding.storyboard in Resources */,
+				19B037D41E2C581C006E25A2 /* LaunchScreen.xib in Resources */,
+				19B037D81E2C581C006E25A2 /* ThirdPick.storyboard in Resources */,
+				19B0382B1E2C58D3006E25A2 /* MechanismTableViewCell.xib in Resources */,
+				19B038291E2C58D3006E25A2 /* MultiCellTableViewCell.xib in Resources */,
+				19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */,
+				19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */,
+				19B037EA1E2C586C006E25A2 /* MatchTableViewCell.xib in Resources */,
+				19B037D31E2C581C006E25A2 /* FirstPick.storyboard in Resources */,
+				19B037C01E2C5739006E25A2 /* Assets.xcassets in Resources */,
+				19B037D61E2C581C006E25A2 /* SecondPick.storyboard in Resources */,
+				19B037D51E2C581C006E25A2 /* Schedule.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E372FC2A11D6315A93EA2AC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		10885DE3B5B3FE7B366CD7D9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		99413070950C583F7307D74D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		19B037B11E2C5739006E25A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				19B0380C1E2C5891006E25A2 /* Team.swift in Sources */,
+				19B038131E2C5891006E25A2 /* GraphViewController.swift in Sources */,
+				19B038151E2C5891006E25A2 /* ArrayTableViewController.m in Sources */,
+				19B038121E2C5891006E25A2 /* PDFRenderer.m in Sources */,
+				19B038101E2C5891006E25A2 /* TeamInMatchCalculatedData.swift in Sources */,
+				19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */,
+				19B037E81E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift in Sources */,
+				19B038071E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift in Sources */,
+				19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */,
+				19B037E91E2C586C006E25A2 /* MatchTableViewCell.m in Sources */,
+				19B0382A1E2C58D3006E25A2 /* MechanismTableViewCell.swift in Sources */,
+				19B038141E2C5891006E25A2 /* CurrentMatchManager.swift in Sources */,
+				19B038171E2C5891006E25A2 /* NotesTableViewController.swift in Sources */,
+				19B0380D1E2C5891006E25A2 /* Match.swift in Sources */,
+				19B038161E2C5891006E25A2 /* SortedRankTableViewController.swift in Sources */,
+				19B0380A1E2C5891006E25A2 /* Utils.swift in Sources */,
+				19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */,
+				19B0380E1E2C5891006E25A2 /* CalculatedTeamData.swift in Sources */,
+				19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */,
+				19B0382C1E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m in Sources */,
+				19B037EB1E2C586C006E25A2 /* SeedTableViewController.m in Sources */,
+				19B038091E2C5891006E25A2 /* DefenseTableViewController.swift in Sources */,
+				19B038261E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift in Sources */,
+				19B0382D1E2C58D3006E25A2 /* UINavigationController+SGProgress.m in Sources */,
+				19B037EC1E2C586C006E25A2 /* PredictedSeedTableViewController.m in Sources */,
+				19B038271E2C58D3006E25A2 /* UnrankedTableViewCell.swift in Sources */,
+				19B037E71E2C586C006E25A2 /* ScheduleTableViewController.m in Sources */,
+				19B037ED1E2C586C006E25A2 /* FirstPickTableViewController.m in Sources */,
+				19B0380F1E2C5891006E25A2 /* TeamInMatchData.swift in Sources */,
+				19B038281E2C58D3006E25A2 /* MultiCellTableViewCell.m in Sources */,
+				19B037EF1E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift in Sources */,
+				19B038081E2C5891006E25A2 /* MatchDetailsViewController.swift in Sources */,
+				19B0380B1E2C5891006E25A2 /* MatchCalculatedData.swift in Sources */,
+				19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */,
+				19B038331E2C5919006E25A2 /* main.m in Sources */,
+				19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				19B037C21E2C5739006E25A2 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		19B037C51E2C5739006E25A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		19B037C61E2C5739006E25A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		19B037C81E2C5739006E25A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 17C3CB7B0693450E7F32640F /* Pods-ios-viewer.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = J3MNNM5PHM;
+				INFOPLIST_FILE = "ios-viewer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ios-viewer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		19B037C91E2C5739006E25A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = J3MNNM5PHM;
+				INFOPLIST_FILE = "ios-viewer/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ios-viewer-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		19B037B01E2C5739006E25A2 /* Build configuration list for PBXProject "ios-viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19B037C51E2C5739006E25A2 /* Debug */,
+				19B037C61E2C5739006E25A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		19B037C71E2C5739006E25A2 /* Build configuration list for PBXNativeTarget "ios-viewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				19B037C81E2C5739006E25A2 /* Debug */,
+				19B037C91E2C5739006E25A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 19B037AD1E2C5739006E25A2 /* Project object */;
+}
