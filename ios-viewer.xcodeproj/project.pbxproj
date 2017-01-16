@@ -11,7 +11,6 @@
 		19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */; };
 		19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CB1E2C581C006E25A2 /* Main.storyboard */; };
 		19B037D31E2C581C006E25A2 /* FirstPick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */; };
-		19B037D41E2C581C006E25A2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */; };
 		19B037D51E2C581C006E25A2 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CE1E2C581C006E25A2 /* Schedule.storyboard */; };
 		19B037D61E2C581C006E25A2 /* SecondPick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */; };
 		19B037D71E2C581C006E25A2 /* Seeding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037D01E2C581C006E25A2 /* Seeding.storyboard */; };
@@ -68,7 +67,6 @@
 		19B037CA1E2C5789006E25A2 /* ios-viewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-viewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		19B037CB1E2C581C006E25A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FirstPick.storyboard; sourceTree = "<group>"; };
-		19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		19B037CE1E2C581C006E25A2 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
 		19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecondPick.storyboard; sourceTree = "<group>"; };
 		19B037D01E2C581C006E25A2 /* Seeding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Seeding.storyboard; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 			children = (
 				19B037CB1E2C581C006E25A2 /* Main.storyboard */,
 				19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */,
-				19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */,
 				19B037CE1E2C581C006E25A2 /* Schedule.storyboard */,
 				19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */,
 				19B037D01E2C581C006E25A2 /* Seeding.storyboard */,
@@ -314,7 +311,6 @@
 			files = (
 				19B038351E2D4171006E25A2 /* GoogleService-Info.plist in Resources */,
 				19B037D71E2C581C006E25A2 /* Seeding.storyboard in Resources */,
-				19B037D41E2C581C006E25A2 /* LaunchScreen.xib in Resources */,
 				19B037D81E2C581C006E25A2 /* ThirdPick.storyboard in Resources */,
 				19B0382B1E2C58D3006E25A2 /* MechanismTableViewCell.xib in Resources */,
 				19B038291E2C58D3006E25A2 /* MultiCellTableViewCell.xib in Resources */,
