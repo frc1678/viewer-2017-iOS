@@ -74,6 +74,12 @@ class MatchDetailsViewController: UIViewController {
     @IBOutlet weak var B3TL: UILabel!
     @IBOutlet weak var B3D: UILabel!
     
+    @IBOutlet weak var R1WA: UILabel!
+    @IBOutlet weak var R2WA: UILabel!
+    @IBOutlet weak var R3WA: UILabel!
+    @IBOutlet weak var B1WA: UILabel!
+    @IBOutlet weak var B2WA: UILabel!
+    @IBOutlet weak var B3WA: UILabel!
     
     @IBOutlet weak var redDefenseOneLabel: UILabel!
     @IBOutlet weak var redDefenseTwoLabel: UILabel!
@@ -141,16 +147,19 @@ class MatchDetailsViewController: UIViewController {
             
             let redTeams = firebaseFetcher?.getTeamsFromNumbers(match.redAllianceTeamNumbers as? [Int])
             if (redTeams?.count)! > 0 {
-                for index in 0...(redTeams?.count)! - 1 {
-                    if index <= 2 {
-                        (value(forKey: "redTeam\(mapping[index])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index])", for: UIControlState())
-                        if let cd = redTeams?[index].calculatedData {
+                //Index goes from 1 to 3, because thats the way the ui labels are named.
+                for index in 1...(redTeams?.count)! {
+                    if index <= 3 {
+                        (value(forKey: "redTeam\(mapping[index-1])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index-1])", for: UIControlState())
+                        if let cd = redTeams?[index-1].calculatedData {
                             
-                            (value(forKey: "R\(index+1)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index+1)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index+1)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index+1)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele?.intValue as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index+1)D") as! UILabel).text = "R Drive: \(roundValue(cd.RScoreDrivingAbility, toDecimalPlaces: 2))"
+                            (value(forKey: "R\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed, toDecimalPlaces: 0))"
+                            (value(forKey: "R\(index)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility, toDecimalPlaces: 0))"
+                            (value(forKey: "R\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele, toDecimalPlaces: 0))"
+                            (value(forKey: "R\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele?.intValue as AnyObject?, toDecimalPlaces: 0))"
+                            (value(forKey: "R\(index)D") as! UILabel).text = "R Drive: \(roundValue(cd.RScoreDrivingAbility, toDecimalPlaces: 2))"
+                            (value(forKey: "R\(index)WA") as! UILabel).attributedText = withAgainstAttributedStringForTeam(number: match.redAllianceTeamNumbers![index-1])
+
                         }
 
                         
@@ -164,7 +173,7 @@ class MatchDetailsViewController: UIViewController {
             
             let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match.blueAllianceTeamNumbers as? [Int])
             if (blueTeams?.count)! > 0 {
-                for index in 1...((blueTeams?.count)! as Int) {
+                for index in 1...(blueTeams?.count)! {
                     if index <= 3 {
                         //print(blueTeams[index].number)
                         (value(forKey: "blueTeam\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", for: UIControlState())
@@ -186,11 +195,62 @@ class MatchDetailsViewController: UIViewController {
                             (value(forKey: "B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele?.intValue as AnyObject?, toDecimalPlaces: 0))"
                             (value(forKey: "B\(index)D") as! UILabel).text = "R Drive: \(roundValue(cd.RScoreDrivingAbility, toDecimalPlaces: 2))"
                             (value(forKey: "B\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele, toDecimalPlaces: 0))"
+                            (value(forKey: "B\(index)WA") as! UILabel).attributedText = withAgainstAttributedStringForTeam(number: match.blueAllianceTeamNumbers![index-1])
+
                         }
                     }
                 }
             }
         }
+    }
+    
+    enum PlayRelationship : String {
+        case With = "With"
+        case Against = "Against"
+        case Both = "Both"
+        case Neither = "Neither"
+    }
+    
+    func playWithAgainstOrBothWithTeam(number: NSNumber) -> PlayRelationship {
+        var playWith = false
+        var playAgainst = false
+        for match in (firebaseFetcher?.getMatchesForTeam(1678))! {
+            if (match.redAllianceTeamNumbers?.contains(1678))! {
+                if (match.redAllianceTeamNumbers?.contains(number))! {
+                    playWith = true
+                } else if (match.blueAllianceTeamNumbers?.contains(number))! {
+                    playAgainst = true
+                }
+            } else if (match.blueAllianceTeamNumbers?.contains(1678))! {
+                if (match.blueAllianceTeamNumbers?.contains(number))! {
+                    playWith = true
+                } else if (match.redAllianceTeamNumbers?.contains(number))! {
+                    playAgainst = true
+                }
+            }
+        }
+        if playWith && playAgainst {
+            return .Both
+        } else if playWith {
+            return .With
+        } else if playAgainst {
+            return .Against
+        } else {
+            return .Neither
+        }
+    }
+    
+    func withAgainstAttributedStringForTeam(number: NSNumber) -> NSAttributedString {
+        var attString : NSAttributedString
+        let withOrAgainst = playWithAgainstOrBothWithTeam(number: number)
+        switch withOrAgainst {
+        case .With : attString = NSAttributedString(string: withOrAgainst.rawValue, attributes: [NSForegroundColorAttributeName: UIColor.green])
+        case .Against : attString = NSAttributedString(string: withOrAgainst.rawValue, attributes: [NSForegroundColorAttributeName: UIColor.orange])
+        case .Both : attString = NSAttributedString(string: withOrAgainst.rawValue, attributes: [NSForegroundColorAttributeName: UIColor.brown])
+        case .Neither : attString = NSAttributedString(string: withOrAgainst.rawValue, attributes: [NSForegroundColorAttributeName: UIColor.gray])
+
+        }
+        return attString
     }
     
     @IBAction func teamTapped(_ sender: UIButton) {
