@@ -1,6 +1,0 @@
-framework module Pods_scout_viewer_2017_iOS {
-  umbrella header "Pods-scout-viewer-2017-iOS-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -44,7 +44,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-scout-viewer-2017-iOS.xcscheme</key>
+		<key>Pods-ios-viewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,6 +72,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>3BB443B715B263CBF97B50DE322D3CAD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6B1714E816AE794962516E2ECBB40A5A</key>
 		<dict>
 			<key>primary</key>
@@ -83,11 +88,6 @@
 			<true/>
 		</dict>
 		<key>7BAAEC1386420288825150BB5315CA52</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8114D0CAEE11027DA0025878CD3BC4E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

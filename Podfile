@@ -4,7 +4,7 @@
 use_frameworks!
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'scout-viewer-2017-iOS' do
+target 'ios-viewer' do
     post_install do |installer|
         installer.pods_project.targets.each do |target|
             target.build_configurations.each do |config|
