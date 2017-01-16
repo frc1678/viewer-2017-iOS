@@ -56,6 +56,7 @@
 		19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038301E2C5919006E25A2 /* AppDelegate.m */; };
 		19B038331E2C5919006E25A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038311E2C5919006E25A2 /* main.m */; };
 		19B038351E2D4171006E25A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19B038341E2D4171006E25A2 /* GoogleService-Info.plist */; };
+		8C38CAA41E2D4E80005F5958 /* TIMDScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C38CAA31E2D4E80005F5958 /* TIMDScheduleViewController.swift */; };
 		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +127,7 @@
 		19B038301E2C5919006E25A2 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		19B038311E2C5919006E25A2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		19B038341E2D4171006E25A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8C38CAA31E2D4E80005F5958 /* TIMDScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDScheduleViewController.swift; sourceTree = "<group>"; };
 		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
 		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -191,6 +193,7 @@
 				19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */,
 				19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */,
 				19B037F41E2C5891006E25A2 /* DefenseTableViewController.swift */,
+				8C38CAA31E2D4E80005F5958 /* TIMDScheduleViewController.swift */,
 				19B0382F1E2C5919006E25A2 /* AppDelegate.h */,
 				19B038301E2C5919006E25A2 /* AppDelegate.m */,
 				19B038311E2C5919006E25A2 /* main.m */,
@@ -390,6 +393,7 @@
 				19B038101E2C5891006E25A2 /* TeamInMatchCalculatedData.swift in Sources */,
 				19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */,
 				19B037E81E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift in Sources */,
+				8C38CAA41E2D4E80005F5958 /* TIMDScheduleViewController.swift in Sources */,
 				19B038071E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift in Sources */,
 				19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */,
 				19B037E91E2C586C006E25A2 /* MatchTableViewCell.m in Sources */,

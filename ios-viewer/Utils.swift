@@ -237,6 +237,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
         
         let defaultKeys = [
+            "TeamInMatchDatas",
             "matchDatas"
         ]
         
@@ -639,6 +640,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.siegeConsistency" : "Siege Consistency",
         "calculatedData.siegePower" : "Siege Power",
         "matchDatas" : "Matches",
+        "TeamInMatchDatas" : "TIMDs",
         "pitLowBarCapability": "Low Bar Ability",
         "calculatedData.autoAbility" : "Auto Ability",
         "calculatedData.citrusDPR" : "Citrus DPR",
