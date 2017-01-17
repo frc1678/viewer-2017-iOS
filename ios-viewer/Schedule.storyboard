@@ -25,11 +25,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Schedule" id="NKq-ai-GQN">
-                        <barButtonItem key="leftBarButtonItem" image="cache" id="tLG-hK-bOv">
-                            <connections>
-                                <action selector="cachePhotos:" destination="GTR-t1-4au" id="xwW-Vw-My3"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="1678" id="05e-XD-yOJ">
                             <connections>
                                 <action selector="ourScheduleTapped:" destination="GTR-t1-4au" id="svP-S3-qJn"/>
@@ -38,7 +33,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="cacheButton" destination="tLG-hK-bOv" id="9i6-Cc-mYy"/>
                         <segue destination="RuH-IZ-uRP" kind="show" identifier="Match Segue" id="XVc-rp-7iO"/>
                     </connections>
                 </tableViewController>
@@ -712,11 +706,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cache" width="30" height="30"/>
         <image name="schedule" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1cq-k5-piP"/>
+        <segue reference="XVc-rp-7iO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

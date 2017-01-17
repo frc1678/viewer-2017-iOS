@@ -491,6 +491,22 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
     }
     
+    static let graphTitleSwitch = [
+        "didScaleTele" : "scalePercentage",
+        "didGetIncapacitated" : "incapacitatedPercentage",
+        "didGetDisabled" : "disabledPercentage",
+        "didChallengeTele" : "challengePercentage",
+        "numShotsBlockedTele" : "avgShotsBlocked",
+        "numLowShotsMadeTele" : "avgLowShotsTele",
+        "numHighShotsMadeTele" : "avgHighShotsTele",
+        "numBallsKnockedOffMidlineAuto" : "avgBallsKnockedOffMidlineAuto",
+        "calculatedData.numBallsIntakedOffMidlineAuto" : "avgMidlineBallsIntakedAuto",
+        "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
+        "calculatedData.RScoreEvasion" : "calculatedData.avgEvasion",
+        "calculatedData.RScoreTorque" : "calculatedData.avgTorque",
+        "rankBallControl" : "calculatedData.avgBallControl",
+        ]
+    
     static let teamCalcKeys = [
         "actualSeed",
         "avgBallControl",
