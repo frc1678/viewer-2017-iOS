@@ -42,6 +42,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - SwiftyJSON (3.1.4)
 
 DEPENDENCIES:
   - Firebase/Core
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - Instabug
   - JBChartView
   - MWPhotoBrowser
+  - SwiftyJSON
 
 EXTERNAL SOURCES:
   HanekeSwift:
@@ -80,7 +82,8 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: 55752463d40569f710af3c74dcea9345a7645e8d
+PODFILE CHECKSUM: bc5bb7829207d9b1ce71920d28cd574e7dcba4a0
 
 COCOAPODS: 1.1.1

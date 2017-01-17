@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class TeamInMatchCalculatedData: NSObject, Reflectable {
+class OLDTeamInMatchCalculatedData: NSObject, Reflectable {
     var firstPickAbility : NSNumber?
     var totalNumTimesCrossedDefensesAuto : NSNumber?
     var numTimesSuccesfulCrossedDefensesAuto : NSDictionary?

@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import Haneke
+import UserNotifications
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -488,9 +490,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return calcData
     }
     
-    func getCalculatedTeamInMatchDataForDict(_ dict: NSDictionary?) -> TeamInMatchCalculatedData {
+    func getCalculatedTeamInMatchDataForDict(_ dict: NSDictionary?) -> CalculatedTeamInMatchData {
         if dict != nil {
-            let CTIMD = TeamInMatchCalculatedData()
+            let CTIMD = CalculatedTeamInMatchData()
             for key in CTIMD.properties() {
                 if let value = dict!.object(forKey: key) {
                     CTIMD.setValue(value, forKey: key)
@@ -743,13 +745,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
      - parameter notificationBody: What the text of the notification should be (that the person reads).
      */
     func postNotification(_ notificationBody:String) {
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = Date(timeIntervalSinceNow: 1)
-        localNotification.alertBody = notificationBody
-        localNotification.timeZone = TimeZone.current
-        localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
-        UIApplication.shared.scheduleLocalNotification(localNotification)
+        let content = UNMutableNotificationContent()
+        content.body = notificationBody
+        content.sound = UNNotificationSound.default()
+        content.badge = NSNumber(integerLiteral: UIApplication.shared.applicationIconBadgeNumber + 1)
+        content.title = "Upcoming Starred Match"
+        let localNotification = UNNotificationRequest(identifier: "ViewerNotification", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(localNotification, withCompletionHandler: nil)
     }
     
     func getCurrentMatch() -> Int {

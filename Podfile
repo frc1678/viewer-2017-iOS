@@ -20,6 +20,7 @@ target 'ios-viewer' do
     pod 'Firebase/Database'
     pod 'Firebase/Storage'
     pod 'JBChartView'
+    pod 'SwiftyJSON'
     pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
     pod 'Instabug'
     pod 'MWPhotoBrowser'
