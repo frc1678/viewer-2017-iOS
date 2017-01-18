@@ -4,17 +4,27 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            scope = "0"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ios-viewer/TeamDetailsTableViewController.swift"
-            timestampString = "506287309.858103"
+            filePath = "ios-viewer/TIMDScheduleViewController.swift"
+            timestampString = "506306659.48284"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -25,14 +35,126 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "ios-viewer/TeamDetailsTableViewController.swift"
-            timestampString = "506287557.261494"
+            filePath = "ios-viewer/FirebaseDataFetcher.swift"
+            timestampString = "506444982.239048"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "getTimDataForTeamInMatch(_:inMatch:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-viewer/FirebaseDataFetcher.swift"
+            timestampString = "506445052.656102"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "getTimDataForTeamInMatch(_:inMatch:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-viewer/FirebaseDataFetcher.swift"
+            timestampString = "506445133.325191"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "getTimDataForTeamInMatch(_:inMatch:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_viewer.FirebaseDataFetcher.getTimDataForTeamInMatch (ios_viewer.Team, inMatch : ios_viewer.Match) -&gt; Swift.Optional&lt;ios_viewer.TeamInMatchData&gt;"
+                  moduleName = "ios-viewer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carterluck/Documents/viewer-2017-iOS/ios-viewer/FirebaseDataFetcher.swift"
+                  timestampString = "506445707.094537"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "129">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_viewer.FirebaseDataFetcher.(getTimDataForTeamInMatch (ios_viewer.Team, inMatch : ios_viewer.Match) -&gt; Swift.Optional&lt;ios_viewer.TeamInMatchData&gt;).(closure #1)"
+                  moduleName = "ios-viewer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carterluck/Documents/viewer-2017-iOS/ios-viewer/FirebaseDataFetcher.swift"
+                  timestampString = "506445707.096371"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-viewer/TIMDScheduleViewController.swift"
+            timestampString = "506445311.03012"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_viewer.TIMDScheduleViewController.prepare (for : __ObjC.UIStoryboardSegue, sender : Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "ios-viewer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carterluck/Documents/viewer-2017-iOS/ios-viewer/TIMDScheduleViewController.swift"
+                  timestampString = "506445707.100259"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "525">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_viewer.TIMDScheduleViewController.prepare (for : __ObjC.UIStoryboardSegue, sender : Swift.Optional&lt;Any&gt;) -&gt; ()"
+                  moduleName = "ios-viewer"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/carterluck/Documents/viewer-2017-iOS/ios-viewer/TIMDScheduleViewController.swift"
+                  timestampString = "506445707.101991"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "2077">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

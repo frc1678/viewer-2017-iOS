@@ -11,7 +11,6 @@
 		19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */; };
 		19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CB1E2C581C006E25A2 /* Main.storyboard */; };
 		19B037D31E2C581C006E25A2 /* FirstPick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */; };
-		19B037D41E2C581C006E25A2 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */; };
 		19B037D51E2C581C006E25A2 /* Schedule.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CE1E2C581C006E25A2 /* Schedule.storyboard */; };
 		19B037D61E2C581C006E25A2 /* SecondPick.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */; };
 		19B037D71E2C581C006E25A2 /* Seeding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037D01E2C581C006E25A2 /* Seeding.storyboard */; };
@@ -57,6 +56,9 @@
 		19B038331E2C5919006E25A2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B038311E2C5919006E25A2 /* main.m */; };
 		19B038351E2D4171006E25A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19B038341E2D4171006E25A2 /* GoogleService-Info.plist */; };
 		8C38CAA41E2D4E80005F5958 /* TIMDScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C38CAA31E2D4E80005F5958 /* TIMDScheduleViewController.swift */; };
+		8C38CAA61E2D8852005F5958 /* TIMDDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C38CAA51E2D8852005F5958 /* TIMDDetailsViewController.swift */; };
+		8C38CAA81E2D8BEB005F5958 /* TIMDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C38CAA71E2D8BEB005F5958 /* TIMDTableViewCell.xib */; };
+		8C38CAAA1E2D9B64005F5958 /* TIMDTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C38CAA91E2D9B64005F5958 /* TIMDTableViewCell.swift */; };
 		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -69,7 +71,6 @@
 		19B037CA1E2C5789006E25A2 /* ios-viewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ios-viewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		19B037CB1E2C581C006E25A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FirstPick.storyboard; sourceTree = "<group>"; };
-		19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		19B037CE1E2C581C006E25A2 /* Schedule.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Schedule.storyboard; sourceTree = "<group>"; };
 		19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SecondPick.storyboard; sourceTree = "<group>"; };
 		19B037D01E2C581C006E25A2 /* Seeding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Seeding.storyboard; sourceTree = "<group>"; };
@@ -128,6 +129,9 @@
 		19B038311E2C5919006E25A2 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		19B038341E2D4171006E25A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C38CAA31E2D4E80005F5958 /* TIMDScheduleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDScheduleViewController.swift; sourceTree = "<group>"; };
+		8C38CAA51E2D8852005F5958 /* TIMDDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDDetailsViewController.swift; sourceTree = "<group>"; };
+		8C38CAA71E2D8BEB005F5958 /* TIMDTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIMDTableViewCell.xib; sourceTree = "<group>"; };
+		8C38CAA91E2D9B64005F5958 /* TIMDTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDTableViewCell.swift; sourceTree = "<group>"; };
 		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
 		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -168,7 +172,6 @@
 			children = (
 				19B037CB1E2C581C006E25A2 /* Main.storyboard */,
 				19B037CC1E2C581C006E25A2 /* FirstPick.storyboard */,
-				19B037CD1E2C581C006E25A2 /* LaunchScreen.xib */,
 				19B037CE1E2C581C006E25A2 /* Schedule.storyboard */,
 				19B037CF1E2C581C006E25A2 /* SecondPick.storyboard */,
 				19B037D01E2C581C006E25A2 /* Seeding.storyboard */,
@@ -190,15 +193,18 @@
 				19B037E61E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift */,
 				19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */,
 				19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */,
+				8C38CAA51E2D8852005F5958 /* TIMDDetailsViewController.swift */,
 				19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */,
 				19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */,
 				19B037F41E2C5891006E25A2 /* DefenseTableViewController.swift */,
 				8C38CAA31E2D4E80005F5958 /* TIMDScheduleViewController.swift */,
+				8C38CAA71E2D8BEB005F5958 /* TIMDTableViewCell.xib */,
+				8C38CAA91E2D9B64005F5958 /* TIMDTableViewCell.swift */,
 				19B0382F1E2C5919006E25A2 /* AppDelegate.h */,
 				19B038301E2C5919006E25A2 /* AppDelegate.m */,
 				19B038311E2C5919006E25A2 /* main.m */,
-				19B037F51E2C5891006E25A2 /* Utils.swift */,
 				19B037F61E2C5891006E25A2 /* MatchCalculatedData.swift */,
+				19B037F51E2C5891006E25A2 /* Utils.swift */,
 				19B037F71E2C5891006E25A2 /* Team.swift */,
 				19B037F81E2C5891006E25A2 /* Match.swift */,
 				19B037F91E2C5891006E25A2 /* CalculatedTeamData.swift */,
@@ -317,10 +323,10 @@
 			files = (
 				19B038351E2D4171006E25A2 /* GoogleService-Info.plist in Resources */,
 				19B037D71E2C581C006E25A2 /* Seeding.storyboard in Resources */,
-				19B037D41E2C581C006E25A2 /* LaunchScreen.xib in Resources */,
 				19B037D81E2C581C006E25A2 /* ThirdPick.storyboard in Resources */,
 				19B0382B1E2C58D3006E25A2 /* MechanismTableViewCell.xib in Resources */,
 				19B038291E2C58D3006E25A2 /* MultiCellTableViewCell.xib in Resources */,
+				8C38CAA81E2D8BEB005F5958 /* TIMDTableViewCell.xib in Resources */,
 				19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */,
 				19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */,
 				19B037EA1E2C586C006E25A2 /* MatchTableViewCell.xib in Resources */,
@@ -406,6 +412,7 @@
 				19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */,
 				19B0380E1E2C5891006E25A2 /* CalculatedTeamData.swift in Sources */,
 				19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */,
+				8C38CAAA1E2D9B64005F5958 /* TIMDTableViewCell.swift in Sources */,
 				19B0382C1E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m in Sources */,
 				19B037EB1E2C586C006E25A2 /* SeedTableViewController.m in Sources */,
 				19B038091E2C5891006E25A2 /* DefenseTableViewController.swift in Sources */,
@@ -423,6 +430,7 @@
 				19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */,
 				19B038331E2C5919006E25A2 /* main.m in Sources */,
 				19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */,
+				8C38CAA61E2D8852005F5958 /* TIMDDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,9 @@
 import UIKit
 
 class TeamInMatchDetailsTableViewController: UITableViewController {
+    var team : Team!
+    var match : Match!
+    
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
     var data: TeamInMatchData? = nil {

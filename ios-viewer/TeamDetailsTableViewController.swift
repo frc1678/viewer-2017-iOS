@@ -663,6 +663,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         if let cell = tableView.cellForRow(at: indexPath) as? UnrankedTableViewCell {
             if cell.titleLabel.text?.range(of: "Matches") != nil {
                 performSegue(withIdentifier: "Matches", sender: nil)
+            } else if cell.titleLabel.text?.range(of: "TIMDs") != nil {
+                performSegue(withIdentifier: "TIMDs", sender: nil)
             }
         } else if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
             let cs = cell.teamLabel!.text

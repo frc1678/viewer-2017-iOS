@@ -261,7 +261,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func getTimDataForTeamInMatch(_ team:Team, inMatch: Match) -> TeamInMatchData? {
         let TIMData = self.getTIMDataForTeam(team)
         if TIMData.count > 0 {
-            let correctTIMDs = TIMData.filter { $0.matchNumber == inMatch.matchNumber} //Hopefully there is exactly one
+            let correctTIMDs = TIMData.filter { $0.matchNumber == inMatch.number } //Hopefully there is exactly one
             if correctTIMDs.count == 1 {
                 return correctTIMDs[0]
             }
