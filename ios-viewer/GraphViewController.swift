@@ -53,6 +53,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         super.viewDidLoad()
         
         title = graphTitle
+        // In case we want to have 0 be "No" and 1 by "Yes" or something like that.
         if zeroAndOneReplacementValues.count > 0 {
             newValuesArray = [String]()
             for i in values.indices {
