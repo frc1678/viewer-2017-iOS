@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import Haneke
+import UserNotifications
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -488,9 +490,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return calcData
     }
     
-    func getCalculatedTeamInMatchDataForDict(_ dict: NSDictionary?) -> TeamInMatchCalculatedData {
+    func getCalculatedTeamInMatchDataForDict(_ dict: NSDictionary?) -> CalculatedTeamInMatchData {
         if dict != nil {
-            let CTIMD = TeamInMatchCalculatedData()
+            let CTIMD = CalculatedTeamInMatchData()
             for key in CTIMD.properties() {
                 if let value = dict!.object(forKey: key) {
                     CTIMD.setValue(value, forKey: key)
@@ -600,6 +602,16 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return array
     }
     
+    func boolValue(value: Any) -> Bool? {
+        let boolValue: Bool
+        if let boolBoolValue = value as? Bool { //Such ugly
+            boolValue = boolBoolValue
+        } else {
+            boolValue = value as? String == "true" ? true : false
+        }
+        return boolValue
+    }
+    
     /**
      Used by the graphing class If you get -1111.1 for any of the values, that means you haz problem.
      
@@ -624,20 +636,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             if value != nil {
                 if let floatVal = value as? Float {
                     valueArray.append(floatVal)
-                    
                 } else { // Pretty much, if its false it's 0, if its true it's 1
                     altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
-                    
-                    let boolValue: Bool
-                    if let boolBoolValue = value as? Bool { //Such ugly
-                        boolValue = boolBoolValue
-                    } else {
-                        boolValue = value as? String == "true" ? true : false
-                    }
-                    valueArray.append((boolValue ? 1.0 : 0.0))
+                    valueArray.append((boolValue(value: value!)! ? 1.0 : 0.0))
                 }
             } else {
-                print("You haz problem with getMatchDataValuesForTeamForPath")
+                print("In getMatchDataValuesForTeamForPath, the value for the key \(path) seems to be nil.")
                 valueArray.append(-1111.1)
             }
         }
@@ -647,90 +651,23 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
      See Description for `getMatchDataValuesForTeamForPath`
      */
     func getMatchValuesForTeamForPath(_ path: String, forTeam: Team) -> ([Float], [CGFloat : String]?) {
-        var timDatas = getTIMDataForTeam(forTeam)
-        timDatas.sort { Int($0.matchNumber!) < Int($1.matchNumber!) }
+        var TIMDs = getTIMDataForTeam(forTeam).sorted { Int($0.matchNumber!) < Int($1.matchNumber!) }
         
-        let sortedTimDatas = timDatas.sorted { $0.matchNumber!.intValue < $1.matchNumber?.intValue }
         var valueArray = [Float]()
         var altValueMapping : [CGFloat: String]?
         
-        for timData in sortedTimDatas {
-            let value = timData.value(forKeyPath: path)
-            
+        for TIMD in TIMDs {
+            let value = TIMD.value(forKeyPath: path)
             if value != nil {
-                
                 if let floatVal = value as? Float {
                     valueArray.append(floatVal)
-                    
                 } else { // Pretty much, if its false it's 0, if its true it's 1
                     altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
-                    
-                    let boolValue: Bool
-                    if let boolBoolValue = value as? Bool { //Such ugly, its for when ppl screw up something on firebase changing values by hand.
-                        boolValue = boolBoolValue
-                    } else {
-                        boolValue = value as? String == "true" ? true : false
-                    }
-                    valueArray.append((boolValue ? 1.0 : 0.0))
+                    valueArray.append((boolValue(value: value) ? 1.0 : 0.0))
                 }
             } else {
-                print("In getMatchValuesForTeamForPath, the key \(path) seems to be nil.")
+                print("In getMatchValuesForTeamForPath, the value for the key \(path) seems to be nil.")
                 valueArray.append(-1111.1)
-            }
-        }
-        return (valueArray, altValueMapping)
-    }
-    /**
-     See Description for `getMatchDataValuesForTeamForPath`
-     */
-    func getMatchValuesForTeamForPathForDefense(_ path: String, forTeam: Team, defenseKey: String) -> ([Float], [CGFloat : String]?) {
-        var timDatas = getTIMDataForTeam(forTeam)
-        timDatas.sort { Int($0.matchNumber!) < Int($1.matchNumber!) }
-        
-        let sortedTimDatas = timDatas.sorted { $0.matchNumber!.intValue < $1.matchNumber?.intValue }
-        var valueArray = [Float]()
-        var altValueMapping : [CGFloat: String]?
-        
-        for timData in sortedTimDatas {
-            let value : AnyObject?
-            //print(timData.matchNumber!.integerValue)
-            let m = self.getMatch(timData.matchNumber as! Int)
-            if m.redDefensePositions != nil {
-                if (m.redAllianceTeamNumbers!.filter {$0 == timData.teamNumber}).count > 0 {
-                    if (m.redDefensePositions!.filter {$0 as String == defenseKey}).count > 0 {
-                        value = timData.value(forKeyPath: path) as AnyObject?
-                    } else {
-                        value = 0.0 as AnyObject?
-                    }
-                } else {
-                    if (m.blueDefensePositions!.filter {$0 as String == defenseKey}).count > 0 {
-                        value = timData.value(forKeyPath: path) as AnyObject?
-                    } else {
-                        value = 0.0 as AnyObject?
-                    }
-                }
-            } else {
-                value = 0.0 as AnyObject?
-            }
-            
-            if value != nil {
-                
-                if let floatVal = value as? Float {
-                    valueArray.append(floatVal)
-                    
-                } else { // Pretty much, if its false it's 0, if its true it's 1
-                    altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
-                    
-                    let boolValue: Bool
-                    if let boolBoolValue = value as? Bool { //Such ugly
-                        boolValue = boolBoolValue
-                    } else {
-                        boolValue = value as? String == "true" ? true : false
-                    }
-                    valueArray.append((boolValue ? 1.0 : 0.0))
-                }
-            } else {
-                valueArray.append(0.0)
             }
         }
         return (valueArray, altValueMapping)
@@ -743,13 +680,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
      - parameter notificationBody: What the text of the notification should be (that the person reads).
      */
     func postNotification(_ notificationBody:String) {
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = Date(timeIntervalSinceNow: 1)
-        localNotification.alertBody = notificationBody
-        localNotification.timeZone = TimeZone.current
-        localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
-        UIApplication.shared.scheduleLocalNotification(localNotification)
+        let content = UNMutableNotificationContent()
+        content.body = notificationBody
+        content.sound = UNNotificationSound.default()
+        content.badge = NSNumber(integerLiteral: UIApplication.shared.applicationIconBadgeNumber + 1)
+        content.title = "Upcoming Starred Match"
+        let localNotification = UNNotificationRequest(identifier: "ViewerNotification", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(localNotification, withCompletionHandler: nil)
     }
     
     func getCurrentMatch() -> Int {

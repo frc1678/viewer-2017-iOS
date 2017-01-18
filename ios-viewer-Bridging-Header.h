@@ -9,7 +9,6 @@
 #import <SDWebImage/SDImageCache.h>
 //#import <JBChartView/JBChartView.h>
 //#import <JBChartView/JBBarChartView.h>
-#import "PDFRenderer.h"
 #import "UINavigationController+SGProgress.h"
 #import "AppDelegate.h"
 #import <Instabug/Instabug.h>
