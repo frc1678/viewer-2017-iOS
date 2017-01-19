@@ -29,9 +29,9 @@
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)([self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.predictedSeed"])];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
-    if(team.calculatedData.predictedNumRPs != nil) {
+    if(team.calculatedData.predictedNumRPs != -1.0) {
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                     [Utils roundValue:team.calculatedData.predictedNumRPs.floatValue toDecimalPlaces:2]];
+                                     [Utils roundValue:team.calculatedData.predictedNumRPs toDecimalPlaces:2]];
     } else {
         multiCell.scoreLabel.text = @"";
     }

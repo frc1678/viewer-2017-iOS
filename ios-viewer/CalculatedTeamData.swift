@@ -40,6 +40,8 @@ public final class CalculatedTeamData: NSObject {
     static let avgLowShotsAuto = "avgLowShotsAuto"
     static let firstPickAbility = "firstPickAbility"
     static let avgBallControl = "avgBallControl"
+    static let actualNumRPs = "actualNumRPs"
+    static let predictedNumRPs = "predictedNumRPs"
   }
 
   // MARK: Properties
@@ -71,6 +73,8 @@ public final class CalculatedTeamData: NSObject {
   public var avgLowShotsAuto: Float = -1.0
   public var firstPickAbility: Float = -1.0
   public var avgBallControl: Float = -1.0
+    public var actualNumRPs: Float = -1.0
+    public var predictedNumRPs: Float = -1.0
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -113,6 +117,8 @@ public final class CalculatedTeamData: NSObject {
     avgLowShotsAuto = json[SerializationKeys.avgLowShotsAuto].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
     avgBallControl = json[SerializationKeys.avgBallControl].floatValue
+    actualNumRPs = json[SerializationKeys.actualNumRPs].floatValue
+    predictedNumRPs = json[SerializationKeys.predictedNumRPs].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -148,6 +154,8 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.avgLowShotsAuto] = avgLowShotsAuto
     dictionary[SerializationKeys.firstPickAbility] = firstPickAbility
     dictionary[SerializationKeys.avgBallControl] = avgBallControl
+    dictionary[SerializationKeys.actualNumRPs] = actualNumRPs
+    dictionary[SerializationKeys.predictedNumRPs] = predictedNumRPs
     return dictionary
   }
 

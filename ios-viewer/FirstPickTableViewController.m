@@ -22,10 +22,10 @@
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)[self.firebaseFetcher rankOfTeam:team withCharacteristic:@"calculatedData.firstPickAbility"]];
-    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number.integerValue];
-    if(team.calculatedData.firstPickAbility != nil) {
+    multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
+    if(team.calculatedData.firstPickAbility != -1.0) {
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@",
-                                     [Utils roundValue:team.calculatedData.firstPickAbility.floatValue toDecimalPlaces:2]];
+                                     [Utils roundValue:team.calculatedData.firstPickAbility toDecimalPlaces:2]];
     } else {
         multiCell.scoreLabel.text = @"";
     }

@@ -27,7 +27,7 @@
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     
-    if(team.calculatedData.actualNumRPs != nil) {
+    if(team.calculatedData.actualNumRPs != -1.0) {
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%ld",
                                      team.calculatedData.actualNumRPs];
     } else {
