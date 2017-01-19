@@ -33,7 +33,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
             multiCell!.teamLabel!.text = String(team!.number)
         }
         if team!.calculatedData?.overallSecondPickAbility != nil {
-            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.overallSecondPickAbility!), toDecimalPlaces: 2)
+            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.overallSecondPickAbility), toDecimalPlaces: 2)
             )
         } else {
             multiCell!.scoreLabel!.text = ""

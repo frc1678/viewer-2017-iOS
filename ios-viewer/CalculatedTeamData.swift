@@ -120,34 +120,34 @@ public final class CalculatedTeamData: NSObject {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
-    dictionary[SerializationKeys.sdLiftoffAbility] = value }
-    dictionary[SerializationKeys.incapacitatedPercentage] = value }
-    dictionary[SerializationKeys.overallSecondPickAbility] = value }
-    dictionary[SerializationKeys.avgHighShotsTele] = value }
-    dictionary[SerializationKeys.baselineReachedPercentage] = value }
-    dictionary[SerializationKeys.avgGearsPlacedAuto] = value }
-    dictionary[SerializationKeys.avgGearControl] = value }
+    dictionary[SerializationKeys.sdLiftoffAbility] = sdLiftoffAbility
+    dictionary[SerializationKeys.incapacitatedPercentage] = incapacitatedPercentage
+    dictionary[SerializationKeys.overallSecondPickAbility] = overallSecondPickAbility
+    dictionary[SerializationKeys.avgHighShotsTele] = avgHighShotsTele
+    dictionary[SerializationKeys.baselineReachedPercentage] = baselineReachedPercentage
+    dictionary[SerializationKeys.avgGearsPlacedAuto] = avgGearsPlacedAuto
+    dictionary[SerializationKeys.avgGearControl] = avgGearControl
     dictionary[SerializationKeys.actualSeed] = actualSeed
-     dictionary[SerializationKeys.sdHighShotsTele] = value }
-   dictionary[SerializationKeys.liftoffPercentage] = value }
-     dictionary[SerializationKeys.avgHighShotsAuto] = value }
-    dictionary[SerializationKeys.avgAgility] = value }
+     dictionary[SerializationKeys.sdHighShotsTele] = sdHighShotsTele
+   dictionary[SerializationKeys.liftoffPercentage] = liftoffPercentage
+     dictionary[SerializationKeys.avgHighShotsAuto] = avgHighShotsAuto
+    dictionary[SerializationKeys.avgAgility] = avgAgility
     dictionary[SerializationKeys.predictedSeed] = predictedSeed
-    if let value = avgGearsPlacedTele { dictionary[SerializationKeys.avgGearsPlacedTele] = value }
-    if let value = liftoffAbility { dictionary[SerializationKeys.liftoffAbility] = value }
-    if let value = sdGearsPlacedAuto { dictionary[SerializationKeys.sdGearsPlacedAuto] = value }
-    if let value = sdLowShotsAuto { dictionary[SerializationKeys.sdLowShotsAuto] = value }
-    if let value = avgKeyShotTime { dictionary[SerializationKeys.avgKeyShotTime] = value }
-    if let value = sdLowShotsTele { dictionary[SerializationKeys.sdLowShotsTele] = value }
-    if let value = sdGearsPlacedTele { dictionary[SerializationKeys.sdGearsPlacedTele] = value }
-    if let value = avgDefense { dictionary[SerializationKeys.avgDefense] = value }
-    if let value = avgLowShotsTele { dictionary[SerializationKeys.avgLowShotsTele] = value }
-    if let value = sdHighShotsAuto { dictionary[SerializationKeys.sdHighShotsAuto] = value }
-    if let value = avgSpeed { dictionary[SerializationKeys.avgSpeed] = value }
-    if let value = disabledPercentage { dictionary[SerializationKeys.disabledPercentage] = value }
-    if let value = avgLowShotsAuto { dictionary[SerializationKeys.avgLowShotsAuto] = value }
-    if let value = firstPickAbility { dictionary[SerializationKeys.firstPickAbility] = value }
-    if let value = avgBallControl { dictionary[SerializationKeys.avgBallControl] = value }
+    dictionary[SerializationKeys.avgGearsPlacedTele] = avgGearsPlacedTele
+    dictionary[SerializationKeys.liftoffAbility] = liftoffAbility
+    dictionary[SerializationKeys.sdGearsPlacedAuto] = sdGearsPlacedAuto
+    dictionary[SerializationKeys.sdLowShotsAuto] = sdLowShotsAuto
+    dictionary[SerializationKeys.avgKeyShotTime] = avgKeyShotTime
+    dictionary[SerializationKeys.sdLowShotsTele] = sdLowShotsTele
+    dictionary[SerializationKeys.sdGearsPlacedTele] = sdGearsPlacedTele
+    dictionary[SerializationKeys.avgDefense] = avgDefense
+    dictionary[SerializationKeys.avgLowShotsTele] = avgLowShotsTele
+    dictionary[SerializationKeys.sdHighShotsAuto] = sdHighShotsAuto
+    dictionary[SerializationKeys.avgSpeed] = avgSpeed
+    dictionary[SerializationKeys.disabledPercentage] = disabledPercentage
+    dictionary[SerializationKeys.avgLowShotsAuto] = avgLowShotsAuto
+    dictionary[SerializationKeys.firstPickAbility] = firstPickAbility
+    dictionary[SerializationKeys.avgBallControl] = avgBallControl
     return dictionary
   }
 
