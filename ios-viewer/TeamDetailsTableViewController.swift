@@ -27,7 +27,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     var team: Team? = nil {
         didSet {
-            num = self.team?.number!
+            num = self.team?.number
             updateTitleAndTopInfo()
             reload()
         }
@@ -57,7 +57,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let team = self.team,
                 let imageView = self.teamSelectedImageView {
                     if team.selectedImageURL != nil {
-                        self.firebaseFetcher?.getImageForTeam((self.team?.number!)!, fetchedCallback: { (image) -> () in
+                        self.firebaseFetcher?.getImageForTeam((self.team?.number)!, fetchedCallback: { (image) -> () in
                             DispatchQueue.main.async(execute: { () -> Void in
                                 imageView.image = image
                             })
@@ -328,7 +328,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 
                 if dataKey == "matchDatas" {
-                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number!)!) ?? "NA"
+                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number)!) ?? "NA"
                     
                     unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + " - (\(matchesUntilNextMatch))  Remaining: \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number)!)))"
                 }
@@ -471,7 +471,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let TIMDScheduleForTeamController = segue.destination as! TIMDScheduleViewController
             
             if let teamNum = team?.number {
-                TIMDScheduleForTeamController.teamNumber = teamNum.intValue
+                TIMDScheduleForTeamController.teamNumber = teamNum
             }
         } else if segue.identifier == "CTIMDGraph" {
             let graphViewController = segue.destination as! GraphViewController
@@ -560,7 +560,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     graphViewController.values = (values as NSArray).map { CGFloat($0 as! Float) }
                     graphViewController.subDisplayLeftTitle = "Match: "
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.number!)!) as [NSNumber]) as [AnyObject]
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.number)!) as [NSNumber]) as [AnyObject]
                     for i in nilValueIndecies.reversed() {
                         graphViewController.subValuesLeft.remove(at: i)
                     }

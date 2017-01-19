@@ -36,7 +36,7 @@ class SortedRankTableViewController: ArrayTableViewController {
         let team = data as! Team
         let multiCell = cell as! MultiCellTableViewCell
         multiCell.rankLabel!.text = String(path.row + 1)
-        multiCell.teamLabel!.text = String(describing: team.number!)
+        multiCell.teamLabel!.text = String(describing: team.number)
         if translatedKeyPath.range(of: "calculatedData") != nil {
             let propPath = translatedKeyPath.replacingOccurrences(of: "calculatedData.", with: "")
             if let value = team.calculatedData!.value(forKeyPath: propPath) {

@@ -111,7 +111,7 @@ class MatchDetailsViewController: UIViewController {
         
         if let match = match {
             if match.number != nil {
-                title = String(describing: match.number!)
+                title = String(describing: match.number)
             } else {
                 title = "???"
             }
@@ -313,7 +313,7 @@ class MatchDetailsViewController: UIViewController {
         if let button = sender as? UIButton,
             let teamNumTapped = Int((button.titleLabel?.text)!) {
                 if let dest = segue.destination as? TeamInMatchDetailsTableViewController {
-                    dest.data = firebaseFetcher?.getMatchesForTeamWithNumber(teamNumTapped)[0]
+                    dest.data = firebaseFetcher?.getTimDataForTeamInMatch((firebaseFetcher?.getTeam(teamNumTapped))!, inMatch: self.match!)
                 } else if let dest = segue.destination as? TeamDetailsTableViewController {
                     dest.team = firebaseFetcher?.getTeam(teamNumTapped)
                 }

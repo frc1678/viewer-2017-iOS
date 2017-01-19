@@ -57,24 +57,24 @@
     NSArray *blueTeams = [self.firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
     
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
-    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.number.integerValue]];
+    matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.number]];
     
     for (int i = 0; i < 3; i++) {
         if(i < redTeams.count) {
-            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number.integerValue]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
+            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
         } else {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"???"]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
         }
         
         if(i < blueTeams.count) {
-            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number.integerValue]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
+            [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[blueTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
         } else {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"???"]] forKeyPath:[NSString stringWithFormat:@"blue%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
         }
     }
     
     if (match.redScore != nil) {
-        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore.integerValue];
+        matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore];
         matchCell.slash.alpha = 1;
         matchCell.redScoreLabel.alpha = 1;
     } else {
@@ -88,7 +88,7 @@
     }
     
     if (match.blueScore != nil) {
-        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore.integerValue];
+        matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore];
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;
     } else {

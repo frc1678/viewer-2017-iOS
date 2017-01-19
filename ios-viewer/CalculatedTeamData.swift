@@ -43,34 +43,34 @@ public final class CalculatedTeamData: NSObject {
   }
 
   // MARK: Properties
-  public var sdLiftoffAbility: Int?
-  public var incapacitatedPercentage: Int?
-  public var overallSecondPickAbility: Int?
-  public var avgHighShotsTele: Int?
-  public var baselineReachedPercentage: Int?
-  public var avgGearsPlacedAuto: Int?
-  public var avgGearControl: Int?
-  public var actualSeed: Int?
-  public var sdHighShotsTele: Int?
-  public var liftoffPercentage: Int?
-  public var avgHighShotsAuto: Int?
-  public var avgAgility: Int?
-  public var predictedSeed: Int?
-  public var avgGearsPlacedTele: Int?
-  public var liftoffAbility: Int?
-  public var sdGearsPlacedAuto: Int?
-  public var sdLowShotsAuto: Int?
-  public var avgKeyShotTime: Int?
-  public var sdLowShotsTele: Int?
-  public var sdGearsPlacedTele: Int?
-  public var avgDefense: Int?
-  public var avgLowShotsTele: Int?
-  public var sdHighShotsAuto: Int?
-  public var avgSpeed: Int?
-  public var disabledPercentage: Int?
-  public var avgLowShotsAuto: Int?
-  public var firstPickAbility: Int?
-  public var avgBallControl: Int?
+  public var sdLiftoffAbility: Float = -1.0
+  public var incapacitatedPercentage: Float = -1.0
+  public var overallSecondPickAbility: Float = -1.0
+  public var avgHighShotsTele: Float = -1.0
+  public var baselineReachedPercentage: Float = -1.0
+  public var avgGearsPlacedAuto: Float = -1.0
+  public var avgGearControl: Float = -1.0
+  public var actualSeed: Int = -1
+  public var sdHighShotsTele: Float = -1.0
+  public var liftoffPercentage: Float = -1.0
+  public var avgHighShotsAuto: Float = -1.0
+  public var avgAgility: Float = -1.0
+  public var predictedSeed: Int = -1
+  public var avgGearsPlacedTele: Float = -1.0
+  public var liftoffAbility: Float = -1.0
+  public var sdGearsPlacedAuto: Float = -1.0
+  public var sdLowShotsAuto: Float = -1.0
+  public var avgKeyShotTime: Float = -1.0
+  public var sdLowShotsTele: Float = -1.0
+  public var sdGearsPlacedTele: Float = -1.0
+  public var avgDefense: Float = -1.0
+  public var avgLowShotsTele: Float = -1.0
+  public var sdHighShotsAuto: Float = -1.0
+  public var avgSpeed: Float = -1.0
+  public var disabledPercentage: Float = -1.0
+  public var avgLowShotsAuto: Float = -1.0
+  public var firstPickAbility: Float = -1.0
+  public var avgBallControl: Float = -1.0
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -85,34 +85,34 @@ public final class CalculatedTeamData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    sdLiftoffAbility = json[SerializationKeys.sdLiftoffAbility].int
-    incapacitatedPercentage = json[SerializationKeys.incapacitatedPercentage].int
-    overallSecondPickAbility = json[SerializationKeys.overallSecondPickAbility].int
-    avgHighShotsTele = json[SerializationKeys.avgHighShotsTele].int
-    baselineReachedPercentage = json[SerializationKeys.baselineReachedPercentage].int
-    avgGearsPlacedAuto = json[SerializationKeys.avgGearsPlacedAuto].int
-    avgGearControl = json[SerializationKeys.avgGearControl].int
-    actualSeed = json[SerializationKeys.actualSeed].int
-    sdHighShotsTele = json[SerializationKeys.sdHighShotsTele].int
-    liftoffPercentage = json[SerializationKeys.liftoffPercentage].int
-    avgHighShotsAuto = json[SerializationKeys.avgHighShotsAuto].int
-    avgAgility = json[SerializationKeys.avgAgility].int
-    predictedSeed = json[SerializationKeys.predictedSeed].int
-    avgGearsPlacedTele = json[SerializationKeys.avgGearsPlacedTele].int
-    liftoffAbility = json[SerializationKeys.liftoffAbility].int
-    sdGearsPlacedAuto = json[SerializationKeys.sdGearsPlacedAuto].int
-    sdLowShotsAuto = json[SerializationKeys.sdLowShotsAuto].int
-    avgKeyShotTime = json[SerializationKeys.avgKeyShotTime].int
-    sdLowShotsTele = json[SerializationKeys.sdLowShotsTele].int
-    sdGearsPlacedTele = json[SerializationKeys.sdGearsPlacedTele].int
-    avgDefense = json[SerializationKeys.avgDefense].int
-    avgLowShotsTele = json[SerializationKeys.avgLowShotsTele].int
-    sdHighShotsAuto = json[SerializationKeys.sdHighShotsAuto].int
-    avgSpeed = json[SerializationKeys.avgSpeed].int
-    disabledPercentage = json[SerializationKeys.disabledPercentage].int
-    avgLowShotsAuto = json[SerializationKeys.avgLowShotsAuto].int
-    firstPickAbility = json[SerializationKeys.firstPickAbility].int
-    avgBallControl = json[SerializationKeys.avgBallControl].int
+    sdLiftoffAbility = json[SerializationKeys.sdLiftoffAbility].floatValue
+    incapacitatedPercentage = json[SerializationKeys.incapacitatedPercentage].floatValue
+    overallSecondPickAbility = json[SerializationKeys.overallSecondPickAbility].floatValue
+    avgHighShotsTele = json[SerializationKeys.avgHighShotsTele].floatValue
+    baselineReachedPercentage = json[SerializationKeys.baselineReachedPercentage].floatValue
+    avgGearsPlacedAuto = json[SerializationKeys.avgGearsPlacedAuto].floatValue
+    avgGearControl = json[SerializationKeys.avgGearControl].floatValue
+    actualSeed = json[SerializationKeys.actualSeed].int!
+    sdHighShotsTele = json[SerializationKeys.sdHighShotsTele].floatValue
+    liftoffPercentage = json[SerializationKeys.liftoffPercentage].floatValue
+    avgHighShotsAuto = json[SerializationKeys.avgHighShotsAuto].floatValue
+    avgAgility = json[SerializationKeys.avgAgility].floatValue
+    predictedSeed = json[SerializationKeys.predictedSeed].int!
+    avgGearsPlacedTele = json[SerializationKeys.avgGearsPlacedTele].floatValue
+    liftoffAbility = json[SerializationKeys.liftoffAbility].floatValue
+    sdGearsPlacedAuto = json[SerializationKeys.sdGearsPlacedAuto].floatValue
+    sdLowShotsAuto = json[SerializationKeys.sdLowShotsAuto].floatValue
+    avgKeyShotTime = json[SerializationKeys.avgKeyShotTime].floatValue
+    sdLowShotsTele = json[SerializationKeys.sdLowShotsTele].floatValue
+    sdGearsPlacedTele = json[SerializationKeys.sdGearsPlacedTele].floatValue
+    avgDefense = json[SerializationKeys.avgDefense].floatValue
+    avgLowShotsTele = json[SerializationKeys.avgLowShotsTele].floatValue
+    sdHighShotsAuto = json[SerializationKeys.sdHighShotsAuto].floatValue
+    avgSpeed = json[SerializationKeys.avgSpeed].floatValue
+    disabledPercentage = json[SerializationKeys.disabledPercentage].floatValue
+    avgLowShotsAuto = json[SerializationKeys.avgLowShotsAuto].floatValue
+    firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
+    avgBallControl = json[SerializationKeys.avgBallControl].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -120,19 +120,19 @@ public final class CalculatedTeamData: NSObject {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
-    if let value = sdLiftoffAbility { dictionary[SerializationKeys.sdLiftoffAbility] = value }
-    if let value = incapacitatedPercentage { dictionary[SerializationKeys.incapacitatedPercentage] = value }
-    if let value = overallSecondPickAbility { dictionary[SerializationKeys.overallSecondPickAbility] = value }
-    if let value = avgHighShotsTele { dictionary[SerializationKeys.avgHighShotsTele] = value }
-    if let value = baselineReachedPercentage { dictionary[SerializationKeys.baselineReachedPercentage] = value }
-    if let value = avgGearsPlacedAuto { dictionary[SerializationKeys.avgGearsPlacedAuto] = value }
-    if let value = avgGearControl { dictionary[SerializationKeys.avgGearControl] = value }
-    if let value = actualSeed { dictionary[SerializationKeys.actualSeed] = value }
-    if let value = sdHighShotsTele { dictionary[SerializationKeys.sdHighShotsTele] = value }
-    if let value = liftoffPercentage { dictionary[SerializationKeys.liftoffPercentage] = value }
-    if let value = avgHighShotsAuto { dictionary[SerializationKeys.avgHighShotsAuto] = value }
-    if let value = avgAgility { dictionary[SerializationKeys.avgAgility] = value }
-    if let value = predictedSeed { dictionary[SerializationKeys.predictedSeed] = value }
+    dictionary[SerializationKeys.sdLiftoffAbility] = value }
+    dictionary[SerializationKeys.incapacitatedPercentage] = value }
+    dictionary[SerializationKeys.overallSecondPickAbility] = value }
+    dictionary[SerializationKeys.avgHighShotsTele] = value }
+    dictionary[SerializationKeys.baselineReachedPercentage] = value }
+    dictionary[SerializationKeys.avgGearsPlacedAuto] = value }
+    dictionary[SerializationKeys.avgGearControl] = value }
+    dictionary[SerializationKeys.actualSeed] = actualSeed
+     dictionary[SerializationKeys.sdHighShotsTele] = value }
+   dictionary[SerializationKeys.liftoffPercentage] = value }
+     dictionary[SerializationKeys.avgHighShotsAuto] = value }
+    dictionary[SerializationKeys.avgAgility] = value }
+    dictionary[SerializationKeys.predictedSeed] = predictedSeed
     if let value = avgGearsPlacedTele { dictionary[SerializationKeys.avgGearsPlacedTele] = value }
     if let value = liftoffAbility { dictionary[SerializationKeys.liftoffAbility] = value }
     if let value = sdGearsPlacedAuto { dictionary[SerializationKeys.sdGearsPlacedAuto] = value }

@@ -10,7 +10,7 @@ import Foundation
 
 class TIMDScheduleViewController: UITableViewController {
     var teamNumber : Int = -1
-    var team = Team()
+    var team : Team!
     var matches : [Match] = []
     let firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
@@ -27,9 +27,9 @@ class TIMDScheduleViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        let match = matches[indexPath.row] as? Match
-        if match?.number != nil {
-            cell.textLabel?.text = "Q\(String(describing: match!.number!))"
+        let match = matches[indexPath.row]
+        if match.number != nil {
+            cell.textLabel?.text = "Q\(String(describing: match.number))"
         }
         return cell
     }

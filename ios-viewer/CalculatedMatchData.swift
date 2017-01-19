@@ -29,20 +29,20 @@ public final class CalculatedMatchData: NSObject {
   }
 
   // MARK: Properties
-  public var actualRedRPs: Int?
-  public var blueWinChance: Int?
-  public var fortyKilopascalChanceBlue: Int?
-  public var predictedRedScore: Int?
-  public var sdPredictedRedScore: Int?
-  public var redWinChance: Int?
-  public var actualBlueRPs: Int?
-  public var predictedRedRPs: Int?
-  public var predictedBlueScore: Int?
-  public var predictedBlueRPs: Int?
-  public var fortyKilopascalChanceRed: Int?
-  public var allRotorsTurningChanceRed: Int?
-  public var allRotorsTurningChanceBlue: Int?
-  public var sdPredictedBlueScore: Int?
+  public var actualRedRPs: Int = -1
+  public var blueWinChance: Float?
+  public var fortyKilopascalChanceBlue: Float?
+  public var predictedRedScore: Float?
+  public var sdPredictedRedScore: Float?
+  public var redWinChance: Float?
+  public var actualBlueRPs: Int = -1
+  public var predictedRedRPs: Float?
+  public var predictedBlueScore: Float?
+  public var predictedBlueRPs: Float?
+  public var fortyKilopascalChanceRed: Float?
+  public var allRotorsTurningChanceRed: Float?
+  public var allRotorsTurningChanceBlue: Float?
+  public var sdPredictedBlueScore: Float?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -57,20 +57,20 @@ public final class CalculatedMatchData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    actualRedRPs = json[SerializationKeys.actualRedRPs].int
-    blueWinChance = json[SerializationKeys.blueWinChance].int
-    fortyKilopascalChanceBlue = json[SerializationKeys.fortyKilopascalChanceBlue].int
-    predictedRedScore = json[SerializationKeys.predictedRedScore].int
-    sdPredictedRedScore = json[SerializationKeys.sdPredictedRedScore].int
-    redWinChance = json[SerializationKeys.redWinChance].int
-    actualBlueRPs = json[SerializationKeys.actualBlueRPs].int
-    predictedRedRPs = json[SerializationKeys.predictedRedRPs].int
-    predictedBlueScore = json[SerializationKeys.predictedBlueScore].int
-    predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].int
-    fortyKilopascalChanceRed = json[SerializationKeys.fortyKilopascalChanceRed].int
-    allRotorsTurningChanceRed = json[SerializationKeys.allRotorsTurningChanceRed].int
-    allRotorsTurningChanceBlue = json[SerializationKeys.allRotorsTurningChanceBlue].int
-    sdPredictedBlueScore = json[SerializationKeys.sdPredictedBlueScore].int
+    actualRedRPs = json[SerializationKeys.actualRedRPs].int!
+    blueWinChance = json[SerializationKeys.blueWinChance].floatValue
+    fortyKilopascalChanceBlue = json[SerializationKeys.fortyKilopascalChanceBlue].floatValue
+    predictedRedScore = json[SerializationKeys.predictedRedScore].floatValue
+    sdPredictedRedScore = json[SerializationKeys.sdPredictedRedScore].floatValue
+    redWinChance = json[SerializationKeys.redWinChance].floatValue
+    actualBlueRPs = json[SerializationKeys.actualBlueRPs].int!
+    predictedRedRPs = json[SerializationKeys.predictedRedRPs].floatValue
+    predictedBlueScore = json[SerializationKeys.predictedBlueScore].floatValue
+    predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].floatValue
+    fortyKilopascalChanceRed = json[SerializationKeys.fortyKilopascalChanceRed].floatValue
+    allRotorsTurningChanceRed = json[SerializationKeys.allRotorsTurningChanceRed].floatValue
+    allRotorsTurningChanceBlue = json[SerializationKeys.allRotorsTurningChanceBlue].floatValue
+    sdPredictedBlueScore = json[SerializationKeys.sdPredictedBlueScore].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -78,13 +78,13 @@ public final class CalculatedMatchData: NSObject {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
-    if let value = actualRedRPs { dictionary[SerializationKeys.actualRedRPs] = value }
+    dictionary[SerializationKeys.actualRedRPs] = actualRedRPs
     if let value = blueWinChance { dictionary[SerializationKeys.blueWinChance] = value }
     if let value = fortyKilopascalChanceBlue { dictionary[SerializationKeys.fortyKilopascalChanceBlue] = value }
     if let value = predictedRedScore { dictionary[SerializationKeys.predictedRedScore] = value }
     if let value = sdPredictedRedScore { dictionary[SerializationKeys.sdPredictedRedScore] = value }
     if let value = redWinChance { dictionary[SerializationKeys.redWinChance] = value }
-    if let value = actualBlueRPs { dictionary[SerializationKeys.actualBlueRPs] = value }
+    dictionary[SerializationKeys.actualBlueRPs] = actualBlueRPs
     if let value = predictedRedRPs { dictionary[SerializationKeys.predictedRedRPs] = value }
     if let value = predictedBlueScore { dictionary[SerializationKeys.predictedBlueScore] = value }
     if let value = predictedBlueRPs { dictionary[SerializationKeys.predictedBlueRPs] = value }

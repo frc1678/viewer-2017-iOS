@@ -38,25 +38,25 @@ public final class TeamInMatchData: NSObject {
   }
 
   // MARK: Properties
-  public var rankDefense: Int?
-  public var rankGearControl: Int?
+  public var rankDefense: Int? 
+  public var rankGearControl: Int? 
   public var lowShotTimesForBoilerTele: [ShotTimesForBoiler]?
-  public var numGearLoaderIntakesTele: Int?
-  public var rankBallControl: Int?
+  public var numGearLoaderIntakesTele: Int? 
+  public var rankBallControl: Int? 
   public var highShotTimesForBoilerAuto: [ShotTimesForBoiler]?
-  public var numHoppersOpenedAuto: Int?
-  public var matchNumber: Int?
+  public var numHoppersOpenedAuto: Int? 
+  public var matchNumber: Int? 
   public var highShotTimesForBoilerTele: [ShotTimesForBoiler]?
-  public var numGearsPlacedAuto: Int?
-  public var numGearGroundIntakesTele: Int?
+  public var numGearsPlacedAuto: Int? 
+  public var numGearGroundIntakesTele: Int? 
   public var didStartDisabled: Bool? = false
   public var didReachBaselineAuto: Bool? = false
-  public var numGearsPlacedTele: Int?
-  public var rankSpeed: Int?
-  public var numHoppersOpenedTele: Int?
+  public var numGearsPlacedTele: Int? 
+  public var rankSpeed: Int? 
+  public var numHoppersOpenedTele: Int? 
   public var lowShotTimesForBoilerAuto: [ShotTimesForBoiler]?
-  public var rankAgility: Int?
-  public var teamNumber: Int?
+  public var rankAgility: Int? 
+  public var teamNumber: Int? 
   public var didBecomeIncapacitated: Bool? = false
   public var didPotentiallyConflictingAuto: Bool? = false
   public var scoutName: String?

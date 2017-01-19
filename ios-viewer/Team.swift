@@ -28,8 +28,8 @@ public final class Team: NSObject {
   public var name: String?
   public var pitOrganization: String?
   public var pitProgrammingLanguage: String?
-  public var number: Int?
-  public var pitAvailableWeight: Int?
+  public var number: Int = -1
+  public var pitAvailableWeight: Int = -1
   public var calculatedData: CalculatedTeamData?
   public var selectedImageURL: String?
     public var allImageUrls: [String]?
@@ -52,8 +52,8 @@ public final class Team: NSObject {
     name = json[SerializationKeys.name].string
     pitOrganization = json[SerializationKeys.pitOrganization].string
     pitProgrammingLanguage = json[SerializationKeys.pitProgrammingLanguage].string
-    number = json[SerializationKeys.number].int
-    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].int
+    number = json[SerializationKeys.number].int!
+    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].int!
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
     selectedImageURL = json[SerializationKeys.selectedImageURL].string
     allImageUrls = json[SerializationKeys.allImageUrls].arrayObject as! [String]?
@@ -69,8 +69,8 @@ public final class Team: NSObject {
     if let value = name { dictionary[SerializationKeys.name] = value }
     if let value = pitOrganization { dictionary[SerializationKeys.pitOrganization] = value }
     if let value = pitProgrammingLanguage { dictionary[SerializationKeys.pitProgrammingLanguage] = value }
-    if let value = number { dictionary[SerializationKeys.number] = value }
-    if let value = pitAvailableWeight { dictionary[SerializationKeys.pitAvailableWeight] = value }
+    dictionary[SerializationKeys.number] = number
+    dictionary[SerializationKeys.pitAvailableWeight] = pitAvailableWeight
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
     if let value = selectedImageURL { dictionary[SerializationKeys.selectedImageURL] = value }
     if let value = allImageUrls { dictionary[SerializationKeys.allImageUrls] = value }
