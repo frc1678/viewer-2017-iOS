@@ -200,7 +200,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
             
-            if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matches'
+            if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
 
@@ -466,6 +466,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let teamNum = team?.number {
                 matchesForTeamController.teamNumber = teamNum
             }
+        } else if segue.identifier == "TIMDs" {
+            //Navigate to a vc to pick which match, then to TIMD vc
+            let TIMDScheduleForTeamController = segue.destination as! TIMDScheduleViewController
+            
+            if let teamNum = team?.number {
+                TIMDScheduleForTeamController.teamNumber = teamNum.intValue
+            }
         } else if segue.identifier == "CTIMDGraph" {
             let graphViewController = segue.destination as! GraphViewController
             
@@ -645,6 +652,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         if let cell = tableView.cellForRow(at: indexPath) as? UnrankedTableViewCell {
             if cell.titleLabel.text?.range(of: "Matches") != nil {
                 performSegue(withIdentifier: "Matches", sender: nil)
+            } else if cell.titleLabel.text?.range(of: "TIMDs") != nil {
+                performSegue(withIdentifier: "TIMDs", sender: nil)
             }
         } else if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
             let cs = cell.teamLabel!.text

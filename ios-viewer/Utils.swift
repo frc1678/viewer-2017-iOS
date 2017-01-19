@@ -237,6 +237,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
         
         let defaultKeys = [
+            "TeamInMatchDatas",
             "matchDatas"
         ]
         
@@ -421,29 +422,43 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
     
-    static let teamInMatchKeys = [
-        "firstPickAbility",
+    
+    static let TIMDAutoKeys = [
         "ballsIntakedAuto",
-        "matchNumber",
         "numBallsKnockedOffMidlineAuto",
-        "numGroundIntakesTele",
         "numHighShotsMadeAuto",
-        "numHighShotsMadeTele",
         "numHighShotsMissedAuto",
-        "numHighShotsMissedTele",
         "numLowShotsMadeAuto",
+        "numLowShotsMissedAuto"
+    ]
+     
+    static let TIMDTeleKeys = [
+        "numGroundIntakesTele",
+        "numHighShotsMadeTele",
+        "numHighShotsMissedTele",
         "numLowShotsMadeTele",
-        "numLowShotsMissedAuto",
         "numLowShotsMissedTele",
-        "numShotsBlockedTele",
+        "numShotsBlockedTele"
+    ]
+     
+    static let TIMDStatusKeys = [
+        "didGetDisabled",
+        "didGetIncapacitated"
+    ]
+    
+    static let TIMDSuperKeys = [
         "rankBallControl",
         "rankDefense",
         "rankAgility",
         "rankSpeed",
-        "rankTorque",
-        "teamNumber",
-        "timesCrossedDefensesAuto",
-        "timesCrossedDefensesTele",
+        "rankTorque"
+    ]
+    
+    static let TIMDKeys = [
+        TIMDAutoKeys,
+        TIMDTeleKeys,
+        TIMDStatusKeys,
+        TIMDSuperKeys
     ]
     
     static let defenseGraphableKeys = [
@@ -655,6 +670,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.siegeConsistency" : "Siege Consistency",
         "calculatedData.siegePower" : "Siege Power",
         "matchDatas" : "Matches",
+        "TeamInMatchDatas" : "TIMDs",
         "pitLowBarCapability": "Low Bar Ability",
         "calculatedData.autoAbility" : "Auto Ability",
         "calculatedData.citrusDPR" : "Citrus DPR",
