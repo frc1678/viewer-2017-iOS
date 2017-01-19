@@ -121,7 +121,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         let unrankedCells = [
-            "selectedImageUrl",
+            "selectedImageURL",
             "otherUrls"
         ]
         

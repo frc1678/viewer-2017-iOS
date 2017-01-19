@@ -11,7 +11,7 @@ import UIKit
 class OverallSecondPickAbilityViewController: ArrayTableViewController {
     
     var teamNumber = -1
-    var team = Team()
+    var team : Team!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +30,10 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         let multiCell = cell as? MultiCellTableViewCell
         let team = data as? Team
         if team!.number != nil {
-            multiCell!.teamLabel!.text = String(team!.number!.intValue)
+            multiCell!.teamLabel!.text = String(team!.number!)
         }
         if team!.calculatedData?.overallSecondPickAbility != nil {
-            multiCell!.scoreLabel!.text = String(Utils.roundValue(team!.calculatedData!.overallSecondPickAbility!.floatValue, toDecimalPlaces: 2)
+            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.overallSecondPickAbility!), toDecimalPlaces: 2)
             )
         } else {
             multiCell!.scoreLabel!.text = ""

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190DFE3E1E30697500477B6D /* CalculatedTeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */; };
+		190DFE441E306A1700477B6D /* CalculatedMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE431E306A1700477B6D /* CalculatedMatchData.swift */; };
+		190DFE461E30703E00477B6D /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE451E30703E00477B6D /* Match.swift */; };
+		190DFE481E3079D000477B6D /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE471E3079D000477B6D /* Team.swift */; };
 		19B037C01E2C5739006E25A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B037BF1E2C5739006E25A2 /* Assets.xcassets */; };
 		19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */; };
 		19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CB1E2C581C006E25A2 /* Main.storyboard */; };
@@ -23,18 +27,11 @@
 		19B037EC1E2C586C006E25A2 /* PredictedSeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E21E2C586C006E25A2 /* PredictedSeedTableViewController.m */; };
 		19B037ED1E2C586C006E25A2 /* FirstPickTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E41E2C586C006E25A2 /* FirstPickTableViewController.m */; };
 		19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */; };
-		19B037EF1E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E61E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift */; };
 		19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */; };
 		19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */; };
 		19B038071E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */; };
 		19B038081E2C5891006E25A2 /* MatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */; };
 		19B0380A1E2C5891006E25A2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F51E2C5891006E25A2 /* Utils.swift */; };
-		19B0380B1E2C5891006E25A2 /* MatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F61E2C5891006E25A2 /* MatchCalculatedData.swift */; };
-		19B0380C1E2C5891006E25A2 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F71E2C5891006E25A2 /* Team.swift */; };
-		19B0380D1E2C5891006E25A2 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F81E2C5891006E25A2 /* Match.swift */; };
-		19B0380E1E2C5891006E25A2 /* CalculatedTeamData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F91E2C5891006E25A2 /* CalculatedTeamData.swift */; };
-		19B0380F1E2C5891006E25A2 /* OLDTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FA1E2C5891006E25A2 /* OLDTeamInMatchData.swift */; };
-		19B038101E2C5891006E25A2 /* OLDTeamInMatchCalculatedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FB1E2C5891006E25A2 /* OLDTeamInMatchCalculatedData.swift */; };
 		19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FC1E2C5891006E25A2 /* Reflectable.swift */; };
 		19B038131E2C5891006E25A2 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FF1E2C5891006E25A2 /* GraphViewController.swift */; };
 		19B038141E2C5891006E25A2 /* CurrentMatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038001E2C5891006E25A2 /* CurrentMatchManager.swift */; };
@@ -60,6 +57,10 @@
 
 /* Begin PBXFileReference section */
 		17C3CB7B0693450E7F32640F /* Pods-ios-viewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.debug.xcconfig"; sourceTree = "<group>"; };
+		190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamData.swift; sourceTree = "<group>"; };
+		190DFE431E306A1700477B6D /* CalculatedMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedMatchData.swift; sourceTree = "<group>"; };
+		190DFE451E30703E00477B6D /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		190DFE471E3079D000477B6D /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		19B037B51E2C5739006E25A2 /* ios-viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B037BF1E2C5739006E25A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B037C21E2C5739006E25A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -84,18 +85,11 @@
 		19B037E31E2C586C006E25A2 /* FirstPickTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstPickTableViewController.h; sourceTree = "<group>"; };
 		19B037E41E2C586C006E25A2 /* FirstPickTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstPickTableViewController.m; sourceTree = "<group>"; };
 		19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverallSecondPickAbilityViewController.swift; sourceTree = "<group>"; };
-		19B037E61E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConditionalSecondPickTableViewController.swift; sourceTree = "<group>"; };
 		19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataFetcher.swift; sourceTree = "<group>"; };
 		19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsTableViewController.swift; sourceTree = "<group>"; };
 		19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchDetailsTableViewController.swift; sourceTree = "<group>"; };
 		19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDetailsViewController.swift; sourceTree = "<group>"; };
 		19B037F51E2C5891006E25A2 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		19B037F61E2C5891006E25A2 /* MatchCalculatedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchCalculatedData.swift; sourceTree = "<group>"; };
-		19B037F71E2C5891006E25A2 /* Team.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
-		19B037F81E2C5891006E25A2 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
-		19B037F91E2C5891006E25A2 /* CalculatedTeamData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamData.swift; sourceTree = "<group>"; };
-		19B037FA1E2C5891006E25A2 /* OLDTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDTeamInMatchData.swift; sourceTree = "<group>"; };
-		19B037FB1E2C5891006E25A2 /* OLDTeamInMatchCalculatedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OLDTeamInMatchCalculatedData.swift; sourceTree = "<group>"; };
 		19B037FC1E2C5891006E25A2 /* Reflectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reflectable.swift; sourceTree = "<group>"; };
 		19B037FF1E2C5891006E25A2 /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		19B038001E2C5891006E25A2 /* CurrentMatchManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentMatchManager.swift; sourceTree = "<group>"; };
@@ -236,7 +230,6 @@
 				19B037E31E2C586C006E25A2 /* FirstPickTableViewController.h */,
 				19B037E41E2C586C006E25A2 /* FirstPickTableViewController.m */,
 				19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */,
-				19B037E61E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift */,
 			);
 			name = Picklists;
 			sourceTree = "<group>";
@@ -244,14 +237,12 @@
 		19B0383B1E2DD7A3006E25A2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				19B037F61E2C5891006E25A2 /* MatchCalculatedData.swift */,
-				19B037F71E2C5891006E25A2 /* Team.swift */,
-				19B037F81E2C5891006E25A2 /* Match.swift */,
-				19B037F91E2C5891006E25A2 /* CalculatedTeamData.swift */,
-				19B037FA1E2C5891006E25A2 /* OLDTeamInMatchData.swift */,
-				19B037FB1E2C5891006E25A2 /* OLDTeamInMatchCalculatedData.swift */,
+				190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */,
+				190DFE431E306A1700477B6D /* CalculatedMatchData.swift */,
+				190DFE451E30703E00477B6D /* Match.swift */,
 				19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */,
 				19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */,
+				190DFE471E3079D000477B6D /* Team.swift */,
 				19B037FC1E2C5891006E25A2 /* Reflectable.swift */,
 			);
 			name = Models;
@@ -441,25 +432,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				190DFE3E1E30697500477B6D /* CalculatedTeamData.swift in Sources */,
 				19B038491E2DE55B006E25A2 /* ShotTimesForBoiler.swift in Sources */,
-				19B0380C1E2C5891006E25A2 /* Team.swift in Sources */,
 				19B038131E2C5891006E25A2 /* GraphViewController.swift in Sources */,
 				19B038151E2C5891006E25A2 /* ArrayTableViewController.m in Sources */,
-				19B038101E2C5891006E25A2 /* OLDTeamInMatchCalculatedData.swift in Sources */,
 				19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */,
 				19B037E81E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift in Sources */,
 				19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */,
 				19B038071E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift in Sources */,
+				190DFE481E3079D000477B6D /* Team.swift in Sources */,
 				19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */,
 				19B037E91E2C586C006E25A2 /* MatchTableViewCell.m in Sources */,
 				19B0382A1E2C58D3006E25A2 /* MechanismTableViewCell.swift in Sources */,
 				19B038141E2C5891006E25A2 /* CurrentMatchManager.swift in Sources */,
 				19B038171E2C5891006E25A2 /* NotesTableViewController.swift in Sources */,
-				19B0380D1E2C5891006E25A2 /* Match.swift in Sources */,
 				19B038161E2C5891006E25A2 /* SortedRankTableViewController.swift in Sources */,
 				19B0380A1E2C5891006E25A2 /* Utils.swift in Sources */,
 				19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */,
-				19B0380E1E2C5891006E25A2 /* CalculatedTeamData.swift in Sources */,
 				19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */,
 				19B0382C1E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m in Sources */,
 				19B037EB1E2C586C006E25A2 /* SeedTableViewController.m in Sources */,
@@ -468,13 +457,12 @@
 				19B037EC1E2C586C006E25A2 /* PredictedSeedTableViewController.m in Sources */,
 				19B038271E2C58D3006E25A2 /* UnrankedTableViewCell.swift in Sources */,
 				19B037E71E2C586C006E25A2 /* ScheduleTableViewController.m in Sources */,
+				190DFE461E30703E00477B6D /* Match.swift in Sources */,
 				19B037ED1E2C586C006E25A2 /* FirstPickTableViewController.m in Sources */,
-				19B0380F1E2C5891006E25A2 /* OLDTeamInMatchData.swift in Sources */,
 				19B038281E2C58D3006E25A2 /* MultiCellTableViewCell.m in Sources */,
-				19B037EF1E2C586C006E25A2 /* ConditionalSecondPickTableViewController.swift in Sources */,
 				19B038081E2C5891006E25A2 /* MatchDetailsViewController.swift in Sources */,
-				19B0380B1E2C5891006E25A2 /* MatchCalculatedData.swift in Sources */,
 				19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */,
+				190DFE441E306A1700477B6D /* CalculatedMatchData.swift in Sources */,
 				19B038331E2C5919006E25A2 /* main.m in Sources */,
 				19B038321E2C5919006E25A2 /* AppDelegate.m in Sources */,
 			);

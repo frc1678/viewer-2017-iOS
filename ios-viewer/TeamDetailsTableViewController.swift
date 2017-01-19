@@ -27,7 +27,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     var team: Team? = nil {
         didSet {
-            num = self.team?.number?.intValue
+            num = self.team?.number!
             updateTitleAndTopInfo()
             reload()
         }
@@ -56,15 +56,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             if let team = self.team,
                 let imageView = self.teamSelectedImageView {
-                    if team.selectedImageUrl != nil {
-                        self.firebaseFetcher?.getImageForTeam(self.team?.number as! Int, fetchedCallback: { (image) -> () in
+                    if team.selectedImageURL != nil {
+                        self.firebaseFetcher?.getImageForTeam((self.team?.number!)!, fetchedCallback: { (image) -> () in
                             DispatchQueue.main.async(execute: { () -> Void in
                                 imageView.image = image
                             })
                             }, couldNotFetch: {
                                 DispatchQueue.main.async(execute: { () -> Void in
                                     
-                                    imageView.hnk_setImageFromURL(URL(string: team.selectedImageUrl!)!)
+                                    imageView.hnk_setImageFromURL(URL(string: team.selectedImageURL!)!)
                                 })
                         })
                     }
@@ -72,9 +72,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if self.teamSelectedImageView.image != noRobotPhoto {
                         self.photos.append(MWPhoto(image: self.teamSelectedImageView.image))
                     }
-                    if let urls = self.team?.otherImageUrls {
-                        for (_, url) in urls {
-                            self.photos.append(MWPhoto(url: URL(string: url as! String)))
+                    if let urls = self.team?.allImageUrls {
+                        for url in urls {
+                            self.photos.append(MWPhoto(url: URL(string: url )))
                         }
                     }
                     if self.teamSelectedImageView.image == noRobotPhoto && self.photos.count > 0 {
@@ -328,9 +328,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 
                 if dataKey == "matchDatas" {
-                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch(team?.number as! Int) ?? "NA"
+                    let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number!)!) ?? "NA"
                     
-                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + " - (\(matchesUntilNextMatch))  Remaining: \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number?.intValue)!)))"
+                    unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + " - (\(matchesUntilNextMatch))  Remaining: \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number)!)))"
                 }
                 cell = unrankedCell
             }
@@ -414,11 +414,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             var seedText = "?"
             var predSeedText = "?"
-            if let seed = team?.calculatedData!.actualSeed , seed.intValue > 0 {
+            if let seed = team?.calculatedData!.actualSeed, seed > 0 {
                 seedText = "\(seed)"
             }
             
-            if let predSeed = team?.calculatedData!.predictedSeed , predSeed.intValue > 0 {
+            if let predSeed = team?.calculatedData!.predictedSeed, predSeed > 0 {
                 predSeedText = "\(predSeed)"
             }
             
@@ -447,18 +447,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if let dest = segue.destination as? SortedRankTableViewController {
                 dest.keyPath = sender as! String
             }
-        }
-        if segue.identifier == "defenseCrossedSegue" {
-            let indexPath = sender as? IndexPath
-            let cell = tableView.cellForRow(at: indexPath!) as? MultiCellTableViewCell
-            let dest = segue.destination as? DefenseTableViewController
-            if let teamNumbah = team?.number {
-                dest!.teamNumber = teamNumbah.intValue
-                dest!.relevantDefense = cell!.teamLabel!.text!
-                dest!.defenseKey = Utils.getKeyForHumanReadableName(dest!.relevantDefense)!.characters.split{$0 == "."}.map(String.init)[2]
-            }
-        }
-        else if segue.identifier == "Photos" {
+        } else if segue.identifier == "Photos" {
             let browser = segue.destination as! MWPhotoBrowser;
             
             browser.delegate = self;
@@ -475,7 +464,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             let matchesForTeamController = segue.destination as! SpecificTeamScheduleTableViewController
             
             if let teamNum = team?.number {
-                matchesForTeamController.teamNumber = teamNum.intValue
+                matchesForTeamController.teamNumber = teamNum
             }
         } else if segue.identifier == "CTIMDGraph" {
             let graphViewController = segue.destination as! GraphViewController
@@ -564,7 +553,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     graphViewController.values = (values as NSArray).map { CGFloat($0 as! Float) }
                     graphViewController.subDisplayLeftTitle = "Match: "
-                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber(team?.number as! Int)) as [AnyObject]
+                    graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.number!)!) as [NSNumber]) as [AnyObject]
                     for i in nilValueIndecies.reversed() {
                         graphViewController.subValuesLeft.remove(at: i)
                     }
@@ -584,7 +573,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     }*/
                     graphViewController.subDisplayRightTitle = "Team: "
-                    graphViewController.subValuesRight = [teamNum,teamNum,teamNum,teamNum,teamNum]
+                    graphViewController.subValuesRight = [teamNum as AnyObject,teamNum as AnyObject,teamNum as AnyObject,teamNum as AnyObject,teamNum as AnyObject]
                     
                     
                 }
@@ -604,7 +593,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     graphViewController.subDisplayLeftTitle = "Team "
                     graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher!.ranksOfTeamsWithCharacteristic(Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] as NSString) as [NSNumber] ) as [AnyObject]
                     graphViewController.subDisplayRightTitle = "Rank: "
-                    if let i = ((graphViewController.subValuesLeft as! [Int]).index(of: teamNum.intValue)) {
+                    if let i = ((graphViewController.subValuesLeft as! [Int]).index(of: teamNum)) {
                         graphViewController.highlightIndex = i
                     }
                 }
@@ -612,7 +601,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 //                graphViewController.teamNumber = Int32(teamNum)
                 //                graphViewController.graphInfo = nil;
             }
-        } else if segue.identifier == "NotesSegue" {
+        } /*else if segue.identifier == "NotesSegue" {
             let notesTableViewController = segue.destination as! NotesTableViewController
             if let teamNum = team?.number  {
                 if let p = team?.pitNotes {
@@ -621,7 +610,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     notesTableViewController.data.append(["Pit Notes: ": "None"])
                 }
                 for TIMD in (firebaseFetcher?.getTIMDataForTeam(team!))! {
-                    if let note = TIMD.superNotes {
+                    if let note = TIMD.superclass {
                         notesTableViewController.data.append(["Match \(TIMD.matchNumber!.intValue)":"\(note)"])
                     } else {
                         notesTableViewController.data.append(["Match \(TIMD.matchNumber!.intValue)":"None"])
@@ -629,7 +618,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 }
                 notesTableViewController.title = "\(teamNum) Notes"
             }
-        }
+        }*/
     }
     
     func boolToBoolString(_ b: Bool) -> String {

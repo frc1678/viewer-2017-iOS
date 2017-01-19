@@ -86,7 +86,7 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? TeamDetailsTableViewController {
             if let number = data?.teamNumber {
-                dest.team = firebaseFetcher?.getTeam(number.intValue)
+                dest.team = firebaseFetcher?.getTeam(number)
             }
         } else if segue.identifier == "Graph" {
             let graphViewController = segue.destination as! GraphViewController
@@ -100,9 +100,9 @@ class TeamInMatchDetailsTableViewController: UITableViewController {
                     if let values = firebaseFetcher?.valuesInCompetitionOfPathForTeams(key) as? [CGFloat] as [CGFloat]? {
                         graphViewController.values = (values)
                         graphViewController.subDisplayLeftTitle = "Match: "
-                        graphViewController.subValuesLeft = firebaseFetcher!.valuesInTeamMatchesOfPath("match.match", forTeam: (firebaseFetcher?.getTeam(data!.teamNumber!.intValue))!) as [AnyObject]
+                        graphViewController.subValuesLeft = firebaseFetcher!.valuesInTeamMatchesOfPath("match.match", forTeam: (firebaseFetcher?.getTeam(data!.teamNumber!))!) as [AnyObject]
                         if let d = data {
-                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher!.ranksOfTeamInMatchDatasWithCharacteristic((keySets as [[String]])[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] as NSString, forTeam:firebaseFetcher!.getTeam(d.teamNumber!.intValue)) as [NSNumber]) as [AnyObject]
+                            graphViewController.subValuesRight = nsNumArrayToIntArray(firebaseFetcher!.ranksOfTeamInMatchDatasWithCharacteristic((keySets as [[String]])[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row] as NSString, forTeam:firebaseFetcher!.getTeam(d.teamNumber!)!) as [NSNumber]) as [AnyObject]
                             
                             if let i = ((graphViewController.subValuesLeft as! [String]).index(of: String(describing: d.matchNumber))) {
                                 graphViewController.highlightIndex = i
