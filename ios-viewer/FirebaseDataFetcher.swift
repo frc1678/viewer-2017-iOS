@@ -160,7 +160,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                     let team = self.makeTeamFromSnapshot(snapshot)
                     if team.number != -1 {
-                        self.updateCacheIfNeeded(snapshot, team: self.getTeam(team.number)!)
+                        self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {
                             self.teams.append(team)
                             self.notificationManager.queueNote("updateLeftTable", specialObject: team)
@@ -173,13 +173,14 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
                     self.teamCounter += 1
                     let team = self.makeTeamFromSnapshot(snapshot)
-                    if team.number != nil {
+                    if team.number != -1 {
                         self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {
                             let te = self.teams.filter({ (t) -> Bool in
                                 if t.number == team.number { return true }
                                 return false
                             })
+                            if te.count > 0 {
                             if let index = self.teams.index(of: te[0]) {
                                 self.teams[index] = team
                                 
@@ -187,6 +188,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                                 self.NSCounter = 0
                                 self.teamCounter = 0
                                 
+                            }
                             }
                         }
                     }
@@ -225,7 +227,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             self.firstCurrentMatchUpdate = false
             
             let currentMatchFetch = self.getMatch(self.currentMatchManager.currentMatch)
-            let m : [String: Any] = ["num":self.currentMatchManager.currentMatch, "redTeams": currentMatchFetch!.redAllianceTeamNumbers ?? [0,0,0], "blueTeams": currentMatchFetch!.blueAllianceTeamNumbers ?? [0,0,0]]
+            
+            let m : [String: Any] = ["num":self.currentMatchManager.currentMatch, "redTeams": currentMatchFetch?.redAllianceTeamNumbers ?? [0,0,0], "blueTeams": currentMatchFetch?.blueAllianceTeamNumbers ?? [0,0,0]]
             UserDefaults.standard.set(m, forKey: "match")
             })
         
@@ -276,7 +279,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         var teams = [Team]()
         if teamNums != nil {
             for teamNum in teamNums! {
-                teams.append(self.getTeam(teamNum)!)
+                if let team = self.getTeam(teamNum) {
+                    teams.append(team)
+                }
             }
         }
         return teams

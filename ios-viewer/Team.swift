@@ -52,8 +52,8 @@ public final class Team: NSObject {
     name = json[SerializationKeys.name].string
     pitOrganization = json[SerializationKeys.pitOrganization].string
     pitProgrammingLanguage = json[SerializationKeys.pitProgrammingLanguage].string
-    number = json[SerializationKeys.number].int!
-    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].int!
+    number = json[SerializationKeys.number].intValue
+    pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].intValue
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
     selectedImageURL = json[SerializationKeys.selectedImageURL].string
     allImageUrls = json[SerializationKeys.allImageUrls].arrayObject as! [String]?

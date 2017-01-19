@@ -57,13 +57,13 @@ public final class CalculatedMatchData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    actualRedRPs = json[SerializationKeys.actualRedRPs].int!
+    actualRedRPs = json[SerializationKeys.actualRedRPs].intValue
     blueWinChance = json[SerializationKeys.blueWinChance].floatValue
     fortyKilopascalChanceBlue = json[SerializationKeys.fortyKilopascalChanceBlue].floatValue
     predictedRedScore = json[SerializationKeys.predictedRedScore].floatValue
     sdPredictedRedScore = json[SerializationKeys.sdPredictedRedScore].floatValue
     redWinChance = json[SerializationKeys.redWinChance].floatValue
-    actualBlueRPs = json[SerializationKeys.actualBlueRPs].int!
+    actualBlueRPs = json[SerializationKeys.actualBlueRPs].intValue
     predictedRedRPs = json[SerializationKeys.predictedRedRPs].floatValue
     predictedBlueScore = json[SerializationKeys.predictedBlueScore].floatValue
     predictedBlueRPs = json[SerializationKeys.predictedBlueRPs].floatValue

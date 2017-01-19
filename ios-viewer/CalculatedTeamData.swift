@@ -96,12 +96,12 @@ public final class CalculatedTeamData: NSObject {
     baselineReachedPercentage = json[SerializationKeys.baselineReachedPercentage].floatValue
     avgGearsPlacedAuto = json[SerializationKeys.avgGearsPlacedAuto].floatValue
     avgGearControl = json[SerializationKeys.avgGearControl].floatValue
-    actualSeed = json[SerializationKeys.actualSeed].int!
+    actualSeed = json[SerializationKeys.actualSeed].intValue
     sdHighShotsTele = json[SerializationKeys.sdHighShotsTele].floatValue
     liftoffPercentage = json[SerializationKeys.liftoffPercentage].floatValue
     avgHighShotsAuto = json[SerializationKeys.avgHighShotsAuto].floatValue
     avgAgility = json[SerializationKeys.avgAgility].floatValue
-    predictedSeed = json[SerializationKeys.predictedSeed].int!
+    predictedSeed = json[SerializationKeys.predictedSeed].intValue
     avgGearsPlacedTele = json[SerializationKeys.avgGearsPlacedTele].floatValue
     liftoffAbility = json[SerializationKeys.liftoffAbility].floatValue
     sdGearsPlacedAuto = json[SerializationKeys.sdGearsPlacedAuto].floatValue

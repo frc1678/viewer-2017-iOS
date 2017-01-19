@@ -55,15 +55,15 @@ public final class Match: NSObject {
   public required init(json: JSON) {
     if let items = json[SerializationKeys.redAllianceTeamNumbers].array { redAllianceTeamNumbers = items.map { $0.intValue } }
     blueDidReachFortyKilopascals = json[SerializationKeys.blueDidReachFortyKilopascals].boolValue
-    blueScore = json[SerializationKeys.blueScore].int!
+    blueScore = json[SerializationKeys.blueScore].intValue
     redDidReachFortyKilopascals = json[SerializationKeys.redDidReachFortyKilopascals].boolValue
     if let items = json[SerializationKeys.blueAllianceTeamNumbers].array { blueAllianceTeamNumbers = items.map { $0.intValue } }
-    number = json[SerializationKeys.number].int!
+    number = json[SerializationKeys.number].intValue
     calculatedData = CalculatedMatchData(json: json[SerializationKeys.calculatedData])
-    foulPointsGainedRed = json[SerializationKeys.foulPointsGainedRed].int!
+    foulPointsGainedRed = json[SerializationKeys.foulPointsGainedRed].intValue
     blueDidStartAllRotors = json[SerializationKeys.blueDidStartAllRotors].boolValue
-    foulPointsGainedBlue = json[SerializationKeys.foulPointsGainedBlue].int!
-    redScore = json[SerializationKeys.redScore].int!
+    foulPointsGainedBlue = json[SerializationKeys.foulPointsGainedBlue].intValue
+    redScore = json[SerializationKeys.redScore].intValue
     redDidStartAllRotors = json[SerializationKeys.redDidStartAllRotors].boolValue
   }
 
