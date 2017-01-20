@@ -207,14 +207,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 
                 dataPoint = team!.value(forKeyPath: dataKey) as AnyObject?? ?? "" as AnyObject?
                 
-                if Utils.teamDetailsKeys.obstacleKeys.contains(dataKey) {
-                    secondDataPoint = team!.value(forKeyPath: dataKey.replacingOccurrences(of: "Auto", with: "Tele")) as AnyObject?
-                    
-                    if let sf = secondDataPoint as? Float? {
-                        secondDataPoint = "\(roundValue(sf as AnyObject?, toDecimalPlaces: 1))" as AnyObject?
-                    }
-                }
-                
                 if secondDataPoint as? String == "" {
                     secondDataPoint = nil
                 }
