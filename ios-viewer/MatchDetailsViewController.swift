@@ -110,7 +110,7 @@ class MatchDetailsViewController: UIViewController {
         }
         
         if let match = match {
-            if match.number != nil {
+            if match.number != -1 {
                 title = String(describing: match.number)
             } else {
                 title = "???"

@@ -41,12 +41,13 @@ class TIMDDetailsViewController: UITableViewController {
                 cell.datapointLabel.text = Utils.humanReadableNames[key]
             }
             
+            var value: Any
             if key.contains("calculatedData") {
-                cell.valueLabel.text = TIMD.value(forKeyPath: key) as! String?
+                value = TIMD.value(forKeyPath: key)
             } else {
-                cell.valueLabel.text = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: key)
+                value = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: key)
             }
-            /* if let value = TIMD.value(forKeyPath: key) {
+            if value != nil {
                 if let stringValue = value as? String {
                     cell.valueLabel.text = stringValue
                 } else if let boolValue = value as? Bool {
@@ -58,7 +59,7 @@ class TIMDDetailsViewController: UITableViewController {
                 } else {
                     //
                 }
-            } */
+            }
         }
         return cell
     }
