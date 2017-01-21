@@ -109,9 +109,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         
-        let longTextCells = [
-            "calculatedData.defensesCrossableAuto"
-        ]
+        let longTextCells : [String] = []
         
         let unrankedCells = [
             "selectedImageURL",
@@ -122,6 +120,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.disabledPercentage",
             "calculatedData.disfunctionalPercentage",
             "calculatedData.incapacitatedPercentage",
+            "calculatedData.baselineReachedPercentage",
+            "calculatedData.liftoffPercentage"
         ]
         
         let otherNoCalcDataValues = [
@@ -129,9 +129,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgHighShotsTele"
         ]
         
-        let addCommasBetweenCapitals = [
-            "calculatedData.reconAcquisitionTypes"
-        ]
+        let addCommasBetweenCapitals : [String] = []
         
         let boolValues = [
             "calculatedData.disabledPercentage",
@@ -323,8 +321,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     ]
      
     static let TIMDStatusKeys = [
-        "didGetDisabled",
-        "didGetIncapacitated"
+        "didStartDisabled",
+        "didBecomeIncapacitated"
     ]
     
     static let TIMDSuperKeys = [
@@ -343,12 +341,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     ]
     
     static let graphTitleSwitch = [
-        "didScaleTele" : "scalePercentage",
-        "didGetIncapacitated" : "incapacitatedPercentage",
-        "didGetDisabled" : "disabledPercentage",
+        "didBecomeIncapacitated" : "incapacitatedPercentage",
+        "didStartDisabled" : "disabledPercentage",
         "numShotsBlockedTele" : "avgShotsBlocked",
+        "didReachBaselineAuto" : "baselineReachedPercentage",
+        "didLiftoff" : "liftoffPercentage",
+        "calculatedData.liftoffAbility" : "liftoffAbility",
         "numLowShotsMadeTele" : "avgLowShotsTele",
-        "numHighShotsMadeTele" : "avgHighShotsTele",
+        "calculatedData.numHighShotsMadeTele" : "avgHighShotsTele",
         "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
         "calculatedData.RScoreEvasion" : "calculatedData.avgEvasion",
         "calculatedData.RScoreTorque" : "calculatedData.avgTorque",
@@ -453,11 +453,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitDidDemonstrateCheesecakePotential": "Can Accommodate Cheesecake",
         "rankBallControl" : "Ball Control Rank",
         "didScaleTele" : "Did Scale",
-        "didGetIncapacitated" : "Was Incap.",
-        "didGetDisabled" : "Was Disabled",
+        "didBecomeIncapacitated" : "Was Incap.",
+        "didStartDisabled" : "Was Disabled",
         "numShotsBlockedTele" : "Num Shots Blocked",
-        "numLowShotsMadeTele" : "Num Low Shots Made",
-        "numHighShotsMadeTele" : "Num High Shots Made",
+        "calculatedData.numLowShotsMadeTele" : "Num Low Shots Made Tele",
+        "calculatedData.numHighShotsMadeTele" : "Num High Shots Made Tele",
         "calculatedData.RScoreSpeed" : "R Score Speed",
         "calculatedData.RScoreEvasion" : "R Score Evasion",
         "calculatedData.RScoreTorque" : "R Score Torque",

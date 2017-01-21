@@ -28,7 +28,7 @@
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     
     if(team.calculatedData.actualNumRPs != -1.0) {
-        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%ld",
+        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%f",
                                      team.calculatedData.actualNumRPs];
     } else {
         multiCell.scoreLabel.text = @"";

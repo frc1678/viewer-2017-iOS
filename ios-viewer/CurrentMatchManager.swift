@@ -8,6 +8,7 @@
 
 import UIKit
 import Haneke
+import UserNotifications
 
 class CurrentMatchManager: NSObject {
     
@@ -60,14 +61,14 @@ class CurrentMatchManager: NSObject {
         }
     }
     
-    func postNotification(_ notificationBody: String) {
-        let localNotification = UILocalNotification()
-        localNotification.fireDate = Date(timeIntervalSinceNow: 1)
-        localNotification.alertBody = notificationBody
-        localNotification.timeZone = TimeZone.current
-        localNotification.soundName = UILocalNotificationDefaultSoundName
-        localNotification.applicationIconBadgeNumber = UIApplication.shared.applicationIconBadgeNumber + 1
-        UIApplication.shared.scheduleLocalNotification(localNotification)
+    func postNotification(_ notificationBody:String) {
+        let content = UNMutableNotificationContent()
+        content.body = notificationBody
+        content.sound = UNNotificationSound.default()
+        content.badge = NSNumber(integerLiteral: UIApplication.shared.applicationIconBadgeNumber + 1)
+        content.title = "Upcoming Starred Match"
+        let localNotification = UNNotificationRequest(identifier: "ViewerNotification", content: content, trigger: nil)
+        UNUserNotificationCenter.current().add(localNotification, withCompletionHandler: nil)
     }
     
     func notificationTriggeredCheckForNotification(_ note: Notification) {

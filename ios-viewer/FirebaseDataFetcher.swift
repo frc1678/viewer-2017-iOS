@@ -148,7 +148,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     if match.number == number {
                         
                         self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
-                        if match.redScore == nil && self.matches[matchIndex].redScore != nil {
+                        if match.redScore == -1 && self.matches[matchIndex].redScore != -1 {
                         }
                         self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                     }
@@ -578,10 +578,17 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         var altValueMapping : [CGFloat: String]?
         
         for TIMD in TIMDs {
-            let value = TIMD.value(forKeyPath: path)
+            var value : Any?
+            if path.contains("calculatedData") {
+                value = TIMD.value(forKeyPath: path)
+            } else {
+                value = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: path)
+            }
             if value != nil {
-                if let floatVal = value as? Float {
-                    valueArray.append(floatVal)
+                if let floatValue = value as? Float {
+                    valueArray.append(floatValue)
+                } else if let intVal = value as? Int {
+                    valueArray.append(Float(intVal))
                 } else { // Pretty much, if its false it's 0, if its true it's 1
                     altValueMapping = [CGFloat(1.0): "Yes", CGFloat(0.0): "No"]
                     valueArray.append((boolValue(value: value!)! ? 1.0 : 0.0))
@@ -615,7 +622,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         var counter = self.matches.count + 1
         for match in sortedMatches {
             counter -= 1
-            if match.redScore != nil || match.redScore != nil {
+            if match.redScore != -1 || match.redScore != -1 {
                 return counter
             }
         }

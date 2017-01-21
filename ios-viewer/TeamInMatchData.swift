@@ -49,18 +49,18 @@ public final class TeamInMatchData: NSObject {
   public var highShotTimesForBoilerTele: [ShotTimesForBoiler]?
   public var numGearsPlacedAuto: Int? 
   public var numGearGroundIntakesTele: Int? 
-  public var didStartDisabled: Bool? = false
-  public var didReachBaselineAuto: Bool? = false
+  public var didStartDisabled: Bool = false
+  public var didReachBaselineAuto: Bool = false
   public var numGearsPlacedTele: Int? 
   public var rankSpeed: Int? 
   public var numHoppersOpenedTele: Int? 
   public var lowShotTimesForBoilerAuto: [ShotTimesForBoiler]?
   public var rankAgility: Int? 
   public var teamNumber: Int? 
-  public var didBecomeIncapacitated: Bool? = false
-  public var didPotentiallyConflictingAuto: Bool? = false
+  public var didBecomeIncapacitated: Bool = false
+  public var didPotentiallyConflictingAuto: Bool = false
   public var scoutName: String?
-  public var didLiftoff: Bool? = false
+  public var didLiftoff: Bool = false
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -75,25 +75,25 @@ public final class TeamInMatchData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    rankDefense = json[SerializationKeys.rankDefense].int
-    rankGearControl = json[SerializationKeys.rankGearControl].int
+    rankDefense = json[SerializationKeys.rankDefense].intValue
+    rankGearControl = json[SerializationKeys.rankGearControl].intValue
     if let items = json[SerializationKeys.lowShotTimesForBoilerTele].array { lowShotTimesForBoilerTele = items.map { ShotTimesForBoiler(json: $0) } }
-    numGearLoaderIntakesTele = json[SerializationKeys.numGearLoaderIntakesTele].int
-    rankBallControl = json[SerializationKeys.rankBallControl].int
+    numGearLoaderIntakesTele = json[SerializationKeys.numGearLoaderIntakesTele].intValue
+    rankBallControl = json[SerializationKeys.rankBallControl].intValue
     if let items = json[SerializationKeys.highShotTimesForBoilerAuto].array { highShotTimesForBoilerAuto = items.map { ShotTimesForBoiler(json: $0) } }
-    numHoppersOpenedAuto = json[SerializationKeys.numHoppersOpenedAuto].int
-    matchNumber = json[SerializationKeys.matchNumber].int
+    numHoppersOpenedAuto = json[SerializationKeys.numHoppersOpenedAuto].intValue
+    matchNumber = json[SerializationKeys.matchNumber].intValue
     if let items = json[SerializationKeys.highShotTimesForBoilerTele].array { highShotTimesForBoilerTele = items.map { ShotTimesForBoiler(json: $0) } }
-    numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].int
-    numGearGroundIntakesTele = json[SerializationKeys.numGearGroundIntakesTele].int
+    numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].intValue
+    numGearGroundIntakesTele = json[SerializationKeys.numGearGroundIntakesTele].intValue
     didStartDisabled = json[SerializationKeys.didStartDisabled].boolValue
     didReachBaselineAuto = json[SerializationKeys.didReachBaselineAuto].boolValue
-    numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].int
-    rankSpeed = json[SerializationKeys.rankSpeed].int
-    numHoppersOpenedTele = json[SerializationKeys.numHoppersOpenedTele].int
+    numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].intValue
+    rankSpeed = json[SerializationKeys.rankSpeed].intValue
+    numHoppersOpenedTele = json[SerializationKeys.numHoppersOpenedTele].intValue
     if let items = json[SerializationKeys.lowShotTimesForBoilerAuto].array { lowShotTimesForBoilerAuto = items.map { ShotTimesForBoiler(json: $0) } }
-    rankAgility = json[SerializationKeys.rankAgility].int
-    teamNumber = json[SerializationKeys.teamNumber].int
+    rankAgility = json[SerializationKeys.rankAgility].intValue
+    teamNumber = json[SerializationKeys.teamNumber].intValue
     didBecomeIncapacitated = json[SerializationKeys.didBecomeIncapacitated].boolValue
     didPotentiallyConflictingAuto = json[SerializationKeys.didPotentiallyConflictingAuto].boolValue
     scoutName = json[SerializationKeys.scoutName].string
