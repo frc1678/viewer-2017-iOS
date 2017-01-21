@@ -56,8 +56,36 @@
 		19B038491E2DE55B006E25A2 /* ShotTimesForBoiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */; };
 		19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */; };
 		8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */; };
+		8CD3CEA91E34074000B328A1 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD3CEA81E34074000B328A1 /* NotificationCenter.framework */; };
+		8CD3CEAC1E34074000B328A1 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD3CEAB1E34074000B328A1 /* TodayViewController.swift */; };
+		8CD3CEAF1E34074000B328A1 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD3CEAD1E34074000B328A1 /* MainInterface.storyboard */; };
+		8CD3CEB31E34074000B328A1 /* UpcomingMatchesExtention.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8CD3CEA71E34074000B328A1 /* UpcomingMatchesExtention.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8CD3CEB11E34074000B328A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19B037AD1E2C5739006E25A2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CD3CEA61E34074000B328A1;
+			remoteInfo = UpcomingMatchesExtention;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8CD3CEB71E34074000B328A1 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8CD3CEB31E34074000B328A1 /* UpcomingMatchesExtention.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		17C3CB7B0693450E7F32640F /* Pods-ios-viewer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.debug.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +153,11 @@
 		19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotTimesForBoiler.swift; sourceTree = "<group>"; };
 		19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = "<group>"; };
 		8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = "<group>"; };
+		8CD3CEA71E34074000B328A1 /* UpcomingMatchesExtention.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = UpcomingMatchesExtention.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CD3CEA81E34074000B328A1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		8CD3CEAB1E34074000B328A1 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		8CD3CEAE1E34074000B328A1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		8CD3CEB01E34074000B328A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
 		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -138,6 +171,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CD3CEA41E34074000B328A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CD3CEA91E34074000B328A1 /* NotificationCenter.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -145,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				19B037B71E2C5739006E25A2 /* ios-viewer */,
+				8CD3CEAA1E34074000B328A1 /* UpcomingMatchesExtention */,
 				19B037B61E2C5739006E25A2 /* Products */,
 				19B037CA1E2C5789006E25A2 /* ios-viewer-Bridging-Header.h */,
 				E88302B98B14AB62FE417541 /* Pods */,
@@ -156,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				19B037B51E2C5739006E25A2 /* ios-viewer.app */,
+				8CD3CEA71E34074000B328A1 /* UpcomingMatchesExtention.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -297,8 +340,19 @@
 			isa = PBXGroup;
 			children = (
 				C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */,
+				8CD3CEA81E34074000B328A1 /* NotificationCenter.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8CD3CEAA1E34074000B328A1 /* UpcomingMatchesExtention */ = {
+			isa = PBXGroup;
+			children = (
+				8CD3CEAB1E34074000B328A1 /* TodayViewController.swift */,
+				8CD3CEAD1E34074000B328A1 /* MainInterface.storyboard */,
+				8CD3CEB01E34074000B328A1 /* Info.plist */,
+			);
+			path = UpcomingMatchesExtention;
 			sourceTree = "<group>";
 		};
 		E88302B98B14AB62FE417541 /* Pods */ = {
@@ -323,15 +377,34 @@
 				19B037B31E2C5739006E25A2 /* Resources */,
 				0E372FC2A11D6315A93EA2AC /* [CP] Embed Pods Frameworks */,
 				10885DE3B5B3FE7B366CD7D9 /* [CP] Copy Pods Resources */,
+				8CD3CEB71E34074000B328A1 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8CD3CEB21E34074000B328A1 /* PBXTargetDependency */,
 			);
 			name = "ios-viewer";
 			productName = "ios-viewer";
 			productReference = 19B037B51E2C5739006E25A2 /* ios-viewer.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8CD3CEA61E34074000B328A1 /* UpcomingMatchesExtention */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CD3CEB61E34074000B328A1 /* Build configuration list for PBXNativeTarget "UpcomingMatchesExtention" */;
+			buildPhases = (
+				8CD3CEA31E34074000B328A1 /* Sources */,
+				8CD3CEA41E34074000B328A1 /* Frameworks */,
+				8CD3CEA51E34074000B328A1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UpcomingMatchesExtention;
+			productName = UpcomingMatchesExtention;
+			productReference = 8CD3CEA71E34074000B328A1 /* UpcomingMatchesExtention.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -347,6 +420,11 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = J3MNNM5PHM;
 						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+					8CD3CEA61E34074000B328A1 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = J3MNNM5PHM;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -365,6 +443,7 @@
 			projectRoot = "";
 			targets = (
 				19B037B41E2C5739006E25A2 /* ios-viewer */,
+				8CD3CEA61E34074000B328A1 /* UpcomingMatchesExtention */,
 			);
 		};
 /* End PBXProject section */
@@ -387,6 +466,14 @@
 				19B037C01E2C5739006E25A2 /* Assets.xcassets in Resources */,
 				19B037D61E2C581C006E25A2 /* SecondPick.storyboard in Resources */,
 				19B037D51E2C581C006E25A2 /* Schedule.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8CD3CEA51E34074000B328A1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CD3CEAF1E34074000B328A1 /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,7 +571,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8CD3CEA31E34074000B328A1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CD3CEAC1E34074000B328A1 /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8CD3CEB21E34074000B328A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CD3CEA61E34074000B328A1 /* UpcomingMatchesExtention */;
+			targetProxy = 8CD3CEB11E34074000B328A1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */ = {
@@ -493,6 +596,14 @@
 				19B037C21E2C5739006E25A2 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8CD3CEAD1E34074000B328A1 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8CD3CEAE1E34074000B328A1 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -626,6 +737,32 @@
 			};
 			name = Release;
 		};
+		8CD3CEB41E34074000B328A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = J3MNNM5PHM;
+				INFOPLIST_FILE = UpcomingMatchesExtention/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer.UpcomingMatchesExtention";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		8CD3CEB51E34074000B328A1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = J3MNNM5PHM;
+				INFOPLIST_FILE = UpcomingMatchesExtention/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer.UpcomingMatchesExtention";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -646,6 +783,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		8CD3CEB61E34074000B328A1 /* Build configuration list for PBXNativeTarget "UpcomingMatchesExtention" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CD3CEB41E34074000B328A1 /* Debug */,
+				8CD3CEB51E34074000B328A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
