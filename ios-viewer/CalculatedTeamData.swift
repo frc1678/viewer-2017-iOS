@@ -44,6 +44,7 @@ public final class CalculatedTeamData: NSObject {
     static let predictedNumRPs = "predictedNumRPs"
     static let disfunctionalPercentage = "disfunctionalPercentage"
     static let sdBaselineReachedPercentage = "sdBaselineReachedPercentage"
+    static let avgGearsPlacedByLiftAuto = "avgGearsPlacedByLiftAuto"
   }
 
   // MARK: Properties
@@ -79,6 +80,7 @@ public final class CalculatedTeamData: NSObject {
     public var predictedNumRPs: Float = -1.0
     public var disfunctionalPercentage: Float = -1.0
     public var sdBaselineReachedPercentage: Float = -1.0
+    public var avgGearsPlacedByLiftAuto: Float = -1.0
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -125,6 +127,7 @@ public final class CalculatedTeamData: NSObject {
     predictedNumRPs = json[SerializationKeys.predictedNumRPs].floatValue
     disfunctionalPercentage = json[SerializationKeys.disfunctionalPercentage].floatValue
     sdBaselineReachedPercentage = json[SerializationKeys.sdBaselineReachedPercentage].floatValue
+    avgGearsPlacedByLiftAuto = json[SerializationKeys.avgGearsPlacedByLiftAuto].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -164,6 +167,7 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.predictedNumRPs] = predictedNumRPs
     dictionary[SerializationKeys.disfunctionalPercentage] = disfunctionalPercentage
     dictionary[SerializationKeys.sdBaselineReachedPercentage] = sdBaselineReachedPercentage
+    dictionary[SerializationKeys.avgGearsPlacedByLiftAuto] = avgGearsPlacedByLiftAuto
     return dictionary
   }
 

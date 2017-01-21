@@ -290,8 +290,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
     }
     
-    static let autoKeys = ["uploadedData.stackedToteSet", "uploadedData.numContainersMovedIntoAutoZone"]
-    static let teleKeys = ["uploadedData.numTotesStacked", "uploadedData.numReconLevels", "uploadedData.numNoodlesContributed", "uploadedData.numReconsStacked", "uploadedData.numTeleopReconsFromStep", "uploadedData.numHorizontalReconsPickedUp", "uploadedData.numVerticalReconsPickedUp", "calculatedData.numReconsPickedUp", "uploadedData.numTotesPickedUpFromGround", "uploadedData.numLitterDropped", "uploadedData.numStacksDamaged", "uploadedData.coopActions", "uploadedData.maxFieldToteHeight", "uploadedData.maxReconHeight", "uploadedData.reconAcquisitions" ]
+    
     static let superKeys = [
         "calculatedData.avgDefense",
         "calculatedData.avgAgility",
@@ -304,20 +303,23 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     
     
-    static let TIMDAutoKeys = [
-        "ballsIntakedAuto",
-        "numHighShotsMadeAuto",
-        "numHighShotsMissedAuto",
-        "numLowShotsMadeAuto",
-        "numLowShotsMissedAuto"
+    static let TIMDAutoKeys : [String] = [
+        "highShotTimesForBoilerAuto",
+        "numHoppersOpenedAuto",
+        "gearsPlacedByLiftAuto",
+        "didReachBaselineAuto",
+        "lowShotTimesForBoilerAuto",
+        "didPotentiallyConflictingAuto"
     ]
      
-    static let TIMDTeleKeys = [
-        "numGroundIntakesTele",
-        "numHighShotsMadeTele",
-        "numHighShotsMissedTele",
-        "numLowShotsMadeTele",
-        "numLowShotsMissedTele"
+    static let TIMDTeleKeys : [String] = [
+        "lowShotTimesForBoilerTele",
+        "numGearLoaderIntakesTele",
+        "highShotTimesForBoilerTele",
+        "numGearGroundIntakesTele",
+        "numHoppersOpenedTele",
+        "gearsPlacedByLiftTele",
+        "didLiftoff"
     ]
      
     static let TIMDStatusKeys = [
@@ -341,6 +343,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     ]
     
     static let graphTitleSwitch = [
+<<<<<<< HEAD
+=======
+        "didScaleTele" : "scalePercentage",
+>>>>>>> origin/master
         "didBecomeIncapacitated" : "incapacitatedPercentage",
         "didStartDisabled" : "disabledPercentage",
         "numShotsBlockedTele" : "avgShotsBlocked",
@@ -452,6 +458,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitDidUseStandardTankDrive" : "Has Normal Tank Drivetrain",
         "pitDidDemonstrateCheesecakePotential": "Can Accommodate Cheesecake",
         "rankBallControl" : "Ball Control Rank",
+        "rankDefense" : "Defense Rank",
+        "rankAgility" : "Agility Rank",
+        "rankSpeed" : "Speed Rank",
+        "rankTorque" : "Torque Rank",
         "didScaleTele" : "Did Scale",
         "didBecomeIncapacitated" : "Was Incap.",
         "didStartDisabled" : "Was Disabled",
@@ -472,7 +482,20 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitNumberOfWheels":"Number of Wheels",
         "calculatedData.liftoffPercentage": "Liftoff Percentage",
         "calculatedData.liftoffAbility": "Liftoff Ability",
-        "calculatedData.avgKeyShotTime": "Avg. Key Shooting Time"
+        "calculatedData.avgKeyShotTime": "Avg. Key Shooting Time",
+        "lowShotTimesForBoilerTele" : "Low Shots Made Tele",
+        "numGearLoaderIntakesTele" : "Gears Intaked From Loader Tele",
+        "highShotTimesForBoilerTele" : "High Shots Made Tele",
+        "numGearGroundIntakesTele" : "Gears Intaked From Ground Tele",
+        "numHoppersOpenedTele" : "Num Hoppers Opened Tele",
+        "gearsPlacedByLiftTele" : "Gears Placed Tele",
+        "didLiftoff" : "Did Liftoff",
+        "highShotTimesForBoilerAuto" : "High Shots Made Auto",
+        "numHoppersOpenedAuto" : "Num Hoppers Opened Auto",
+        "gearsPlacedByLiftAuto" : "Gears Placed Tele",
+        "didReachBaselineAuto" : "Reached Baseline in Auto",
+        "lowShotTimesForBoilerAuto" : "Low Shots Made Auto",
+        "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto"
         ]
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
@@ -547,6 +570,19 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         } else {
             return ""
         }
+    }
+    
+    class func boolToString(b: Bool?) -> String? {
+        let stringBool : String? = b?.description ?? nil
+        let boolToStringValues = [
+            "true" : "Yes",
+            "false" : "No"
+        ]
+        if stringBool != nil {
+            let stringReadable = boolToStringValues[stringBool!]
+            return (stringReadable)
+        }
+        return(nil)
     }
 }
 
