@@ -294,25 +294,17 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     
     
-    static let TIMDAutoKeys = [
-        "ballsIntakedAuto",
-        "numHighShotsMadeAuto",
-        "numHighShotsMissedAuto",
-        "numLowShotsMadeAuto",
-        "numLowShotsMissedAuto"
+    static let TIMDAutoKeys : [String] = [
+        //High shot, low shot, etc
     ]
      
-    static let TIMDTeleKeys = [
-        "numGroundIntakesTele",
-        "numHighShotsMadeTele",
-        "numHighShotsMissedTele",
-        "numLowShotsMadeTele",
-        "numLowShotsMissedTele"
+    static let TIMDTeleKeys : [String] = [
+        //High shot, low shot, etc
     ]
      
     static let TIMDStatusKeys = [
-        "didGetDisabled",
-        "didGetIncapacitated"
+        "didStartDisabled",
+        "didBecomeIncapacitated"
     ]
     
     static let TIMDSuperKeys = [
@@ -332,8 +324,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     static let graphTitleSwitch = [
         "didScaleTele" : "scalePercentage",
-        "didGetIncapacitated" : "incapacitatedPercentage",
-        "didGetDisabled" : "disabledPercentage",
+        "didBecomeIncapacitated" : "incapacitatedPercentage",
+        "didStartDisabled" : "disabledPercentage",
         "numShotsBlockedTele" : "avgShotsBlocked",
         "numLowShotsMadeTele" : "avgLowShotsTele",
         "numHighShotsMadeTele" : "avgHighShotsTele",
@@ -444,8 +436,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitOrganization" : "Pit Organization",
         "rankBallControl" : "Ball Control Rank",
         "didScaleTele" : "Did Scale",
-        "didGetIncapacitated" : "Was Incap.",
-        "didGetDisabled" : "Was Disabled",
+        "didBecomeIncapacitated" : "Was Incap.",
+        "didStartDisabled" : "Was Disabled",
         "numShotsBlockedTele" : "Num Shots Blocked Tele",
         "numLowShotsMadeTele" : "Num Low Shots Made Tele",
         "numHighShotsMadeTele" : "Num High Shots Made Tele",
@@ -531,6 +523,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         } else {
             return ""
         }
+    }
+    
+    class func boolToString(b: Bool?) -> String? {
+        return (b?.description ?? nil)
     }
 }
 

@@ -20,8 +20,12 @@ class TIMDDetailsViewController: UITableViewController {
         super.viewDidLoad()
         if TIMD.teamNumber != nil && TIMD.matchNumber != nil {
 
-        self.title = "\(TIMD.teamNumber) - Q\(TIMD.matchNumber)"
+        self.title = "\(TIMD.teamNumber!) - Q\(TIMD.matchNumber!)"
         }
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return Utils.TIMDKeys.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,7 +40,25 @@ class TIMDDetailsViewController: UITableViewController {
             if Utils.humanReadableNames.keys.contains(key) {
                 cell.datapointLabel.text = Utils.humanReadableNames[key]
             }
-            cell.valueLabel.text = TIMD.value(forKeyPath: key) as! String?
+            
+            if key.contains("calculatedData") {
+                cell.valueLabel.text = TIMD.value(forKeyPath: key) as! String?
+            } else {
+                cell.valueLabel.text = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: key)
+            }
+            /* if let value = TIMD.value(forKeyPath: key) {
+                if let stringValue = value as? String {
+                    cell.valueLabel.text = stringValue
+                } else if let boolValue = value as? Bool {
+                    cell.valueLabel.text = Utils.boolToString(b: boolValue)
+                } else if let intValue = value as? Int {
+                    cell.valueLabel.text = String(describing: intValue)
+                } else if let floatValue = value as? Float {
+                    cell.valueLabel.text = String(describing: floatValue)
+                } else {
+                    //
+                }
+            } */
         }
         return cell
     }
