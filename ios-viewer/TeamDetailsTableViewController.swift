@@ -34,7 +34,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     var num: Int? = nil
-    var showMinimalistTeamDetails = true
+    var showMinimalistTeamDetails = false
     var shareController: UIDocumentInteractionController!
     var photoBrowser = MWPhotoBrowser()
     var photos: [MWPhoto] = []
@@ -101,8 +101,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         photos = []
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.rankingDetailsSegue(_:)))
         self.view.addGestureRecognizer(longPress)
-        let longPressForMoreDetail = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didLongPressForMoreDetail(_:)))
-        self.teamNumberLabel.addGestureRecognizer(longPressForMoreDetail)
+        //let longPressForMoreDetail = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didLongPressForMoreDetail(_:)))
+        //self.teamNumberLabel.addGestureRecognizer(longPressForMoreDetail)
         let tap = UITapGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didTapImage(_:)))
         self.teamSelectedImageView.addGestureRecognizer(tap)
     }
@@ -191,7 +191,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         if team != nil {
-            if team!.number == nil {
+            if team!.number == -1 {
                 cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath)
                 cell.textLabel?.text = "No team yet..."
                 cell.accessoryType = UITableViewCellAccessoryType.none
@@ -204,8 +204,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
 
+                if dataKey.contains("calculatedData") {
+                    dataPoint =  team!.value(forKeyPath: dataKey) as AnyObject?? ?? "" as AnyObject?
+                } else {
+                    dataPoint = (team!.dictionaryRepresentation() as NSDictionary).object(forKey: dataKey) as AnyObject?? ?? "" as AnyObject?
+                }
+                /*do {
+                } catch {*/
+                //}
                 
-                dataPoint = team!.value(forKeyPath: dataKey) as AnyObject?? ?? "" as AnyObject?
                 
                 if secondDataPoint as? String == "" {
                     secondDataPoint = nil

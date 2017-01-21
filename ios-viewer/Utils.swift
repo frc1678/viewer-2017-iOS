@@ -136,6 +136,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let boolValues = [
             "calculatedData.disabledPercentage",
             "calculatedData.incapacitatedPercentage",
+            "pitDidUseStandardTankDrive",
+           "pitDidDemonstrateCheesecakePotential"
         ]
         
         
@@ -166,10 +168,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             return [
                 "",
                 "High Level",
+                "Status",
                 "Autonomous",
                 "Teleoperated",
-                "Siege",
-                "Status",
+                "End Game",
                 "Super Scout",
                 "Pit Scout",
             ]
@@ -191,10 +193,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             return [
                 defaultKeys,
                 highLevel,
+                statusKeys,
                 autoKeys,
                 teleKeys,
-                siegeKeys,
-                statusKeys,
+                endGame,
                 superKeys,
                 pitKeys,
             ]
@@ -208,7 +210,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let highLevel = [
             "calculatedData.firstPickAbility",
-            "calculatedData.overallSecondPickAbility"
+            "calculatedData.overallSecondPickAbility",
+            "calculatedData.avgKeyShotTime"
         ]
         
         let autoKeysMini = [
@@ -219,8 +222,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let autoKeys = [
             //TODO: Add Avg. Num Shots in 2 ball Auto
+            
             "calculatedData.avgHighShotsAuto",
             "calculatedData.avgLowShotsAuto",
+            "calculatedData.baselineReachedPercentage"
         ]
         
         let teleKeysMini = [
@@ -234,14 +239,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let teleKeys = [
             "calculatedData.avgHighShotsTele",
-            "calculatedData.sdHighShotsTele",
-            "calculatedData.avgLowShotsTele",
-            "calculatedData.sdLowShotsTele"
+            //"calculatedData.sdHighShotsTele",
+            "calculatedData.avgLowShotsTele"
+            //"calculatedData.sdLowShotsTele"
         ]
         
-        let siegeKeys = [
-            "calculatedData.liftoffAbility",
-            "calculatedData.sdLiftoffAbility"
+        let endGame = [
+            "calculatedData.liftoffPercentage",
+            "calculatedData.liftoffAbility"
         ]
         
         let siegeKeysMini = [
@@ -262,9 +267,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         let pitKeys = [
+            "pitDidUseStandardTankDrive",
+            "pitDidDemonstrateCheesecakePotential",
+            "pitAvailableWeight",
             "pitOrganization",
-            "pitProgrammingLanguage",
-            "pitAvailableWeight"
+            "pitProgrammingLanguage"
         ]
         
         let calculatedTeamInMatchDataHumanReadableKeys = [
@@ -287,7 +294,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     static let autoKeys = ["uploadedData.stackedToteSet", "uploadedData.numContainersMovedIntoAutoZone"]
     static let teleKeys = ["uploadedData.numTotesStacked", "uploadedData.numReconLevels", "uploadedData.numNoodlesContributed", "uploadedData.numReconsStacked", "uploadedData.numTeleopReconsFromStep", "uploadedData.numHorizontalReconsPickedUp", "uploadedData.numVerticalReconsPickedUp", "calculatedData.numReconsPickedUp", "uploadedData.numTotesPickedUpFromGround", "uploadedData.numLitterDropped", "uploadedData.numStacksDamaged", "uploadedData.coopActions", "uploadedData.maxFieldToteHeight", "uploadedData.maxReconHeight", "uploadedData.reconAcquisitions" ]
-    static let superKeys = ["calculatedData.avgAgility"]
+    static let superKeys = [
+        "calculatedData.avgDefense",
+        "calculatedData.avgAgility",
+        "calculatedData.avgSpeed",
+        "calculatedData.avgBallControl"
+    ]
     static let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
     
@@ -390,19 +402,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     static let humanReadableNames = [
         "calculatedData.actualSeed" : "Seed",
-        "calculatedData.avgBallControl" : "Avg. Ball Controll",
-        "calculatedData.avgBallsKnockedOffMidlineAuto" : "Avg. Mid. Auto Balls Knocked",
-        "calculatedData.avgDefense" : "Avg. Defense",
         "calculatedData.avgEvasion" : "Avg. Evasion",
-        "calculatedData.avgFailedTimesCrossedDefensesAuto" : "Avg. Cross Fails Auto",
-        "calculatedData.avgFailedTimesCrossedDefensesTele" : "Avg. Cross Fails Tele",
         "calculatedData.avgGroundIntakes" : "Avg. Ground Intakes",
-        "calculatedData.avgHighShotsAuto" : "Avg. High Shots in Auto",
-        "calculatedData.avgHighShotsTele" : "Avg. High Shots in Tele",
-        "calculatedData.avgLowShotsAuto" : "Avg. Low Shots in Auto",
-        "calculatedData.avgLowShotsTele" : "Avg. Low Shots in Tele",
+        "calculatedData.avgHighShotsAuto" : "Avg. High Shots",
+        "calculatedData.avgHighShotsTele" : "Avg. High Shots",
+        "calculatedData.avgLowShotsAuto" : "Avg. Low Shots",
+        "calculatedData.avgLowShotsTele" : "Avg. Low Shots",
         "calculatedData.avgShotsBlocked" : "Avg. Shots Blocked",
-        "calculatedData.avgSpeed" : "Avg. Speed",
         "calculatedData.avgTorque" : "Avg. Torque",
         "calculatedData.disabledPercentage" : "Disabled Percentage",
         "calculatedData.disfunctionalPercentage" : "Disfunctional Percentage",
@@ -414,14 +420,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.predictedNumRPs" : "Predicted # of RPs",
         "calculatedData.predictedSeed" : "Predicted Seed",
         "calculatedData.scalePercentage" : "Scale Percentage",
-        "calculatedData.avgHighShotsAttemptedTele": "Avg. H Shots Tried Tele",
+        "calculatedData.avgHighShotsAttemptedTele": "Avg. H Shots Tried",
         //"calculatedData.sdBallsKnockedOffMidlineAuto" : "σ Balls off Midline Auto",
         //"calculatedData.sdFailedDefenseCrossesAuto" : "σ Failed Defenses Auto",
+        "calculatedData.baselineReachedPercentage" : "Baseline Reached Percentage",
         "calculatedData.sdGroundIntakes" : "σ Ground Intakes",
-        "calculatedData.sdHighShotsAuto" : "σ High Shots Auto",
-        "calculatedData.sdHighShotsTele" : "σ High Shots Tele",
-        "calculatedData.sdLowShotsAuto" : "σ Low Shots Auto",
-        "calculatedData.sdLowShotsTele" : "σ Low Shots Tele",
+        "calculatedData.sdHighShotsAuto" : "σ High Shots",
+        "calculatedData.sdHighShotsTele" : "σ High Shots",
+        "calculatedData.sdLowShotsAuto" : "σ Low Shots",
+        "calculatedData.sdLowShotsTele" : "σ Low Shots",
         "calculatedData.sdShotsBlocked" : "σ Shots Blocked",
         "calculatedData.overallSecondPickAbility" : "Second Pick Ability",
         "matchDatas" : "Matches",
@@ -442,21 +449,30 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitProgrammingLanguage": "Prog. Lang.",
         "pitAvailableWeight" : "Avail. Weight",
         "pitOrganization" : "Pit Organization",
+        "pitDidUseStandardTankDrive" : "Has Normal Tank Drivetrain",
+        "pitDidDemonstrateCheesecakePotential": "Can Accommodate Cheesecake",
         "rankBallControl" : "Ball Control Rank",
         "didScaleTele" : "Did Scale",
         "didGetIncapacitated" : "Was Incap.",
         "didGetDisabled" : "Was Disabled",
-        "numShotsBlockedTele" : "Num Shots Blocked Tele",
-        "numLowShotsMadeTele" : "Num Low Shots Made Tele",
-        "numHighShotsMadeTele" : "Num High Shots Made Tele",
+        "numShotsBlockedTele" : "Num Shots Blocked",
+        "numLowShotsMadeTele" : "Num Low Shots Made",
+        "numHighShotsMadeTele" : "Num High Shots Made",
         "calculatedData.RScoreSpeed" : "R Score Speed",
         "calculatedData.RScoreEvasion" : "R Score Evasion",
         "calculatedData.RScoreTorque" : "R Score Torque",
         "calculatedData.RScoreAgility": "R Score Agility",
         "calculatedData.RScoreDefense": "R Score Defense",
         "calculatedData.RScoreBallControl": "R Score Ball Control",
-        "calculatedData.avgLowShotsAttemptedTele": "Avg. L Shots Tried Tele",
+        "calculatedData.avgAgility": "Avg. Agility",
+        "calculatedData.avgDefense": "Avg. Defense",
+        "calculatedData.avgSpeed": "Avg. Speed",
+        "calculatedData.avgBallControl": "Avg. Ball Control",
+        "calculatedData.avgLowShotsAttemptedTele": "Avg. L Shots Tried",
         "pitNumberOfWheels":"Number of Wheels",
+        "calculatedData.liftoffPercentage": "Liftoff Percentage",
+        "calculatedData.liftoffAbility": "Liftoff Ability",
+        "calculatedData.avgKeyShotTime": "Avg. Key Shooting Time"
         ]
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
@@ -533,7 +549,5 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
     }
 }
-
-
 
 

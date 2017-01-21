@@ -29,7 +29,7 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
     override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let multiCell = cell as? MultiCellTableViewCell
         let team = data as? Team
-        if team!.number != nil {
+        if team!.number != -1 {
             multiCell!.teamLabel!.text = String(team!.number)
         }
         if team!.calculatedData?.overallSecondPickAbility != nil {
