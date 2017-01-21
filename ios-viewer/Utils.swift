@@ -292,8 +292,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
     }
     
-    static let autoKeys = ["uploadedData.stackedToteSet", "uploadedData.numContainersMovedIntoAutoZone"]
-    static let teleKeys = ["uploadedData.numTotesStacked", "uploadedData.numReconLevels", "uploadedData.numNoodlesContributed", "uploadedData.numReconsStacked", "uploadedData.numTeleopReconsFromStep", "uploadedData.numHorizontalReconsPickedUp", "uploadedData.numVerticalReconsPickedUp", "calculatedData.numReconsPickedUp", "uploadedData.numTotesPickedUpFromGround", "uploadedData.numLitterDropped", "uploadedData.numStacksDamaged", "uploadedData.coopActions", "uploadedData.maxFieldToteHeight", "uploadedData.maxReconHeight", "uploadedData.reconAcquisitions" ]
+    
     static let superKeys = [
         "calculatedData.avgDefense",
         "calculatedData.avgAgility",
@@ -307,11 +306,22 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     
     static let TIMDAutoKeys : [String] = [
-        //High shot, low shot, etc
+        "highShotTimesForBoilerAuto",
+        "numHoppersOpenedAuto",
+        "gearsPlacedByLiftAuto",
+        "didReachBaselineAuto",
+        "lowShotTimesForBoilerAuto",
+        "didPotentiallyConflictingAuto"
     ]
      
     static let TIMDTeleKeys : [String] = [
-        //High shot, low shot, etc
+        "lowShotTimesForBoilerTele",
+        "numGearLoaderIntakesTele",
+        "highShotTimesForBoilerTele",
+        "numGearGroundIntakesTele",
+        "numHoppersOpenedTele",
+        "gearsPlacedByLiftTele",
+        "didLiftoff"
     ]
      
     static let TIMDStatusKeys = [
@@ -468,7 +478,20 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitNumberOfWheels":"Number of Wheels",
         "calculatedData.liftoffPercentage": "Liftoff Percentage",
         "calculatedData.liftoffAbility": "Liftoff Ability",
-        "calculatedData.avgKeyShotTime": "Avg. Key Shooting Time"
+        "calculatedData.avgKeyShotTime": "Avg. Key Shooting Time",
+        "lowShotTimesForBoilerTele" : "Low Shots Made Tele",
+        "numGearLoaderIntakesTele" : "Gears Intaked From Loader Tele",
+        "highShotTimesForBoilerTele" : "High Shots Made Tele",
+        "numGearGroundIntakesTele" : "Gears Intaked From Ground Tele",
+        "numHoppersOpenedTele" : "Num Hoppers Opened Tele",
+        "gearsPlacedByLiftTele" : "Gears Placed Tele",
+        "didLiftoff" : "Did Liftoff",
+        "highShotTimesForBoilerAuto" : "High Shots Made Auto",
+        "numHoppersOpenedAuto" : "Num Hoppers Opened Auto",
+        "gearsPlacedByLiftAuto" : "Gears Placed Tele",
+        "didReachBaselineAuto" : "Reached Baseline in Auto",
+        "lowShotTimesForBoilerAuto" : "Low Shots Made Auto",
+        "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto"
         ]
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {

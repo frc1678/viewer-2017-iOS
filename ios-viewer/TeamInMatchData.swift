@@ -25,7 +25,7 @@ public final class TeamInMatchData: NSObject {
     static let numGearGroundIntakesTele = "numGearGroundIntakesTele"
     static let didStartDisabled = "didStartDisabled"
     static let didReachBaselineAuto = "didReachBaselineAuto"
-    static let numGearsPlacedTele = "numGearsPlacedTele"
+    static let gearsPlacedByLiftTele = "gearsPlacedByLiftTele"
     static let rankSpeed = "rankSpeed"
     static let numHoppersOpenedTele = "numHoppersOpenedTele"
     static let lowShotTimesForBoilerAuto = "lowShotTimesForBoilerAuto"
@@ -51,7 +51,7 @@ public final class TeamInMatchData: NSObject {
   public var numGearGroundIntakesTele: Int? 
   public var didStartDisabled: Bool? = false
   public var didReachBaselineAuto: Bool? = false
-  public var numGearsPlacedTele: Int? 
+  public var gearsPlacedByLiftTele: Int?
   public var rankSpeed: Int? 
   public var numHoppersOpenedTele: Int? 
   public var lowShotTimesForBoilerAuto: [ShotTimesForBoiler]?
@@ -88,7 +88,7 @@ public final class TeamInMatchData: NSObject {
     numGearGroundIntakesTele = json[SerializationKeys.numGearGroundIntakesTele].int
     didStartDisabled = json[SerializationKeys.didStartDisabled].boolValue
     didReachBaselineAuto = json[SerializationKeys.didReachBaselineAuto].boolValue
-    numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].int
+    gearsPlacedByLiftTele = json[SerializationKeys.gearsPlacedByLiftTele].int
     rankSpeed = json[SerializationKeys.rankSpeed].int
     numHoppersOpenedTele = json[SerializationKeys.numHoppersOpenedTele].int
     if let items = json[SerializationKeys.lowShotTimesForBoilerAuto].array { lowShotTimesForBoilerAuto = items.map { ShotTimesForBoiler(json: $0) } }
@@ -118,7 +118,7 @@ public final class TeamInMatchData: NSObject {
     if let value = numGearGroundIntakesTele { dictionary[SerializationKeys.numGearGroundIntakesTele] = value }
     dictionary[SerializationKeys.didStartDisabled] = didStartDisabled
     dictionary[SerializationKeys.didReachBaselineAuto] = didReachBaselineAuto
-    if let value = numGearsPlacedTele { dictionary[SerializationKeys.numGearsPlacedTele] = value }
+    if let value = gearsPlacedByLiftTele { dictionary[SerializationKeys.gearsPlacedByLiftTele] = value }
     if let value = rankSpeed { dictionary[SerializationKeys.rankSpeed] = value }
     if let value = numHoppersOpenedTele { dictionary[SerializationKeys.numHoppersOpenedTele] = value }
     if let value = lowShotTimesForBoilerAuto { dictionary[SerializationKeys.lowShotTimesForBoilerAuto] = value.map { $0.dictionaryRepresentation() } }

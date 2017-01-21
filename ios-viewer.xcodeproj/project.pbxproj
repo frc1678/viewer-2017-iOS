@@ -33,7 +33,6 @@
 		19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */; };
 		19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */; };
 		19B038061E2C5891006E25A2 /* TeamDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */; };
-		19B038071E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */; };
 		19B038081E2C5891006E25A2 /* MatchDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */; };
 		19B0380A1E2C5891006E25A2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037F51E2C5891006E25A2 /* Utils.swift */; };
 		19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B037FC1E2C5891006E25A2 /* Reflectable.swift */; };
@@ -56,6 +55,7 @@
 		19B038351E2D4171006E25A2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 19B038341E2D4171006E25A2 /* GoogleService-Info.plist */; };
 		19B038491E2DE55B006E25A2 /* ShotTimesForBoiler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */; };
 		19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */; };
+		8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */; };
 		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,7 +95,6 @@
 		19B037E51E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverallSecondPickAbilityViewController.swift; sourceTree = "<group>"; };
 		19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseDataFetcher.swift; sourceTree = "<group>"; };
 		19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamDetailsTableViewController.swift; sourceTree = "<group>"; };
-		19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchDetailsTableViewController.swift; sourceTree = "<group>"; };
 		19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDetailsViewController.swift; sourceTree = "<group>"; };
 		19B037F51E2C5891006E25A2 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		19B037FC1E2C5891006E25A2 /* Reflectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reflectable.swift; sourceTree = "<group>"; };
@@ -125,6 +124,7 @@
 		19B038341E2D4171006E25A2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShotTimesForBoiler.swift; sourceTree = "<group>"; };
 		19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = "<group>"; };
+		8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = "<group>"; };
 		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
 		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -169,7 +169,6 @@
 				19B0383A1E2DD76E006E25A2 /* Picklists */,
 				19B037F01E2C5891006E25A2 /* FirebaseDataFetcher.swift */,
 				19B037F11E2C5891006E25A2 /* TeamDetailsTableViewController.swift */,
-				19B037F21E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift */,
 				19B037F31E2C5891006E25A2 /* MatchDetailsViewController.swift */,
 				19B037FF1E2C5891006E25A2 /* GraphViewController.swift */,
 				19B038001E2C5891006E25A2 /* CurrentMatchManager.swift */,
@@ -248,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				190DFE3D1E30697500477B6D /* CalculatedTeamData.swift */,
+				8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */,
 				190DFE431E306A1700477B6D /* CalculatedMatchData.swift */,
 				190DFE451E30703E00477B6D /* Match.swift */,
 				19B038461E2DE55B006E25A2 /* ShotTimesForBoiler.swift */,
@@ -452,10 +452,10 @@
 				19B038051E2C5891006E25A2 /* FirebaseDataFetcher.swift in Sources */,
 				19B037E81E2C586C006E25A2 /* SpecificTeamScheduleTableViewController.swift in Sources */,
 				19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */,
-				19B038071E2C5891006E25A2 /* TeamInMatchDetailsTableViewController.swift in Sources */,
 				190DFE4A1E308B7700477B6D /* TIMDScheduleViewController.swift in Sources */,
 				190DFE481E3079D000477B6D /* Team.swift in Sources */,
 				19B037EE1E2C586C006E25A2 /* OverallSecondPickAbilityViewController.swift in Sources */,
+				8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */,
 				190DFE4E1E308BDC00477B6D /* TIMDTableViewCell.swift in Sources */,
 				19B037E91E2C586C006E25A2 /* MatchTableViewCell.m in Sources */,
 				19B0382A1E2C58D3006E25A2 /* MechanismTableViewCell.swift in Sources */,

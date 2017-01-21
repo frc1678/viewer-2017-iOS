@@ -312,9 +312,7 @@ class MatchDetailsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let button = sender as? UIButton,
             let teamNumTapped = Int((button.titleLabel?.text)!) {
-                if let dest = segue.destination as? TeamInMatchDetailsTableViewController {
-                    dest.data = firebaseFetcher?.getTimDataForTeamInMatch((firebaseFetcher?.getTeam(teamNumTapped))!, inMatch: self.match!)
-                } else if let dest = segue.destination as? TeamDetailsTableViewController {
+                if let dest = segue.destination as? TeamDetailsTableViewController {
                     dest.team = firebaseFetcher?.getTeam(teamNumTapped)
                 }
         }
