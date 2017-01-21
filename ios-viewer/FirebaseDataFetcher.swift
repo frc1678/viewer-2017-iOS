@@ -580,7 +580,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         for TIMD in TIMDs {
             var value : Any?
             if path.contains("calculatedData") {
-                value = TIMD.value(forKeyPath: path)
+                value = (TIMD.calculatedData!.dictionaryRepresentation() as NSDictionary).object(forKey: path.replacingOccurrences(of: "calculatedData.", with: ""))
             } else {
                 value = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: path)
             }

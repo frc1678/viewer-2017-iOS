@@ -30,35 +30,34 @@ public final class TeamInMatchData: NSObject {
     static let numHoppersOpenedTele = "numHoppersOpenedTele"
     static let lowShotTimesForBoilerAuto = "lowShotTimesForBoilerAuto"
     static let rankAgility = "rankAgility"
+    static let numGearsPlacedTele = "numGearsPlacedTele"
     static let teamNumber = "teamNumber"
     static let didBecomeIncapacitated = "didBecomeIncapacitated"
     static let didPotentiallyConflictingAuto = "didPotentiallyConflictingAuto"
     static let scoutName = "scoutName"
     static let didLiftoff = "didLiftoff"
+    static let numGearsPlacedAuto = "numGearsPlacedAuto"
+    static let calculatedData = "calculatedData"
   }
 
   // MARK: Properties
   public var rankDefense: Int? 
-  public var rankGearControl: Int? 
+  public var rankGearControl: Int?
+    public var numGearsPlacedAuto: Int?
   public var lowShotTimesForBoilerTele: [ShotTimesForBoiler]?
   public var numGearLoaderIntakesTele: Int? 
   public var rankBallControl: Int? 
   public var highShotTimesForBoilerAuto: [ShotTimesForBoiler]?
   public var numHoppersOpenedAuto: Int? 
-  public var matchNumber: Int? 
+  public var matchNumber: Int?
+    public var gearsPlacedByLiftTele: Int?
+    public var gearsPlacedByLiftAuto: Int?
   public var highShotTimesForBoilerTele: [ShotTimesForBoiler]?
-  public var gearsPlacedByLiftAuto: Int?
+    public var numGearsPlacedTele: Int?
   public var numGearGroundIntakesTele: Int? 
-<<<<<<< HEAD
   public var didStartDisabled: Bool = false
   public var didReachBaselineAuto: Bool = false
-  public var numGearsPlacedTele: Int? 
-=======
-  public var didStartDisabled: Bool? = false
-  public var didReachBaselineAuto: Bool? = false
-  public var gearsPlacedByLiftTele: Int?
->>>>>>> origin/master
-  public var rankSpeed: Int? 
+  public var rankSpeed: Int?
   public var numHoppersOpenedTele: Int? 
   public var lowShotTimesForBoilerAuto: [ShotTimesForBoiler]?
   public var rankAgility: Int? 
@@ -67,6 +66,7 @@ public final class TeamInMatchData: NSObject {
   public var didPotentiallyConflictingAuto: Bool = false
   public var scoutName: String?
   public var didLiftoff: Bool = false
+    public var calculatedData : CalculatedTeamInMatchData?
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -90,7 +90,7 @@ public final class TeamInMatchData: NSObject {
     numHoppersOpenedAuto = json[SerializationKeys.numHoppersOpenedAuto].intValue
     matchNumber = json[SerializationKeys.matchNumber].intValue
     if let items = json[SerializationKeys.highShotTimesForBoilerTele].array { highShotTimesForBoilerTele = items.map { ShotTimesForBoiler(json: $0) } }
-<<<<<<< HEAD
+    gearsPlacedByLiftAuto = json[SerializationKeys.gearsPlacedByLiftAuto].int
     numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].intValue
     numGearGroundIntakesTele = json[SerializationKeys.numGearGroundIntakesTele].intValue
     didStartDisabled = json[SerializationKeys.didStartDisabled].boolValue
@@ -98,15 +98,7 @@ public final class TeamInMatchData: NSObject {
     numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].intValue
     rankSpeed = json[SerializationKeys.rankSpeed].intValue
     numHoppersOpenedTele = json[SerializationKeys.numHoppersOpenedTele].intValue
-=======
-    gearsPlacedByLiftAuto = json[SerializationKeys.gearsPlacedByLiftAuto].int
-    numGearGroundIntakesTele = json[SerializationKeys.numGearGroundIntakesTele].int
-    didStartDisabled = json[SerializationKeys.didStartDisabled].boolValue
-    didReachBaselineAuto = json[SerializationKeys.didReachBaselineAuto].boolValue
-    gearsPlacedByLiftTele = json[SerializationKeys.gearsPlacedByLiftTele].int
-    rankSpeed = json[SerializationKeys.rankSpeed].int
-    numHoppersOpenedTele = json[SerializationKeys.numHoppersOpenedTele].int
->>>>>>> origin/master
+
     if let items = json[SerializationKeys.lowShotTimesForBoilerAuto].array { lowShotTimesForBoilerAuto = items.map { ShotTimesForBoiler(json: $0) } }
     rankAgility = json[SerializationKeys.rankAgility].intValue
     teamNumber = json[SerializationKeys.teamNumber].intValue
@@ -114,6 +106,7 @@ public final class TeamInMatchData: NSObject {
     didPotentiallyConflictingAuto = json[SerializationKeys.didPotentiallyConflictingAuto].boolValue
     scoutName = json[SerializationKeys.scoutName].string
     didLiftoff = json[SerializationKeys.didLiftoff].boolValue
+    calculatedData = CalculatedTeamInMatchData(json: json[SerializationKeys.calculatedData])
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -144,6 +137,8 @@ public final class TeamInMatchData: NSObject {
     dictionary[SerializationKeys.didPotentiallyConflictingAuto] = didPotentiallyConflictingAuto
     if let value = scoutName { dictionary[SerializationKeys.scoutName] = value }
     dictionary[SerializationKeys.didLiftoff] = didLiftoff
+    if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
+
     return dictionary
   }
 

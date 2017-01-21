@@ -154,10 +154,10 @@ class MatchDetailsViewController: UIViewController {
                         if let cd = redTeams?[index-1].calculatedData {
                             
                             (value(forKey: "R\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index)D") as! UILabel).text = "2nd Pick: \(roundValue(cd.overallSecondPickAbility as AnyObject?, toDecimalPlaces: 2))"
+                            (value(forKey: "R\(index)FP") as! UILabel).text = "Pred. Seed: \(roundValue(cd.predictedSeed as AnyObject?, toDecimalPlaces: 0))"
+                            (value(forKey: "R\(index)TH") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility as AnyObject?, toDecimalPlaces: 0))"
+                            (value(forKey: "R\(index)TL") as! UILabel).text = "2nd Pick: \(roundValue(cd.overallSecondPickAbility as AnyObject?, toDecimalPlaces: 2))"
+                            (value(forKey: "R\(index)D") as! UILabel).text =  "Disfunc.: \(roundValue(cd.disfunctionalPercentage*100.0 as AnyObject?, toDecimalPlaces: 0))%"
                             (value(forKey: "R\(index)WA") as! UILabel).attributedText = withAgainstAttributedStringForTeam(number: (match.redAllianceTeamNumbers! as [Int])[index-1])
 
                         }
@@ -191,11 +191,11 @@ class MatchDetailsViewController: UIViewController {
                             }*/
                             
                             (value(forKey: "B\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "B\(index)FP") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "B\(index)TH") as! UILabel).text = "H.S.T.: \(roundValue(cd.avgHighShotsTele as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "B\(index)D") as! UILabel).text = "2nd Pick: \(roundValue(cd.overallSecondPickAbility as AnyObject?, toDecimalPlaces: 2))"
-                            (value(forKey: "B\(index)TL") as! UILabel).text = "L.S.T.: \(roundValue(cd.avgLowShotsTele as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "B\(index)WA") as! UILabel).attributedText = withAgainstAttributedStringForTeam(number: match.blueAllianceTeamNumbers![index-1])
+                            (value(forKey: "B\(index)FP") as! UILabel).text = "Pred. Seed: \(roundValue(cd.predictedSeed as AnyObject?, toDecimalPlaces: 0))"
+                            (value(forKey: "B\(index)TH") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility as AnyObject?, toDecimalPlaces: 0))"
+                            (value(forKey: "B\(index)TL") as! UILabel).text = "2nd Pick: \(roundValue(cd.overallSecondPickAbility as AnyObject?, toDecimalPlaces: 2))"
+                            (value(forKey: "B\(index)D") as! UILabel).text =  "Disfunc.: \(roundValue(cd.disfunctionalPercentage*100.0 as AnyObject?, toDecimalPlaces: 0))%"
+                            (value(forKey: "B\(index)WA") as! UILabel).attributedText = withAgainstAttributedStringForTeam(number: (match.blueAllianceTeamNumbers! as [Int])[index-1])
 
                         }
                     }

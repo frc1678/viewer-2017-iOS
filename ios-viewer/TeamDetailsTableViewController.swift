@@ -492,8 +492,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     case "disabledPercentage": key = "didStartDisabled"
                     case "challengePercentage": key = "didChallengeTele"
                     case "avgShotsBlocked": key = "numShotsBlockedTele"
-                    case "avgLowShotsTele": key = "numLowShotsMadeTele"
-                    case "avgHighShotsTele": key = "calculatedData.numHighShotsMadeTele"
+                    case "avgLowShotsTele": key = "numLowShotsTele"
+                    case "avgHighShotsTele": key = "calculatedData.numHighShotsTele"
                     case "avgBallsKnockedOffMidlineAuto": key = "numBallsKnockedOffMidlineAuto"
                     case "avgMidlineBallsIntakedAuto": key = "calculatedData.numBallsIntakedOffMidlineAuto"
                     case "avgSpeed": key = "rankSpeed"
@@ -521,8 +521,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     case "numAutoPoints": key = "calculatedData.numAutoPoints"
                     case "disfunctionalPercentage": key = "calculatedData.wasDisfunctional"
                     case "avgNumTimesCrossedDefensesAuto": key = "calculatedData.totalNumTimesCrossedDefensesAuto"
-                    case "avgHighShotsAuto": key = "numHighShotsMadeAuto"
-                    case "avgLowShotsAuto": key = "numLowShotsMadeAuto"
+                    case "avgHighShotsAuto": key = "numHighShotsAuto"
+                    case "avgLowShotsAuto": key = "numLowShotsAuto"
                     default: break
                     }
                     

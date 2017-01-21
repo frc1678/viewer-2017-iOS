@@ -343,18 +343,15 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     ]
     
     static let graphTitleSwitch = [
-<<<<<<< HEAD
-=======
-        "didScaleTele" : "scalePercentage",
->>>>>>> origin/master
+
         "didBecomeIncapacitated" : "incapacitatedPercentage",
         "didStartDisabled" : "disabledPercentage",
         "numShotsBlockedTele" : "avgShotsBlocked",
         "didReachBaselineAuto" : "baselineReachedPercentage",
         "didLiftoff" : "liftoffPercentage",
         "calculatedData.liftoffAbility" : "liftoffAbility",
-        "numLowShotsMadeTele" : "avgLowShotsTele",
-        "calculatedData.numHighShotsMadeTele" : "avgHighShotsTele",
+        "numLowShotsTele" : "avgLowShotsTele",
+        "calculatedData.numHighShotsTele" : "avgHighShotsTele",
         "calculatedData.RScoreSpeed" : "calculatedData.avgSpeed",
         "calculatedData.RScoreEvasion" : "calculatedData.avgEvasion",
         "calculatedData.RScoreTorque" : "calculatedData.avgTorque",
@@ -466,8 +463,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "didBecomeIncapacitated" : "Was Incap.",
         "didStartDisabled" : "Was Disabled",
         "numShotsBlockedTele" : "Num Shots Blocked",
-        "calculatedData.numLowShotsMadeTele" : "Num Low Shots Made Tele",
-        "calculatedData.numHighShotsMadeTele" : "Num High Shots Made Tele",
+        "calculatedData.numLowShotsTele" : "Num Low Shots Made Tele",
+        "calculatedData.numHighShotsTele" : "Num High Shots Made Tele",
         "calculatedData.RScoreSpeed" : "R Score Speed",
         "calculatedData.RScoreEvasion" : "R Score Evasion",
         "calculatedData.RScoreTorque" : "R Score Torque",

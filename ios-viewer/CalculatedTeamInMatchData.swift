@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyJSON
 
-public final class CalculatedTeamInMatchData: NSCoding {
+public final class CalculatedTeamInMatchData: NSObject {
 
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
