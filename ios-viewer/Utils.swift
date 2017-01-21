@@ -546,7 +546,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     }
     
     class func boolToString(b: Bool?) -> String? {
-        return (b?.description ?? nil)
+        let stringBool : String? = b?.description ?? nil
+        let boolToStringValues = [
+            "true" : "Yes",
+            "false" : "No"
+        ]
+        if stringBool != nil {
+            let stringReadable = boolToStringValues[stringBool!]
+            return (stringReadable)
+        }
+        return(nil)
     }
 }
 
