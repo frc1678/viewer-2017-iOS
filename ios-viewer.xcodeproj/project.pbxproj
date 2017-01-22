@@ -63,6 +63,7 @@
 		8CBD71371E354696009C0206 /* Current Match.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8CBD712C1E354696009C0206 /* Current Match.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8CBD713C1E3546D1009C0206 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD713B1E3546D1009C0206 /* MainInterface.storyboard */; };
 		8CBD713E1E355876009C0206 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD713D1E355876009C0206 /* GoogleService-Info.plist */; };
+		8CBD71401E356CD1009C0206 /* CC 2017 Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD713F1E356CD1009C0206 /* CC 2017 Logo.png */; };
 		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -168,6 +169,7 @@
 		8CBD71341E354696009C0206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8CBD713B1E3546D1009C0206 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		8CBD713D1E355876009C0206 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8CBD713F1E356CD1009C0206 /* CC 2017 Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CC 2017 Logo.png"; sourceTree = "<group>"; };
 		8CD3CEA81E34074000B328A1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
 		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +241,7 @@
 				19B0383B1E2DD7A3006E25A2 /* Models */,
 				19B0383D1E2DD844006E25A2 /* Custom Table View Cells */,
 				19B037BF1E2C5739006E25A2 /* Assets.xcassets */,
+				8CBD713F1E356CD1009C0206 /* CC 2017 Logo.png */,
 				19B0383C1E2DD801006E25A2 /* Obj-C Boilerplate */,
 				19B038371E2DD70C006E25A2 /* Plists */,
 			);
@@ -497,6 +500,7 @@
 				8C5868711E34254E0056EA17 /* Storyboard.storyboard in Resources */,
 				19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */,
 				19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */,
+				8CBD71401E356CD1009C0206 /* CC 2017 Logo.png in Resources */,
 				19B037EA1E2C586C006E25A2 /* MatchTableViewCell.xib in Resources */,
 				19B037D31E2C581C006E25A2 /* FirstPick.storyboard in Resources */,
 				190DFE501E308BE300477B6D /* TIMDTableViewCell.xib in Resources */,

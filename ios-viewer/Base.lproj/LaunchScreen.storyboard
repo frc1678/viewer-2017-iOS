@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1217" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,19 +22,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FRC 1678 Scout Data Viewer" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kW-dQ-WZx">
-                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Citrus Circuits" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kW-dQ-WZx">
+                                <rect key="frame" x="16" y="82" width="343" height="83"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="42"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.26666666666666666" green="0.82745098039215681" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CC 2017 Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="0cr-xT-Mef">
+                                <rect key="frame" x="27" y="207" width="327" height="198"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Data Viewing App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMY-xh-KKf">
+                                <rect key="frame" x="16" y="455" width="343" height="83"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="42"/>
+                                <color key="textColor" red="0.26666666666666666" green="0.80414456260692191" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.3960784376" green="0.8627451062" blue="0.30980393290000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.19607843137254902" green="0.19607843137254902" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="7kW-dQ-WZx" secondAttribute="bottom" constant="20" id="Mlc-Lx-qwN"/>
-                            <constraint firstItem="7kW-dQ-WZx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ZWA-83-Mr1"/>
-                            <constraint firstItem="7kW-dQ-WZx" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="ZaS-MM-034"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="7kW-dQ-WZx" secondAttribute="leading" id="iaO-Di-M7u"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="7kW-dQ-WZx" secondAttribute="leading" id="AE7-Nz-pUj"/>
+                            <constraint firstItem="7kW-dQ-WZx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fv2-ef-AXq"/>
+                            <constraint firstItem="7kW-dQ-WZx" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="62" id="bgp-dz-beF"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7kW-dQ-WZx" secondAttribute="trailing" id="dzq-FM-VQv"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -43,4 +54,7 @@
             <point key="canvasLocation" x="52" y="374.66266866566718"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CC 2017 Logo.png" width="3877" height="2459"/>
+    </resources>
 </document>
