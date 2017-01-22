@@ -11,6 +11,11 @@ target 'ios-viewer' do
                 config.build_settings['SWIFT_VERSION'] = '3.0'
                 config.build_settings['MACOSX_DEPLOYMENT_TARGET'] = '10.10'
             end
+            if target.name == "Pods-CurrentMatch-AFNetworking"   # EMToday should be the Extension target name
+                target.build_configurations.each do |config|
+                    config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)', 'AF_APP_EXTENSIONS=1']
+                end
+            end
         end
     end
     pod 'Firebase/Core'
@@ -26,13 +31,11 @@ target 'ios-viewer' do
     pod 'MWPhotoBrowser'
 end
 
-#target 'CurrentMatch' do
-#    pod 'Firebase/Core'
-#    #pod 'Firebase/Auth'
-#    #pod 'FirebaseUI', '~> 0.4'
-#    pod 'Firebase/Database'
-#    pod 'Firebase/Storage'
-#    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
-#end
+target 'CurrentMatch' do
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'Firebase/Storage'
+    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
+end
 
 

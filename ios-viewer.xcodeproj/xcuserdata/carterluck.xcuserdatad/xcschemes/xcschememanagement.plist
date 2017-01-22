@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>CurrentMatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
 		<key>UpcomingMatchesExtention.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -18,6 +23,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>19B037B41E2C5739006E25A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8C58687A1E3426200056EA17</key>
 		<dict>
 			<key>primary</key>
 			<true/>
