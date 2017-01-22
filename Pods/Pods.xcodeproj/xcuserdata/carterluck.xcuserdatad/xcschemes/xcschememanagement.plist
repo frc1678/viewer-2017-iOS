@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Current Match.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-CurrentMatch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -82,17 +87,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1ABEEFB1D56A6669DC8D8AD7784D481B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>36505A031BB3A1A3913E45B58E7DD88B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6B1714E816AE794962516E2ECBB40A5A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>71E0FEE6BA137CE8C61817064343CD6E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -118,6 +123,11 @@
 			<true/>
 		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E2A816BF238B492E1F07291E98AB7A24</key>
 		<dict>
 			<key>primary</key>
 			<true/>

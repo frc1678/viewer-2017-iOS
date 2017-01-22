@@ -31,10 +31,15 @@ target 'ios-viewer' do
     pod 'MWPhotoBrowser'
 end
 
+target 'Current Match' do
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
+end
+
 target 'CurrentMatch' do
     pod 'Firebase/Core'
     pod 'Firebase/Database'
-    pod 'Firebase/Storage'
     pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
 end
 
