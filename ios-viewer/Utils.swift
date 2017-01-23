@@ -217,7 +217,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
             "calculatedData.avgHighShotsAuto",
             "calculatedData.avgLowShotsAuto",
-            "calculatedData.baselineReachedPercentage"
+            "calculatedData.baselineReachedPercentage",
+            "calculatedData.avgHoppersOpenedAuto"
         ]
         
         let teleKeysMini = [
@@ -231,9 +232,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let teleKeys = [
             "calculatedData.avgHighShotsTele",
-            //"calculatedData.sdHighShotsTele",
-            "calculatedData.avgLowShotsTele"
-            //"calculatedData.sdLowShotsTele"
+            "calculatedData.sdHighShotsTele",
+            "calculatedData.avgLowShotsTele",
+            "calculatedData.sdLowShotsTele",
+            "calculatedData.avgHoppersOpenedTele",
+            "calculatedData.avgGearGroundIntakesTele",
+            "calculatedData.avgGearsFumbledTele",
+            "calculatedData.avgGearsEjectedTele",
+            "calculatedData.avgLoaderIntakesTele",
+            "calculatedData.sdGearsPlacedByLiftTele",
+            "calculatedData.avgGearsPlacedByLiftTele",
         ]
         
         let endGame = [
@@ -491,8 +499,36 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "gearsPlacedByLiftAuto" : "Gears Placed Tele",
         "didReachBaselineAuto" : "Reached Baseline in Auto",
         "lowShotTimesForBoilerAuto" : "Low Shots Made Auto",
-        "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto"
+        "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto",
+        "calculatedData.avgHoppersOpenedTele" : "Avg. Hoppers Opened Tele",
+        "calculatedData.avgHoppersOpenedAuto" : "Avg. Hoppers Opened Auto",
+        "calculatedData.avgGearGroundIntakesTele" : "Avg. Gears Intaked From Ground Tele",
+        "calculatedData.avgGearGroundIntakesAuto" : "Avg. Gears Intaked From Ground Auto",
+        "calculatedData.avgGearsFumbledTele" : "Avg. Gears Fumbled Tele",
+        "calculatedData.avgGearsFumbledAuto" : "Avg. Gears Fumbled Auto",
+        "calculatedData.avgGearsEjectedTele" : "Avg. Gears Ejected Tele",
+        "calculatedData.avgGearsEjectedAuto" : "Avg. Gears Ejected Auto",
+        "calculatedData.avgLoaderIntakesTele" : "Avg. Loader Intakes Tele",
+        "calculatedData.avgLoaderIntakesAuto" : "Avg. Loader Intakes Auto",
+        "calculatedData.sdGearsPlacedByLiftTele" : "σ Gears Placed Tele",
+        "calculatedData.sdGearsPlacedByLiftAuto" : "σ Gears Placed Auto",
+        "calculatedData.avgGearsPlacedByLiftTele" : "Avg. Gears Placed Tele",
+        "calculatedData.avgGearsPlacedByLiftAuto" : "Avg. Gears Placed Auto",
         ]
+    
+    /*
+     "calculatedData.avgHighShotsTele",
+     "calculatedData.sdHighShotsTele",
+     "calculatedData.avgLowShotsTele",
+     "calculatedData.sdLowShotsTele",
+     "calculatedData.avgHoppersOpenedTele",
+     "calculatedData.avgGearGroundIntakesTele",
+     "calculatedData.avgGearsFumbledTele",
+     "calculatedData.avgGearsEjectedTele",
+     "calculatedData.avgLoaderIntakesTele",
+     "calculatedData.sdGearsPlacedByLiftTele",
+     "calculatedData.avgGearsPlacedByLiftTele",
+    */
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
