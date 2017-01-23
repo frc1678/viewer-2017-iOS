@@ -29,6 +29,8 @@ target 'ios-viewer' do
     pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
     pod 'Instabug'
     pod 'MWPhotoBrowser'
+    pod 'HockeySDK'
+
 end
 
 target 'Current Match' do

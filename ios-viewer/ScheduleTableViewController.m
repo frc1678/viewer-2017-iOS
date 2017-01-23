@@ -11,7 +11,7 @@
 #import "MatchTableViewCell.h"
 #import "ios_viewer-Swift.h"
 #import "UINavigationController+SGProgress.h"
-
+#import <UserNotifications/UserNotifications.h>
 
 @interface ScheduleTableViewController ()
 
@@ -44,7 +44,7 @@
 }
 
 -(void)scroll:(NSTimer*)timer {
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
     if([self.tableView numberOfRowsInSection:0] > self.currentMatch - 1) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.currentMatch - 1 inSection:0] atScrollPosition:UITableViewScrollPositionNone animated:YES];
     }

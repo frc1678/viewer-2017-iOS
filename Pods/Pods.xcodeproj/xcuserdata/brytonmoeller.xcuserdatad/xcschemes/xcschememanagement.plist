@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>HockeySDK-HockeySDKResources.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>JBChartView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -77,7 +82,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1ABEEFB1D56A6669DC8D8AD7784D481B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>36505A031BB3A1A3913E45B58E7DD88B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>37FFB74640C7EBC4972C67179BA27095</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6A276196DEE84FE04F9F040DFDF245B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -112,7 +132,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>E2A816BF238B492E1F07291E98AB7A24</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E7CDE2F1F29926FA093951ECF4828C43</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB9AD825427F216B54E693242E671FA1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -41,7 +41,7 @@ class TIMDDetailsViewController: UITableViewController {
                 cell.datapointLabel.text = Utils.humanReadableNames[key]
             }
             
-            var value: Any
+            var value: Any?
             if key.contains("calculatedData") {
                 value = TIMD.value(forKeyPath: key)
             } else {
