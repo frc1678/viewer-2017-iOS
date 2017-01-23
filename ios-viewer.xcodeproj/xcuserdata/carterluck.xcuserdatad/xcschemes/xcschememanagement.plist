@@ -6,18 +6,30 @@
 	<dict>
 		<key>UpcomingMatchesExtention.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
-			<integer>12</integer>
+			<integer>1</integer>
 		</dict>
 		<key>ios-viewer.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>19B037B41E2C5739006E25A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8C58687A1E3426200056EA17</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8CBD712B1E354696009C0206</key>
 		<dict>
 			<key>primary</key>
 			<true/>

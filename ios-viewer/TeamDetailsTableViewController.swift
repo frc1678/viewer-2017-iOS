@@ -269,9 +269,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
                         } else {
                             if dataPoint as? String != "" {
-                                if Utils.teamDetailsKeys.plus1Keys.contains(dataKey) { //Something ranked with a 1-5 selector, but the indecles that would come back from such a selector are 0-4
-                                    multiCell.scoreLabel?.text = "\(roundValue(NSNumber(value: dataPoint! as! Float + 1.00), toDecimalPlaces: 2))"
-                                } else if Utils.teamDetailsKeys.yesNoKeys.contains(dataKey) {
+                                 if Utils.teamDetailsKeys.yesNoKeys.contains(dataKey) {
                                     if dataPoint! as! Bool == true {
                                         multiCell.scoreLabel?.text = "Yes"
                                     } else {

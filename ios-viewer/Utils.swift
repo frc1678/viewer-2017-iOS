@@ -65,14 +65,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 @objc class Utils: NSObject {
     static let teamDetailsKeys = TeamDetailsKeys()
     struct TeamDetailsKeys {
-        let plus1Keys = [
-            "pitPotentialLowBarCapability",
-            "pitPotentialMidlineBallCapability"
-        ]
         
-        let yesNoKeys = [
-            "pitLowBarCapability"
-        ]
+        let yesNoKeys : [String] = []
         
         let abilityKeys = [
             "calculatedData.firstPickAbility",
@@ -223,7 +217,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
             "calculatedData.avgHighShotsAuto",
             "calculatedData.avgLowShotsAuto",
-            "calculatedData.baselineReachedPercentage"
+            "calculatedData.baselineReachedPercentage",
+            "calculatedData.avgHoppersOpenedAuto"
         ]
         
         let teleKeysMini = [
@@ -237,9 +232,16 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let teleKeys = [
             "calculatedData.avgHighShotsTele",
-            //"calculatedData.sdHighShotsTele",
-            "calculatedData.avgLowShotsTele"
-            //"calculatedData.sdLowShotsTele"
+            "calculatedData.sdHighShotsTele",
+            "calculatedData.avgLowShotsTele",
+            "calculatedData.sdLowShotsTele",
+            "calculatedData.avgHoppersOpenedTele",
+            "calculatedData.avgGearGroundIntakesTele",
+            "calculatedData.avgGearsFumbledTele",
+            "calculatedData.avgGearsEjectedTele",
+            "calculatedData.avgLoaderIntakesTele",
+            "calculatedData.sdGearsPlacedByLiftTele",
+            "calculatedData.avgGearsPlacedByLiftTele",
         ]
         
         let endGame = [
@@ -384,23 +386,28 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "sdLowShotsAuto",
         "sdLowShotsTele",
         "overallSecondPickAbility",
-        "secondPickAbility"
+        "secondPickAbility",
+        "avgGearsFumbledTele",
+        "avgGearsEjectedTele",
+        "avgGearGroundInakesTele",
+        "avgLoaderIntakesTele",
+        "avgHoppersOpenedTele",
+        "avgHoppersOpenedAuto"
     ]
     
     static let calculatedTeamInMatchDataKeys = [
         "calculatedData.firstPickAbility",
         "calculatedData.numRPs",
-        "calculatedData.citrusDPR",
         "calculatedData.secondPickAbility",
         "calculatedData.overallSecondPickAbility",
-        "calculatedData.scoreContribution"
-    ]
-    static let calculatedTIMDataKeys = [
-        "firstPickAbility",
-        "actualNumRPs",
-        "citrusDPR",
-        "overallSecondPickAbility",
-        "scoreContribution"
+        "calculatedData.scoreContribution",
+        "calculatedData.hoppersOpenedAuto",
+        "calculatedData.hoppersOpenedTele",
+        "calculatedData.liftoffAbility",
+        "calculatedData.numLowShotsAuto",
+        "calculatedData.numHighShotsTele",
+        "calculatedData.numLowShotsTele",
+        "calculatedData.numHighShotsAuto"
     ]
     
     static let humanReadableNames = [
@@ -484,16 +491,44 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "numGearLoaderIntakesTele" : "Gears Intaked From Loader Tele",
         "highShotTimesForBoilerTele" : "High Shots Made Tele",
         "numGearGroundIntakesTele" : "Gears Intaked From Ground Tele",
-        "numHoppersOpenedTele" : "Num Hoppers Opened Tele",
+        "hoppersOpenedTele" : "Num Hoppers Opened Tele",
         "gearsPlacedByLiftTele" : "Gears Placed Tele",
         "didLiftoff" : "Did Liftoff",
         "highShotTimesForBoilerAuto" : "High Shots Made Auto",
-        "numHoppersOpenedAuto" : "Num Hoppers Opened Auto",
+        "hoppersOpenedAuto" : "Num Hoppers Opened Auto",
         "gearsPlacedByLiftAuto" : "Gears Placed Tele",
         "didReachBaselineAuto" : "Reached Baseline in Auto",
         "lowShotTimesForBoilerAuto" : "Low Shots Made Auto",
-        "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto"
+        "didPotentiallyConflictingAuto" : "Did a Potentially Conflicting Auto",
+        "calculatedData.avgHoppersOpenedTele" : "Avg. Hoppers Opened Tele",
+        "calculatedData.avgHoppersOpenedAuto" : "Avg. Hoppers Opened Auto",
+        "calculatedData.avgGearGroundIntakesTele" : "Avg. Gears Intaked From Ground Tele",
+        "calculatedData.avgGearGroundIntakesAuto" : "Avg. Gears Intaked From Ground Auto",
+        "calculatedData.avgGearsFumbledTele" : "Avg. Gears Fumbled Tele",
+        "calculatedData.avgGearsFumbledAuto" : "Avg. Gears Fumbled Auto",
+        "calculatedData.avgGearsEjectedTele" : "Avg. Gears Ejected Tele",
+        "calculatedData.avgGearsEjectedAuto" : "Avg. Gears Ejected Auto",
+        "calculatedData.avgLoaderIntakesTele" : "Avg. Loader Intakes Tele",
+        "calculatedData.avgLoaderIntakesAuto" : "Avg. Loader Intakes Auto",
+        "calculatedData.sdGearsPlacedByLiftTele" : "σ Gears Placed Tele",
+        "calculatedData.sdGearsPlacedByLiftAuto" : "σ Gears Placed Auto",
+        "calculatedData.avgGearsPlacedByLiftTele" : "Avg. Gears Placed Tele",
+        "calculatedData.avgGearsPlacedByLiftAuto" : "Avg. Gears Placed Auto",
         ]
+    
+    /*
+     "calculatedData.avgHighShotsTele",
+     "calculatedData.sdHighShotsTele",
+     "calculatedData.avgLowShotsTele",
+     "calculatedData.sdLowShotsTele",
+     "calculatedData.avgHoppersOpenedTele",
+     "calculatedData.avgGearGroundIntakesTele",
+     "calculatedData.avgGearsFumbledTele",
+     "calculatedData.avgGearsEjectedTele",
+     "calculatedData.avgLoaderIntakesTele",
+     "calculatedData.sdGearsPlacedByLiftTele",
+     "calculatedData.avgGearsPlacedByLiftTele",
+    */
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
