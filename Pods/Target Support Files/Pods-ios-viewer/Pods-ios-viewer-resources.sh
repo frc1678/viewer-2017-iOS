@@ -74,9 +74,11 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle"
   install_resource "Instabug/Instabug.framework/Instabug.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle"
   install_resource "Instabug/Instabug.framework/Instabug.bundle"
 fi
 
