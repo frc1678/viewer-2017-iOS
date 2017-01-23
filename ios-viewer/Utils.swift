@@ -218,7 +218,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgHighShotsAuto",
             "calculatedData.avgLowShotsAuto",
             "calculatedData.baselineReachedPercentage",
-            "calculatedData.avgHoppersOpenedAuto"
+            "calculatedData.avgHoppersOpenedAuto",
+            "calculatedData.avgGearsPlacedByLiftAuto",
+            "calculatedData.sdGearsPlacedByLiftAuto", 
+            "calculatedData.sdLowShotsAuto",
+            "calculatedData.sdHighShotsAuto"
         ]
         
         let teleKeysMini = [
@@ -515,20 +519,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgGearsPlacedByLiftTele" : "Avg. Gears Placed Tele",
         "calculatedData.avgGearsPlacedByLiftAuto" : "Avg. Gears Placed Auto",
         ]
-    
-    /*
-     "calculatedData.avgHighShotsTele",
-     "calculatedData.sdHighShotsTele",
-     "calculatedData.avgLowShotsTele",
-     "calculatedData.sdLowShotsTele",
-     "calculatedData.avgHoppersOpenedTele",
-     "calculatedData.avgGearGroundIntakesTele",
-     "calculatedData.avgGearsFumbledTele",
-     "calculatedData.avgGearsEjectedTele",
-     "calculatedData.avgLoaderIntakesTele",
-     "calculatedData.sdGearsPlacedByLiftTele",
-     "calculatedData.avgGearsPlacedByLiftTele",
-    */
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
