@@ -782,13 +782,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = S2C8988WQX;
-<<<<<<< HEAD
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
 				);
-=======
->>>>>>> origin/master
 				INFOPLIST_FILE = "ios-viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer";
@@ -807,13 +804,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = S2C8988WQX;
-<<<<<<< HEAD
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
 				);
-=======
->>>>>>> origin/master
+
 				INFOPLIST_FILE = "ios-viewer/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer";
@@ -828,11 +823,7 @@
 			baseConfigurationReference = 0562B80EE4C07093F7297E43 /* Pods-Current Match.debug.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = S2C8988WQX;
-<<<<<<< HEAD
-				INFOPLIST_FILE = UpcomingMatchesExtention/Info.plist;
-=======
 				INFOPLIST_FILE = "Current Match/Info.plist";
->>>>>>> origin/master
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer.Current-Match";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -846,11 +837,7 @@
 			baseConfigurationReference = E090D67F37F412E6347A2014 /* Pods-Current Match.release.xcconfig */;
 			buildSettings = {
 				DEVELOPMENT_TEAM = S2C8988WQX;
-<<<<<<< HEAD
-				INFOPLIST_FILE = UpcomingMatchesExtention/Info.plist;
-=======
 				INFOPLIST_FILE = "Current Match/Info.plist";
->>>>>>> origin/master
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.brytonmoeller.ios-viewer.Current-Match";
 				PRODUCT_NAME = "$(TARGET_NAME)";
