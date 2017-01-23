@@ -45,6 +45,12 @@ public final class CalculatedTeamData: NSObject {
     static let disfunctionalPercentage = "disfunctionalPercentage"
     static let sdBaselineReachedPercentage = "sdBaselineReachedPercentage"
     static let avgGearsPlacedByLiftAuto = "avgGearsPlacedByLiftAuto"
+    static let avgGearsFumbledTele = "avgGearsFumbledTele"
+    static let avgGearsEjectedTele = "avgGearsEjectedTele"
+    static let avgGearGroundInakesTele = "avgGearGroundInakesTele"
+    static let avgLoaderIntakesTele = "avgLoaderIntakesTele"
+    static let avgHoppersOpenedTele = "avgHoppersOpenedTele"
+    static let avgHoppersOpenedAuto = "avgHoppersOpenedAuto"
   }
 
   // MARK: Properties
@@ -81,6 +87,14 @@ public final class CalculatedTeamData: NSObject {
     public var disfunctionalPercentage: Float = -1.0
     public var sdBaselineReachedPercentage: Float = -1.0
     public var avgGearsPlacedByLiftAuto: Float = -1.0
+    public var avgGearsFumbledTele: Float = -1.0
+    public var avgGearsEjectedTele: Float = -1.0
+    public var avgGearGroundInakesTele: Float = -1.0
+    public var avgLoaderIntakesTele: Float = -1.0
+    public var avgHoppersOpenedTele: Float = -1.0
+    public var avgHoppersOpenedAuto: Float = -1.0
+
+
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -128,6 +142,12 @@ public final class CalculatedTeamData: NSObject {
     disfunctionalPercentage = json[SerializationKeys.disfunctionalPercentage].floatValue
     sdBaselineReachedPercentage = json[SerializationKeys.sdBaselineReachedPercentage].floatValue
     avgGearsPlacedByLiftAuto = json[SerializationKeys.avgGearsPlacedByLiftAuto].floatValue
+    avgGearsFumbledTele = json[SerializationKeys.avgGearsFumbledTele].floatValue
+    avgGearsEjectedTele = json[SerializationKeys.avgGearsEjectedTele].floatValue
+    avgGearGroundInakesTele = json[SerializationKeys.avgGearGroundInakesTele].floatValue
+    avgLoaderIntakesTele = json[SerializationKeys.avgLoaderIntakesTele].floatValue
+    avgHoppersOpenedTele = json[SerializationKeys.avgHoppersOpenedTele].floatValue
+    avgHoppersOpenedAuto = json[SerializationKeys.avgHoppersOpenedAuto].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -168,6 +188,13 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.disfunctionalPercentage] = disfunctionalPercentage
     dictionary[SerializationKeys.sdBaselineReachedPercentage] = sdBaselineReachedPercentage
     dictionary[SerializationKeys.avgGearsPlacedByLiftAuto] = avgGearsPlacedByLiftAuto
+    dictionary[SerializationKeys.avgGearsFumbledTele] = avgGearsFumbledTele
+    dictionary[SerializationKeys.avgGearsEjectedTele] = avgGearsEjectedTele
+    dictionary[SerializationKeys.avgGearGroundInakesTele] = avgGearGroundInakesTele
+    dictionary[SerializationKeys.avgLoaderIntakesTele] = avgLoaderIntakesTele
+    dictionary[SerializationKeys.avgHoppersOpenedTele] = avgHoppersOpenedTele
+    dictionary[SerializationKeys.avgHoppersOpenedAuto] = avgHoppersOpenedAuto
+
     return dictionary
   }
 
