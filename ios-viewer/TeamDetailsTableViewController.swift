@@ -412,11 +412,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             var seedText = "?"
             var predSeedText = "?"
             if let seed = team?.calculatedData!.actualSeed, seed > 0 {
-                seedText = "\(seed)"
+                seedText = "Seed: \(seed)"
             }
             
             if let predSeed = team?.calculatedData!.predictedSeed, predSeed > 0 {
-                predSeedText = "\(predSeed)"
+                predSeedText = "Pred. Seed: \(predSeed)"
             }
             
             
