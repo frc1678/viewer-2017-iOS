@@ -22,7 +22,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     let mapping = ["One", "Two", "Three"]
-    let tableKeys = ["actualSeed","predictedSeed","firstPickAbility","secondPickAbility","disfunctionalPercentage"]
+    let tableKeys = ["actualSeed","predictedSeed","firstPickAbility","overallSecondPickAbility","disfunctionalPercentage","avgGearsPlacedByLiftAuto","avgGearsPlacedByLiftTele","avgHighShotsAuto","avgHighShotsTele","avgLowShotsAuto","avgLowShotsTele","liftoffPercentage","avgDefense"]
     
     
     
@@ -59,9 +59,10 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
         
         let cell : TIMDTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableCell", for: indexPath) as! TIMDTableViewCell
-        if Utils.humanReadableNames.keys.contains(tableKeys[indexPath.row]) {
-            cell.datapointLabel.text = Utils.humanReadableNames[tableKeys[indexPath.row]]
-        }
+        cell.datapointLabel.text = Utils.humanReadableNames["calculatedData.\(tableKeys[indexPath.row])"]
+        cell.datapointLabel.font = cell.datapointLabel.font.withSize(5)
+        cell.valueLabel.font = cell.valueLabel.font.withSize(5)
+
         switch tableView {
         case r1TableView :
             cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
