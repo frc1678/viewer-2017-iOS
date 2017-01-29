@@ -60,9 +60,15 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         
         let cell : TIMDTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableCell", for: indexPath) as! TIMDTableViewCell
         cell.datapointLabel.text = Utils.humanReadableNames["calculatedData.\(tableKeys[indexPath.row])"]
-        cell.datapointLabel.font = cell.datapointLabel.font.withSize(5)
-        cell.valueLabel.font = cell.valueLabel.font.withSize(5)
-
+        cell.datapointLabel.font = cell.datapointLabel.font.withSize(12)
+        cell.valueLabel.font = cell.valueLabel.font.withSize(12)
+        cell.datapointLabel.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
+        cell.datapointLabel.numberOfLines = 0
+        cell.valueLabel.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
+        cell.valueLabel.numberOfLines = 0
+        //cell.datapointLabel.preferredMaxLayoutWidth = 50
+        //cell.valueLabel.preferredMaxLayoutWidth = 50
+        
         switch tableView {
         case r1TableView :
             cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
