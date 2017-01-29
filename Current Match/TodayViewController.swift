@@ -41,14 +41,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         super.viewDidAppear(animated)
         firebase = FIRDatabase.database().reference()
         self.preferredContentSize = CGSize(width: 320, height: 90);
-        self.firebase.child("currentMatchNumber").observe(.value, with: { (snap) -> Void in
+        self.firebase.child("currentMatchNum").observe(.value, with: { (snap) -> Void in
             self.refreshMatchNum()
         })
     }
     
     func refreshMatchNum() {
         self.firebase.observeSingleEvent(of: .value, with: { (snap) -> Void in
-            if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNumber").value as? Int {
+            if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNum").value as? Int {
                 if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).value as? NSDictionary {
                     let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
                     let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]

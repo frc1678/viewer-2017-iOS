@@ -36,6 +36,8 @@ public final class TeamInMatchData: NSObject {
     static let didLiftoff = "didLiftoff"
     static let numGearsPlacedAuto = "numGearsPlacedAuto"
     static let calculatedData = "calculatedData"
+    static let numHoppersOpenedAuto = "numHoppersOpenedAuto"
+    static let numHoppersOpenedTele = "numHoppersOpenedTele"
   }
 
   // MARK: Properties
@@ -103,6 +105,8 @@ public final class TeamInMatchData: NSObject {
     scoutName = json[SerializationKeys.scoutName].string
     didLiftoff = json[SerializationKeys.didLiftoff].boolValue
     calculatedData = CalculatedTeamInMatchData(json: json[SerializationKeys.calculatedData])
+    numHoppersOpenedAuto = json[SerializationKeys.numHoppersOpenedAuto].int
+    numHoppersOpenedAuto = json[SerializationKeys.numHoppersOpenedTele].int
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -132,6 +136,8 @@ public final class TeamInMatchData: NSObject {
     if let value = scoutName { dictionary[SerializationKeys.scoutName] = value }
     dictionary[SerializationKeys.didLiftoff] = didLiftoff
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
+    if let value = numHoppersOpenedAuto { dictionary[SerializationKeys.numHoppersOpenedAuto] = value }
+    if let value = numHoppersOpenedTele { dictionary[SerializationKeys.numHoppersOpenedTele] = value }
 
     return dictionary
   }

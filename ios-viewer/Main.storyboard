@@ -683,7 +683,7 @@
         <scene sceneID="eyt-ri-plP">
             <objects>
                 <tableViewController id="1fW-7d-q3t" customClass="TIMDDetailsViewController" customModule="ios_viewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8kT-yP-aFQ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8kT-yP-aFQ">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -770,8 +770,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AMp-59-SZN"/>
+        <segue reference="e57-hB-uH0"/>
         <segue reference="hw9-do-Pyv"/>
-        <segue reference="BGa-X6-1aO"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
