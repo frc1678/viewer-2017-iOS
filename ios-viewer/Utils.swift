@@ -606,6 +606,19 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
         return(nil)
     }
+    
+    class func unwrap(any:Any) -> Any {
+        
+        let mi = Mirror(reflecting: any)
+        if mi.displayStyle != .optional {
+            return any
+        }
+        
+        if mi.children.count == 0 { return NSNull() }
+        let (_, some) = mi.children.first!
+        return some
+        
+    }
 }
 
 

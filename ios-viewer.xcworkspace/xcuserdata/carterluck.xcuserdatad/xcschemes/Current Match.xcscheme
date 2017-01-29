@@ -67,16 +67,26 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "19B037B41E2C5739006E25A2"
-            BuildableName = "ios-viewer.app"
-            BlueprintName = "ios-viewer"
+            BlueprintIdentifier = "8CBD712B1E354696009C0206"
+            BuildableName = "Current Match.appex"
+            BlueprintName = "Current Match"
             ReferencedContainer = "container:ios-viewer.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8CBD712B1E354696009C0206"
+            BuildableName = "Current Match.appex"
+            BlueprintName = "Current Match"
+            ReferencedContainer = "container:ios-viewer.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

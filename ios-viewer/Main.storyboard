@@ -688,7 +688,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="MultiCellTableViewCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TIMDTableViewCell" id="32i-Mz-e2F" userLabel="Two Label Table View Cell" customClass="TIMDTableViewCell" customModule="ios_viewer" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="TIMDTableCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="TIMDTableViewCell" id="32i-Mz-e2F" userLabel="Two Label Table View Cell" customClass="TIMDTableViewCell" customModule="ios_viewer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="1024" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="32i-Mz-e2F" id="WbB-uQ-lbF">

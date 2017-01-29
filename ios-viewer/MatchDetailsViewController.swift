@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MatchDetailsViewController: UIViewController {
+class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher;
     
@@ -22,6 +22,9 @@ class MatchDetailsViewController: UIViewController {
     }
     
     let mapping = ["One", "Two", "Three"]
+    let tableKeys = ["actualSeed","predictedSeed","firstPickAbility","secondPickAbility","disfunctionalPercentage"]
+    
+    
     
     @IBOutlet weak var redOfficialScoreLabel: UILabel!
     @IBOutlet weak var blueOfficialScoreLabel: UILabel!
@@ -31,65 +34,57 @@ class MatchDetailsViewController: UIViewController {
     @IBOutlet weak var blueErrorPercentageLabel: UILabel!
     
     @IBOutlet weak var redTeamOneButton: UIButton!
-    @IBOutlet weak var R1S: UILabel!
-    @IBOutlet weak var R1FP: UILabel!
-    @IBOutlet weak var R1TH: UILabel!
-    @IBOutlet weak var R1TL: UILabel!
-    @IBOutlet weak var R1D: UILabel!
-    
-   
+    @IBOutlet weak var r1TableView: UITableView!
     
     @IBOutlet weak var redTeamTwoButton: UIButton!
-    @IBOutlet weak var R2S: UILabel!
-    @IBOutlet weak var R2FP: UILabel!
-    @IBOutlet weak var R2TH: UILabel!
-    @IBOutlet weak var R2TL: UILabel!
-    @IBOutlet weak var R2D: UILabel!
+    @IBOutlet weak var r2TableView: UITableView!
     
     @IBOutlet weak var redTeamThreeButton: UIButton!
-    @IBOutlet weak var R3FP: UILabel!
-    @IBOutlet weak var R3S: UILabel!
-    @IBOutlet weak var R3TH: UILabel!
-    @IBOutlet weak var R3TL: UILabel!
-    @IBOutlet weak var R3D: UILabel!
+    @IBOutlet weak var r3TableView: UITableView!
     
     @IBOutlet weak var blueTeamOneButton: UIButton!
-    @IBOutlet weak var B1FP: UILabel!
-    @IBOutlet weak var B1S: UILabel!
-    @IBOutlet weak var B1TH: UILabel!
-    @IBOutlet weak var B1TL: UILabel!
-    @IBOutlet weak var B1D: UILabel!
+    @IBOutlet weak var b1TableView: UITableView!
     
     @IBOutlet weak var blueTeamTwoButton: UIButton!
-    @IBOutlet weak var B2FP: UILabel!
-    @IBOutlet weak var B2S: UILabel!
-    @IBOutlet weak var B2TH: UILabel!
-    @IBOutlet weak var B2TL: UILabel!
-    @IBOutlet weak var B2D: UILabel!
+    @IBOutlet weak var b2TableView: UITableView!
     
     @IBOutlet weak var blueTeamThreeButton: UIButton!
-    @IBOutlet weak var B3FP: UILabel!
-    @IBOutlet weak var B3S: UILabel!
-    @IBOutlet weak var B3TH: UILabel!
-    @IBOutlet weak var B3TL: UILabel!
-    @IBOutlet weak var B3D: UILabel!
+    @IBOutlet weak var b3TableView: UITableView!
     
-    @IBOutlet weak var R1WA: UILabel!
-    @IBOutlet weak var R2WA: UILabel!
-    @IBOutlet weak var R3WA: UILabel!
-    @IBOutlet weak var B1WA: UILabel!
-    @IBOutlet weak var B2WA: UILabel!
-    @IBOutlet weak var B3WA: UILabel!
+    func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let redTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
+        let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
+        
+        let cell : TIMDTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableCell", for: indexPath) as! TIMDTableViewCell
+        if Utils.humanReadableNames.keys.contains(tableKeys[indexPath.row]) {
+            cell.datapointLabel.text = Utils.humanReadableNames[tableKeys[indexPath.row]]
+        }
+        switch tableView {
+        case r1TableView :
+            cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+        case r2TableView :
+            cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+        case r3TableView :
+            cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+        case b1TableView :
+            cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+        case b2TableView :
+            cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+        case b3TableView :
+            cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+        default :
+            break
+        }
+        
+        return cell
+    }
     
-    @IBOutlet weak var redDefenseOneLabel: UILabel!
-    @IBOutlet weak var redDefenseTwoLabel: UILabel!
-    @IBOutlet weak var redDefenseThreeLabel: UILabel!
-    @IBOutlet weak var redDefenseFourLabel: UILabel!
-    
-    @IBOutlet weak var blueDefenseOneLabel: UILabel!
-    @IBOutlet weak var blueDefenseTwoLabel: UILabel!
-    @IBOutlet weak var blueDefenseThreeLabel: UILabel!
-    @IBOutlet weak var blueDefenseFourLabel: UILabel!
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableKeys.count
+    }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
@@ -102,6 +97,30 @@ class MatchDetailsViewController: UIViewController {
         
         updateUI()
        // print(self.match)
+        self.r1TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
+        self.r2TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
+        self.r3TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
+        self.b1TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
+        self.b2TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
+        self.b3TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
+        self.r1TableView.delegate = self
+        self.r1TableView.dataSource = self
+        self.r1TableView.reloadData()
+        self.r2TableView.delegate = self
+        self.r2TableView.dataSource = self
+        self.r2TableView.reloadData()
+        self.r3TableView.delegate = self
+        self.r3TableView.dataSource = self
+        self.r3TableView.reloadData()
+        self.b1TableView.delegate = self
+        self.b1TableView.dataSource = self
+        self.b1TableView.reloadData()
+        self.b2TableView.delegate = self
+        self.b2TableView.dataSource = self
+        self.b2TableView.reloadData()
+        self.b3TableView.delegate = self
+        self.b3TableView.dataSource = self
+        self.b3TableView.reloadData()
     }
     
     fileprivate func updateUI() {
@@ -151,16 +170,6 @@ class MatchDetailsViewController: UIViewController {
                 for index in 1...(redTeams?.count)! {
                     if index <= 3 {
                         (value(forKey: "redTeam\(mapping[index-1])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index-1])", for: UIControlState())
-                        if let cd = redTeams?[index-1].calculatedData {
-                            
-                            (value(forKey: "R\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index)FP") as! UILabel).text = "Pred. Seed: \(roundValue(cd.predictedSeed as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index)TH") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "R\(index)TL") as! UILabel).text = "2nd Pick: \(roundValue(cd.overallSecondPickAbility as AnyObject?, toDecimalPlaces: 2))"
-                            (value(forKey: "R\(index)D") as! UILabel).text =  "Disfunc.: \(roundValue(cd.disfunctionalPercentage*100.0 as AnyObject?, toDecimalPlaces: 0))%"
-                            (value(forKey: "R\(index)WA") as! UILabel).attributedText = withAgainstAttributedStringForTeam(number: (match.redAllianceTeamNumbers! as [Int])[index-1])
-
-                        }
 
                         
                     }
@@ -177,27 +186,6 @@ class MatchDetailsViewController: UIViewController {
                     if index <= 3 {
                         //print(blueTeams[index].number)
                         (value(forKey: "blueTeam\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", for: UIControlState())
-                        if let cd = blueTeams?[index - 1].calculatedData {
-                            /*let match = firebaseFetcher.getMatch(matchNumber)
-                            let TIMDatas = blueTeams[index-1].TeamInMatchDatas
-                            var teamInMatchData = TeamInMatchData()
-                            for TIMData in TIMDatas {
-                                print(TIMData.matchNumber!.integerValue)
-                                print(matchNumber)
-                                if TIMData.matchNumber?.integerValue == matchNumber {
-                                    print("We made it")
-                                    teamInMatchData = TIMData
-                                }
-                            }*/
-                            
-                            (value(forKey: "B\(index)S") as! UILabel).text = "Seed: \(roundValue(cd.actualSeed as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "B\(index)FP") as! UILabel).text = "Pred. Seed: \(roundValue(cd.predictedSeed as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "B\(index)TH") as! UILabel).text = "1st Pick: \(roundValue(cd.firstPickAbility as AnyObject?, toDecimalPlaces: 0))"
-                            (value(forKey: "B\(index)TL") as! UILabel).text = "2nd Pick: \(roundValue(cd.overallSecondPickAbility as AnyObject?, toDecimalPlaces: 2))"
-                            (value(forKey: "B\(index)D") as! UILabel).text =  "Disfunc.: \(roundValue(cd.disfunctionalPercentage*100.0 as AnyObject?, toDecimalPlaces: 0))%"
-                            (value(forKey: "B\(index)WA") as! UILabel).attributedText = withAgainstAttributedStringForTeam(number: (match.blueAllianceTeamNumbers! as [Int])[index-1])
-
-                        }
                     }
                 }
             }
