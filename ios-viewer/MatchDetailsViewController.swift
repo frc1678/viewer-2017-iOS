@@ -59,7 +59,9 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
         
         let cell : TIMDTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableCell", for: indexPath) as! TIMDTableViewCell
-        cell.datapointLabel.text = Utils.humanReadableNames["calculatedData.\(tableKeys[indexPath.row])"]
+        if indexPath.row != tableKeys.count {
+            cell.datapointLabel.text = Utils.humanReadableNames["calculatedData.\(tableKeys[indexPath.row])"]
+        }
         cell.datapointLabel.font = cell.datapointLabel.font.withSize(12)
         cell.valueLabel.font = cell.valueLabel.font.withSize(12)
         cell.datapointLabel.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
@@ -69,28 +71,65 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         //cell.datapointLabel.preferredMaxLayoutWidth = 50
         //cell.valueLabel.preferredMaxLayoutWidth = 50
         
+        //If after all tablekeys
+        
+        
         switch tableView {
         case r1TableView :
-            cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            if indexPath.row == tableKeys.count {
+                cell.datapointLabel.text = "Future Match Status"
+                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[0].number)!).rawValue
+            } else {
+                cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            }
         case r2TableView :
-            cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            if indexPath.row == tableKeys.count {
+                cell.datapointLabel.text = "Future Match Status"
+                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[1].number)!).rawValue
+            } else {
+                cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            }
         case r3TableView :
+            if indexPath.row == tableKeys.count {
+                cell.datapointLabel.text = "Future Match Status"
+                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[2].number)!).rawValue
+            } else {
             cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            }
         case b1TableView :
-            cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            if indexPath.row == tableKeys.count {
+                cell.datapointLabel.text = "Future Match Status"
+                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[0].number)!).rawValue
+            } else {
+                cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            }
         case b2TableView :
-            cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            if indexPath.row == tableKeys.count {
+                cell.datapointLabel.text = "Future Match Status"
+                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[1].number)!).rawValue
+            } else {
+                cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            }
         case b3TableView :
+            if indexPath.row == tableKeys.count {
+                cell.datapointLabel.text = "Future Match Status"
+                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[2].number)!).rawValue
+            } else {
             cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+            }
         default :
             break
+        }
+        
+        if let valueLabelFloat = Float(cell.valueLabel.text!) {
+            cell.valueLabel.text = Utils.roundValue(Float(cell.valueLabel.text!)!, toDecimalPlaces: 2)
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableKeys.count
+        return tableKeys.count + 1
     }
     
     required init(coder aDecoder: NSCoder) {
