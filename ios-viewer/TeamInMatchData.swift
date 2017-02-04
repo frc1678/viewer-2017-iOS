@@ -106,7 +106,7 @@ public final class TeamInMatchData: NSObject {
     didLiftoff = json[SerializationKeys.didLiftoff].boolValue
     calculatedData = CalculatedTeamInMatchData(json: json[SerializationKeys.calculatedData])
     numHoppersOpenedAuto = json[SerializationKeys.numHoppersOpenedAuto].int
-    numHoppersOpenedAuto = json[SerializationKeys.numHoppersOpenedTele].int
+    numHoppersOpenedTele = json[SerializationKeys.numHoppersOpenedTele].int
   }
 
   /// Generates description of the object in the form of a NSDictionary.

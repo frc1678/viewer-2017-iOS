@@ -17,6 +17,8 @@ public final class CalculatedTeamInMatchData: NSObject {
     static let numHighShotsTele = "numHighShotsTele"
     static let numLowShotsTele = "numLowShotsTele"
     static let numHighShotsAuto = "numHighShotsAuto"
+    static let numGearsPlacedAuto = "numGearsPlacedAuto"
+    static let numGearsPlacedTele = "numGearsPlacedTele"
   }
 
   // MARK: Properties
@@ -25,6 +27,8 @@ public final class CalculatedTeamInMatchData: NSObject {
   public var numHighShotsTele: Int?
   public var numLowShotsTele: Int?
   public var numHighShotsAuto: Int?
+    public var numGearsPlacedAuto: Int?
+    public var numGearsPlacedTele: Int?
 
 
   // MARK: SwiftyJSON Initializers
@@ -45,6 +49,8 @@ public final class CalculatedTeamInMatchData: NSObject {
     numHighShotsTele = json[SerializationKeys.numHighShotsTele].int
     numLowShotsTele = json[SerializationKeys.numLowShotsTele].int
     numHighShotsAuto = json[SerializationKeys.numHighShotsAuto].int
+    numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].int
+    numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].int
     
   }
 
@@ -58,6 +64,8 @@ public final class CalculatedTeamInMatchData: NSObject {
     if let value = numHighShotsTele { dictionary[SerializationKeys.numHighShotsTele] = value }
     if let value = numLowShotsTele { dictionary[SerializationKeys.numLowShotsTele] = value }
     if let value = numHighShotsAuto { dictionary[SerializationKeys.numHighShotsAuto] = value }
+    if let value = numGearsPlacedAuto { dictionary[SerializationKeys.numGearsPlacedAuto] = value }
+    if let value = numGearsPlacedTele { dictionary[SerializationKeys.numGearsPlacedTele] = value }
     
     return dictionary
   }
@@ -69,8 +77,8 @@ public final class CalculatedTeamInMatchData: NSObject {
     self.numHighShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsTele) as? Int
     self.numLowShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numLowShotsTele) as? Int
     self.numHighShotsAuto = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsAuto) as? Int
-    
-
+    self.numGearsPlacedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedAuto) as? Int
+    self.numGearsPlacedTele = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedTele) as? Int
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -79,5 +87,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     aCoder.encode(numHighShotsTele, forKey: SerializationKeys.numHighShotsTele)
     aCoder.encode(numLowShotsTele, forKey: SerializationKeys.numLowShotsTele)
     aCoder.encode(numHighShotsAuto, forKey: SerializationKeys.numHighShotsAuto)
+    aCoder.encode(numGearsPlacedAuto, forKey: SerializationKeys.numGearsPlacedAuto)
+    aCoder.encode(numGearsPlacedTele, forKey: SerializationKeys.numGearsPlacedTele)
   }
 }

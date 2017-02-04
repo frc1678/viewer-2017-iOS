@@ -310,24 +310,23 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     
     static let TIMDAutoKeys : [String] = [
-        "highShotTimesForBoilerAuto",
+        "calculatedData.numLowShotsAuto",
         "numHoppersOpenedAuto",
-        "gearsPlacedByLiftAuto",
+        "calculatedData.numGearsPlacedAuto",
         "didReachBaselineAuto",
-        "lowShotTimesForBoilerAuto",
-        "didPotentiallyConflictingAuto"
+        "calculatedData.numHighShotsAuto",
     ]
-     
+    
     static let TIMDTeleKeys : [String] = [
-        "lowShotTimesForBoilerTele",
+        "calculatedData.numLowShotsTele",
         "numGearLoaderIntakesTele",
-        "highShotTimesForBoilerTele",
+        "calculatedData.numHighShotsTele",
         "numGearGroundIntakesTele",
         "numHoppersOpenedTele",
-        "gearsPlacedByLiftTele",
+        "calculatedData.numGearsPlacedTele",
         "didLiftoff"
     ]
-     
+    
     static let TIMDStatusKeys = [
         "didStartDisabled",
         "didBecomeIncapacitated"
@@ -518,7 +517,23 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdGearsPlacedByLiftAuto" : "σ Gears Placed Auto",
         "calculatedData.avgGearsPlacedByLiftTele" : "Avg. Gears Placed Tele",
         "calculatedData.avgGearsPlacedByLiftAuto" : "Avg. Gears Placed Auto",
-        ]
+        "numHoppersOpenedAuto" : "Num Hoppers Opened Auto",
+        "numHoppersOpenedTele" : "Num Hoppers Opened Tele",
+        "gearsPlacedByLiftAuto.lift1" : "Gears Placed Auto (Lift 1)",
+        "gearsPlacedByLiftAuto.lift2" : "Gears Placed Auto (Lift 2)",
+        "gearsPlacedByLiftAuto.lift3" : "Gears Placed Auto (Lift 3)",
+        "gearsPlacedByLiftTele.lift1" : "Gears Placed Tele (Lift 1)",
+        "gearsPlacedByLiftTele.lift2" : "Gears Placed Tele (Lift 2)",
+        "gearsPlacedByLiftTele.lift3" : "Gears Placed Tele (Lift 3)",
+        "lowShotTimesForBoilerTele.numShots" : "Low Shots Made Tele",
+        "lowShotTimesForBoilerAuto.numShots" : "Low Shots Made Auto",
+        "highShotTimesForBoilerTele.numShots" : "High Shots Made Tele",
+        "highShotTimesForBoilerAuto.numShots" : "High Shots Made Auto",
+        "calculatedData.numLowShotsAuto" : "Low Shots Made Auto",
+        "calculatedData.numGearsPlacedAuto" : "Num Gears Scored Auto",
+        "calculatedData.numHighShotsAuto" : "High Shots Made Auto",
+        "calculatedData.numGearsPlacedTele" : "Num Gears Scored Tele",
+    ]
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber

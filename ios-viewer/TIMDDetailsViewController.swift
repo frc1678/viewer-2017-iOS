@@ -43,9 +43,10 @@ class TIMDDetailsViewController: UITableViewController {
             
             var value: Any?
             if key.contains("calculatedData") {
-                value = TIMD.value(forKeyPath: key)
+                value = ((TIMD.value(forKeyPath: "calculatedData") as! CalculatedTeamInMatchData).dictionaryRepresentation() as NSDictionary).object(forKey: key.replacingOccurrences(of: "calculatedData.", with: ""))
             } else {
                 value = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: key)
+                print(key)
             }
             if value != nil {
                 if let stringValue = value as? String {
