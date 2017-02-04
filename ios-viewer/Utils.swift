@@ -337,7 +337,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "rankDefense",
         "rankAgility",
         "rankSpeed",
-        "rankTorque"
+        "rankGearControl"
     ]
     
     static let TIMDKeys = [
@@ -533,6 +533,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numGearsPlacedAuto" : "Num Gears Scored Auto",
         "calculatedData.numHighShotsAuto" : "High Shots Made Auto",
         "calculatedData.numGearsPlacedTele" : "Num Gears Scored Tele",
+        "rankGearControl" : "Gear Control Rank",
     ]
     
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
