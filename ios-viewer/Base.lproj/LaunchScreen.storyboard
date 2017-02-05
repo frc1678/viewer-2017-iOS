@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,21 +23,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=" Citrus Circuits" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kW-dQ-WZx">
-                                <rect key="frame" x="16" y="82" width="343" height="83"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Citrus Circuits" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7kW-dQ-WZx">
+                                <rect key="frame" x="16" y="142" width="343" height="50.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="42"/>
                                 <color key="textColor" red="0.26666666666666666" green="0.82745098039215681" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="CC 2017 Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="0cr-xT-Mef">
-                                <rect key="frame" x="27" y="207" width="327" height="198"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="CC 2017 Logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="0cr-xT-Mef">
+                                <rect key="frame" x="24" y="234.5" width="327" height="198"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="198" id="8kz-g8-4Lz"/>
-                                    <constraint firstAttribute="width" constant="327" id="mGp-4I-Vzm"/>
+                                    <constraint firstAttribute="width" secondItem="0cr-xT-Mef" secondAttribute="height" multiplier="109:66" id="6an-xf-SC5"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Data Viewing App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMY-xh-KKf">
-                                <rect key="frame" x="16" y="455" width="343" height="83"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data Viewing App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMY-xh-KKf">
+                                <rect key="frame" x="37" y="482.5" width="301.5" height="50.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="42"/>
                                 <color key="textColor" red="0.26666666666666666" green="0.80414456260692191" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -48,10 +48,12 @@
                             <constraint firstAttribute="leadingMargin" secondItem="7kW-dQ-WZx" secondAttribute="leading" id="AE7-Nz-pUj"/>
                             <constraint firstItem="7kW-dQ-WZx" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Fv2-ef-AXq"/>
                             <constraint firstItem="0cr-xT-Mef" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="O8X-a2-98v"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0cr-xT-Mef" secondAttribute="trailing" constant="8" id="WJ2-9C-g05"/>
                             <constraint firstItem="wMY-xh-KKf" firstAttribute="top" secondItem="0cr-xT-Mef" secondAttribute="bottom" constant="50" id="ZlD-XI-6Lv"/>
                             <constraint firstItem="wMY-xh-KKf" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="aCm-MM-zBA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7kW-dQ-WZx" secondAttribute="trailing" id="dzq-FM-VQv"/>
                             <constraint firstItem="0cr-xT-Mef" firstAttribute="top" secondItem="7kW-dQ-WZx" secondAttribute="bottom" constant="42" id="f4q-Xz-CBL"/>
+                            <constraint firstItem="0cr-xT-Mef" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="8" id="mxw-92-4Bm"/>
                         </constraints>
                     </view>
                 </viewController>

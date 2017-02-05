@@ -118,7 +118,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         let shouldAggressivelyDownload = defaults.bool(forKey: "predownloadPreference")
         if shouldAggressivelyDownload {
             if let newURL = snap.childSnapshot(forPath: "selectedImageURL").value {
-                if team.selectedImageURL != newURL as? String {
+                if team.pitSelectedImageURL != newURL as? String {
                     cacheImage(snap.childSnapshot(forPath: "number").value as! Int, url: newURL as? String)
                 }
             }

@@ -56,15 +56,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             if let team = self.team,
                 let imageView = self.teamSelectedImageView {
-                    if team.selectedImageURL != nil {
+                    if team.pitSelectedImageURL != nil {
                         self.firebaseFetcher?.getImageForTeam((self.team?.number)!, fetchedCallback: { (image) -> () in
                             DispatchQueue.main.async(execute: { () -> Void in
                                 imageView.image = image
                             })
                             }, couldNotFetch: {
                                 DispatchQueue.main.async(execute: { () -> Void in
-                                    
-                                    imageView.hnk_setImageFromURL(URL(string: team.selectedImageURL!)!)
+                                    if team.pitAllImageURLs != nil {
+                                    imageView.hnk_setImageFromURL(URL(string: Array(team.pitAllImageURLs!.values).filter { $0.contains(team.pitSelectedImageURL!) }[0])!)
+                                    }
                                 })
                         })
                     }
@@ -72,9 +73,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if self.teamSelectedImageView.image != noRobotPhoto {
                         self.photos.append(MWPhoto(image: self.teamSelectedImageView.image))
                     }
-                    if let urls = self.team?.allImageUrls {
-                        for url in urls {
-                            self.photos.append(MWPhoto(url: URL(string: url )))
+                    if let urls = self.team?.pitAllImageURLs {
+                        for url in urls.values {
+                            self.photos.append(MWPhoto(url: URL(string: url)))
                         }
                     }
                     if self.teamSelectedImageView.image == noRobotPhoto && self.photos.count > 0 {

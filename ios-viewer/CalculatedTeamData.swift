@@ -50,6 +50,7 @@ public final class CalculatedTeamData: NSObject {
     static let avgLoaderIntakesTele = "avgLoaderIntakesTele"
     static let avgHoppersOpenedTele = "avgHoppersOpenedTele"
     static let avgHoppersOpenedAuto = "avgHoppersOpenedAuto"
+    static let firstPickAllRotorsTurningChance = "firstPickAllRotorsTurningChance"
   }
 
   // MARK: Properties
@@ -91,6 +92,7 @@ public final class CalculatedTeamData: NSObject {
     public var avgLoaderIntakesTele: Float = -1.0
     public var avgHoppersOpenedTele: Float = -1.0
     public var avgHoppersOpenedAuto: Float = -1.0
+    public var firstPickAllRotorsTurningChance: Float = -1.0
 
 
 
@@ -145,6 +147,7 @@ public final class CalculatedTeamData: NSObject {
     avgLoaderIntakesTele = json[SerializationKeys.avgLoaderIntakesTele].floatValue
     avgHoppersOpenedTele = json[SerializationKeys.avgHoppersOpenedTele].floatValue
     avgHoppersOpenedAuto = json[SerializationKeys.avgHoppersOpenedAuto].floatValue
+    firstPickAllRotorsTurningChance = json[SerializationKeys.firstPickAllRotorsTurningChance].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -191,6 +194,7 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.avgLoaderIntakesTele] = avgLoaderIntakesTele
     dictionary[SerializationKeys.avgHoppersOpenedTele] = avgHoppersOpenedTele
     dictionary[SerializationKeys.avgHoppersOpenedAuto] = avgHoppersOpenedAuto
+    dictionary[SerializationKeys.firstPickAllRotorsTurningChance] = firstPickAllRotorsTurningChance
 
     return dictionary
   }
