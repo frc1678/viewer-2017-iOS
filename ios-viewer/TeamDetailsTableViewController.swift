@@ -75,7 +75,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     if let urls = self.team?.pitAllImageURLs {
                         for url in urls.values {
-                            self.photos.append(MWPhoto(url: URL(string: url)))
+                            if self.photos.count < self.team!.pitAllImageURLs!.count {
+                                self.photos.append(MWPhoto(url: URL(string: url)))
+                            }
                         }
                     }
                     if self.teamSelectedImageView.image == noRobotPhoto && self.photos.count > 0 {
