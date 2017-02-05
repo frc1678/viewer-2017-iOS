@@ -70,9 +70,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         })
                     }
                     let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
-                    if self.teamSelectedImageView.image != noRobotPhoto {
+                    /*if self.teamSelectedImageView.image != noRobotPhoto {
                         self.photos.append(MWPhoto(image: self.teamSelectedImageView.image))
-                    }
+                    }*/ //Deprecated since updated selectedImageView
                     if let urls = self.team?.pitAllImageURLs {
                         for url in urls.values {
                             if self.photos.count < self.team!.pitAllImageURLs!.count {
