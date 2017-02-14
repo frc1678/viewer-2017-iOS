@@ -9,7 +9,7 @@
 import Foundation
 
 
-
+//Rounds a value
 func roundValue(_ value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> String {
     if let val = value as? NSNumber {
         let f = NumberFormatter()
@@ -26,6 +26,7 @@ func roundValue(_ value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> S
     return ""
 }
 
+/** Converts a float value into a percentage. */
 func percentageValueOf(_ number: AnyObject?) -> String {
     if let n = number as? Float {
         return "\(roundValue(NSNumber(value: n * 100), toDecimalPlaces: 1))%"
@@ -34,6 +35,7 @@ func percentageValueOf(_ number: AnyObject?) -> String {
     return ""
 }
 
+//Self explanitory
 func insertCommasAndSpacesBetweenCapitalsInString(_ string: String) -> String {
     var toReturn = ""
     for char in string.characters {
@@ -51,6 +53,7 @@ func insertCommasAndSpacesBetweenCapitalsInString(_ string: String) -> String {
     return toReturn
 }
 
+/** Turns an NSNumArray into an Int Array */
 func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     var values: [Int] = []
     for num in nsNumberArray {
@@ -62,6 +65,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     return values
 }
 
+/** A class filled with undoubtably underwhelmingly useful utilities. */
 @objc class Utils: NSObject {
     static let teamDetailsKeys = TeamDetailsKeys()
     struct TeamDetailsKeys {
@@ -85,17 +89,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         // Add carrying stability into stacking security
         
-        
-        
-        
-        
-        
         /* let superKeys = [
         "calculatedData.avgEvasion",
         "calculatedData.avgDefense"
         ]
         */
         
+        /** Values that should not be graphed */
         let notGraphingValues = [
             "First Pick Ability",
             "Second Pick Ability",
@@ -110,6 +110,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "otherUrls"
         ]
         
+        /** Values to be displayed as percentages. */
         let percentageValues = [
             "calculatedData.disabledPercentage",
             "calculatedData.disfunctionalPercentage",
@@ -143,7 +144,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "Pit Scouting / Robot Design",
             "Additional Info",
         ]
-        
+        // MARK: KeySets, TeamDetails keys.
         func keySetNames(_ minimalist : Bool) -> [String] {
             if minimalist {
                 return  [
@@ -169,6 +170,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             ]
             
         }
+        
+        //Keys for team details
         func keySets(_ minimalist : Bool) -> [[String]] {
             if minimalist {
                 return [
@@ -219,8 +222,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgLowShotsAuto",
             "calculatedData.baselineReachedPercentage",
             "calculatedData.avgHoppersOpenedAuto",
-            "calculatedData.avgGearsPlacedByLiftAuto",
-            "calculatedData.sdGearsPlacedByLiftAuto", 
+            "calculatedData.avgGearsPlacedAuto",
+            "calculatedData.sdGearsPlacedAuto",
             "calculatedData.sdLowShotsAuto",
             "calculatedData.sdHighShotsAuto"
         ]
@@ -240,12 +243,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgLowShotsTele",
             "calculatedData.sdLowShotsTele",
             "calculatedData.avgHoppersOpenedTele",
-            "calculatedData.avgGearGroundIntakesTele",
+            //"calculatedData.avgGearGroundIntakesTele",
             "calculatedData.avgGearsFumbledTele",
             "calculatedData.avgGearsEjectedTele",
-            "calculatedData.avgLoaderIntakesTele",
-            "calculatedData.sdGearsPlacedByLiftTele",
-            "calculatedData.avgGearsPlacedByLiftTele",
+            //"calculatedData.avgLoaderIntakesTele",
+            "calculatedData.sdGearsPlacedTele",
+            "calculatedData.avgGearsPlacedTele",
         ]
         
         let endGame = [
@@ -308,7 +311,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     
     
-    
+    // MARK: TIMD keys
     static let TIMDAutoKeys : [String] = [
         "calculatedData.numLowShotsAuto",
         "numHoppersOpenedAuto",
@@ -413,6 +416,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numHighShotsAuto"
     ]
     
+    /** A dictionary with datapoints as keys and Human Readable Names as indices */
     static let humanReadableNames = [
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.avgEvasion" : "Avg. Evasion",
@@ -534,8 +538,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numHighShotsAuto" : "High Shots Made Auto",
         "calculatedData.numGearsPlacedTele" : "Num Gears Scored Tele",
         "rankGearControl" : "Gear Control Rank",
+        "calculatedData.avgGearsPlacedAuto" : "Avg Gears Placed Auto",
+        "calculatedData.sdGearsPlacedAuto" : "σ Gears Placed Auto",
+        "calculatedData.avgGearsPlacedTele" : "Avg Gears Placed Tele",
+        "calculatedData.sdGearsPlacedTele" : "σ Gears Placed Tele",
     ]
     
+    /** Rounds a given float value to a given number of decimal places. */
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
         let f = NumberFormatter()
@@ -549,6 +558,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return f.string(from: val)!
     }
     
+    /** Rounds a given double value to a given number of decimal places. */
     class func roundDoubleValue(_ value: Double, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
         let f = NumberFormatter()
@@ -562,9 +572,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return f.string(from: val)!
     }
     
+    /** Returns a human readable name for a given key. */
     class func getHumanReadableNameForKey(_ key: String) -> String? {
         return humanReadableNames[key]
     }
+    
     class func findKeyForValue(_ value: String) ->String?
     {
         for (key, stringValue) in humanReadableNames
@@ -578,6 +590,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return nil
     }
     
+    /** Returns a key for a given Human Readable Name. */
     class func getKeyForHumanReadableName(_ name: String) -> String? {
         var computerReadableNames = [String: String]()
         for (key, value) in humanReadableNames {
@@ -585,6 +598,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
         return computerReadableNames[name]
     }
+    
+    /** Detects if a given value is null. */
     class func isNull(_ object: AnyObject?) -> Bool {
         if object_getClass(object) == object_getClass(NSNull()) {
             return true
@@ -592,7 +607,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return false
     }
     
-    /// This is presentable as a string on the screen. It won't have Optional() or anything like that in it.
+    /** Converts a value to one that is presentable as a string on the screen. It won't have Optional() or anything like that in it. */
     class func sp(thing : Any?) -> String {
         if thing != nil {
             if let s = thing as? String {
@@ -610,6 +625,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         }
     }
     
+    /**Conversion of bool value to string "Yes" or "No".*/
     class func boolToString(b: Bool?) -> String? {
         let stringBool : String? = b?.description ?? nil
         let boolToStringValues = [
@@ -623,6 +639,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return(nil)
     }
     
+    /**
+     Unwraps a value.
+    */
     class func unwrap(any:Any) -> Any {
         
         let mi = Mirror(reflecting: any)

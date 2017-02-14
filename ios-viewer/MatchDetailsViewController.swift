@@ -22,7 +22,8 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     let mapping = ["One", "Two", "Three"]
-    let tableKeys = ["actualSeed","predictedSeed","firstPickAbility","overallSecondPickAbility","disfunctionalPercentage","avgGearsPlacedByLiftAuto","avgGearsPlacedByLiftTele","avgHighShotsAuto","avgHighShotsTele","avgLowShotsAuto","avgLowShotsTele","liftoffPercentage","avgDefense"]
+    //keys for the tables
+    let tableKeys = ["actualSeed","predictedSeed","firstPickAbility","overallSecondPickAbility","disfunctionalPercentage","avgGearsPlacedAuto","avgGearsPlacedTele","avgHighShotsAuto","avgHighShotsTele","avgLowShotsAuto","avgLowShotsTele","liftoffPercentage","avgDefense"]
     
     
     
@@ -52,16 +53,22 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var b3TableView: UITableView!
     
     func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        //can't select
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let redTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
         let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
         
+        //get cell
         let cell : TIMDTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableCell", for: indexPath) as! TIMDTableViewCell
+        
+        //set datapointLabel to tableKeys
         if indexPath.row != tableKeys.count {
             cell.datapointLabel.text = Utils.humanReadableNames["calculatedData.\(tableKeys[indexPath.row])"]
         }
+        
+        //setup the label stuff
         cell.datapointLabel.font = cell.datapointLabel.font.withSize(12)
         cell.valueLabel.font = cell.valueLabel.font.withSize(12)
         cell.datapointLabel.lineBreakMode = .byWordWrapping // or NSLineBreakMode.ByWordWrapping
@@ -71,15 +78,15 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         //cell.datapointLabel.preferredMaxLayoutWidth = 50
         //cell.valueLabel.preferredMaxLayoutWidth = 50
         
-        //If after all tablekeys
-        
-        
+        //detect which tableView it is
         switch tableView {
         case r1TableView :
             if indexPath.row == tableKeys.count {
+                //set final row to Future Match Status
                 cell.datapointLabel.text = "Future Match Status"
                 cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[0].number)!).rawValue
             } else {
+                //set valueLabel to the appropriate value
                 cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
             }
         case r2TableView :
@@ -128,6 +135,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         return cell
     }
     
+    //how many rows are there (all the keys and future match status
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableKeys.count + 1
     }
@@ -174,8 +182,10 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             return
         }
         
+        
         if let match = match {
             if match.number != -1 {
+                //setting title
                 title = String(describing: match.number)
             } else {
                 title = "???"
@@ -205,6 +215,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                    
                 }
                 */
+                //setting labels
                 redOfficialScoreLabel.text = "Score: \(getLabelTitle(match.redScore))"
                 redPredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(cd.predictedRedScore))"
                 redErrorPercentageLabel.text = "Win Chance: \(percentageValueOf(cd.redWinChance as AnyObject?))"
@@ -215,6 +226,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 //Index goes from 1 to 3, because thats the way the ui labels are named.
                 for index in 1...(redTeams?.count)! {
                     if index <= 3 {
+                        //setting the titles of the team button numbers
                         (value(forKey: "redTeam\(mapping[index-1])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index-1])", for: UIControlState())
 
                         
@@ -222,6 +234,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
             
+            //setting labels
             blueOfficialScoreLabel.text = "Score: \(getLabelTitle(match.blueScore))"
             bluePredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(match.calculatedData?.predictedBlueScore))"
             blueErrorPercentageLabel.text = "Win Chance: \(percentageValueOf(match.calculatedData?.blueWinChance as AnyObject?))"
@@ -231,6 +244,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 for index in 1...(blueTeams?.count)! {
                     if index <= 3 {
                         //print(blueTeams[index].number)
+                        //setting team button titles
                         (value(forKey: "blueTeam\(mapping[index - 1])Button") as! UIButton).setTitle("\(match.blueAllianceTeamNumbers![index - 1])", for: UIControlState())
                     }
                 }
@@ -245,6 +259,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         case Neither = "Neither"
     }
     
+    //returns whether you are playing against, with, both, or neither a team
     func playWithAgainstOrBothWithTeam(number: Int) -> PlayRelationship {
         var playWith = false
         var playAgainst = false

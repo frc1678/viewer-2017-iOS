@@ -52,11 +52,12 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
     }
     
+    //this is a really big function that just sets selectedImage
     func reloadImage() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             if let team = self.team,
                 let imageView = self.teamSelectedImageView {
-                    if team.pitSelectedImageURL != nil {
+                    if team.pitSelectedImageName != nil {
                         self.firebaseFetcher?.getImageForTeam((self.team?.number)!, fetchedCallback: { (image) -> () in
                             DispatchQueue.main.async(execute: { () -> Void in
                                 imageView.image = image
@@ -64,7 +65,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             }, couldNotFetch: {
                                 DispatchQueue.main.async(execute: { () -> Void in
                                     if team.pitAllImageURLs != nil {
-                                    imageView.hnk_setImageFromURL(URL(string: Array(team.pitAllImageURLs!.values).filter { $0.contains(team.pitSelectedImageURL!) }[0])!)
+                                        if team.pitSelectedImageName != nil && team.pitSelectedImageName != "" {
+                                            imageView.hnk_setImageFromURL(URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!)
+                                        }
                                     }
                                 })
                         })
@@ -80,7 +83,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             }
                         }
                     }
-                    if self.teamSelectedImageView.image == noRobotPhoto && self.photos.count > 0 {
+                if self.team?.pitSelectedImageName != nil {
+                    if self.teamSelectedImageView.image != MWPhoto(url: URL(string: (self.team?.pitSelectedImageName)!)) && self.photos.count > 0 {
                         if self.photos.count > 0 && self.photos[0].underlyingImage != noRobotPhoto && (self.photos[0].underlyingImage ?? UIImage()).size.height > 0 {
                             DispatchQueue.main.async(execute: { () -> Void in
                                 
@@ -88,6 +92,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             })
                         }
                     }
+                }
             }
         }
     }
@@ -96,12 +101,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         super.viewDidLoad()
         self.reload()
         NotificationCenter.default.addObserver(self, selector: #selector(TeamDetailsTableViewController.reloadTableView(_:)), name:NSNotification.Name(rawValue: "updateLeftTable"), object:nil)
-       
+        
+       //set up the tableView
         tableView.register(UINib(nibName: "MultiCellTableViewCell", bundle: nil), forCellReuseIdentifier: "MultiCellTableViewCell")
         tableView.delegate = self
+        
         self.navigationController?.delegate = self
         self.photoBrowser.delegate = self
+        
+        //array of all photos
         photos = []
+        
+        //longpress recognizer
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.rankingDetailsSegue(_:)))
         self.view.addGestureRecognizer(longPress)
         //let longPressForMoreDetail = UILongPressGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didLongPressForMoreDetail(_:)))
@@ -115,7 +126,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     
-    
+    //Not used in 2017
     func didLongPressForMoreDetail(_ recognizer: UIGestureRecognizer) {
         if recognizer.state == UIGestureRecognizerState.recognized {
             self.showMinimalistTeamDetails = !self.showMinimalistTeamDetails
@@ -126,8 +137,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } 
     }
     
+    //Image is tapped
     func didTapImage(_ recognizer: UITapGestureRecognizer) {
         if recognizer.state == UIGestureRecognizerState.recognized {
+            //navigate to image browser
             let nav = UINavigationController(rootViewController: self.photoBrowser)
             nav.delegate = self
             self.present(nav, animated: true, completion: nil)
@@ -165,7 +178,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             return 44
         }
         
+        //get key
         let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
+        
+        //no longTextCells
         if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
             let dataPoint: AnyObject = team!.value(forKeyPath: dataKey) as AnyObject? ?? "" as AnyObject
             
@@ -195,6 +211,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         var cell = UITableViewCell()
         if team != nil {
             if team!.number == -1 {
+                //no team number
                 cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath)
                 cell.textLabel?.text = "No team yet..."
                 cell.accessoryType = UITableViewCellAccessoryType.none
@@ -208,19 +225,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
 
                 if dataKey.contains("calculatedData") {
-                    dataPoint =  team!.value(forKeyPath: dataKey) as AnyObject?? ?? "" as AnyObject?
+                    dataPoint = team!.value(forKeyPath: dataKey) as AnyObject?? ?? "" as AnyObject?
                 } else {
                     dataPoint = (team!.dictionaryRepresentation() as NSDictionary).object(forKey: dataKey) as AnyObject?? ?? "" as AnyObject?
                 }
-                /*do {
-                } catch {*/
-                //}
-                
                 
                 if secondDataPoint as? String == "" {
                     secondDataPoint = nil
                 }
                 
+                //no longTextCells
                 if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     
@@ -236,14 +250,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") {
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UnrankedCell", for: indexPath) as! UnrankedTableViewCell
                     
+                    //titleLabel is the humanReadable version of dataKey
                     unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
                     
                     if "\(dataPoint)".isEmpty || (dataPoint as? Float != nil && dataPoint as! Float == 0.0) {
                         unrankedCell.detailLabel.text = ""
                     } else if dataKey == "pitOrganization" { //In the pit scout, the selector is indexed 0 to 4, this translates it back in to what those numbers mean.
-                        unrankedCell.detailLabel!.text! = pitOrgForNumberString(unrankedCell.detailLabel!.text!)
+                        unrankedCell.detailLabel!.text! = (team?.pitOrganization) ?? ""
                     } else if dataKey == "pitProgrammingLanguage" {
-                        unrankedCell.detailLabel!.text! = pitProgrammingLanguageForNumberString(unrankedCell.detailLabel!.text!)
+                        unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
@@ -255,24 +270,28 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     unrankedCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = unrankedCell
                 } else {
+                    //get cell
                     let multiCell: MultiCellTableViewCell = tableView.dequeueReusableCell(withIdentifier: "MultiCellTableViewCell", for: indexPath) as! MultiCellTableViewCell
                     
+                    //label is humanReadable version of dataKey
                     multiCell.teamLabel!.text = Utils.humanReadableNames[dataKey]
                     
-                    if secondDataPoint != nil { //This means that it is a defense crossing
+                    if secondDataPoint != nil { //This means that it is a defense crossing (Deprecated)
                         if secondDataPoint as? String != "" && dataPoint as? String != "" {
                             if let ff = dataPoint as? Float {
                                 dataPoint = roundValue(ff as AnyObject?, toDecimalPlaces: 1) as AnyObject?? ?? "" as AnyObject?
                             }
                             multiCell.scoreLabel?.text = "A: \(dataPoint!) T: \(secondDataPoint!)"
                         }
-                    } else { //Its not a defense crossing
+                    } else {
                         
                         if Utils.teamDetailsKeys.percentageValues.contains(dataKey) {
+                            //value needs to be displayed as a percentage
                             multiCell.scoreLabel!.text = "\(percentageValueOf(dataPoint!))"
                         } else {
                             if dataPoint as? String != "" {
                                  if Utils.teamDetailsKeys.yesNoKeys.contains(dataKey) {
+                                    //value needs to be displayed as Yes or No
                                     if dataPoint! as! Bool == true {
                                         multiCell.scoreLabel?.text = "Yes"
                                     } else {
@@ -321,15 +340,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     cell = multiCell
                     multiCell.rankLabel!.text = "\((firebaseFetcher?.rankOfTeam(team!, withCharacteristic: dataKey))! as Int)"
                 }
-            } else {
+            } else { //is a defaultKey
                 let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UnrankedCell", for: indexPath) as! UnrankedTableViewCell
                 
+                //title is humanReadable dataKey
                 unrankedCell.titleLabel.text = Utils.humanReadableNames[dataKey]
+                
                 unrankedCell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 
                 if dataKey == "matchDatas" {
                     let matchesUntilNextMatch : String = firebaseFetcher?.matchesUntilTeamNextMatch((team?.number)!) ?? "NA"
                     
+                    //label: "Matches - #  Remaining
                     unrankedCell.titleLabel.text = (unrankedCell.titleLabel.text)! + " - (\(matchesUntilNextMatch))  Remaining: \(Utils.sp(thing: firebaseFetcher?.remainingMatchesForTeam((team?.number)!)))"
                 }
                 cell = unrankedCell
@@ -337,6 +359,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             
         } else {
+            //get empty cell
             cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath)
             cell.textLabel?.text = "No team yet..."
             cell.accessoryType = UITableViewCellAccessoryType.none

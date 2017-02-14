@@ -310,7 +310,7 @@
         <scene sceneID="BlG-2Q-zGr">
             <objects>
                 <tableViewController id="ojt-9Z-11a" customClass="SortedRankTableViewController" customModule="ios_viewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="V7L-j9-OOK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="V7L-j9-OOK">
                         <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -769,9 +769,9 @@
         <image name="secondPick" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AMp-59-SZN"/>
-        <segue reference="e57-hB-uH0"/>
+        <segue reference="wMy-oa-Yu3"/>
         <segue reference="hw9-do-Pyv"/>
+        <segue reference="e57-hB-uH0"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.28627450980000002" green="0.81176470590000005" blue="0.25098039220000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

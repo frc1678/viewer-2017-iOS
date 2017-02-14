@@ -16,19 +16,24 @@ class TIMDScheduleViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //setting title
         self.title = "\(self.teamNumber)'s TIMDs"
         matches = self.firebaseFetcher!.getMatchesForTeamWithNumber(self.teamNumber)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //go to specific TIMD
         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "TIMDDetails", sender: tableView.cellForRow(at: indexPath))
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //gets cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        //gets match
         let match = matches[indexPath.row]
         if match.number != -1 {
+            //Cell label: "Q#"
             cell.textLabel?.text = "Q\(String(describing: match.number))"
         }
         return cell
@@ -44,6 +49,7 @@ class TIMDScheduleViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let dest = segue.destination as? TIMDDetailsViewController {
             let selectedCell = sender as? UITableViewCell
+            //Go to specific match, get rid of Qs
             dest.TIMD = firebaseFetcher?.getTimDataForTeamInMatch((firebaseFetcher?.getTeam(self.teamNumber))!, inMatch: (firebaseFetcher?.getMatch(Int((selectedCell?.textLabel?.text?.replacingOccurrences(of: "Q", with: ""))!)!))!)
         }
     }

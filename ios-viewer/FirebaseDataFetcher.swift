@@ -1,4 +1,4 @@
-//
+ //
 //  FirebaseDataFetcher.swift
 //  scout-viewer-2016-iOS
 //
@@ -82,6 +82,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return Match(json: JSON(snapshot.value!))
     }
     
+    /**
+     dfsdfsds
+    */
     func makeTeamFromSnapshot(_ snapshot: FIRDataSnapshot) -> Team {
         return Team(json: JSON(snapshot.value!))
     }
@@ -118,7 +121,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         let shouldAggressivelyDownload = defaults.bool(forKey: "predownloadPreference")
         if shouldAggressivelyDownload {
             if let newURL = snap.childSnapshot(forPath: "selectedImageURL").value {
-                if team.pitSelectedImageURL != newURL as? String {
+                if team.pitSelectedImageName != newURL as? String {
                     cacheImage(snap.childSnapshot(forPath: "number").value as! Int, url: newURL as? String)
                 }
             }

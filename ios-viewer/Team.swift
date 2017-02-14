@@ -18,7 +18,7 @@ public final class Team: NSObject {
     static let number = "number"
     static let pitAvailableWeight = "pitAvailableWeight"
     static let calculatedData = "calculatedData"
-    static let pitSelectedImageURL = "pitSelectedImageURL"
+    static let pitSelectedImageName = "pitSelectedImageName"
     static let pitAllImageURLs = "pitAllImageURLs"
     static let pitDidUseStandardTankDrive = "pitDidUseStandardTankDrive"
     static let pitDidDemonstrateCheesecakePotential = "pitDidDemonstrateCheesecakePotential"
@@ -31,7 +31,7 @@ public final class Team: NSObject {
   public var number: Int = -1
   public var pitAvailableWeight: Int = -1
   public var calculatedData: CalculatedTeamData?
-  public var pitSelectedImageURL: String?
+  public var pitSelectedImageName: String?
     public var pitAllImageURLs: [String: String]?
   public var pitDidUseStandardTankDrive: Bool? = false
   public var pitDidDemonstrateCheesecakePotential: Bool? = false
@@ -55,7 +55,7 @@ public final class Team: NSObject {
     number = json[SerializationKeys.number].intValue
     pitAvailableWeight = json[SerializationKeys.pitAvailableWeight].intValue
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
-    pitSelectedImageURL = json[SerializationKeys.pitSelectedImageURL].string
+    pitSelectedImageName = json[SerializationKeys.pitSelectedImageName].string
     pitAllImageURLs = json[SerializationKeys.pitAllImageURLs].dictionaryObject as! [String: String]?
     pitDidUseStandardTankDrive = json[SerializationKeys.pitDidUseStandardTankDrive].boolValue
     pitDidDemonstrateCheesecakePotential = json[SerializationKeys.pitDidDemonstrateCheesecakePotential].boolValue
@@ -72,7 +72,7 @@ public final class Team: NSObject {
     dictionary[SerializationKeys.number] = number
     dictionary[SerializationKeys.pitAvailableWeight] = pitAvailableWeight
     if let value = calculatedData { dictionary[SerializationKeys.calculatedData] = value.dictionaryRepresentation() }
-    if let value = pitSelectedImageURL { dictionary[SerializationKeys.pitSelectedImageURL] = value }
+    if let value = pitSelectedImageName { dictionary[SerializationKeys.pitSelectedImageName] = value }
     if let value = pitAllImageURLs { dictionary[SerializationKeys.pitAllImageURLs] = value }
 
     dictionary[SerializationKeys.pitDidUseStandardTankDrive] = pitDidUseStandardTankDrive

@@ -51,6 +51,11 @@ public final class CalculatedTeamData: NSObject {
     static let avgHoppersOpenedTele = "avgHoppersOpenedTele"
     static let avgHoppersOpenedAuto = "avgHoppersOpenedAuto"
     static let firstPickAllRotorsTurningChance = "firstPickAllRotorsTurningChance"
+    static let avgGearsPlacedAuto = "avgGearsPlacedAuto"
+    static let sdGearsPlacedAuto = "sdGearsPlacedAuto"
+    static let avgGearsPlacedTele = "avgGearsPlacedTele"
+    static let sdGearsPlacedTele = "sdGearsPlacedTele"
+
   }
 
   // MARK: Properties
@@ -93,6 +98,13 @@ public final class CalculatedTeamData: NSObject {
     public var avgHoppersOpenedTele: Float = -1.0
     public var avgHoppersOpenedAuto: Float = -1.0
     public var firstPickAllRotorsTurningChance: Float = -1.0
+    public var avgGearsPlacedAuto: Float = -1.0
+    public var sdGearsPlacedAuto: Float = -1.0
+    public var avgGearsPlacedTele: Float = -1.0
+    public var sdGearsPlacedTele: Float = -1.0
+
+    
+
 
 
 
@@ -148,6 +160,10 @@ public final class CalculatedTeamData: NSObject {
     avgHoppersOpenedTele = json[SerializationKeys.avgHoppersOpenedTele].floatValue
     avgHoppersOpenedAuto = json[SerializationKeys.avgHoppersOpenedAuto].floatValue
     firstPickAllRotorsTurningChance = json[SerializationKeys.firstPickAllRotorsTurningChance].floatValue
+    avgGearsPlacedAuto = json[SerializationKeys.avgGearsPlacedAuto].floatValue
+    sdGearsPlacedAuto = json[SerializationKeys.sdGearsPlacedAuto].floatValue
+    avgGearsPlacedTele = json[SerializationKeys.avgGearsPlacedTele].floatValue
+    sdGearsPlacedTele = json[SerializationKeys.sdGearsPlacedTele].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -195,6 +211,11 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.avgHoppersOpenedTele] = avgHoppersOpenedTele
     dictionary[SerializationKeys.avgHoppersOpenedAuto] = avgHoppersOpenedAuto
     dictionary[SerializationKeys.firstPickAllRotorsTurningChance] = firstPickAllRotorsTurningChance
+    dictionary[SerializationKeys.avgGearsPlacedAuto] = avgGearsPlacedAuto
+    dictionary[SerializationKeys.sdGearsPlacedAuto] = sdGearsPlacedAuto
+    dictionary[SerializationKeys.avgGearsPlacedTele] = avgGearsPlacedTele
+    dictionary[SerializationKeys.sdGearsPlacedTele] = sdGearsPlacedTele
+
 
     return dictionary
   }
