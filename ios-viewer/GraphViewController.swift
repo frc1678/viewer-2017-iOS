@@ -28,6 +28,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     /// Normal color of the bars
     var color = UIColor.green
     
+    /// Color of negative values, changable via slider at bottom of vc
     var negativeColor = UIColor.red
     /// Color when you press and hold a bar
     var highlightColor = UIColor.gray
@@ -53,7 +54,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         super.viewDidLoad()
         
         title = graphTitle
-        // In case we want to have 0 be "No" and 1 by "Yes" or something like that.
+        // In case we want to have 0 be "No" and 1 be "Yes" or something like that.
         if zeroAndOneReplacementValues.count > 0 {
             newValuesArray = [String]()
             for i in values.indices {

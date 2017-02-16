@@ -9,7 +9,7 @@
 import Foundation
 
 
-//Rounds a value
+/** Rounds a value. */
 func roundValue(_ value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> String {
     if let val = value as? NSNumber {
         let f = NumberFormatter()

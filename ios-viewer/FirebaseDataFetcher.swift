@@ -82,9 +82,6 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return Match(json: JSON(snapshot.value!))
     }
     
-    /**
-     dfsdfsds
-    */
     func makeTeamFromSnapshot(_ snapshot: FIRDataSnapshot) -> Team {
         return Team(json: JSON(snapshot.value!))
     }

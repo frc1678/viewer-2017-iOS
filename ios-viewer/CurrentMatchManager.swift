@@ -6,6 +6,8 @@
 //
 //
 
+//NOTE: Is not currently being used as of 2017.
+
 import UIKit
 import Haneke
 import UserNotifications

@@ -358,6 +358,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    //prepare to segue to appropriate vc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let button = sender as? UIButton,
             let teamNumTapped = Int((button.titleLabel?.text)!) {

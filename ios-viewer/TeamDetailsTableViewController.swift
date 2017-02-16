@@ -451,10 +451,24 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
+    /**
+     Returns the number of photos in a PhotoBrowser.
+     
+    - parameter photoBrowser: PhotoBrowser you want the function to count.
+    */
     func numberOfPhotos(in photoBrowser: MWPhotoBrowser!) -> UInt {
         return UInt(photos.count)
     }
     
+    /**
+    Initializes the photoBrowser.
+     
+    - parameter photoBrowser: The photoBrowser you want to initialize.
+     
+    - parameter photoAt: The index at which the photo you're initializing is located.
+     
+    - returns: The photo at the index you requested.
+    */
     func photoBrowser(_ photoBrowser: MWPhotoBrowser!, photoAt index: UInt) -> MWPhotoProtocol! {
         if index < UInt(photos.count) {
             return photos[Int(index)]
@@ -462,6 +476,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         return nil;
     }
     
+    //preparing to change viewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         self.teamSelectedImageView.isUserInteractionEnabled = true;
         //        self.n
@@ -651,6 +666,13 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }*/
     }
     
+    /** 
+    Converts a boolean value to a string value.
+     
+    - parameter b: Bool to be converted.
+     
+    - returns: Yes or No for inputted true or false respectively.
+     */
     func boolToBoolString(_ b: Bool) -> String {
         let strings = [false : "No", true : "Yes"]
         return strings[b]!
@@ -671,6 +693,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     //    return interactionController;
     //    }
     
+    //Row has been selected, perform segue to appropriate vc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? UnrankedTableViewCell {
             if cell.titleLabel.text?.range(of: "Matches") != nil {
@@ -710,6 +733,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
     }
     
+    //Rankable row has been long-pressed, perform segue
     func rankingDetailsSegue(_ gesture: UIGestureRecognizer) {
         
         if(gesture.state == UIGestureRecognizerState.began) {
