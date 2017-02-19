@@ -11,16 +11,25 @@
 import UIKit
 import Haneke
 import UserNotifications
+import Firebase
 
 class CurrentMatchManager: NSObject {
     
     let notificationManager : NotificationManager
     let cache = Shared.dataCache
+    let firebase: FIRDatabaseReference
     
     override init() {
+        firebase = FIRDatabase.database().reference()
+        
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         super.init()
         self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated", selector: "notificationTriggeredCheckForNotification:", object: nil))
+        
+        firebase.child("currentMatchNum").observeSingleEvent(of: .value, with: { (snap) -> Void in
+            self.currentMatch = snap.value as! Int
+        })
+
         self.setUp()
     }
     
@@ -36,9 +45,9 @@ class CurrentMatchManager: NSObject {
         }
     }
     
-    var currentMatch = 0 {
+    var currentMatch = -1 {
         didSet {
-            if currentMatch != oldValue {
+            if currentMatch != oldValue && currentMatch != -1 {
                 let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.getMatch(currentMatch)
                 let m : [String: AnyObject] = ["num":currentMatch as AnyObject, "redTeams": currentMatchFetch!.redAllianceTeamNumbers! as AnyObject, "blueTeams": currentMatchFetch!.blueAllianceTeamNumbers! as AnyObject]
                 UserDefaults.standard.set(m, forKey: "match")

@@ -1,4 +1,4 @@
- //
+//
 //  FirebaseDataFetcher.swift
 //  scout-viewer-2016-iOS
 //
@@ -124,6 +124,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }
         }
     }
+    
     // MARK: Data Fetching
     func getAllTheData() {
         self.firebase.observeSingleEvent(of: .value, with: { [unowned self] (snap) -> Void in
@@ -131,7 +132,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             
             matchReference.observe(.childAdded, with: { [unowned self] snapshot in
                 self.matches.append(self.makeMatchFromSnapshot(snapshot))
-                self.currentMatchManager.currentMatch = self.getCurrentMatch()
+                self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 if self.hasUpdatedMatchOnSetup == false {
                     self.hasUpdatedMatchOnSetup = true
                     self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
@@ -140,8 +141,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             
             matchReference.observe(.childChanged, with: { [unowned self] snapshot in
                 self.matchCounter += 1
-                print(self.getCurrentMatch())
-                self.currentMatchManager.currentMatch = self.getCurrentMatch()
+                print(self.currentMatchManager.currentMatch)
+                self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 let number = (snapshot.childSnapshot(forPath: "number").value as? Int)!
                 for matchIndex in 0..<self.matches.count {
                     let match = self.matches[matchIndex]
@@ -617,22 +618,14 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         UNUserNotificationCenter.current().add(localNotification, withCompletionHandler: nil)
     }
     
-    func getCurrentMatch() -> Int {
-        let sortedMatches = self.matches.sorted { $0.number > $1.number}
-        var counter = self.matches.count + 1
-        for match in sortedMatches {
-            counter -= 1
-            if match.redScore != -1 || match.redScore != -1 {
-                return counter
-            }
-        }
-        return 0
+    func didReceiveCurrentMatchNum (notificationObject : Notification) {
+        
     }
     
     func matchesUntilTeamNextMatch(_ teamNumber : Int) -> String? {
         let sortedMatches = self.matches.sorted { Int($0.number) < Int($1.number) }
-        if getCurrentMatch() < sortedMatches.count {
-            if let indexOfCurrentMatch = sortedMatches.index(of: self.getMatch(self.getCurrentMatch() + 1)!) {
+        if self.currentMatchManager.currentMatch < sortedMatches.count {
+            if let indexOfCurrentMatch = sortedMatches.index(of: self.getMatch(.self.currentMatchManager.currentMatch + 1)!) {
                 var counter = 0
                 for i in indexOfCurrentMatch + 1..<self.matches.count {
                     let match = sortedMatches[i]

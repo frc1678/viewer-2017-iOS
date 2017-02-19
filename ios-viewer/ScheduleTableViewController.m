@@ -37,7 +37,7 @@
 
 - (void)scrollToCurrentMatch:(NSNotification*)note {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"currentMatchUpdated" object:nil];
-    self.currentMatch = (NSInteger)[self.firebaseFetcher getCurrentMatch];
+    self.currentMatch = (NSInteger)self.firebaseFetcher.currentMatchManager.currentMatch;
     
     [NSTimer scheduledTimerWithTimeInterval:3 target: self selector:@selector(scroll:) userInfo:nil repeats:NO];
     
