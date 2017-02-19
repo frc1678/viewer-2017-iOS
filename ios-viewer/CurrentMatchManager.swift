@@ -45,13 +45,14 @@ class CurrentMatchManager: NSObject {
         }
     }
     
-    var currentMatch = -1 {
+    var currentMatch = 0 {
         didSet {
             if currentMatch != oldValue && currentMatch != -1 {
-                let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.getMatch(currentMatch)
-                let m : [String: AnyObject] = ["num":currentMatch as AnyObject, "redTeams": currentMatchFetch!.redAllianceTeamNumbers! as AnyObject, "blueTeams": currentMatchFetch!.blueAllianceTeamNumbers! as AnyObject]
-                UserDefaults.standard.set(m, forKey: "match")
-                notifyIfNeeded()
+                if let currentMatchFetch = AppDelegate.getAppDelegate().firebaseFetcher.getMatch(currentMatch) {
+                    let m : [String: AnyObject] = ["num":currentMatch as AnyObject, "redTeams": currentMatchFetch.redAllianceTeamNumbers! as AnyObject, "blueTeams": currentMatchFetch.blueAllianceTeamNumbers! as AnyObject]
+                    UserDefaults.standard.set(m, forKey: "match")
+                    notifyIfNeeded()
+                }
             }
         }
     }
