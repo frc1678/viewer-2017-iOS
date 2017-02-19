@@ -87,7 +87,12 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[0].number)!).rawValue
             } else {
                 //set valueLabel to the appropriate value
-                cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
+                    //If the value is a percentage, multiply float by 100 and add %
+                    cell.valueLabel.text = "\(String(describing: Utils.roundValue(((Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]) as! Float) * 100), toDecimalPlaces: 2)))%"
+                } else {
+                    cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                }
             }
         case r2TableView :
             if indexPath.row == tableKeys.count {
