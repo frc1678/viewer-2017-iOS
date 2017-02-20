@@ -12,6 +12,7 @@
 #import <Instabug/Instabug.h>
 #import <UserNotifications/UserNotifications.h>
 @import HockeySDK;
+#import "NSData+NSData_HexString.h"
 
 @interface AppDelegate ()
 
@@ -40,6 +41,8 @@
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"89774ebc4b4d4c95a24d92da8003f355"]; // Do some additional configuration if needed here
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation]; // This line is obsolete in the crash only builds
+    [application registerForRemoteNotifications];
+
     
     return YES;
 }
@@ -49,6 +52,24 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+}
+
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    NSLog(@"Did Register with id of");
+    //NSString *deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+    NSString *deviceTokenString = [deviceToken hexString];
+    NSLog(@"%@", deviceTokenString);
+    [[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:deviceTokenString] child:@"Token"] setValue: deviceTokenString];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setValue:deviceTokenString forKey:@"NotificationToken"];
+    [defaults synchronize];
+}
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    NSLog(@"Did Fail to Register");
+}
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    NSLog(@"Did recieve notification %@",userInfo[@"aps"]);
 }
 
 

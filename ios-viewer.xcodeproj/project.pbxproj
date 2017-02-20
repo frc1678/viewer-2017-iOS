@@ -65,6 +65,7 @@
 		8CBD713E1E355876009C0206 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD713D1E355876009C0206 /* GoogleService-Info.plist */; };
 		8CBD71401E356CD1009C0206 /* CC 2017 Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD713F1E356CD1009C0206 /* CC 2017 Logo.png */; };
 		8CBD71421E4695BE009C0206 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD71411E4695BE009C0206 /* Settings.bundle */; };
+		8CD8FA6C1E5A4474004C2825 /* NSData+NSData_HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8FA6B1E5A4474004C2825 /* NSData+NSData_HexString.m */; };
 		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -173,6 +174,9 @@
 		8CBD713F1E356CD1009C0206 /* CC 2017 Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CC 2017 Logo.png"; sourceTree = "<group>"; };
 		8CBD71411E4695BE009C0206 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		8CD3CEA81E34074000B328A1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		8CD8FA691E5A2950004C2825 /* ios-viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-viewer.entitlements"; sourceTree = "<group>"; };
+		8CD8FA6A1E5A4474004C2825 /* NSData+NSData_HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+NSData_HexString.h"; path = "../NSData+NSData_HexString.h"; sourceTree = "<group>"; };
+		8CD8FA6B1E5A4474004C2825 /* NSData+NSData_HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+NSData_HexString.m"; path = "../NSData+NSData_HexString.m"; sourceTree = "<group>"; };
 		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
 		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0394ACA1B0BF4AF13EA11B /* Pods_Current_Match.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Current_Match.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -226,6 +230,7 @@
 		19B037B71E2C5739006E25A2 /* ios-viewer */ = {
 			isa = PBXGroup;
 			children = (
+				8CD8FA691E5A2950004C2825 /* ios-viewer.entitlements */,
 				19B038361E2DD6EA006E25A2 /* Storyboards */,
 				19B038381E2DD74C006E25A2 /* Schedule */,
 				19B038391E2DD75B006E25A2 /* Seed */,
@@ -326,6 +331,8 @@
 		19B0383C1E2DD801006E25A2 /* Obj-C Boilerplate */ = {
 			isa = PBXGroup;
 			children = (
+				8CD8FA6A1E5A4474004C2825 /* NSData+NSData_HexString.h */,
+				8CD8FA6B1E5A4474004C2825 /* NSData+NSData_HexString.m */,
 				19B0382F1E2C5919006E25A2 /* AppDelegate.h */,
 				19B038301E2C5919006E25A2 /* AppDelegate.m */,
 				19B038311E2C5919006E25A2 /* main.m */,
@@ -463,6 +470,14 @@
 						DevelopmentTeam = S2C8988WQX;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					8CBD712B1E354696009C0206 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -629,6 +644,7 @@
 				19B0382E1E2C58D3006E25A2 /* UIColor+HexString.m in Sources */,
 				19B038111E2C5891006E25A2 /* Reflectable.swift in Sources */,
 				19B0382C1E2C58D3006E25A2 /* NSAttributedString+OrdinalFormat.m in Sources */,
+				8CD8FA6C1E5A4474004C2825 /* NSData+NSData_HexString.m in Sources */,
 				19B037EB1E2C586C006E25A2 /* SeedTableViewController.m in Sources */,
 				190DFE4C1E308BBD00477B6D /* TIMDDetailsViewController.swift in Sources */,
 				19B038261E2C58D3006E25A2 /* ResizableNotesTableViewCell.swift in Sources */,
@@ -785,6 +801,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ios-viewer/ios-viewer.entitlements";
 				DEVELOPMENT_TEAM = S2C8988WQX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -807,6 +824,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "ios-viewer/ios-viewer.entitlements";
 				DEVELOPMENT_TEAM = S2C8988WQX;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
