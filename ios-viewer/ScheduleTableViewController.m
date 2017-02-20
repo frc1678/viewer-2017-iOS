@@ -223,22 +223,27 @@
             cell.backgroundColor = [UIColor whiteColor];
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSString *token = [defaults valueForKey:@"NotificationToken"];
-            NSPredicate *isStarred = [NSPredicate predicateWithFormat:@"self.firebaseFetcher.currentMatchManager.starredMatchesArray contains[c] 'SELF'"];
-            NSDictionary *oldStarredMatches = [[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"];
-            NSMutableArray *starredMatches;
-            for (id item in [[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"]) {
-                if ([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject: [oldStarredMatches objectForKey:item]]) {
-                    [starredMatches addObject:[oldStarredMatches objectForKey:item]];
+            //NSPredicate *isStarred = [NSPredicate predicateWithFormat:@"self.firebaseFetcher.currentMatchManager.starredMatchesArray contains[c] 'SELF'"];
+            NSMutableArray *starredMatches = [[NSMutableArray alloc] init];
+            [[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] observeSingleEventOfType:FIRDataEventTypeValue withBlock:^(FIRDataSnapshot * _Nonnull snapshot) {
+                for (FIRDataSnapshot *item in [snapshot children]) {
+                    if ([self.firebaseFetcher.currentMatchManager.starredMatchesArray containsObject: [NSString stringWithFormat: @"%@",item.value]]) {
+                        [starredMatches addObject: [NSNumber numberWithInt:[(NSString *)item.value integerValue]]];
+                    }
                 }
-            }
+                [[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] setValue:nil];
+                for (NSNumber *item in starredMatches) {
+                    [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] childByAutoId] setValue:item];
+                }
+            }];
             
-            //[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"]
+            
         } else {
             cell.backgroundColor = [UIColor colorWithRed:1.0 green:0.64 blue:1.0 alpha:0.6];
             self.firebaseFetcher.currentMatchManager.starredMatchesArray = [self.firebaseFetcher.currentMatchManager.starredMatchesArray arrayByAddingObjectsFromArray:@[cell.matchLabel.text]];
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSString *token = [defaults valueForKey:@"NotificationToken"];
-            [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] childByAutoId] setValue: cell.matchLabel.text];
+            [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] childByAutoId] setValue: [NSNumber numberWithInt:[cell.matchLabel.text integerValue]]];
         }
         //use filter when unstarring match
         //ASDF
