@@ -99,35 +99,60 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 cell.datapointLabel.text = "Future Match Status"
                 cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[1].number)!).rawValue
             } else {
-                cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
+                    //If the value is a percentage, multiply float by 100 and add %
+                    cell.valueLabel.text = "\(String(describing: Utils.roundValue(((Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]) as! Float) * 100), toDecimalPlaces: 2)))%"
+                } else {
+                    cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                }
             }
         case r3TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
                 cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[2].number)!).rawValue
             } else {
-            cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
+                    //If the value is a percentage, multiply float by 100 and add %
+                    cell.valueLabel.text = "\(String(describing: Utils.roundValue(((Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]) as! Float) * 100), toDecimalPlaces: 2)))%"
+                } else {
+                    cell.valueLabel.text = String(describing: Utils.unwrap(any: redTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                }
             }
         case b1TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
                 cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[0].number)!).rawValue
             } else {
-                cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
+                    //If the value is a percentage, multiply float by 100 and add %
+                    cell.valueLabel.text = "\(String(describing: Utils.roundValue(((Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]) as! Float) * 100), toDecimalPlaces: 2)))%"
+                } else {
+                    cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                }
             }
         case b2TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
                 cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[1].number)!).rawValue
             } else {
-                cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
+                    //If the value is a percentage, multiply float by 100 and add %
+                    cell.valueLabel.text = "\(String(describing: Utils.roundValue(((Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]) as! Float) * 100), toDecimalPlaces: 2)))%"
+                } else {
+                    cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[1].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                }
             }
         case b3TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
                 cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[2].number)!).rawValue
             } else {
-            cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
+                    //If the value is a percentage, multiply float by 100 and add %
+                    cell.valueLabel.text = "\(String(describing: Utils.roundValue(((Utils.unwrap(any: redTeams?[0].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]) as! Float) * 100), toDecimalPlaces: 2)))%"
+                } else {
+                    cell.valueLabel.text = String(describing: Utils.unwrap(any: blueTeams?[2].calculatedData?.dictionaryRepresentation()[tableKeys[indexPath.row]]))
+                }
             }
         default :
             break

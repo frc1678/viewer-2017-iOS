@@ -36,7 +36,7 @@
     [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:(UNAuthorizationOptionBadge + UNAuthorizationOptionAlert + UNAuthorizationOptionSound) completionHandler:^(BOOL granted, NSError * _Nullable error) {
         //
     }];
-    [Instabug startWithToken: @"c82bc184e97be08093c702a3a1ccf80e" invocationEvent: IBGInvocationEventShake];
+    [Instabug startWithToken: @"98616ae556601b6b72101615cd3f7f9a" invocationEvent: IBGInvocationEventShake];
     [application setApplicationIconBadgeNumber:0];
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:@"89774ebc4b4d4c95a24d92da8003f355"]; // Do some additional configuration if needed here
     [[BITHockeyManager sharedHockeyManager] startManager];

@@ -39,11 +39,21 @@ class SortedRankTableViewController: ArrayTableViewController {
         multiCell.teamLabel!.text = String(describing: team.number)
         if translatedKeyPath.range(of: "calculatedData") != nil {
             let propPath = translatedKeyPath.replacingOccurrences(of: "calculatedData.", with: "")
-            if let value = team.calculatedData!.value(forKeyPath: propPath) {
-                multiCell.scoreLabel!.text = roundValue(value as AnyObject?, toDecimalPlaces: 2)
+            if Utils.teamDetailsKeys.percentageValues.contains(translatedKeyPath) {
+                if let value = team.calculatedData!.value(forKeyPath: propPath) {
+                    multiCell.scoreLabel!.text = "\(Float(roundValue(value as AnyObject?, toDecimalPlaces: 2))! * 100)%"
+                }
+            } else {
+                if let value = team.calculatedData!.value(forKeyPath: propPath) {
+                    multiCell.scoreLabel!.text = roundValue(value as AnyObject?, toDecimalPlaces: 2)
+                }
             }
         } else {
-            multiCell.scoreLabel!.text = roundValue(team.value(forKeyPath: translatedKeyPath) as AnyObject?, toDecimalPlaces: 2)
+            if Utils.teamDetailsKeys.percentageValues.contains(translatedKeyPath) {
+            multiCell.scoreLabel!.text = "\(Float(roundValue(team.value(forKeyPath: translatedKeyPath) as AnyObject?, toDecimalPlaces: 2))! * 100)%"
+            } else {
+                multiCell.scoreLabel!.text = roundValue(team.value(forKeyPath: translatedKeyPath) as AnyObject?, toDecimalPlaces: 2)
+            }
         }
     }
     

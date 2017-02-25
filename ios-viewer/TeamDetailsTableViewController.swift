@@ -524,47 +524,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     
                     key = key?.replacingOccurrences(of: "calculatedData.", with: "")
-                    switch key! { // Should really just be a dictionary
-                    case "reachPercentage": key = "didReachAuto"
-                    case "scalePercentage": key = "didScaleTele"
-                    case "incapacitatedPercentage": key = "didBecomeIncapacitated"
-                    case "disabledPercentage": key = "didStartDisabled"
-                    case "challengePercentage": key = "didChallengeTele"
-                    case "avgShotsBlocked": key = "numShotsBlockedTele"
-                    case "avgLowShotsTele": key = "numLowShotsTele"
-                    case "avgHighShotsTele": key = "calculatedData.numHighShotsTele"
-                    case "avgBallsKnockedOffMidlineAuto": key = "numBallsKnockedOffMidlineAuto"
-                    case "avgMidlineBallsIntakedAuto": key = "calculatedData.numBallsIntakedOffMidlineAuto"
-                    case "avgSpeed": key = "rankSpeed"
-                    case "avgAgility": key = "rankAgility"
-                    case "avgTorque": key = "rankTorque"
-                    case "avgBallControl": key = "rankBallControl"
-                    case "avgLowShotsAttemptedTele": key = "calculatedData.lowShotsAttemptedTele"
-                    case "avgHighShotsAttemptedAuto": key = "calculatedData.highShotsAttemptedAuto"
-                    case "avgHighShotsAttemptedTele": key = "calculatedData.highShotsAttemptedTele"
-                    case "RScoreDrivingAbility": key = "calculatedData.drivingAbility"
-                    case "RScoreBallControl": key = "rankBallControl"
-                    case "RScoreAgility": key = "rankAgility"
-                    case "RScoreDefense": key = "rankDefense"
-                    case "RScoreSpeed": key = "rankSpeed"
-                    case "RScoreTorque": key = "rankTorque"
-                    case "avgGroundIntakes": key = "numGroundIntakesTele"
-                    case "avgDefense": key = "rankDefense"
-                    case "actualNumRPs": key = "calculatedData.numRPs"
-                    case "siegeConsistency": key = "calculatedData.siegeConsistency"
-                    case "teleopShotAbility": key = "calculatedData.teleopShotAbility"
-                    case "lowShotAccuracyTele": key = "calculatedData.lowShotAccuracyTele"
-                    case "highShotAccuracyTele": key = "calculatedData.highShotAccuracyTele"
-                    case "lowShotAccuracyAuto": key = "calculatedData.lowShotAccuracyAuto"
-                    case "highShotAccuracyAuto": key = "calculatedData.highShotAccuracyAuto"
-                    case "numAutoPoints": key = "calculatedData.numAutoPoints"
-                    case "disfunctionalPercentage": key = "calculatedData.wasDisfunctional"
-                    case "avgNumTimesCrossedDefensesAuto": key = "calculatedData.totalNumTimesCrossedDefensesAuto"
-                    case "avgHighShotsAuto": key = "numHighShotsAuto"
-                    case "avgLowShotsAuto": key = "numLowShotsAuto"
-                    default: break
-                    }
-                    
+                    key = Utils.teamDetailsKeys.teamDetailsToTIMD[key!]
                     
                     var values: [Float]
                     let altMapping : [CGFloat: String]?

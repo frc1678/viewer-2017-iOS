@@ -48,6 +48,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var teamCounter = 0
     
     var teams = [Team]()
+    //beginning of url for firebase
     let firebaseURLFirstPart = "https://1678-scouting-2016.firebaseio.com/"
     
     let scoutingToken = "qVIARBnAD93iykeZSGG8mWOwGegminXUUGF2q0ee"
@@ -357,10 +358,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return teamArray
     }*/
     
+    //get list of teams sorted by seed
     func seedList() -> [Team] {
         return teams.sorted { $0.calculatedData!.actualSeed < $1.calculatedData!.actualSeed }
     }
     
+    //get list of teams sorted by predicted seed
     func predSeedList() -> [Team] {
         return teams.sorted { $0.calculatedData!.predictedSeed < $1.calculatedData!.predictedSeed }
     }
@@ -631,7 +634,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     let match = sortedMatches[i]
                     counter += 1
                     if (match.redAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) || (match.blueAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) {
-                        return "\(counter)"
+                        return "\(counter + 1)"
                     }
                 }
             }

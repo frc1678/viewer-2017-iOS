@@ -102,7 +102,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "R Score Driving Ability"
         ]
         
-        
         let longTextCells : [String] = []
         
         let unrankedCells = [
@@ -251,6 +250,58 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgGearsPlacedTele",
         ]
         
+        let teamDetailsToTIMD = [
+        "liftoffPercentage" : "didLiftoff",
+        "scalePercentage" : "didScaleTele",
+        "incapacitatedPercentage" : "didBecomeIncapacitated",
+        "disabledPercentage" : "didStartDisabled",
+        "disfunctionalPercentage" : "calculatedData.wasDisfunctional",
+        "challengePercentage" : "didChallengeTele",
+        "avgShotsBlocked" : "numShotsBlockedTele",
+        "avgLowShotsTele" : "calculatedData.numLowShotsTele",
+        "avgHighShotsTele" : "calculatedData.numHighShotsTele",
+        "avgLowShotsAuto" : "calculatedData.numLowShotsAuto",
+        "avgHighShotsAuto" : "calculatedData.numHighShotsAuto",
+        "avgBallsKnockedOffMidlineAuto": "numBallsKnockedOffMidlineAuto",
+        "avgMidlineBallsIntakedAuto" : "calculatedData.numBallsIntakedOffMidlineAuto",
+        "avgSpeed" : "rankSpeed",
+        "avgAgility" : "rankAgility",
+        "avgTorque" : "rankTorque",
+        "avgBallControl" : "rankBallControl",
+        "avgLowShotsAttemptedTele" : "calculatedData.lowShotsAttemptedTele",
+        "avgHighShotsAttemptedAuto" : "calculatedData.highShotsAttemptedAuto",
+        "avgHighShotsAttemptedTele" : "calculatedData.highShotsAttemptedTele",
+        "RScoreDrivingAbility" : "calculatedData.drivingAbility",
+        "RScoreBallControl" : "rankBallControl",
+        "RScoreAgility" : "rankAgility",
+        "RScoreDefense" : "rankDefense",
+        "RScoreSpeed" : "rankSpeed",
+        "RScoreTorque" : "rankTorque",
+        "avgGroundIntakes" : "numGroundIntakesTele",
+        "avgDefense" : "rankDefense",
+        "actualNumRPs" : "calculatedData.numRPs",
+        "siegeConsistency" : "calculatedData.siegeConsistency",
+        "teleopShotAbility" : "calculatedData.teleopShotAbility",
+        "lowShotAccuracyTele" : "calculatedData.lowShotAccuracyTele",
+        "highShotAccuracyTele" : "calculatedData.highShotAccuracyTele",
+        "lowShotAccuracyAuto" : "calculatedData.lowShotAccuracyAuto",
+        "highShotAccuracyAuto" : "calculatedData.highShotAccuracyAuto",
+        "numAutoPoints" : "calculatedData.numAutoPoints",
+        "disfunctionalPercentage" : "calculatedData.wasDisfunctional",
+        "avgNumTimesCrossedDefensesAuto" : "calculatedData.totalNumTimesCrossedDefensesAuto",
+        "avgHighShotsAuto" : "numHighShotsAuto",
+        "avgLowShotsAuto" : "numLowShotsAuto",
+        "baselineReachedPercentage" : "didReachBaselineAuto",
+        "avgGearsPlacedAuto" : "calculatedData.numGearsPlacedAuto",
+        "avgGearsPlacedTele" : "calculatedData.numGearsPlacedTele",
+        "avgHoppersOpenedTele" : "numHoppersOpenedTele",
+        "avgHoppersOpenedAuto" : "numHoppersOpenedAuto",
+        "avgGearsFumbledTele" : "numGearsFumbledTele",
+        "avgGearsEjectedTele" : "numGearsEjectedTele",
+        "avgGearControl" : "rankGearControl",
+        "avgDrivingAbility" : "rankDrivingAbility"
+        ]
+        
         let endGame = [
             "calculatedData.liftoffPercentage",
             "calculatedData.liftoffAbility"
@@ -304,7 +355,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgDefense",
         "calculatedData.avgAgility",
         "calculatedData.avgSpeed",
-        "calculatedData.avgBallControl"
+        "calculatedData.avgBallControl",
+        "calculatedData.avgGearControl",
+        "calculatedData.avgDrivingAbility"
     ]
     static let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
@@ -364,7 +417,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.RScoreEvasion" : "calculatedData.avgEvasion",
         "calculatedData.RScoreTorque" : "calculatedData.avgTorque",
         "rankBallControl" : "calculatedData.avgBallControl",
-        ]
+    ]
     
     static let teamCalcKeys = [
         "actualSeed",

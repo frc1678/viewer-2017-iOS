@@ -24,7 +24,11 @@
     Team *team = data;
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
-    multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
+    if(team.calculatedData.actualSeed != nil){
+        multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
+    } else {
+        multiCell.rankLabel.text = @"N/A";
+    }
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     
     if(team.calculatedData.actualNumRPs != -1.0) {
