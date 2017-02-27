@@ -29,27 +29,27 @@ THE SOFTWARE.
 
 ## Firebase
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseAnalytics
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseCore
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseDatabase
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseInstanceID
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## FirebaseStorage
 
-Copyright 2016 Google
+Copyright 2017 Google
 
 ## GTMSessionFetcher
 
@@ -256,14 +256,6 @@ Copyright 2016 Google
    See the License for the specific language governing permissions and
    limitations under the License.
 
-
-## GoogleInterchangeUtilities
-
-Copyright 2016 Google
-
-## GoogleSymbolUtilities
-
-Copyright 2016 Google
 
 ## GoogleToolboxForMac
 
@@ -832,12 +824,9 @@ GZIP is licensed as follow:
 
 ## Instabug
 
-        Copyright (C) 2014 Instabug
-
-        Permission is hereby granted to use this framework as is, modification are not allowed.
-
-        All rights reserved.
-
+Copyright (C) 2014 Instabug Permission is hereby granted to use this framework as is, modification are not allowed.
+All rights reserved.
+        
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE

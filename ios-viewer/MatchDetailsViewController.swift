@@ -23,7 +23,8 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     let mapping = ["One", "Two", "Three"]
     //keys for the tables
-    let tableKeys = ["actualSeed","predictedSeed","firstPickAbility","overallSecondPickAbility","disfunctionalPercentage","avgHighShotsAuto","avgHighShotsTele","avgLowShotsAuto","avgLowShotsTele","liftoffPercentage","avgDefense"]
+
+    let tableKeys = ["firstPickAbility","overallSecondPickAbility","disfunctionalPercentage","avgGearsPlacedTele","avgGearGroundIntakesTele"]
     
     
     

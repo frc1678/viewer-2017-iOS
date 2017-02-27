@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-Current Match.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ios-viewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -78,16 +83,6 @@
 			<true/>
 		</dict>
 		<key>17CEAD1B3EC4E80098DF5F8AA00BE966</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>1ABEEFB1D56A6669DC8D8AD7784D481B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>36505A031BB3A1A3913E45B58E7DD88B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -133,11 +128,6 @@
 			<true/>
 		</dict>
 		<key>E2A816BF238B492E1F07291E98AB7A24</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E7CDE2F1F29926FA093951ECF4828C43</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -251,6 +251,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         let teamDetailsToTIMD = [
+<<<<<<< HEAD
             //status
             "incapacitatedPercentage" : "didBecomeIncapacitated",
             "disabledPercentage" : "didStartDisabled",
@@ -292,6 +293,54 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgHoppersOpenedAuto" : "numHoppersOpenedAuto",
             "avgGearsFumbledTele" : "numGearsFumbledTele",
             "avgGearsEjectedTele" : "numGearsEjectedTele",
+=======
+        "liftoffPercentage" : "didLiftoff",
+        "scalePercentage" : "didScaleTele",
+        "incapacitatedPercentage" : "didBecomeIncapacitated",
+        "disabledPercentage" : "didStartDisabled",
+        "challengePercentage" : "didChallengeTele",
+        "avgShotsBlocked" : "numShotsBlockedTele",
+        "avgLowShotsTele" : "calculatedData.numLowShotsTele",
+        "avgHighShotsTele" : "calculatedData.numHighShotsTele",
+        "avgBallsKnockedOffMidlineAuto": "numBallsKnockedOffMidlineAuto",
+        "avgMidlineBallsIntakedAuto" : "calculatedData.numBallsIntakedOffMidlineAuto",
+        "avgSpeed" : "rankSpeed",
+        "avgAgility" : "rankAgility",
+        "avgTorque" : "rankTorque",
+        "avgBallControl" : "rankBallControl",
+        "avgLowShotsAttemptedTele" : "calculatedData.lowShotsAttemptedTele",
+        "avgHighShotsAttemptedAuto" : "calculatedData.highShotsAttemptedAuto",
+        "avgHighShotsAttemptedTele" : "calculatedData.highShotsAttemptedTele",
+        "RScoreDrivingAbility" : "calculatedData.drivingAbility",
+        "RScoreBallControl" : "rankBallControl",
+        "RScoreAgility" : "rankAgility",
+        "RScoreDefense" : "rankDefense",
+        "RScoreSpeed" : "rankSpeed",
+        "RScoreTorque" : "rankTorque",
+        "avgGroundIntakes" : "numGroundIntakesTele",
+        "avgDefense" : "rankDefense",
+        "actualNumRPs" : "calculatedData.numRPs",
+        "siegeConsistency" : "calculatedData.siegeConsistency",
+        "teleopShotAbility" : "calculatedData.teleopShotAbility",
+        "lowShotAccuracyTele" : "calculatedData.lowShotAccuracyTele",
+        "highShotAccuracyTele" : "calculatedData.highShotAccuracyTele",
+        "lowShotAccuracyAuto" : "calculatedData.lowShotAccuracyAuto",
+        "highShotAccuracyAuto" : "calculatedData.highShotAccuracyAuto",
+        "numAutoPoints" : "calculatedData.numAutoPoints",
+        "disfunctionalPercentage" : "calculatedData.wasDisfunctional",
+        "avgNumTimesCrossedDefensesAuto" : "calculatedData.totalNumTimesCrossedDefensesAuto",
+        "avgHighShotsAuto" : "numHighShotsAuto",
+        "avgLowShotsAuto" : "numLowShotsAuto",
+        "baselineReachedPercentage" : "didReachBaselineAuto",
+        "avgGearsPlacedAuto" : "calculatedData.numGearsPlacedAuto",
+        "avgGearsPlacedTele" : "calculatedData.numGearsPlacedTele",
+        "avgHoppersOpenedTele" : "numHoppersOpenedTele",
+        "avgHoppersOpenedAuto" : "numHoppersOpenedAuto",
+        "avgGearsFumbledTele" : "numGearsFumbledTele",
+        "avgGearsEjectedTele" : "numGearsEjectedTele",
+        "avgGearControl" : "rankGearControl",
+        "avgDrivingAbility" : "rankDrivingAbility"
+>>>>>>> 7596bb4af6452ccf3814a511c3931c9aeffc8768
         ]
         
         let endGame = [
@@ -538,7 +587,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgGearControl": "Avg. Gear Control",
         "calculatedData.avgDrivingAbility": "Avg. Driving Ability",
         "calculatedData.avgLowShotsAttemptedTele": "Avg. L Shots Tried",
-        "pitNumberOfWheels":"Number of Wheels",
+        "pitNumberOfWheels": "Number of Wheels",
         "calculatedData.liftoffPercentage": "Liftoff Percentage",
         "calculatedData.liftoffAbility": "Liftoff Ability",
         "calculatedData.avgKeyShotTime": "Avg. Key Shooting Time",

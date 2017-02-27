@@ -1,6 +1,0 @@
-framework module Pods_CurrentMatch {
-  umbrella header "Pods-CurrentMatch-umbrella.h"
-
-  export *
-  module * { export * }
-}
