@@ -25,11 +25,9 @@ class CurrentMatchManager: NSObject {
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         super.init()
         self.notificationManager.notifications.append(NotificationManager.Notification(name: "currentMatchUpdated", selector: "notificationTriggeredCheckForNotification:", object: nil))
-        
-        firebase.child("currentMatchNum").observeSingleEvent(of: .value, with: { (snap) -> Void in
-            self.currentMatch = snap.value as! Int
-        })
-
+        firebase.child("currentMatchNum").observe(.value) { (snap) in
+            self.currentMatch = snap.value as? Int ?? -1
+        }
         self.setUp()
     }
     

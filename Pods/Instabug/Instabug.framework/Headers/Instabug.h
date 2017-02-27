@@ -5,7 +5,7 @@
 
  Copyright:  (c) 2013-2017 by Instabug, Inc., all rights reserved.
 
- Version:    6.3.1
+ Version:    7.0.3
  */
 
 #import <Foundation/Foundation.h>
@@ -72,8 +72,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @brief Attaches a file to each report being sent.
  
- @deprecated Starting from v6.3, use `setFileAttachmentWithURL:` instead.
- 
+ @deprecated Use `addFileAttachmentWithURL:` instead.
+
  @discussion A new copy of the file at fileURL will be attached with each bug report being sent. The file is only copied
  at the time of sending the report, so you could safely call this API whenever the file is available on disk, and the copy
  attached to your bug reports will always contain that latest changes at the time of sending the report.
@@ -83,11 +83,13 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param fileLocation Path to a file that's going to be attached to each report.
  */
-+ (void)setFileAttachment:(NSString *)fileLocation DEPRECATED_MSG_ATTRIBUTE("Starting from v6.3, use setFileAttachmentWithURL: instead.");;
++ (void)setFileAttachment:(NSString *)fileLocation DEPRECATED_MSG_ATTRIBUTE("Use addFileAttachmentWithURL: instead.");
 
 /**
  @brief Attaches a file to each report being sent.
  
+ @deprecated Use `addFileAttachmentWithURL:` instead.
+
  @discussion A new copy of the file at fileURL will be attached with each bug report being sent. The file is only copied
  at the time of sending the report, so you could safely call this API whenever the file is available on disk, and the copy
  attached to your bug reports will always contain that latest changes at the time of sending the report.
@@ -97,7 +99,31 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param fileURL Path to a file that's going to be attached to each report.
  */
-+ (void)setFileAttachmentWithURL:(NSURL *)fileURL;
++ (void)setFileAttachmentWithURL:(NSURL *)fileURL DEPRECATED_MSG_ATTRIBUTE("Use addFileAttachmentWithURL: instead.");
+
+
+/**
+ @brief Add file to attached files with each report being sent.
+
+ @discussion A new copy of the file at fileURL will be attached with each bug report being sent. The file is only copied
+ at the time of sending the report, so you could safely call this API whenever the file is available on disk, and the copy
+ attached to your bug reports will always contain that latest changes at the time of sending the report.
+
+ Each call to this method adds the file to the files attached, until a maximum of 3 then it overrides the first file. 
+ The file has to be available locally at the provided path when the report is being sent.
+
+ @param fileURL Path to a file that's going to be attached to each report.
+ */
++ (void)addFileAttachmentWithURL:(NSURL *)fileURL;
+
+
+/**
+ @brief Clear list of files to be attached with each report.
+
+ @discussion This method doesn't delete any files from the file system. It will just removes them for the list of files
+ to be attached with each report.
+ */
++ (void)clearFileAttachments;
 
 /**
  @brief Attaches user data to each report being sent.
@@ -120,38 +146,6 @@ NS_ASSUME_NONNULL_BEGIN
  @param isUserStepsEnabled A boolean to set user steps tracking to being enabled or disabled.
  */
 + (void)setUserStepsEnabled:(BOOL)isUserStepsEnabled;
-
-/**
- @brief Sets whether to log network requests or not.
- 
- @discussion When enabled, Instabug will automtically log all network requests and responses. Logs are attached to
- each report being sent and are available on your Instabug dashboard.
- 
- Networking logging is enabled by default if it's available in your current plan.
-
- @param isNetworkLoggingEnabled A boolean to set network logging to be enabled to disabled.
- */
-+ (void)setNetworkLoggingEnabled:(BOOL)isNetworkLoggingEnabled;
-
-/**
- @brief Specify an NSPredicate to be used to omit certain requests from being logged.
-
- @discussion Predicate will be matched against an `NSURLRequest`. This can be used to filter out requests to a specific
- domain for example.
- 
- @param filterPredicate An NSPredicate to match against an NSURLRequest. Matching requests will be omitted.
- */
-+ (void)setNetworkLoggingFilterPredicate:(NSPredicate *)filterPredicate;
-
-/**
- @brief Enable logging for network requests and responses on a custom NSURLSessionConfiguration.
- 
- @discussion Logging for network requests and responses may not work if you're using a custom `NSURLSession` object.
- If this is the case, call this method passing in your custom NSURLSessions's configuration to enable logging for it.
-
- @param URLSessionConfiguration The NSURLSessionConfiguration of your custom NSURLSession.
- */
-+ (void)enableLoggingForURLSessionConfiguration:(NSURLSessionConfiguration *)URLSessionConfiguration;
 
 /**
  @brief Sets whether to track and report crashes or not.
@@ -254,7 +248,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  - dismissType: How the SDK was dismissed.
  - reportType: Type of report that has been sent. Will be set to IBGReportTypeBug in case the SDK has been dismissed
- without selecting a report type, so you might need to check issueState before reportType
+ without selecting a report type, so you might need to check dismissType before reportType.
  
  @see IBGReportType, IBGDismissType
  */
@@ -262,6 +256,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  @brief Present a view that educates the user on how to invoke the SDK with the currently set invocation event.
+ 
+ @discussion Does nothing if invocation event is set to anything other than IBGInvocationEventShake or IBGInvocationEventScreenshot.
  */
 + (void)showIntroMessage;
 
@@ -276,13 +272,28 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)setWillTakeScreenshot:(BOOL)willTakeScreenshot DEPRECATED_MSG_ATTRIBUTE("Starting from v6.0, use setAttachmentTypesEnabledScreenShot:extraScreenShot:galleryImage:voiceNote:screenRecording: instead.");
 
 /**
- @brief Sets the default value of the user's email and hides the email field from the reporting UI.
+ @brief Sets the user email and name for all sent reports. Also hides the email field from the reporting UI.
  
+ @param email Email address to be set as the user's email.
+ @param name Name of the user to be set.
+ */
++ (void)identifyUserWithEmail:(NSString *)email name:(NSString *)name;
+
+/**
+ @brief Sets the default value of the user's email to nil and show email field and remove user name from all reports
+ 
+ @discussion This method also resets all chats currently on the device and removes any set user attributes.
+ */
++ (void)logOut;
+
+/**
+ @brief Sets the default value of the user's email and hides the email field from the reporting UI.
+
  @discussion Defaults to an empty string.
 
  @param userEmail An email address to be set as the user's email.
  */
-+ (void)setUserEmail:(NSString *)userEmail;
++ (void)setUserEmail:(NSString *)userEmail DEPRECATED_MSG_ATTRIBUTE("Use identifyUserWithEmail:Name: instead.");
 
 /**
  @brief Sets the default value of the user's name to be included with all reports.
@@ -291,7 +302,16 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param userName Name of the user to be set.
  */
-+ (void)setUserName:(NSString *)userName;
++ (void)setUserName:(NSString *)userName DEPRECATED_MSG_ATTRIBUTE("Use identifyUserWithEmail:Name: instead.");
+
+/**
+ @brief Shows/Hides email field.
+
+ @discussion Defaults to show email field.
+
+ @param isShowingEmailField YES to show the email field, NO to hide it.
+ */
++ (void)setShowEmailField:(BOOL)isShowingEmailField;
 
 /**
  @brief Enables/disables screenshot view when reporting a bug/improvement.
@@ -641,6 +661,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (nullable NSDictionary *)userAttributes;
 
+/**
+ @brief Enables/disables inspect view hierarchy when reporting a bug/feedback.
+ 
+ @param viewHierarchyEnabled A boolean to set whether view hierarchy are enabled or disabled.
+ */
++ (void)setViewHierarchyEnabled:(BOOL)viewHierarchyEnabled;
+
 /// -------------------
 /// @name SDK Reporting
 /// -------------------
@@ -651,6 +678,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param exception Exception to be reported.
  */
 + (void)reportException:(NSException *)exception;
+
+/**
+ @brief Report an error manually.
+ 
+ @param error error to be reported.
+ */
++ (void)reportError:(NSError *)error;
 
 /// --------------------------
 /// @name In-App Conversations
@@ -704,9 +738,26 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)didReceiveRemoteNotification:(NSDictionary *)userInfo;
 
-/// -------------
-/// @name Logging
-/// -------------
+/**
+ @brief Logs a user event that happens through the lifecycle of the application.
+ 
+ @discussion Logged user events are going to be sent with each report, as well as at the end of a session.
+ 
+ @param name Event name.
+ */
++ (void)logUserEventWithName:(NSString *)name;
+
+/**
+ @brief Logs a user event that happens through the lifecycle of the application.
+ 
+ @discussion Logged user events are going to be sent with each report, as well as at the end of a session.
+ 
+ @param name Event name.
+ @param params An optional dictionary or parameters to be associated with the event.
+ */
++ (void)logUserEventWithName:(NSString *)name params:(nullable NSDictionary *)params;
+
+#pragma mark - IBGLog
 
 /**
  @brief Adds custom logs that will be sent with each report.
@@ -810,6 +861,95 @@ OBJC_EXTERN void IBGLogError(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
  @param log Message to be logged.
  */
 + (void)logError:(NSString *)log;
+
+#pragma mark - Network Logging
+
+/**
+ @brief Sets whether to log network requests or not.
+ 
+ @discussion When enabled, Instabug will automtically log all network requests and responses. Logs are attached to
+ each report being sent and are available on your Instabug dashboard.
+ 
+ Networking logging is enabled by default if it's available in your current plan.
+ 
+ @param isNetworkLoggingEnabled A boolean to set network logging to be enabled to disabled.
+ */
++ (void)setNetworkLoggingEnabled:(BOOL)isNetworkLoggingEnabled;
+
+/**
+ @brief Specify an NSPredicate to be used to omit certain requests from being logged.
+ 
+ @deprecated Use `setNetworkLoggingRequestFilterPredicate:responseFilterPredicate:` instead.
+ 
+ @discussion Predicate will be matched against an `NSURLRequest`. This can be used to filter out requests to a specific
+ domain for example.
+ 
+ @param filterPredicate An NSPredicate to match against an NSURLRequest. Matching requests will be omitted.
+ */
++ (void)setNetworkLoggingFilterPredicate:(NSPredicate *)filterPredicate DEPRECATED_MSG_ATTRIBUTE("Use setNetworkLoggingRequestFilterPredicate:responseFilterPredicate: instead.");
+
+/**
+ @brief Specify NSPredicates to be used to omit certain network requests from being logged based on their request or
+ response objects.
+ 
+ @discussion `requestFilterPredicate` will be matched against an `NSURLRequest`. It can be used to filter out requests 
+ to a specific domain for example.
+ 
+ `responseFilterPredicate` will be matched against an `NSHTTPURLResponse`. It can be used to filter out responses that 
+ match specific status codes.
+ 
+ If both predicates are specified, `requestFilterPredicate` is evaluated first, if it matches, the request is omitted
+ from logging without evaluating `responseFilterPredicate`.
+ 
+ @param requestFilterPredicate An NSPredicate to match against an NSURLRequest. Matching requests will be omitted.
+ @param responseFilterPredicate An NSPredicate to match against an NSHTTPURLResponse. Matching responses will be omitted.
+ */
++ (void)setNetworkLoggingRequestFilterPredicate:(nullable NSPredicate *)requestFilterPredicate responseFilterPredicate:(nullable NSPredicate *)responseFilterPredicate;
+
+/**
+ @brief Enable logging for network requests and responses on a custom NSURLSessionConfiguration.
+ 
+ @discussion Logging for network requests and responses may not work if you're using a custom `NSURLSession` object.
+ If this is the case, call this method passing in your custom NSURLSessions's configuration to enable logging for it.
+ 
+ @param URLSessionConfiguration The NSURLSessionConfiguration of your custom NSURLSession.
+ */
++ (void)enableLoggingForURLSessionConfiguration:(NSURLSessionConfiguration *)URLSessionConfiguration;
+
+/**
+ @brief Set HTTP body of a POST request to be included in network logs.
+ 
+ @discussion Due to a bug in Foundation, it's not possible to retrieve the body of POST requests automatically. Use
+ this method to include the body of your POST requests in network logs.
+ 
+ If you'd like to exclude or obfuscate user sensitive data in the request body, this is also the place to do it.
+ 
+ @param body Body data of a POST request.
+ @param request The POST request that is being sent.
+ */
++ (void)logHTTPBody:(NSData *)body forRequest:(NSMutableURLRequest *)request;
+
+/**
+ @brief Use to obfuscate a URL that's going to be included in network logs.
+ 
+ @discussion Use this method if you make requests that include user sensitive data in the URL (like authentication tokens
+ for example), and you'd like to hide those from your network logs. 
+ 
+ The provided block will be called for every request. You should do whatever processing you need to do on the URL inside
+ that block, then return a URL to be included in network logs.
+
+ @param obfuscationHandler A block that obfuscates the passed URL and returns it.
+ */
++ (void)setNetworkLoggingURLObfuscationHandler:(nonnull NSURL * (^)(NSURL * _Nonnull url))obfuscationHandler;
+
+#pragma mark - SDK Debugging
+
+/**
+ @brief Sets the verbosity level of logs used to debug the Instabug SDK itself.
+
+ @param level Logs verbosity level.
+ */
++ (void)setSDKDebugLogsLevel:(IBGSDKDebugLogsLevel)level;
 
 @end
 NS_ASSUME_NONNULL_END

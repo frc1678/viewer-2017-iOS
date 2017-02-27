@@ -39,10 +39,3 @@ target 'Current Match' do
     pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
 end
 
-target 'CurrentMatch' do
-    pod 'Firebase/Core'
-    pod 'Firebase/Database'
-    pod 'HanekeSwift', :git => 'https://github.com/Haneke/HanekeSwift', :branch => 'feature/swift-3'
-end
-
-

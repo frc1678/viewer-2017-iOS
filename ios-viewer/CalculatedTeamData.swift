@@ -25,6 +25,7 @@ public final class CalculatedTeamData: NSObject {
     static let avgHighShotsAuto = "avgHighShotsAuto"
     static let avgAgility = "avgAgility"
     static let predictedSeed = "predictedSeed"
+    static let avgDrivingAbility = "avgDrivingAbility"
     static let avgGearsPlacedByLiftTele = "avgGearsPlacedByLiftTele"
     static let liftoffAbility = "liftoffAbility"
     static let sdGearsPlacedByLiftAuto = "sdGearsPlacedByLiftAuto"
@@ -67,6 +68,7 @@ public final class CalculatedTeamData: NSObject {
   public var avgGearsPlacedByLiftAuto: Float = -1.0
   public var avgGearControl: Float = -1.0
   public var actualSeed: Int = -1
+    public var avgDrivingAbility: Float = -1.0
   public var sdHighShotsTele: Float = -1.0
   public var liftoffPercentage: Float = -1.0
   public var avgHighShotsAuto: Float = -1.0
@@ -129,6 +131,7 @@ public final class CalculatedTeamData: NSObject {
     avgGearsPlacedByLiftAuto = json[SerializationKeys.avgGearsPlacedByLiftAuto].floatValue
     avgGearControl = json[SerializationKeys.avgGearControl].floatValue
     actualSeed = json[SerializationKeys.actualSeed].intValue
+    avgDrivingAbility = json[SerializationKeys.avgDrivingAbility].floatValue
     sdHighShotsTele = json[SerializationKeys.sdHighShotsTele].floatValue
     liftoffPercentage = json[SerializationKeys.liftoffPercentage].floatValue
     avgHighShotsAuto = json[SerializationKeys.avgHighShotsAuto].floatValue
@@ -171,6 +174,7 @@ public final class CalculatedTeamData: NSObject {
   /// - returns: A Key value pair containing all valid values in the object.
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
+    dictionary[SerializationKeys.avgDrivingAbility] = avgDrivingAbility
     dictionary[SerializationKeys.sdLiftoffAbility] = sdLiftoffAbility
     dictionary[SerializationKeys.incapacitatedPercentage] = incapacitatedPercentage
     dictionary[SerializationKeys.overallSecondPickAbility] = overallSecondPickAbility
