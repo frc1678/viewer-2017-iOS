@@ -14,17 +14,20 @@ import Haneke
 
 
 class TIMDDetailsViewController: UITableViewController {
+    
+    //ideally set when segued into from TIMDScheduleView
     var TIMD: TeamInMatchData!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if TIMD.teamNumber != nil && TIMD.matchNumber != nil {
-        //set title: "# - Q#"
-        self.title = "\(TIMD.teamNumber!) - Q\(TIMD.matchNumber!)"
+            //set title: "# - Q#"
+            self.title = "\(TIMD.teamNumber!) - Q\(TIMD.matchNumber!)"
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        //return the number of keys in the TIMDs
         return Utils.TIMDKeys.count
     }
     

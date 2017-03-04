@@ -93,6 +93,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         return UInt(values.count)
     }
     
+    //This returns the height of a given bar
     func barChartView(_ barChartView: JBBarChartView!, heightForBarViewAt index: UInt) -> CGFloat {
         return values[Int(index)] - min(values.min()!, 0.0);
     }
@@ -100,7 +101,8 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     func barSelectionColor(for barChartView: JBBarChartView!) -> UIColor! {
         return highlightColor
     }
-        
+    
+    //Tells what to do when a given a selected bar
     func barChartView(_ barChartView: JBBarChartView!, didSelectBarAt index: UInt) {
         let mainDisplayText : String
         let displayTitleWithoutAvg = displayTitle.replacingOccurrences(of: "Avg. ", with: "").replacingOccurrences(of: " Consistency", with: "").replacingOccurrences(of: " Percentage", with: "")

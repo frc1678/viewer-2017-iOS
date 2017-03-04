@@ -25,6 +25,7 @@ class SortedRankTableViewController: ArrayTableViewController {
         if self.title == nil || self.title!.characters.count == 0 {
             self.title = keyPath
         }
+        
         //So you can litrally flip the list over to reverse the sort
         let rotation = UIRotationGestureRecognizer(target: self, action: #selector(SortedRankTableViewController.rotationDetected(_:)))
         
@@ -32,6 +33,7 @@ class SortedRankTableViewController: ArrayTableViewController {
         
         // Do any additional setup after loading the view.
     }
+    
     override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let team = data as! Team
         let multiCell = cell as! MultiCellTableViewCell
@@ -81,24 +83,33 @@ class SortedRankTableViewController: ArrayTableViewController {
         }
     }
     
+    //Black magic to rotate the screen
     func rotationDetected(_ recognizer: UIRotationGestureRecognizer) {
+        //how much it rotated
         let rot = recognizer.rotation
+        //layer that the tableview is one
         let layer = self.tableView.layer
+        //affine: maintains parallel, not length/angle
         var transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+        //rotate the affine matrix
         transform = transform.rotated(by: rot)
         
         switch recognizer.state {
             
         case .began :
+            //make table view not opaque
             layer.isOpaque = false
+            //animate UIView
             UIView.animate(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
                 layer.setAffineTransform(transform)
                 layer.opacity = 0.8
                 }, completion: nil)
             
+            //visually rotate tableview
         case .changed : layer.setAffineTransform(transform)
             
         case .ended :
+            //detect if the view should be rotated: any angle x when 90 < x < 270 returns true
             let shouldRotate = cos(rot) < 0
             if shouldRotate {
                 UIView.animate(withDuration: 0.1, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
@@ -118,6 +129,25 @@ class SortedRankTableViewController: ArrayTableViewController {
                                     self.tableView.setNeedsDisplay()
                                 }
                         })
+                })
+            } else {
+                UIView.animate(withDuration: 0.1, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
+                    layer.opacity = 0.0
+                }, completion: { c in
+                    layer.setAffineTransform(CGAffineTransform.identity)
+                    UIView.animate(withDuration: 0.1, animations: {
+                        layer.opacity = 1.0
+                    }, completion: { d in
+                        
+                        if shouldRotate {
+                            self.shouldReverseRank = !self.shouldReverseRank
+                            self.dataArray = self.dataArray.reversed()
+                            //self.filteredArray = self.filteredArray.reverse()
+                            //self.loadDataArray(true)
+                            self.tableView.reloadData()
+                            self.tableView.setNeedsDisplay()
+                        }
+                    })
                 })
             }
             

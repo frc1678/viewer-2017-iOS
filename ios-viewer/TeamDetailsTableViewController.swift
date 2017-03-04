@@ -11,11 +11,12 @@ import MWPhotoBrowser
 import SDWebImage
 import Haneke
 
-
+//TableViewDataSource/Delegate allows vc to contain a table view/pass in info.
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate {
     
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
+    //setup visuals
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var teamNumberLabel: UILabel!
     @IBOutlet weak var teamNameLabel: UILabel!
@@ -52,7 +53,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
     }
     
-    //this is a really big function that just sets selectedImage
+    //this is a really big function that just sets selectedImage... i think
     func reloadImage() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
             if let team = self.team,
@@ -73,9 +74,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         })
                     }
                     let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
-                    /*if self.teamSelectedImageView.image != noRobotPhoto {
-                        self.photos.append(MWPhoto(image: self.teamSelectedImageView.image))
-                    }*/ //Deprecated since updated selectedImageView
                     if let urls = self.team?.pitAllImageURLs {
                         for url in urls.values {
                             if self.photos.count < self.team!.pitAllImageURLs!.count {

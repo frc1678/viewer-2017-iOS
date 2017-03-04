@@ -12,21 +12,26 @@ class TIMDScheduleViewController: UITableViewController {
     var teamNumber : Int = -1
     var team : Team!
     var matches : [Match] = []
+    //get instance of Firebase Fetcher
     let firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //setting title
         self.title = "\(self.teamNumber)'s TIMDs"
+        //get list of matches with this team in it
         matches = self.firebaseFetcher!.getMatchesForTeamWithNumber(self.teamNumber)
     }
     
+    //when a row is sellected...
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //go to specific TIMD
+        //deselect the row
         tableView.deselectRow(at: indexPath, animated: true)
+        //segue to the TIMD
         self.performSegue(withIdentifier: "TIMDDetails", sender: tableView.cellForRow(at: indexPath))
     }
     
+    //gives info for a specific cell
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //gets cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
@@ -39,6 +44,7 @@ class TIMDScheduleViewController: UITableViewController {
         return cell
     }
     
+    //...
     func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let match = data as? Match
         if match?.number != nil {
@@ -46,11 +52,14 @@ class TIMDScheduleViewController: UITableViewController {
         }
     }
     
+    //when you click on a cell, this function is called. see tableView didSelectRowAt
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //if the segue is a TIMDTableViewController
         if let dest = segue.destination as? TIMDDetailsViewController {
+            //get cell
             let selectedCell = sender as? UITableViewCell
-            //Go to specific match, get rid of Qs
-            dest.TIMD = firebaseFetcher?.getTimDataForTeamInMatch((firebaseFetcher?.getTeam(self.teamNumber))!, inMatch: (firebaseFetcher?.getMatch(Int((selectedCell?.textLabel?.text?.replacingOccurrences(of: "Q", with: ""))!)!))!)
+            //Go to specific match, get rid of Qs, set TIMD
+            dest.TIMD = firebaseFetcher?.getTIMDataForTeamInMatch((firebaseFetcher?.getTeam(self.teamNumber))!, inMatch: (firebaseFetcher?.getMatch(Int((selectedCell?.textLabel?.text?.replacingOccurrences(of: "Q", with: ""))!)!))!)
         }
     }
     
