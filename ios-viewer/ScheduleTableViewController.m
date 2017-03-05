@@ -74,13 +74,14 @@
         }
     }
     
-    if (match.redScore != -1) {
+    if (match.redScore != -1 && match.redScore != nil) {
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore];
         matchCell.slash.alpha = 1;
         matchCell.redScoreLabel.alpha = 1;
     } else {
         if (match.calculatedData.predictedRedScore != -1.0) {
             matchCell.redScoreLabel.text = [Utils roundValue: match.calculatedData.predictedRedScore toDecimalPlaces:1];
+            matchCell.redScoreLabel.alpha = .3;
         } else {
             matchCell.redScoreLabel.text = @"?";
         }
@@ -88,7 +89,7 @@
         matchCell.slash.alpha = .3;
     }
     
-    if (match.blueScore != -1) {
+    if (match.blueScore != -1 && match.blueScore != nil) {
         matchCell.blueScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.blueScore];
         matchCell.slash.alpha = 1;
         matchCell.blueScoreLabel.alpha = 1;

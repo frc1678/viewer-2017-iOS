@@ -386,7 +386,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "rankDefense",
         "rankAgility",
         "rankSpeed",
-        "rankGearControl"
+        "rankGearControl",
+        "drivingAbility"
     ]
     
     static let TIMDKeys = [
