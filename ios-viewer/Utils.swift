@@ -475,7 +475,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgShotsBlocked" : "Avg. Shots Blocked",
         "calculatedData.avgTorque" : "Avg. Torque",
         "calculatedData.disabledPercentage" : "Disabled Percentage",
-        "calculatedData.disfunctionalPercentage" : "Disfunctional Percentage",
+        "calculatedData.disfunctionalPercentage" : "Dysfunctional Percentage",
         "calculatedData.driverAbility" : "Driver Ability",
         "calculatedData.firstPickAbility" : "First Pick Ability",
         "calculatedData.incapacitatedPercentage" : "Incapacitated Percentage",

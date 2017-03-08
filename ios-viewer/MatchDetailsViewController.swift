@@ -294,7 +294,9 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     func playWithAgainstOrBothWithTeam(number: Int) -> PlayRelationship {
         var playWith = false
         var playAgainst = false
-        for match in (firebaseFetcher?.getMatchesForTeam(1678))! {
+        let ourMatches = firebaseFetcher?.getMatchesForTeam(1678)
+        let sortedMatches = ourMatches?.filter { $0.number >= (firebaseFetcher?.currentMatchManager.currentMatch)! }
+        for match in sortedMatches! {
             if (match.redAllianceTeamNumbers?.contains(1678))! {
                 if (match.redAllianceTeamNumbers?.contains(Int(number)))! {
                     playWith = true

@@ -320,12 +320,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getMatchesForTeam(_ teamNumbah: Int) -> [Match] {
-        var matches = [Match]()
+        var importantMatches = [Match]()
         for match in self.matches {
             let teamNumArray = (match).redAllianceTeamNumbers! + match.blueAllianceTeamNumbers!
             for number in teamNumArray {
                 if (number as Int) == (teamNumbah as Int) {
-                    matches.append(match)
+                    importantMatches.append(match)
                 }
             }
         }
@@ -628,7 +628,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func matchesUntilTeamNextMatch(_ teamNumber : Int) -> String? {
         let sortedMatches = self.matches.sorted { Int($0.number) < Int($1.number) }
         if self.currentMatchManager.currentMatch < sortedMatches.count {
-            if let indexOfCurrentMatch = sortedMatches.index(of: self.getMatch(self.currentMatchManager.currentMatch)!) {
+            if let indexOfCurrentMatch = sortedMatches.index(of: self.getMatch(self.currentMatchManager.currentMatch ?? 0)!) {
                 var counter = 0
                 for i in indexOfCurrentMatch + 1..<self.matches.count {
                     let match = sortedMatches[i]
