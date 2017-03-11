@@ -510,6 +510,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 TIMDScheduleForTeamController.teamNumber = teamNum
             }
         } else if segue.identifier == "CTIMDGraph" {
+            //this is called for every timd graph, not just ctimds
             let graphViewController = segue.destination as! GraphViewController
             if let teamNum = team?.number {
                 let indexPath = sender as! IndexPath
@@ -598,20 +599,21 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         graphViewController.highlightIndex = i
                     }
                 }*/
+                //keys that don't graph right: Incap, disabled, baseline, liftoff percentage, defense, agility, all super except driving ability- none of these are CTIMDs, but some normal timds work
                 var values: [Float]
                 let altMapping : [CGFloat: String]?
                 var key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
                 key = Utils.teamDetailsKeys.teamDetailsToTIMD[key!]
                 (values, altMapping) = (firebaseFetcher?.getMatchValuesForTeamForPath(key!, forTeam: team!))!
-                var nilValueIndecies = [Int]()
-                for i in 0..<values.count {
+                //var nilValueIndecies = [Int]()
+                /* for i in 0..<values.count {
                     if values[i] == -1111.1 {
                         nilValueIndecies.append(i)
                     }
                 }
                 for i in nilValueIndecies.reversed() {
                     values.remove(at: i)
-                }
+                } */
                 graphViewController.values = (values as NSArray).map { CGFloat($0 as! Float) }
                 //                graphViewController.heights =]
                 //                graphViewController.teamNumber = Int32(teamNum)

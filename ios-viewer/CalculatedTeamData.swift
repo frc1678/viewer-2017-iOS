@@ -31,6 +31,7 @@ public final class CalculatedTeamData: NSObject {
     static let sdGearsPlacedByLiftAuto = "sdGearsPlacedByLiftAuto"
     static let sdLowShotsAuto = "sdLowShotsAuto"
     static let avgKeyShotTime = "avgKeyShotTime"
+    static let avgHopperShotTime = "avgHopperShotTime"
     static let sdLowShotsTele = "sdLowShotsTele"
     static let sdGearsPlacedByLiftTele = "sdGearsPlacedByLiftTele"
     static let avgDefense = "avgDefense"
@@ -79,6 +80,7 @@ public final class CalculatedTeamData: NSObject {
   public var sdGearsPlacedByLiftAuto: Float = -1.0
   public var sdLowShotsAuto: Float = -1.0
   public var avgKeyShotTime: Float = -1.0
+    public var avgHopperShotTime: Float = -1.0
   public var sdLowShotsTele: Float = -1.0
   public var sdGearsPlacedByLiftTele: Float = -1.0
   public var avgDefense: Float = -1.0
@@ -141,6 +143,7 @@ public final class CalculatedTeamData: NSObject {
     sdGearsPlacedByLiftAuto = json[SerializationKeys.sdGearsPlacedByLiftAuto].floatValue
     sdLowShotsAuto = json[SerializationKeys.sdLowShotsAuto].floatValue
     avgKeyShotTime = json[SerializationKeys.avgKeyShotTime].floatValue
+    avgHopperShotTime = json[SerializationKeys.avgHopperShotTime].floatValue
     sdLowShotsTele = json[SerializationKeys.sdLowShotsTele].floatValue
     sdGearsPlacedByLiftTele = json[SerializationKeys.sdGearsPlacedByLiftTele].floatValue
     avgDefense = json[SerializationKeys.avgDefense].floatValue
@@ -193,6 +196,7 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.sdGearsPlacedByLiftAuto] = sdGearsPlacedByLiftAuto
     dictionary[SerializationKeys.sdLowShotsAuto] = sdLowShotsAuto
     dictionary[SerializationKeys.avgKeyShotTime] = avgKeyShotTime
+    dictionary[SerializationKeys.avgHopperShotTime] = avgHopperShotTime
     dictionary[SerializationKeys.sdLowShotsTele] = sdLowShotsTele
     dictionary[SerializationKeys.sdGearsPlacedByLiftTele] = sdGearsPlacedByLiftTele
     dictionary[SerializationKeys.avgDefense] = avgDefense

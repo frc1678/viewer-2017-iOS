@@ -33,16 +33,18 @@
     [super viewWillAppear: animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults valueForKey:@"NotificationToken"];
-    if(token != nil) {
-        [[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] setValue:nil];
-    }
-    NSMutableArray *intMatches = [[NSMutableArray alloc] init];
-    for(NSString *item in self.firebaseFetcher.currentMatchManager.starredMatchesArray) {
-        [intMatches addObject:[NSNumber numberWithInt:[item integerValue]]];
-    }
-    for(NSNumber *item in intMatches) {
-        [[[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] childByAutoId] setValue: item];
-    }
+    //if(self.firebaseFetcher.currentMatchManager.starredMatchesArray != nil){
+        if(token != nil) {
+            [[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] setValue:nil];
+        }
+        NSMutableArray *intMatches = [[NSMutableArray alloc] init];
+        for(NSString *item in self.firebaseFetcher.currentMatchManager.starredMatchesArray) {
+            [intMatches addObject:[NSNumber numberWithInt:[item integerValue]]];
+        }
+        for(NSNumber *item in intMatches) {
+            [[[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] childByAutoId] setValue: item];
+        }
+    //}
 
 }
 

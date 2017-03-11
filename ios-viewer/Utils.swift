@@ -99,7 +99,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let notGraphingValues = [
             "First Pick Ability",
             "Second Pick Ability",
-            "R Score Driving Ability"
+            "R Score Driving Ability",
+            // "Avg. Key Shooting Time",
+            "Liftoff Ability",
+            
         ]
         
         let longTextCells : [String] = []
@@ -292,6 +295,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgHoppersOpenedAuto" : "numHoppersOpenedAuto",
             "avgGearsFumbledTele" : "numGearsFumbledTele",
             "avgGearsEjectedTele" : "numGearsEjectedTele",
+            "avgKeyShotTime" : "calculatedData.avgKeyShotTime",
 
         ]
         
@@ -592,6 +596,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdGearsPlacedAuto" : "σ Gears Placed Auto",
         "calculatedData.avgGearsPlacedTele" : "Avg Gears Placed Tele",
         "calculatedData.sdGearsPlacedTele" : "σ Gears Placed Tele",
+        "calculatedData.avgHopperShotTime" : "Avg. Hopper Shooting Time"
     ]
     
     /** Rounds a given float value to a given number of decimal places. */

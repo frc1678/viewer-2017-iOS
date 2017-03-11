@@ -59,7 +59,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let redTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
-        let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
+        let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.blueAllianceTeamNumbers!)
         
         //get cell
         let cell : TIMDTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TIMDTableCell", for: indexPath) as! TIMDTableViewCell
@@ -85,7 +85,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             if indexPath.row == tableKeys.count {
                 //set final row to Future Match Status
                 cell.datapointLabel.text = "Future Match Status"
-                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[0].number)!).rawValue
+                cell.valueLabel.attributedText = withAgainstAttributedStringForTeam(number: (redTeams?[0].number)!)
             } else {
                 //set valueLabel to the appropriate value
                 if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
@@ -98,7 +98,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         case r2TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
-                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[1].number)!).rawValue
+                cell.valueLabel.attributedText = withAgainstAttributedStringForTeam(number: (redTeams?[1].number)!)
             } else {
                 if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
                     //If the value is a percentage, multiply float by 100 and add %
@@ -110,7 +110,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         case r3TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
-                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[2].number)!).rawValue
+                cell.valueLabel.attributedText = withAgainstAttributedStringForTeam(number: (redTeams?[2].number)!)
             } else {
                 if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
                     //If the value is a percentage, multiply float by 100 and add %
@@ -122,7 +122,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         case b1TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
-                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[0].number)!).rawValue
+                cell.valueLabel.attributedText = withAgainstAttributedStringForTeam(number: (blueTeams?[0].number)!)
             } else {
                 if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
                     //If the value is a percentage, multiply float by 100 and add %
@@ -134,7 +134,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         case b2TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
-                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[1].number)!).rawValue
+                cell.valueLabel.attributedText = withAgainstAttributedStringForTeam(number: (blueTeams?[1].number)!)
             } else {
                 if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
                     //If the value is a percentage, multiply float by 100 and add %
@@ -146,7 +146,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         case b3TableView :
             if indexPath.row == tableKeys.count {
                 cell.datapointLabel.text = "Future Match Status"
-                cell.valueLabel.text = playWithAgainstOrBothWithTeam(number: (redTeams?[2].number)!).rawValue
+                cell.valueLabel.attributedText = withAgainstAttributedStringForTeam(number: (blueTeams?[2].number)!)
             } else {
                 if Utils.teamDetailsKeys.percentageValues.contains("calculatedData.\(tableKeys[indexPath.row])") {
                     //If the value is a percentage, multiply float by 100 and add %
@@ -295,18 +295,18 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         var playWith = false
         var playAgainst = false
         let ourMatches = firebaseFetcher?.getMatchesForTeam(1678)
-        let sortedMatches = ourMatches?.filter { $0.number >= (firebaseFetcher?.currentMatchManager.currentMatch)! }
-        for match in sortedMatches! {
+        let futureMatches = ourMatches?.filter { $0.number >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
+        for match in futureMatches! {
             if (match.redAllianceTeamNumbers?.contains(1678))! {
-                if (match.redAllianceTeamNumbers?.contains(Int(number)))! {
+                if (match.redAllianceTeamNumbers?.contains(number))! {
                     playWith = true
-                } else if (match.blueAllianceTeamNumbers?.contains(Int(number)))! {
+                } else if (match.blueAllianceTeamNumbers?.contains(number))! {
                     playAgainst = true
                 }
             } else if (match.blueAllianceTeamNumbers?.contains(1678))! {
-                if (match.blueAllianceTeamNumbers?.contains(Int(number)))! {
+                if (match.blueAllianceTeamNumbers?.contains(number))! {
                     playWith = true
-                } else if (match.redAllianceTeamNumbers?.contains(Int(number)))! {
+                } else if (match.redAllianceTeamNumbers?.contains(number))! {
                     playAgainst = true
                 }
             }
@@ -330,7 +330,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         case .Against : attString = NSAttributedString(string: withOrAgainst.rawValue, attributes: [NSForegroundColorAttributeName: UIColor.orange])
         case .Both : attString = NSAttributedString(string: withOrAgainst.rawValue, attributes: [NSForegroundColorAttributeName: UIColor.brown])
         case .Neither : attString = NSAttributedString(string: withOrAgainst.rawValue, attributes: [NSForegroundColorAttributeName: UIColor.gray])
-
         }
         return attString
     }
