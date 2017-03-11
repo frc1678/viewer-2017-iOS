@@ -273,7 +273,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgAgility" : "rankAgility",
             "avgTorque" : "rankTorque",
             "avgBallControl" : "rankBallControl",
-            "avgDrivingAbility" : "rankDrivingAbility",
+            "avgDrivingAbility" : "calculatedData.drivingAbility",
             "avgDefense" : "rankDefense",
             "avgGearControl" : "rankGearControl",
             //RScore super data

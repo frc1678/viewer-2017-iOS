@@ -20,6 +20,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     static let numGearsPlacedAuto = "numGearsPlacedAuto"
     static let numGearsPlacedTele = "numGearsPlacedTele"
     static let drivingAbility = "drivingAbility"
+    static let wasDisfunctional = "wasDisfunctional"
   }
 
   // MARK: Properties
@@ -31,6 +32,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     public var numGearsPlacedAuto: Int?
     public var numGearsPlacedTele: Int?
     public var drivingAbility: Int?
+    public var wasDisfunctional: Int?
 
 
   // MARK: SwiftyJSON Initializers
@@ -54,6 +56,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].int
     numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].int
     drivingAbility = json[SerializationKeys.drivingAbility].int
+    wasDisfunctional = json[SerializationKeys.drivingAbility].int
     
   }
 
@@ -70,6 +73,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     if let value = numGearsPlacedAuto { dictionary[SerializationKeys.numGearsPlacedAuto] = value }
     if let value = numGearsPlacedTele { dictionary[SerializationKeys.numGearsPlacedTele] = value }
     if let value = drivingAbility { dictionary[SerializationKeys.drivingAbility] = value }
+    if let value = wasDisfunctional { dictionary[SerializationKeys.wasDisfunctional] = value }
     
     return dictionary
   }
@@ -84,6 +88,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     self.numGearsPlacedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedAuto) as? Int
     self.numGearsPlacedTele = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedTele) as? Int
     self.drivingAbility = aDecoder.decodeObject(forKey: SerializationKeys.drivingAbility) as? Int
+    self.wasDisfunctional = aDecoder.decodeObject(forKey: SerializationKeys.wasDisfunctional) as? Int
   }
 
   public func encode(with aCoder: NSCoder) {
@@ -95,5 +100,6 @@ public final class CalculatedTeamInMatchData: NSObject {
     aCoder.encode(numGearsPlacedAuto, forKey: SerializationKeys.numGearsPlacedAuto)
     aCoder.encode(numGearsPlacedTele, forKey: SerializationKeys.numGearsPlacedTele)
     aCoder.encode(drivingAbility, forKey: SerializationKeys.drivingAbility)
+    aCoder.encode(wasDisfunctional, forKey: SerializationKeys.wasDisfunctional)
   }
 }

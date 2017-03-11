@@ -511,8 +511,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
         } else if segue.identifier == "CTIMDGraph" {
             let graphViewController = segue.destination as! GraphViewController
-            
-            
             if let teamNum = team?.number {
                 let indexPath = sender as! IndexPath
                 if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
@@ -590,7 +588,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 let cell = tableView.cellForRow(at: indexPath) as! MultiCellTableViewCell
                 graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                 graphViewController.displayTitle = "\(graphViewController.graphTitle): "
-                if let values = firebaseFetcher?.valuesInCompetitionOfPathForTeams(Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]) as? [CGFloat] {
+                /*if let values = firebaseFetcher?.valuesInCompetitionOfPathForTeams(Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]) as? [CGFloat] {
                     graphViewController.values = values
                     graphViewController.subValuesLeft = firebaseFetcher!.valuesInCompetitionOfPathForTeams("number") as [AnyObject]
                     graphViewController.subDisplayLeftTitle = "Team "
@@ -599,7 +597,22 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     if let i = ((graphViewController.subValuesLeft as! [Int]).index(of: teamNum)) {
                         graphViewController.highlightIndex = i
                     }
+                }*/
+                var values: [Float]
+                let altMapping : [CGFloat: String]?
+                var key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
+                key = Utils.teamDetailsKeys.teamDetailsToTIMD[key!]
+                (values, altMapping) = (firebaseFetcher?.getMatchValuesForTeamForPath(key!, forTeam: team!))!
+                var nilValueIndecies = [Int]()
+                for i in 0..<values.count {
+                    if values[i] == -1111.1 {
+                        nilValueIndecies.append(i)
+                    }
                 }
+                for i in nilValueIndecies.reversed() {
+                    values.remove(at: i)
+                }
+                graphViewController.values = (values as NSArray).map { CGFloat($0 as! Float) }
                 //                graphViewController.heights =]
                 //                graphViewController.teamNumber = Int32(teamNum)
                 //                graphViewController.graphInfo = nil;

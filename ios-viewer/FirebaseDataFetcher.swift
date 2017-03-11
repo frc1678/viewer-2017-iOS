@@ -329,8 +329,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 }
             }
         }
-        matches.sort { Int($0.number) > Int($1.number) }
-        return matches
+        importantMatches.sort { Int($0.number) > Int($1.number) }
+        return importantMatches
     }
     
     
@@ -519,11 +519,15 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     func valuesInCompetitionOfPathForTeams(_ path: String) -> NSArray {
         let array = NSMutableArray()
+        //iterate thru all teams
         for team in self.teams {
+            //if the team's value for the key you put in...
             if team.value(forKeyPath: path) != nil {
+                //add to the array the value
                 array.add(team.value(forKeyPath: path)!)
             }
         }
+        //so this is an array of all of the non-nil values for a certain path, for every team
         return array
     }
     

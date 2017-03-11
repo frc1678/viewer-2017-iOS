@@ -29,17 +29,13 @@
     [self performSegueWithIdentifier:@"citrusSchedule" sender:sender];
 }
 
-- (void)viewDidLoad {
-    
-    self.cacheButton.enabled = NO;
-    [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
-    
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults valueForKey:@"NotificationToken"];
-    NSMutableArray *starredMatches = [[NSMutableArray alloc] init];
-    
-    [[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] setValue:nil];
+    if(token != nil) {
+        [[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] setValue:nil];
+    }
     NSMutableArray *intMatches = [[NSMutableArray alloc] init];
     for(NSString *item in self.firebaseFetcher.currentMatchManager.starredMatchesArray) {
         [intMatches addObject:[NSNumber numberWithInt:[item integerValue]]];
@@ -47,6 +43,14 @@
     for(NSNumber *item in intMatches) {
         [[[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] childByAutoId] setValue: item];
     }
+
+}
+
+- (void)viewDidLoad {
+    
+    self.cacheButton.enabled = NO;
+    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
 
 }
 
@@ -260,12 +264,6 @@
             NSString *token = [defaults valueForKey:@"NotificationToken"];
             [[[[[[[FIRDatabase database] reference] child:@"AppTokens"] child:token] child:@"StarredMatches"] childByAutoId] setValue: [NSNumber numberWithInt:[cell.matchLabel.text integerValue]]];
         }
-        //use filter when unstarring match
-        //ASDF
-
-        
-        //NSNotification *note = [[NSNotification alloc] initWithName:@"lpgrTriggered" object:nil userInfo:nil];
-        //[[NSNotificationCenter defaultCenter] postNotification:note];
     }
 }
 
