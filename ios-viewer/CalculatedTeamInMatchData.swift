@@ -56,7 +56,7 @@ public final class CalculatedTeamInMatchData: NSObject {
     numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].int
     numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].int
     drivingAbility = json[SerializationKeys.drivingAbility].int
-    wasDisfunctional = json[SerializationKeys.drivingAbility].int
+    wasDisfunctional = json[SerializationKeys.wasDisfunctional].int
     
   }
 
