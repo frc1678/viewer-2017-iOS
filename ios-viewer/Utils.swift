@@ -208,7 +208,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let highLevel = [
             "calculatedData.firstPickAbility",
             "calculatedData.overallSecondPickAbility",
-            "calculatedData.avgKeyShotTime"
+            "calculatedData.avgKeyShotTime",
+            "calculatedData.avgHopperShotTime"
         ]
         
         let autoKeysMini = [
@@ -296,6 +297,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgGearsFumbledTele" : "numGearsFumbledTele",
             "avgGearsEjectedTele" : "numGearsEjectedTele",
             "avgKeyShotTime" : "calculatedData.avgKeyShotTime",
+            "avgHopperShotTime" : "calculatedData.avgHopperShotTime",
 
         ]
         
