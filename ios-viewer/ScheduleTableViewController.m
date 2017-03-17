@@ -33,7 +33,7 @@
     [super viewWillAppear: animated];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults valueForKey:@"NotificationToken"];
-    //if(self.firebaseFetcher.currentMatchManager.starredMatchesArray != nil){
+    if(self.firebaseFetcher.currentMatchManager.starredMatchesArray != nil && [self.firebaseFetcher.currentMatchManager.starredMatchesArray count]){
         if(token != nil) {
             [[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] setValue:nil];
         }
@@ -44,7 +44,7 @@
         for(NSNumber *item in intMatches) {
             [[[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] childByAutoId] setValue: item];
         }
-    //}
+    }
 
 }
 
