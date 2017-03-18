@@ -27,12 +27,12 @@
     if(team.calculatedData.actualSeed != nil){
         multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
     } else {
-        multiCell.rankLabel.text = @"N/A";
+        multiCell.rankLabel.text = @"NA";
     }
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     
     if(team.calculatedData.actualNumRPs != -1.0) {
-        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%ld", team.calculatedData.actualNumRPs];
+        multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@", [Utils roundValue:team.calculatedData.actualNumRPs toDecimalPlaces:2]]; // Actually is average Num RPs
     } else {
         multiCell.scoreLabel.text = @"";
     }

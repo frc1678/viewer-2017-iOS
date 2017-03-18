@@ -91,7 +91,7 @@ public final class CalculatedTeamData: NSObject {
   public var avgLowShotsAuto: Float = -1.0
   public var firstPickAbility: Float = -1.0
   public var avgBallControl: Float = -1.0
-    public var actualNumRPs: Int = -1
+    public var actualNumRPs: Float = -1.0
     public var predictedNumRPs: Float = -1.0
     public var disfunctionalPercentage: Float = -1.0
     public var sdBaselineReachedPercentage: Float = -1.0
@@ -154,7 +154,7 @@ public final class CalculatedTeamData: NSObject {
     avgLowShotsAuto = json[SerializationKeys.avgLowShotsAuto].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
     avgBallControl = json[SerializationKeys.avgBallControl].floatValue
-    actualNumRPs = json[SerializationKeys.actualNumRPs].intValue
+    actualNumRPs = json[SerializationKeys.actualNumRPs].floatValue
     predictedNumRPs = json[SerializationKeys.predictedNumRPs].floatValue
     disfunctionalPercentage = json[SerializationKeys.disfunctionalPercentage].floatValue
     sdBaselineReachedPercentage = json[SerializationKeys.sdBaselineReachedPercentage].floatValue

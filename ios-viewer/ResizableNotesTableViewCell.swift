@@ -10,7 +10,6 @@ import UIKit
 
 class ResizableNotesTableViewCell: UITableViewCell {
 
-
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var notesLabel: UILabel!
 

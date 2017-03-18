@@ -117,6 +117,10 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         //self.teamNumberLabel.addGestureRecognizer(longPressForMoreDetail)
         let tap = UITapGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didTapImage(_:)))
         self.teamSelectedImageView.addGestureRecognizer(tap)
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44.0
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -171,7 +175,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }*/
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    /*func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if team == nil {
             return 44
         }
@@ -181,10 +185,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         //no longTextCells
         if Utils.teamDetailsKeys.TIMDLongTextCells.contains(dataKey) {
+            
             var text = ""
             for timd in (self.firebaseFetcher?.getTIMDataForTeam(self.team!))! {
                 if let data = timd.value(forKey: dataKey) {
-                    text.append("\nQ\(timd.matchNumber): \(data)")
+                    text.append("\nQ\(timd.matchNumber!): \(data)")
                 }
             }
             
@@ -195,7 +200,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else {
             return 44
         }
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return team == nil ? nil : Utils.teamDetailsKeys.keySetNames(self.showMinimalistTeamDetails)[section]
@@ -246,7 +251,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
                     
-                    let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!)
+                    let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!).sorted { $0.matchNumber! < $1.matchNumber! }
                     var datas = [String]()
                     for TIMD in TIMDs! {
                         if let data = TIMD.value(forKey: dataKey) {
@@ -256,7 +261,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                     
                     notesCell.notesLabel.text = datas.reduce(String()) { previous, new in "\(previous)\n\(new)" }
-                    
+                    //notesCell.heightAnchor
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") {
