@@ -180,14 +180,18 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
         
         //no longTextCells
-        if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
-            let dataPoint: AnyObject = team!.value(forKeyPath: dataKey) as AnyObject? ?? "" as AnyObject
+        if Utils.teamDetailsKeys.TIMDLongTextCells.contains(dataKey) {
+            var text = ""
+            for timd in (self.firebaseFetcher?.getTIMDataForTeam(self.team!))! {
+                if let data = timd.value(forKey: dataKey) {
+                    text.append("\nQ\(timd.matchNumber): \(data)")
+                }
+            }
             
             let titleText = Utils.humanReadableNames[dataKey]
-            let notesText = "\(roundValue(dataPoint, toDecimalPlaces: 2))"
             
             let attrs = [NSFontAttributeName : UIFont.systemFont(ofSize: 16)]
-            return (titleText! as NSString).size(attributes: attrs).height + (notesText as NSString).size(attributes: attrs).height + 44
+            return (titleText! as NSString).size(attributes: attrs).height + (text as NSString).size(attributes: attrs).height + 44
         } else {
             return 44
         }
@@ -237,27 +241,22 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 }
                 
                 //no longTextCells
-                if Utils.teamDetailsKeys.longTextCells.contains(dataKey) {
+                if Utils.teamDetailsKeys.TIMDLongTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
                     
                     let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!)
-                    var notes : [String]?
-                    var notesString : String?
+                    var datas = [String]()
                     for TIMD in TIMDs! {
-                        if let note = TIMD.SuperNotes {
-                            notesString = "\(notesString)\nQ\(TIMD.matchNumber): \(note)"
+                        if let data = TIMD.value(forKey: dataKey) {
+                            let dataString = "Q\(TIMD.matchNumber!): \(data)"
+                            datas.append(dataString)
                         }
                     }
                     
+                    notesCell.notesLabel.text = datas.reduce(String()) { previous, new in "\(previous)\n\(new)" }
                     
-                    
-                    if "\(dataPoint)".isEmpty {
-                        notesCell.notesLabel?.text = "None"
-                    } else {
-                        notesCell.notesLabel?.text = "\(dataPoint!)"
-                    }
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") {

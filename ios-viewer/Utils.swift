@@ -105,8 +105,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
         ]
         
-        let longTextCells : [String] = [
-        "SuperNotes"
+        let TIMDLongTextCells : [String] = [
+        "superNotes"
         ]
         
         let unrankedCells = [
@@ -354,7 +354,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     static let superKeys = [
         //superNotes- They're in TIMDs, so see TeamDetails for more info
-        "S uperNotes",
+        "superNotes",
         "calculatedData.avgDefense",
         "calculatedData.avgAgility",
         "calculatedData.avgSpeed",
@@ -476,6 +476,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     /** A dictionary with datapoints as keys and Human Readable Names as indices */
     static let humanReadableNames = [
+        "superNotes": "Super Scout Notes",
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.avgEvasion" : "Avg. Evasion",
         "calculatedData.avgGroundIntakes" : "Avg. Ground Intakes",
