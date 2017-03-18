@@ -40,6 +40,7 @@ public final class TeamInMatchData: NSObject {
     static let numHoppersOpenedTele = "numHoppersOpenedTele"
     static let numGearsFumbledTele = "numGearsFumbledTele"
     static let numGearsEjectedTele = "numGearsEjectedTele"
+    static let SuperNotes = "SuperNotes"
   }
 
   // MARK: Properties
@@ -71,6 +72,8 @@ public final class TeamInMatchData: NSObject {
     public var numGearsFumbledTele: Int?
     public var numGearsEjectedTele: Int?
     public var calculatedData : CalculatedTeamInMatchData?
+    public var SuperNotes: String?
+
 
   // MARK: SwiftyJSON Initializers
   /// Initiates the instance based on the object.
@@ -113,6 +116,7 @@ public final class TeamInMatchData: NSObject {
     numHoppersOpenedTele = json[SerializationKeys.numHoppersOpenedTele].int
     numGearsEjectedTele = json[SerializationKeys.numGearsEjectedTele].int
     numGearsFumbledTele = json[SerializationKeys.numGearsFumbledTele].int
+    SuperNotes = json[SerializationKeys.SuperNotes].string
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -146,6 +150,7 @@ public final class TeamInMatchData: NSObject {
     if let value = numHoppersOpenedTele { dictionary[SerializationKeys.numHoppersOpenedTele] = value }
     if let value = numGearsFumbledTele { dictionary[SerializationKeys.numGearsFumbledTele] = value }
     if let value = numGearsEjectedTele { dictionary[SerializationKeys.numGearsEjectedTele] = value }
+    if let value = numGearsEjectedTele { dictionary[SerializationKeys.SuperNotes] = value }
 
     return dictionary
   }

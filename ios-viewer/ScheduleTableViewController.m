@@ -171,9 +171,9 @@
 
 - (NSArray *)filteredArrayForSearchText:(NSString *)searchString inScope:(NSInteger)scope
 {
-    if(scope == 0) {
+    if(scope == 1) {
         return [self.firebaseFetcher filteredMatchesForMatchSearchString:searchString];
-    } else if(scope == 1) {
+    } else if(scope == 0) {
         return [self.firebaseFetcher filteredMatchesforTeamSearchString:searchString];
     }
     return @[@"ERROR"];
@@ -195,13 +195,13 @@
 }
 
 - (NSArray *)scopeButtonTitles {
-    return @[@"Matches", @"Teams"];
+    return @[@"Teams", @"Matches"];
 }
 
 - (NSAttributedString *)textForScheduleLabelForType:(NSInteger)type forString:(NSString *)string {
-    if (type == [self currentScope] && type == 0) {
+    if (type != [self currentScope] && type == 1) {
         return [self textForLabelForString:string highlightOccurencesOfString:[self highlightedStringForScope]];
-    } else if (type == [self currentScope] && type == 1) {
+    } else if (type != [self currentScope] && type == 0) {
         if ([string rangeOfString:[self highlightedStringForScope]].location == 0) {
             return [self textForLabelForString:string highlightOccurencesOfString:[self highlightedStringForScope]];
         }

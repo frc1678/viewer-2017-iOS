@@ -202,7 +202,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return team == nil ? 1 : Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[section].count
+        if Utils.teamDetailsKeys.keySetNames(self.showMinimalistTeamDetails)[section] != "super" {
+            return team == nil ? 1 : Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[section].count
+        } else {
+            return team == nil ? 1 : Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[section].count + 1
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -218,7 +222,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             
             let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
             
-            if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'
+            if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'... if NOT a default key
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
 
@@ -237,6 +241,17 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
+                    
+                    let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!)
+                    var notes : [String]?
+                    var notesString : String?
+                    for TIMD in TIMDs! {
+                        if let note = TIMD.SuperNotes {
+                            notesString = "\(notesString)\nQ\(TIMD.matchNumber): \(note)"
+                        }
+                    }
+                    
+                    
                     
                     if "\(dataPoint)".isEmpty {
                         notesCell.notesLabel?.text = "None"

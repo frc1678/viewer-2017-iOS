@@ -105,7 +105,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
         ]
         
-        let longTextCells : [String] = []
+        let longTextCells : [String] = [
+        "SuperNotes"
+        ]
         
         let unrankedCells = [
             "selectedImageURL",
@@ -151,7 +153,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             if minimalist {
                 return  [
                     "",
-                    "High Level",
+                    //"High Level",
                     "Autonomous",
                     "Teleoperated",
                     "Siege",
@@ -162,7 +164,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             }
             return [
                 "",
-                "High Level",
+                //"High Level",
                 "Status",
                 "Autonomous",
                 "Teleoperated",
@@ -178,7 +180,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             if minimalist {
                 return [
                     defaultKeys,
-                    highLevel,
+                    //highLevel,
                     autoKeysMini,
                     teleKeysMini,
                     siegeKeysMini,
@@ -189,7 +191,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             }
             return [
                 defaultKeys,
-                highLevel,
+                //highLevel,
                 statusKeys,
                 autoKeys,
                 teleKeys,
@@ -205,52 +207,52 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "matchDatas"
         ]
         
-        let highLevel = [
-            "calculatedData.firstPickAbility",
+        let highLevel : [String] = [ //not needed
+            /*"calculatedData.firstPickAbility",
             "calculatedData.overallSecondPickAbility",
             "calculatedData.avgKeyShotTime",
-            "calculatedData.avgHopperShotTime"
+            "calculatedData.avgHopperShotTime"*/
         ]
         
         let autoKeysMini = [
             //TODO: Add Avg. Num Shots in 2 ball Auto
             "calculatedData.avgHighShotsAuto",
-            "calculatedData.avgLowShotsAuto"
+            //"calculatedData.avgLowShotsAuto"
         ]
         
         let autoKeys = [
-            //TODO: Add Avg. Num Shots in 2 ball Auto
+            //Some stuff is not needed
             
             "calculatedData.avgHighShotsAuto",
-            "calculatedData.avgLowShotsAuto",
+            //"calculatedData.avgLowShotsAuto",
             "calculatedData.baselineReachedPercentage",
-            "calculatedData.avgHoppersOpenedAuto",
+            //"calculatedData.avgHoppersOpenedAuto",
             "calculatedData.avgGearsPlacedAuto",
-            "calculatedData.sdGearsPlacedAuto",
-            "calculatedData.sdLowShotsAuto",
-            "calculatedData.sdHighShotsAuto"
+            //"calculatedData.sdGearsPlacedAuto",
+            //"calculatedData.sdLowShotsAuto",
+            //"calculatedData.sdHighShotsAuto"
         ]
         
-        let teleKeysMini = [
-            "calculatedData.avgHighShotsTele",
+        let teleKeysMini : [String] = [
+            //"calculatedData.avgHighShotsTele",
             //"calculatedData.sdHighShotsTele",
-            "calculatedData.avgLowShotsTele",
+            //"calculatedData.avgLowShotsTele",
             //"calculatedData.sdLowShotsTele",
             //"calculatedData.avgLowShotsAttemptedTele",
             //"calculatedData.avgHighShotsAttemptedTele",
         ]
         
         let teleKeys = [
-            "calculatedData.avgHighShotsTele",
-            "calculatedData.sdHighShotsTele",
-            "calculatedData.avgLowShotsTele",
-            "calculatedData.sdLowShotsTele",
-            "calculatedData.avgHoppersOpenedTele",
+            //"calculatedData.avgHighShotsTele",
+            //"calculatedData.sdHighShotsTele",
+            //"calculatedData.avgLowShotsTele",
+            //"calculatedData.sdLowShotsTele",
+            //"calculatedData.avgHoppersOpenedTele",
             //"calculatedData.avgGearGroundIntakesTele",
             "calculatedData.avgGearsFumbledTele",
             "calculatedData.avgGearsEjectedTele",
             //"calculatedData.avgLoaderIntakesTele",
-            "calculatedData.sdGearsPlacedTele",
+            //"calculatedData.sdGearsPlacedTele",
             "calculatedData.avgGearsPlacedTele",
         ]
         
@@ -303,12 +305,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
         let endGame = [
             "calculatedData.liftoffPercentage",
-            "calculatedData.liftoffAbility"
+            //"calculatedData.liftoffAbility"
         ]
         
-        let siegeKeysMini = [
-            "calculatedData.liftoffAbility",
-            "calculatedData.sdLiftoffAbility"
+        let siegeKeysMini : [String] = [
+            //"calculatedData.liftoffAbility",
+            //"calculatedData.sdLiftoffAbility"
         ]
         
         let statusKeysMini = [
@@ -351,10 +353,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     
     static let superKeys = [
+        //superNotes- They're in TIMDs, so see TeamDetails for more info
+        "S uperNotes",
         "calculatedData.avgDefense",
         "calculatedData.avgAgility",
         "calculatedData.avgSpeed",
-        "calculatedData.avgBallControl",
+        //"calculatedData.avgBallControl",
         "calculatedData.avgGearControl",
         "calculatedData.avgDrivingAbility"
     ]
@@ -393,7 +397,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "rankAgility",
         "rankSpeed",
         "rankGearControl",
-        "drivingAbility"
+        "drivingAbility",
+        //"superNotes"
     ]
     
     static let TIMDKeys = [
