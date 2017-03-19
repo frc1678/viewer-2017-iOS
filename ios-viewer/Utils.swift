@@ -133,7 +133,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         let boolValues = [
             "calculatedData.disabledPercentage",
             "calculatedData.incapacitatedPercentage",
-            "pitDidUseStandardTankDrive",
            "pitDidDemonstrateCheesecakePotential"
         ]
         
@@ -326,7 +325,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         
         let pitKeys = [
-            "pitDidUseStandardTankDrive",
+            "pitDriveTrain",
             "pitDidDemonstrateCheesecakePotential",
             "pitAvailableWeight",
             "pitOrganization",
@@ -604,7 +603,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdGearsPlacedAuto" : "σ Gears Placed Auto",
         "calculatedData.avgGearsPlacedTele" : "Avg Gears Placed Tele",
         "calculatedData.sdGearsPlacedTele" : "σ Gears Placed Tele",
-        "calculatedData.avgHopperShotTime" : "Avg. Hopper Shooting Time"
+        "calculatedData.avgHopperShotTime" : "Avg. Hopper Shooting Time",
+        "pitDriveTrain" : "Drive Train"
     ]
     
     /** Rounds a given float value to a given number of decimal places. */

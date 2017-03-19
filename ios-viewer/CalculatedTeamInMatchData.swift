@@ -24,15 +24,15 @@ public final class CalculatedTeamInMatchData: NSObject {
   }
 
   // MARK: Properties
-  public var liftoffAbility: Int?
-  public var numLowShotsAuto: Int?
-  public var numHighShotsTele: Int?
-  public var numLowShotsTele: Int?
-  public var numHighShotsAuto: Int?
-    public var numGearsPlacedAuto: Int?
-    public var numGearsPlacedTele: Int?
-    public var drivingAbility: Int?
-    public var wasDisfunctional: Int?
+  public var liftoffAbility: Float?
+  public var numLowShotsAuto: Float?
+  public var numHighShotsTele: Float?
+  public var numLowShotsTele: Float?
+  public var numHighShotsAuto: Float?
+    public var numGearsPlacedAuto: Float?
+    public var numGearsPlacedTele: Float?
+    public var drivingAbility: Float?
+    public var wasDisfunctional: Bool?
 
 
   // MARK: SwiftyJSON Initializers
@@ -48,15 +48,15 @@ public final class CalculatedTeamInMatchData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
-    liftoffAbility = json[SerializationKeys.liftoffAbility].int
-    numLowShotsAuto = json[SerializationKeys.numLowShotsAuto].int
-    numHighShotsTele = json[SerializationKeys.numHighShotsTele].int
-    numLowShotsTele = json[SerializationKeys.numLowShotsTele].int
-    numHighShotsAuto = json[SerializationKeys.numHighShotsAuto].int
-    numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].int
-    numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].int
-    drivingAbility = json[SerializationKeys.drivingAbility].int
-    wasDisfunctional = json[SerializationKeys.wasDisfunctional].int
+    liftoffAbility = json[SerializationKeys.liftoffAbility].float
+    numLowShotsAuto = json[SerializationKeys.numLowShotsAuto].float
+    numHighShotsTele = json[SerializationKeys.numHighShotsTele].float
+    numLowShotsTele = json[SerializationKeys.numLowShotsTele].float
+    numHighShotsAuto = json[SerializationKeys.numHighShotsAuto].float
+    numGearsPlacedAuto = json[SerializationKeys.numGearsPlacedAuto].float
+    numGearsPlacedTele = json[SerializationKeys.numGearsPlacedTele].float
+    drivingAbility = json[SerializationKeys.drivingAbility].float
+    wasDisfunctional = json[SerializationKeys.wasDisfunctional].bool
     
   }
 
@@ -80,15 +80,15 @@ public final class CalculatedTeamInMatchData: NSObject {
 
   // MARK: NSCoding Protocol
   required public init(coder aDecoder: NSCoder) {
-    self.liftoffAbility = aDecoder.decodeObject(forKey: SerializationKeys.liftoffAbility) as? Int
-    self.numLowShotsAuto = aDecoder.decodeObject(forKey: SerializationKeys.numLowShotsAuto) as? Int
-    self.numHighShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsTele) as? Int
-    self.numLowShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numLowShotsTele) as? Int
-    self.numHighShotsAuto = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsAuto) as? Int
-    self.numGearsPlacedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedAuto) as? Int
-    self.numGearsPlacedTele = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedTele) as? Int
-    self.drivingAbility = aDecoder.decodeObject(forKey: SerializationKeys.drivingAbility) as? Int
-    self.wasDisfunctional = aDecoder.decodeObject(forKey: SerializationKeys.wasDisfunctional) as? Int
+    self.liftoffAbility = aDecoder.decodeObject(forKey: SerializationKeys.liftoffAbility) as? Float
+    self.numLowShotsAuto = aDecoder.decodeObject(forKey: SerializationKeys.numLowShotsAuto) as? Float
+    self.numHighShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsTele) as? Float
+    self.numLowShotsTele = aDecoder.decodeObject(forKey: SerializationKeys.numLowShotsTele) as? Float
+    self.numHighShotsAuto = aDecoder.decodeObject(forKey: SerializationKeys.numHighShotsAuto) as? Float
+    self.numGearsPlacedAuto = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedAuto) as? Float
+    self.numGearsPlacedTele = aDecoder.decodeObject(forKey: SerializationKeys.numGearsPlacedTele) as? Float
+    self.drivingAbility = aDecoder.decodeObject(forKey: SerializationKeys.drivingAbility) as? Float
+    self.wasDisfunctional = aDecoder.decodeObject(forKey: SerializationKeys.wasDisfunctional) as? Bool
   }
 
   public func encode(with aCoder: NSCoder) {

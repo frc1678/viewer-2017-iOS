@@ -20,7 +20,7 @@ public final class Team: NSObject {
     static let calculatedData = "calculatedData"
     static let pitSelectedImageName = "pitSelectedImageName"
     static let pitAllImageURLs = "pitAllImageURLs"
-    static let pitDidUseStandardTankDrive = "pitDidUseStandardTankDrive"
+    static let pitDriveTrain = "pitDriveTrain"
     static let pitDidDemonstrateCheesecakePotential = "pitDidDemonstrateCheesecakePotential"
   }
 
@@ -33,7 +33,7 @@ public final class Team: NSObject {
   public var calculatedData: CalculatedTeamData?
   public var pitSelectedImageName: String?
     public var pitAllImageURLs: [String: String]?
-  public var pitDidUseStandardTankDrive: Bool? = false
+  public var pitDriveTrain: String?
   public var pitDidDemonstrateCheesecakePotential: Bool? = false
 
   // MARK: SwiftyJSON Initializers
@@ -57,7 +57,7 @@ public final class Team: NSObject {
     calculatedData = CalculatedTeamData(json: json[SerializationKeys.calculatedData])
     pitSelectedImageName = json[SerializationKeys.pitSelectedImageName].string
     pitAllImageURLs = json[SerializationKeys.pitAllImageURLs].dictionaryObject as! [String: String]?
-    pitDidUseStandardTankDrive = json[SerializationKeys.pitDidUseStandardTankDrive].boolValue
+    pitDriveTrain = json[SerializationKeys.pitDriveTrain].string
     pitDidDemonstrateCheesecakePotential = json[SerializationKeys.pitDidDemonstrateCheesecakePotential].boolValue
   }
 
@@ -75,7 +75,7 @@ public final class Team: NSObject {
     if let value = pitSelectedImageName { dictionary[SerializationKeys.pitSelectedImageName] = value }
     if let value = pitAllImageURLs { dictionary[SerializationKeys.pitAllImageURLs] = value }
 
-    dictionary[SerializationKeys.pitDidUseStandardTankDrive] = pitDidUseStandardTankDrive
+    dictionary[SerializationKeys.pitDriveTrain] = pitDriveTrain
     dictionary[SerializationKeys.pitDidDemonstrateCheesecakePotential] = pitDidDemonstrateCheesecakePotential
     return dictionary
   }
