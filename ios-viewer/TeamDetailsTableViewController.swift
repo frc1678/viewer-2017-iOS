@@ -276,6 +276,8 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         unrankedCell.detailLabel!.text! = (team?.pitOrganization) ?? ""
                     } else if dataKey == "pitProgrammingLanguage" {
                         unrankedCell.detailLabel!.text! = (team?.pitProgrammingLanguage) ?? ""
+                    } else if dataKey == "pitDriveTrain" {
+                        unrankedCell.detailLabel!.text! = (team?.pitDriveTrain) ?? ""
                     } else if Utils.teamDetailsKeys.addCommasBetweenCapitals.contains(dataKey) {
                         unrankedCell.detailLabel.text = "\(insertCommasAndSpacesBetweenCapitalsInString(roundValue(dataPoint!, toDecimalPlaces: 2)))"
                     } else if Utils.teamDetailsKeys.boolValues.contains(dataKey) {
