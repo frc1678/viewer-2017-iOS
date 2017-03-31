@@ -717,6 +717,44 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return some
         
     }
+    
+    class func humanReadableNameFromKey(key: String) -> String {
+        let noCalculatedDataKey = key.replacingOccurrences(of: "calculatedData.", with: "").replacingOccurrences(of: "pit", with: "pitScout")
+        var indiciesToAddSpaces = [Int]()
+        for i in 0..<noCalculatedDataKey.characters.count {
+            if i != 0 {
+                let currentChar = Array(noCalculatedDataKey.characters)[i]
+                //let previousChar = Array(noCalculatedDataKey.characters)[i-1]
+                if !self.isLowercase(string: String(currentChar)) && self.isLowercase(string: String(previousChar)) {
+                    indiciesToAddSpaces.append(i)
+                }
+            }
+        }
+        var finalName = noCalculatedDataKey
+        indiciesToAddSpaces.sort()
+        for i in 0..<indiciesToAddSpaces.count {
+            let ind = indiciesToAddSpaces[i] + i //Adding i to ajust for the fact that we are adding characters as we go here
+            finalName = finalName.insert(string: " ", ind: ind)
+        }
+        finalName = String(Array(finalName.characters)[0]).uppercased() + String(finalName.characters.dropFirst())
+        return finalName
+    }
+    
+    static func isLowercase(string: String) -> Bool {
+        let set = CharacterSet.lowercaseLetters
+        
+        if let scala = UnicodeScalar(string) {
+            return set.contains(scala)
+        } else {
+            return false
+        }
+    }
+}
+
+extension String {
+    func insert(string:String,ind:Int) -> String {
+        return  String(self.characters.prefix(ind)) + string + String(self.characters.suffix(self.characters.count-ind))
+    }
 }
 
 
