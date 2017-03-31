@@ -638,7 +638,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     let match = sortedMatches[i]
                     counter += 1
                     if (match.redAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) || (match.blueAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) {
-                        return "\(counter + 1)"
+                        return "\(counter)"
                     }
                 }
             }

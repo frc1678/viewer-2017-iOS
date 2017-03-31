@@ -245,7 +245,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     secondDataPoint = nil
                 }
                 
-                //no longTextCells
+                //notes
                 if Utils.teamDetailsKeys.TIMDLongTextCells.contains(dataKey) {
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     
@@ -264,7 +264,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //notesCell.heightAnchor
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
-                } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") {
+                } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UnrankedCell", for: indexPath) as! UnrankedTableViewCell
                     
                     //titleLabel is the humanReadable version of dataKey
