@@ -247,10 +247,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //"calculatedData.avgLowShotsTele",
             //"calculatedData.sdLowShotsTele",
             //"calculatedData.avgHoppersOpenedTele",
-            //"calculatedData.avgGearGroundIntakesTele",
+            "calculatedData.avgGearGroundIntakesTele",
+            //"calculatedData.avgLoaderIntakesTele",
             "calculatedData.avgGearsFumbledTele",
             "calculatedData.avgGearsEjectedTele",
-            //"calculatedData.avgLoaderIntakesTele",
             //"calculatedData.sdGearsPlacedTele",
             "calculatedData.avgGearsPlacedTele",
         ]
@@ -724,7 +724,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         for i in 0..<noCalculatedDataKey.characters.count {
             if i != 0 {
                 let currentChar = Array(noCalculatedDataKey.characters)[i]
-                //let previousChar = Array(noCalculatedDataKey.characters)[i-1]
+                let previousChar = Array(noCalculatedDataKey.characters)[i-1]
                 if !self.isLowercase(string: String(currentChar)) && self.isLowercase(string: String(previousChar)) {
                     indiciesToAddSpaces.append(i)
                 }
