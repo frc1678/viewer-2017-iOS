@@ -392,7 +392,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
      
      - returns: A string with the human readable pit org
      */
-    func pitOrgForNumberString(_ numString: String) -> String {
+    /*func pitOrgForNumberString(_ numString: String) -> String {
         var translated = ""
         switch numString {
         case "0": translated = "Terrible"
@@ -404,7 +404,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
         return translated
 
-    }
+    }*/ 
     /**
      Translates numbers into what it actually means.
      
