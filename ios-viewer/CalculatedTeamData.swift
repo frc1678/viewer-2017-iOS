@@ -13,6 +13,9 @@ public final class CalculatedTeamData: NSObject {
   // MARK: Declaration for string constants to be used to decode and also serialize.
   private struct SerializationKeys {
     static let sdLiftoffAbility = "sdLiftoffAbility"
+    static let RScoreDefense = "RScoreDefense"
+    static let RScoreAgility = "RScoreAgility"
+    static let RScoreDrivingAbility = "RScoreDrivingAbility"
     static let incapacitatedPercentage = "incapacitatedPercentage"
     static let overallSecondPickAbility = "overallSecondPickAbility"
     static let avgHighShotsTele = "avgHighShotsTele"
@@ -38,6 +41,7 @@ public final class CalculatedTeamData: NSObject {
     static let avgLowShotsTele = "avgLowShotsTele"
     static let sdHighShotsAuto = "sdHighShotsAuto"
     static let avgSpeed = "avgSpeed"
+    static let RScoreSpeed = "RScoreSpeed"
     static let disabledPercentage = "disabledPercentage"
     static let avgLowShotsAuto = "avgLowShotsAuto"
     static let firstPickAbility = "firstPickAbility"
@@ -62,12 +66,16 @@ public final class CalculatedTeamData: NSObject {
 
   // MARK: Properties
   public var sdLiftoffAbility: Float = -1.0
+    public var RScoreDefense: Float = -1.0
+    public var RScoreAgility: Float = -1.0
+    public var RScoreDrivingAbility: Float = -1.0
   public var incapacitatedPercentage: Float = -1.0
   public var overallSecondPickAbility: Float = -1.0
   public var avgHighShotsTele: Float = -1.0
   public var baselineReachedPercentage: Float = -1.0
   public var avgGearsPlacedByLiftAuto: Float = -1.0
   public var avgGearControl: Float = -1.0
+    public var RScoreSpeed: Float = -1.0
   public var actualSeed: Int = -1
     public var avgDrivingAbility: Float = -1.0
   public var sdHighShotsTele: Float = -1.0
@@ -107,6 +115,7 @@ public final class CalculatedTeamData: NSObject {
     public var avgGearsPlacedTele: Float = -1.0
     public var sdGearsPlacedTele: Float = -1.0
     
+    
 
 
 
@@ -124,6 +133,9 @@ public final class CalculatedTeamData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
+    RScoreDefense = json[SerializationKeys.RScoreDefense].floatValue
+    RScoreAgility = json[SerializationKeys.RScoreAgility].floatValue
+    RScoreDrivingAbility = json[SerializationKeys.RScoreDrivingAbility].floatValue
     sdLiftoffAbility = json[SerializationKeys.sdLiftoffAbility].floatValue
     incapacitatedPercentage = json[SerializationKeys.incapacitatedPercentage].floatValue
     overallSecondPickAbility = json[SerializationKeys.overallSecondPickAbility].floatValue
@@ -150,6 +162,7 @@ public final class CalculatedTeamData: NSObject {
     avgLowShotsTele = json[SerializationKeys.avgLowShotsTele].floatValue
     sdHighShotsAuto = json[SerializationKeys.sdHighShotsAuto].floatValue
     avgSpeed = json[SerializationKeys.avgSpeed].floatValue
+    RScoreSpeed = json[SerializationKeys.RScoreSpeed].floatValue
     disabledPercentage = json[SerializationKeys.disabledPercentage].floatValue
     avgLowShotsAuto = json[SerializationKeys.avgLowShotsAuto].floatValue
     firstPickAbility = json[SerializationKeys.firstPickAbility].floatValue
@@ -178,6 +191,9 @@ public final class CalculatedTeamData: NSObject {
   public func dictionaryRepresentation() -> [String: Any] {
     var dictionary: [String: Any] = [:]
     dictionary[SerializationKeys.avgDrivingAbility] = avgDrivingAbility
+    dictionary[SerializationKeys.RScoreDefense] = RScoreDefense
+    dictionary[SerializationKeys.RScoreAgility] = RScoreAgility
+    dictionary[SerializationKeys.RScoreDrivingAbility] = RScoreDrivingAbility
     dictionary[SerializationKeys.sdLiftoffAbility] = sdLiftoffAbility
     dictionary[SerializationKeys.incapacitatedPercentage] = incapacitatedPercentage
     dictionary[SerializationKeys.overallSecondPickAbility] = overallSecondPickAbility
@@ -203,6 +219,7 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.avgLowShotsTele] = avgLowShotsTele
     dictionary[SerializationKeys.sdHighShotsAuto] = sdHighShotsAuto
     dictionary[SerializationKeys.avgSpeed] = avgSpeed
+    dictionary[SerializationKeys.RScoreSpeed] = RScoreSpeed
     dictionary[SerializationKeys.disabledPercentage] = disabledPercentage
     dictionary[SerializationKeys.avgLowShotsAuto] = avgLowShotsAuto
     dictionary[SerializationKeys.firstPickAbility] = firstPickAbility

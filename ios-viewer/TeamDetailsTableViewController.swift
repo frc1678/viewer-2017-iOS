@@ -12,11 +12,12 @@ import SDWebImage
 import Haneke
 
 //TableViewDataSource/Delegate allows vc to contain a table view/pass in info.
-class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate {
+class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
     
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
     //setup visuals
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var teamNumberLabel: UILabel!
     @IBOutlet weak var teamNameLabel: UILabel!
@@ -45,7 +46,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if team?.number != nil {
                 tableView?.reloadData()
                 self.updateTitleAndTopInfo()
-                tableViewHeightConstraint?.constant = (tableView.contentSize.height)
+                //tableViewHeightConstraint?.constant = (tableView.contentSize.height)
                 
                 self.reloadImage()
             }
@@ -62,12 +63,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         self.firebaseFetcher?.getImageForTeam((self.team?.number)!, fetchedCallback: { (image) -> () in
                             DispatchQueue.main.async(execute: { () -> Void in
                                 imageView.image = image
+                                self.resetTableViewHeight()
                             })
                             }, couldNotFetch: {
                                 DispatchQueue.main.async(execute: { () -> Void in
                                     if team.pitAllImageURLs != nil {
                                         if team.pitSelectedImageName != nil && team.pitSelectedImageName != "" {
-                                            imageView.hnk_setImageFromURL(URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!)
+                                            let url = URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
+                                            imageView.hnk_setImageFromURL(url, success: { _ in
+                                                self.resetTableViewHeight()
+                                                })
                                         }
                                     }
                                 })
@@ -81,18 +86,37 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                             }
                         }
                     }
+                
                 if self.team?.pitSelectedImageName != nil {
                     if self.teamSelectedImageView.image != MWPhoto(url: URL(string: (self.team?.pitSelectedImageName)!)) && self.photos.count > 0 {
                         if self.photos.count > 0 && self.photos[0].underlyingImage != noRobotPhoto && (self.photos[0].underlyingImage ?? UIImage()).size.height > 0 {
                             DispatchQueue.main.async(execute: { () -> Void in
                                 
                                 self.teamSelectedImageView.image = self.photos[0].underlyingImage
+                                self.resetTableViewHeight()
+                               
+
                             })
+                            
                         }
+                        self.resetTableViewHeight()
                     }
                 }
             }
         }
+        self.resetTableViewHeight()
+    }
+    
+    func resetTableViewHeight() {
+        DispatchQueue.main.async(execute: { () -> Void in
+            
+            self.tableViewHeightConstraint?.constant = (self.tableView.contentSize.height)
+            self.scrollView.contentSize.height = self.tableViewHeightConstraint.constant + self.tableView.frame.origin.y
+            //self.tableView.setNeedsUpdateConstraints()
+            //self.scrollView.setNeedsUpdateConstraints()
+            self.scrollView.setNeedsDisplay()
+            self.tableView.setNeedsDisplay()
+        })
     }
     
     override func viewDidLoad() {
@@ -106,6 +130,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
         self.navigationController?.delegate = self
         self.photoBrowser.delegate = self
+        self.scrollView.delegate = self
         
         //array of all photos
         photos = []
@@ -124,8 +149,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        //self.reload()
         reloadImage()
-    }
+
+           }
+    
     
     
     //Not used in 2017
@@ -264,6 +292,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     //notesCell.heightAnchor
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
+                    
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UnrankedCell", for: indexPath) as! UnrankedTableViewCell
                     
@@ -385,6 +414,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //
+    }
+    
+    /*func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        //
+    }*/
+    
     /**
      Translates numbers into what it actually means.
      

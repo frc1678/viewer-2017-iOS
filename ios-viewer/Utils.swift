@@ -328,7 +328,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitDriveTrain",
             "pitDidDemonstrateCheesecakePotential",
             "pitAvailableWeight",
-            "pitOrganization",
+            //"pitOrganization",
             "pitProgrammingLanguage"
         ]
         
@@ -354,12 +354,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     static let superKeys = [
         //superNotes- They're in TIMDs, so see TeamDetails for more info
         "superNotes",
-        "calculatedData.avgDefense",
-        "calculatedData.avgAgility",
-        "calculatedData.avgSpeed",
+        "calculatedData.RScoreDefense",
+        "calculatedData.RScoreAgility",
+        "calculatedData.RScoreSpeed",
         //"calculatedData.avgBallControl",
-        "calculatedData.avgGearControl",
-        "calculatedData.avgDrivingAbility"
+        //"calculatedData.avgGearControl",
+        "calculatedData.RScoreDrivingAbility"
     ]
     static let statusKeys = ["uploadedData.incapacitated", "uploadedData.disabled"]
     static let miscKeys = ["uploadedData.miscellaneousNotes"]
@@ -511,7 +511,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitLowBarCapability": "Low Bar Ability",
         "calculatedData.autoAbility" : "Auto Ability",
         "calculatedData.citrusDPR" : "Citrus DPR",
-        "calculatedData.RScoreDrivingAbility": " R Score Driving Ability",
+        "calculatedData.RScoreDrivingAbility": "R Score Driving Ability",
         "calculatedData.drivingAbility": "Driving Ability",
         "pitPotentialLowBarCapability" : "Low Bar Potential",
         "pitHeightOfBallLeavingShooter": "Shot Release Height",

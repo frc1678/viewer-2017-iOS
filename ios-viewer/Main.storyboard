@@ -148,19 +148,19 @@
                                 <rect key="frame" x="16" y="20" width="288" height="147"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iqc-Z7-lYn">
-                                        <rect key="frame" x="8" y="8" width="272" height="77"/>
+                                        <rect key="frame" x="8" y="8" width="272" height="76"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOc-X3-Q1J">
-                                        <rect key="frame" x="148" y="93" width="132" height="46"/>
+                                        <rect key="frame" x="148" y="92" width="132" height="47"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8a-qH-5Yw">
-                                        <rect key="frame" x="8" y="93" width="132" height="46"/>
+                                        <rect key="frame" x="8" y="92" width="132" height="47"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -490,9 +490,10 @@
                     <connections>
                         <outlet property="imageViewHeightConstraint" destination="LcJ-aj-6aX" id="9lE-In-2tV"/>
                         <outlet property="predictedSeed" destination="qLK-pA-5hg" id="kM3-xV-4GR"/>
+                        <outlet property="scrollView" destination="sQr-7D-beT" id="Z6p-ZY-CyT"/>
                         <outlet property="seed" destination="mFc-Ax-siZ" id="hjh-nt-FKM"/>
                         <outlet property="tableView" destination="LzD-ke-M1D" id="4vb-WO-NnO"/>
-                        <outlet property="tableViewHeightConstraint" destination="Bfb-yf-St3" id="abY-4g-Iet"/>
+                        <outlet property="tableViewHeightConstraint" destination="Bfb-yf-St3" id="dME-5c-Rfa"/>
                         <outlet property="teamNameLabel" destination="h31-C2-HDV" id="HcO-Q5-Fbt"/>
                         <outlet property="teamNumberLabel" destination="Wgi-0q-wmd" id="8K2-aX-hBG"/>
                         <outlet property="teamSelectedImageView" destination="E9H-uJ-eX2" id="mr7-HH-t5q"/>
