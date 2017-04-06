@@ -289,7 +289,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "RScoreSpeed" : "rankSpeed",
             "RScoreTorque" : "rankTorque",
             //Misc
-            "avgGroundIntakes" : "numGroundIntakesTele",
+            "avgGearGroundIntakesTele" : "numGearGroundIntakesTele",
             "actualNumRPs" : "calculatedData.numRPs",
             "numAutoPoints" : "calculatedData.numAutoPoints",
             "baselineReachedPercentage" : "didReachBaselineAuto",
