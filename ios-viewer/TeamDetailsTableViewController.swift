@@ -111,11 +111,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         DispatchQueue.main.async(execute: { () -> Void in
             
             self.tableViewHeightConstraint?.constant = (self.tableView.contentSize.height)
-            self.scrollView.contentSize.height = self.tableViewHeightConstraint.constant + self.tableView.frame.origin.y
-            //self.tableView.setNeedsUpdateConstraints()
-            //self.scrollView.setNeedsUpdateConstraints()
-            self.scrollView.setNeedsDisplay()
-            self.tableView.setNeedsDisplay()
+            if self.scrollView != nil && self.tableView != nil {
+                self.scrollView.contentSize.height = self.tableViewHeightConstraint.constant + self.tableView.frame.origin.y
+            
+                //self.tableView.setNeedsUpdateConstraints()
+                //self.scrollView.setNeedsUpdateConstraints()
+                self.scrollView.setNeedsDisplay()
+                self.tableView.setNeedsDisplay()
+            }
         })
     }
     
