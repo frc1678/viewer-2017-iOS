@@ -32,8 +32,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var blueOfficialScoreLabel: UILabel!
     @IBOutlet weak var redPredictedScoreLabel: UILabel!
     @IBOutlet weak var bluePredictedScoreLabel: UILabel!
-    @IBOutlet weak var redErrorPercentageLabel: UILabel!
-    @IBOutlet weak var blueErrorPercentageLabel: UILabel!
     
     @IBOutlet weak var redTeamOneButton: UIButton!
     @IBOutlet weak var r1TableView: UITableView!
@@ -249,7 +247,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 //setting labels
                 redOfficialScoreLabel.text = "Score: \(getLabelTitle(match.redScore))"
                 redPredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(cd.predictedRedScore))"
-                redErrorPercentageLabel.text = "Win Chance: \(percentageValueOf(cd.redWinChance as AnyObject?))"
             }
             
             let redTeams = firebaseFetcher?.getTeamsFromNumbers(match.redAllianceTeamNumbers!)
@@ -268,7 +265,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             //setting labels
             blueOfficialScoreLabel.text = "Score: \(getLabelTitle(match.blueScore))"
             bluePredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(match.calculatedData?.predictedBlueScore))"
-            blueErrorPercentageLabel.text = "Win Chance: \(percentageValueOf(match.calculatedData?.blueWinChance as AnyObject?))"
             
             let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match.blueAllianceTeamNumbers)
             if (blueTeams?.count)! > 0 {

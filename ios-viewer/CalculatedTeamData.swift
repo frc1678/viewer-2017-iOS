@@ -61,6 +61,7 @@ public final class CalculatedTeamData: NSObject {
     static let sdGearsPlacedAuto = "sdGearsPlacedAuto"
     static let avgGearsPlacedTele = "avgGearsPlacedTele"
     static let sdGearsPlacedTele = "sdGearsPlacedTele"
+    static let allRotorsAbility = "allRotorsAbility"
 
   }
 
@@ -114,7 +115,8 @@ public final class CalculatedTeamData: NSObject {
     public var sdGearsPlacedAuto: Float = -1.0
     public var avgGearsPlacedTele: Float = -1.0
     public var sdGearsPlacedTele: Float = -1.0
-    
+    public var allRotorsAbility: Float = -1.0
+
     
 
 
@@ -183,6 +185,7 @@ public final class CalculatedTeamData: NSObject {
     avgGearsPlacedTele = json[SerializationKeys.avgGearsPlacedTele].floatValue
     sdGearsPlacedTele = json[SerializationKeys.sdGearsPlacedTele].floatValue
     avgDrivingAbility = json[SerializationKeys.avgDrivingAbility].floatValue
+    allRotorsAbility = json[SerializationKeys.allRotorsAbility].floatValue
   }
 
   /// Generates description of the object in the form of a NSDictionary.
@@ -241,7 +244,7 @@ public final class CalculatedTeamData: NSObject {
     dictionary[SerializationKeys.avgGearsPlacedTele] = avgGearsPlacedTele
     dictionary[SerializationKeys.sdGearsPlacedTele] = sdGearsPlacedTele
     dictionary[SerializationKeys.avgDrivingAbility] = avgDrivingAbility
-
+    dictionary[SerializationKeys.allRotorsAbility] = allRotorsAbility
 
     return dictionary
   }

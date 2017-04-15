@@ -32,13 +32,13 @@ class OverallSecondPickAbilityViewController: ArrayTableViewController {
         if team!.number != -1 {
             multiCell!.teamLabel!.text = String(team!.number)
         }
-        if team!.calculatedData?.overallSecondPickAbility != nil {
-            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.overallSecondPickAbility), toDecimalPlaces: 2)
+        if team!.calculatedData?.allRotorsAbility != nil {
+            multiCell!.scoreLabel!.text = String(Utils.roundValue(Float(team!.calculatedData!.allRotorsAbility), toDecimalPlaces: 2)
             )
         } else {
             multiCell!.scoreLabel!.text = ""
         }
-        multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.overallSecondPickAbility"))"
+        multiCell!.rankLabel!.text = "\(self.firebaseFetcher.rankOfTeam(team!, withCharacteristic: "calculatedData.allRotorsAbility"))"
     }
    
     

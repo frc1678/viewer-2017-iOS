@@ -119,7 +119,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.disabledPercentage",
             "calculatedData.disfunctionalPercentage",
             "calculatedData.incapacitatedPercentage",
-            "calculatedData.baselineReachedPercentage",
             "calculatedData.liftoffPercentage"
         ]
         
@@ -224,7 +223,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
             "calculatedData.avgHighShotsAuto",
             //"calculatedData.avgLowShotsAuto",
-            "calculatedData.baselineReachedPercentage",
             //"calculatedData.avgHoppersOpenedAuto",
             "calculatedData.avgGearsPlacedAuto",
             //"calculatedData.sdGearsPlacedAuto",
@@ -371,7 +369,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numLowShotsAuto",
         "numHoppersOpenedAuto",
         "calculatedData.numGearsPlacedAuto",
-        "didReachBaselineAuto",
         "calculatedData.numHighShotsAuto",
     ]
     

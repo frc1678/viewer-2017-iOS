@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rQz-no-Mgb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="rQz-no-Mgb">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +20,7 @@
         <!--Second Pick-->
         <scene sceneID="aYr-19-gzq">
             <objects>
-                <tableViewController title="Second Pick" id="rQz-no-Mgb" customClass="OverallSecondPickAbilityViewController" customModule="scout_viewer_2016_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="Second Pick" id="rQz-no-Mgb" customClass="OverallSecondPickAbilityViewController" customModule="ios_viewer" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ka5-bb-cut">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -29,7 +30,7 @@
                             <outlet property="delegate" destination="rQz-no-Mgb" id="UPG-bD-lIS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Second Pick" id="hHb-Ta-5ho"/>
+                    <navigationItem key="navigationItem" title="4 Rotors" id="hHb-Ta-5ho" userLabel="3 Rotors and Defense"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <segue destination="8rX-aN-Arn" kind="show" identifier="TeamDetails" id="5Yr-Rh-Fhg"/>

@@ -340,7 +340,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getOverallSecondPickList() -> [Team] {
-        return self.teams.sorted { $0.calculatedData?.overallSecondPickAbility > $1.calculatedData?.overallSecondPickAbility }
+        return self.teams.sorted { $0.calculatedData?.allRotorsAbility > $1.calculatedData?.allRotorsAbility }
     }
     
     /*func getConditionalSecondPickList(_ teamNum: Int) -> [Team] {
