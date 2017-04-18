@@ -319,12 +319,12 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return self.getMatchesForTeamWithNumber(number).map(matchNum)
     }
     
-    func getMatchesForTeam(_ teamNumbah: Int) -> [Match] {
+    func getMatchesForTeam(_ teamNumber: Int) -> [Match] {
         var importantMatches = [Match]()
         for match in self.matches {
-            let teamNumArray = (match).redAllianceTeamNumbers! + match.blueAllianceTeamNumbers!
+            let teamNumArray = match.redAllianceTeamNumbers! + match.blueAllianceTeamNumbers!
             for number in teamNumArray {
-                if (number as Int) == (teamNumbah as Int) {
+                if (number as Int) == (teamNumber as Int) {
                     importantMatches.append(match)
                 }
             }
@@ -431,7 +431,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func getSortedListbyString(_ path: String) -> [Team] {
+        
         return teams.sorted(by: { (t1, t2) -> Bool in
+            
             if let t1v = t1.value(forKeyPath: path) {
                 if let t2v = t2.value(forKeyPath: path) {
                     if (t1v as AnyObject).doubleValue > (t2v as AnyObject).doubleValue {
@@ -589,6 +591,8 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             var value : Any?
             if path.contains("calculatedData") {
                 value = (TIMD.calculatedData!.dictionaryRepresentation() as NSDictionary).object(forKey: path.replacingOccurrences(of: "calculatedData.", with: ""))
+            } else if path.contains("gearsPlacedByLiftAuto") {
+                value = TIMD.gearsPlacedByLiftAuto?[path.components(separatedBy: ".")[1]]
             } else {
                 value = (TIMD.dictionaryRepresentation() as NSDictionary).object(forKey: path)
             }
@@ -632,7 +636,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     func matchesUntilTeamNextMatch(_ teamNumber : Int) -> String? {
         let sortedMatches = self.matches.sorted { Int($0.number) < Int($1.number) }
         if self.currentMatchManager.currentMatch < sortedMatches.count {
-            if let indexOfCurrentMatch = sortedMatches.index(of: self.getMatch(self.currentMatchManager.currentMatch ?? 0)!) {
+            if let indexOfCurrentMatch = sortedMatches.index(of: self.getMatch(self.currentMatchManager.currentMatch) ?? sortedMatches[0]) {
                 var counter = 0
                 for i in indexOfCurrentMatch + 1..<self.matches.count {
                     let match = sortedMatches[i]

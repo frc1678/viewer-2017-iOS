@@ -74,7 +74,7 @@ public final class CalculatedTeamData: NSObject {
   public var overallSecondPickAbility: Float = -1.0
   public var avgHighShotsTele: Float = -1.0
   public var baselineReachedPercentage: Float = -1.0
-  public var avgGearsPlacedByLiftAuto: Float = -1.0
+    public var avgGearsPlacedByLiftAuto: [String: Float]?
   public var avgGearControl: Float = -1.0
     public var RScoreSpeed: Float = -1.0
   public var actualSeed: Int = -1
@@ -143,7 +143,7 @@ public final class CalculatedTeamData: NSObject {
     overallSecondPickAbility = json[SerializationKeys.overallSecondPickAbility].floatValue
     avgHighShotsTele = json[SerializationKeys.avgHighShotsTele].floatValue
     baselineReachedPercentage = json[SerializationKeys.baselineReachedPercentage].floatValue
-    avgGearsPlacedByLiftAuto = json[SerializationKeys.avgGearsPlacedByLiftAuto].floatValue
+    avgGearsPlacedByLiftAuto = json[SerializationKeys.avgGearsPlacedByLiftAuto].dictionaryObject as? [String : Float]
     avgGearControl = json[SerializationKeys.avgGearControl].floatValue
     actualSeed = json[SerializationKeys.actualSeed].intValue
     avgDrivingAbility = json[SerializationKeys.avgDrivingAbility].floatValue

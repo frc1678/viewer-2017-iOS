@@ -264,11 +264,12 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'... if NOT a default key
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
-
-                if dataKey.contains("calculatedData") {
-                    dataPoint = team!.value(forKeyPath: dataKey) as AnyObject?? ?? "" as AnyObject?
+                if dataKey.contains("calculatedData.avgGearsPlacedByLiftAuto") {
+                    dataPoint = team?.calculatedData?.avgGearsPlacedByLiftAuto?[dataKey.components(separatedBy: ".")[2]] as AnyObject
+                } else if dataKey.contains("calculatedData") {
+                    dataPoint = team!.value(forKeyPath: dataKey) as AnyObject
                 } else {
-                    dataPoint = (team!.dictionaryRepresentation() as NSDictionary).object(forKey: dataKey) as AnyObject?? ?? "" as AnyObject?
+                    dataPoint = (team!.dictionaryRepresentation() as NSDictionary).object(forKey: dataKey) as AnyObject
                 }
                 
                 if secondDataPoint as? String == "" {
@@ -737,9 +738,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
             }
         } else if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
             let cs = cell.teamLabel!.text
-            if ((cs ?? "").contains("Times Crossed"))  {
-                performSegue(withIdentifier: "defenseCrossedSegue", sender:indexPath)
-            } else if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
+            if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
                 if !Utils.teamDetailsKeys.notGraphingValues.contains(cs!) && !cs!.contains("σ") { performSegue(withIdentifier: "CTIMDGraph", sender: indexPath) }
             } else {
                 performSegue(withIdentifier: "TGraph", sender: indexPath)
