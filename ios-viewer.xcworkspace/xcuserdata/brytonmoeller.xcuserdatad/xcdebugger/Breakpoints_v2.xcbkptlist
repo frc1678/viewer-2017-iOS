@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-viewer/FirebaseDataFetcher.swift"
-            timestampString = "506801238.378429"
+            timestampString = "514069777.513264"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "601"
-            endingLineNumber = "601"
+            startingLineNumber = "605"
+            endingLineNumber = "605"
             landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-viewer/TeamDetailsTableViewController.swift"
-            timestampString = "512953932.17398"
+            timestampString = "514067338.679213"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "293"
+            endingLineNumber = "293"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -100,12 +100,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-viewer/TeamDetailsTableViewController.swift"
-            timestampString = "512953932.17398"
+            timestampString = "514067338.679213"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
-            landmarkName = "tableView(_:willDisplay:forRowAt:)"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
+            landmarkName = "TeamDetailsTableViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-viewer/FirebaseDataFetcher.swift"
+            timestampString = "514068218.596767"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
+            landmarkName = "getSortedListbyString(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-viewer/FirebaseDataFetcher.swift"
+            timestampString = "514069885.864615"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "595"
+            endingLineNumber = "595"
+            landmarkName = "getMatchValuesForTeamForPath(_:forTeam:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

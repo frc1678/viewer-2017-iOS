@@ -225,6 +225,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //"calculatedData.avgLowShotsAuto",
             //"calculatedData.avgHoppersOpenedAuto",
             "calculatedData.avgGearsPlacedAuto",
+            "calculatedData.avgGearsPlacedByLiftAuto.allianceWall",
+            "calculatedData.avgGearsPlacedByLiftAuto.hpStation",
+            "calculatedData.avgGearsPlacedByLiftAuto.boiler",
+
             //"calculatedData.sdGearsPlacedAuto",
             //"calculatedData.sdLowShotsAuto",
             //"calculatedData.sdHighShotsAuto"
@@ -265,6 +269,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "avgHighShotsAuto" : "calculatedData.numHighShotsAuto",
             "avgLowShotsTele" : "calculatedData.numLowShotsTele",
             "teleopShotAbility" : "calculatedData.teleopShotAbility",
+            "avgGearsPlacedByLiftAuto.allianceWall" : "gearsPlacedByLiftAuto.allianceWall",
+            "avgGearsPlacedByLiftAuto.hpStation" : "gearsPlacedByLiftAuto.hpStation",
+            "avgGearsPlacedByLiftAuto.boiler" : "gearsPlacedByLiftAuto.boiler",
             "lowShotAccuracyTele" : "calculatedData.lowShotAccuracyTele",
             "highShotAccuracyTele" : "calculatedData.highShotAccuracyTele",
             "lowShotAccuracyAuto" : "calculatedData.lowShotAccuracyAuto",
@@ -473,6 +480,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     /** A dictionary with datapoints as keys and Human Readable Names as indices */
     static let humanReadableNames = [
         "superNotes": "Super Scout Notes",
+        "calculatedData.avgGearsPlacedByLiftAuto.allianceWall": "Avg. Center Gears",
+        "calculatedData.avgGearsPlacedByLiftAuto.hpStation": "Avg. HP Side Gears",
+        "calculatedData.avgGearsPlacedByLiftAuto.boiler": "Avg. Boiler Side Gears",
         "calculatedData.actualSeed" : "Seed",
         "calculatedData.avgEvasion" : "Avg. Evasion",
         "calculatedData.avgGroundIntakes" : "Avg. Ground Intakes",
@@ -577,7 +587,6 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.avgLoaderIntakesAuto" : "Avg. Loader Intakes Auto",
         "calculatedData.sdGearsPlacedByLiftTele" : "σ Gears Placed Tele",
         "calculatedData.sdGearsPlacedByLiftAuto" : "σ Gears Placed Auto",
-        "calculatedData.avgGearsPlacedByLiftTele" : "Avg. Gears Placed Tele",
         "calculatedData.avgGearsPlacedByLiftAuto" : "Avg. Gears Placed Auto",
         "numHoppersOpenedAuto" : "Num Hoppers Opened Auto",
         "numHoppersOpenedTele" : "Num Hoppers Opened Tele",
@@ -596,9 +605,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numHighShotsAuto" : "High Shots Made Auto",
         "calculatedData.numGearsPlacedTele" : "Num Gears Scored Tele",
         "rankGearControl" : "Gear Control Rank",
-        "calculatedData.avgGearsPlacedAuto" : "Avg Gears Placed Auto",
+        "calculatedData.avgGearsPlacedAuto" : "Avg. Total Gears Placed Auto",
         "calculatedData.sdGearsPlacedAuto" : "σ Gears Placed Auto",
-        "calculatedData.avgGearsPlacedTele" : "Avg Gears Placed Tele",
+        "calculatedData.avgGearsPlacedTele" : "Avg. Gears Placed Tele",
         "calculatedData.sdGearsPlacedTele" : "σ Gears Placed Tele",
         "calculatedData.avgHopperShotTime" : "Avg. Hopper Shooting Time",
         "pitDriveTrain" : "Drive Train"

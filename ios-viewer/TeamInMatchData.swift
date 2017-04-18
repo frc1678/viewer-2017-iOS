@@ -67,6 +67,7 @@ public final class TeamInMatchData: NSObject {
     public var numGearsEjectedTele: Float?
     public var calculatedData : CalculatedTeamInMatchData?
     public var superNotes: String?
+    public var gearsPlacedByLiftAuto: [String: Int]?
 
 
   // MARK: SwiftyJSON Initializers
@@ -82,6 +83,7 @@ public final class TeamInMatchData: NSObject {
   ///
   /// - parameter json: JSON object from SwiftyJSON.
   public required init(json: JSON) {
+    gearsPlacedByLiftAuto = json[SerializationKeys.gearsPlacedByLiftAuto].dictionaryObject as? [String: Int]
     rankDefense = json[SerializationKeys.rankDefense].int
     rankGearControl = json[SerializationKeys.rankGearControl].int
     if let items = json[SerializationKeys.lowShotTimesForBoilerTele].array { lowShotTimesForBoilerTele = items.map { ShotTimesForBoiler(json: $0) } }
@@ -138,7 +140,7 @@ public final class TeamInMatchData: NSObject {
     if let value = numGearsFumbledTele { dictionary[SerializationKeys.numGearsFumbledTele] = value }
     if let value = numGearsEjectedTele { dictionary[SerializationKeys.numGearsEjectedTele] = value }
     if let value = numGearsEjectedTele { dictionary[SerializationKeys.superNotes] = value }
-
+    dictionary[SerializationKeys.gearsPlacedByLiftAuto] = gearsPlacedByLiftAuto
     return dictionary
   }
 
