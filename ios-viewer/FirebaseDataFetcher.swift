@@ -56,16 +56,22 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     let dev2Token = "hL8fStivTbHUXM8A0KXBYPg2cMsl80EcD7vgwJ1u"
     let devToken = "j1r2wo3RUPMeUZosxwvVSFEFVcrXuuMAGjk6uPOc"
     let stratDevToken = "IMXOxXD3FjOOUoMGJlkAK5pAtn89mGIWAEnaKJhP"
+    //array of all matches
     var matches = [Match]()
+    //array of all TIMDs
     var teamInMatches = [TeamInMatchData]()
+    //image urls
     var imageUrls = [Int: String]()
     var allTheData = NSDictionary()
     
     let firebase : FIRDatabaseReference
     
     override init() {
+        //reference to firebase
         firebase = FIRDatabase.database().reference()
+        //initiate currentmatchmanager
         self.currentMatchManager = CurrentMatchManager()
+        //initiate notification manager
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         super.init()
         
@@ -78,11 +84,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         
     }
     
+    //returns a match given a snapshot
     func makeMatchFromSnapshot(_ snapshot: FIRDataSnapshot) -> Match {
         
         return Match(json: JSON(snapshot.value!))
     }
     
+    //returns a team given a snapshot
     func makeTeamFromSnapshot(_ snapshot: FIRDataSnapshot) -> Team {
         return Team(json: JSON(snapshot.value!))
     }
@@ -95,18 +103,24 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }) .resume()
     }
     
+    //get and cache an image for a team and url
     func cacheImage(_ teamNum : Int, url : String?) {
         if let urlString = url {
             let url = URL(string: urlString)
+            //get the info from the url that's passed in
             getDataFromUrl(url!) { [unowned self] (data, error) in
                 guard let data = data , error == nil else { return }
+                //cache the image to the team
                 self.imageCache.set(value: UIImage(data: data) ?? UIImage(), key: "\(teamNum)")
+                //warn that memory updated?
                 UIApplication.shared.perform(Selector(("_performMemoryWarning")))
             }
         }
     }
     
+    //get an image for a team
     func getImageForTeam(_ teamNumber : Int, fetchedCallback : @escaping (UIImage)->(), couldNotFetch: @escaping ()->()) { // Is already async
+        //go into the cache and find a team. get the image from the team
         self.imageCache.fetch(key: "\(teamNumber)").onSuccess { (image) -> () in
             fetchedCallback(image)
             }.onFailure { (E) -> () in
@@ -114,12 +128,17 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
+    //input a team, store as snap
     func updateCacheIfNeeded(_ snap : FIRDataSnapshot, team : Team) {
         let defaults = UserDefaults.standard
+        //check if the user wants to aggressively download
         let shouldAggressivelyDownload = defaults.bool(forKey: "predownloadPreference")
         if shouldAggressivelyDownload {
+            //look for the selected image url on firebase
             if let newURL = snap.childSnapshot(forPath: "selectedImageURL").value {
+                //if the url has changed
                 if team.pitSelectedImageName != newURL as? String {
+                    //cache the new image under the team's number
                     cacheImage(snap.childSnapshot(forPath: "number").value as! Int, url: newURL as? String)
                 }
             }
@@ -129,41 +148,54 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     // MARK: Data Fetching
     func getAllTheData() {
         self.firebase.observeSingleEvent(of: .value, with: { [unowned self] (snap) -> Void in
+            //create a firebase reference that points to Matches
             let matchReference = self.firebase.child("Matches")
             
+            //if a child is added to the matches on firebase, make a snapshot
             matchReference.observe(.childAdded, with: { [unowned self] snapshot in
+                //appends a match for the current snapshot to the matches
                 self.matches.append(self.makeMatchFromSnapshot(snapshot))
+                //this line seems redundant but I don't have a lightning cable to test... test this, future me!
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
                 if self.hasUpdatedMatchOnSetup == false {
                     self.hasUpdatedMatchOnSetup = true
                     self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                 }
                 })
-            
+            //if a child has changed, make a snapshot
             matchReference.observe(.childChanged, with: { [unowned self] snapshot in
+                //increase matchCounter
                 self.matchCounter += 1
                 print(self.currentMatchManager.currentMatch)
+                //once again, future me: test commenting out this line
                 self.currentMatchManager.currentMatch = self.currentMatchManager.currentMatch
+                //gets the match number
                 let number = (snapshot.childSnapshot(forPath: "number").value as? Int)!
                 for matchIndex in 0..<self.matches.count {
                     let match = self.matches[matchIndex]
                     if match.number == number {
-                        
+                        //update the appropriate match
                         self.matches[matchIndex] = self.makeMatchFromSnapshot(snapshot)
+                        
                         if match.redScore == -1 && self.matches[matchIndex].redScore != -1 {
                         }
                         self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                     }
                 }
                 })
-            
+            //create a reference to teams
             let teamReference = self.firebase.child("Teams")
+            //if there's a new child, make a snapshot
             teamReference.observe(.childAdded, with: { [unowned self] snapshot in
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    //makes a team
                     let team = self.makeTeamFromSnapshot(snapshot)
+                    //if the team is a real team
                     if team.number != -1 {
+                        //update cache
                         self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {
+                            //add the team to the list
                             self.teams.append(team)
                             self.notificationManager.queueNote("updateLeftTable", specialObject: team)
                         }
@@ -171,13 +203,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                 }
                 })
             
+            //if a team has changed
             teamReference.observe(.childChanged, with: { [unowned self] snapshot in
                DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    //increase the team counter
                     self.teamCounter += 1
+                    //make a team out of the snapshot
                     let team = self.makeTeamFromSnapshot(snapshot)
+                    //if the team's real
                     if team.number != -1 {
+                        //update cache
                         self.updateCacheIfNeeded(snapshot, team: team)
                         DispatchQueue.main.async {
+                            //filter the teams to find the changed team
                             let te = self.teams.filter({ (t) -> Bool in
                                 if t.number == team.number { return true }
                                 return false
@@ -196,29 +234,37 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
                     }
                 }
                 })
-            
+            //get a ref to timds
             let timdRef = self.firebase.child("TeamInMatchDatas")
+            //if a new timd was added
             timdRef.observe(.childAdded, with: { [unowned self] (snap) -> Void in
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    //get a timd for the snapshot
                     let timd = TeamInMatchData(json: JSON(snap.value!))
                     DispatchQueue.main.async {
-                        
+                        //add the timd to the list
                         self.teamInMatches.append(timd)
                         self.notificationManager.queueNote("updateLeftTable", specialObject: nil)
                     }
                 }
                 })
             
+            //if a timd was updated
             timdRef.observe(.childChanged, with: { [unowned self] (snap) -> Void in
                 DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+                    //increase the counter
                     self.TIMDCounter += 1
+                    //get the timd
                     let timd = TeamInMatchData(json: JSON(snap.value!))
                     DispatchQueue.main.async {
+                        //filter to get the appropriate match
                         let tm = self.teamInMatches.filter({ (t) -> Bool in
                             if t.teamNumber == timd.teamNumber && t.matchNumber == timd.matchNumber { return true }
                             return false
                         })
+                        //find the index of the timd
                         if let index = self.teamInMatches.index(of: tm[0]) {
+                            //replace the timd
                             self.teamInMatches[index] = timd
                         }
                         
@@ -228,6 +274,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             
             self.firstCurrentMatchUpdate = false
             
+            //get the current match
             let currentMatchFetch = self.getMatch(self.currentMatchManager.currentMatch)
             
             let m : [String: Any] = ["num":self.currentMatchManager.currentMatch, "redTeams": currentMatchFetch?.redAllianceTeamNumbers ?? [0,0,0], "blueTeams": currentMatchFetch?.blueAllianceTeamNumbers ?? [0,0,0]]
@@ -236,15 +283,20 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         
     }
     
+    //returns all timds for a given team
     func getTIMDataForTeam(_ team: Team) -> [TeamInMatchData] {
         return self.teamInMatches.filter { $0.teamNumber == team.number }
     }
     
+    //returns a timd for a team in a match
     func getTIMDataForTeamInMatch(_ team:Team, inMatch: Match) -> TeamInMatchData? {
+        //gets timds for the team
         let TIMData = self.getTIMDataForTeam(team)
+        //if the team has timds
         if TIMData.count > 0 {
+            //filter to get the timd with the match number of inMatch
             let correctTIMDs = TIMData.filter { $0.matchNumber == inMatch.number} //Hopefully there is exactly one
-
+            
             if correctTIMDs.count == 1 {
                 return correctTIMDs[0]
             }
@@ -253,7 +305,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return nil
     }
     
+    //returns a team for a number
     func getTeam(_ teamNum: Int) -> Team? {
+        //filter to end up with only the team(s) with the given number
         let myTeams = teams.filter { $0.number == teamNum }
         if myTeams.count == 1 { return myTeams[0] }
         else if myTeams.count > 1 {
@@ -265,7 +319,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
+    //gets a match for a number
     func getMatch(_ matchNum: Int) -> Match? {
+        //filter to get the match(es) with the given number
         let myMatches = matches.filter { $0.number == matchNum }
         if myMatches.count == 1 { return myMatches[0] }
         else if myMatches.count > 1 {
@@ -277,6 +333,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
+    //returns an array of teams with the numbers passed in
     func getTeamsFromNumbers(_ teamNums: [Int]?) -> [Team] {
         var teams = [Team]()
         if teamNums != nil {
@@ -289,29 +346,38 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return teams
     }
     
+    //gets all teams in a given match
     func allTeamsInMatch(_ match: Match) -> [Team]  {
         let redTeams = getTeamsFromNumbers(match.redAllianceTeamNumbers! as [Int])
         let blueTeams = getTeamsFromNumbers(match.blueAllianceTeamNumbers! as [Int])
         return redTeams + blueTeams
     }
     
+    //returns an array of matches that contain a team specified by number
     func getMatchesForTeamWithNumber(_ number:Int) -> [Match] {
         var array = [Match]()
+        //iterate thru all matches
         for match in self.matches {
+            //iterate thru all red teams
             for teamNumber in match.redAllianceTeamNumbers! {
+                //if the team matches, add that match
                 if (teamNumber as Int) == number {
                     array.append(match)
                 }
             }
+            //iterate thru all blue teams
             for teamNumber in match.blueAllianceTeamNumbers! {
+                //if the team matches, add that match
                 if (teamNumber as Int) == number {
                     array.append(match)
                 }
             }
         }
+        //sort array by # and return it
         return array.sorted { Int($0.number) < Int($1.number) }
     }
     
+    //returns an array of match numbers for a team specified by number
     func matchNumbersForTeamNumber(_ number: Int) -> [Int] {
         func matchNum(_ match : Match) -> Int {
             return match.number
@@ -319,6 +385,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return self.getMatchesForTeamWithNumber(number).map(matchNum)
     }
     
+    //I think this does the same thing as getMatchesForTeamWithNumber
     func getMatchesForTeam(_ teamNumber: Int) -> [Match] {
         var importantMatches = [Match]()
         for match in self.matches {
@@ -335,10 +402,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     // MARK: Rank
+    //returns first pick list
     func getFirstPickList() -> [Team] {
+        //sorts teams by first pick ability
         return teams.sorted { $0.calculatedData?.firstPickAbility > $1.calculatedData!.firstPickAbility }
     }
     
+    //returns second pick list
     func getOverallSecondPickList() -> [Team] {
         return self.teams.sorted { $0.calculatedData?.allRotorsAbility > $1.calculatedData?.allRotorsAbility }
     }
@@ -368,6 +438,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return teams.sorted { $0.calculatedData!.predictedSeed < $1.calculatedData!.predictedSeed }
     }
     
+    //returns how many rps we think a team will get
     func predictedRPsKeyForTeamNum(_ teamNumber: Int, matchNum: Int) -> String {
         let match = getMatch(matchNum)
         if (match?.redAllianceTeamNumbers!.contains(teamNumber))! {
@@ -377,19 +448,26 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
+    //returns the rank of a team for a given characteristic
     func rankOfTeam(_ team: Team, withCharacteristic: String) -> Int {
         var counter = 0
+        //sort teams by the characteristic
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic)
         
+        //iterate thru the sorted teams
         for loopTeam in sortedTeams {
+            //increase the counter
             counter += 1
+            //if team is found
             if loopTeam.number == team.number {
+                //return rank (how many teams it went thru before it got this team)
                 return counter
             }
         }
         return counter
     }
     
+    //see rankOfTeam
     func reverseRankOfTeam(_ team: Team, withCharacteristic:String) -> Int {
         var counter = 0
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed()
@@ -403,6 +481,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return counter
     }
     
+    //
     func ranksOfTeamInMatchDatasWithCharacteristic(_ characteristic: NSString, forTeam: Team) -> [Int] {
         var array = [Int]()
         let TIMDatas = getTIMDataForTeam(forTeam)
@@ -422,11 +501,13 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return values.index(of: teamNum)! + 1
     }
     
+    //ranks all teams by a characteristic
     func ranksOfTeamsWithCharacteristic(_ characteristic: NSString) -> [Int] {
         var array = [Int]()
         for team in self.teams {
             array.append(self.rankOfTeam(team, withCharacteristic: characteristic as String))
         }
+        //array of all teams in numerical order, represented by rank with characteristic
         return array
     }
     
@@ -452,7 +533,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     
-    
+    //deprecated
     func getAverageDefenseValuesForDict(_ dict: NSDictionary) -> [Int] {
         var valueArray = [Int]()
         let keyArray = dict.allKeys as? [String]
@@ -469,10 +550,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     // MARK: Search Bar
-    
+    //filters matches according to the search string when set to matches
     func filteredMatchesForMatchSearchString(_ searchString:String) -> [Match] {
         var filteredMatches = [Match]()
         for match in self.matches  {
+            //if the match contains the search field
             if String(describing: match.number).range(of: searchString) != nil {
                 filteredMatches.append(match)
             }
@@ -480,6 +562,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return filteredMatches
     }
     
+    //filters matches according to the search string when set to teams, see filteredMatchesForMatchSearchString
     func filteredMatchesforTeamSearchString(_ searchString: String) -> [Match] {
         var filteredMatches = [Match]()
         for match in self.matches  {
@@ -497,9 +580,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return filteredMatches
     }
     
+    //filters general searches
     func filteredTeamsForSearchString(_ searchString: String) -> [Team] {
         var filteredTeams = [Team]()
         for team in self.teams {
+            //if team number contains search field
             if String(describing: team.number).range(of: searchString) != nil {
                 filteredTeams.append(team)
             }
