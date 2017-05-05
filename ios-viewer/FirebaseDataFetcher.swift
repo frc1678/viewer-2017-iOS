@@ -595,20 +595,25 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     // MARK: Grapher Class
+    //returns the values at a path for a team's timds
     func valuesInTeamMatchesOfPath(_ path: NSString, forTeam: Team) -> NSArray {
         let array = NSMutableArray()
+        //get timds
         let teamInMatchDatas = self.getTIMDataForTeam(forTeam)
+        //iterate thru timds
         for data in teamInMatchDatas {
+            //add the value for the timd at the path to array
             array.add((data.value(forKeyPath: path as String)! as? Int)!)
         }
         return array
     }
     
+    //returns all non-nil values of a path for every team
     func valuesInCompetitionOfPathForTeams(_ path: String) -> NSArray {
         let array = NSMutableArray()
         //iterate thru all teams
         for team in self.teams {
-            //if the team's value for the key you put in...
+            //if the team's value for the key you put in exists
             if team.value(forKeyPath: path) != nil {
                 //add to the array the value
                 array.add(team.value(forKeyPath: path)!)
@@ -618,6 +623,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return array
     }
     
+    //sees if value is convertable to bool, if so, returns it
     func boolValue(value: Any) -> Bool? {
         let boolValue: Bool
         if let boolBoolValue = value as? Bool { //Such ugly
@@ -700,7 +706,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     // MARK: Dealing With Current Match
     /**
-     This puts up the little banner at the top, and increases the badge number on the app.
+     This puts up the little banner at the top, and increases the badge number on the app.  This should not be used currently.
      
      - parameter notificationBody: What the text of the notification should be (that the person reads).
      */
@@ -715,17 +721,23 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     func didReceiveCurrentMatchNum (notificationObject : Notification) {
-        
+        //no
     }
     
+    //
     func matchesUntilTeamNextMatch(_ teamNumber : Int) -> String? {
+        //sort matches by match num
         let sortedMatches = self.matches.sorted { Int($0.number) < Int($1.number) }
+        //if currentmatch is a real match
         if self.currentMatchManager.currentMatch < sortedMatches.count {
+            //get the index of the current match. In theory, this should just be currentMatch - 1, right???
             if let indexOfCurrentMatch = sortedMatches.index(of: self.getMatch(self.currentMatchManager.currentMatch) ?? sortedMatches[0]) {
                 var counter = 0
+                //iterate thru all of the matches after current match
                 for i in indexOfCurrentMatch + 1..<self.matches.count {
                     let match = sortedMatches[i]
                     counter += 1
+                    //if the red or blue team numbers contain the given team
                     if (match.redAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) || (match.blueAllianceTeamNumbers?.filter { Int($0) == teamNumber }.count != 0) {
                         return "\(counter)"
                     }
@@ -735,14 +747,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return nil
     }
     
+    //returns how many matches a team has left
     func remainingMatchesForTeam(_ teamNum:Int) -> Int {
+        //get matches
         let matchArray = getMatchesForTeam(teamNum)
         var remainingArray = [Match]()
         for match in matchArray {
+            //if match hasn't happened
             if match.number > self.currentMatchManager.currentMatch {
+                //append match
                 remainingArray.append(match)
             }
         }
+        //return how many matches are left
         return remainingArray.count
     }
     
