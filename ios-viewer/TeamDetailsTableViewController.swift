@@ -54,22 +54,30 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         
     }
     
-    //this is a really big function that just sets selectedImage... i think
+    //sets selectedImage
     func reloadImage() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+            //if team exists, imageView exists
             if let team = self.team,
                 let imageView = self.teamSelectedImageView {
+                    //if selected image name exists
                     if team.pitSelectedImageName != nil {
+                        //check the cache to see if the image is saved
                         self.firebaseFetcher?.getImageForTeam((self.team?.number)!, fetchedCallback: { (image) -> () in
                             DispatchQueue.main.async(execute: { () -> Void in
+                                //set the selected image
                                 imageView.image = image
                                 self.resetTableViewHeight()
                             })
                             }, couldNotFetch: {
                                 DispatchQueue.main.async(execute: { () -> Void in
+                                    //team has images
                                     if team.pitAllImageURLs != nil {
+                                        //team has selected image
                                         if team.pitSelectedImageName != nil && team.pitSelectedImageName != "" {
+                                            //get url
                                             let url = URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
+                                            //set imageview
                                             imageView.hnk_setImageFromURL(url, success: { _ in
                                                 self.resetTableViewHeight()
                                                 })
@@ -79,19 +87,25 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                         })
                     }
                     let noRobotPhoto = UIImage(named: "SorryNoRobotPhoto")
+                    //if team has urls
                     if let urls = self.team?.pitAllImageURLs {
+                        //iterate thru urls
                         for url in urls.values {
+                            //if not all photos are downloaded
                             if self.photos.count < self.team!.pitAllImageURLs!.count {
+                                //add this photo
                                 self.photos.append(MWPhoto(url: URL(string: url)))
                             }
                         }
                     }
-                
+                //if there's a selected image
                 if self.team?.pitSelectedImageName != nil {
+                    //if photos are downloaded and image view is not the same as the image for the url
                     if self.teamSelectedImageView.image != MWPhoto(url: URL(string: (self.team?.pitSelectedImageName)!)) && self.photos.count > 0 {
+                        //if photos are downloaded and the first one is not a no robot photo and it's height is greater than 0
                         if self.photos.count > 0 && self.photos[0].underlyingImage != noRobotPhoto && (self.photos[0].underlyingImage ?? UIImage()).size.height > 0 {
                             DispatchQueue.main.async(execute: { () -> Void in
-                                
+                                //selected image is the first picture
                                 self.teamSelectedImageView.image = self.photos[0].underlyingImage
                                 self.resetTableViewHeight()
                                
@@ -107,11 +121,14 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         self.resetTableViewHeight()
     }
     
+    //reset the height of the table so info doesn't go off
     func resetTableViewHeight() {
         DispatchQueue.main.async(execute: { () -> Void in
-            
+            // set height constraint as equal to the size of the content
             self.tableViewHeightConstraint?.constant = (self.tableView.contentSize.height)
+            //if scrollview and tableview exist
             if self.scrollView != nil && self.tableView != nil {
+                //scrollview height is set correctly
                 self.scrollView.contentSize.height = self.tableViewHeightConstraint.constant + self.tableView.frame.origin.y
                 //self.tableView.setNeedsUpdateConstraints()
                 //self.scrollView.setNeedsUpdateConstraints()

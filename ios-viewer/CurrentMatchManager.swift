@@ -6,7 +6,7 @@
 //
 //
 
-//NOTE: Is not currently being used as of 2017.
+//NOTE: Using a different method for this, via the server. Talk to whoever's running it, but don't delete this file.
 
 import UIKit
 import Haneke

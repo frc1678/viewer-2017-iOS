@@ -44,10 +44,11 @@ class TIMDScheduleViewController: UITableViewController {
         return cell
     }
     
-    //...
+    //sets values for a given cell
     func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let match = data as? Match
         if match?.number != nil {
+            //set cell label to "Q##"
             cell.textLabel?.text = "Q\(String(describing: match!.number))"
         }
     }

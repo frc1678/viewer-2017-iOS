@@ -66,7 +66,7 @@ class TIMDDetailsViewController: UITableViewController {
                 } else if let floatValue = value as? Float {
                     cell.valueLabel.text = String(describing: floatValue)
                 } else {
-                    //
+                    //problems
                 }
             }
         }
