@@ -162,6 +162,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         let tap = UITapGestureRecognizer(target: self, action: #selector(TeamDetailsTableViewController.didTapImage(_:)))
         self.teamSelectedImageView.addGestureRecognizer(tap)
         
+        //constraints
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0
         
@@ -171,7 +172,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         //self.reload()
         reloadImage()
 
-           }
+    }
     
     
     
@@ -249,6 +250,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
     }*/
     
+    //set title of section
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return team == nil ? nil : Utils.teamDetailsKeys.keySetNames(self.showMinimalistTeamDetails)[section]
     }
@@ -266,8 +268,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //get cell
         var cell = UITableViewCell()
+        //if team exists
         if team != nil {
+            //if team is not real (team number)
             if team!.number == -1 {
                 //no team number
                 cell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath)
@@ -275,13 +280,15 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 cell.accessoryType = UITableViewCellAccessoryType.none
                 return cell
             }
-            
+            //set datakey to the appropriate key
             let dataKey: String = Utils.teamDetailsKeys.keySets(self.showMinimalistTeamDetails)[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row]
             
+            //NOTE: This is if NOT a default key! Don't go looking thru this thinking it will run if it's a default key, you will waste your time.
             if !Utils.teamDetailsKeys.defaultKeys.contains(dataKey) { //Default keys are currently just 'matchDatas' and 'TeamInMatchDatas'... if NOT a default key
                 var dataPoint = AnyObject?.init(nilLiteral: ())
                 var secondDataPoint = AnyObject?.init(nilLiteral: ())
                 if dataKey.contains("calculatedData.avgGearsPlacedByLiftAuto") {
+                    //This is not really used, not one of the keys
                     dataPoint = team?.calculatedData?.avgGearsPlacedByLiftAuto?[dataKey.components(separatedBy: ".")[2]] as AnyObject
                 } else if dataKey.contains("calculatedData") {
                     dataPoint = team!.value(forKeyPath: dataKey) as AnyObject
@@ -295,25 +302,37 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 
                 //notes
                 if Utils.teamDetailsKeys.TIMDLongTextCells.contains(dataKey) {
+                    //get cell
                     let notesCell: ResizableNotesTableViewCell = tableView.dequeueReusableCell(withIdentifier: "TeamInMatchDetailStringCell", for: indexPath) as! ResizableNotesTableViewCell
                     
+                    //set title
                     notesCell.titleLabel?.text = Utils.humanReadableNames[dataKey]
                     
+                    //get and sort timds by match num
                     let TIMDs = firebaseFetcher?.getTIMDataForTeam(self.team!).sorted { $0.matchNumber! < $1.matchNumber! }
                     var datas = [String]()
+                    //iterate thru timds
                     for TIMD in TIMDs! {
+                        //navigate to key
                         if let data = TIMD.value(forKey: dataKey) {
+                            //add "Q##: Notes"
                             let dataString = "Q\(TIMD.matchNumber!): \(data)"
                             datas.append(dataString)
                         }
                     }
-                    
+                    //consolidate into a single string file like so:
+                    /*
+                     Q#: Notes
+                     Q#: Notes
+                     Q#: Notes
+                     */
                     notesCell.notesLabel.text = datas.reduce(String()) { previous, new in "\(previous)\n\(new)" }
                     //notesCell.heightAnchor
                     notesCell.selectionStyle = UITableViewCellSelectionStyle.none
                     cell = notesCell
                     
                 } else if Utils.teamDetailsKeys.unrankedCells.contains(dataKey) || dataKey.contains("pit") { //pit keys
+                    //get cell
                     let unrankedCell: UnrankedTableViewCell = tableView.dequeueReusableCell(withIdentifier: "UnrankedCell", for: indexPath) as! UnrankedTableViewCell
                     
                     //titleLabel is the humanReadable version of dataKey
@@ -483,6 +502,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
 
     }
     
+    //updates title
     func updateTitleAndTopInfo() {
         if self.teamNameLabel != nil {
             if self.teamNameLabel.text == "" || self.teamNameLabel.text == "Unknown name..." {
@@ -578,38 +598,51 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         } else if segue.identifier == "Matches" {
             let matchesForTeamController = segue.destination as! SpecificTeamScheduleTableViewController
             
+            //if team exists
             if let teamNum = team?.number {
+                //set team number
                 matchesForTeamController.teamNumber = teamNum
             }
         } else if segue.identifier == "TIMDs" {
             //Navigate to a vc to pick which match, then to TIMD vc
             let TIMDScheduleForTeamController = segue.destination as! TIMDScheduleViewController
             
+            //if team exists
             if let teamNum = team?.number {
+                //set team number
                 TIMDScheduleForTeamController.teamNumber = teamNum
             }
         } else if segue.identifier == "CTIMDGraph" {
             //this is called for every timd graph, not just ctimds
             let graphViewController = segue.destination as! GraphViewController
+            //if team number is not nil
             if let teamNum = team?.number {
+                //get indexpath
                 let indexPath = sender as! IndexPath
+                //if the cell exists
                 if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
+                    //set titles
                     graphViewController.graphTitle = "\(cell.teamLabel!.text!)"
                     graphViewController.displayTitle = "\(graphViewController.graphTitle): "
+                    //get the key
                     var key = Utils.getKeyForHumanReadableName(graphViewController.graphTitle)
                     
-                    
+                    //get rid of calculatedData in key
                     key = key?.replacingOccurrences(of: "calculatedData.", with: "")
+                    //turn the key from a teamDetailsKey to a TIMD key
                     key = Utils.teamDetailsKeys.teamDetailsToTIMD[key!]
                     
                     var values: [Float]
                     let altMapping : [CGFloat: String]?
+                    //if the key is predictedNumRPs
                     if key == "calculatedData.predictedNumRPs" {
-                        
+                        //do stuff... we don't really use this?
                         (values, altMapping) = (firebaseFetcher!.getMatchDataValuesForTeamForPath(key!, forTeam: team!))
                     } else {
+                        //get the values in timds for this key
                         (values, altMapping) = (firebaseFetcher?.getMatchValuesForTeamForPath(key!, forTeam: team!))!
                     }
+                    //if the key contains accuracy, it's a percentage graph
                     if key?.range(of: "Accuracy") != nil {
                         graphViewController.isPercentageGraph = true
                     }
@@ -623,22 +656,28 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     } else {
                     //print(values)*/
                     var nilValueIndecies = [Int]()
+                    //iterate thru all timd values
                     for i in 0..<values.count {
+                        //if the value is marked as empty, add the value
                         if values[i] == -1111.1 {
                             nilValueIndecies.append(i)
                         }
                     }
+                    //iterate thru empty values and remove them
                     for i in nilValueIndecies.reversed() {
                         values.remove(at: i)
                     }
-                    
+                    //set values
                     graphViewController.values = (values as NSArray).map { CGFloat($0 as! Float) }
+                    //set left title
                     graphViewController.subDisplayLeftTitle = "Match: "
+                    //set values
                     graphViewController.subValuesLeft = nsNumArrayToIntArray(firebaseFetcher!.matchNumbersForTeamNumber((team?.number)!) as [NSNumber]) as [AnyObject]
+                    //iterate thru the values for the subvalues and remove empties
                     for i in nilValueIndecies.reversed() {
                         graphViewController.subValuesLeft.remove(at: i)
                     }
-                    
+                    //replace with altmapping
                     if altMapping != nil {
                         graphViewController.zeroAndOneReplacementValues = altMapping!
                     }
@@ -653,7 +692,9 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     graphViewController.highlightIndex = i
                     
                     }*/
+                    //set title
                     graphViewController.subDisplayRightTitle = "Team: "
+                    //set... something
                     graphViewController.subValuesRight = [teamNum as AnyObject,teamNum as AnyObject,teamNum as AnyObject,teamNum as AnyObject,teamNum as AnyObject]
                     
                     
@@ -715,7 +756,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                 }
                 notesTableViewController.title = "\(teamNum) Notes"
             }
-        }*/
+        }*/ //Notes are integrated into view
     }
     
     /** 
@@ -747,22 +788,31 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     
     //Row has been selected, perform segue to appropriate vc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //if the cell can be an unranked table view cell
         if let cell = tableView.cellForRow(at: indexPath) as? UnrankedTableViewCell {
+            //if the title contains Matches
             if cell.titleLabel.text?.range(of: "Matches") != nil {
+                //go to matches
                 performSegue(withIdentifier: "Matches", sender: nil)
+            //if the title contains TIMDs
             } else if cell.titleLabel.text?.range(of: "TIMDs") != nil {
+                //go to timds
                 performSegue(withIdentifier: "TIMDs", sender: nil)
             }
+        //if the cell is a multicelltableviewcell
         } else if let cell = tableView.cellForRow(at: indexPath) as? MultiCellTableViewCell {
+            //get the text on the team label
             let cs = cell.teamLabel!.text
+            //if there is a key for the human readable name
             if((Utils.getKeyForHumanReadableName(cs!)) != nil) {
+                //if it's not a notGraphingValue and it is not a standard deviation, segue into CTIMDGraph. Note: all timd graphs
                 if !Utils.teamDetailsKeys.notGraphingValues.contains(cs!) && !cs!.contains("σ") { performSegue(withIdentifier: "CTIMDGraph", sender: indexPath) }
             } else {
                 performSegue(withIdentifier: "TGraph", sender: indexPath)
             }
             
         } else if let cell = tableView.cellForRow(at: indexPath) as? ResizableNotesTableViewCell {
-            //Currently the only one is pit notes. We want it to segue to super notes per match
+            //Notes do not segue anymore
             if cell.textLabel?.text == "Pit Notes" {
                 performSegue(withIdentifier: "NotesSegue", sender: indexPath)
             }
