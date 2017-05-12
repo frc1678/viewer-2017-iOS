@@ -10,6 +10,7 @@ import UIKit
 
 class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    //get firebase fetcher
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher;
     
     var matchNumber = -1
@@ -23,7 +24,6 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     let mapping = ["One", "Two", "Three"]
     //keys for the tables
-
     let tableKeys = ["disfunctionalPercentage","avgGearsPlacedTele","avgGearGroundIntakesTele","liftoffPercentage"]
     
     
@@ -56,7 +56,9 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //get red teams
         let redTeams = firebaseFetcher?.getTeamsFromNumbers(match?.redAllianceTeamNumbers!)
+        //get blue teams
         let blueTeams = firebaseFetcher?.getTeamsFromNumbers(match?.blueAllianceTeamNumbers!)
         
         //get cell
@@ -157,6 +159,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             break
         }
         
+        //if it's a float, round to the nearest hundreth
         if let valueLabelFloat = Float(cell.valueLabel.text!) {
             cell.valueLabel.text = Utils.roundValue(Float(cell.valueLabel.text!)!, toDecimalPlaces: 2)
         }
@@ -166,7 +169,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     
     //how many rows are there (all the keys and (currently not) future match status)
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableKeys.count
+        return tableKeys.count// + 1 (for future match status)
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -180,12 +183,14 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         
         updateUI()
        // print(self.match)
+        //register table views
         self.r1TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
         self.r2TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
         self.r3TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
         self.b1TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
         self.b2TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
         self.b3TableView.register(UINib(nibName: "TIMDTableViewCell", bundle: nil), forCellReuseIdentifier: "TIMDTableCell")
+        //register self as delegate and dataSource so it can feed data to tableviews
         self.r1TableView.delegate = self
         self.r1TableView.dataSource = self
         self.r1TableView.reloadData()
@@ -211,7 +216,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
             return
         }
         
-        
+        //if match exists
         if let match = match {
             if match.number != -1 {
                 //setting title
@@ -248,13 +253,13 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 redOfficialScoreLabel.text = "Score: \(getLabelTitle(match.redScore))"
                 redPredictedScoreLabel.text = "Pred. Score: \(getLabelTitle(cd.predictedRedScore))"
             }
-            
+            //get red teams from match
             let redTeams = firebaseFetcher?.getTeamsFromNumbers(match.redAllianceTeamNumbers!)
             if (redTeams?.count)! > 0 {
                 //Index goes from 1 to 3, because thats the way the ui labels are named.
                 for index in 1...(redTeams?.count)! {
                     if index <= 3 {
-                        //setting the titles of the team button numbers
+                        //setting the titles of the team button numbers. V Sketch
                         (value(forKey: "redTeam\(mapping[index-1])Button") as! UIButton).setTitle("\(match.redAllianceTeamNumbers![index-1])", for: UIControlState())
 
                         
@@ -290,15 +295,20 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     func playWithAgainstOrBothWithTeam(number: Int) -> PlayRelationship {
         var playWith = false
         var playAgainst = false
+        //get our matches
         let ourMatches = firebaseFetcher?.getMatchesForTeam(1678)
+        //get rid of already played matches
         let futureMatches = ourMatches?.filter { $0.number >= firebaseFetcher?.currentMatchManager.currentMatch ?? 0 }
+        //iterate thru unplayed matches
         for match in futureMatches! {
+            //if we're on red and they're on red, play with them. if we're on red and they're on blue, play against them.
             if (match.redAllianceTeamNumbers?.contains(1678))! {
                 if (match.redAllianceTeamNumbers?.contains(number))! {
                     playWith = true
                 } else if (match.blueAllianceTeamNumbers?.contains(number))! {
                     playAgainst = true
                 }
+            //if we're on blue and they're on blue, play with them. if we're on blue and they're on red, play against them.
             } else if (match.blueAllianceTeamNumbers?.contains(1678))! {
                 if (match.blueAllianceTeamNumbers?.contains(number))! {
                     playWith = true
@@ -307,6 +317,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
                 }
             }
         }
+        //if we're playing with and against them, return both. if just play with or against, return the respective enum. if none of those, return neither
         if playWith && playAgainst {
             return .Both
         } else if playWith {
@@ -318,6 +329,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    //color
     func withAgainstAttributedStringForTeam(number: Int) -> NSAttributedString {
         var attString : NSAttributedString
         let withOrAgainst = playWithAgainstOrBothWithTeam(number: number)

@@ -846,8 +846,6 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                     }
                 }
             }
-            
-            
         }
     }
 }
