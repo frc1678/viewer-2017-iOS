@@ -98,6 +98,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         return values[Int(index)] - min(values.min()!, 0.0);
     }
     
+    //returns color of selected bars
     func barSelectionColor(for barChartView: JBBarChartView!) -> UIColor! {
         return highlightColor
     }
@@ -105,6 +106,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     //Tells what to do when a given a selected bar
     func barChartView(_ barChartView: JBBarChartView!, didSelectBarAt index: UInt) {
         let mainDisplayText : String
+        //get title without certain key words
         let displayTitleWithoutAvg = displayTitle.replacingOccurrences(of: "Avg. ", with: "").replacingOccurrences(of: " Consistency", with: "").replacingOccurrences(of: " Percentage", with: "")
         if newValuesArray.count == 0 {
             if !isPercentageGraph {

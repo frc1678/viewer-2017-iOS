@@ -6,7 +6,7 @@
 //
 //
 
-//NOTE: Using a different method for this, via the server. Talk to whoever's running it, but don't delete this file.
+//NOTE: Using a different method for notifications (banners). Get server people to send notifications. Important: This is where current match is stored, do not delete!
 
 import UIKit
 import Haneke

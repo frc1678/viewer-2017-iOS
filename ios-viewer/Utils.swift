@@ -105,6 +105,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
         ]
         
+        /** Values that should be displayed as long text cells*/
         let TIMDLongTextCells : [String] = [
         "superNotes"
         ]
@@ -173,7 +174,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
         }
         
-        //Keys for team details
+        /** Sections of teamDetails view. */
         func keySets(_ minimalist : Bool) -> [[String]] {
             if minimalist {
                 return [
@@ -200,6 +201,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
         }
         
+        /** Segues to schedules, things unrelated to data */
         let defaultKeys = [
             "TeamInMatchDatas",
             "matchDatas"
@@ -217,7 +219,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgHighShotsAuto",
             //"calculatedData.avgLowShotsAuto"
         ]
-        
+        /** Keys relating to autonomous to be displayed on teamDetails. */
         let autoKeys = [
             //Some stuff is not needed
             
@@ -243,6 +245,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //"calculatedData.avgHighShotsAttemptedTele",
         ]
         
+        /** Keys relating to Teleoperated to be displayed on teamDetails */
         let teleKeys = [
             //"calculatedData.avgHighShotsTele",
             //"calculatedData.sdHighShotsTele",
@@ -257,6 +260,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "calculatedData.avgGearsPlacedTele",
         ]
         
+        /** Dict translating a key for a teamDetails datapoint to the key for the respective TIMD datapoint */
         let teamDetailsToTIMD = [
             //status
             "incapacitatedPercentage" : "didBecomeIncapacitated",
@@ -307,6 +311,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
 
         ]
         
+        /** Keys relating to the portions of the game that occur in the end (climbing, challenging, etc) */
         let endGame = [
             "calculatedData.liftoffPercentage",
             //"calculatedData.liftoffAbility"
@@ -323,12 +328,14 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             //"calculatedData.incapacitatedPercentage",
         ]
         
+        /** Keys relating to the status of a robot to be displayed on teamDetails */
         let statusKeys = [
             "calculatedData.disfunctionalPercentage",
             "calculatedData.disabledPercentage",
             "calculatedData.incapacitatedPercentage",
         ]
         
+        /** Keys relating to the data the pit scout collects to be displayed on teamDetails */
         let pitKeys = [
             "pitDriveTrain",
             "pitDidDemonstrateCheesecakePotential",
@@ -337,6 +344,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "pitProgrammingLanguage"
         ]
         
+        /** Human readable names for CTIMD keys */
         let calculatedTeamInMatchDataHumanReadableKeys = [
             "First Pick Ability",
             "R Score Torque",
@@ -372,6 +380,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     
     
     // MARK: TIMD keys
+    /** Keys relating to the Autonomous period to be displayed in the TIMD view */
     static let TIMDAutoKeys : [String] = [
         "calculatedData.numLowShotsAuto",
         "numHoppersOpenedAuto",
@@ -379,6 +388,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.numHighShotsAuto",
     ]
     
+    /** Keys relating to the Teleoperated period to be displayed in the TIMD view */
     static let TIMDTeleKeys : [String] = [
         "calculatedData.numLowShotsTele",
         "numGearLoaderIntakesTele",
@@ -389,11 +399,13 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "didLiftoff"
     ]
     
+    /** Keys relating to the status of a robot to be displayed in the TIMD view */
     static let TIMDStatusKeys = [
         "didStartDisabled",
         "didBecomeIncapacitated"
     ]
     
+    /** Keys relating to the data Super Scouts collect to be displayed in the TIMD view */
     static let TIMDSuperKeys = [
         "rankBallControl",
         "rankDefense",
@@ -404,6 +416,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         //"superNotes"
     ]
     
+    /** All sections of the TIMD view */
     static let TIMDKeys = [
         TIMDAutoKeys,
         TIMDTeleKeys,
@@ -411,6 +424,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         TIMDSuperKeys
     ]
     
+    /** A dictionary turning TIMD keys into teamDetails keys */
     static let graphTitleSwitch = [
 
         "didBecomeIncapacitated" : "incapacitatedPercentage",
@@ -427,6 +441,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "rankBallControl" : "calculatedData.avgBallControl",
     ]
     
+    /** Team Details keys? */
     static let teamCalcKeys = [
         "actualSeed",
         "avgBallControl",
@@ -462,6 +477,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "avgHoppersOpenedAuto"
     ]
     
+    /** Calculated TIMD keys */
     static let calculatedTeamInMatchDataKeys = [
         "calculatedData.firstPickAbility",
         "calculatedData.numRPs",
@@ -724,6 +740,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         
     }
     
+    /** Gets the human readable name from a key... use humanReadableNames instead */
     class func humanReadableNameFromKey(key: String) -> String {
         let noCalculatedDataKey = key.replacingOccurrences(of: "calculatedData.", with: "").replacingOccurrences(of: "pit", with: "pitScout")
         var indiciesToAddSpaces = [Int]()
