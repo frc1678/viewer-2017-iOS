@@ -27,6 +27,7 @@
     Team *team = data;
     
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
+    //get rank of team when the highest number is on the top
     multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", (long)([self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.predictedSeed"])];
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     if(team.calculatedData.predictedNumRPs != -1.0) {

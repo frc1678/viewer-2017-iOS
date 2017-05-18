@@ -31,16 +31,23 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
+    //get cached data, get app token
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *token = [defaults valueForKey:@"NotificationToken"];
+    //if there are starred matches
     if(self.firebaseFetcher.currentMatchManager.starredMatchesArray != nil && [self.firebaseFetcher.currentMatchManager.starredMatchesArray count]){
+        //if app token exists
         if(token != nil) {
+            //remove all starred matches for this app on the firebase
             [[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] setValue:nil];
         }
         NSMutableArray *intMatches = [[NSMutableArray alloc] init];
+        //iterate thru cached starred matches
         for(NSString *item in self.firebaseFetcher.currentMatchManager.starredMatchesArray) {
+            //add the match number
             [intMatches addObject:[NSNumber numberWithInt:[item integerValue]]];
         }
+        //add all of the starred matches back
         for(NSNumber *item in intMatches) {
             [[[[[[[FIRDatabase database] reference] child: @"AppTokens"] child:token] child: @"StarredMatches"] childByAutoId] setValue: item];
         }
@@ -78,8 +85,10 @@
     NSArray *blueTeams = [self.firebaseFetcher getTeamsFromNumbers:match.blueAllianceTeamNumbers];
     
     MatchTableViewCell *matchCell = (MatchTableViewCell *)cell;
+    //set matchNum label
     matchCell.matchLabel.attributedText = [self textForScheduleLabelForType:0 forString:[NSString stringWithFormat:@"%ld", (long)match.number]];
     
+    //iterate thru 3 times
     for (int i = 0; i < 3; i++) {
         if(i < redTeams.count) {
             [cell setValue:[self textForScheduleLabelForType:1 forString:[NSString stringWithFormat:@"%ld", (long)((Team *)[redTeams objectAtIndex:i]).number]] forKeyPath:[NSString stringWithFormat:@"red%@Label.attributedText", [ScheduleTableViewController mappings][i]]];
@@ -94,7 +103,9 @@
         }
     }
     
+    //if the red team has a valid score
     if (match.redScore != -1 && match.redScore != nil) {
+        //set the red score
         matchCell.redScoreLabel.text = [NSString stringWithFormat:@"%ld", (long)match.redScore];
         matchCell.slash.alpha = 1;
         matchCell.redScoreLabel.alpha = 1;

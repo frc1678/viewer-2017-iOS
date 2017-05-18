@@ -25,6 +25,7 @@
     MultiCellTableViewCell *multiCell = (MultiCellTableViewCell *)cell;
     
     if(team.calculatedData.actualSeed != nil){
+        //get the rank where higher numbers are on the top
         multiCell.rankLabel.text = [NSString stringWithFormat:@"%ld", [self.firebaseFetcher reverseRankOfTeam:team withCharacteristic:@"calculatedData.actualSeed"]];
     } else {
         multiCell.rankLabel.text = @"NA";
@@ -32,6 +33,7 @@
     multiCell.teamLabel.text = [NSString stringWithFormat:@"%ld", (long)team.number];
     
     if(team.calculatedData.actualNumRPs != -1.0) {
+        //score label is average number of rps
         multiCell.scoreLabel.text = [NSString stringWithFormat:@"%@", [Utils roundValue:team.calculatedData.actualNumRPs toDecimalPlaces:2]]; // Actually is average Num RPs
     } else {
         multiCell.scoreLabel.text = @"";
