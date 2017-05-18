@@ -55,15 +55,14 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func refreshMatchNum() {
-        //get currentMatchNum
         self.firebase.observeSingleEvent(of: .value, with: { (snap) -> Void in
-            //set currentMatchNum
+            //get currentMatchNum
             if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNum").value as? Int {
                 //match is the match with the number currentMatchNum as a NSDictionary
-                if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).value as? NSDictionary {
-                    let redTeamNumbers = match["redAllianceTeamNumbers"] as! [Int]
-                    let blueTeamNumbers = match["blueAllianceTeamNumbers"] as! [Int]
-                    self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
+                if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).childSnapshot(forPath: "number").value as? Int {//value as? NSDictionary {
+                    //let redTeamNumbers = match["redAllianceTeamNumbers"] as? [Int]
+                    //let blueTeamNumbers = match["blueAllianceTeamNumbers"] as? [Int]
+                    //self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
                 } else {
                     self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
                 }
@@ -92,16 +91,16 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         completionHandler(NCUpdateResult.newData)
     }
     
-    func updateCurrentMatch(_ matchNum: Int, redTeams: [Int], blueTeams: [Int]) {
+    func updateCurrentMatch(_ matchNum: Int, redTeams: [Int]?, blueTeams: [Int]?) {
         print("Update")
         //setting labels
         self.MatchNum.text = "Q\(matchNum)"
-        self.r1.text = String(redTeams[0])
-        self.r2.text = String(redTeams[1])
-        self.r3.text = String(redTeams[2])
-        self.b1.text = String(blueTeams[0])
-        self.b2.text = String(blueTeams[1])
-        self.b3.text = String(blueTeams[2])
+        self.r1.text = String(redTeams?[0] ?? 0)
+        self.r2.text = String(redTeams?[1] ?? 0)
+        self.r3.text = String(redTeams?[2] ?? 0)
+        self.b1.text = String(blueTeams?[0] ?? 0)
+        self.b2.text = String(blueTeams?[1] ?? 0)
+        self.b3.text = String(blueTeams?[2] ?? 0)
     }
     
 }

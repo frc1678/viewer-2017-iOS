@@ -37,7 +37,9 @@ class SortedRankTableViewController: ArrayTableViewController {
     override func configureCell(_ cell: UITableViewCell!, at path: IndexPath!, forData data: Any!, in tableView: UITableView!) {
         let team = data as! Team
         let multiCell = cell as! MultiCellTableViewCell
+        //Rank is position + 1
         multiCell.rankLabel!.text = String(path.row + 1)
+        //set team label
         multiCell.teamLabel!.text = String(describing: team.number)
         if translatedKeyPath.range(of: "calculatedData") != nil {
             let propPath = translatedKeyPath.replacingOccurrences(of: "calculatedData.", with: "")
@@ -89,13 +91,14 @@ class SortedRankTableViewController: ArrayTableViewController {
         let rot = recognizer.rotation
         //layer that the tableview is one
         let layer = self.tableView.layer
-        //affine: maintains parallel, not length/angle
+        //affine: maintains parallel lines, not length/angle... makes sure it's still the same shape
         var transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         //rotate the affine matrix
         transform = transform.rotated(by: rot)
         
         switch recognizer.state {
             
+        //if the recognizer just began
         case .began :
             //make table view not opaque
             layer.isOpaque = false
@@ -106,20 +109,24 @@ class SortedRankTableViewController: ArrayTableViewController {
                 }, completion: nil)
             
             //visually rotate tableview
+            
+        //if the rotation has changed
         case .changed : layer.setAffineTransform(transform)
             
+        //if the user has lifted their fingers
         case .ended :
             //detect if the view should be rotated: any angle x when 90 < x < 270 returns true
             let shouldRotate = cos(rot) < 0
             if shouldRotate {
+                //fade back into the normal rotation
                 UIView.animate(withDuration: 0.1, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
                     layer.opacity = 0.0
                     }, completion: { c in
+                        //reset it to original rotation
                         layer.setAffineTransform(CGAffineTransform.identity)
                         UIView.animate(withDuration: 0.1, animations: {
                             layer.opacity = 1.0
                             }, completion: { d in
-                                
                                 if shouldRotate {
                                     self.shouldReverseRank = !self.shouldReverseRank
                                     self.dataArray = self.dataArray.reversed()
@@ -130,10 +137,13 @@ class SortedRankTableViewController: ArrayTableViewController {
                                 }
                         })
                 })
+            //if we shouldn't rotate...
             } else {
+                //fade back to default rotation
                 UIView.animate(withDuration: 0.1, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: {
                     layer.opacity = 0.0
                 }, completion: { c in
+                    //set rotation to normal
                     layer.setAffineTransform(CGAffineTransform.identity)
                     UIView.animate(withDuration: 0.1, animations: {
                         layer.opacity = 1.0
@@ -162,7 +172,7 @@ class SortedRankTableViewController: ArrayTableViewController {
     
     /*
     // MARK: - Navigation
-    
+     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
     // Get the new view controller using segue.destinationViewController.
