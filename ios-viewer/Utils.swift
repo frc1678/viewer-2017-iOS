@@ -9,7 +9,11 @@
 import Foundation
 
 
-/** Rounds a value. */
+/** 
+    Rounds a value.
+    - parameter value: Value to be rounded
+    - parameter numDecimalPlaces: How many decimal places it should be rounded to
+*/
 func roundValue(_ value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> String {
     if let val = value as? NSNumber {
         let f = NumberFormatter()
@@ -26,7 +30,10 @@ func roundValue(_ value: AnyObject?, toDecimalPlaces numDecimalPlaces: Int) -> S
     return ""
 }
 
-/** Converts a float value into a percentage. */
+/** 
+    Converts a float value into a percentage.
+    - parameter number: Float value
+*/
 func percentageValueOf(_ number: AnyObject?) -> String {
     if let n = number as? Float {
         return "\(roundValue(NSNumber(value: n * 100), toDecimalPlaces: 1))%"
@@ -35,7 +42,10 @@ func percentageValueOf(_ number: AnyObject?) -> String {
     return ""
 }
 
-//Self explanitory
+/**
+    Inserts commas and spaces between capitals in a string.
+    - parameter string: String to be change
+*/
 func insertCommasAndSpacesBetweenCapitalsInString(_ string: String) -> String {
     var toReturn = ""
     for char in string.characters {
@@ -53,7 +63,10 @@ func insertCommasAndSpacesBetweenCapitalsInString(_ string: String) -> String {
     return toReturn
 }
 
-/** Turns an NSNumArray into an Int Array */
+/**
+    Turns an NSNumArray into an Int Array
+    - parameter nsNumberArray: NSNumberArray to be converted
+*/
 func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     var values: [Int] = []
     for num in nsNumberArray {
@@ -65,7 +78,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     return values
 }
 
-/** A class filled with undoubtably underwhelmingly useful utilities. */
+/** 
+    A class filled with undoubtably underwhelmingly useful utilities. 
+*/
 @objc class Utils: NSObject {
     static let teamDetailsKeys = TeamDetailsKeys()
     struct TeamDetailsKeys {
@@ -95,7 +110,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         ]
         */
         
-        /** Values that should not be graphed */
+        /** 
+            Values that should not be graphed
+        */
         let notGraphingValues = [
             "First Pick Ability",
             "Second Pick Ability",
@@ -105,7 +122,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             
         ]
         
-        /** Values that should be displayed as long text cells*/
+        /** Values that should be displayed as long text cells */
         let TIMDLongTextCells : [String] = [
         "superNotes"
         ]
@@ -629,7 +646,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "pitDriveTrain" : "Drive Train"
     ]
     
-    /** Rounds a given float value to a given number of decimal places. */
+    /**
+        Rounds a given float value to a given number of decimal places.
+        - parameter value: Input value
+        - parameter numDecimalPlaces: Number of decimal places
+    */
     class func roundValue(_ value: Float, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
         let f = NumberFormatter()
@@ -643,7 +664,11 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return f.string(from: val)!
     }
     
-    /** Rounds a given double value to a given number of decimal places. */
+    /** 
+        Rounds a given double value to a given number of decimal places.
+        - parameter value: Input value
+        - parameter toDecimalPlaces: Number of decimal places to round to
+    */
     class func roundDoubleValue(_ value: Double, toDecimalPlaces numDecimalPlaces: Int) -> String {
         let val = value as NSNumber
         let f = NumberFormatter()
@@ -675,7 +700,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return nil
     }
     
-    /** Returns a key for a given Human Readable Name. */
+    /** 
+        Returns a key for a given Human Readable Name.
+        - parameter name: Human Readable Name
+    */
     class func getKeyForHumanReadableName(_ name: String) -> String? {
         var computerReadableNames = [String: String]()
         for (key, value) in humanReadableNames {
