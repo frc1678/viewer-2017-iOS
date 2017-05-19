@@ -31,10 +31,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         //check if firebase has been configured
         if !TodayViewController.isAlreadyLaunchedOnce {
             //print how many firebase instances are open
-            //print(FIRApp.allApps()?.keys.count)
+            print(FIRApp.allApps()?.keys.count)
             FIRApp.configure()
             TodayViewController.isAlreadyLaunchedOnce = true
-            FIRDatabase.database().persistenceEnabled = true
+            //FIRDatabase.database().persistenceEnabled = true
+            print(FIRApp.allApps()?.keys.count)
         }
     }
     
@@ -49,7 +50,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         //set the preferred size
         self.preferredContentSize = CGSize(width: 320, height: 90);
         //get the current match number, call refreshMatchNum
-        self.firebase.child("currentMatchNum").observe(.value, with: { (snap) -> Void in
+        self.firebase.child("currentMatchNum").observeSingleEvent(of: .value, with: { (snap) -> Void in
             self.refreshMatchNum()
         })
     }
@@ -59,10 +60,10 @@ class TodayViewController: UIViewController, NCWidgetProviding {
             //get currentMatchNum
             if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNum").value as? Int {
                 //match is the match with the number currentMatchNum as a NSDictionary
-                if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).childSnapshot(forPath: "number").value as? Int {//value as? NSDictionary {
-                    //let redTeamNumbers = match["redAllianceTeamNumbers"] as? [Int]
-                    //let blueTeamNumbers = match["blueAllianceTeamNumbers"] as? [Int]
-                    //self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
+                if let match = snap.childSnapshot(forPath: "Matches").childSnapshot(forPath: String(currentMatchNum)).value as? NSDictionary {
+                    let redTeamNumbers = match["redAllianceTeamNumbers"] as? [Int]
+                    let blueTeamNumbers = match["blueAllianceTeamNumbers"] as? [Int]
+                    self.updateCurrentMatch(currentMatchNum, redTeams: redTeamNumbers, blueTeams: blueTeamNumbers)
                 } else {
                     self.updateCurrentMatch(00, redTeams: [0000,0000,0000], blueTeams: [0000,0000,0000])
                 }
