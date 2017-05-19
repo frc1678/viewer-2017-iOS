@@ -84,13 +84,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         
     }
     
-    //returns a match given a snapshot
+    /** 
+        Returns a match given a snapshot.
+        - parameter snapshot: The snapshot of a match.
+    */
     func makeMatchFromSnapshot(_ snapshot: FIRDataSnapshot) -> Match {
         
         return Match(json: JSON(snapshot.value!))
     }
     
-    //returns a team given a snapshot
+    /**
+        Returns a team given a snapshot.
+        - parameter snapshot: The snapshot of a team.
+     */
     func makeTeamFromSnapshot(_ snapshot: FIRDataSnapshot) -> Team {
         return Team(json: JSON(snapshot.value!))
     }
@@ -103,7 +109,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
             }) .resume()
     }
     
-    //get and cache an image for a team and url
+    /**
+        Caches an image.
+        - parameter teamNum: The team to cache the image to.
+        - parameter url: The url of the image (from firebase)
+     */
     func cacheImage(_ teamNum : Int, url : String?) {
         if let urlString = url {
             let url = URL(string: urlString)
@@ -118,7 +128,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
-    //get an image for a team
+    /** 
+        Gets an image for a team.
+        - parameter teamNumber: Team for which it is getting the image.
+     */
     func getImageForTeam(_ teamNumber : Int, fetchedCallback : @escaping (UIImage)->(), couldNotFetch: @escaping ()->()) { // Is already async
         //go into the cache and find a team. get the image from the team
         self.imageCache.fetch(key: "\(teamNumber)").onSuccess { (image) -> () in
@@ -128,7 +141,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
-    //input a team, store as snap
+    /** 
+        Caches a new team photo if the it has changed and agressive photo downloading is enabled.
+        - parameter team: Team to download photo for
+        - parameter snap: Snapshot of the firebase to pull images from
+    */
     func updateCacheIfNeeded(_ snap : FIRDataSnapshot, team : Team) {
         let defaults = UserDefaults.standard
         //check if the user wants to aggressively download
@@ -146,6 +163,9 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     }
     
     // MARK: Data Fetching
+    /**
+        Retrieves many datas
+    */
     func getAllTheData() {
         self.firebase.observeSingleEvent(of: .value, with: { [unowned self] (snap) -> Void in
             //create a firebase reference that points to Matches
@@ -283,12 +303,19 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         
     }
     
-    //returns all timds for a given team
+    /**
+        Gets an array of all TIMDs for a team
+        - parameter team: Team for which TIMDs are to be retrieved
+    */
     func getTIMDataForTeam(_ team: Team) -> [TeamInMatchData] {
         return self.teamInMatches.filter { $0.teamNumber == team.number }
     }
     
-    //returns a timd for a team in a match
+    /**
+        Retrieves a TIMD given a team and match
+        - parameter team: Team for which the TIMD is being retrieved
+        - parameter inMatch: Match for which the TIMD is being retrieved
+    */
     func getTIMDataForTeamInMatch(_ team:Team, inMatch: Match) -> TeamInMatchData? {
         //gets timds for the team
         let TIMData = self.getTIMDataForTeam(team)
@@ -305,7 +332,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return nil
     }
     
-    //returns a team for a number
+    /**
+        Gets team object given team number
+        - parameter teamNum: Number of the team
+    */
     func getTeam(_ teamNum: Int) -> Team? {
         //filter to end up with only the team(s) with the given number
         let myTeams = teams.filter { $0.number == teamNum }
@@ -319,7 +349,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
-    //gets a match for a number
+    /**
+        Retrieves a match object given a match number
+        - parameter matchNum: Number of the match
+    */
     func getMatch(_ matchNum: Int) -> Match? {
         //filter to get the match(es) with the given number
         let myMatches = matches.filter { $0.number == matchNum }
@@ -333,7 +366,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
-    //returns an array of teams with the numbers passed in
+    /**
+        Gets an array of team objects
+        - parameter teamNums: Array of team numbers
+    */
     func getTeamsFromNumbers(_ teamNums: [Int]?) -> [Team] {
         var teams = [Team]()
         if teamNums != nil {
@@ -346,14 +382,20 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return teams
     }
     
-    //gets all teams in a given match
+    /**
+        Retrieves every team in the form of a team object in a given match
+        - parameter match: Match object for which to retrieve teams
+    */
     func allTeamsInMatch(_ match: Match) -> [Team]  {
         let redTeams = getTeamsFromNumbers(match.redAllianceTeamNumbers! as [Int])
         let blueTeams = getTeamsFromNumbers(match.blueAllianceTeamNumbers! as [Int])
         return redTeams + blueTeams
     }
     
-    //returns an array of matches that contain a team specified by number
+    /**
+        Gets all matches containing a team
+        - parameter number: Number of the team for which to retrieve matches
+    */
     func getMatchesForTeamWithNumber(_ number:Int) -> [Match] {
         var array = [Match]()
         //iterate thru all matches
@@ -377,7 +419,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return array.sorted { Int($0.number) < Int($1.number) }
     }
     
-    //returns an array of match numbers for a team specified by number
+    /**
+        Gets an array of match numbers that a team is in
+        - parameter number: Number of team to get match nums for
+    */
     func matchNumbersForTeamNumber(_ number: Int) -> [Int] {
         func matchNum(_ match : Match) -> Int {
             return match.number
@@ -385,30 +430,37 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return self.getMatchesForTeamWithNumber(number).map(matchNum)
     }
     
-    //I think this does the same thing as getMatchesForTeamWithNumber
+    /** See getMatchesForTeamWithNumber */
     func getMatchesForTeam(_ teamNumber: Int) -> [Match] {
         var importantMatches = [Match]()
+        //iterate thru all matches
         for match in self.matches {
+            //get all teams
             let teamNumArray = match.redAllianceTeamNumbers! + match.blueAllianceTeamNumbers!
+            //iterate thru all teams
             for number in teamNumArray {
+                //if the match contains the team
                 if (number as Int) == (teamNumber as Int) {
+                    //this is an important match
                     importantMatches.append(match)
                 }
             }
         }
+        //sort
         importantMatches.sort { Int($0.number) > Int($1.number) }
+        //return
         return importantMatches
     }
     
     
     // MARK: Rank
-    //returns first pick list
+    /** Returns first pick list */
     func getFirstPickList() -> [Team] {
         //sorts teams by first pick ability
         return teams.sorted { $0.calculatedData?.firstPickAbility > $1.calculatedData!.firstPickAbility }
     }
     
-    //returns second pick list
+    /** Returns second pick list */
     func getOverallSecondPickList() -> [Team] {
         return self.teams.sorted { $0.calculatedData?.allRotorsAbility > $1.calculatedData?.allRotorsAbility }
     }
@@ -428,17 +480,21 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return teamArray
     }*/
     
-    //get list of teams sorted by seed
+    /** Get list of teams sorted by seed */
     func seedList() -> [Team] {
         return teams.sorted { $0.calculatedData!.actualSeed < $1.calculatedData!.actualSeed }
     }
     
-    //get list of teams sorted by predicted seed
+    /** Get list of teams sorted by predicted seed */
     func predSeedList() -> [Team] {
         return teams.sorted { $0.calculatedData!.predictedSeed < $1.calculatedData!.predictedSeed }
     }
     
-    //returns how many rps we think a team will get
+    /** 
+        Gets rps predicted for a given team and match
+        - parameter teamNumber: Team number to calculate RPs for
+        - parameter matchNum: Match number to calculate RPs for
+    */
     func predictedRPsKeyForTeamNum(_ teamNumber: Int, matchNum: Int) -> String {
         let match = getMatch(matchNum)
         if (match?.redAllianceTeamNumbers!.contains(teamNumber))! {
@@ -448,7 +504,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         }
     }
     
-    //returns the rank of a team for a given characteristic
+    /** 
+        Gets the rank of a team given a certain characteristic
+        - parameter team: Team to find rank for
+        - parameter withCharacteristic: Characteristic to rank by
+    */
     func rankOfTeam(_ team: Team, withCharacteristic: String) -> Int {
         var counter = 0
         //sort teams by the characteristic
@@ -467,7 +527,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return counter
     }
     
-    //see rankOfTeam
+    /** See rankOfTeam, reverses */
     func reverseRankOfTeam(_ team: Team, withCharacteristic:String) -> Int {
         var counter = 0
         let sortedTeams : [Team] = self.getSortedListbyString(withCharacteristic).reversed()
@@ -493,15 +553,24 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     func rankOfTeamInMatchData(_ timData: TeamInMatchData, withCharacteristic: NSString) -> Int {
         var values = [Int]()
+        //gets team number from timd
         let teamNum = timData.teamNumber!
+        //gets timds for the number
         let TIMDatas = getTIMDataForTeam(self.getTeam(teamNum)!)
+        //iterate thru team's timds
         for timData in TIMDatas {
+            //add match's number
             values.append(timData.matchNumber!)
         }
+        //at this point values is an array of all match numbers the team plays in
+        //return one more than the position the team's number is?
         return values.index(of: teamNum)! + 1
     }
     
-    //ranks all teams by a characteristic
+    /** 
+        Ranks all teams by a characteristic
+        - parameter characteristic: Characteristic to rank teams by
+    */
     func ranksOfTeamsWithCharacteristic(_ characteristic: NSString) -> [Int] {
         var array = [Int]()
         for team in self.teams {
@@ -550,7 +619,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     // MARK: Search Bar
-    //filters matches according to the search string when set to matches
+    /** 
+        Filters matches according to the search string when set to matches
+        - parameter searchString: String to filter results by
+    */
     func filteredMatchesForMatchSearchString(_ searchString:String) -> [Match] {
         var filteredMatches = [Match]()
         for match in self.matches  {
@@ -562,7 +634,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return filteredMatches
     }
     
-    //filters matches according to the search string when set to teams, see filteredMatchesForMatchSearchString
+    /** Filters matches according to the search string when set to teams. See filteredMatchesForMatchSearchString */
     func filteredMatchesforTeamSearchString(_ searchString: String) -> [Match] {
         var filteredMatches = [Match]()
         for match in self.matches  {
@@ -580,7 +652,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return filteredMatches
     }
     
-    //filters general searches
+    /** 
+        Filters general searches
+        - parameter searchString: String to filter results by
+    */
     func filteredTeamsForSearchString(_ searchString: String) -> [Team] {
         var filteredTeams = [Team]()
         for team in self.teams {
@@ -595,7 +670,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     
     
     // MARK: Grapher Class
-    //returns the values at a path for a team's timds
+    /** 
+        Creates an NSArray of all values in TIMDs for a given team at a certain path
+        - parameter path: Value to list
+        - parameter forTeam: Team to get values for
+    */
     func valuesInTeamMatchesOfPath(_ path: NSString, forTeam: Team) -> NSArray {
         let array = NSMutableArray()
         //get timds
@@ -608,7 +687,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return array
     }
     
-    //returns all non-nil values of a path for every team
+    /**
+        Gets an array containing a certain value for every team
+        - parameter path: The location of the value
+    */
     func valuesInCompetitionOfPathForTeams(_ path: String) -> NSArray {
         let array = NSMutableArray()
         //iterate thru all teams
@@ -623,7 +705,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return array
     }
     
-    //sees if value is convertable to bool, if so, returns it
+    /** 
+        Returns the bool version of a value
+        - parameter value: Value to be converted
+    */
     func boolValue(value: Any) -> Bool? {
         let boolValue: Bool
         if let boolBoolValue = value as? Bool { //Such ugly
@@ -724,7 +809,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         //no
     }
     
-    //
+    /** 
+        Calculates how many matches are to be played until the next match that contains a specified team
+        - parameter teamNumber: Specified team
+    */
     func matchesUntilTeamNextMatch(_ teamNumber : Int) -> String? {
         //sort matches by match num
         let sortedMatches = self.matches.sorted { Int($0.number) < Int($1.number) }
@@ -747,7 +835,10 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         return nil
     }
     
-    //returns how many matches a team has left
+    /** 
+        Returns how many matches are left for a specified team to play
+        - parameter teamNum: Specified team
+    */
     func remainingMatchesForTeam(_ teamNum:Int) -> Int {
         //get matches
         let matchArray = getMatchesForTeam(teamNum)
