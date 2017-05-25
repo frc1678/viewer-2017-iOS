@@ -57,7 +57,7 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
     //sets selectedImage
     func reloadImage() {
         DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
-            //if team exists, imageView exists
+            //if team exists, if imageView exists
             if let team = self.team,
                 let imageView = self.teamSelectedImageView {
                     //if selected image name exists

@@ -687,6 +687,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         return humanReadableNames[key]
     }
     
+    /** Returns the key for a human readable name */
     class func findKeyForValue(_ value: String) ->String?
     {
         for (key, stringValue) in humanReadableNames
