@@ -22,17 +22,20 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
         }
     }
     
+    //used in valueforkey to iterate thru tables of similar names
     let mapping = ["One", "Two", "Three"]
+    
     //keys for the tables
     let tableKeys = ["disfunctionalPercentage","avgGearsPlacedTele","avgGearGroundIntakesTele","liftoffPercentage"]
     
     
-    
+    //score labels
     @IBOutlet weak var redOfficialScoreLabel: UILabel!
     @IBOutlet weak var blueOfficialScoreLabel: UILabel!
     @IBOutlet weak var redPredictedScoreLabel: UILabel!
     @IBOutlet weak var bluePredictedScoreLabel: UILabel!
     
+    //tables and titles
     @IBOutlet weak var redTeamOneButton: UIButton!
     @IBOutlet weak var r1TableView: UITableView!
     

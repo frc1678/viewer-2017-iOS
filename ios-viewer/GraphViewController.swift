@@ -32,6 +32,7 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
     var negativeColor = UIColor.red
     /// Color when you press and hold a bar
     var highlightColor = UIColor.gray
+    //gradient
     var fadeColor = UIColor.black
     var highlightIndex = -1;
     var defaultHeight: CGFloat!
@@ -136,8 +137,10 @@ class GraphViewController: UIViewController, JBBarChartViewDataSource, JBBarChar
         barChartView.becomeFirstResponder()
     }
     
+    //calculate color
     func barChartView(_ barChartView: JBBarChartView!, colorForBarViewAt index: UInt) -> UIColor! {
         if Int(index) == highlightIndex {
+            //if the value is less than 0, do the transparency thing
             if values[Int(index)] < 0 {
                 return UIColor.purple
             } else {

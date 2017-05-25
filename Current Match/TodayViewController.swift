@@ -56,7 +56,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     func refreshMatchNum() {
-        self.firebase.observeSingleEvent(of: .value, with: { (snap) -> Void in
+        self.firebase.observe(.value, with: { (snap) -> Void in
             //get currentMatchNum
             if let currentMatchNum = snap.childSnapshot(forPath: "currentMatchNum").value as? Int {
                 //match is the match with the number currentMatchNum as a NSDictionary
