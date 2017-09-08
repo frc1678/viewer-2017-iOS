@@ -13,7 +13,6 @@ import Haneke
 
 //TableViewDataSource/Delegate allows vc to contain a table view/pass in info.
 class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MWPhotoBrowserDelegate, UIDocumentInteractionControllerDelegate, UINavigationControllerDelegate, UIScrollViewDelegate {
-    
     var firebaseFetcher = AppDelegate.getAppDelegate().firebaseFetcher
     
     //setup visuals
@@ -75,12 +74,16 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
                                     if team.pitAllImageURLs != nil {
                                         //team has selected image
                                         if team.pitSelectedImageName != nil && team.pitSelectedImageName != "" {
+                                            let selectedURLs = (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )
                                             //get url
-                                            let url = URL(string: (Array(Array(team.pitAllImageURLs!.values)).filter { $0.contains((team.pitSelectedImageName!).replacingOccurrences(of: " ", with: "%20").replacingOccurrences(of: "+", with: "%2B")) } )[0])!
-                                            //set imageview
-                                            imageView.hnk_setImageFromURL(url, success: { _ in
-                                                self.resetTableViewHeight()
+                                            if let selectedURL = selectedURLs[safe: 0] {
+                                                let url = URL(string: selectedURL)!
+                                                
+                                                //set imageview
+                                                imageView.hnk_setImageFromURL(url, success: { _ in
+                                                    self.resetTableViewHeight()
                                                 })
+                                            }
                                         }
                                     }
                                 })
@@ -849,5 +852,11 @@ class TeamDetailsTableViewController: UIViewController, UITableViewDataSource, U
         }
     }
 }
-
+extension Collection where Indices.Iterator.Element == Index {
+    
+    /// Returns the element at the specified index iff it is within bounds, otherwise nil.
+    subscript (safe index: Index) -> Generator.Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
 

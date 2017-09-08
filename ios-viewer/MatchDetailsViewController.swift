@@ -26,7 +26,7 @@ class MatchDetailsViewController: UIViewController, UITableViewDelegate, UITable
     let mapping = ["One", "Two", "Three"]
     
     //keys for the tables
-    let tableKeys = ["disfunctionalPercentage","avgGearsPlacedTele","avgGearGroundIntakesTele","liftoffPercentage"]
+    let tableKeys = ["disfunctionalPercentage",/*"avgGearsPlacedTele","avgGearGroundIntakesTele","liftoffPercentage"*/]
     
     
     //score labels
