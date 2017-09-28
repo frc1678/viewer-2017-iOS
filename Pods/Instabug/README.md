@@ -21,6 +21,22 @@ Then, run the following command:
 $ pod install
 ```
 
+### Carthage
+
+To integrate Instabug into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), add it to your `Cartfile`:
+
+```
+binary "https://raw.githubusercontent.com/Instabug/Instabug-iOS/master/Carthage.json"
+```
+
+Then, run the following command:
+
+```bash
+$ carthage update
+```
+
+Then drag Instabug.framework into your Xcode project.
+
 ### Manually
 
 1. [Download the Instabug SDK](https://s3.amazonaws.com/instabug-pro/sdk_releases/Instabug.zip)
@@ -60,7 +76,7 @@ bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instabug.framework/Instabu
 	Make sure to replace `app_token` with your application token. Find it [here](https://instabug.com/app/sdk/).
 
 ## Notes
-Instabug needs access to the microphone and photo library. Starting from iOS 10, apps that don’t provide a usage description for those 2 permissions would be rejected when submitted to the App Store.
+Instabug needs access to the microphone and photo library to be able to let users add audio and video attachments. Starting from iOS 10, apps that don’t provide a usage description for those 2 permissions would be rejected when submitted to the App Store.
 
 For your app not to be rejected, you’ll need to add the following 2 keys to your app’s info.plist file with text explaining to the user why those permissions are needed:
 

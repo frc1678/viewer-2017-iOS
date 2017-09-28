@@ -64,11 +64,11 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
     var imageUrls = [Int: String]()
     var allTheData = NSDictionary()
     
-    let firebase : FIRDatabaseReference
+    let firebase : DatabaseReference
     
     override init() {
         //reference to firebase
-        firebase = FIRDatabase.database().reference()
+        firebase = Database.database().reference()
         //initiate currentmatchmanager
         self.currentMatchManager = CurrentMatchManager()
         //initiate notification manager
@@ -88,7 +88,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         Returns a match given a snapshot.
         - parameter snapshot: The snapshot of a match.
     */
-    func makeMatchFromSnapshot(_ snapshot: FIRDataSnapshot) -> Match {
+    func makeMatchFromSnapshot(_ snapshot: DataSnapshot) -> Match {
         
         return Match(json: JSON(snapshot.value!))
     }
@@ -97,7 +97,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         Returns a team given a snapshot.
         - parameter snapshot: The snapshot of a team.
      */
-    func makeTeamFromSnapshot(_ snapshot: FIRDataSnapshot) -> Team {
+    func makeTeamFromSnapshot(_ snapshot: DataSnapshot) -> Team {
         return Team(json: JSON(snapshot.value!))
     }
     
@@ -146,7 +146,7 @@ class FirebaseDataFetcher: NSObject, UITableViewDelegate {
         - parameter team: Team to download photo for
         - parameter snap: Snapshot of the firebase to pull images from
     */
-    func updateCacheIfNeeded(_ snap : FIRDataSnapshot, team : Team) {
+    func updateCacheIfNeeded(_ snap : DataSnapshot, team : Team) {
         let defaults = UserDefaults.standard
         //check if the user wants to aggressively download
         let shouldAggressivelyDownload = defaults.bool(forKey: "predownloadPreference")

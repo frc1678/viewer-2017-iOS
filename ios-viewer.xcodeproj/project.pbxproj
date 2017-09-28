@@ -57,7 +57,6 @@
 		19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */; };
 		20B97B0927CBDC12735F6F22 /* Pods_Current_Match.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0394ACA1B0BF4AF13EA11B /* Pods_Current_Match.framework */; };
 		8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */; };
-		8C26011A1EC557D800248792 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C2601191EC557D800248792 /* GoogleService-Info.plist */; };
 		8C5868711E34254E0056EA17 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C58686C1E34254E0056EA17 /* Storyboard.storyboard */; };
 		8CBD712D1E354696009C0206 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD3CEA81E34074000B328A1 /* NotificationCenter.framework */; };
 		8CBD71301E354696009C0206 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBD712F1E354696009C0206 /* TodayViewController.swift */; };
@@ -66,6 +65,7 @@
 		8CBD71401E356CD1009C0206 /* CC 2017 Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD713F1E356CD1009C0206 /* CC 2017 Logo.png */; };
 		8CBD71421E4695BE009C0206 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8CBD71411E4695BE009C0206 /* Settings.bundle */; };
 		8CD8FA6C1E5A4474004C2825 /* NSData+NSData_HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8FA6B1E5A4474004C2825 /* NSData+NSData_HexString.m */; };
+		8CDFCE851F7C950B00F965F3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8CDFCE841F7C950B00F965F3 /* GoogleService-Info.plist */; };
 		DF1525F6C6F8117FF8E51A47 /* Pods_ios_viewer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */; };
 /* End PBXBuildFile section */
 
@@ -162,7 +162,6 @@
 		19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamInMatchData.swift; sourceTree = "<group>"; };
 		763F6CE09D211CAEC3E4C000 /* Pods-CurrentMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatch/Pods-CurrentMatch.debug.xcconfig"; sourceTree = "<group>"; };
 		8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = "<group>"; };
-		8C2601191EC557D800248792 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C58686D1E34254E0056EA17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		8C58687E1E3426200056EA17 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		8C58688C1E3426970056EA17 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -177,6 +176,7 @@
 		8CD8FA691E5A2950004C2825 /* ios-viewer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ios-viewer.entitlements"; sourceTree = "<group>"; };
 		8CD8FA6A1E5A4474004C2825 /* NSData+NSData_HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+NSData_HexString.h"; path = "../NSData+NSData_HexString.h"; sourceTree = "<group>"; };
 		8CD8FA6B1E5A4474004C2825 /* NSData+NSData_HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+NSData_HexString.m"; path = "../NSData+NSData_HexString.m"; sourceTree = "<group>"; };
+		8CDFCE841F7C950B00F965F3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		ACA90B025BDD94DFE0A379CB /* Pods-ios-viewer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ios-viewer.release.xcconfig"; path = "Pods/Target Support Files/Pods-ios-viewer/Pods-ios-viewer.release.xcconfig"; sourceTree = "<group>"; };
 		C12E5150009B8B4C0E520876 /* Pods_ios_viewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ios_viewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA0394ACA1B0BF4AF13EA11B /* Pods_Current_Match.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Current_Match.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,8 +391,8 @@
 			isa = PBXGroup;
 			children = (
 				8CBD712F1E354696009C0206 /* TodayViewController.swift */,
+				8CDFCE841F7C950B00F965F3 /* GoogleService-Info.plist */,
 				8CBD713B1E3546D1009C0206 /* MainInterface.storyboard */,
-				8C2601191EC557D800248792 /* GoogleService-Info.plist */,
 				8CBD71341E354696009C0206 /* Info.plist */,
 			);
 			path = "Current Match";
@@ -534,7 +534,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBD713C1E3546D1009C0206 /* MainInterface.storyboard in Resources */,
-				8C26011A1EC557D800248792 /* GoogleService-Info.plist in Resources */,
+				8CDFCE851F7C950B00F965F3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

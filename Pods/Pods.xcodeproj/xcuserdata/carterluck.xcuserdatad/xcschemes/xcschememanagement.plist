@@ -8,97 +8,76 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
 		<key>GTMSessionFetcher.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>GoogleToolboxForMac.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 		<key>HanekeSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
 		<key>HockeySDK-HockeySDKResources.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>17</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>JBChartView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
 		</dict>
 		<key>MWPhotoBrowser-MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
 		</dict>
 		<key>MWPhotoBrowser.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
 		</dict>
 		<key>Pods-Current Match.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
-		</dict>
-		<key>Pods-CurrentMatch.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
 		</dict>
 		<key>Pods-ios-viewer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
 		</dict>
 		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>15</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>16</integer>
+		</dict>
+		<key>leveldb-library.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>nanopb.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -118,22 +97,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1ABEEFB1D56A6669DC8D8AD7784D481B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>36505A031BB3A1A3913E45B58E7DD88B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>37FFB74640C7EBC4972C67179BA27095</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6A276196DEE84FE04F9F040DFDF245B1</key>
+		<key>266AE1506DAD13D34C0725E909C0C476</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,7 +117,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>955D0E7026A1D0CFEA31ADA337F9ADB4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A32FB3540E66793A58A58C751717819A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A3B3CA69641375F94D39F255650BF877</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD59D6AC63A2CDD489F8A23DE9E3F7D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -168,12 +147,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E2A816BF238B492E1F07291E98AB7A24</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E7CDE2F1F29926FA093951ECF4828C43</key>
+		<key>E4DD95323C54A78F879DAB0F1508B8E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
