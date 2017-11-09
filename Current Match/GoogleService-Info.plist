@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>271381195123-matn09alenjpsbht7ceejb9v4sqv0al1.apps.googleusercontent.com</string>
+	<string>62327054481-9vrb6pslapngjnv4u4bau0pqkqlunlor.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.271381195123-matn09alenjpsbht7ceejb9v4sqv0al1</string>
+	<string>com.googleusercontent.apps.62327054481-9vrb6pslapngjnv4u4bau0pqkqlunlor</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBWYWwXNyEo5D6xBX4nvCOwAyR-9MDcXUg</string>
+	<string>AIzaSyDDv-KbKOJTW84uWCKB_-ZcHkUFIdspsg0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>271381195123</string>
+	<string>62327054481</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.citruscircuits.ios-viewer</string>
+	<string>org.brytonmoeller.ios-viewer.Current-Match</string>
 	<key>PROJECT_ID</key>
-	<string>firebase-scouting-2016</string>
+	<string>scouting-2017-5f51c</string>
 	<key>STORAGE_BUCKET</key>
-	<string>firebase-scouting-2016.appspot.com</string>
+	<string>scouting-2017-5f51c.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:271381195123:ios:b14923feaeadec39</string>
+	<string>1:62327054481:ios:f9aedd421cbec6c5</string>
 	<key>DATABASE_URL</key>
-	<string>https://1678-scouting-2016.firebaseio.com</string>
+	<string>https://scouting-2017-5f51c.firebaseio.com</string>
 </dict>
 </plist>

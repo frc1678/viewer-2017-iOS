@@ -15,7 +15,6 @@
 		190DFE4C1E308BBD00477B6D /* TIMDDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE4B1E308BBD00477B6D /* TIMDDetailsViewController.swift */; };
 		190DFE4E1E308BDC00477B6D /* TIMDTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190DFE4D1E308BDC00477B6D /* TIMDTableViewCell.swift */; };
 		190DFE501E308BE300477B6D /* TIMDTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 190DFE4F1E308BE300477B6D /* TIMDTableViewCell.xib */; };
-		193590061EA41FE6003AEAC2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 193590051EA41FE6003AEAC2 /* GoogleService-Info.plist */; };
 		19B037C01E2C5739006E25A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19B037BF1E2C5739006E25A2 /* Assets.xcassets */; };
 		19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037C11E2C5739006E25A2 /* LaunchScreen.storyboard */; };
 		19B037D21E2C581C006E25A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19B037CB1E2C581C006E25A2 /* Main.storyboard */; };
@@ -57,6 +56,7 @@
 		19B0384B1E2DE55B006E25A2 /* TeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B038481E2DE55B006E25A2 /* TeamInMatchData.swift */; };
 		20B97B0927CBDC12735F6F22 /* Pods_Current_Match.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA0394ACA1B0BF4AF13EA11B /* Pods_Current_Match.framework */; };
 		8C25A7CC1E33F2790012A23E /* CalculatedTeamInMatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */; };
+		8C286C531FB40D6E003FA84F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C286C521FB40D6E003FA84F /* GoogleService-Info.plist */; };
 		8C5868711E34254E0056EA17 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C58686C1E34254E0056EA17 /* Storyboard.storyboard */; };
 		8CBD712D1E354696009C0206 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CD3CEA81E34074000B328A1 /* NotificationCenter.framework */; };
 		8CBD71301E354696009C0206 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBD712F1E354696009C0206 /* TodayViewController.swift */; };
@@ -104,7 +104,6 @@
 		190DFE4B1E308BBD00477B6D /* TIMDDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDDetailsViewController.swift; sourceTree = "<group>"; };
 		190DFE4D1E308BDC00477B6D /* TIMDTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TIMDTableViewCell.swift; sourceTree = "<group>"; };
 		190DFE4F1E308BE300477B6D /* TIMDTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TIMDTableViewCell.xib; sourceTree = "<group>"; };
-		193590051EA41FE6003AEAC2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		19B037B51E2C5739006E25A2 /* ios-viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		19B037BF1E2C5739006E25A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		19B037C21E2C5739006E25A2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -162,6 +161,7 @@
 		763F6CE09D211CAEC3E4C000 /* Pods-CurrentMatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CurrentMatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CurrentMatch/Pods-CurrentMatch.debug.xcconfig"; sourceTree = "<group>"; };
 		8C25A7CB1E33F2790012A23E /* CalculatedTeamInMatchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatedTeamInMatchData.swift; sourceTree = "<group>"; };
 		8C286C4D1FAC047B003FA84F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "/Users/carterluck/Documents/Robotics/xcode projects/viewer-2017-iOS/Current Match/GoogleService-Info.plist"; sourceTree = "<absolute>"; };
+		8C286C521FB40D6E003FA84F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8C58686D1E34254E0056EA17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Storyboard.storyboard; sourceTree = "<group>"; };
 		8C58687E1E3426200056EA17 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		8C58688C1E3426970056EA17 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -272,8 +272,8 @@
 		19B038371E2DD70C006E25A2 /* Plists */ = {
 			isa = PBXGroup;
 			children = (
-				193590051EA41FE6003AEAC2 /* GoogleService-Info.plist */,
 				19B037C41E2C5739006E25A2 /* Info.plist */,
+				8C286C521FB40D6E003FA84F /* GoogleService-Info.plist */,
 			);
 			name = Plists;
 			sourceTree = "<group>";
@@ -509,7 +509,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				193590061EA41FE6003AEAC2 /* GoogleService-Info.plist in Resources */,
 				19B037D71E2C581C006E25A2 /* Seeding.storyboard in Resources */,
 				19B037D81E2C581C006E25A2 /* ThirdPick.storyboard in Resources */,
 				19B0382B1E2C58D3006E25A2 /* MechanismTableViewCell.xib in Resources */,
@@ -519,6 +518,7 @@
 				19B037C31E2C5739006E25A2 /* LaunchScreen.storyboard in Resources */,
 				8CBD71421E4695BE009C0206 /* Settings.bundle in Resources */,
 				8CBD71401E356CD1009C0206 /* CC 2017 Logo.png in Resources */,
+				8C286C531FB40D6E003FA84F /* GoogleService-Info.plist in Resources */,
 				19B037EA1E2C586C006E25A2 /* MatchTableViewCell.xib in Resources */,
 				19B037D31E2C581C006E25A2 /* FirstPick.storyboard in Resources */,
 				190DFE501E308BE300477B6D /* TIMDTableViewCell.xib in Resources */,
