@@ -6,6 +6,8 @@
 //  Copyright (c) 2016 Citrus Circuits. All rights reserved.
 //
 
+//numHoppersOpenedTele->numHoppersUsedTele + for auto, numGearGroundIntakes->numGroundGearIntakes, numGearLoaderIntakesTele->numHumanGearIntakesTele
+
 import Foundation
 
 
@@ -315,12 +317,12 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
             "RScoreSpeed" : "rankSpeed",
             "RScoreTorque" : "rankTorque",
             //Misc
-            "avgGearGroundIntakesTele" : "numGearGroundIntakesTele",
+            "avgGearGroundIntakesTele" : "numGroundGearIntakesTele",
             "actualNumRPs" : "calculatedData.numRPs",
             "numAutoPoints" : "calculatedData.numAutoPoints",
             "baselineReachedPercentage" : "didReachBaselineAuto",
-            "avgHoppersOpenedTele" : "numHoppersOpenedTele",
-            "avgHoppersOpenedAuto" : "numHoppersOpenedAuto",
+            "avgHoppersOpenedTele" : "numHoppersUsedTele",
+            "avgHoppersOpenedAuto" : "numHoppersUsedAuto",
             "avgGearsFumbledTele" : "numGearsFumbledTele",
             "avgGearsEjectedTele" : "numGearsEjectedTele",
             "avgKeyShotTime" : "calculatedData.avgKeyShotTime",
@@ -400,7 +402,7 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     /** Keys relating to the Autonomous period to be displayed in the TIMD view */
     static let TIMDAutoKeys : [String] = [
         "calculatedData.numLowShotsAuto",
-        "numHoppersOpenedAuto",
+        "numHoppersUsedAuto",
         "calculatedData.numGearsPlacedAuto",
         "calculatedData.numHighShotsAuto",
     ]
@@ -408,10 +410,10 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
     /** Keys relating to the Teleoperated period to be displayed in the TIMD view */
     static let TIMDTeleKeys : [String] = [
         "calculatedData.numLowShotsTele",
-        "numGearLoaderIntakesTele",
+        "numHumanGearIntakesTele",
         "calculatedData.numHighShotsTele",
-        "numGearGroundIntakesTele",
-        "numHoppersOpenedTele",
+        "numGroundGearIntakesTele",
+        "numHoppersUsedTele",
         "calculatedData.numGearsPlacedTele",
         "didLiftoff"
     ]
@@ -596,9 +598,9 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.liftoffAbility": "Liftoff Ability",
         "calculatedData.avgKeyShotTime": "Avg. Key Shooting Time",
         "lowShotTimesForBoilerTele" : "Low Shots Made Tele",
-        "numGearLoaderIntakesTele" : "Gears Intaked From Loader Tele",
+        "numHumanGearIntakesTele" : "Gears Intaked From Loader Tele",
         "highShotTimesForBoilerTele" : "High Shots Made Tele",
-        "numGearGroundIntakesTele" : "Gears Intaked From Ground Tele",
+        "numGroundGearIntakesTele" : "Gears Intaked From Ground Tele",
         "hoppersOpenedTele" : "Num Hoppers Opened Tele",
         "gearsPlacedByLiftTele" : "Gears Placed Tele",
         "didLiftoff" : "Did Liftoff",
@@ -621,8 +623,8 @@ func nsNumArrayToIntArray(_ nsNumberArray: [NSNumber]) -> [Int] {
         "calculatedData.sdGearsPlacedByLiftTele" : "σ Gears Placed Tele",
         "calculatedData.sdGearsPlacedByLiftAuto" : "σ Gears Placed Auto",
         "calculatedData.avgGearsPlacedByLiftAuto" : "Avg. Gears Placed Auto",
-        "numHoppersOpenedAuto" : "Num Hoppers Opened Auto",
-        "numHoppersOpenedTele" : "Num Hoppers Opened Tele",
+        "numHoppersUsedAuto" : "Num Hoppers Opened Auto",
+        "numHoppersUsedTele" : "Num Hoppers Opened Tele",
         "gearsPlacedByLiftAuto.lift1" : "Gears Placed Auto (Lift 1)",
         "gearsPlacedByLiftAuto.lift2" : "Gears Placed Auto (Lift 2)",
         "gearsPlacedByLiftAuto.lift3" : "Gears Placed Auto (Lift 3)",

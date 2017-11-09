@@ -60,7 +60,6 @@
     self.cacheButton.enabled = NO;
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollToCurrentMatch:) name:@"currentMatchUpdated" object:nil];
-
 }
 
 - (void)scrollToCurrentMatch:(NSNotification*)note {
@@ -68,7 +67,6 @@
     self.currentMatch = (NSInteger)self.firebaseFetcher.currentMatchManager.currentMatch;
     
     [NSTimer scheduledTimerWithTimeInterval:3 target: self selector:@selector(scroll:) userInfo:nil repeats:NO];
-    
 }
 
 -(void)scroll:(NSTimer*)timer {
