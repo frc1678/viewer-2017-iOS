@@ -20,7 +20,7 @@ class TIMDDetailsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if TIMD.teamNumber != nil && TIMD.matchNumber != nil {
+        if let teamNum = TIMD.teamNumber as? Int!, let matchNum = TIMD.matchNumber as? Int! {
             //set title: "# - Q#"
             self.title = "\(TIMD.teamNumber!) - Q\(TIMD.matchNumber!)"
         }
