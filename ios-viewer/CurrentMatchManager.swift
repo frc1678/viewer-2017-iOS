@@ -17,10 +17,10 @@ class CurrentMatchManager: NSObject {
     
     let notificationManager : NotificationManager
     let cache = Shared.dataCache
-    let firebase: FIRDatabaseReference
+    let firebase: DatabaseReference
     
     override init() {
-        firebase = FIRDatabase.database().reference()
+        firebase = Database.database().reference()
         
         self.notificationManager = NotificationManager(secsBetweenUpdates: 5, notifications: [])
         super.init()

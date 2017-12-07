@@ -1,7 +1,10 @@
+# Instabug iOS SDK
 ![CocoaPods Compatible](https://img.shields.io/cocoapods/v/Instabug.svg)
 ![Twitter](https://img.shields.io/badge/twitter-@Instabug-blue.svg)
 
-Bug Reporting and In-App Chat for Mobile Apps
+Instabug is an in-app feedback and bug reporting tool for mobile apps. With just a simple shake, your users or beta testers can [report bugs](https://instabug.com/bug-reporting) or send in-app feedback and the SDK will capture an environment snapshot of your user's device including all console logs, [server-side network requests](https://instabug.com/network-logging) and bug reproduction steps compiling all these details in one organised dashboard to help you debug and fix bugs faster. 
+
+Instabug also provides you with a [reliable crash reporter](https://instabug.com/crash-reporting) that automatically captures a detailed report of the running environment, the different threads’ states, [the steps to reproduce the crash](https://instabug.com/user-steps), and the network request logs. All the data is captured automatically with no need for breadcrumbs, and you can always [reply back to your users](https://instabug.com/in-app-chat) and they will receive your messages within the app.
 
 For more info, visit [Instabug.com](https://www.instabug.com).
 
@@ -20,6 +23,22 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+### Carthage
+
+To integrate Instabug into your Xcode project using [Carthage](https://github.com/Carthage/Carthage), add it to your `Cartfile`:
+
+```
+binary "https://raw.githubusercontent.com/Instabug/Instabug-iOS/master/Carthage.json"
+```
+
+Then, run the following command:
+
+```bash
+$ carthage update
+```
+
+Then drag Instabug.framework into your Xcode project.
 
 ### Manually
 
@@ -60,7 +79,7 @@ bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Instabug.framework/Instabu
 	Make sure to replace `app_token` with your application token. Find it [here](https://instabug.com/app/sdk/).
 
 ## Notes
-Instabug needs access to the microphone and photo library. Starting from iOS 10, apps that don’t provide a usage description for those 2 permissions would be rejected when submitted to the App Store.
+Instabug needs access to the microphone and photo library to be able to let users add audio and video attachments. Starting from iOS 10, apps that don’t provide a usage description for those 2 permissions would be rejected when submitted to the App Store.
 
 For your app not to be rejected, you’ll need to add the following 2 keys to your app’s info.plist file with text explaining to the user why those permissions are needed:
 

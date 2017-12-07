@@ -23,7 +23,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     static var isAlreadyLaunchedOnce = false
     
     @IBOutlet weak var MatchNum: UILabel!
-    var firebase : FIRDatabaseReference!
+    var firebase : DatabaseReference!
     
     //configure firebase
     override func viewDidLoad() {
@@ -31,11 +31,11 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         //check if firebase has been configured
         if !TodayViewController.isAlreadyLaunchedOnce {
             //print how many firebase instances are open
-            print(FIRApp.allApps()?.keys.count)
-            FIRApp.configure()
+            print(FirebaseApp.allApps?.keys.count)
+            FirebaseApp.configure()
             TodayViewController.isAlreadyLaunchedOnce = true
             //FIRDatabase.database().persistenceEnabled = true
-            print(FIRApp.allApps()?.keys.count)
+            print(FirebaseApp.allApps?.keys.count)
         }
     }
     
@@ -46,7 +46,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        firebase = FIRDatabase.database().reference()
+        firebase = Database.database().reference()
         //set the preferred size
         self.preferredContentSize = CGSize(width: 320, height: 90);
         //get the current match number, call refreshMatchNum
